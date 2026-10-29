@@ -1,0 +1,44 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Local experiments, raw prompts, session IDs, exports and QA output
+/data/
+/reports/
+/exports/
+.cache/
+.qa-runtime/
+test-results/
+playwright-report/
+assets/npc-canon/*-report.json
+*.log
+*.zip
+
+# Databases and sidecars, including custom output directories
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+
+# Local authentication and environment settings
+.env
+.env.*
+!.env.example
+!.env.sample
+.codex/
+auth.json
+credentials.json
+*.pem
+*.key
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
