@@ -1,0 +1,33 @@
+name: Verify
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run verify
+      - name: Install browser
+        if: runner.os == 'Linux'
+        run: npx playwright install --with-deps chromium
+      - name: Check dashboard and offline gallery with mock data
+        if: runner.os == 'Linux'
+        run: |
+          npm run smoke:ui
+          npm run assets:gallery

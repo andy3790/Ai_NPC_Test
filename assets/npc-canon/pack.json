@@ -1,0 +1,327 @@
+{
+  "assetSchemaVersion": 1,
+  "packId": "npc-canon-six-worlds",
+  "version": "1.0.0",
+  "language": "ko-KR",
+  "authoredDate": "2026-10-28",
+  "runtimeSchemaVersion": 1,
+  "description": "독립 세계관 6개와 캐릭터 36명, 3인 시나리오 12개 및 6인 시나리오 6개.",
+  "counts": {
+    "worlds": 6,
+    "characters": 36,
+    "scenarios": 18,
+    "experiments": 18,
+    "activeImageFiles": 12,
+    "characterPortraitRegions": 36,
+    "evaluationFixtures": 72,
+    "scheduledEvents": 18
+  },
+  "compatibility": {
+    "schemaPath": "src/shared/schema.ts",
+    "schemaSha256": "eb3bde5b19d33f06f1fdf42acbd157aba4d8fe0328fda9c5d3371ae969935b64",
+    "promptPath": "src/core/prompts.ts",
+    "promptSha256": "aaa7d369d9d575283e144d7662df90ff5c0eb5be4f793eb21a564a38b48b521e",
+    "imageInputSupported": false,
+    "defaultModel": "gpt-6.1-sol",
+    "defaultEffort": "low",
+    "modelAvailabilityVerified": false
+  },
+  "entrypoints": {
+    "gallery": "index.html",
+    "catalog": "catalog.json",
+    "assets": "image-manifest.json",
+    "anchors": "evaluation/anchors.json",
+    "readme": "README.md",
+    "handoff": "HANDOFF.md"
+  },
+  "experiments": [
+    {
+      "id": "tidemark-a",
+      "worldId": "tidemark",
+      "name": "청람 수문도시 — 90칸의 승인",
+      "characters": [
+        "tid-seoyul",
+        "tid-mujae",
+        "tid-harin"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/tidemark-a.scenario.json",
+      "experimentPath": "experiments/tidemark-a.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "tidemark-b",
+      "worldId": "tidemark",
+      "name": "청람 수문도시 — 게시되지 않은 안내문",
+      "characters": [
+        "tid-sori",
+        "tid-eunsu",
+        "tid-dan"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/tidemark-b.scenario.json",
+      "experimentPath": "experiments/tidemark-b.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "tidemark-ensemble",
+      "worldId": "tidemark",
+      "name": "청람 수문도시 — 전체 인물 교차 검토",
+      "characters": [
+        "tid-seoyul",
+        "tid-mujae",
+        "tid-harin",
+        "tid-sori",
+        "tid-eunsu",
+        "tid-dan"
+      ],
+      "characterCount": 6,
+      "scenarioPath": "scenarios/tidemark-ensemble.scenario.json",
+      "experimentPath": "experiments/tidemark-ensemble.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "glass-a",
+      "worldId": "glass",
+      "name": "유리서고의 빈 여백 — 보관과 열람 사이",
+      "characters": [
+        "gla-iona",
+        "gla-ruen",
+        "gla-mara"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/glass-a.scenario.json",
+      "experimentPath": "experiments/glass-a.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "glass-b",
+      "worldId": "glass",
+      "name": "유리서고의 빈 여백 — 짧지만 빠짐없는 문장",
+      "characters": [
+        "gla-teo",
+        "gla-seda",
+        "gla-or"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/glass-b.scenario.json",
+      "experimentPath": "experiments/glass-b.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "glass-ensemble",
+      "worldId": "glass",
+      "name": "유리서고의 빈 여백 — 전체 인물 교차 검토",
+      "characters": [
+        "gla-iona",
+        "gla-ruen",
+        "gla-mara",
+        "gla-teo",
+        "gla-seda",
+        "gla-or"
+      ],
+      "characterCount": 6,
+      "scenarioPath": "scenarios/glass-ensemble.scenario.json",
+      "experimentPath": "experiments/glass-ensemble.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "orison-a",
+      "worldId": "orison",
+      "name": "궤도정거장 헤스티아 — 12단위와 하나의 모듈",
+      "characters": [
+        "orb-jian",
+        "orb-basil",
+        "orb-l4"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/orison-a.scenario.json",
+      "experimentPath": "experiments/orison-a.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "orison-b",
+      "worldId": "orison",
+      "name": "궤도정거장 헤스티아 — 응답이 없는 빈칸",
+      "characters": [
+        "orb-mirek",
+        "orb-soa",
+        "orb-noor"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/orison-b.scenario.json",
+      "experimentPath": "experiments/orison-b.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "orison-ensemble",
+      "worldId": "orison",
+      "name": "궤도정거장 헤스티아 — 전체 인물 교차 검토",
+      "characters": [
+        "orb-jian",
+        "orb-basil",
+        "orb-l4",
+        "orb-mirek",
+        "orb-soa",
+        "orb-noor"
+      ],
+      "characterCount": 6,
+      "scenarioPath": "scenarios/orison-ensemble.scenario.json",
+      "experimentPath": "experiments/orison-ensemble.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "emberline-a",
+      "worldId": "emberline",
+      "name": "재선 종착역 — 출발하지 않는 약속",
+      "characters": [
+        "emb-daon",
+        "emb-hwanho",
+        "emb-esra"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/emberline-a.scenario.json",
+      "experimentPath": "experiments/emberline-a.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "emberline-b",
+      "worldId": "emberline",
+      "name": "재선 종착역 — 아홉 번째 상자",
+      "characters": [
+        "emb-silas",
+        "emb-haesol",
+        "emb-idris"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/emberline-b.scenario.json",
+      "experimentPath": "experiments/emberline-b.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "emberline-ensemble",
+      "worldId": "emberline",
+      "name": "재선 종착역 — 전체 인물 교차 검토",
+      "characters": [
+        "emb-daon",
+        "emb-hwanho",
+        "emb-esra",
+        "emb-silas",
+        "emb-haesol",
+        "emb-idris"
+      ],
+      "characterCount": 6,
+      "scenarioPath": "scenarios/emberline-ensemble.scenario.json",
+      "experimentPath": "experiments/emberline-ensemble.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "orchard-a",
+      "worldId": "orchard",
+      "name": "느티재 공동과수원 — 흠집을 쓰는 문장",
+      "characters": [
+        "orc-gyeongja",
+        "orc-minseok",
+        "orc-narae"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/orchard-a.scenario.json",
+      "experimentPath": "experiments/orchard-a.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "orchard-b",
+      "worldId": "orchard",
+      "name": "느티재 공동과수원 — 호의의 가격표",
+      "characters": [
+        "orc-bokrye",
+        "orc-dogeon",
+        "orc-yujin"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/orchard-b.scenario.json",
+      "experimentPath": "experiments/orchard-b.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "orchard-ensemble",
+      "worldId": "orchard",
+      "name": "느티재 공동과수원 — 전체 인물 교차 검토",
+      "characters": [
+        "orc-gyeongja",
+        "orc-minseok",
+        "orc-narae",
+        "orc-bokrye",
+        "orc-dogeon",
+        "orc-yujin"
+      ],
+      "characterCount": 6,
+      "scenarioPath": "scenarios/orchard-ensemble.scenario.json",
+      "experimentPath": "experiments/orchard-ensemble.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "nocturne-a",
+      "worldId": "nocturne",
+      "name": "무영 야시장의 저울 — 반환의 두 번째 동사",
+      "characters": [
+        "noc-eunseo",
+        "noc-rion",
+        "noc-sebel"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/nocturne-a.scenario.json",
+      "experimentPath": "experiments/nocturne-a.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "nocturne-b",
+      "worldId": "nocturne",
+      "name": "무영 야시장의 저울 — 스친 그림자의 걱정",
+      "characters": [
+        "noc-doha",
+        "noc-ara",
+        "noc-mora"
+      ],
+      "characterCount": 3,
+      "scenarioPath": "scenarios/nocturne-b.scenario.json",
+      "experimentPath": "experiments/nocturne-b.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    },
+    {
+      "id": "nocturne-ensemble",
+      "worldId": "nocturne",
+      "name": "무영 야시장의 저울 — 전체 인물 교차 검토",
+      "characters": [
+        "noc-eunseo",
+        "noc-rion",
+        "noc-sebel",
+        "noc-doha",
+        "noc-ara",
+        "noc-mora"
+      ],
+      "characterCount": 6,
+      "scenarioPath": "scenarios/nocturne-ensemble.scenario.json",
+      "experimentPath": "experiments/nocturne-ensemble.json",
+      "maxUtterances": 60,
+      "variantCount": 2
+    }
+  ]
+}

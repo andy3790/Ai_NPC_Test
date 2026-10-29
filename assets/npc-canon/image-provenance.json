@@ -1,0 +1,72 @@
+[
+  {
+    "id": "glass-world",
+    "sourcePath": "images/glass-world.png",
+    "generator": "built-in image_gen",
+    "status": "generated",
+    "sourceLocation": "repository_copy"
+  },
+  {
+    "id": "glass-cast",
+    "sourcePath": "images/glass-cast.png",
+    "generator": "built-in image_gen",
+    "status": "generated",
+    "sourceLocation": "repository_copy"
+  },
+  {
+    "id": "orison-world",
+    "sourcePath": "images/orison-world.png",
+    "generator": "built-in image_gen",
+    "status": "generated",
+    "sourceLocation": "repository_copy"
+  },
+  {
+    "id": "orison-cast",
+    "sourcePath": "images/orison-cast.png",
+    "generator": "built-in image_gen",
+    "status": "generated",
+    "sourceLocation": "repository_copy"
+  },
+  {
+    "id": "emberline-world",
+    "sourcePath": "images/emberline-world.png",
+    "generator": "built-in image_gen",
+    "status": "generated",
+    "sourceLocation": "repository_copy"
+  },
+  {
+    "id": "emberline-cast",
+    "sourcePath": "images/emberline-cast.png",
+    "generator": "built-in image_gen",
+    "status": "generated",
+    "sourceLocation": "repository_copy"
+  },
+  {
+    "id": "orchard-world",
+    "sourcePath": "images/orchard-world.png",
+    "generator": "built-in image_gen",
+    "status": "generated",
+    "sourceLocation": "repository_copy"
+  },
+  {
+    "id": "orchard-cast",
+    "sourcePath": "images/orchard-cast.png",
+    "generator": "built-in image_gen",
+    "status": "generated",
+    "sourceLocation": "repository_copy"
+  },
+  {
+    "id": "nocturne-world",
+    "sourcePath": "images/nocturne-world.png",
+    "generator": "built-in image_gen",
+    "status": "generated",
+    "sourceLocation": "repository_copy"
+  },
+  {
+    "id": "nocturne-cast",
+    "sourcePath": "images/nocturne-cast.png",
+    "generator": "built-in image_gen",
+    "status": "generated",
+    "sourceLocation": "repository_copy"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "id": "tidemark-world",
+    "prompt": "Use case: stylized-concept. Asset type: environment key art for a Korean NPC simulation asset pack. Create one polished painterly wide landscape, 1536x1024 if supported. A fictional nonmagical flood-control canal town called Cheongram, blue gray rain and muted brass. View from a stone pump hall: one closed iron sluice gate, brick water measuring tower, covered wooden dock, communal cistern courtyard, worn plain pipes and mechanical gauge. No people, no text or numbers, no flags, no weapons, no magical glow, no electricity, no modern skyscrapers. Modest human scale. A quiet tense overcast morning, wet mossy stone, carefully readable silhouettes, evocative game art. These are the only established architectural features; no added temples, ships, factories or settlements."
+  },
+  {
+    "id": "tidemark-cast",
+    "prompt": "Use case: stylized-concept. Asset type: six-character portrait atlas for fictional nonmagical canal-town NPCs. ONE image, wide 1536x1024 if possible, EXACT 3 columns by 2 rows of equal rectangular portrait cells, no gaps, each portrait strictly within its cell. Head and upper torso, all adult. Same refined hand-painted game portrait style and soft diffuse lighting, distinct muted solid background per cell. Top left: Korean woman age38, straight black chin-length bob, serious calm gaze, navy raincoat, small brass key at chest. Top middle: Korean man52, broad square face, very short graying hair, stubble, rust work vest, plain wrench held low. Top right: Korean woman27, round glasses, long black hair tied low, cream shirt, dark green scarf, closed ledger low. Bottom left: Korean man31, lean warm brown complexion, tied long black hair, teal boat cloak, rope at shoulder. Bottom middle: Korean woman64, silver bun, fine wrinkles, plum shawl, plain wooden cup low. Bottom right: Korean woman22, short copper-brown curly hair, ochre work jacket, rolled paper low. No text, no labels, no borders, no shared scene, no extra figures, no magic, no helmets, no gradients bleeding across cells. Each face unique and centered, eyes visible."
+  }
+]

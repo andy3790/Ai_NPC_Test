@@ -1,0 +1,113 @@
+{
+  "assetSchemaVersion": 1,
+  "records": [
+    {
+      "id": "tidemark-world",
+      "prompt": "Use case: stylized-concept. Asset type: environment key art for a Korean NPC simulation asset pack. Create one polished painterly wide landscape, 1536x1024 if supported. A fictional nonmagical flood-control canal town called Cheongram, blue gray rain and muted brass. View from a stone pump hall: one closed iron sluice gate, brick water measuring tower, covered wooden dock, communal cistern courtyard, worn plain pipes and mechanical gauge. No people, no text or numbers, no flags, no weapons, no magical glow, no electricity, no modern skyscrapers. Modest human scale. A quiet tense overcast morning, wet mossy stone, carefully readable silhouettes, evocative game art. These are the only established architectural features; no added temples, ships, factories or settlements.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/tidemark-world.png",
+      "outputPath": "images/tidemark-world.png",
+      "status": "final"
+    },
+    {
+      "id": "tidemark-cast",
+      "prompt": "Use case: stylized-concept. Asset type: six-character portrait atlas for fictional nonmagical canal-town NPCs. ONE image, wide 1536x1024 if possible, EXACT 3 columns by 2 rows of equal rectangular portrait cells, no gaps, each portrait strictly within its cell. Head and upper torso, all adult. Same refined hand-painted game portrait style and soft diffuse lighting, distinct muted solid background per cell. Top left: Korean woman age38, straight black chin-length bob, serious calm gaze, navy raincoat, small brass key at chest. Top middle: Korean man52, broad square face, very short graying hair, stubble, rust work vest, plain wrench held low. Top right: Korean woman27, round glasses, long black hair tied low, cream shirt, dark green scarf, closed ledger low. Bottom left: Korean man31, lean warm brown complexion, tied long black hair, teal boat cloak, rope at shoulder. Bottom middle: Korean woman64, silver bun, fine wrinkles, plum shawl, plain wooden cup low. Bottom right: Korean woman22, short copper-brown curly hair, ochre work jacket, rolled paper low. No text, no labels, no borders, no shared scene, no extra figures, no magic, no helmets, no gradients bleeding across cells. Each face unique and centered, eyes visible.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/tidemark-cast.png",
+      "outputPath": "images/tidemark-cast.png",
+      "status": "final"
+    },
+    {
+      "id": "glass-world",
+      "prompt": "Use case: stylized-concept. Asset type: environment key art for an original NPC simulation. One wide painterly game concept illustration, preferably 1536x1024, richly textured but restrained. No people, no text, no labels, no symbols with writing, no watermark. A quiet enclosed memory archive in an original low-magic setting: tall glass-front wooden shelves, brass-framed glass viewing table, three small transparent hexagonal memory tiles placed flat, amber oil lamps, pale cloth curtains and a plain wax-sealed document at the desk. Dark indigo shadows, honey light, dust motes, intimate wooden architecture. No floating objects, no magical beings, no screens, no electric bulbs, no readable memories in glass, no extra rooms or cosmic portals.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/glass-world.png",
+      "outputPath": "images/glass-world.png",
+      "status": "superseded"
+    },
+    {
+      "id": "glass-cast",
+      "prompt": "Use case: stylized-concept. Asset type: character portrait atlas for an original Korean-language NPC simulation. ONE wide image, preferably 1536x1024, EXACT 3 columns by 2 rows of equal-size cells without gaps. One distinct head-and-upper-torso adult portrait per cell, soft painterly game illustration, readable eyes and consistent lighting, simple muted solid backdrops. No text, no lettering, no labels, no frame, no extra figures. Each subject stays inside their own cell. Order strictly left to right then next row. Top left: woman44, medium brown skin, long salt-and-pepper braid, indigo high collar jacket, plain wax seal held low, reserved. Top middle: man26, pale skin, short auburn hair, small silver round glasses, cream artisan apron, blank clear hexagonal glass tile low. Top right: woman58, deep dark brown skin, shaved head, gold linen cloak, cloth wrapped around thumb, dignified. Bottom left: man33, olive tan complexion, wavy brown hair, moss green coat and long cloth sleeves, patient. Bottom middle: East Asian woman29, blunt black bob, coral scarf, pale linen gloves, intent eyes. Bottom right: woman35, warm brown skin, cropped dark curls, wine-colored apron, small amber-rimmed magnifier held low, skeptical. Low-magic glass archive aesthetic, no overt magic or extra jewelry.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/glass-cast.png",
+      "outputPath": "images/glass-cast.png",
+      "status": "final"
+    },
+    {
+      "id": "orison-world",
+      "prompt": "Use case: stylized-concept. Asset type: environment key art for an original NPC simulation. One wide painterly game concept illustration, preferably 1536x1024, richly textured but restrained. No people, no text, no labels, no symbols with writing, no watermark. Interior of a modest rotating orbital station named Hestia: curved utilitarian cream-and-navy aluminum corridor opens into a circular planning room with bolted central table, a closed hydroponics compartment with green trays behind glass, one ordinary round amber terminal on the wall and a circular window showing an uninhabited ochre planet. Mechanical handrails, realistic sealed doors, worn practical surfaces, no artificial gravity beam, no holograms, no giant spacecraft, no stars indoors, no station labels. Restrained hard science fiction, cool white work lights.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/orison-world.png",
+      "outputPath": "images/orison-world.png",
+      "status": "final"
+    },
+    {
+      "id": "orison-cast",
+      "prompt": "Use case: stylized-concept. Asset type: character portrait atlas for an original Korean-language NPC simulation. ONE wide image, preferably 1536x1024, EXACT 3 columns by 2 rows of equal-size cells without gaps. One distinct head-and-upper-torso adult portrait per cell, soft painterly game illustration, readable eyes and consistent lighting, simple muted solid backdrops. No text, no lettering, no labels, no frame, no extra figures. Each subject stays inside their own cell. Order strictly left to right then next row. Hard science fiction maintenance station. Top left: East Asian woman41, short black pixie haircut, navy command utility suit, firm tired eyes, no rank insignia. Top middle: Black man46, deep brown skin, shaved head, broad build, mustard maintenance suit, scratched ordinary wrench low. Top right: L4, a nonhumanoid wall-mounted computer terminal only, round flat amber display inside gray faceted metal case, two small side grilles, abstract simple horizontal light bars on screen with NO face or letters, isolated on plain gray background, same portrait scale. Bottom left: white man62, short silver hair, neatly trimmed gray beard, white and mint laboratory collar, soft gaze. Bottom middle: East Asian woman28, tied short black ponytail, orange cargo utility jacket, folded plain strap low. Bottom right: woman35 with warm brown skin, navy hijab tucked into teal navigation suit, thoughtful expression. No weapons or fantasy technology.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/orison-cast.png",
+      "outputPath": "images/orison-cast.png",
+      "status": "final"
+    },
+    {
+      "id": "emberline-world",
+      "prompt": "Use case: stylized-concept. Asset type: environment key art for an original NPC simulation. One wide painterly game concept illustration, preferably 1536x1024, richly textured but restrained. No people, no text, no labels, no symbols with writing, no watermark. An isolated single-platform steam railway terminus in a volcanic ash plain, not actively erupting. One parked dark steam locomotive coupled to ONE short freight wagon under a timber shelter, low brick ticket office, visible hand signal lever, soot-covered rain barrel and an old mechanical platform clock without legible markings. Rust red and charcoal palette, pale ash haze and late afternoon amber sunlight. Tracks disappear toward a closed low tunnel entrance in distance. No electricity, no automobiles, no flying vehicles, no burning town, no extra trains.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/emberline-world.png",
+      "outputPath": "images/emberline-world.png",
+      "status": "final"
+    },
+    {
+      "id": "emberline-cast",
+      "prompt": "Use case: stylized-concept. Asset type: character portrait atlas for an original Korean-language NPC simulation. ONE wide image, preferably 1536x1024, EXACT 3 columns by 2 rows of equal-size cells without gaps. One distinct head-and-upper-torso adult portrait per cell, soft painterly game illustration, readable eyes and consistent lighting, simple muted solid backdrops. No text, no lettering, no labels, no frame, no extra figures. Each subject stays inside their own cell. Order strictly left to right then next row. Original industrial steam rail frontier. Top left: East Asian woman47, long black braid, burgundy conductor coat, plain brass pocket watch low, direct gaze. Top middle: man36, tan skin, cropped black hair and short beard, soot gray work overalls, round goggles on forehead, weary warm expression. Top right: Black woman30, tight dark coils pinned back, ochre mail coat, sealed blank cream envelope low, energetic gaze. Bottom left: white man60, gray mustache, lined face, brown waistcoat and plain light shirt, small closed cargo ledger low. Bottom middle: East Asian woman25, dark brown blunt shoulder-length hair, pale blue scarf, olive tool jacket, small blank mechanical gauge held low. Bottom right: man43, olive skin, long wavy black hair tied back, tan water carrier coat, plain metal cup low. No guns, no faction symbols, no magic.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/emberline-cast.png",
+      "outputPath": "images/emberline-cast.png",
+      "status": "final"
+    },
+    {
+      "id": "orchard-world",
+      "prompt": "Use case: stylized-concept. Asset type: environment key art for an original NPC simulation. One wide painterly game concept illustration, preferably 1536x1024, richly textured but restrained. No people, no text, no labels, no symbols with writing, no watermark. A contemporary rural Korean cooperative orchard meeting place. View through an open wooden shed onto a modest apple orchard on a low hill. Foreground folding meeting table, stack of plain reusable fruit crates, analog hanging produce scale, empty chalkboard, old compact upright refrigerator with closed door, fabric work gloves, a closed paper ledger. Simple concrete floor and corrugated shed roof, warm autumn afternoon, sage green and muted apple red. No people, no cars, no logos, no text, no distant city, no festival decorations.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/orchard-world.png",
+      "outputPath": "images/orchard-world.png",
+      "status": "final"
+    },
+    {
+      "id": "orchard-cast",
+      "prompt": "Use case: stylized-concept. Asset type: character portrait atlas for an original Korean-language NPC simulation. ONE wide image, preferably 1536x1024, EXACT 3 columns by 2 rows of equal-size cells without gaps. One distinct head-and-upper-torso adult portrait per cell, soft painterly game illustration, readable eyes and consistent lighting, simple muted solid backdrops. No text, no lettering, no labels, no frame, no extra figures. Each subject stays inside their own cell. Order strictly left to right then next row. Contemporary Korean farming cooperative, realistic workwear with warm watercolor-like texture. Top left: Korean woman56, short black hair with a few silver strands, green quilted vest over cream plaid shirt, firm kind gaze. Top middle: Korean man32, black side-parted hair, thin metal glasses, navy cardigan, closed plain ledger held low, thoughtful. Top right: Korean woman24, black ponytail, faded coral work shirt, tan sun hat held low, frank gaze. Bottom left: Korean woman67, short silver curls, purple floral work vest, folded cotton gloves low, amused eyes. Bottom middle: Korean man39, wavy black hair, light beard, ochre delivery jacket, plain cardboard corner low, relaxed expression. Bottom right: Korean woman45, short chestnut bob, pale blue shirt under charcoal apron, simple kitchen towel low, attentive. No cosmetics advertisement styling, no logos, no celebrity resemblance.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/orchard-cast.png",
+      "outputPath": "images/orchard-cast.png",
+      "status": "final"
+    },
+    {
+      "id": "nocturne-world",
+      "prompt": "Use case: stylized-concept. Asset type: environment key art for an original NPC simulation. One wide painterly game concept illustration, preferably 1536x1024, richly textured but restrained. No people, no text, no labels, no symbols with writing, no watermark. An original bounded-supernatural night market entirely under one long covered wooden arcade. A row of closed small stalls with plain fabric curtains, wet dark slate paving, exactly three amber lanterns above a central table, a polished brass balance with two empty pans, shallow brass bowl, tied stack of blank paper contracts. No people, no creatures, no ghost faces, no portal, no futuristic architecture. Natural shadows cast consistently by lanterns, violet night visible only at the open arcade end, burgundy and dark teal details. Quiet mysterious atmosphere, not horror.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/nocturne-world.png",
+      "outputPath": "images/nocturne-world.png",
+      "status": "final"
+    },
+    {
+      "id": "nocturne-cast",
+      "prompt": "Use case: stylized-concept. Asset type: character portrait atlas for an original Korean-language NPC simulation. ONE wide image, preferably 1536x1024, EXACT 3 columns by 2 rows of equal-size cells without gaps. One distinct head-and-upper-torso adult portrait per cell, soft painterly game illustration, readable eyes and consistent lighting, simple muted solid backdrops. No text, no lettering, no labels, no frame, no extra figures. Each subject stays inside their own cell. Order strictly left to right then next row. Original nocturnal market where subtle shadow contracts exist, all six subjects are ordinary adults with normal eyes and normal physical bodies. Top left: East Asian woman40, long black hair in low bun, plum robe with high plain collar, small brass balance chain held low, composed. Top middle: man28, medium brown skin, curly black hair, teal vest over cream shirt, plain rolled contract low, lively. Top right: woman53, light skin, short silver asymmetrical hair, charcoal coat, thin copper spectacles, careful gaze. Bottom left: man61, dark brown skin, salt-and-pepper beard, indigo cap, ochre robe, plain unlit lantern handle low, warm smile. Bottom middle: East Asian woman23, short straight black hair with one white streak, rust-red jacket, empty palm raised low, wary. Bottom right: androgynous woman34, olive skin, shoulder-length wavy brown hair, moss shawl and black apron, folded plain cloth low, calm serious gaze. No monstrous features, no glowing eyes, no weapons, no floating objects.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/nocturne-cast.png",
+      "outputPath": "images/nocturne-cast.png",
+      "status": "final"
+    },
+    {
+      "id": "glass-world-v2",
+      "prompt": "Use case: precise-object-edit. Edit this exact archive environment image. Preserve the composition, camera, lighting, room, furniture and all other details. Change ONLY the three hexagonal glass tiles on the central table: remove ALL miniature landscapes, trees, mountains and embedded pictures from inside all three tiles. Each tile must be empty colorless clear glass with only natural reflections and refractions from the room, no objects, no image or scene, no text. The tiles are inert unreplayed memory media, not displays. Keep all three tiles in their exact positions and same hexagonal outline and thickness. Do not add anything.",
+      "tool": "built-in image_gen",
+      "sourcePath": "images/glass-world-v2.png",
+      "outputPath": "images/glass-world-v2.png",
+      "status": "final",
+      "editTarget": "images/glass-world.png",
+      "supersedes": "glass-world",
+      "qa": "세 육각 유리편의 임의 풍경을 제거하여 미열람 상태의 설정과 일치시킴"
+    }
+  ],
+  "sourcePathMeaning": "Repository image copy; original temporary generation paths omitted for portability."
+}

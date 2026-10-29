@@ -1,0 +1,14 @@
+{
+  "assetSchemaVersion": 1,
+  "visibility": "evaluator_only",
+  "count": 72,
+  "files": [
+    "tidemark.fixtures.json",
+    "glass.fixtures.json",
+    "orison.fixtures.json",
+    "emberline.fixtures.json",
+    "orchard.fixtures.json",
+    "nocturne.fixtures.json"
+  ],
+  "note": "작성자 기준 사례. 모의 어댑터의 판정 정답이나 실제 모델 성능 측정 결과가 아니다. expected는 평가 입력에 넣지 않는다."
+}

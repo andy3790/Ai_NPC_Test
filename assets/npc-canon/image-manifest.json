@@ -1,0 +1,979 @@
+{
+  "assetSchemaVersion": 1,
+  "images": [
+    {
+      "id": "tidemark-world",
+      "worldId": "tidemark",
+      "kind": "world",
+      "path": "images/tidemark-world.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 3195737,
+      "sha256": "3716dd27f070d554179d55bb738ec0459401ebd7cecd98e6dbf359cb1c3d8c1f",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "청람 수문도시의 배경 참고화. 이미지의 세부 사물·숫자는 정본이 아니다."
+    },
+    {
+      "id": "tidemark-cast",
+      "worldId": "tidemark",
+      "kind": "cast",
+      "path": "images/tidemark-cast.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2513370,
+      "sha256": "5dc6f09fec967c0fd8723ef85f70f208922e0486c13e3ec790dcc638e61cfe2b",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "청람 수문도시의 인물 여섯 명. 왼쪽 위부터 행 우선으로 서율, 강무재, 백하린, 남소리, 임은수, 채단."
+    },
+    {
+      "id": "glass-world",
+      "worldId": "glass",
+      "kind": "world",
+      "path": "images/glass-world-v2.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1994730,
+      "sha256": "9e22a10bcd25f563e67aaf1a24670783eb1ca93d3eb7f9186ef399e154e132c3",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "유리서고의 빈 여백의 배경 참고화. 이미지의 세부 사물·숫자는 정본이 아니다."
+    },
+    {
+      "id": "glass-cast",
+      "worldId": "glass",
+      "kind": "cast",
+      "path": "images/glass-cast.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2443637,
+      "sha256": "9653e170e6e503e2536cb5af3cb6b5eb21b94a7ee4493bf86cc393fbe0f896a1",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "유리서고의 빈 여백의 인물 여섯 명. 왼쪽 위부터 행 우선으로 이오나, 루엔, 마라, 테오, 세다, 오르."
+    },
+    {
+      "id": "orison-world",
+      "worldId": "orison",
+      "kind": "world",
+      "path": "images/orison-world.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 3120054,
+      "sha256": "a4d43b609033de1c0a17745348a9f0834d210985535709df120394f3c351e14a",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "궤도정거장 헤스티아의 배경 참고화. 시각 기준은 크림색 금속 통로, 남색 손잡이, 닫힌 재배실 유리, 호박색 원형 L4 화면이다. 화면의 가로 막대는 대화 표시 장식이며 산소·전력 측정값이 아니다."
+    },
+    {
+      "id": "orison-cast",
+      "worldId": "orison",
+      "kind": "cast",
+      "path": "images/orison-cast.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2330339,
+      "sha256": "55a2b221f2576cec183496b5e80ab2b4ce90b5e9d1d1825e44cbefb7a0e44a41",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "궤도정거장 헤스티아의 인물 여섯 명. 왼쪽 위부터 행 우선으로 연지안, 바실 오코예, L4, 미렉, 류소아, 누르."
+    },
+    {
+      "id": "emberline-world",
+      "worldId": "emberline",
+      "kind": "world",
+      "path": "images/emberline-world.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 3219470,
+      "sha256": "ebc5cb5f1e88ad994f61b13e2eb1f53e3d7324d23ad1b7d639cd5157108dd462",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "재선 종착역의 배경 참고화. 시각 기준은 숯빛 기관차, 적갈색 외투, 화산재 묻은 목재, 황동 시계다. 불안한 분위기만으로 사망자·도적단·비밀 철도망을 만들어 낼 수 없다."
+    },
+    {
+      "id": "emberline-cast",
+      "worldId": "emberline",
+      "kind": "cast",
+      "path": "images/emberline-cast.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2502712,
+      "sha256": "b313adf7d0c4a41f1b9a9c0fb6594073d88b31676dbe559f5ef5007e3cb50a93",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "재선 종착역의 인물 여섯 명. 왼쪽 위부터 행 우선으로 윤다온, 환호, 에스라, 사일러스, 문해솔, 이드리스."
+    },
+    {
+      "id": "orchard-world",
+      "worldId": "orchard",
+      "kind": "world",
+      "path": "images/orchard-world.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 3088305,
+      "sha256": "003a6847c532d52485e51866267373547ac573f8e44e0cff9d6b9955e14526fc",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "느티재 공동과수원의 배경 참고화. 시각 기준은 세이지색 과수원, 빛바랜 작업복, 붉은 사과, 재사용 상자다. 배경 그림에 보이는 상자·사과 수량이나 저울 바늘은 공식 60상자 분류표를 대체하지 않는다."
+    },
+    {
+      "id": "orchard-cast",
+      "worldId": "orchard",
+      "kind": "cast",
+      "path": "images/orchard-cast.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2612479,
+      "sha256": "afeadac7819bc32055d1fcf298fa5c543485bce4424b2d9e5b1f06f101334fd3",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "느티재 공동과수원의 인물 여섯 명. 왼쪽 위부터 행 우선으로 서경자, 오민석, 김나래, 박복례, 정도건, 한유진."
+    },
+    {
+      "id": "nocturne-world",
+      "worldId": "nocturne",
+      "kind": "world",
+      "path": "images/nocturne-world.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2435359,
+      "sha256": "91032c67c200dec3b782929921d4a2a4e87312bf9c021436699492bfa242866e",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "무영 야시장의 저울의 배경 참고화. 시각 기준은 자주색 밤, 호박색 등불, 젖은 석재, 황동 그릇과 저울이다. 그림 속 장식 문양·원경·반사·불빛 수는 계약 문구, 추가 노점 이름, 숨은 능력을 뜻하지 않는다."
+    },
+    {
+      "id": "nocturne-cast",
+      "worldId": "nocturne",
+      "kind": "cast",
+      "path": "images/nocturne-cast.png",
+      "mimeType": "image/png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2429579,
+      "sha256": "10be6918fe2f1b004779c3bc383d679bdb8237359be81e84ed5f9806c5767f94",
+      "visibility": "public_visual_reference",
+      "generator": "built-in image_gen",
+      "canonAuthority": "text_only",
+      "alt": "무영 야시장의 저울의 인물 여섯 명. 왼쪽 위부터 행 우선으로 은서, 리온, 세벨, 도하, 아라, 모라."
+    }
+  ],
+  "portraits": [
+    {
+      "characterId": "tid-seoyul",
+      "worldId": "tidemark",
+      "assetId": "tidemark-cast",
+      "path": "images/tidemark-cast.png",
+      "cellIndex": 0,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "서율 — 검은 단발, 남색 비옷, 가슴에 건 작은 황동 열쇠. 시선을 오래 피하지 않는다."
+    },
+    {
+      "characterId": "tid-mujae",
+      "worldId": "tidemark",
+      "assetId": "tidemark-cast",
+      "path": "images/tidemark-cast.png",
+      "cellIndex": 1,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "강무재 — 짧게 깎은 회색 섞인 머리, 넓은 얼굴, 녹슨 붉은 작업 조끼, 평범한 렌치."
+    },
+    {
+      "characterId": "tid-harin",
+      "worldId": "tidemark",
+      "assetId": "tidemark-cast",
+      "path": "images/tidemark-cast.png",
+      "cellIndex": 2,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "백하린 — 둥근 안경, 낮게 묶은 검은 머리, 크림색 셔츠와 짙은 초록 목도리, 닫힌 장부."
+    },
+    {
+      "characterId": "tid-sori",
+      "worldId": "tidemark",
+      "assetId": "tidemark-cast",
+      "path": "images/tidemark-cast.png",
+      "cellIndex": 3,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "남소리 — 햇빛에 그을린 얼굴, 뒤로 묶은 긴 검은 머리, 청록색 망토, 어깨의 밧줄."
+    },
+    {
+      "characterId": "tid-eunsu",
+      "worldId": "tidemark",
+      "assetId": "tidemark-cast",
+      "path": "images/tidemark-cast.png",
+      "cellIndex": 4,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "임은수 — 은빛 쪽머리, 잔주름, 자주색 숄, 작은 나무잔."
+    },
+    {
+      "characterId": "tid-dan",
+      "worldId": "tidemark",
+      "assetId": "tidemark-cast",
+      "path": "images/tidemark-cast.png",
+      "cellIndex": 5,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "채단 — 짧은 구리빛 곱슬머리, 황토색 작업 재킷, 말아 쥔 종이."
+    },
+    {
+      "characterId": "gla-iona",
+      "worldId": "glass",
+      "assetId": "glass-cast",
+      "path": "images/glass-cast.png",
+      "cellIndex": 0,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "이오나 — 갈색 피부, 흰빛 섞인 긴 땋은 머리, 남색 높은 깃, 평범한 밀랍 봉인."
+    },
+    {
+      "characterId": "gla-ruen",
+      "worldId": "glass",
+      "assetId": "glass-cast",
+      "path": "images/glass-cast.png",
+      "cellIndex": 1,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "루엔 — 짧은 적갈색 머리, 작은 은색 둥근 안경, 크림색 앞치마, 빈 육각 유리편."
+    },
+    {
+      "characterId": "gla-mara",
+      "worldId": "glass",
+      "assetId": "glass-cast",
+      "path": "images/glass-cast.png",
+      "cellIndex": 2,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "마라 — 짙은 갈색 피부, 짧게 민 머리, 금빛 아마 망토, 엄지에 감은 천."
+    },
+    {
+      "characterId": "gla-teo",
+      "worldId": "glass",
+      "assetId": "glass-cast",
+      "path": "images/glass-cast.png",
+      "cellIndex": 3,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "테오 — 올리브빛 피부, 물결치는 갈색 머리, 이끼색 외투, 긴 천 소매."
+    },
+    {
+      "characterId": "gla-seda",
+      "worldId": "glass",
+      "assetId": "glass-cast",
+      "path": "images/glass-cast.png",
+      "cellIndex": 4,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "세다 — 검은 단발, 산호색 목도리, 옅은 아마 장갑, 또렷한 눈매."
+    },
+    {
+      "characterId": "gla-or",
+      "worldId": "glass",
+      "assetId": "glass-cast",
+      "path": "images/glass-cast.png",
+      "cellIndex": 5,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "오르 — 갈색 피부, 짧은 검은 곱슬머리, 포도주색 앞치마, 호박색 테두리 확대경."
+    },
+    {
+      "characterId": "orb-jian",
+      "worldId": "orison",
+      "assetId": "orison-cast",
+      "path": "images/orison-cast.png",
+      "cellIndex": 0,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "연지안 — 짧은 검은 머리, 남색 작업복, 피곤하지만 집중된 눈. 계급장은 없다."
+    },
+    {
+      "characterId": "orb-basil",
+      "worldId": "orison",
+      "assetId": "orison-cast",
+      "path": "images/orison-cast.png",
+      "cellIndex": 1,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "바실 오코예 — 짙은 피부, 민 머리, 넓은 어깨, 겨자색 정비복, 긁힌 일반 렌치."
+    },
+    {
+      "characterId": "orb-l4",
+      "worldId": "orison",
+      "assetId": "orison-cast",
+      "path": "images/orison-cast.png",
+      "cellIndex": 2,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "L4 — 가동 8년. 회색 다면 금속 케이스의 원형 호박색 벽면 화면. 얼굴·팔다리·이동 몸체가 없다."
+    },
+    {
+      "characterId": "orb-mirek",
+      "worldId": "orison",
+      "assetId": "orison-cast",
+      "path": "images/orison-cast.png",
+      "cellIndex": 3,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "미렉 — 짧은 은발과 회색 수염, 흰색·민트색 연구복 깃."
+    },
+    {
+      "characterId": "orb-soa",
+      "worldId": "orison",
+      "assetId": "orison-cast",
+      "path": "images/orison-cast.png",
+      "cellIndex": 4,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "류소아 — 짧게 묶은 검은 머리, 주황색 화물 작업복, 접은 평범한 고정 끈."
+    },
+    {
+      "characterId": "orb-noor",
+      "worldId": "orison",
+      "assetId": "orison-cast",
+      "path": "images/orison-cast.png",
+      "cellIndex": 5,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "누르 — 갈색 피부, 남색 히잡, 청록색 작업복, 침착한 눈."
+    },
+    {
+      "characterId": "emb-daon",
+      "worldId": "emberline",
+      "assetId": "emberline-cast",
+      "path": "images/emberline-cast.png",
+      "cellIndex": 0,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "윤다온 — 길게 땋은 검은 머리, 짙은 적갈색 역무 외투, 평범한 황동 회중시계."
+    },
+    {
+      "characterId": "emb-hwanho",
+      "worldId": "emberline",
+      "assetId": "emberline-cast",
+      "path": "images/emberline-cast.png",
+      "cellIndex": 1,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "환호 — 그을린 피부, 짧은 검은 머리와 수염, 회색 작업복, 이마의 고글."
+    },
+    {
+      "characterId": "emb-esra",
+      "worldId": "emberline",
+      "assetId": "emberline-cast",
+      "path": "images/emberline-cast.png",
+      "cellIndex": 2,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "에스라 — 짙은 피부, 뒤로 고정한 곱슬머리, 황토색 우편 외투, 봉인된 무지 봉투."
+    },
+    {
+      "characterId": "emb-silas",
+      "worldId": "emberline",
+      "assetId": "emberline-cast",
+      "path": "images/emberline-cast.png",
+      "cellIndex": 3,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "사일러스 — 회색 콧수염, 주름진 얼굴, 갈색 조끼, 작은 닫힌 화물 장부."
+    },
+    {
+      "characterId": "emb-haesol",
+      "worldId": "emberline",
+      "assetId": "emberline-cast",
+      "path": "images/emberline-cast.png",
+      "cellIndex": 4,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "문해솔 — 짙은 갈색 단발, 옅은 푸른 목도리, 올리브색 작업복, 작은 기계식 계기."
+    },
+    {
+      "characterId": "emb-idris",
+      "worldId": "emberline",
+      "assetId": "emberline-cast",
+      "path": "images/emberline-cast.png",
+      "cellIndex": 5,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "이드리스 — 올리브빛 피부, 뒤로 묶은 긴 검은 머리, 황갈색 외투, 평범한 금속 컵."
+    },
+    {
+      "characterId": "orc-gyeongja",
+      "worldId": "orchard",
+      "assetId": "orchard-cast",
+      "path": "images/orchard-cast.png",
+      "cellIndex": 0,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "서경자 — 흰 가닥이 섞인 짧은 검은 머리, 초록 누빔 조끼, 크림색 체크 셔츠."
+    },
+    {
+      "characterId": "orc-minseok",
+      "worldId": "orchard",
+      "assetId": "orchard-cast",
+      "path": "images/orchard-cast.png",
+      "cellIndex": 1,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "오민석 — 가르마 탄 검은 머리, 얇은 금속 안경, 남색 카디건, 닫힌 장부."
+    },
+    {
+      "characterId": "orc-narae",
+      "worldId": "orchard",
+      "assetId": "orchard-cast",
+      "path": "images/orchard-cast.png",
+      "cellIndex": 2,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "김나래 — 검은 포니테일, 빛바랜 산호색 작업 셔츠, 손에 든 밀짚모자."
+    },
+    {
+      "characterId": "orc-bokrye",
+      "worldId": "orchard",
+      "assetId": "orchard-cast",
+      "path": "images/orchard-cast.png",
+      "cellIndex": 3,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "박복례 — 짧은 은빛 곱슬머리, 자주색 꽃무늬 작업 조끼, 접은 면장갑."
+    },
+    {
+      "characterId": "orc-dogeon",
+      "worldId": "orchard",
+      "assetId": "orchard-cast",
+      "path": "images/orchard-cast.png",
+      "cellIndex": 4,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "정도건 — 물결치는 검은 머리와 옅은 수염, 황토색 운반 재킷, 평범한 상자 모서리."
+    },
+    {
+      "characterId": "orc-yujin",
+      "worldId": "orchard",
+      "assetId": "orchard-cast",
+      "path": "images/orchard-cast.png",
+      "cellIndex": 5,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "한유진 — 짧은 밤색 머리, 옅은 푸른 셔츠, 짙은 회색 앞치마, 작은 행주."
+    },
+    {
+      "characterId": "noc-eunseo",
+      "worldId": "nocturne",
+      "assetId": "nocturne-cast",
+      "path": "images/nocturne-cast.png",
+      "cellIndex": 0,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "은서 — 낮게 묶은 긴 검은 머리, 자주색 높은 깃의 옷, 작은 황동 저울 사슬."
+    },
+    {
+      "characterId": "noc-rion",
+      "worldId": "nocturne",
+      "assetId": "nocturne-cast",
+      "path": "images/nocturne-cast.png",
+      "cellIndex": 1,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "리온 — 갈색 피부, 짧은 검은 곱슬머리, 청록 조끼와 크림색 셔츠, 말린 계약 사본."
+    },
+    {
+      "characterId": "noc-sebel",
+      "worldId": "nocturne",
+      "assetId": "nocturne-cast",
+      "path": "images/nocturne-cast.png",
+      "cellIndex": 2,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 0,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "세벨 — 짧은 은빛 비대칭 머리, 구리색 얇은 안경, 숯빛 외투."
+    },
+    {
+      "characterId": "noc-doha",
+      "worldId": "nocturne",
+      "assetId": "nocturne-cast",
+      "path": "images/nocturne-cast.png",
+      "cellIndex": 3,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 0,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "도하 — 짙은 피부, 희끗한 수염, 남색 모자, 황토색 옷, 불 꺼진 등불 손잡이."
+    },
+    {
+      "characterId": "noc-ara",
+      "worldId": "nocturne",
+      "assetId": "nocturne-cast",
+      "path": "images/nocturne-cast.png",
+      "cellIndex": 4,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.3333333333333333,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 512,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "아라 — 흰 한 가닥이 있는 짧은 검은 머리, 녹슨 붉은 재킷, 빈 손바닥."
+    },
+    {
+      "characterId": "noc-mora",
+      "worldId": "nocturne",
+      "assetId": "nocturne-cast",
+      "path": "images/nocturne-cast.png",
+      "cellIndex": 5,
+      "columns": 3,
+      "rows": 2,
+      "rectNormalized": {
+        "x": 0.6666666666666666,
+        "y": 0.5,
+        "width": 0.3333333333333333,
+        "height": 0.5
+      },
+      "rectPixels": {
+        "x": 1024,
+        "y": 512,
+        "width": 512,
+        "height": 512
+      },
+      "alt": "모라 — 올리브빛 피부, 어깨까지 오는 갈색 물결머리, 이끼색 숄과 검은 앞치마, 접은 천."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import { resolve, join } from 'node:path';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { Store } from '../src/core/store.js';
+import { Engine } from '../src/core/engine.js';
+import { CodexAdapter } from '../src/adapters/codex.js';
+import { exampleSpec } from '../src/shared/example.js';
+const root = resolve('.cache', `recovery-smoke-${Date.now()}`); await mkdir(root, { recursive: true });
+let store = new Store(join(root, 'npc-lab.sqlite'));
+let adapter = new CodexAdapter(join(root, 'runtime'));
+let engine = new Engine(store, adapter, root);
+try {
+  const catalog = await adapter.models(); const model = catalog.find(m => m.isDefault) ?? catalog[0];
+  const spec = exampleSpec(model.id, model.efforts.includes('low') ? 'low' : model.defaultEffort);
+  delete spec.scenario.environment;
+  spec.name = '서버 재시작 복구 검증'; spec.scenario.characters = spec.scenario.characters.slice(0, 2);
+  spec.variants = [spec.variants[0]]; spec.maxUtterances = 3; spec.evaluation.enabled = false;
+  const { runs } = await engine.create(spec, false); const id = runs[0].id;
+  await engine.resume(id, true); await engine.idle();
+  const before = engine.detail(id); assert.equal(before.run.status, 'paused'); assert.equal(before.utterances.length, 1);
+  const threads = Object.values(before.run.sessions).map(s => s.threadId);
+  await engine.close(); store.close();
+  store = new Store(join(root, 'npc-lab.sqlite')); adapter = new CodexAdapter(join(root, 'runtime')); engine = new Engine(store, adapter, root);
+  await engine.resume(id); await engine.idle();
+  const after = engine.detail(id); assert.equal(after.run.status, 'completed', after.run.error ?? '미완료');
+  assert.equal(after.utterances.length, 3); assert.equal(after.invocations.length, 3);
+  assert.equal(after.run.sessions.yoon.threadId, threads[0], '발화한 세션 ID 유지');
+  assert.equal(after.run.sessions.doha.id, before.run.sessions.doha.id, '미발화 NPC의 논리 세션 ID 유지');
+  assert.ok(store.events(id).some(e => e.method === 'session/recreated_empty'), 'Codex에 저장되지 않은 빈 세션만 재생성');
+  assert.equal(after.utterances[0].id, before.utterances[0].id);
+  await writeFile(join(root, 'report.json'), JSON.stringify({ runId: id, status: after.run.status, threadsBefore: threads, threadsAfter: Object.values(after.run.sessions).map(s => s.threadId), summary: after.summary }, null, 2));
+  console.log(`RECOVERY_SMOKE_OK ${root}`);
+} finally { await engine.close(); store.close(); }
