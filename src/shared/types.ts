@@ -29,4 +29,5 @@ export interface Run {
   completionReason?: 'goals_achieved' | 'utterance_limit';
 }
 export interface RawEvent { id: number; runId: string; invocationId: string | null; receivedAt: string; method: string; params: unknown }
-export interface RunDetail { run: Run; utterances: Utterance[]; receipts: DeliveryReceipt[]; invocations: InvocationMetrics[]; findings: EvaluationFinding[]; evaluations: EvaluationRecord[]; summary: Record<string, any> }
+export interface RunHistory { readOnly: boolean; kind: 'current' | 'archive'; locations: string[]; archivedAt?: string }
+export interface RunDetail { run: Run; utterances: Utterance[]; receipts: DeliveryReceipt[]; invocations: InvocationMetrics[]; findings: EvaluationFinding[]; evaluations: EvaluationRecord[]; summary: Record<string, any>; history?: RunHistory }

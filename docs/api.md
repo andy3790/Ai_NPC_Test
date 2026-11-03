@@ -2,15 +2,19 @@
 
 기본 주소: `http://127.0.0.1:4317/api`. 요청 본문과 응답은 JSON, 다운로드는 ZIP, 이벤트 스트림은 SSE입니다. CLI와 웹 화면이 같은 API를 사용합니다. 변경 요청은 `Content-Type: application/json`을 사용합니다. 오류 응답은 `{ "error": "설명" }`입니다.
 
+v1.2의 OpenAI API 실행도 같은 HTTP 규격을 사용합니다. `npm run start:openai`의 기본 주소는 `http://127.0.0.1:4318/api`입니다. `/health.adapter`와 `Run.adapter`는 `codex`, `openai`, `mock`를 구분합니다. 키는 서버의 `OPENAI_API_KEY` 환경 변수에서 읽으며 로컬 HTTP 요청으로 키를 보내지 않습니다. API 모델·사용량·세션 규칙은 [API 실행 안내](openai-api.md)에 있습니다.
+
 | 메서드 | 경로 | 동작 |
 |---|---|---|
-| GET | `/health` | 서버·어댑터 버전 |
+| GET | `/health` | 서버·어댑터 버전, `historyEnabled` |
+| GET | `/history` | 통합 보관소 경로, 검색한 원본과 상태·오류 |
+| POST | `/history/refresh` | 기존 저장 위치와 추가 경로 재검색·보관 갱신 |
 | GET | `/models` | 계정에서 표시되는 모델과 지원 추론 강도 |
 | GET | `/example` | 현재 모델 목록을 반영한 예제 설정 |
 | GET / PUT | `/config` | 마지막 편집 설정 조회 / 저장 |
 | POST | `/validate` | 본문의 ExperimentSpec 구조와 모델·추론 검증 |
 | POST | `/experiments` | `{spec: ExperimentSpec, start: boolean}`로 묶음 생성 |
-| GET | `/runs` | 묶음 목록과 요약 |
+| GET | `/runs?provider=all` | 통합 목록과 요약. `all`, `real`, `codex`, `openai`, `mock` |
 | GET | `/runs/:id` | 설정·세션·발화·호출·수신·평가·요약 전체 |
 | POST | `/runs/:id/pause` | 현재 발화·전달 경계에서 일시정지 |
 | POST | `/runs/:id/resume` | 상태 대조 후 재개 |
@@ -25,6 +29,12 @@
 | GET | `/events` | 변경 알림 SSE. 알림 후 관련 묶음을 다시 조회 |
 
 기본 타입은 `src/shared/types.ts`, 설정 및 출력 검증 스키마는 `src/shared/schema.ts`가 정의합니다. `schemaVersion`은 1이며, 상세한 설정 예시는 `examples/`에 있습니다. 실행 설정은 생성 시 복사·해시 처리되어 이후 편집 설정과 분리됩니다.
+
+필드별 작성법과 요구사항 변환 프롬프트는 [실험 JSON 작성 가이드](experiment-json-guide.md)에 있습니다.
+
+v1.3부터 `serve`는 기본적으로 여러 저장소의 기록을 통합합니다. 목록과 상세 응답의 `history`는 `readOnly`, `kind`(`current`/`archive`), 원본 위치 목록 `locations`, 보관 갱신 시각 `archivedAt`을 제공합니다. 현재 서버에 없는 기록도 같은 상세·분석·내보내기 API를 사용합니다. 보관 기록에 대한 실행 제어와 평가 검토 변경은 400으로 거부하며 모델 호출은 발생하지 않습니다. `--no-history` 서버는 기존 현재 DB 조회만 지원합니다.
+
+`/history`의 `sources`와 `errors`에는 파일별 검색 결과가 있으며, 읽기에 실패한 파일이 있어도 다른 기록은 조회할 수 있습니다. `runs`는 보관소에 복사된 고유 실행 수입니다. 현재 서버의 진행 중 기록은 아직 보관되지 않았을 수 있으므로 `/runs` 수와 다를 수 있습니다. 종료·일시정지한 현재 실행은 자동 보관하며 외부 저장소의 변경은 `/history/refresh` 또는 서버 재시작으로 갱신합니다. 원본 파일이 사라져도 보관본을 자동 삭제하지 않습니다. 내보내기의 `history-source.json`은 실행 ID와 출처 정보를 담습니다. 기존 공통 ID와 집계 기준은 바뀌지 않습니다.
 
 v1.1 추가 설정은 `scenario.environment`(생략 가능)와 `evaluation.repetitionWindow/repetitionThreshold/repetitionMinChars`입니다. 기존 v1 파일은 그대로 읽습니다. 환경의 초기 상태, 행동 조건·효과·공개 결과, 목표 조건은 모두 생성 시 고정됩니다. `enabled`로 사용 여부를, `stopOnGoals`로 목표 달성 시 종료 여부를 선택합니다.
 

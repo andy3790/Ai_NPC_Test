@@ -1,14 +1,15 @@
+import { buildRunDetail } from './detail.js';
 import { EventEmitter } from 'node:events';
 import { createHash, randomUUID } from 'node:crypto';
 import { join } from 'node:path';
 import type { Adapter } from '../adapters/types.js';
 import { Store } from './store.js';
-import { aggregate, emptyUsage, UsageTracker } from './metrics.js';
+import { emptyUsage, UsageTracker } from './metrics.js';
 import { evaluationPrompt, persona, PROMPT_VERSION, publicMessage, receiverPrompt, speakerPrompt } from './prompts.js';
 import { directorSchema, evaluationSchema, experimentSchema, outputSchemas, receiveSchema, speechSchema, type ExperimentSpec, type ModelConfig } from '../shared/schema.js';
 import type { CallKind, DeliveryReceipt, InvocationMetrics, NpcSession, Run, RunDetail, Utterance } from '../shared/types.js';
 import { progression, progressionPrompt, resolveAction } from './progression.js';
-import { qualityMetrics, repetitionMetrics } from './quality.js';
+import { repetitionMetrics } from './quality.js';
 import { APP_VERSION } from '../shared/version.js';
 
 const now = () => new Date().toISOString();
@@ -107,7 +108,7 @@ export class Engine extends EventEmitter {
     if (previous && ['uncertain', 'running'].includes(previous.status)) throw new Error(`미확정 호출 ${previous.id}: 자동 재전송하지 않습니다. 재개하여 상태를 확인하세요.`);
     // A failed accepted turn already appended its input. A retry asks to complete that input,
     // without appending the dialogue payload a second time to the same persistent session.
-    if (previous?.turnId) input = JSON.stringify({ task: JSON.parse(input).task, instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
+    if (previous?.turnId && previous.metadata.inputRetained !== false) input = JSON.stringify({ task: JSON.parse(input).task, instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
     const run = this.run(id); const call: InvocationMetrics = {
       id: randomUUID(), experimentId: run.experimentId, runId: id, variantId: run.variant.id, repetition: run.repetition,
       kind, characterId: ['speech', 'receive'].includes(kind) ? session.characterId : null, operationKey, attempt: (previous?.attempt ?? 0) + 1, retryOf: previous?.id ?? null,
@@ -134,12 +135,15 @@ export class Engine extends EventEmitter {
           if (event.method === 'turn/accepted' || event.method === 'turn/started') call.turnId = event.params.turnId ?? event.params.turn?.id;
           if (event.method === 'item/agentMessage/delta' && !call.firstOutputAt) { call.firstOutputAt = now(); call.firstOutputMs = performance.now() - begin; }
           if (event.method === 'thread/tokenUsage/updated') { tracker.update(event.params); const result = tracker.result(); call.usage = result.usage; call.usageStatus = result.status; }
+          if (event.method === 'response/usage') { tracker.report(event.params.usage); const usage = tracker.result(); call.usage = usage.usage; call.usageStatus = usage.status; }
           if (event.method === 'model/rerouted') call.actualModel = event.params.toModel;
+          if (event.method === 'model/resolved') call.actualModel = event.params.model;
           if (event.method === 'item/started' && event.params.item?.type === 'contextCompaction') call.metadata.compactions = Number(call.metadata.compactions ?? 0) + 1;
           this.store.put('invocations', call); this.changed(id);
         }, controller.signal);
       } finally { set.delete(controller); }
       const usage = tracker.result();
+      if (result.inputRetained !== undefined) call.metadata.inputRetained = result.inputRetained;
       Object.assign(call, { turnId: result.turnId || call.turnId, output: result.output, status: result.status, error: result.error ?? null,
         completedAt: now(), durationMs: performance.now() - begin, usage: usage.usage, usageStatus: usage.status });
       if (call.status === 'completed') {
@@ -309,6 +313,11 @@ export class Engine extends EventEmitter {
         let status = result.status; let error = result.error ?? null;
         if (status === 'completed') try { ({ speech: speechSchema, receive: receiveSchema, director: directorSchema, evaluation: evaluationSchema }[call.kind]).parse(JSON.parse(result.output)); } catch (e) { status = 'failed'; error = err(e); }
         this.store.patch('invocations', call.id, { status, turnId: result.turnId, output: result.output, error, completedAt: now(), metadata: { ...call.metadata, reconciled: true }, durationMs: null });
+        if (result.inputRetained !== undefined || result.usage || result.actualModel) {
+          this.store.patch('invocations', call.id, { ...(result.usage ? { usage: result.usage, usageStatus: 'reported_response' } : {}),
+            ...(result.actualModel ? { actualModel: result.actualModel } : {}), metadata: { ...call.metadata, reconciled: true, ...(result.inputRetained !== undefined ? { inputRetained: result.inputRetained } : {}) } });
+          this.store.event(id, call.id, 'response/reconciled', { usage: result.rawUsage ?? null, actualModel: result.actualModel ?? null });
+        }
       }
       if (this.run(id).status === 'stopped') throw new Error('상태 확인 중 묶음이 중단되었습니다.');
       this.store.patch('runs', id, { status: 'queued', pauseRequested: false, stepRemaining: step ? 1 : null, error: null }); this.pump();
@@ -336,31 +345,9 @@ export class Engine extends EventEmitter {
   review(findingId: string, review: 'unreviewed' | 'confirmed' | 'dismissed', note: string) { const f = this.store.patch('findings', findingId, { review, note }); this.changed(f.runId); return f; }
   detail(id: string): RunDetail {
     const run = this.run(id); const utterances = this.store.list('utterances', id), invocations = this.store.list('invocations', id), findings = this.store.list('findings', id), evaluations = this.store.list('evaluations', id), receipts = this.store.list('receipts', id);
-    const count = utterances.filter(u => u.kind === 'speech').length; const evaluated = new Set<number>();
-    const repetitionEvaluated = new Set<number>();
-    for (const e of evaluations.filter(e => e.status === 'completed')) for (let i = e.from; i <= e.to; i++) evaluated.add(i);
-    for (const e of evaluations.filter(e => e.status === 'completed')) {
-      const version = String(invocations.find(c => c.id === e.invocationId)?.metadata.promptVersion ?? '').match(/^npc-lab\/(\d+)/);
-      if (version && Number(version[1]) >= 2) for (let i = e.from; i <= e.to; i++) repetitionEvaluated.add(i);
-    }
-    const issues = findings.filter(f => f.review !== 'dismissed' && f.verdict === 'issue');
-    const issueUtterances = new Set(issues.map(f => f.utteranceId)); const total = aggregate(invocations);
-    const end = run.completedAt ? Date.parse(run.completedAt) : Date.now();
-    return { run, utterances, invocations, findings, evaluations, receipts, summary: {
-      ...total, speechCount: count, pendingReceipts: receipts.filter(r => r.status !== 'delivered').length,
-      byKind: Object.fromEntries((['speech', 'receive', 'director', 'evaluation'] as CallKind[]).map(k => [k, aggregate(invocations.filter(c => c.kind === k))])),
-      tokensPerSpeech: count && total.tokens.totalTokens !== null ? total.tokens.totalTokens / count : null,
-      evaluatedUtterances: evaluated.size, evaluationFailures: evaluations.filter(e => e.status === 'failed').length,
-      firstIssue: utterances.find(u => issueUtterances.has(u.id))?.speechIndex ?? null,
-      issueRate: evaluated.size ? issueUtterances.size / evaluated.size : null,
-      categories: Object.fromEntries([...new Set(findings.map(f => f.category))].map(k => [k, issues.filter(f => f.category === k).length])),
-      confirmedIssues: issues.filter(f => f.review === 'confirmed').length,
-      quality: qualityMetrics(run.spec, utterances, findings, repetitionEvaluated.size),
-      elapsedMs: run.startedAt ? end - Date.parse(run.startedAt) : 0, activeMs: run.activeMs + (this.activeStarts.has(id) ? performance.now() - this.activeStarts.get(id)! : 0),
-      timingComplete: run.timingComplete ?? true,
-      pausedMs: run.pausedMs + (run.pausedAt && !run.completedAt ? Date.now() - Date.parse(run.pausedAt) : 0),
-    } };
+    return buildRunDetail({ run, utterances, invocations, findings, evaluations, receipts }, this.activeStarts.has(id) ? performance.now() - this.activeStarts.get(id)! : 0);
   }
+
   async idle() { while (this.workers.size || this.store.list('runs').some(r => r.status === 'queued')) { await Promise.allSettled([...this.workers.values()]); await new Promise(r => setTimeout(r, 5)); } }
   async close() { this.closing = true; for (const set of this.aborts.values()) for (const c of set) c.abort(); await Promise.allSettled([...this.workers.values()]); await this.adapter.close(); }
 }

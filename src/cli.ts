@@ -3,13 +3,13 @@ import { Command } from 'commander';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { serve } from './server/main.js';
-const cli = new Command().name('npc-lab').description('Codex CLI 기반 NPC 대화 실험').option('--url <url>', '서버 주소', 'http://127.0.0.1:4317');
+const cli = new Command().name('npc-lab').description('Codex CLI · OpenAI API NPC 대화 실험').option('--url <url>', '서버 주소', 'http://127.0.0.1:4317');
 async function api(path: string, body?: unknown, method?: string) {
   const response = await fetch(`${cli.opts().url}/api${path}`, { method: method ?? (body === undefined ? 'GET' : 'POST'), headers: { 'Content-Type': 'application/json' }, ...(body !== undefined ? { body: JSON.stringify(body) } : {}) });
   const result = await response.json() as any; if (!response.ok) throw new Error(result.error ?? response.statusText); return result;
 }
 const print = (v: unknown) => console.log(JSON.stringify(v, null, 2));
-cli.command('serve').option('--port <port>', '포트', '4317').option('--data <directory>', '저장 폴더', 'data').option('--mock', '모의 모델 사용').action(async o => { await serve({ port: Number(o.port), data: o.data, mock: o.mock }); });
+cli.command('serve').option('--port <port>', '포트', '4317').option('--data <directory>', '저장 폴더 (API 기본값: data/openai)').option('--adapter <name>', '실행 경로: codex | openai | mock').option('--mock', '모의 모델 사용').option('--no-history', '통합 보관 기록 조회 끄기').action(async o => { await serve({ port: Number(o.port), data: o.data, mock: o.mock, adapter: o.adapter, history: o.history }); });
 cli.command('models').action(async () => print(await api('/models')));
 cli.command('example').option('--out <file>', 'JSON 파일 경로').action(async o => { const spec = await api('/example'); if (o.out) await writeFile(resolve(o.out), JSON.stringify(spec, null, 2)); else print(spec); });
 cli.command('validate').requiredOption('--config <file>', '설정 JSON').action(async o => print(await api('/validate', JSON.parse(await readFile(resolve(o.config), 'utf8')))));

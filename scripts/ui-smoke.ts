@@ -2,7 +2,7 @@ import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import { serve } from '../src/server/main.js';
-const server = process.env.NPC_UI_URL ? null : await serve({ port: 4319, mock: true, data: `.cache/ui-smoke-${Date.now()}` });
+const server = process.env.NPC_UI_URL ? null : await serve({ port: 4319, mock: true, data: `.cache/ui-smoke-${Date.now()}`, history: false });
 const base = process.env.NPC_UI_URL ?? 'http://127.0.0.1:4319';
 const channel = process.env.NPC_BROWSER_CHANNEL ?? (process.platform === 'win32' ? 'msedge' : undefined);
 const browser = await chromium.launch({ headless: true, channel, executablePath: process.env.NPC_BROWSER_EXECUTABLE });

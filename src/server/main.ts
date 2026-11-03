@@ -3,11 +3,15 @@ import { openSync, closeSync, readFileSync, unlinkSync, mkdirSync, writeFileSync
 import { pathToFileURL } from 'node:url';
 import { Store } from '../core/store.js';
 import { Engine } from '../core/engine.js';
-import { CodexAdapter } from '../adapters/codex.js';
-import { MockAdapter } from '../adapters/mock.js';
+import { adapterName, createAdapter } from '../adapters/factory.js';
 import { createApp } from './app.js';
-export async function serve(options: { port?: number; data?: string; mock?: boolean } = {}) {
-  const data = resolve(options.data ?? process.env.NPC_LAB_DATA ?? 'data'); mkdirSync(data, { recursive: true });
+import { RunHistoryCatalog } from '../core/history.js';
+export async function serve(options: { port?: number; data?: string; mock?: boolean; adapter?: string; history?: boolean; historyRoots?: string[]; historyArchive?: string; historyWorkspace?: string } = {}) {
+  const roots = options.historyRoots ?? (process.env.NPC_LAB_HISTORY_ROOTS ? JSON.parse(process.env.NPC_LAB_HISTORY_ROOTS) : undefined);
+  if (roots !== undefined && (!Array.isArray(roots) || roots.some((r: unknown) => typeof r !== 'string'))) throw new Error('NPC_LAB_HISTORY_ROOTS는 폴더 경로의 JSON 배열이어야 합니다.');
+  const mode = adapterName(options);
+  const data = resolve(options.data ?? process.env.NPC_LAB_DATA ?? (mode === 'openai' ? 'data/openai' : 'data')); mkdirSync(data, { recursive: true });
+  const adapter = createAdapter(mode, join(data, 'runtime'));
   const lock = join(data, 'server.lock');
   try { const fd = openSync(lock, 'wx'); closeSync(fd); }
   catch {
@@ -17,8 +21,9 @@ export async function serve(options: { port?: number; data?: string; mock?: bool
   }
   writeFileSync(lock, String(process.pid));
   const store = new Store(join(data, 'npc-lab.sqlite'));
-  const adapter = options.mock || process.env.NPC_LAB_ADAPTER === 'mock' ? new MockAdapter() : new CodexAdapter(join(data, 'runtime'));
-  const engine = new Engine(store, adapter, data); const app = await createApp(engine);
+  const engine = new Engine(store, adapter, data);
+  const history = options.history === false ? undefined : new RunHistoryCatalog(engine, { roots, workspace: options.historyWorkspace, archive: options.historyArchive ?? process.env.NPC_LAB_HISTORY_DATABASE });
+  const app = await createApp(engine, { history });
   let closing = false;
   const close = async () => { if (closing) return; closing = true; await engine.close(); await app.close(); store.close(); try { unlinkSync(lock); } catch {} };
   process.once('SIGINT', () => void close()); process.once('SIGTERM', () => void close());

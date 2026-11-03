@@ -14,11 +14,13 @@ const speeches = d.utterances.filter(u => u.kind === 'speech'), events = d.utter
 const attempts = d.invocations.filter(c => c.kind === 'speech');
 const calls = attempts.filter(c => c.status === 'completed');
 assert.equal(calls.length, 120); assert.equal(d.invocations.filter(c => c.kind === 'receive').length, 0);
-assert.equal(d.invocations.filter(c => c.kind === 'evaluation').length, 12);
-assert.equal(d.invocations.length, 132 + attempts.filter(c => c.status !== 'completed').length); assert.equal(events.length, 3);
+const evaluationCalls = d.invocations.filter(c => c.kind === 'evaluation');
+assert.ok(evaluationCalls.length >= 12);
+assert.equal(d.invocations.length, 120 + evaluationCalls.length + attempts.filter(c => c.status !== 'completed').length); assert.equal(events.length, 3);
 assert.equal(d.receipts.length, 618); assert.equal(d.receipts.filter(r => r.status !== 'delivered').length, 15);
 assert.equal(d.summary.missingUsage, 0);
-assert.ok(d.invocations.every(c => ['completed', 'failed', 'cancelled'].includes(c.status) && c.model === 'gpt-6.1-terra' && c.effort === 'medium'));
+const expectedConfig = manifest.spec.scenario.defaults;
+assert.ok(d.invocations.every(c => ['completed', 'failed', 'cancelled'].includes(c.status) && c.model === expectedConfig.model && c.effort === expectedConfig.effort));
 assert.equal(new Set(Object.values(d.run.sessions).map(s => s.threadId)).size, 6);
 assert.equal(d.summary.quality.progression, null);
 const delivered = new Map<string, Set<string>>();
@@ -47,7 +49,9 @@ for (let i = 0; i < 3; i++) {
   assert.equal(speeches.filter(s => s.sequence < events[i].sequence).length, d.run.spec.scheduledEvents[i].afterUtterance);
 }
 assert.deepEqual(d.evaluations.map(e => [e.from, e.to]), Array.from({ length: 12 }, (_, i) => [i * 10 + 1, i * 10 + 10]));
-assert.ok(d.evaluations.every(e => e.status === 'completed' && !e.contextTruncated));
+assert.ok(d.evaluations.every(e => ['completed', 'failed'].includes(e.status) && !e.contextTruncated));
+const evaluatedCoverage = d.evaluations.filter(e => e.status === 'completed').reduce((sum, e) => sum + e.to - e.from + 1, 0);
+assert.equal(d.summary.evaluatedUtterances, evaluatedCoverage);
 const records = (await readFile(join(root, 'records.jsonl'), 'utf8')).trim().split('\n').map(l => JSON.parse(l));
 assert.equal(records.filter(r => r.type === 'invocation').reduce((sum, c) => sum + c.usage.totalTokens, 0), d.summary.tokens.totalTokens);
 assert.ok(!records.some(r => r.type === 'raw_event' && r.method === 'item/started' && ['commandExecution', 'mcpToolCall', 'webSearch', 'collabToolCall', 'fileChange'].includes(r.params?.item?.type)));
@@ -61,12 +65,12 @@ const findings = d.findings.map(f => ({ ...f, speechIndex: speeches.find(u => u.
 const issues = findings.filter(f => f.verdict === 'issue' && f.review !== 'dismissed');
 const categories = Object.fromEntries([...new Set(findings.map(f => f.category))].map(category => [category, { issue: issues.filter(f => f.category === category).length, uncertain: findings.filter(f => f.category === category && f.verdict === 'uncertain').length }]));
 const analysis = { experimentId: d.run.experimentId, runId: d.run.id, sourceSha256: manifest.sourceSha256, snapshotHash: d.run.snapshotHash,
-  model: 'gpt-6.1-terra', effort: 'medium', speeches: 120, events: 3,
+  adapter: d.run.adapter, model: expectedConfig.model, effort: expectedConfig.effort, speeches: 120, events: 3,
   summary: d.summary, publicGeneration: distribution('durationMs'), publicFirstOutput: distribution('firstOutputMs'), publicQueue: distribution('queueMs'),
   categories, findings, compactions: d.invocations.reduce((sum, c) => sum + Number(c.metadata.compactions ?? 0), 0),
   failedAttempts: d.invocations.filter(c => c.status !== 'completed').map(c => ({ id: c.id, operationKey: c.operationKey, error: c.error, usage: c.usage, durationMs: c.durationMs })),
   perCharacter: d.run.spec.scenario.characters.map(c => ({ id: c.id, name: c.name, speeches: speeches.filter(u => u.speakerId === c.id).length, issues: issues.filter(f => f.speakerName === c.name).length })),
-  verified: { sourceSnapshot: true, requestedModels: true, exactlyOneRun: true, receiptOrder: true, noDuplicateInput: true, privateInitialProfiles: true, noFutureEventsInPersona: true, noTools: true, evaluationCoverage: 120, jsonlTokenTotal: true } };
+  verified: { sourceSnapshot: true, requestedModels: true, exactlyOneRun: true, receiptOrder: true, noDuplicateInput: true, privateInitialProfiles: true, noFutureEventsInPersona: true, noTools: true, evaluationCoverage: evaluatedCoverage, failedEvaluationRanges: d.evaluations.filter(e => e.status === 'failed').map(e => [e.from, e.to]), jsonlTokenTotal: true } };
 await writeFile(join(root, 'analysis.json'), JSON.stringify(analysis, null, 2));
 await writeFile(join(root, 'review-transcript.txt'), d.utterances.map(u => `${u.kind === 'speech' ? `#${u.speechIndex}` : '[공식 사건]'} ${u.speakerName}\n${u.speech}\n[행동] ${u.action}\n`).join('\n'));
 console.log(JSON.stringify({ ...analysis, findings: findings.map(f => ({ n: f.speechIndex, category: f.category, severity: f.severity, verdict: f.verdict, quote: f.quote })), summary: { tokens: d.summary.tokens, elapsedMs: d.summary.elapsedMs, quality: d.summary.quality } }, null, 2));

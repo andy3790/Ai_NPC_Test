@@ -8,7 +8,9 @@ export function normalizeUsage(value: any): TokenUsage {
 // Use thread total deltas to account for multiple requests and compaction in one turn.
 export class UsageTracker {
   baseline: TokenUsage | null; latest: TokenUsage | null = null; invalid = false;
+  private reportedUsage: TokenUsage | null = null;
   constructor(baseline: TokenUsage | null) { this.baseline = baseline; }
+  report(usage: TokenUsage) { this.reportedUsage = normalizeUsage(usage); }
   update(event: any) {
     const total = normalizeUsage(event?.tokenUsage?.total ?? event?.total);
     if (total.totalTokens === null) return;
@@ -17,6 +19,7 @@ export class UsageTracker {
     this.latest = total;
   }
   result(): { usage: TokenUsage; status: string } {
+    if (this.reportedUsage) return { usage: this.reportedUsage, status: 'reported_response' };
     if (!this.latest) return { usage: emptyUsage(), status: 'missing_usage_event' };
     if (!this.baseline || this.invalid) return { usage: emptyUsage(), status: this.invalid ? 'counter_discontinuity' : 'unknown_baseline' };
     return { usage: Object.fromEntries(tokenKeys.map(k => [k, this.latest![k] === null || this.baseline![k] === null ? null : this.latest![k]! - this.baseline![k]!])) as unknown as TokenUsage, status: 'reported_cumulative_delta' };

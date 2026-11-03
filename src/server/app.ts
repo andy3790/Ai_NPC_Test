@@ -9,9 +9,13 @@ import { experimentSchema } from '../shared/schema.js';
 import { exportFiles, zipFiles } from '../core/export.js';
 import { groupedMetrics } from '../core/metrics.js';
 import { APP_VERSION } from '../shared/version.js';
+import type { RunHistoryCatalog } from '../core/history.js';
 
-export async function createApp(engine: Engine) {
+export async function createApp(engine: Engine, options: { history?: RunHistoryCatalog } = {}) {
   const app = Fastify({ logger: false, bodyLimit: 4 * 1024 * 1024 });
+  const history = options.history;
+  const detail = (id: string) => history ? history.detail(id) : engine.detail(id);
+  const files = (id: string) => history ? history.exports(id) : exportFiles(engine.detail(id), engine.store.events(id));
   // Loopback binding plus Origin/Host checks prevent browser-driven writes from other sites.
   app.addHook('onRequest', async (request, reply) => {
     const host = request.headers.host ?? '';
@@ -20,36 +24,44 @@ export async function createApp(engine: Engine) {
     if (origin && origin !== `http://${host}`) return reply.code(403).send({ error: '다른 출처의 요청은 허용하지 않습니다.' });
   });
   app.setErrorHandler((error, _request, reply) => reply.code(400).send({ error: error instanceof Error ? error.message : String(error) }));
-  app.get('/api/health', async () => ({ ok: true, adapter: engine.adapter.name, version: APP_VERSION }));
+  app.get('/api/health', async () => ({ ok: true, adapter: engine.adapter.name, version: APP_VERSION, historyEnabled: !!history }));
+  app.get('/api/history', async () => history ? { enabled: true, ...history.sources() } : { enabled: false, sources: [], runs: 0, errors: [] });
+  app.post('/api/history/refresh', async () => { if (!history) throw new Error('이 서버는 통합 기록 조회가 꺼져 있습니다.'); const result = history.refresh(); engine.emit('change', { runId: '', at: new Date().toISOString() }); return result; });
   app.get('/api/models', async () => engine.adapter.models());
   app.get('/api/example', async () => {
     const models = await engine.adapter.models(); const m = models.find(x => x.isDefault) ?? models[0];
-    return exampleSpec(m.id, m.efforts.includes('low') ? 'low' : m.defaultEffort);
+    const spec = exampleSpec(m.id, m.efforts.includes('low') ? 'low' : m.defaultEffort);
+    if (engine.adapter.name === 'openai') { spec.maxUtterances = 6; spec.evaluation.interval = 6; spec.concurrentRuns = 1; spec.maxConcurrentCalls = 1; }
+    return spec;
   });
   app.get('/api/config', async () => engine.store.setting('lastSpec') ?? null);
   app.put('/api/config', async req => { const spec = experimentSchema.parse(req.body); engine.store.setting('lastSpec', spec); return spec; });
   app.post('/api/validate', async req => ({ valid: true, spec: await engine.validate(req.body) }));
   app.post('/api/experiments', async req => { const { spec, start } = req.body as any; return engine.create(spec, start !== false); });
-  app.get('/api/runs', async () => engine.store.list('runs').reverse().map(r => ({ ...r, maxUtterances: r.spec.maxUtterances, sessions: undefined, helperSessions: undefined, spec: undefined, summary: engine.detail(r.id).summary })));
+  app.get<{ Querystring: { provider?: string } }>('/api/runs', async req => {
+    const provider = z.enum(['all', 'real', 'codex', 'openai', 'mock']).optional().parse(req.query.provider);
+    return history ? history.list(provider) : engine.store.list('runs').reverse().filter(r => !provider || provider === 'all' || (provider === 'real' ? r.adapter !== 'mock' : r.adapter === provider)).map(r => ({ ...r, maxUtterances: r.spec.maxUtterances, sessions: undefined, helperSessions: undefined, spec: undefined, summary: engine.detail(r.id).summary }));
+  });
   app.get<{ Querystring: { runIds?: string } }>('/api/analysis', async req => {
     const ids = req.query.runIds?.split(',');
-    const runs = engine.store.list('runs').filter(r => !ids || ids.includes(r.id));
-    return groupedMetrics(runs.flatMap(r => engine.store.list('invocations', r.id).map(c => ({ ...c, metadata: { ...c.metadata, adapter: r.adapter } }))));
+    const runs = (history ? history.list() : engine.store.list('runs')).filter(r => !ids || ids.includes(r.id));
+    return groupedMetrics(runs.flatMap(r => detail(r.id).invocations.map(c => ({ ...c, metadata: { ...c.metadata, adapter: r.adapter } }))));
   });
-  app.get<{ Params: { id: string } }>('/api/runs/:id', async req => engine.detail(req.params.id));
+  app.get<{ Params: { id: string } }>('/api/runs/:id', async req => detail(req.params.id));
   app.post<{ Params: { id: string; action: string } }>('/api/runs/:id/:action', async req => {
     const { id, action } = req.params;
+    history?.assertWritable(id);
     if (action === 'pause') await engine.pause(id);
     else if (action === 'resume' || action === 'step') await engine.resume(id, action === 'step');
     else if (action === 'stop') await engine.stop(id);
     else if (action === 'inject') await engine.inject(id, z.object({ text: z.string() }).parse(req.body).text);
     else if (action === 'evaluate') await engine.evaluate(id);
     else throw new Error('알 수 없는 동작');
-    return engine.detail(id);
+    return detail(id);
   });
-  app.patch<{ Params: { id: string } }>('/api/findings/:id', async req => { const body = z.object({ review: z.enum(['unreviewed', 'confirmed', 'dismissed']), note: z.string().max(10000) }).parse(req.body); return engine.review(req.params.id, body.review, body.note); });
-  app.get<{ Params: { id: string } }>('/api/runs/:id/export', async req => exportFiles(engine.detail(req.params.id), engine.store.events(req.params.id)));
-  app.get<{ Params: { id: string } }>('/api/runs/:id/export.zip', async (req, reply) => reply.type('application/zip').header('Content-Disposition', `attachment; filename="npc-${req.params.id}.zip"`).send(zipFiles(exportFiles(engine.detail(req.params.id), engine.store.events(req.params.id)))));
+  app.patch<{ Params: { id: string } }>('/api/findings/:id', async req => { if (history && !engine.store.get('findings', req.params.id)) throw new Error('보관 기록의 평가 검토는 원본 저장소의 서버에서 사용하세요.'); const body = z.object({ review: z.enum(['unreviewed', 'confirmed', 'dismissed']), note: z.string().max(10000) }).parse(req.body); return engine.review(req.params.id, body.review, body.note); });
+  app.get<{ Params: { id: string } }>('/api/runs/:id/export', async req => files(req.params.id));
+  app.get<{ Params: { id: string } }>('/api/runs/:id/export.zip', async (req, reply) => reply.type('application/zip').header('Content-Disposition', `attachment; filename="npc-${req.params.id}.zip"`).send(zipFiles(files(req.params.id))));
   const streams = new Set<import('node:http').ServerResponse>();
   app.get('/api/events', (req, reply) => {
     reply.hijack(); reply.raw.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive' });
@@ -60,7 +72,7 @@ export async function createApp(engine: Engine) {
   engine.on('change', listener);
   const heartbeat = setInterval(() => { for (const stream of streams) stream.write(': heartbeat\n\n'); }, 15_000); heartbeat.unref();
   app.addHook('preClose', async () => { for (const stream of streams) stream.end(); });
-  app.addHook('onClose', async () => { engine.off('change', listener); clearInterval(heartbeat); for (const stream of streams) stream.end(); });
+  app.addHook('onClose', async () => { engine.off('change', listener); clearInterval(heartbeat); for (const stream of streams) stream.end(); history?.close(); });
   const webDir = resolve('dist/web');
   if (existsSync(webDir)) { await app.register(fastifyStatic, { root: webDir }); app.setNotFoundHandler((req, reply) => req.url.startsWith('/api/') ? reply.code(404).send({ error: '찾을 수 없습니다.' }) : reply.sendFile('index.html')); }
   else app.get('/', async (_req, reply) => reply.type('text/plain; charset=utf-8').send('웹 화면을 먼저 빌드하세요: npm run build')); 
