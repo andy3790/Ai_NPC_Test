@@ -1,8 +1,10 @@
 # 실험 JSON 작성과 요구사항 변환 가이드
 
-NPC Dialogue Lab의 실험 설정 파일은 `schemaVersion: 1`인 JSON 객체입니다. 세계관·캐릭터·비교 조건·평가·행동 규칙을 한 파일에 담고, 웹과 CLI가 같은 형식으로 읽습니다. 이 가이드는 앱 v1.3의 [실제 스키마](../src/shared/schema.ts)를 기준으로 합니다.
+NPC Dialogue Lab의 실험 설정 파일은 `schemaVersion: 1`인 JSON 객체입니다. 세계관·캐릭터·비교 조건·평가·행동 규칙을 한 파일에 담고, 웹과 CLI가 같은 형식으로 읽습니다. 이 가이드는 앱 1.4.0의 [공통 스키마](../src/shared/schema.ts)와 [공간 스키마](../src/shared/spatial-schema.ts)를 기준으로 합니다.
 
 바로 편집하려면 [완전한 작성 예제](../examples/authoring-starter.json)를 복사하세요. 자연어로 작성하려면 [요구사항 양식](#요구사항을-정리하는-양식)을 채우고 [변환 프롬프트](#복사해서-사용하는-변환-프롬프트)와 함께 AI에게 전달하세요. 생성된 JSON은 마지막의 [검증과 실행](#검증과-실행) 절차로 확인합니다.
+
+AI 행동 결과·가상 시간·장소 이동·선택형 사건의 동작은 [세계 엔진·분산 공간](world-engine.md)에 있습니다. 설정 필드는 이 문서에서 설명하며 [단일 공간](../examples/ai-world-engine.json)과 [분산 공간](../examples/spatial-world.json)의 완전한 예제를 제공합니다.
 
 ## 먼저 구분할 설정
 
@@ -12,7 +14,7 @@ NPC Dialogue Lab의 실험 설정 파일은 `schemaVersion: 1`인 JSON 객체입
 |---|---|---|
 | 세계관·NPC·모델·추론·전달·평가 | 실험 JSON | `scenario`, `variants`, `evaluation` |
 | Codex CLI 또는 OpenAI API | 서버 실행 옵션 | `serve --adapter codex`, `npm run start:openai` |
-| API 키 | 서버 환경 변수 또는 로컬 `.env` | `OPENAI_API_KEY` |
+| API 키 | 페이지의 API 키 설정 우선, 없으면 서버 환경 변수·로컬 `.env` | 개인 키는 해당 브라우저의 새 실험에 적용. 서버 키는 `OPENAI_API_KEY` |
 | API 호출당 출력 한도 | 서버 환경 변수 | `OPENAI_MAX_OUTPUT_TOKENS` |
 | DB·통합 기록 저장 위치 | 서버 실행 옵션·환경 변수 | `--data`, `NPC_LAB_HISTORY_ROOTS` |
 | 토큰·시간 수집 | 엔진이 자동 수행 | 별도 활성화 필드 없음 |
@@ -27,18 +29,22 @@ ExperimentSpec
   scenario
     id, name, world, situation, defaults
     characters[]
-    environment                    선택 사항
+    environment                    사전 규칙, 선택 사항
+    worldEngineInstructions        AI 진행 규칙, 선택 사항
+    spatial                        분산 공간 지도·시작 위치·채널
   variants[]                       비교할 조건을 각각 명시
   repetitions, maxUtterances
   concurrentRuns, maxConcurrentCalls, timeoutMs
   evaluation
   director
+  worldEngine                      AI 환경 사용 시 필요
+  eventGenerator                   상황 발생 사용 시 필요
   scheduledEvents[]
 ```
 
 **묶음 수 = `variants.length × repetitions`**입니다. NPC 수는 `scenario.characters.length`이며 `npcCount`라는 별도 필드는 없습니다. 각 묶음은 같은 시나리오로 시작하되 NPC 세션과 대화 기록을 공유하지 않습니다.
 
-예를 들어 NPC 6명, 4조건, 조건별 2회, `maxUtterances: 120`이면 8묶음을 만들고 묶음마다 전체 NPC를 합쳐 최대 120발화를 진행합니다. 1인당 120발화가 아닙니다. 순번제에서 120회를 모두 마치면 각 NPC는 20차례를 갖습니다. 진행자 방식에서는 횟수가 달라질 수 있습니다.
+예를 들어 NPC 6명, 4조건, 조건별 2회, `maxUtterances: 120`이면 8묶음을 만들고 묶음마다 전체 NPC를 합쳐 최대 120발화를 진행합니다. 1인당 120발화가 아닙니다. 단순 순번제에서 반응 우선·분산 진행 없이 120회를 마치면 각 NPC는 20차례를 갖습니다. 진행자·AI 반응 우선·분산 공간에서는 인물별 횟수가 달라질 수 있습니다.
 
 공개 발화 수에는 대사 없이 행동만 출력한 차례도 포함됩니다. `maxUtterances: 120`이 120개의 비어 있지 않은 대사를 보장하지는 않습니다. 현재 설정에는 대사 필수 여부를 강제하는 전용 필드가 없습니다. 수신 확인, 환경 결과, 수동 사건, 평가, 진행자 호출은 공개 발화 수에 포함하지 않습니다.
 
@@ -59,11 +65,13 @@ ExperimentSpec
 | `timeoutMs` | `300000` | 모델 요청 한 번의 제한 시간, 정수 1000~3600000밀리초. 전체 실험 제한 시간이 아님 |
 | `evaluation` | 필수 | 평가 객체. 꺼도 객체와 모델·추론 필드는 필요 |
 | `director` | 필수 | 진행자용 `{ "model": "...", "effort": "..." }`. 순번제여도 객체는 필요 |
-| `scheduledEvents` | `[]` | 발화 번호를 기준으로 넣을 공개 사건 |
+| `worldEngine` | 선택 | `{model, effort}`. ai/ai_spatial 조건이 있으면 필수 |
+| `eventGenerator` | 선택 | 상황 발생 모델·빈도·범위. eventGeneration 조건이 있으면 필수 |
+| `scheduledEvents` | `[]` | 발화 번호별 사건. 선택 audience로 관찰 범위 지정 |
 
 전체 묶음은 최대 500개입니다. 100조건 × 100반복처럼 각 필드의 범위는 맞아도 곱이 500을 넘으면 거부됩니다. `concurrentRuns`는 생성 개수를 줄이지 않고 실행 순서만 제한합니다. 같은 서버에서 여러 실험을 돌리면 전체 묶음 상한과 활성 실험들의 호출 한도도 함께 적용됩니다.
 
-스키마 기본 발화 수는 60이지만 API 서버의 ‘새 예제’는 짧은 확인용 값으로 6발화·평가 간격 6·동시 묶음과 호출 1을 제안합니다. 불러온 JSON의 값을 자동으로 그 값으로 줄이지는 않습니다.
+스키마 기본 발화 수는 60이지만 API 서버의 ‘새 예제’는 짧은 확인용 값으로 6발화·평가 간격 6·동시 묶음과 호출 1을 제안합니다. 분산 공간 예제 불러오기는 별도의 60차례·2조건 구성을 사용합니다. 불러온 JSON의 값을 자동으로 6차례로 줄이지는 않습니다.
 
 ## 세계관과 시작 상황
 
@@ -75,7 +83,9 @@ ExperimentSpec
 | `situation` | 대화 시작 시점의 상황. 비어 있지 않은 문자열 |
 | `defaults` | NPC 모델·추론의 기본값 |
 | `characters` | 2~30명의 캐릭터. 캐릭터 ID 중복 불가 |
-| `environment` | 허용 행동·결과·목표를 엔진이 처리하는 규칙. 생략 가능 |
+| `environment` | rules 모드의 행동·결과·목표 규칙. 생략 가능 |
+| `worldEngineInstructions` | AI 세계 엔진에 주는 추가 장면 규칙 문자열. 생략 가능 |
+| `spatial` | ai_spatial의 장소·통로·시작 위치·채널. 해당 모드이면 필수 |
 
 시나리오·캐릭터·조건·행동·목표 ID와 상태 키에는 **영문 대소문자, 숫자, `_`, `-`만** 쓰고 길이는 1~100자로 합니다. 표시 이름과 본문에는 한국어를 쓸 수 있습니다. `hestia-plan`, `orb-jian`, `planApproved`는 가능하고 `연지안`, `plan approved`, `npc.1`은 ID로 사용할 수 없습니다.
 
@@ -83,7 +93,7 @@ ExperimentSpec
 
 예를 들어 ‘진단을 논의한다’와 ‘진단을 실행해 장치가 정상임을 확인했다’는 다른 설정입니다. 실제 결과가 원본에 없다면 성공·실패를 임의로 정하지 말고, 논의만 할지 작성자가 결과 규칙을 추가할지 결정해야 합니다.
 
-`world`, `situation`, 참가자 ID·이름은 모든 NPC에게 제공됩니다. 특정 NPC만 아는 정보는 그 NPC의 `memories`, `knowledge`, `goals` 등에 둡니다. 비밀을 `world`에 적으면 이미 공개 정보가 됩니다. 본인 캐릭터 객체는 본인 세션에만 전달되지만 NPC가 대화에서 그 내용을 밝히면 이후에는 공개 발언으로 전달됩니다.
+`world`, `situation`, 참가자 ID·이름은 모든 NPC에게 제공됩니다. 특정 NPC만 아는 정보는 그 NPC의 `memories`, `knowledge`, `goals` 등에 둡니다. 비밀을 `world`에 적으면 이미 공개 정보가 됩니다. 본인 캐릭터 객체는 본인 세션에만 전달되지만 NPC가 대화에서 그 내용을 밝히면 해당 발언의 수신 대상에게 전달됩니다. 분산 공간의 initialSituation은 시작 장소의 NPC만 받지만 공통 world/situation은 모두가 받습니다.
 
 ## 캐릭터 작성
 
@@ -136,7 +146,7 @@ ExperimentSpec
 
 캐릭터에서 `model`만 고정하면 추론은 조건에서 바뀔 수 있습니다. 조건에서 `model`만 바꾸면 기본 추론 강도가 새 모델에서도 지원되는지 확인해야 합니다. 모든 NPC의 모델을 조건별로 바꾸려면 기존 캐릭터의 모델 재정의가 비교를 막고 있지 않은지 확인하세요.
 
-`evaluation.model/effort`와 `director.model/effort`는 별도 값이며 이 우선순위를 상속하지 않습니다. 같은 비교 안에서 평가 모델을 고정하려면 `evaluation`을 한 쌍으로 유지합니다. 조건별 평가 모델을 달리하려면 실험 파일을 나누어야 합니다.
+`evaluation`, `director`, `worldEngine`, `eventGenerator`의 model/effort는 별도 값이며 NPC 우선순위를 상속하지 않습니다. 같은 비교 안에서 평가 모델을 고정하려면 `evaluation`을 한 쌍으로 유지합니다. 조건별 평가 모델을 달리하려면 실험 파일을 나누어야 합니다.
 
 모델 ID와 강도는 실행할 서버의 `models` 결과를 사용합니다. ‘terra-low’라는 문자열을 `model` 하나에 넣지 말고 모델 ID와 강도를 분리하세요. 아래 예제의 `gpt-6.1-terra` / `low`도 실행 서버에서 사용 가능한지 검증해야 합니다. 강도는 모든 모델에서 공통인 고정 목록이 아니며, 이 앱은 `ultra`를 허용하지 않습니다.
 
@@ -149,14 +159,16 @@ ExperimentSpec
 | `memoryMode` | `initial_only` 기본 / `reinject_on_speech` |
 | `deliveryMode` | `batched_on_turn` 기본 / `per_utterance` |
 | `turnPolicy` | `round_robin` 기본 / `director` |
+| `environmentMode` | `off`, `rules`, `ai`, `ai_spatial`. 생략 시 활성 environment가 있으면 rules, 없으면 off |
+| `eventGeneration` | 선택 불리언. 생략은 꺼짐. true는 ai/ai_spatial과 eventGenerator 필요 |
 
 `batched_on_turn`은 다른 NPC의 발언을 수신함에 쌓았다가 자기 차례에 아직 받지 않은 내용을 순서대로 전달합니다. 별도 수신 모델 호출은 없고 종료 시 미처리 수신함이 남을 수 있습니다.
 
-`per_utterance`는 발화마다 나머지 NPC가 같은 세션·모델·추론으로 수신 확인 호출을 수행합니다. 모두 처리된 뒤 다음 공개 화자가 시작합니다. 수신 출력은 공개 대사에 섞이지 않습니다.
+`per_utterance`는 발화마다 실제 관찰 대상 NPC가 같은 세션·모델·추론으로 수신 확인 호출을 수행합니다. 필요한 확인을 모두 처리한 뒤 다음 단계가 시작됩니다. 분산 공간에서는 위치·통신 방식에 따라 수신 대상이 줄고, 혼자 행동은 수신 호출이 없을 수 있습니다. 수신 출력은 공개 대사에 섞이지 않습니다.
 
 `initial_only`는 초기 설정을 준 동일 세션을 이어 갑니다. `reinject_on_speech`는 본인의 공개 발화 요청에 원본 설정을 추가로 상기시킵니다. 수신 확인에는 추가 상기를 넣지 않습니다. API 실행도 역할 지시문을 매 요청에 설정하므로 `initial_only`가 ‘첫 요청 이후 캐릭터 지시문을 완전히 제거한다’는 뜻은 아닙니다. 실행기별 세션 차이는 [API 안내](openai-api.md)에 있습니다.
 
-`round_robin`은 캐릭터 배열 순서로 발화합니다. `director`는 첫 화자 이후 별도 모델 호출로 다음 화자를 고릅니다. 공개 기록에서만 선택하고, 연속 발화와 장기 배제를 제한합니다. 이 제한의 수치를 바꾸는 JSON 필드는 현재 없습니다.
+단일 공간의 `round_robin`은 캐릭터 배열 순서를 따릅니다. AI 환경의 반응 대상은 우선할 수 있습니다. 분산 공간은 장소별 선택 가능한 NPC 중 오래 선택되지 않은 순서이며 최초 동률은 캐릭터 배열 순서입니다. `director`는 후보와 발생한 기록으로 다음 화자를 고르며 연속 선택·장기 배제를 제한합니다. 이 제한 수치를 바꾸는 JSON 필드는 없습니다.
 
 ### 비교 조합을 명시하는 예시
 
@@ -173,13 +185,68 @@ ExperimentSpec
 
 여기에 모델 2종과 추론 2종까지 곱하면 16조건입니다. 각 조건에 해당 `model`, `effort`를 명시하고 ID를 모두 다르게 만듭니다. 전체 모델에 같은 강도가 지원되는지 확인한 후 조합을 생성하세요.
 
+## AI 환경·장소·상황 발생 설정
+
+AI 환경에는 `worldEngine: {"model":"서버의 모델 ID","effort":"지원 강도"}`를 지정합니다. `scenario.worldEngineInstructions`는 추가 장면 규칙 문자열입니다. 비공개 기억·목표·성격을 여기에 복사하지 않습니다. 기본 단일 공간은 `ai`, 분산 공간은 `ai_spatial`입니다.
+
+### scenario.spatial
+
+| 배열 | 항목과 범위 |
+|---|---|
+| locations | 2~100개. id, name(1~100자), description(문자열), initialSituation(기본 빈 문자열) |
+| connections | 기본 [], 최대 500개. id, from, to, bidirectional(기본 true), description(기본 빈 문자열) |
+| initialPositions | 모든 NPC마다 정확히 하나의 {npcId, locationId}. 2~30개 |
+| channels | 기본 [], 최대 100개. id, name(1~100자), memberNpcIds(2~30명), description(기본 빈 문자열) |
+
+ID는 각각의 종류 안에서 고유해야 합니다. 통로의 from/to는 선언된 서로 다른 장소이며, 시작 위치·채널은 실제 참가자 ID를 참조합니다. 채널 참가자 중복은 금지합니다. 장소·통로 정보가 원본에 없다면 작성자에게 확인해야 하며 실행 중 새 장소를 자동 생성하지 않습니다.
+
+다음은 spatial **필드만의 발췌**입니다. eun/haneul은 scenario.characters에 선언되어 있어야 합니다.
+
+```json
+{
+  "locations": [
+    {"id": "desk", "name": "접수대", "description": "책을 인계하는 곳.", "initialSituation": "책 한 권이 놓여 있다."},
+    {"id": "lounge", "name": "휴게실", "description": "대기하는 곳.", "initialSituation": ""}
+  ],
+  "connections": [
+    {"id": "hall", "from": "desk", "to": "lounge", "bidirectional": true, "description": "두 장소 사이의 짧은 통로"}
+  ],
+  "initialPositions": [
+    {"npcId": "eun", "locationId": "desk"},
+    {"npcId": "haneul", "locationId": "lounge"}
+  ],
+  "channels": [
+    {"id": "radio", "name": "업무 무전", "memberNpcIds": ["eun", "haneul"], "description": "대사만 전달하는 채널"}
+  ]
+}
+```
+
+공통 world/situation은 모두에게 제공됩니다. 처음 한 장소의 NPC만 알아야 하는 장면은 그 장소의 initialSituation에 둡니다. 이동·긴 행동·관찰 범위는 [세계 엔진 안내](world-engine.md)처럼 실행 중 결정하며 `worldState`, `spatialIntent`, `perception`을 실험 설정에 직접 넣지 않습니다.
+
+### eventGenerator
+
+| 필드 | 필수·기본값·범위 |
+|---|---|
+| model, effort | 필수. 별도 상황 제안 모델·추론 |
+| intervalSeconds | 기본 30. 0 초과~31536000의 가상 초 |
+| minGapSeconds | 기본 60. 0~31536000의 가상 초 |
+| maxChecks | 기본 30. 정수 1~10000. 침묵 포함 정상 처리 검토 수 |
+| maxProposals | 기본 10. 정수 1~1000. 채택·거절을 합친 제안 수 |
+| maxSeverity | low/medium/high, 기본 medium |
+| allowedEvents | 필수. 비어 있지 않은 허용 사건 문자열 |
+| forbiddenEvents | 기본 빈 문자열. 금지 사건 |
+
+eventGenerator 객체만 넣어서는 실행되지 않습니다. 사용할 조건에 `eventGeneration:true`를 지정합니다. 반대로 true인데 객체가 없거나 환경이 off/rules이면 거부합니다. 같은 실험의 조건들은 공통 생성 모델·빈도를 사용하며 조건별로 켬/끔을 비교할 수 있습니다.
+
+상황 AI의 제안은 세계 엔진 검토를 통과해야 적용됩니다. 실패·재시도는 별도 호출이어서 실제 호출 수가 maxChecks를 넘을 수 있습니다. 새로운 핵심 설정·NPC 자발적 행동·내면을 대신 정하는 사건은 허용하지 않습니다.
+
 ## 행동 결과와 목표 달성
 
 ### 서술 목표와 판정 목표
 
 `characters[].goals`는 NPC의 동기입니다. ‘책 인계를 마친다’고 쓰는 것만으로 화면에 목표 달성 판정이 생기지는 않습니다. 자동 판정을 원하면 **`scenario.environment.goals`의 상태 조건**을 정의해야 합니다.
 
-환경 규칙을 생략하거나 `enabled: false`로 두면 구조화 목표 지표는 ‘목표 미정의’입니다. 미달성 0%와 구분합니다. 환경 설정을 제공한다면 꺼 놓더라도 규칙 자체의 형식과 ID·자료형은 유효해야 합니다.
+rules 이외의 환경 방식이거나 환경 규칙을 생략하거나 `enabled: false`로 두면 구조화 목표 지표는 ‘목표 미정의’입니다. 미달성 0%와 구분합니다. 환경 설정을 제공한다면 꺼 놓더라도 규칙 자체의 형식과 ID·자료형은 유효해야 합니다.
 
 ### 환경 필드
 
@@ -254,7 +321,7 @@ ExperimentSpec
 
 종료 시에는 마지막 미평가 구간도 평가합니다. `maxUtterances: 120`, 간격 10이면 정상 경로에서 12구간입니다. AI 평가 기준은 성격·가치관, 말투, 행동, 기억, 지식 범위, 세계관 모순, 세계관 확대, 의미 반복, 목표 진행 정체의 9종으로 고정되어 있습니다. `evaluation.categories`나 `customPrompt` 필드로 평가 기준을 교체할 수는 없습니다.
 
-`contextCharacters`는 모델의 토큰 한도가 아닙니다. 긴 공개 기록에서 앞부분 맥락을 덜어내는 기준이며, 대상 구간 자체는 남기므로 전체 평가 요청 길이가 이 수치를 넘을 수 있습니다. 설정·캐릭터·지시문도 따로 들어갑니다. 누락된 맥락은 `contextTruncated`로 표시됩니다.
+`contextCharacters`는 모델의 토큰 한도가 아니라 평가 요청의 공개 기록 JSON 문자 한도입니다. 대상 구간 이전의 맥락부터 덜어내며 대상 발화와 그 환경 결과는 보존합니다. 대상 구간만으로 한도를 넘으면 구간을 나누어 평가하므로 평가 호출 수가 늘어날 수 있습니다. 발화 하나와 그 결과만으로도 초과하면 해당 구간은 호출 없이 평가 실패·미평가로 기록하고 평가 완료 통계에서 제외합니다. 설정·캐릭터·지시문은 별도로 포함되므로 전체 요청은 이 수치를 넘을 수 있습니다. 제외된 이전 맥락은 `contextTruncated`로 표시됩니다.
 
 어휘 반복률은 같은 화자의 정규화한 대사에 문자 3-gram Dice 유사도를 적용합니다. 행동문과 사건은 제외하며 비교 가능한 이전 발언이 없는 경우 분모에 넣지 않습니다. 분모가 없으면 0% 대신 `null`입니다. 뜻은 같아도 표현이 크게 다르면 놓칠 수 있으므로 AI의 `repetition` 지적률과 별도로 봅니다. 어휘 반복률과 구조화 목표는 `evaluation.enabled: false`여도 계산할 수 있지만, AI 의미 반복 지적과 다른 AI 평가는 생성되지 않습니다.
 
@@ -269,9 +336,11 @@ ExperimentSpec
 ]
 ```
 
-이 코드는 `scheduledEvents`의 형식 예시입니다. `afterUtterance`는 0 이상의 정수이며 시간이나 NPC별 횟수가 아닙니다. 0이면 첫 발화 전입니다. 같은 번호의 사건은 배열 순서대로 처리하므로 작성 시 번호 순으로 정리하세요. 조기 종료나 중단으로 해당 번호에 도달하지 못하면 사건은 실행되지 않습니다. 예약 사건은 공개 서술만 전달하며 목표 상태를 자동 변경하지 않습니다.
+이 코드는 `scheduledEvents`의 형식 예시입니다. `afterUtterance`는 0 이상의 정수이며 시간이나 NPC별 횟수가 아닙니다. 0이면 첫 발화 전입니다. 같은 번호의 사건은 배열 순서대로 처리하므로 작성 시 번호 순으로 정리하세요. 조기 종료나 중단으로 해당 번호에 도달하지 못하면 사건은 실행되지 않습니다. 예약 사건은 관찰 서술을 전달하며 rules의 목표 상태를 직접 변경하지 않습니다. AI 환경에서는 이후 엔진 처리의 입력에 포함됩니다.
 
-NPC 수를 N, 완료한 공개 발화 수를 S, 실제 발생한 공개 사건 수를 E라고 하면, 재시도·실패가 없는 기본 호출 수는 다음과 같습니다. E에는 환경 결과와 예약·수동 사건을 모두 포함합니다.
+`audience`는 선택 객체입니다. `{ "scope": "locations", "locationIds": ["lounge"], "npcIds": [] }`처럼 두 배열을 포함합니다. locations는 장소 배열만, npcs는 NPC 배열만 채우고 all/none은 둘 다 비웁니다. 미지정은 전체입니다. 장소 범위 예약은 실험의 모든 조건이 ai_spatial이어야 하며 알 수 없는 ID·중복은 거부합니다.
+
+아래 공식은 **단일 공간에서 모두가 관찰하며 AI 환경을 끈 경우**의 참고입니다. NPC 수 N, 선택 수 S, 전체 관찰 사건 수 E이고 재시도·실패가 없습니다. E에는 규칙 결과·예약·수동 사건이 포함됩니다.
 
 | 종류 | 모아 전달 | 매 발화 전달 |
 |---|---|---|
@@ -280,7 +349,7 @@ NPC 수를 N, 완료한 공개 발화 수를 S, 실제 발생한 공개 사건 �
 | AI 진행자 | 순번제는 0, 진행자 방식은 일반적으로 `max(0, S - 1)` | 동일 |
 | AI 평가 | 켜져 있으면 종료까지 보통 `ceil(S / interval)` | 동일 |
 
-예를 들어 NPC 3명·6발화·사건 없음·순번제·평가 끔이면 모아 전달 6회, 매 발화 전달 18회입니다. 완전한 작성 예제는 환경 사건과 평가가 켜져 있으므로 6회·18회로 끝나는 예제가 아닙니다. 각 호출의 입력 길이·세션 문맥·모델이 달라 호출 수와 토큰·시간 차이가 같은 비율로 움직이지는 않습니다. `maxConcurrentCalls`도 전체 호출 수를 줄이지 않습니다.
+예를 들어 NPC 3명·6발화·사건 없음·순번제·평가 끔이면 모아 전달 6회, 매 발화 전달 18회입니다. 완전한 작성 예제는 환경 사건과 평가가 켜져 있으므로 6회·18회로 끝나는 예제가 아닙니다. 각 호출의 입력 길이·세션 문맥·모델이 달라 호출 수와 토큰·시간 차이가 같은 비율로 움직이지는 않습니다. `maxConcurrentCalls`도 전체 호출 수를 줄이지 않습니다. AI 환경은 environment, 선택형 상황은 event_generation 및 검토 호출이 추가됩니다. 분산 공간·범위 지정 사건은 실제 수신 대상만 호출하므로 위 수신 공식이 적용되지 않습니다. 공동 처리와 호출별 계측은 [데이터 문서](data-and-evaluation.md)를 참고하세요.
 
 ## 완전한 예제에서 시작하기
 
@@ -314,6 +383,8 @@ Copy-Item examples/authoring-starter.json examples/my-experiment.json
 전체 기본 모델과 추론 강도:
 평가 모델과 추론 강도:
 AI 진행자 사용 시 진행자 모델과 추론 강도:
+AI 환경 사용 시 세계 엔진 모델과 추론 강도:
+상황 발생 사용 시 모델과 추론 강도:
 
 [원본 자료]
 세계관 원문 또는 첨부:
@@ -340,12 +411,15 @@ NPC별 모델·추론 예외:
 호출 제한 시간:
 
 [진행과 목표]
-환경 규칙: 사용 / 사용하지 않음 / 원본 유지
+환경 방식: off / rules / ai / ai_spatial / 원본 유지
+AI 추가 규칙:
+분산 공간의 장소·통로·NPC 시작 위치·원격 채널:
+상황 발생 켬/끔·가상 시간 빈도·강도·최대 횟수·허용/금지 범위:
 공개 초기 상태:
 허용 행동별 수행자·선행 조건·효과·관찰 결과:
 자동 판정할 목표와 충족 조건:
 목표 달성 시 조기 종료 여부:
-발화 번호별 예약 공개 사건:
+발화 번호별 예약 사건과 관찰 대상:
 미정인 결과를 AI가 새로 설계해도 되는 범위:
 
 [평가]
@@ -369,109 +443,9 @@ NPC는 전원 gpt-6.1-terra / low, 모아 전달, 초기 설정 유지, 순번�
 
 ## 복사해서 사용하는 변환 프롬프트
 
-다음 블록은 프로젝트를 모르는 AI에게도 붙여 넣을 수 있도록 현재 형식의 계약을 포함합니다. 같은 내용의 [복사용 텍스트 파일](prompts/requirements-to-experiment-json.txt)도 제공합니다. 프롬프트 뒤의 입력 구역을 채우거나 앞 절의 양식을 이어 붙이세요. 지원하지 않는 기능까지 JSON으로 표현할 수 있다고 가정하지 않도록 만든 프롬프트입니다.
+[requirements-to-experiment-json.txt](prompts/requirements-to-experiment-json.txt)를 열어 전체 내용을 복사한 뒤, 위 요구사항 양식·원본 파일 본문·실행 서버의 models 결과를 함께 전달하세요. 이 파일이 **유일한 복사용 프롬프트 원본**입니다. 가이드에 같은 내용을 다시 복제하지 않습니다.
 
-<!-- conversion-prompt:start -->
-```text
-당신은 NPC Dialogue Lab의 실험 설정 작성자다. 아래 사용자 요구사항과 제공된 원본 자료를 ExperimentSpec schemaVersion 1 JSON 한 개로 변환하라. 실행하거나 모델을 호출하지 말고 설정 파일만 작성하라.
-
-처리 원칙
-1. 사용자의 명시적 변경 요구를 적용하고, 그 외 원본 세계관·시작 상황·캐릭터 프로필·비공개 기억·금기는 보존하라. 조건만 바꾸라는 요청이면 서사 필드를 원문 그대로 유지하라.
-2. 원본에 없는 인물·장소·역사·권한·능력·진단 결과·자원을 사실로 보충하지 마라. 첨부되거나 본문에 제공되지 않은 파일의 내용을 안다고 가정하지 마라.
-3. 핵심 원본 자료, 필수 모델 선택, 모순된 조건, 행동 결과가 부족하면 JSON을 지어내지 말고 먼저 필요한 질문을 최대 5개로 묶어라. 세계관이나 캐릭터 창작은 사용자가 명시적으로 허용한 범위에서만 하라. 질문에 답을 받기 전에는 불완전한 실행 JSON을 출력하지 마라.
-4. 원본 인원과 요청 인원이 다르면 누구를 포함할지 확인하라. 배열 순서는 순번제 발화 순서이므로 원본 순서를 유지하거나 사용자가 지정한 순서를 따르라.
-5. 실행 경로는 서버 옵션이다. JSON에 adapter, apiKey, baseURL, temperature, max_tokens, tokenBudget, customPrompt, evaluation.categories 같은 미지원 필드를 추가하지 마라. 키를 요구하거나 포함하지 마라. Codex와 API가 섞인 조건을 한 실험으로 만들 수 있다고 표현하지 마라.
-6. 모델 ID와 추론 강도는 제공된 실행 서버의 models 결과를 기준으로 하라. 약칭은 대응이 분명한 경우만 정확한 ID와 effort로 나누고, 목록이 없거나 모호하면 확인하라. ultra는 금지한다. 계정 권한을 검증했다거나 실행 성공을 보장한다고 말하지 마라.
-7. 요청된 모델 × 추론 × 기억 × 전달 조합을 variants의 개별 객체로 펼쳐라. 요청하지 않은 축은 추가하지 마라. 캐릭터 재정의 → 조건 → 시나리오 기본값 순으로 model과 effort가 각각 적용된다. 모든 NPC에 조건의 모델·추론을 적용하라는 명시 요구가 있으면 기존 캐릭터 model/effort 재정의를 그 요구에 맞게 제거하거나 수정하라. NPC별 예외 요구가 함께 있어 적용 범위가 모호할 때만 확인하라.
-8. 평가 모델과 진행자 모델은 별도 설정이다. 평가 모델을 조건마다 자동으로 바꾸지 마라. 사용자가 생략했으면 선택된 시나리오 기본 모델·추론을 사용하되 같은 실험 안에서는 고정하라.
-9. character.goals는 문자열 동기다. 자동 목표 판정은 scenario.environment.goals의 상태 조건으로만 정의하라. 환경 규칙을 요청하지 않았으면 원본 유지 또는 생략을 따른다. 미정 결과를 임의의 성공·실패로 정하지 마라. 논의만 하는 시나리오를 진단 실행 시나리오로 몰래 바꾸지 마라.
-10. environment는 모든 NPC에게 공개된다. 타인의 비공개 기억이나 숨긴 정답을 world, situation, environment, scheduledEvents에 옮기지 마라. 말투·행동은 반복 의무 문구로 기계화하지 말고 원본의 구체적인 특성을 유지하라. 예시 대사를 실제 과거 대화로 취급하지 마라.
-
-스키마 계약
-- 아래에서 필수라고 표시한 키는 생략하지 마라. 결과에는 실행 기본값도 가능한 한 명시하라. 스키마에 없는 해설·메타데이터는 JSON에 넣지 마라.
-- ID와 상태 키: 정규식 ^[a-zA-Z0-9_-]+$, 길이 1~100자. 표시 이름과 본문은 한국어 가능.
-- 정수 필드에 문자열 숫자를 넣지 마라. 불리언은 true/false다. 본문은 배열이나 객체가 아닌 문자열이고 최대 100000자다. 줄바꿈은 JSON 문자열 안에서 \n으로 인코딩하라.
-
-최상위 객체
-- schemaVersion: 필수, 숫자 1.
-- name: 필수, 비어 있지 않은 실험 이름.
-- scenario: 필수, 아래 시나리오 객체.
-- variants: 필수, 아래 조건 객체 1~100개. 조건 ID는 고유.
-- repetitions: 정수 1~100, 생략 요구 시 기본 1. variants 개수와 곱해서 최대 500묶음.
-- maxUtterances: 정수 1~100000, 기본 60. NPC 전체의 공개 차례 합계이며 행동만 있는 차례도 포함한다.
-- concurrentRuns: 정수 1~16, 기본 2.
-- maxConcurrentCalls: 정수 1~32, 기본 2.
-- timeoutMs: 정수 1000~3600000, 기본 300000. 한 호출의 제한 시간.
-- evaluation: 필수, 아래 평가 객체.
-- director: 필수, 비어 있지 않은 model과 effort 문자열 객체. 순번제에서도 포함.
-- scheduledEvents: 배열, 기본 []. 각 항목은 afterUtterance(0 이상 정수), text(비어 있지 않은 본문 문자열). 번호순으로 정리하고 같은 번호는 입력 순서 유지. 단순 공개 사건이며 구조화 상태를 바꾸지 않는다.
-
-scenario 객체
-- 필수: id, name(비어 있지 않은 문자열), world(비어 있지 않은 본문), situation(비어 있지 않은 본문), defaults, characters.
-- defaults: 비어 있지 않은 model, effort 문자열.
-- characters: 캐릭터 객체 2~30개. 캐릭터 ID 고유.
-- environment: 선택 사항. 아래 환경 객체. 없는 경우 null 대신 키를 생략.
-
-캐릭터 객체
-- 필수 키: id, name(1~100자), identity, personality, speechStyle, behaviors.
-- 문자열 선택 필드: values, goals, relationships, memories, knowledge, unknowns, exampleDialogue, taboos. 생략 시 각각 빈 문자열이지만 원본에 있으면 보존.
-- model, effort: 선택 문자열. 필요할 때만 유효한 값으로 포함하고, 상속은 키 생략으로 표현. null이나 빈 모델 ID로 표현하지 마라.
-- 원본 없이 핵심 성격·말투·행동을 임의로 창작하지 마라. 사용자가 창작을 허용했을 때만 그 범위에서 구체화.
-
-조건 객체
-- 필수: id, label(비어 있지 않은 문자열).
-- model, effort: 선택 문자열, 생략하면 각 항목별 상속.
-- memoryMode: initial_only 또는 reinject_on_speech. 기본 initial_only.
-- deliveryMode: batched_on_turn 또는 per_utterance. 기본 batched_on_turn.
-- turnPolicy: round_robin 또는 director. 기본 round_robin.
-- conditions나 models 같은 별도의 조합 축 배열을 만들지 마라. 모든 조합을 variants 안에 직접 나열.
-
-evaluation 객체
-- enabled: 불리언, 기본 true.
-- interval: 1 이상 정수, 기본 10.
-- model, effort: 필수, 비어 있지 않은 문자열. enabled가 false여도 키는 포함.
-- contextCharacters: 정수 1000~500000, 기본 100000. 토큰 한도가 아닌 평가 공개 기록의 문자 기준.
-- repetitionWindow: 정수 1~100, 기본 12.
-- repetitionThreshold: 숫자 0.1~1, 기본 0.72.
-- repetitionMinChars: 정수 3~1000, 기본 20.
-- 평가 범주는 앱에 고정되어 있으므로 별도 배열이나 사용자 평가 프롬프트 필드를 만들지 마라. 반복률과 구조화 목표에 필요한 설정은 위 필드와 environment로 표현.
-
-environment 객체를 사용할 때의 계약
-- enabled: 불리언, 기본 true.
-- stopOnGoals: 불리언, 기본 true. 사용자가 목표 달성 후에도 한도까지 관찰하길 원하면 false. 원본 설정과 명시 요구가 우선.
-- initialState: 상태 키와 초기값의 객체. 값은 문자열(최대 1000자), 유한 숫자, 불리언만. 배열·객체·null 불가.
-- actions: 1~100개. 각 항목은 id, label(비어 있지 않은 문자열), actorIds(실제 캐릭터 ID 최소 1개), conditions(기본 []), effects(최소 한 키), result(비어 있지 않은 공개 결과문), once(불리언, 기본 true).
-- goals: 1~50개. 각 항목은 id, label(비어 있지 않은 문자열), conditions(최소 1개).
-- 행동 ID끼리, 목표 ID끼리 각각 고유. actorIds에 없는 NPC를 만들지 마라.
-- 조건: key, op(eq/neq/gte/lte, 기본 eq), value. conditions의 모든 조건은 AND.
-- 조건과 효과의 키는 모두 initialState에 먼저 선언하고 값의 자료형을 동일하게 유지. gte/lte는 숫자에만 허용.
-- effects는 상수 대입이며 산술식·함수·OR·임의 스크립트가 아니다. result에 쓴 서술만으로 다른 상태 키가 바뀌지 않는다.
-- 행동은 수행 권한과 선행 조건을 만족하고 효과 하나 이상이 현재 값과 달라야 후보가 된다. once=true면 성공 후 다시 사용 불가. 각 NPC 차례에 actionId 하나만 선택할 수 있다.
-- 다른 사람의 동의를 대신하지 않도록 수행자와 상태를 분리하고, 초기 상태에서 목표까지 도달 가능한 순서를 점검.
-- 승인·확인·실행·기록의 구분과 결과를 사용자 자료에서 확보. 결과가 부족하면 질문. 공개 결과에 미래의 성공이나 미확인 원인을 추가하지 마라.
-
-출력 전 확인
-- 필수 키·자료형·숫자 범위·고유 ID·실제 참가자 참조를 확인.
-- 최종 NPC별 model/effort와 평가·진행자 조합을 제공된 목록에 대조.
-- 조건 수 × 반복 수, NPC 수, 전체 발화 수, 조기 종료 의도가 요구와 일치하는지 확인.
-- 공개·비공개 정보를 섞지 않았는지, 원본의 사실과 미확인 사항을 보존했는지 확인.
-- 상태 키·자료형·행동 경로·목표 조건·결과문의 일관성을 확인.
-- 지원하지 않는 요구를 임의의 필드로 표현하거나 아무 설명 없이 삭제하지 마라. 해결이 필요하면 JSON 작성 전에 질문.
-
-출력 형식
-정보가 충분하면 Markdown 코드 펜스, 설명, 주석, 후행 쉼표, 생략 기호 없이 유효한 JSON 객체 하나만 출력하라. 토큰·시간·세션 ID·실행 결과·평가 결과를 미리 생성하지 마라. 정보가 부족하거나 요구가 지원 범위를 벗어나면 필요한 질문만 출력하고 JSON은 아직 출력하지 마라.
-
-사용자 입력
-[실행 경로와 서버 models 결과]
-여기에 입력
-
-[원본 세계관과 캐릭터 또는 첨부 파일]
-여기에 입력
-
-[요구사항과 변경 허용 범위]
-여기에 입력
-```
-<!-- conversion-prompt:end -->
+프롬프트에는 schemaVersion 1의 필수 필드·기본값·장소·상황 발생·규칙·비공개 정보 계약이 포함되어 있습니다. 모호한 원본·모델·지도·행동 결과는 질문하게 하며, 지원하지 않는 필드를 지어내거나 실행 결과를 미리 생성하지 않게 합니다. AI 출력은 아래 검증 단계를 통과한 뒤 실행하세요.
 
 ## 웹에서 범위별 JSON 편집
 
@@ -480,10 +454,10 @@ environment 객체를 사용할 때의 계약
 | 편집 범위 | 입력할 JSON | 바뀌는 부분 |
 |---|---|---|
 | 전체 설정 | `ExperimentSpec` 객체 전체 | 실험 전체. 기존 파일 가져오기와 편집 유지 |
-| 세계관 | `scenario`에서 `characters`를 제외한 객체 | `id`, `name`, `world`, `situation`, `defaults`, 선택적인 `environment` |
+| 세계관 | `scenario`에서 `characters`를 제외한 객체 | `id`, `name`, `world`, `situation`, `defaults`, 선택적인 `environment`, `worldEngineInstructions`, `spatial` |
 | 선택 캐릭터 | NPC 한 명의 객체 | 선택한 캐릭터 한 명. JSON 화면의 선택 목록으로 대상 변경 가능 |
 | 전체 캐릭터 | NPC 객체들의 배열 | 캐릭터 목록 전체와 순서 |
-| 실험 조건 | 실험 조건을 담은 객체 | `variants`, `repetitions`, `maxUtterances`, `concurrentRuns`, `maxConcurrentCalls`, `timeoutMs`, `evaluation`, `director`, `scheduledEvents` |
+| 실험 조건 | 실험 조건을 담은 객체 | `variants`, `repetitions`, `maxUtterances`, `concurrentRuns`, `maxConcurrentCalls`, `timeoutMs`, `evaluation`, `director`, 선택적인 `worldEngine`, `eventGenerator`, `scheduledEvents` |
 
 세계관 JSON의 `name`은 시나리오 이름이며 최상위 실험 `name`과 다릅니다. 세계관의 기본 모델도 이 범위에 속합니다. 캐릭터나 비교 조건의 모델 재정의는 각 편집 범위에서 수정합니다. 부분 파일에는 `scenario` 같은 상위 포장 키를 덧붙이지 않고 선택한 범위의 내용 자체를 넣습니다. 전체 캐릭터만 최상위가 배열이고 나머지는 객체입니다.
 
@@ -491,13 +465,13 @@ environment 객체를 사용할 때의 계약
 
 적용할 때는 JSON 문법과 해당 범위의 구조를 확인하고, 전체 실험으로 조립해 다시 검증합니다. 캐릭터 ID 중복, 존재하지 않는 환경 수행자, 묶음 수 초과 같은 오류는 적용하지 않고 기존 설정을 유지합니다. NPC ID와 환경의 `actorIds`를 함께 바꾸는 작업은 전체 JSON에서 한 번에 수정하세요. 모델 계정 지원 여부는 적용 후 **설정 검증**으로 확인합니다.
 
-범위·캐릭터·탭을 오가도 미적용 JSON 초안을 보존합니다. 초안이 남아 있으면 저장·검증·실험 생성 버튼은 비활성화됩니다. 각 초안을 적용하거나 **현재 설정 다시 불러오기**, **모든 JSON 초안 되돌리기**로 되돌리세요. 폼에서 같은 범위를 수정해 초안의 원본이 달라졌다면 자동 덮어쓰기를 막습니다. 필요한 초안 내용을 복사한 뒤 현재 설정을 다시 불러와 수정할 수 있습니다. 편집 창을 닫으면 미적용 초안은 사라집니다.
+범위·캐릭터·탭을 오가거나 편집 창을 닫았다 다시 열어도 미적용 JSON 초안을 보존합니다. 시나리오 탭의 환경 규칙 JSON에도 같은 보호를 적용합니다. 초안이 남아 있으면 저장·검증·실험 생성 버튼은 비활성화됩니다. 각 초안을 적용하거나 **현재 설정 다시 불러오기**, **모든 JSON 초안 되돌리기**로 되돌리세요. 환경 초안은 **현재 환경 설정 다시 불러오기**로 되돌릴 수 있습니다. 폼에서 같은 범위를 수정해 초안의 원본이 달라졌다면 자동 덮어쓰기를 막습니다. 필요한 초안 내용을 복사한 뒤 현재 설정을 다시 불러와 수정할 수 있습니다. 초안은 현재 화면의 메모리에만 보관되므로 브라우저를 새로고침하거나 종료하면 사라집니다.
 
-앞의 변환 프롬프트는 전체 실험 JSON을 생성합니다. AI에게 부분 JSON만 요청하려면 완성된 전체 설정을 함께 주고 위 표에 맞춰 해당 범위를 추출하도록 요청하세요. 예를 들어 ‘캐릭터는 바꾸지 말고 `scenario`에서 `characters`를 제외한 객체만 출력’이라고 지정하면 세계관 편집에 사용할 수 있습니다.
+[복사용 변환 프롬프트](prompts/requirements-to-experiment-json.txt)는 전체 실험 JSON을 생성합니다. AI에게 부분 JSON만 요청하려면 완성된 전체 설정을 함께 주고 위 표에 맞춰 해당 범위를 추출하도록 요청하세요. 예를 들어 ‘캐릭터는 바꾸지 말고 `scenario`에서 `characters`를 제외한 객체만 출력’이라고 지정하면 세계관 편집에 사용할 수 있습니다.
 
 ## 검증과 실행
 
-생성된 결과를 UTF-8 **BOM 없이** `examples/my-experiment.json`으로 저장합니다. JSON은 큰따옴표를 사용하고 주석·후행 쉼표·Markdown 코드 펜스를 허용하지 않습니다. 빈 문자열, 키 생략, `null`은 서로 다르며 선택 설정은 보통 키를 생략해 표현합니다.
+실행에서 다운로드한 config.json은 스냅샷 래퍼이므로 내부 `spec`을 꺼내 사용합니다. 생성된 결과를 UTF-8 **BOM 없이** `examples/my-experiment.json`으로 저장합니다. JSON은 큰따옴표를 사용하고 주석·후행 쉼표·Markdown 코드 펜스를 허용하지 않습니다. 빈 문자열, 키 생략, `null`은 서로 다르며 선택 설정은 보통 키를 생략해 표현합니다.
 
 ### 모델 호출 없이 문법과 구조 확인
 

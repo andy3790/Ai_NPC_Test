@@ -1,6 +1,6 @@
 # 에셋 데이터 사전
 
-모든 JSON은 UTF-8입니다. 실행 파일의 `schemaVersion:1`은 앱 규격이며, 확장 에셋의 `assetSchemaVersion:1`은 이 팩의 문서 규격입니다. `.scenario.json`과 `.character.json`에는 앱 스키마에 없는 버전 필드를 넣지 않고 상위 `pack.json`에서 버전을 관리합니다.
+앱 1.4.0과 함께 사용하는 팩 1.0.0의 데이터 사전입니다. 실제 실행 지표는 [앱 데이터·평가 문서](../../../docs/data-and-evaluation.md)에서 관리합니다. 모든 JSON은 UTF-8입니다. 실행 파일의 `schemaVersion:1`은 앱 규격이며, 확장 에셋의 `assetSchemaVersion:1`은 이 팩의 문서 규격입니다. `.scenario.json`과 `.character.json`에는 앱 스키마에 없는 버전 필드를 넣지 않고 상위 `pack.json`에서 버전을 관리합니다.
 
 | 파일·필드 | 의미·단위·대상 |
 |---|---|
@@ -36,5 +36,7 @@
 | `art-production.json` | 생성 도구·정확한 프롬프트·원본 경로·출력 경로·수정 이력 |
 
 ID 접두어는 TID(청람), GLA(유리서고), ORB(헤스티아), EMB(재선), ORC(과수원), NOC(야시장)입니다. `*-W01`은 세계 정본, `*-E01`은 진행자 사건, `캐릭터ID-MEMORIES` 등은 프로필 필드 기준입니다. 이벤트 ID는 문장 안에 들어 있으며 현재 앱 스키마에는 별도 이벤트 ID 필드를 추가하지 않았습니다.
+
+이 팩은 environment/spatial/worldEngine/eventGenerator를 선언하지 않아 현재 환경은 off입니다. 실제 실행에서 생기는 worldState·perception·spatialIntent·상황 제안·호출 연결은 팩 원본 필드가 아닙니다. 새 환경의 필드는 [실험 JSON 가이드](../../../docs/experiment-json-guide.md)를 따릅니다.
 
 사용량·응답 시간·UTC 시각·실험 결과는 이 팩에 창작해 넣지 않았습니다. 실제 실행 시 기존 엔진의 공통 ID와 계측 데이터가 생성됩니다. 검증 보고의 `checkedAt`은 검증을 실행한 시각의 ISO UTC 문자열입니다.

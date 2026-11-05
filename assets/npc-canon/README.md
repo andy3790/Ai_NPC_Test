@@ -1,6 +1,6 @@
 # NPC 세계관·캐릭터 에셋 팩
 
-한국어 원본 설정 **6개 세계관·36명 캐릭터**, 배경화 6장과 6인 초상 시트 6장, 실행 설정 18종입니다. 현재 프로젝트의 `ExperimentSpec` / `Scenario` / `Character` 스키마에 맞춰 작성했습니다. 앱 소스·의존성·기본 예제는 수정하지 않습니다.
+한국어 원본 설정 **6개 세계관·36명 캐릭터**, 배경화 6장과 6인 초상 시트 6장, 실행 설정 18종입니다. 팩 콘텐츠 버전은 1.0.0이며 현재 앱 1.4.0의 `ExperimentSpec` / `Scenario` / `Character` schemaVersion 1과 호환성을 검증합니다. 팩 버전은 앱 버전과 별개입니다. 앱 전체 사용법은 [문서 목차](../../docs/README.md)에 있습니다.
 
 [이미지 카탈로그 열기](index.html) · [세계관별 전체 설정](docs/CATALOG.md) · [앱 통합 안내](HANDOFF.md) · [데이터 사전](docs/DATA-DICTIONARY.md) · [평가 가이드](evaluation/GUIDE.md)
 
@@ -31,7 +31,7 @@ npm run cli -- run --config assets/npc-canon/experiments/tidemark-a.json --pause
 
 마지막 명령은 검토할 수 있도록 일시정지 상태의 실험을 만듭니다. 바로 실행하려면 `--paused`를 빼거나, 반환된 묶음 ID를 `npm run cli -- resume <묶음ID>`에 사용합니다. 실행된 실험에는 모델 사용량이 발생합니다.
 
-파일 기본 모델·강도는 프로젝트 기본 예제와 같은 `gpt-6.1-sol` / `low`입니다. 계정에서 실제 사용 가능한 조합인지 확인한 값은 아닙니다. `models` 결과에 맞춰 원본을 보존하는 준비 도구로 바꿀 수 있습니다. 아래 `<...>`를 실제 값으로 바꿉니다.
+팩 파일 기본 모델·강도는 `gpt-6.1-sol` / `low`입니다. 서버에서 새로 만드는 일반 예제의 모델 선택과는 별개입니다. 계정에서 실제 사용 가능한 조합인지 확인한 값은 아닙니다. `models` 결과에 맞춰 원본을 보존하는 준비 도구로 바꿀 수 있습니다. 아래 `<...>`를 실제 값으로 바꿉니다.
 
 ```powershell
 node assets/npc-canon/prepare.mjs --in assets/npc-canon/experiments/glass-a.json --out .cache/glass-local.json --model <models에서_확인한_ID> --effort <허용_강도>
@@ -39,7 +39,7 @@ npm run cli -- validate --config .cache/glass-local.json
 npm run cli -- run --config .cache/glass-local.json
 ```
 
-`prepare.mjs`는 NPC·variant의 모델 덮어쓰기를 제거하고 시나리오 기본값·평가·진행자에 동일 조합을 설정합니다. 기본 비교가 모델 혼합으로 바뀌지 않게 하기 위한 도구입니다. 다른 평가 모델을 쓰려면 생성된 JSON의 `evaluation`만 별도로 편집합니다. `--director`는 두 조건 모두 AI 진행자 방식으로, `--each`는 두 조건 모두 매 발화 전달로 바꿉니다. 현재 앱이 허용하지 않는 `ultra`는 거부합니다.
+`prepare.mjs`는 NPC·variant의 모델 덮어쓰기를 제거하고 시나리오 기본값·평가·진행자에 동일 조합을 설정합니다. 기본 비교가 모델 혼합으로 바뀌지 않게 하기 위한 도구입니다. 다른 평가 모델을 쓰려면 생성된 JSON의 `evaluation`만 별도로 편집합니다. `--director`는 두 조건 모두 AI 진행자 방식으로, `--each`는 두 조건 모두 매 발화 전달로 바꿉니다. 현재 앱이 허용하지 않는 `ultra`는 거부합니다. 이 도구는 팩의 대화 전용 설정 준비용이며 worldEngine/eventGenerator 모델이나 spatial 참조를 자동 변환하지 않습니다. 공간 실험의 참가자를 줄일 때 그대로 --smoke를 적용하지 마세요.
 
 ## 실험 구성
 
@@ -50,7 +50,9 @@ npm run cli -- run --config .cache/glass-local.json
 - 각 세계관에서 12·30·45발화 **완료 뒤** 같은 사건을 투입합니다. 30발화 사건은 명시적으로 미확인인 주장입니다. 진행자의 제시와 내용의 참을 혼동하는지 관찰합니다.
 - 전체 18파일을 모두 실행하면 36묶음, 총 2,160개 NPC 발화에 진행자·평가 호출 등이 더해집니다. 파일을 준비한 것만으로 실행되지는 않습니다.
 
-세계 상태의 판정 기준을 분명히 하기 위해 모두 결정 전 숙의 장면으로 만들었습니다. 일상적 행동·새 질문·타협·가설은 허용되지만, 자원 소비·계약 해지·운행·배송 같은 세계 상태의 완료는 공식 사건으로만 갱신합니다. 최신 앱의 선택적 `environment` / `actionId` 목표 진행 모드는 이 팩에서 사용하지 않습니다. 반복 평가 기본값은 최신 스키마에 맞췄지만 fixture는 원래 7개 범주를 대상으로 합니다. 행동 중심의 자유 진행을 비교하려면 별도 조건으로 이 규칙과 사건 체계를 함께 변경해야 합니다.
+세계 상태의 판정 기준을 분명히 하기 위해 모두 결정 전 숙의 장면으로 만들었습니다. 일상적 행동·새 질문·타협·가설은 허용되지만, 자원 소비·계약 해지·운행·배송 같은 세계 상태의 완료는 공식 사건으로만 갱신합니다. 팩은 environment·environmentMode·spatial·worldEngine·eventGenerator를 선언하지 않아 현재 해석은 **off**입니다. 앱이 AI 환경을 지원해도 이 팩을 자동 변환하지 않습니다. 반복 평가 기본값은 현재 스키마와 맞지만 fixture는 원래 7개 범주만 다룹니다.
+
+행동 중심 실험을 만들려면 원본을 보존한 사본에서 완료 판정·사건 체계를 함께 설계해야 합니다. [세계 엔진](../../docs/world-engine.md)과 [JSON 가이드](../../docs/experiment-json-guide.md)를 따라 AI 모델을 지정하고, 분산 환경이면 원본이 허용한 장소·통로·시작 위치·채널도 확인하세요. 팩에는 자동 목표 판정 규칙이 없어 목표 달성률을 실패 0%로 해석하면 안 됩니다.
 
 ## 이미지
 
@@ -81,11 +83,11 @@ node --import tsx assets/npc-canon/smoke.ts
 수동으로 2인·6발화 연결만 확인하려면 모의 서버와 별도 설정을 사용합니다.
 
 ```powershell
-npm run cli -- serve --mock --port 4318 --data .cache/npc-canon-mock
+npm run cli -- serve --mock --port 4319 --data .cache/npc-canon-mock
 # 다른 터미널에서:
 node assets/npc-canon/prepare.mjs --in assets/npc-canon/experiments/tidemark-a.json --out .cache/tidemark-mock.json --mock --smoke
-npm run cli -- --url http://127.0.0.1:4318 validate --config .cache/tidemark-mock.json
-npm run cli -- --url http://127.0.0.1:4318 run --config .cache/tidemark-mock.json
+npm run cli -- --url http://127.0.0.1:4319 validate --config .cache/tidemark-mock.json
+npm run cli -- --url http://127.0.0.1:4319 run --config .cache/tidemark-mock.json
 ```
 
 이 축소 설정은 두 기억 조건을 유지하고, 인물을 2명·발화를 6회·평가 간격을 3회로 줄이며 예약 사건은 비웁니다. 원본의 60발화 실험을 대신하지 않습니다.
