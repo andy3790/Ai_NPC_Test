@@ -10,6 +10,7 @@ import { exportFiles, zipFiles } from '../core/export.js';
 import { groupedMetrics } from '../core/metrics.js';
 import { APP_VERSION } from '../shared/version.js';
 import type { RunHistoryCatalog } from '../core/history.js';
+import { audienceSchema } from '../shared/spatial-schema.js';
 
 export async function createApp(engine: Engine, options: { history?: RunHistoryCatalog } = {}) {
   const app = Fastify({ logger: false, bodyLimit: 4 * 1024 * 1024 });
@@ -40,7 +41,7 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
   app.post('/api/experiments', async req => { const { spec, start } = req.body as any; return engine.create(spec, start !== false); });
   app.get<{ Querystring: { provider?: string } }>('/api/runs', async req => {
     const provider = z.enum(['all', 'real', 'codex', 'openai', 'mock']).optional().parse(req.query.provider);
-    return history ? history.list(provider) : engine.store.list('runs').reverse().filter(r => !provider || provider === 'all' || (provider === 'real' ? r.adapter !== 'mock' : r.adapter === provider)).map(r => ({ ...r, maxUtterances: r.spec.maxUtterances, sessions: undefined, helperSessions: undefined, spec: undefined, summary: engine.detail(r.id).summary }));
+    return history ? history.list(provider) : engine.list(provider);
   });
   app.get<{ Querystring: { runIds?: string } }>('/api/analysis', async req => {
     const ids = req.query.runIds?.split(',');
@@ -54,12 +55,17 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
     if (action === 'pause') await engine.pause(id);
     else if (action === 'resume' || action === 'step') await engine.resume(id, action === 'step');
     else if (action === 'stop') await engine.stop(id);
-    else if (action === 'inject') await engine.inject(id, z.object({ text: z.string() }).parse(req.body).text);
+    else if (action === 'inject') { const input = z.object({ text: z.string(), audience: audienceSchema.optional() }).parse(req.body); await engine.inject(id, input.text, input.audience); }
     else if (action === 'evaluate') await engine.evaluate(id);
     else throw new Error('알 수 없는 동작');
     return detail(id);
   });
-  app.patch<{ Params: { id: string } }>('/api/findings/:id', async req => { if (history && !engine.store.get('findings', req.params.id)) throw new Error('보관 기록의 평가 검토는 원본 저장소의 서버에서 사용하세요.'); const body = z.object({ review: z.enum(['unreviewed', 'confirmed', 'dismissed']), note: z.string().max(10000) }).parse(req.body); return engine.review(req.params.id, body.review, body.note); });
+  app.patch<{ Params: { id: string } }>('/api/findings/:id', async req => {
+    if (history && !engine.store.get('findings', req.params.id)) throw new Error('보관 기록의 평가 검토는 원본 저장소의 서버에서 사용하세요.');
+    const patch = z.object({ review: z.enum(['unreviewed', 'confirmed', 'dismissed']).optional(), note: z.string().max(10000).optional() }).strict()
+      .refine(value => value.review !== undefined || value.note !== undefined, '검토 상태 또는 메모를 지정하세요.').parse(req.body);
+    return engine.review(req.params.id, patch);
+  });
   app.get<{ Params: { id: string } }>('/api/runs/:id/export', async req => files(req.params.id));
   app.get<{ Params: { id: string } }>('/api/runs/:id/export.zip', async (req, reply) => reply.type('application/zip').header('Content-Disposition', `attachment; filename="npc-${req.params.id}.zip"`).send(zipFiles(files(req.params.id))));
   const streams = new Set<import('node:http').ServerResponse>();

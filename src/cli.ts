@@ -17,6 +17,10 @@ cli.command('run').requiredOption('--config <file>', '설정 JSON').option('--pa
 cli.command('status').argument('[id]', '묶음 ID').action(async id => print(await api(id ? `/runs/${id}` : '/runs')));
 cli.command('analysis').option('--runs <ids>', '쉼표로 구분한 묶음 ID').action(async o => print(await api(`/analysis${o.runs ? `?runIds=${encodeURIComponent(o.runs)}` : ''}`)));
 for (const action of ['pause', 'resume', 'step', 'stop', 'evaluate']) cli.command(action).argument('<id>', '묶음 ID').action(async id => print(await api(`/runs/${id}/${action}`, {})));
-cli.command('inject').argument('<id>', '묶음 ID').requiredOption('--text <text>', '상황 내용').action(async (id, o) => print(await api(`/runs/${id}/inject`, { text: o.text })));
+cli.command('inject').argument('<id>', '묶음 ID').requiredOption('--text <text>', '상황 내용').option('--location <id>', '이 장소의 현재 NPC만 관찰').option('--npc <id>', '이 NPC만 관찰').action(async (id, o) => {
+  if (o.location && o.npc) throw new Error('--location과 --npc 중 하나만 지정하세요.');
+  const audience = o.location ? { scope: 'locations', locationIds: [o.location], npcIds: [] } : o.npc ? { scope: 'npcs', npcIds: [o.npc], locationIds: [] } : undefined;
+  print(await api(`/runs/${id}/inject`, { text: o.text, audience }));
+});
 cli.command('export').argument('<id>', '묶음 ID').requiredOption('--out <directory>', '출력 폴더').action(async (id, o) => { const files = await api(`/runs/${id}/export`); const directory = resolve(o.out); await mkdir(directory, { recursive: true }); for (const [name, content] of Object.entries(files)) await writeFile(join(directory, name), String(content)); console.log(directory); });
 cli.parseAsync().catch(e => { console.error(e.message, '\n서버가 필요하면 npm run cli -- serve 를 먼저 실행하세요.'); process.exitCode = 1; });

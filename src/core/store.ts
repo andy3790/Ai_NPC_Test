@@ -6,6 +6,9 @@ import type { DeliveryReceipt, EvaluationFinding, EvaluationRecord, InvocationMe
 type Tables = { runs: Run; utterances: Utterance; receipts: DeliveryReceipt; invocations: InvocationMetrics; findings: EvaluationFinding; evaluations: EvaluationRecord };
 export class Store {
   db: DatabaseSync;
+  private revisions = new Map<string, number>();
+  private revisionSequence = 0;
+  private transactionRuns: Set<string> | null = null;
   constructor(public path: string) {
     if (path !== ':memory:') mkdirSync(dirname(path), { recursive: true });
     this.db = new DatabaseSync(path);
@@ -18,8 +21,15 @@ export class Store {
       CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL); PRAGMA user_version=1;`);
   }
   put<K extends keyof Tables>(table: K, value: Tables[K]) {
-    this.db.prepare(`INSERT INTO ${table}(id,run_id,data) VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data`).run(value.id, 'runId' in value ? value.runId : value.id, JSON.stringify(value));
+    const changed = this.db.prepare(`INSERT INTO ${table}(id,run_id,data) VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data WHERE ${table}.data<>excluded.data RETURNING run_id`)
+      .get(value.id, 'runId' in value ? value.runId : value.id, JSON.stringify(value)) as { run_id: string } | undefined;
+    if (changed) this.changed(changed.run_id);
     return value;
+  }
+  revision(runId: string) { return this.revisions.get(runId) ?? 0; }
+  private changed(runId: string) {
+    this.revisions.set(runId, ++this.revisionSequence);
+    this.transactionRuns?.add(runId);
   }
   get<K extends keyof Tables>(table: K, id: string): Tables[K] | undefined {
     const row = this.db.prepare(`SELECT data FROM ${table} WHERE id=?`).get(id) as { data: string } | undefined;
@@ -33,10 +43,22 @@ export class Store {
     const old = this.get(table, id); if (!old) throw new Error(`${table}/${id} 없음`);
     return this.put(table, { ...old, ...patch } as Tables[K]);
   }
+  remove(table: keyof Tables, id: string) {
+    const removed = this.db.prepare(`DELETE FROM ${table} WHERE id=? RETURNING run_id`).get(id) as { run_id: string } | undefined;
+    if (removed) this.changed(removed.run_id);
+  }
   transaction<T>(fn: () => T): T {
     this.db.exec('BEGIN IMMEDIATE');
+    const changedRuns = new Set<string>(); this.transactionRuns = changedRuns;
     try { const result = fn(); this.db.exec('COMMIT'); return result; }
-    catch (e) { this.db.exec('ROLLBACK'); throw e; }
+    catch (e) {
+      this.db.exec('ROLLBACK');
+      // A summary may have been read inside the transaction. Its revision must
+      // become stale again after rollback restores the previously stored data.
+      this.transactionRuns = null;
+      for (const runId of changedRuns) this.changed(runId);
+      throw e;
+    } finally { this.transactionRuns = null; }
   }
   event(runId: string, invocationId: string | null, method: string, params: unknown) {
     this.db.prepare('INSERT INTO events(run_id,invocation_id,received_at,method,params) VALUES(?,?,?,?,?)').run(runId, invocationId, new Date().toISOString(), method, JSON.stringify(params ?? null));

@@ -40,9 +40,9 @@ export function aggregate(calls: InvocationMetrics[], adapter?: string): Invocat
 }
 export function groupedMetrics(calls: InvocationMetrics[]) {
   const groups = new Map<string, InvocationMetrics[]>();
-  for (const c of calls) { const key = JSON.stringify([c.metadata.adapter ?? 'unknown', c.model, c.effort, c.deliveryMode, c.memoryMode, c.kind]); const group = groups.get(key) ?? []; group.push(c); groups.set(key, group); }
+  for (const c of calls) { const key = JSON.stringify([c.metadata.adapter ?? 'unknown', c.model, c.effort, c.deliveryMode, c.memoryMode, c.kind, c.environmentMode ?? 'legacy']); const group = groups.get(key) ?? []; group.push(c); groups.set(key, group); }
   return [...groups.values()].map(group => {
     const summary = aggregate(group);
-    return { adapter: String(group[0].metadata.adapter ?? 'unknown'), model: group[0].model, effort: group[0].effort, deliveryMode: group[0].deliveryMode, memoryMode: group[0].memoryMode, kind: group[0].kind, runs: new Set(group.map(c => c.runId)).size, tokensPerCall: summary.tokens.totalTokens === null ? null : summary.tokens.totalTokens / group.length, ...summary };
+    return { adapter: String(group[0].metadata.adapter ?? 'unknown'), model: group[0].model, effort: group[0].effort, deliveryMode: group[0].deliveryMode, memoryMode: group[0].memoryMode, environmentMode: group[0].environmentMode ?? 'legacy', kind: group[0].kind, runs: new Set(group.map(c => c.runId)).size, tokensPerCall: summary.tokens.totalTokens === null ? null : summary.tokens.totalTokens / group.length, ...summary };
   });
 }

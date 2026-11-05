@@ -1,6 +1,6 @@
 {
   "name": "npc-dialogue-lab",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Local Codex CLI and OpenAI API NPC dialogue experiments with character, world, token and latency evaluation.",
   "private": true,
   "type": "module",

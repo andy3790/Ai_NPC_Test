@@ -3,8 +3,11 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, realpathSync, statSyn
 import { dirname, join, relative, resolve } from 'node:path';
 import { Engine } from './engine.js';
 import { buildRunDetail } from './detail.js';
+import { matchesProvider, toRunListItem } from './summary.js';
 import { exportFiles } from './export.js';
-import type { RawEvent, Run, RunDetail, RunHistory } from '../shared/types.js';
+import { aggregateCost, PRICING_DATE } from './pricing.js';
+import { aggregate } from './metrics.js';
+import type { RawEvent, Run, RunDetail, RunHistory, RunListItem, RunSummary } from '../shared/types.js';
 
 interface ArchiveRow { run_id: string; run_json: string; summary_json: string; detail_json: string; events_json: string; source: string; priority: number; archived_at: string }
 interface SourceState { path: string; status: 'loaded' | 'unchanged' | 'error'; runs: number; error?: string }
@@ -32,9 +35,28 @@ export class RunHistoryCatalog {
       CREATE TABLE IF NOT EXISTS history_locations (run_id TEXT NOT NULL, path TEXT NOT NULL, PRIMARY KEY(run_id,path));`);
     this.roots = [...new Set([join(this.workspace, 'data'), join(this.workspace, 'reports'), join(this.workspace, '.cache'), ...(options.roots ?? [])])];
     this.refresh();
+    this.updateSavedCosts();
     engine.on('change', this.onChange);
   }
   private roots: string[];
+  private updateSavedCosts() {
+    // An archive may be the only copy of a run. Refresh derived summaries even
+    // when its original DB or export is no longer available to the scanner.
+    const rows = this.db.prepare(`SELECT run_id, summary_json, detail_json FROM history_runs
+      WHERE json_extract(summary_json, '$.cost.pricingDate') IS NOT ? OR json_extract(summary_json, '$.byKind.environment') IS NULL OR json_extract(summary_json, '$.byKind.event_generation') IS NULL`).all(PRICING_DATE);
+    const update = this.db.prepare('UPDATE history_runs SET summary_json=? WHERE run_id=?');
+    for (const row of rows) {
+      const { run, invocations } = JSON.parse(row.detail_json as string) as RunDetail;
+      const summary = JSON.parse(row.summary_json as string) as RunSummary;
+      summary.cost = aggregateCost(invocations, run.adapter);
+      summary.byKind.environment = aggregate(invocations.filter(call => call.kind === 'environment'), run.adapter);
+      summary.byKind.event_generation = aggregate(invocations.filter(call => call.kind === 'event_generation'), run.adapter);
+      for (const kind of Object.keys(summary.byKind) as (keyof RunSummary['byKind'])[]) {
+        summary.byKind[kind].cost = aggregateCost(invocations.filter(call => call.kind === kind), run.adapter);
+      }
+      update.run(JSON.stringify(summary), row.run_id);
+    }
+  }
   private label(path: string) { return relative(this.workspace, resolve(path)).replaceAll('\\', '/') || '.'; }
   private onChange = (event: { runId: string }) => {
     const run = this.engine.store.get('runs', event.runId);
@@ -147,19 +169,21 @@ export class RunHistoryCatalog {
     if (current && !locations.includes(this.label(this.engine.store.path))) locations.unshift(this.label(this.engine.store.path));
     return { readOnly: !current, kind: current ? 'current' : 'archive', locations, ...(archivedAt ? { archivedAt } : {}) };
   }
-  list(provider?: string) {
+  list(provider?: string): RunListItem[] {
     const current = this.engine.store.list('runs'); const activeIds = new Set(current.map(run => run.id));
     const archived = (this.db.prepare('SELECT run_id,run_json,summary_json,archived_at FROM history_runs').all() as unknown as ArchiveRow[])
-      .filter(row => !activeIds.has(row.run_id)).map(row => ({ run: JSON.parse(row.run_json) as Run, summary: JSON.parse(row.summary_json), history: this.origin(row.run_id, false, row.archived_at) }));
-    const all = [...current.map(run => ({ run, summary: this.engine.detail(run.id).summary, history: this.origin(run.id, true) })), ...archived];
-    return all.filter(({ run }) => !provider || provider === 'all' || (provider === 'real' ? run.adapter !== 'mock' : run.adapter === provider))
-      .sort((a, b) => b.run.createdAt.localeCompare(a.run.createdAt)).map(({ run, summary, history }) => ({ ...run, sessions: undefined, helperSessions: undefined, spec: undefined, maxUtterances: run.spec.maxUtterances, summary, history }));
+      .filter(row => !activeIds.has(row.run_id)).map(row => ({ run: JSON.parse(row.run_json) as Run, summary: JSON.parse(row.summary_json) as RunSummary, history: this.origin(row.run_id, false, row.archived_at) }));
+    const live = current.filter(run => matchesProvider(run, provider))
+      .map(run => toRunListItem(run, this.engine.summary(run.id), this.origin(run.id, true)));
+    const saved = archived.filter(({ run }) => matchesProvider(run, provider))
+      .map(({ run, summary, history }) => toRunListItem(run, summary, history));
+    return [...live, ...saved].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   }
   detail(id: string): RunDetail {
     if (this.engine.store.get('runs', id)) return { ...this.engine.detail(id), history: this.origin(id, true) };
     const row = this.db.prepare('SELECT * FROM history_runs WHERE run_id=?').get(id) as ArchiveRow | undefined;
     if (!row) throw new Error('대화 묶음이 없습니다.');
-    return { ...JSON.parse(row.detail_json), history: this.origin(id, false, row.archived_at) };
+    return { ...JSON.parse(row.detail_json), summary: JSON.parse(row.summary_json), history: this.origin(id, false, row.archived_at) };
   }
   events(id: string): RawEvent[] {
     if (this.engine.store.get('runs', id)) return this.engine.store.events(id);

@@ -127,7 +127,7 @@ test('evaluation findings reference actual evidence and support independent huma
   try {
     const { runs } = await engine.create(spec); await engine.idle(); let d = engine.detail(runs[0].id);
     assert.equal(d.findings.length, 3); assert.equal(d.summary.issueRate, 1);
-    engine.review(d.findings[0].id, 'dismissed', '직접 검토 예제'); d = engine.detail(runs[0].id);
+    engine.review(d.findings[0].id, { review: 'dismissed', note: '직접 검토 예제' }); d = engine.detail(runs[0].id);
     assert.equal(d.findings[0].verdict, 'issue'); assert.equal(d.findings[0].review, 'dismissed'); assert.equal(d.summary.issueRate, 2 / 3);
   } finally { await engine.close(); store.close(); }
 });

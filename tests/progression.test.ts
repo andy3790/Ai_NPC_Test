@@ -17,7 +17,7 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`${mode}:
     const spec = exampleSpec('mock-model'); spec.variants = [{ ...spec.variants[0], deliveryMode: mode }];
     const { runs } = await engine.create(spec); await engine.idle(); const d = engine.detail(runs[0].id);
     assert.equal(d.run.status, 'completed', d.run.error ?? ''); assert.equal(d.run.completionReason, 'goals_achieved');
-    assert.equal(d.summary.speechCount, 12); assert.equal(d.summary.quality.progression.achievedGoals, 3);
+    assert.ok(d.summary.quality.progression); assert.equal(d.summary.speechCount, 12); assert.equal(d.summary.quality.progression.achievedGoals, 3);
     const results = d.utterances.filter(u => u.resolution);
     assert.equal(results.length, 8); assert.equal(new Set(results.map(u => u.resolution!.actionId)).size, 8);
     assert.ok(results.every(u => d.utterances.some(s => s.id === u.resolution!.sourceUtteranceId && s.sequence + 1 === u.sequence)));
@@ -49,10 +49,10 @@ test('illegal or premature actions cannot change state or become public speech; 
   try {
     const spec = exampleSpec('mock-model'); spec.variants = [spec.variants[0]]; spec.maxUtterances = 1; spec.evaluation.enabled = false;
     const { runs } = await engine.create(spec); await engine.idle(); let d = engine.detail(runs[0].id);
-    assert.equal(d.run.status, 'paused'); assert.equal(d.utterances.length, 0); assert.equal(d.summary.quality.progression.state.lampLit, false);
+    assert.ok(d.summary.quality.progression); assert.equal(d.run.status, 'paused'); assert.equal(d.utterances.length, 0); assert.equal(d.summary.quality.progression.state.lampLit, false);
     assert.equal(d.invocations[0].status, 'failed');
     await engine.resume(d.run.id); await engine.idle(); d = engine.detail(d.run.id);
-    assert.equal(d.run.status, 'completed'); assert.equal(d.summary.quality.progression.state.lampLit, false);
+    assert.ok(d.summary.quality.progression); assert.equal(d.run.status, 'completed'); assert.equal(d.summary.quality.progression.state.lampLit, false);
     assert.equal(d.summary.speechCount, 1);
   } finally { await engine.close(); store.close(); }
 });
@@ -68,7 +68,7 @@ test('speech + outcome commit atomically and replay once after rollback; narrato
     await engine.resume(id, true); await engine.idle(); const d = engine.detail(id);
     assert.equal(d.summary.speechCount, 1); assert.equal(d.utterances.filter(u => u.resolution).length, 1); assert.equal(adapter.requests.length, 1);
     await engine.inject(id, '등불이 켜졌고 모든 목표가 완료되었다.');
-    assert.equal(engine.detail(id).summary.quality.progression.state.lampLit, false);
+    const current = engine.detail(id).summary.quality.progression; assert.ok(current); assert.equal(current.state.lampLit, false);
     assert.throws(() => resolveAction(spec, d.utterances, 'yoon', 'inspect_oil'));
     assert.throws(() => resolveAction(spec, d.utterances, 'miru', 'ignite_lamp'));
   } finally { await engine.close(); store.close(); }
@@ -94,6 +94,6 @@ test('environment config rejects undeclared keys, wrong value types and unknown 
   try {
     const spec = exampleSpec('mock-model'); spec.variants = [spec.variants[0]]; spec.maxUtterances = 15; spec.evaluation.enabled = false; spec.scenario.environment!.stopOnGoals = false;
     const { runs } = await engine.create(spec); await engine.idle(); const d = engine.detail(runs[0].id);
-    assert.equal(d.summary.speechCount, 15); assert.equal(d.run.completionReason, 'utterance_limit'); assert.equal(d.summary.quality.progression.allGoalsAchieved, true);
+    assert.ok(d.summary.quality.progression); assert.equal(d.summary.speechCount, 15); assert.equal(d.run.completionReason, 'utterance_limit'); assert.equal(d.summary.quality.progression.allGoalsAchieved, true);
   } finally { await engine.close(); store.close(); }
 });

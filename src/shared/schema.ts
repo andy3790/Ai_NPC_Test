@@ -1,4 +1,6 @@
 import { z } from 'zod';
+import { worldOutputSchema } from './world-schema.js';
+import { audienceSchema, eventGeneratorSchema, eventProposalSchema, spatialPlanSchema, spatialResolutionSchema, spatialSchema, spatialSpeechSchema } from './spatial-schema.js';
 
 const id = z.string().regex(/^[a-zA-Z0-9_-]+$/).max(100);
 const text = z.string().max(100_000);
@@ -28,9 +30,22 @@ export const scenarioSchema = z.object({
   characters: z.array(characterSchema).min(2).max(30),
   defaults: modelConfig,
   environment: environmentSchema.optional(),
+  worldEngineInstructions: text.optional(),
+  spatial: spatialSchema.optional(),
 }).superRefine((v, c) => {
   if (new Set(v.characters.map(x => x.id)).size !== v.characters.length)
     c.addIssue({ code: 'custom', message: '캐릭터 ID는 중복될 수 없습니다.' });
+  if (v.spatial) {
+    const s = v.spatial;
+    const fail = (message: string) => c.addIssue({ code: 'custom', path: ['spatial'], message });
+    for (const values of [s.locations.map(x => x.id), s.connections.map(x => x.id), s.channels.map(x => x.id), s.initialPositions.map(x => x.npcId)])
+      if (new Set(values).size !== values.length) fail('장소·통로·채널·초기 NPC 위치의 ID는 각각 중복될 수 없습니다.');
+    const place = (id: string) => s.locations.some(x => x.id === id);
+    const npc = (id: string) => v.characters.some(x => x.id === id);
+    for (const route of s.connections) if (!place(route.from) || !place(route.to) || route.from === route.to) fail(`잘못된 연결 통로: ${route.id}`);
+    if (s.initialPositions.length !== v.characters.length || s.initialPositions.some(x => !npc(x.npcId) || !place(x.locationId))) fail('모든 NPC의 시작 장소를 한 번씩 지정하세요.');
+    for (const channel of s.channels) if (new Set(channel.memberNpcIds).size !== channel.memberNpcIds.length || channel.memberNpcIds.some(x => !npc(x))) fail(`잘못된 통신 채널 참가자: ${channel.id}`);
+  }
   const env = v.environment;
   if (!env) return;
   const fail = (message: string) => c.addIssue({ code: 'custom', message });
@@ -51,6 +66,8 @@ export const experimentSchema = z.object({
     memoryMode: z.enum(['initial_only', 'reinject_on_speech']).default('initial_only'),
     deliveryMode: z.enum(['batched_on_turn', 'per_utterance']).default('batched_on_turn'),
     turnPolicy: z.enum(['round_robin', 'director']).default('round_robin'),
+    environmentMode: z.enum(['off', 'rules', 'ai', 'ai_spatial']).optional(),
+    eventGeneration: z.boolean().optional(),
   })).min(1).max(100),
   repetitions: z.number().int().min(1).max(100).default(1),
   maxUtterances: z.number().int().min(1).max(100_000).default(60),
@@ -64,12 +81,30 @@ export const experimentSchema = z.object({
     repetitionMinChars: z.number().int().min(3).max(1000).default(20),
   }),
   director: modelConfig,
-  scheduledEvents: z.array(z.object({ afterUtterance: z.number().int().min(0), text: text.min(1) })).default([]),
+  worldEngine: modelConfig.optional(),
+  eventGenerator: eventGeneratorSchema.optional(),
+  scheduledEvents: z.array(z.object({ afterUtterance: z.number().int().min(0), text: text.min(1), audience: audienceSchema.optional() })).default([]),
 }).superRefine((v, c) => {
   if (new Set(v.variants.map(x => x.id)).size !== v.variants.length)
     c.addIssue({ code: 'custom', message: '실험 조건 ID는 중복될 수 없습니다.' });
   if (v.variants.length * v.repetitions > 500)
     c.addIssue({ code: 'custom', message: '한 실험은 최대 500개 묶음을 생성할 수 있습니다.' });
+  if (v.variants.some(x => ['ai', 'ai_spatial'].includes(x.environmentMode ?? '')) && !v.worldEngine)
+    c.addIssue({ code: 'custom', path: ['worldEngine'], message: 'AI 세계 엔진의 모델과 추론 강도를 지정하세요.' });
+  if (v.variants.some(x => x.environmentMode === 'ai_spatial') && !v.scenario.spatial)
+    c.addIssue({ code: 'custom', path: ['scenario', 'spatial'], message: '분산 공간의 장소·통로·NPC 시작 위치를 지정하세요.' });
+  if (v.variants.some(x => x.eventGeneration) && !v.eventGenerator)
+    c.addIssue({ code: 'custom', path: ['eventGenerator'], message: '상황 발생 엔진의 모델·빈도·허용 범위를 지정하세요.' });
+  if (v.variants.some(x => x.eventGeneration && !['ai', 'ai_spatial'].includes(x.environmentMode ?? '')))
+    c.addIssue({ code: 'custom', message: '상황 발생 엔진은 AI 세계 엔진 환경에서만 사용할 수 있습니다.' });
+  if (v.variants.some(x => x.environmentMode === 'rules') && !v.scenario.environment?.enabled)
+    c.addIssue({ code: 'custom', path: ['scenario', 'environment'], message: '규칙 환경 모드에는 활성화된 환경 규칙이 필요합니다.' });
+  for (const [i, e] of v.scheduledEvents.entries()) if (e.audience) {
+    const a = e.audience, issue = (message: string) => c.addIssue({ code: 'custom', path: ['scheduledEvents', i, 'audience'], message });
+    if (a.scope === 'locations' && (v.variants.some(x => x.environmentMode !== 'ai_spatial') || !a.locationIds.length || a.npcIds.length)) issue('장소별 상황은 분산 공간 조건에만 사용하고 장소 ID를 지정하세요.');
+    if (a.scope === 'npcs' && (!a.npcIds.length || a.locationIds.length) || ['all', 'none'].includes(a.scope) && (a.npcIds.length || a.locationIds.length)) issue('수신 범위에 해당하는 배열만 채우세요.');
+    if (new Set(a.npcIds).size !== a.npcIds.length || new Set(a.locationIds).size !== a.locationIds.length || a.npcIds.some(id => !v.scenario.characters.some(c => c.id === id)) || a.locationIds.some(id => !v.scenario.spatial?.locations.some(l => l.id === id))) issue('알 수 없거나 중복된 수신 대상입니다.');
+  }
 });
 export type ExperimentSpec = z.infer<typeof experimentSchema>;
 export type Scenario = z.infer<typeof scenarioSchema>;
@@ -79,6 +114,7 @@ export type Variant = ExperimentSpec['variants'][number];
 export const speechSchema = z.object({ speech: z.string(), action: z.string(), actionId: z.string().nullable().optional() }).refine(v => !!(v.speech.trim() || v.action.trim()), '대사 또는 행동이 필요합니다.');
 export const progressSpeechSchema = z.object({ speech: z.string(), action: z.string(), actionId: z.string().nullable() });
 export const receiveSchema = z.object({ received: z.literal(true) });
+export const situationResolutionSchema = worldOutputSchema.extend({ proposalDecision: z.object({ accepted: z.boolean(), reason: z.string().min(1) }) });
 export const directorSchema = z.object({ speakerId: z.string(), reason: z.string() });
 export const categories = ['personality', 'speech_style', 'behavior', 'memory', 'knowledge', 'world_contradiction', 'world_expansion', 'repetition', 'goal_stagnation'] as const;
 export const evaluationSchema = z.object({ findings: z.array(z.object({
@@ -89,4 +125,21 @@ export const outputSchemas = {
   speech: z.toJSONSchema(z.object({ speech: z.string(), action: z.string() })),
   progressSpeech: z.toJSONSchema(progressSpeechSchema),
   receive: z.toJSONSchema(receiveSchema), director: z.toJSONSchema(directorSchema), evaluation: z.toJSONSchema(evaluationSchema),
+  environment: z.toJSONSchema(worldOutputSchema),
+  situationResolution: z.toJSONSchema(situationResolutionSchema),
+  spatialSpeech: z.toJSONSchema(spatialSpeechSchema), spatialPlan: z.toJSONSchema(spatialPlanSchema),
+  spatialResolution: z.toJSONSchema(spatialResolutionSchema), event_generation: z.toJSONSchema(eventProposalSchema),
 };
+export function environmentMode(spec: ExperimentSpec, variant?: Variant) {
+  return variant?.environmentMode ?? (spec.scenario.environment?.enabled ? 'rules' : 'off');
+}
+export const isAiEnvironment = (spec: ExperimentSpec, variant?: Variant) => ['ai', 'ai_spatial'].includes(environmentMode(spec, variant));
+export function responseValidator(kind: string, outputType?: unknown) {
+  if (kind === 'speech' && outputType === 'spatialSpeech') return spatialSpeechSchema;
+  if (kind === 'environment' && outputType === 'spatialPlan') return spatialPlanSchema;
+  if (kind === 'environment' && outputType === 'spatialResolution') return spatialResolutionSchema;
+  if (kind === 'environment' && outputType === 'situationResolution') return situationResolutionSchema;
+  const schemas: Record<string, z.ZodType> = { speech: speechSchema, receive: receiveSchema, director: directorSchema, evaluation: evaluationSchema, environment: worldOutputSchema, event_generation: eventProposalSchema };
+  if (!schemas[kind]) throw new Error(`알 수 없는 호출 종류: ${kind}`);
+  return schemas[kind];
+}

@@ -61,6 +61,7 @@ test('unified history: read-only database + exports, deduplication, providers, o
     assert.equal((await req(`/api/runs/${api.detail.run.id}/export.zip`)).rawPayload.readUInt32LE(0), 0x04034b50);
     const groups = (await req(`/api/analysis?runIds=${d.run.id},${api.detail.run.id}`)).json();
     assert.deepEqual([...new Set(groups.map((g: any) => g.adapter))].sort(), ['codex', 'openai']);
+    assert.ok(d.summary.tokens.totalTokens !== null); assert.ok(api.detail.summary.tokens.totalTokens !== null);
     assert.equal(groups.reduce((n: number, g: any) => n + g.tokens.totalTokens, 0), d.summary.tokens.totalTokens + api.detail.summary.tokens.totalTokens);
     // Updating one original must refresh only its snapshot and preserve the other IDs.
     const update = new Store(foreign); update.patch('runs', d.run.id, { status: 'completed', name: '이름 갱신' }); update.close();
@@ -91,6 +92,6 @@ test('current records win duplicates and completed runs are captured for later s
   unlinkSync(file);
   const fresh = new Store(':memory:'), other = new Engine(fresh, new MockAdapter(), join(root, 'other'));
   const history2 = new RunHistoryCatalog(other, { workspace: root, roots: [] });
-  try { assert.equal(history2.list().length, 2); assert.ok(history2.list().every(r => r.history.readOnly)); assert.equal(history2.detail(initial.detail.run.id).run.name, '현재 저장소 우선'); }
+  try { assert.equal(history2.list().length, 2); assert.ok(history2.list().every(r => r.history?.readOnly)); assert.equal(history2.detail(initial.detail.run.id).run.name, '현재 저장소 우선'); }
   finally { history2.close(); await other.close(); fresh.close(); }
 });

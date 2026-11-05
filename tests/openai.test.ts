@@ -8,49 +8,16 @@ import { adapterName } from '../src/adapters/factory.js';
 import { Engine } from '../src/core/engine.js';
 import { Store } from '../src/core/store.js';
 import { exampleSpec } from '../src/shared/example.js';
+import { spatialExample } from '../src/shared/spatial-example.js';
 import { outputSchemas } from '../src/shared/schema.js';
 import { exportFiles } from '../src/core/export.js';
 import { emptyUsage, UsageTracker } from '../src/core/metrics.js';
 import { createApp } from '../src/server/app.js';
 import type { AdapterEvent } from '../src/adapters/types.js';
+import { openaiFixture } from './fixtures/openai.js';
 
 const model = 'gpt-6-luna', config = { model, effort: 'low' };
-function fixture() {
-  const key = 'fixture-only-' + randomUUID();
-  const requests: any[] = [], retrieved: string[] = [], responses = new Map<string, any>();
-  let next = '', counter = 0;
-  const fake: typeof fetch = async (url, init) => {
-    assert.ok(String(url).startsWith('https://api.openai.com/v1/'));
-    assert.equal((init?.headers as any).Authorization, `Bearer ${key}`);
-    assert.equal(init?.redirect, 'error');
-    if (String(url).endsWith('/models')) return Response.json({ data: [{ id: model }, { id: 'gpt-4.1-mini' }, { id: 'embedding-not-for-dialogue' }] });
-    if (init?.method !== 'POST') {
-      const id = String(url).split('/').at(-1)!; retrieved.push(id);
-      return responses.has(id) ? Response.json(responses.get(id)) : new Response('', { status: 404 });
-    }
-    const body = JSON.parse(String(init.body)); requests.push(body);
-    const failure = next; next = '';
-    if (failure === 'rate') return Response.json({ error: { code: 'insufficient_quota', message: `fixture echo ${key}` } }, { status: 429 });
-    if (failure === 'server') return new Response('server error', { status: 503 });
-    const input = JSON.parse(body.input), id = `resp_fixture_${++counter}`;
-    const output = input.task === 'receive' ? { received: true } : input.task === 'evaluate' ? { findings: [], summary: '검사 완료' } : input.task === 'direct' ? { speakerId: input.allowedSpeakerIds[0], reason: '순서 선택' } : { speech: '안녕하세요. 다음 선택을 이야기해요.', action: '고개를 끄덕인다.' };
-    const usage = { input_tokens: 100, input_tokens_details: { cached_tokens: 60, cache_write_tokens: 10 }, output_tokens: 20, output_tokens_details: { reasoning_tokens: 5 }, total_tokens: 120 };
-    const completed = { id, status: 'completed', model: body.model, output: [{ type: 'message', role: 'assistant', content: [{ type: 'output_text', text: JSON.stringify(output) }] }], ...(failure === 'missing_usage' ? {} : { usage }) };
-    responses.set(id, completed);
-    const terminal = failure === 'incomplete' ? { ...completed, status: 'incomplete', incomplete_details: { reason: 'max_output_tokens' } } : completed;
-    const events = [
-      ...(failure === 'unknown' ? [] : [{ type: 'response.created', response: { id, model: body.model, status: 'in_progress' } }]),
-      ...(['drop', 'unknown'].includes(failure) ? [] : [
-        { type: 'response.output_text.delta', delta: JSON.stringify(output) },
-        { type: failure === 'incomplete' ? 'response.incomplete' : 'response.completed', response: terminal },
-      ]),
-    ];
-    // CRLF and byte boundaries deliberately split Korean UTF-8 and SSE frames.
-    const bytes = new TextEncoder().encode(events.map(event => `event: ${event.type}\r\ndata: ${JSON.stringify(event)}\r\n\r\n`).join(''));
-    return new Response(new ReadableStream({ start(controller) { for (let i = 0; i < bytes.length; i += 13) controller.enqueue(bytes.slice(i, i + 13)); controller.close(); } }), { headers: { 'Content-Type': 'text/event-stream', 'x-request-id': 'req_fixture' } });
-  };
-  return { key, requests, retrieved, responses, fetch: fake, fail(mode: string) { next = mode; } };
-}
+const fixture = openaiFixture;
 async function setup(mode: 'batched_on_turn' | 'per_utterance' = 'batched_on_turn') {
   await mkdir('.cache', { recursive: true });
   const root = await mkdtemp(resolve('.cache/openai-test-')), api = fixture();
@@ -60,6 +27,31 @@ async function setup(mode: 'batched_on_turn' | 'per_utterance' = 'batched_on_tur
   spec.variants = [{ ...spec.variants[0], deliveryMode: mode }]; spec.maxUtterances = 6; spec.evaluation.interval = 6;
   return { root, api, adapter, store, engine, spec };
 }
+
+for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI ${mode}: distributed roles use strict schemas, independent chains and measured shared costs`, async () => {
+  const { api, store, engine } = await setup(mode);
+  try {
+    const spec = spatialExample(model); spec.variants = [{ ...spec.variants[1], deliveryMode: mode }]; spec.maxUtterances = 10; spec.evaluation.enabled = true; spec.evaluation.interval = 5;
+    Object.assign(spec.eventGenerator!, { intervalSeconds: 1, minGapSeconds: 2, maxProposals: 1 });
+    spec.scenario.characters.forEach(c => { c.memories = `PRIVATE_API_${c.id}`; });
+    const { runs: [run] } = await engine.create(spec); await engine.idle(); const d = engine.detail(run.id);
+    assert.equal(d.run.status, 'completed', d.run.error ?? ''); assert.equal(d.summary.speechCount, 10);
+    assert.equal(d.summary.byKind.event_generation.calls, 1); assert.ok(d.summary.byKind.environment.calls > 0); assert.ok(d.evaluations.length > 0);
+    assert.ok(d.invocations.every(c => c.usage.totalTokens === 120 && c.actualModel === model && c.durationMs !== null && c.firstOutputMs !== null));
+    assert.equal(d.summary.tokens.totalTokens, d.invocations.length * 120);
+    assert.ok(d.summary.cost.usd! > 0); assert.ok(Math.abs(Object.values(d.summary.byKind).reduce((n, v) => n + (v.cost.usd ?? 0), 0) - d.summary.cost.usd!) < 1e-8);
+    const last = new Map<string, string>();
+    const strict = (schema: any) => { if (schema.type === 'object') { assert.equal(schema.additionalProperties, false); assert.deepEqual([...schema.required].sort(), Object.keys(schema.properties).sort()); } for (const value of Object.values(schema)) if (value && typeof value === 'object') { if (Array.isArray(value)) value.forEach(v => typeof v === 'object' && strict(v)); else strict(value); } };
+    for (const body of api.requests) {
+      const call = d.invocations.find(c => c.id === body.metadata.npc_lab_call_id)!;
+      assert.equal(body.previous_response_id, last.get(call.threadId) ?? null); last.set(call.threadId, call.turnId!);
+      strict(body.text.format.schema); assert.deepEqual(body.tools, []); assert.equal(body.tool_choice, 'none');
+      if (['environment', 'event_generation', 'director'].includes(call.kind)) assert.ok(!body.input.includes('PRIVATE_API_') && !body.instructions.includes('PRIVATE_API_'));
+    }
+    const files = exportFiles(d, store.events(run.id)); assert.ok(files['invocation-links.csv'].includes('"true"')); assert.ok(!JSON.stringify(files).includes(api.key));
+    assert.equal(d.invocations.filter(c => c.kind === 'receive').length, mode === 'per_utterance' ? d.receipts.length : 0);
+  } finally { await engine.close(); store.close(); }
+});
 
 for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI ${mode}: independent response chains, delivery, raw usage and exports`, async () => {
   const { root, api, adapter, store, engine, spec } = await setup(mode);
@@ -94,6 +86,34 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI $
     assert.ok(files['invocations.csv'].includes('reported_response')); assert.ok(files['records.jsonl'].includes('openai/response.completed'));
     assert.ok(!JSON.stringify(files).includes(api.key));
     for (const kind of ['sessions', 'calls']) for (const file of await readdir(join(root, 'openai', kind))) assert.ok(!(await readFile(join(root, 'openai', kind, file), 'utf8')).includes(api.key));
+  } finally { await engine.close(); store.close(); }
+});
+
+for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI ${mode}: world engine uses private response chain, strict schema, usage, latency and cost`, async () => {
+  const { api, store, engine, spec } = await setup(mode);
+  spec.variants[0].environmentMode = 'ai'; spec.worldEngine = { model, effort: 'medium' };
+  spec.maxUtterances = 2; spec.evaluation.enabled = false;
+  spec.scenario.characters.forEach((c, i) => { c.memories = `PRIVATE_API_MEMORY_${i}`; });
+  try {
+    const { runs: [run] } = await engine.create(spec); await engine.idle(); const d = engine.detail(run.id);
+    assert.equal(d.run.status, 'completed', d.run.error ?? ''); assert.equal(d.run.worldState?.virtualSeconds, 4);
+    const requests = api.requests.filter(body => JSON.parse(body.input).task === 'environment');
+    assert.equal(requests.length, 2); assert.equal(requests[0].previous_response_id, null);
+    const calls = d.invocations.filter(c => c.kind === 'environment');
+    assert.equal(requests[1].previous_response_id, calls[0].turnId);
+    for (const body of requests) {
+      assert.equal(body.text.format.strict, true); assert.equal(body.text.format.schema.additionalProperties, false);
+      assert.ok(body.text.format.schema.required.includes('elapsedSeconds')); assert.ok(body.text.format.schema.required.includes('events'));
+      assert.deepEqual(body.tools, []); assert.equal(body.reasoning.effort, 'medium');
+      assert.ok(!body.instructions.includes('PRIVATE_API_')); assert.ok(!body.input.includes('PRIVATE_API_'));
+      assert.deepEqual(Object.keys(JSON.parse(body.input).npcs[0]), ['id', 'name']);
+    }
+    assert.equal(d.summary.byKind.environment.tokens.totalTokens, 240);
+    assert.ok(d.summary.byKind.environment.cost.usd! > 0);
+    assert.ok(calls.every(c => c.durationMs !== null && c.firstOutputMs !== null && c.usageStatus === 'reported_response'));
+    assert.equal(d.summary.byKind.receive.calls, mode === 'per_utterance' ? 4 : 0);
+    assert.equal(d.utterances.length, 2); assert.equal(d.summary.tokens.totalTokens, api.requests.length * 120);
+    const files = exportFiles(d, store.events(run.id)); assert.equal(JSON.parse(files['world-state.json']).virtualSeconds, 4);
   } finally { await engine.close(); store.close(); }
 });
 

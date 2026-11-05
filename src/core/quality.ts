@@ -1,4 +1,4 @@
-import type { ExperimentSpec } from '../shared/schema.js';
+import { environmentMode, type ExperimentSpec, type Variant } from '../shared/schema.js';
 import type { EvaluationFinding, Utterance } from '../shared/types.js';
 import { progression } from './progression.js';
 const normalize = (text: string) => text.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
@@ -24,7 +24,7 @@ export function repetitionMetrics(spec: ExperimentSpec, history: Utterance[]) {
   return { algorithm: 'same-speaker-char-trigram-dice/v1', window, threshold, minChars, totalSpeeches: speeches.length,
     eligibleSpeeches: eligible, repeatedSpeeches: matches.length, rate: eligible ? matches.length / eligible : null, matches };
 }
-export function qualityMetrics(spec: ExperimentSpec, history: Utterance[], findings: EvaluationFinding[], evaluated: number) {
+export function qualityMetrics(spec: ExperimentSpec, history: Utterance[], findings: EvaluationFinding[], evaluated: number, variant?: Variant) {
   const semantic = new Set(findings.filter(f => f.category === 'repetition' && f.verdict === 'issue' && f.review !== 'dismissed').map(f => f.utteranceId));
-  return { repetition: repetitionMetrics(spec, history), semanticRepetition: { flaggedSpeeches: semantic.size, evaluatedSpeeches: evaluated, rate: evaluated ? semantic.size / evaluated : null }, progression: progression(spec, history) };
+  return { repetition: repetitionMetrics(spec, history), semanticRepetition: { flaggedSpeeches: semantic.size, evaluatedSpeeches: evaluated, rate: evaluated ? semantic.size / evaluated : null }, progression: environmentMode(spec, variant) === 'rules' ? progression(spec, history) : null };
 }

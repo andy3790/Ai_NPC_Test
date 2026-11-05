@@ -1,4 +1,4 @@
-import { buildRunDetail } from './detail.js';
+import { buildRunSummary, matchesProvider, toRunListItem, withRunTiming } from './summary.js';
 import { EventEmitter } from 'node:events';
 import { createHash, randomUUID } from 'node:crypto';
 import { join } from 'node:path';
@@ -6,8 +6,16 @@ import type { Adapter } from '../adapters/types.js';
 import { Store } from './store.js';
 import { emptyUsage, UsageTracker } from './metrics.js';
 import { evaluationPrompt, persona, PROMPT_VERSION, publicMessage, receiverPrompt, speakerPrompt } from './prompts.js';
-import { directorSchema, evaluationSchema, experimentSchema, outputSchemas, receiveSchema, speechSchema, type ExperimentSpec, type ModelConfig } from '../shared/schema.js';
-import type { CallKind, DeliveryReceipt, InvocationMetrics, NpcSession, Run, RunDetail, Utterance } from '../shared/types.js';
+import { directorSchema, evaluationSchema, experimentSchema, outputSchemas, receiveSchema, speechSchema, environmentMode, isAiEnvironment, responseValidator, type ExperimentSpec, type ModelConfig } from '../shared/schema.js';
+import { receives } from './perception.js';
+import { audienceNpcIds } from './perception.js';
+import type { Audience } from '../shared/spatial-schema.js';
+import type { SimulationHost } from './simulation-host.js';
+import { runSpatial } from './spatial-runner.js';
+import { advanceSingleRoomSituations } from './single-room-situations.js';
+import { worldOutputSchema } from '../shared/world-schema.js';
+import { applyWorldOutput, initialWorldState, priorityWorldSpeaker, worldInstructions, worldPrompt } from './world.js';
+import type { CallKind, DeliveryReceipt, InvocationMetrics, NpcSession, Run, RunDetail, RunListItem, RunRecords, RunSummary, Utterance } from '../shared/types.js';
 import { progression, progressionPrompt, resolveAction } from './progression.js';
 import { repetitionMetrics } from './quality.js';
 import { APP_VERSION } from '../shared/version.js';
@@ -17,13 +25,16 @@ const err = (e: unknown) => e instanceof Error ? e.message : String(e);
 class Slots {
   active = 0; waiters: (() => void)[] = []; limit = 2;
   async enter() { if (this.active >= this.limit) await new Promise<void>(r => this.waiters.push(r)); else this.active++; }
-  leave() { this.active--; while (this.active < this.limit && this.waiters.length) { this.active++; this.waiters.shift()!(); } }
+  private drain() { while (this.active < this.limit && this.waiters.length) { this.active++; this.waiters.shift()!(); } }
+  setLimit(limit: number) { this.limit = limit; this.drain(); }
+  leave() { this.active--; this.drain(); }
 }
 export class Engine extends EventEmitter {
   private workers = new Map<string, Promise<void>>();
   private aborts = new Map<string, Set<AbortController>>();
   private slots = new Slots(); private closing = false;
   private activeStarts = new Map<string, number>();
+  private summaries = new Map<string, { revision: number; summary: RunSummary }>();
   private resuming = new Set<string>();
   constructor(public store: Store, public adapter: Adapter, public dataDir: string) {
     super();
@@ -45,6 +56,8 @@ export class Engine extends EventEmitter {
     for (const v of parsed.variants) for (const c of parsed.scenario.characters) check({ model: c.model ?? v.model ?? parsed.scenario.defaults.model, effort: c.effort ?? v.effort ?? parsed.scenario.defaults.effort });
     if (parsed.evaluation.enabled) check(parsed.evaluation);
     if (parsed.variants.some(v => v.turnPolicy === 'director')) check(parsed.director);
+    if (parsed.variants.some(v => isAiEnvironment(parsed, v))) check(parsed.worldEngine!);
+    if (parsed.variants.some(v => v.eventGeneration)) check(parsed.eventGenerator!);
     return parsed;
   }
   async create(input: unknown, start = true) {
@@ -54,30 +67,43 @@ export class Engine extends EventEmitter {
       const run: Run = { id: randomUUID(), experimentId, name: `${spec.name} · ${variant.label} · #${repetition}`, variant, repetition, spec, snapshotHash,
         status: start ? 'queued' : 'paused', error: null, createdAt: now(), startedAt: null, completedAt: null, activeMs: 0, pausedMs: 0, pausedAt: start ? null : now(), timingComplete: true,
         sessions: {}, helperSessions: {}, lastSpeakerId: null, nextSpeakerId: null, evaluatedThrough: 0, appliedEvents: [], stepRemaining: null, pauseRequested: false,
-        revisions: 0, adapter: this.adapter.name, appVersion: APP_VERSION, cliVersion: this.adapter.version };
+        revisions: 0, adapter: this.adapter.name, appVersion: APP_VERSION, cliVersion: this.adapter.version, promptVersion: PROMPT_VERSION };
       this.store.put('runs', run); runs.push(run); this.changed(run.id);
     }
     this.store.setting('lastSpec', spec); this.pump(); return { experimentId, runs };
   }
+  private refreshCallLimit() {
+    const limits = [...this.workers.keys()].map(id => this.run(id).spec.maxConcurrentCalls);
+    this.slots.setLimit(limits.length ? Math.min(...limits) : 2);
+  }
+  private startWorker(id: string, task: () => Promise<void>) {
+    if (this.workers.has(id)) throw new Error('현재 진행 중인 요청이 끝난 뒤 실행하세요.');
+    // Register before any asynchronous work can request a call slot. Manual
+    // evaluations and event delivery participate in the same global limit.
+    const worker = Promise.resolve().then(task).finally(() => {
+      this.workers.delete(id); this.refreshCallLimit(); this.changed(id); this.pump();
+    });
+    this.workers.set(id, worker); this.refreshCallLimit(); this.changed(id);
+    return worker;
+  }
   private pump() {
     if (this.closing) return;
     for (const run of this.store.list('runs').filter(r => r.status === 'queued')) {
+      if (this.workers.has(run.id)) continue;
       const active = [...this.workers.keys()].map(id => this.run(id));
       if (active.filter(r => r.experimentId === run.experimentId).length >= run.spec.concurrentRuns || active.length >= 16) continue;
       const pausedMs = run.pausedMs + (run.pausedAt ? Date.now() - Date.parse(run.pausedAt) : 0);
       this.store.patch('runs', run.id, { status: 'running', startedAt: run.startedAt ?? now(), pausedAt: null, pausedMs, error: null });
-      this.slots.limit = Math.min(run.spec.maxConcurrentCalls, ...active.map(r => r.spec.maxConcurrentCalls));
-      const worker = this.work(run.id).catch(e => {
+      this.startWorker(run.id, () => this.work(run.id).catch(e => {
         if (this.run(run.id).status !== 'stopped') this.store.patch('runs', run.id, { status: 'paused', pausedAt: now(), error: err(e) });
-      }).finally(() => { this.workers.delete(run.id); this.changed(run.id); this.pump(); });
-      this.workers.set(run.id, worker); this.changed(run.id);
+      }));
     }
   }
   private async sessions(id: string) {
     for (const c of this.run(id).spec.scenario.characters) {
-      const run = this.run(id); if (run.sessions[c.id]) { await this.restoreSession(id, 'sessions', c.id, run.sessions[c.id]); continue; }
+      const run = this.run(id); if (Object.hasOwn(run.sessions, c.id)) { await this.restoreSession(id, 'sessions', c.id, run.sessions[c.id]); continue; }
       const config = { model: c.model ?? run.variant.model ?? run.spec.scenario.defaults.model, effort: c.effort ?? run.variant.effort ?? run.spec.scenario.defaults.effort };
-      const instructions = persona(run.spec, c);
+      const instructions = persona(run.spec, c, run.variant);
       const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, c.id));
       this.store.patch('runs', id, { sessions: { ...this.run(id).sessions, [c.id]: { id: randomUUID(), characterId: c.id, threadId, config, instructions } } });
     }
@@ -97,7 +123,7 @@ export class Engine extends EventEmitter {
     }
   }
   private async helper(id: string, key: string, config: ModelConfig, instructions: string): Promise<NpcSession> {
-    const old = this.run(id).helperSessions[key]; if (old) return this.restoreSession(id, 'helperSessions', key, old);
+    const helpers = this.run(id).helperSessions; if (Object.hasOwn(helpers, key)) return this.restoreSession(id, 'helperSessions', key, helpers[key]);
     const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, key));
     const session = { id: randomUUID(), characterId: key, threadId, config, instructions };
     this.store.patch('runs', id, { helperSessions: { ...this.run(id).helperSessions, [key]: session } }); return session;
@@ -108,12 +134,13 @@ export class Engine extends EventEmitter {
     if (previous && ['uncertain', 'running'].includes(previous.status)) throw new Error(`미확정 호출 ${previous.id}: 자동 재전송하지 않습니다. 재개하여 상태를 확인하세요.`);
     // A failed accepted turn already appended its input. A retry asks to complete that input,
     // without appending the dialogue payload a second time to the same persistent session.
-    if (previous?.turnId && previous.metadata.inputRetained !== false) input = JSON.stringify({ task: JSON.parse(input).task, instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
+    if (previous?.turnId && previous.metadata.inputRetained !== false) input = JSON.stringify({ task: JSON.parse(input).task, previousFailure: previous.error?.slice(0, 5000), instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 해당 호출의 결과는 아직 공개·적용되지 않았습니다. previousFailure는 이전 결과가 거부된 이유입니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
     const run = this.run(id); const call: InvocationMetrics = {
       id: randomUUID(), experimentId: run.experimentId, runId: id, variantId: run.variant.id, repetition: run.repetition,
       kind, characterId: ['speech', 'receive'].includes(kind) ? session.characterId : null, operationKey, attempt: (previous?.attempt ?? 0) + 1, retryOf: previous?.id ?? null,
       threadId: session.threadId, turnId: null, sourceUtteranceId: (metadata.sourceUtteranceId as string) ?? null, utteranceId: null,
       model: session.config.model, effort: session.config.effort, actualModel: null, deliveryMode: run.variant.deliveryMode, memoryMode: run.variant.memoryMode,
+      environmentMode: environmentMode(run.spec, run.variant),
       queuedAt: now(), startedAt: null, firstOutputAt: null, completedAt: null, queueMs: null, firstOutputMs: null, durationMs: null,
       status: 'queued', usage: emptyUsage(), usageStatus: 'not_started', input, output: '', error: null, metadata: { ...metadata, adapter: run.adapter, appVersion: run.appVersion, cliVersion: run.cliVersion, promptVersion: PROMPT_VERSION },
     };
@@ -128,7 +155,8 @@ export class Engine extends EventEmitter {
       const controller = new AbortController(); const set = this.aborts.get(id) ?? new Set(); set.add(controller); this.aborts.set(id, set);
       let result;
       try {
-        result = await this.adapter.turn({ threadId: session.threadId, config: session.config, input, outputSchema: kind === 'speech' && run.spec.scenario.environment?.enabled ? outputSchemas.progressSpeech : outputSchemas[kind], clientMessageId: call.id, timeoutMs: run.spec.timeoutMs }, event => {
+        const format = metadata.outputType as keyof typeof outputSchemas | undefined;
+        result = await this.adapter.turn({ threadId: session.threadId, config: session.config, input, outputSchema: format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind], clientMessageId: call.id, timeoutMs: run.spec.timeoutMs }, event => {
           // Late usage events must preserve fields committed after the turn completed.
           Object.assign(call, this.store.get('invocations', call.id));
           this.store.event(id, call.id, event.method, event.params);
@@ -149,7 +177,7 @@ export class Engine extends EventEmitter {
       if (call.status === 'completed') {
         try {
           const parsed = JSON.parse(call.output);
-          ({ speech: speechSchema, receive: receiveSchema, director: directorSchema, evaluation: evaluationSchema }[kind]).parse(parsed);
+          responseValidator(kind, metadata.outputType).parse(parsed);
         } catch (e) { call.status = 'failed'; call.error = `출력 형식 오류: ${err(e)}`; }
       }
       this.store.put('invocations', call);
@@ -176,7 +204,7 @@ export class Engine extends EventEmitter {
       const results = await Promise.allSettled(receipts.map(async receipt => {
         const session = this.run(id).sessions[receipt.characterId];
         this.store.patch('receipts', receipt.id, { status: 'processing' });
-        const call = await this.invoke(id, 'receive', session, `receive:${receipt.id}`, receiverPrompt(u), { sourceUtteranceId: u.id, receiptIds: [receipt.id] });
+        const call = await this.invoke(id, 'receive', session, `receive:${receipt.id}`, receiverPrompt(u, receipt.characterId), { sourceUtteranceId: u.id, receiptIds: [receipt.id] });
         this.store.patch('receipts', receipt.id, { status: 'delivered', invocationId: call.id, deliveredAt: now() });
       }));
       const failed = results.find(x => x.status === 'rejected');
@@ -186,15 +214,18 @@ export class Engine extends EventEmitter {
   }
   private append(id: string, u: Utterance) {
     this.store.put('utterances', u);
-    for (const c of this.run(id).spec.scenario.characters) if (c.id !== u.speakerId) {
+    for (const c of this.run(id).spec.scenario.characters) if (c.id !== u.speakerId && receives(u, c.id)) {
       const receipt: DeliveryReceipt = { id: `${u.id}:${c.id}`, runId: id, utteranceId: u.id, characterId: c.id, status: 'pending', invocationId: null, deliveredAt: null };
       this.store.put('receipts', receipt);
     }
+    if (u.perception && !this.store.list('receipts', id).some(r => r.utteranceId === u.id)) this.completeDelivery(id, u);
   }
   private async speaker(id: string, speeches: Utterance[]) {
     const run = this.run(id); if (run.nextSpeakerId) return run.nextSpeakerId;
-    const chars = run.spec.scenario.characters; let selected = chars[speeches.length % chars.length].id;
-    if (run.variant.turnPolicy === 'director' && speeches.length) {
+    const chars = run.spec.scenario.characters;
+    const urgent = environmentMode(run.spec, run.variant) === 'ai' ? priorityWorldSpeaker(run.worldState) : null;
+    let selected = urgent ?? chars[(run.roundRobinCursor ?? speeches.length) % chars.length].id;
+    if (!urgent && run.variant.turnPolicy === 'director' && speeches.length) {
       const age = (characterId: string) => speeches.length - (speeches.findLastIndex(u => u.speakerId === characterId));
       const candidates = chars.filter(c => c.id !== run.lastSpeakerId).sort((a, b) => age(b.id) - age(a.id));
       const allowed = age(candidates[0].id) >= chars.length * 2 ? [candidates[0]] : candidates;
@@ -205,19 +236,53 @@ export class Engine extends EventEmitter {
     }
     this.store.patch('runs', id, { nextSpeakerId: selected }); return selected;
   }
+  private async advanceWorld(id: string) {
+    const run = this.run(id);
+    if (environmentMode(run.spec, run.variant) !== 'ai') return;
+    const history = this.store.list('utterances', id);
+    const state = run.worldState ?? initialWorldState();
+    const source = history.find(u => u.kind === 'speech' && u.speechIndex! > state.processedSpeechCount);
+    if (!source) return;
+    const session = await this.helper(id, 'world-engine', run.spec.worldEngine!, worldInstructions);
+    const call = await this.invoke(id, 'environment', session, `environment:${source.id}`, worldPrompt(run.spec, state, history, source), { sourceUtteranceId: source.id });
+    let result: ReturnType<typeof applyWorldOutput>;
+    try { result = applyWorldOutput(state, JSON.parse(call.output), source, run.spec.scenario.characters.map(c => c.id)); }
+    catch (e) { this.store.patch('invocations', call.id, { status: 'failed', error: err(e) }); throw e; }
+    this.store.transaction(() => {
+      let sequence = this.store.list('utterances', id).length;
+      for (const event of result.output.events) this.append(id, {
+        id: randomUUID(), runId: id, sequence: ++sequence, speechIndex: null, speakerId: '__environment__', speakerName: '세계 엔진',
+        kind: 'event', speech: event.text, action: '', createdAt: now(), invocationId: call.id, deliveryCompletedAt: null, deliveryMs: null,
+        worldEvent: { ...event, sourceUtteranceId: source.id, virtualSeconds: result.state.virtualSeconds },
+      });
+      // Only consume input through the triggering speech. Events injected after
+      // it (e.g. during a failed-call pause) must still reach the next tick.
+      this.store.patch('runs', id, { worldState: result.state });
+      this.store.event(id, call.id, 'world/committed', { sourceUtteranceId: source.id, state: result.state, events: result.output.events });
+    });
+    this.changed(id);
+  }
   private async work(id: string) {
     const began = performance.now();
     this.activeStarts.set(id, began);
     try {
       await this.sessions(id);
+      if (environmentMode(this.run(id).spec, this.run(id).variant) === 'ai_spatial') {
+        await runSpatial(this.simulationHost(id));
+        return;
+      }
       while (!this.closing && this.run(id).status === 'running') {
+        await this.flush(id);
+        await this.advanceWorld(id);
+        await advanceSingleRoomSituations(this.simulationHost(id));
         await this.flush(id);
         let run = this.run(id); let all = this.store.list('utterances', id); let speeches = all.filter(u => u.kind === 'speech');
         for (const [index, event] of run.spec.scheduledEvents.entries()) if (event.afterUtterance <= speeches.length && !this.run(id).appliedEvents.includes(index)) {
-          this.store.transaction(() => { this.appendEvent(id, event.text); this.store.patch('runs', id, { appliedEvents: [...this.run(id).appliedEvents, index] }); });
+          this.store.transaction(() => { this.appendEvent(id, event.text, event.audience); this.store.patch('runs', id, { appliedEvents: [...this.run(id).appliedEvents, index] }); });
         }
         await this.flush(id);
-        const goalsDone = !!(run.spec.scenario.environment?.enabled && run.spec.scenario.environment.stopOnGoals && progression(run.spec, this.store.list('utterances', id))?.allGoalsAchieved);
+        const rules = environmentMode(run.spec, run.variant) === 'rules';
+        const goalsDone = !!(rules && run.spec.scenario.environment?.stopOnGoals && progression(run.spec, this.store.list('utterances', id))?.allGoalsAchieved);
         await this.evaluatePending(id, speeches.length >= run.spec.maxUtterances || goalsDone);
         run = this.run(id);
         if (run.status !== 'running') break;
@@ -226,10 +291,10 @@ export class Engine extends EventEmitter {
         const speakerId = await this.speaker(id, speeches); const session = this.run(id).sessions[speakerId];
         const receipts = this.pending(id, speakerId); all = this.store.list('utterances', id);
         const messages = all.filter(u => receipts.some(r => r.utteranceId === u.id));
-        const call = await this.invoke(id, 'speech', session, `speech:${speeches.length + 1}`, speakerPrompt(messages, run.variant.memoryMode === 'reinject_on_speech' ? session.instructions : undefined, progressionPrompt(run.spec, all, speakerId)), { receiptIds: receipts.map(r => r.id) });
+        const call = await this.invoke(id, 'speech', session, `speech:${speeches.length + 1}`, speakerPrompt(messages, run.variant.memoryMode === 'reinject_on_speech' ? session.instructions : undefined, rules ? progressionPrompt(run.spec, all, speakerId) : undefined), { receiptIds: receipts.map(r => r.id) });
         const output = speechSchema.parse(JSON.parse(call.output)); const character = run.spec.scenario.characters.find(c => c.id === speakerId)!;
         let resolved: ReturnType<typeof resolveAction>;
-        try { resolved = resolveAction(run.spec, all, speakerId, output.actionId); }
+        try { resolved = rules ? resolveAction(run.spec, all, speakerId, output.actionId) : null; }
         catch (e) { this.store.patch('invocations', call.id, { status: 'failed', error: err(e) }); throw e; }
         this.store.transaction(() => {
           const u: Utterance = { id: randomUUID(), runId: id, sequence: all.length + 1, speechIndex: speeches.length + 1, speakerId, speakerName: character.name, kind: 'speech', speech: output.speech, action: output.action, actionId: output.actionId ?? null, createdAt: now(), invocationId: call.id, deliveryCompletedAt: null, deliveryMs: null };
@@ -243,7 +308,11 @@ export class Engine extends EventEmitter {
           for (const r of receipts) this.store.patch('receipts', r.id, { status: 'delivered', invocationId: call.id, deliveredAt: now() });
           for (const old of messages) this.completeDelivery(id, old);
           const current = this.run(id);
-          this.store.patch('runs', id, { lastSpeakerId: speakerId, nextSpeakerId: null, stepRemaining: current.stepRemaining === null ? null : Math.max(0, current.stepRemaining - 1) });
+          const cursor = current.roundRobinCursor ?? speeches.length;
+          const regularSpeaker = run.spec.scenario.characters[cursor % run.spec.scenario.characters.length].id;
+          this.store.patch('runs', id, { lastSpeakerId: speakerId, nextSpeakerId: null,
+            roundRobinCursor: cursor + (speakerId === regularSpeaker ? 1 : 0),
+            stepRemaining: current.stepRemaining === null ? null : Math.max(0, current.stepRemaining - 1) });
         });
         this.changed(id);
       }
@@ -253,16 +322,43 @@ export class Engine extends EventEmitter {
       this.activeStarts.delete(id);
     }
   }
-  private async evaluateRange(id: string, from: number, to: number) {
+  private async evaluateRange(id: string, from: number, to: number, attempted = new Set<string>()) {
     const run = this.run(id); const evalId = `${id}:eval:${from}:${to}`;
-    if (this.store.get('evaluations', evalId)?.status === 'completed') return;
+    if (attempted.has(evalId)) return;
+    attempted.add(evalId);
+    const previous = this.store.get('evaluations', evalId);
+    if (previous?.status === 'completed') return;
     const history = this.store.list('utterances', id);
     // Include the target's authoritative outcome, but never a later speech/result.
     const nextSequence = history.find(u => u.speechIndex !== null && u.speechIndex > to)?.sequence ?? Infinity;
-    const bounded = history.filter(u => u.sequence < nextSequence);
+    const spatial = environmentMode(run.spec, run.variant) === 'ai_spatial';
+    const earlierIds = new Set(history.filter(u => u.speechIndex !== null && u.speechIndex <= to).map(u => u.id));
+    const bounded = history.filter(u => u.sequence < nextSequence || spatial && u.kind === 'event' && !!u.worldEvent?.sourceUtteranceId && earlierIds.has(u.worldEvent.sourceUtteranceId));
     const targets = bounded.filter(u => u.speechIndex !== null && u.speechIndex >= from && u.speechIndex <= to);
-    const prompt = evaluationPrompt(run.spec, bounded, targets); let call: InvocationMetrics | undefined;
+    const prompt = evaluationPrompt(run.spec, bounded, targets, run.variant); let call: InvocationMetrics | undefined;
+    const previousCall = this.store.list('invocations', id).findLast(c => c.operationKey === `eval:${from}:${to}`);
+    // Splitting changes operation keys, so preserve invoke's no-resend guard
+    // before a parent range can be replaced by new child model requests.
+    if (previousCall && ['uncertain', 'running'].includes(previousCall.status)) {
+      this.store.put('evaluations', { id: evalId, runId: id, from, to, status: 'failed', contextTruncated: prompt.truncated,
+        summary: '', invocationId: previousCall.id, error: `미확정 호출 ${previousCall.id}: 평가 구간을 분할하거나 자동 재전송하지 않습니다. 재개하여 상태를 확인하세요.` });
+      return;
+    }
+    if (prompt.overBudget && targets.length > 1) {
+      const middle = targets[Math.floor(targets.length / 2) - 1].speechIndex!;
+      await this.evaluateRange(id, from, middle, attempted);
+      await this.evaluateRange(id, middle + 1, to, attempted);
+      // Replace an old failed range only after both child ranges are persisted.
+      // Its original failure and invocation remain available in the event log.
+      if (previous) this.store.transaction(() => {
+        this.store.event(id, previous.invocationId, 'evaluation/range_split', { previous, ranges: [[from, middle], [middle + 1, to]] });
+        this.store.remove('evaluations', evalId);
+      });
+      return;
+    }
     try {
+      if (!targets.length) throw new Error('평가할 대상 발화가 없습니다.');
+      if (prompt.overBudget) throw new Error(`평가 대상 발화와 환경 결과가 맥락 문자 한도를 초과합니다 (${prompt.contextCharacters}/${run.spec.evaluation.contextCharacters}). 대상은 생략하지 않았으며 이 구간은 미평가입니다.`);
       const session = await this.helper(id, `judge-${from}-${to}`, run.spec.evaluation, '당신은 NPC 대화의 독립 평가자입니다. 제공한 설정과 공개 기록에서 확인 가능한 근거만 사용하세요. 대화를 교정하거나 참여하지 마세요.');
       call = await this.invoke(id, 'evaluation', session, `eval:${from}:${to}`, prompt.input, { from, to, contextTruncated: prompt.truncated });
       const result = evaluationSchema.parse(JSON.parse(call.output));
@@ -271,7 +367,7 @@ export class Engine extends EventEmitter {
         if (!u || !f.quote || !(u.speech.includes(f.quote) || u.action.includes(f.quote))) throw new Error('평가 근거가 대상 발화와 일치하지 않습니다.');
       }
       this.store.transaction(() => {
-        this.store.put('evaluations', { id: evalId, runId: id, from, to, status: 'completed', contextTruncated: prompt.truncated, summary: result.summary, invocationId: call!.id, error: null, quality: { repetition: repetitionMetrics(run.spec, bounded), progression: progression(run.spec, bounded) } });
+        this.store.put('evaluations', { id: evalId, runId: id, from, to, status: 'completed', contextTruncated: prompt.truncated, summary: result.summary, invocationId: call!.id, error: null, quality: { repetition: repetitionMetrics(run.spec, bounded), progression: environmentMode(run.spec, run.variant) === 'rules' ? progression(run.spec, bounded) : null } });
         for (const f of result.findings) this.store.put('findings', { ...f, id: randomUUID(), runId: id, evaluationId: evalId, review: 'unreviewed', note: '' });
       });
     } catch (e) {
@@ -279,21 +375,28 @@ export class Engine extends EventEmitter {
       this.store.put('evaluations', { id: evalId, runId: id, from, to, status: 'failed', contextTruncated: prompt.truncated, summary: '', invocationId: call?.id ?? null, error: err(e) });
     }
   }
-  private async evaluatePending(id: string, final: boolean) {
+  private async evaluatePending(id: string, final: boolean, attempted = new Set<string>()) {
     const run = this.run(id); if (!run.spec.evaluation.enabled) return;
-    const count = this.store.list('utterances', id).filter(u => u.kind === 'speech').length;
+    const speeches = this.store.list('utterances', id).filter(u => u.kind === 'speech');
+    let count = speeches.length;
+    if (!final && environmentMode(run.spec, run.variant) === 'ai_spatial') {
+      const pending = new Set(run.worldState?.spatial?.activities.filter(a => a.status === 'pending').map(a => a.sourceUtteranceId));
+      const first = speeches.find(u => pending.has(u.id)); if (first) count = first.speechIndex! - 1;
+    }
     while (this.run(id).evaluatedThrough < count) {
       const from = this.run(id).evaluatedThrough + 1; const to = Math.min(count, from + run.spec.evaluation.interval - 1);
       if (!final && to - from + 1 < run.spec.evaluation.interval) break;
-      await this.evaluateRange(id, from, to); this.store.patch('runs', id, { evaluatedThrough: to });
+      await this.evaluateRange(id, from, to, attempted); this.store.patch('runs', id, { evaluatedThrough: to });
     }
   }
   async evaluate(id: string) {
     const run = this.run(id); if (this.workers.has(id)) throw new Error('일시정지한 후 수동 평가를 실행하세요.');
     if (!run.spec.evaluation.enabled) throw new Error('이 실험의 자동 평가 설정이 꺼져 있습니다.');
-    const worker = (async () => { for (const e of this.store.list('evaluations', id).filter(x => x.status === 'failed')) await this.evaluateRange(id, e.from, e.to); await this.evaluatePending(id, true); })();
-    this.workers.set(id, worker);
-    try { await worker; } finally { this.workers.delete(id); this.changed(id); this.pump(); }
+    await this.startWorker(id, async () => {
+      const attempted = new Set<string>();
+      for (const e of this.store.list('evaluations', id).filter(x => x.status === 'failed')) await this.evaluateRange(id, e.from, e.to, attempted);
+      await this.evaluatePending(id, true, attempted);
+    });
   }
   async pause(id: string) {
     const run = this.run(id);
@@ -311,7 +414,7 @@ export class Engine extends EventEmitter {
         const result = await this.adapter.reconcile(call.threadId, call.turnId, call.id);
         if (!result) throw new Error(`호출 ${call.id}의 완료 상태를 확인할 수 없습니다. 자동 재전송하지 않습니다.`);
         let status = result.status; let error = result.error ?? null;
-        if (status === 'completed') try { ({ speech: speechSchema, receive: receiveSchema, director: directorSchema, evaluation: evaluationSchema }[call.kind]).parse(JSON.parse(result.output)); } catch (e) { status = 'failed'; error = err(e); }
+        if (status === 'completed') try { responseValidator(call.kind, call.metadata.outputType).parse(JSON.parse(result.output)); } catch (e) { status = 'failed'; error = err(e); }
         this.store.patch('invocations', call.id, { status, turnId: result.turnId, output: result.output, error, completedAt: now(), metadata: { ...call.metadata, reconciled: true }, durationMs: null });
         if (result.inputRetained !== undefined || result.usage || result.actualModel) {
           this.store.patch('invocations', call.id, { ...(result.usage ? { usage: result.usage, usageStatus: 'reported_response' } : {}),
@@ -330,24 +433,62 @@ export class Engine extends EventEmitter {
     for (const controller of this.aborts.get(id) ?? []) controller.abort();
     this.changed(id);
   }
-  private appendEvent(id: string, text: string) {
+  private appendEvent(id: string, text: string, audience?: Audience) {
     const all = this.store.list('utterances', id);
-    this.append(id, { id: randomUUID(), runId: id, sequence: all.length + 1, speechIndex: null, kind: 'event', speakerId: '__narrator__', speakerName: '상황', speech: text, action: '', createdAt: now(), invocationId: null, deliveryCompletedAt: null, deliveryMs: null });
-    this.store.event(id, null, 'narrator/event', { text });
+    const run = this.run(id), scoped = audience ?? { scope: 'all' as const, locationIds: [], npcIds: [] };
+    if (scoped.scope === 'locations' && environmentMode(run.spec, run.variant) !== 'ai_spatial') throw new Error('장소별 상황 투입은 AI 분산 공간에서 사용하세요.');
+    const perception = environmentMode(run.spec, run.variant) === 'ai_spatial' || audience ? {
+      locationId: scoped.scope === 'locations' && scoped.locationIds.length === 1 ? scoped.locationIds[0] : null, virtualSeconds: run.worldState?.virtualSeconds ?? 0,
+      speechRecipientIds: audienceNpcIds(run.spec, run.worldState, scoped), actionRecipientIds: [], audience: scoped,
+    } : undefined;
+    this.append(id, { id: randomUUID(), runId: id, sequence: all.length + 1, speechIndex: null, kind: 'event', speakerId: '__narrator__', speakerName: '상황', speech: text, action: '', createdAt: now(), invocationId: null, deliveryCompletedAt: null, deliveryMs: null, ...(perception ? { perception } : {}) });
+    this.store.event(id, null, 'narrator/event', { text, ...(audience ? { audience } : {}) });
   }
-  async inject(id: string, text: string) {
+  async inject(id: string, text: string, audience?: Audience) {
     const run = this.run(id); if (run.status !== 'paused' || this.workers.has(id)) throw new Error('상황은 일시정지가 완료된 묶음에 투입하세요.');
+    if (run.worldState?.spatial?.cycle || run.worldState?.spatial?.pendingResolution || run.eventGeneratorState?.proposals.some(p => p.status === 'proposed')) throw new Error('미완료 선택·엔진 결과를 먼저 재개하여 확정한 뒤 일시정지하고 상황을 투입하세요. 복구 중인 입력에는 새 사건을 끼워 넣을 수 없습니다.');
     if (!text.trim() || text.length > 100_000) throw new Error('상황 내용은 1~100,000자여야 합니다.');
-    this.store.transaction(() => this.appendEvent(id, text));
-    const worker = (async () => { await this.sessions(id); await this.flush(id); })(); this.workers.set(id, worker);
-    try { await worker; } finally { this.workers.delete(id); this.changed(id); this.pump(); }
+    this.store.transaction(() => this.appendEvent(id, text, audience));
+    await this.startWorker(id, async () => { await this.sessions(id); await this.flush(id); });
   }
-  review(findingId: string, review: 'unreviewed' | 'confirmed' | 'dismissed', note: string) { const f = this.store.patch('findings', findingId, { review, note }); this.changed(f.runId); return f; }
+  review(findingId: string, patch: { review?: 'unreviewed' | 'confirmed' | 'dismissed'; note?: string }) {
+    const changes = { ...(patch.review !== undefined ? { review: patch.review } : {}), ...(patch.note !== undefined ? { note: patch.note } : {}) };
+    const f = this.store.patch('findings', findingId, changes); this.changed(f.runId); return f;
+  }
+  private records(run: Run): RunRecords {
+    const id = run.id;
+    return { run, utterances: this.store.list('utterances', id), invocations: this.store.list('invocations', id),
+      findings: this.store.list('findings', id), evaluations: this.store.list('evaluations', id), receipts: this.store.list('receipts', id) };
+  }
+  private summarize(run: Run, records?: RunRecords): RunSummary {
+    const revision = this.store.revision(run.id);
+    let cached = this.summaries.get(run.id);
+    if (!cached || cached.revision !== revision) {
+      cached = { revision, summary: buildRunSummary(records ?? this.records(run)) };
+      this.summaries.set(run.id, cached);
+    }
+    const activeIncrement = this.activeStarts.has(run.id) ? performance.now() - this.activeStarts.get(run.id)! : 0;
+    // Return isolated DTOs: a consumer cannot mutate another list/detail view
+    // or poison the stored aggregation. Raw prompts and records are not cached.
+    return withRunTiming(structuredClone(cached.summary), run, activeIncrement);
+  }
+  summary(id: string): RunSummary { return this.summarize(this.run(id)); }
+  list(provider?: string): RunListItem[] {
+    return this.store.list('runs').reverse().filter(run => matchesProvider(run, provider))
+      .map(run => toRunListItem(run, this.summarize(run)));
+  }
   detail(id: string): RunDetail {
-    const run = this.run(id); const utterances = this.store.list('utterances', id), invocations = this.store.list('invocations', id), findings = this.store.list('findings', id), evaluations = this.store.list('evaluations', id), receipts = this.store.list('receipts', id);
-    return buildRunDetail({ run, utterances, invocations, findings, evaluations, receipts }, this.activeStarts.has(id) ? performance.now() - this.activeStarts.get(id)! : 0);
+    const records = this.records(this.run(id));
+    return { ...records, summary: this.summarize(records.run, records) };
   }
-
   async idle() { while (this.workers.size || this.store.list('runs').some(r => r.status === 'queued')) { await Promise.allSettled([...this.workers.values()]); await new Promise(r => setTimeout(r, 5)); } }
+  private simulationHost(id: string): SimulationHost {
+    return { id, store: this.store, run: () => this.run(id), closing: () => this.closing,
+      helper: (key, config, instructions) => this.helper(id, key, config, instructions),
+      invoke: (kind, session, key, input, metadata) => this.invoke(id, kind, session, key, input, metadata),
+      append: u => this.append(id, u), flush: () => this.flush(id), changed: () => this.changed(id),
+      completeDelivery: u => this.completeDelivery(id, u), inject: (text, audience) => this.appendEvent(id, text, audience),
+      evaluate: final => this.evaluatePending(id, final) };
+  }
   async close() { this.closing = true; for (const set of this.aborts.values()) for (const c of set) c.abort(); await Promise.allSettled([...this.workers.values()]); await this.adapter.close(); }
 }
