@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { inspectPublicationFile } from '../scripts/check-publish.js';
 
 test('publication check detects local output and ignores portable sample content', () => {
-  for (const path of ['reports/run/detail.json', 'exports/result.csv', 'custom/npc.sqlite-wal', '.env.local', 'assets/pack.zip', 'data/runtime.json']) {
+  for (const path of ['reports/run/detail.json', 'exports/result.csv', 'outputs/review/transcript.txt', 'outputs/review/evidence.json', 'custom/npc.sqlite-wal', '.env.local', 'assets/pack.zip', 'data/runtime.json']) {
     assert.ok(inspectPublicationFile(path, Buffer.from('{}')).includes('local_or_generated_file'), path);
   }
   for (const path of ['src/core/engine.ts', '.env.example', 'assets/npc-canon/characters/person.character.json']) {

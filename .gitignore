@@ -8,6 +8,7 @@ coverage/
 /data/
 /reports/
 /exports/
+/outputs/
 .cache/
 .qa-runtime/
 test-results/

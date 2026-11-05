@@ -6,7 +6,7 @@ import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const privateDirectory = /(^|\/)(node_modules|dist|data|reports|exports|\.cache|\.codex|\.qa-runtime|test-results|playwright-report)(\/|$)/i;
+const privateDirectory = /(^|\/)(node_modules|dist|data|reports|exports|outputs|\.cache|\.codex|\.qa-runtime|test-results|playwright-report)(\/|$)/i;
 const privateFile = /(^|\/)(auth|credentials)\.json$|\.(?:db|sqlite3?)(?:-.*)?$|\.(?:zip|pem|key|log)$/i;
 const imageFile = /\.(?:png|jpe?g|gif|webp|ico)$/i;
 const checks: Array<[string, RegExp]> = [
