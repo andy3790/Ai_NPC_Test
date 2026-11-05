@@ -1,4 +1,5 @@
-import type { InvocationMetrics, TokenUsage } from '../shared/types.js';
+import type { InvocationMetrics, InvocationSummary, TokenUsage } from '../shared/types.js';
+import { aggregateCost } from './pricing.js';
 export const tokenKeys = ['inputTokens', 'cachedInputTokens', 'cacheWriteInputTokens', 'outputTokens', 'reasoningOutputTokens', 'totalTokens'] as const;
 export const emptyUsage = (): TokenUsage => Object.fromEntries(tokenKeys.map(k => [k, null])) as unknown as TokenUsage;
 export function normalizeUsage(value: any): TokenUsage {
@@ -25,13 +26,14 @@ export class UsageTracker {
     return { usage: Object.fromEntries(tokenKeys.map(k => [k, this.latest![k] === null || this.baseline![k] === null ? null : this.latest![k]! - this.baseline![k]!])) as unknown as TokenUsage, status: 'reported_cumulative_delta' };
   }
 }
-export function aggregate(calls: InvocationMetrics[]) {
+export function aggregate(calls: InvocationMetrics[], adapter?: string): InvocationSummary {
   const durations = calls.filter(x => x.status === 'completed' && x.durationMs !== null).map(x => x.durationMs!).sort((a, b) => a - b);
   const quantile = (q: number) => durations.length ? durations[Math.max(0, Math.ceil(durations.length * q) - 1)] : null;
   return { calls: calls.length, failed: calls.filter(x => ['failed', 'cancelled', 'uncertain'].includes(x.status)).length,
+    cost: aggregateCost(calls, adapter),
     pendingCalls: calls.filter(x => ['running', 'queued'].includes(x.status)).length,
     missingUsage: calls.filter(x => !['running', 'queued'].includes(x.status) && x.usage.totalTokens === null).length,
-    tokens: Object.fromEntries(tokenKeys.map(k => [k, !calls.length ? 0 : calls.some(x => x.usage[k] !== null) ? calls.reduce((s, x) => s + (x.usage[k] ?? 0), 0) : null])),
+    tokens: Object.fromEntries(tokenKeys.map(k => [k, !calls.length ? 0 : calls.some(x => x.usage[k] !== null) ? calls.reduce((s, x) => s + (x.usage[k] ?? 0), 0) : null])) as unknown as TokenUsage,
     durationSumMs: calls.reduce((s, x) => s + (x.durationMs ?? 0), 0), medianMs: quantile(.5), p95Ms: quantile(.95),
     failureRate: calls.length ? calls.filter(x => ['failed', 'cancelled', 'uncertain'].includes(x.status)).length / calls.length : null,
   };

@@ -7,6 +7,12 @@ export interface ActionResolution { actionId: string; sourceUtteranceId: string;
 export interface Utterance { id: string; runId: string; sequence: number; speechIndex: number | null; speakerId: string; speakerName: string; kind: 'speech' | 'event'; speech: string; action: string; createdAt: string; invocationId: string | null; deliveryCompletedAt: string | null; deliveryMs: number | null; actionId?: string | null; resolution?: ActionResolution }
 export interface DeliveryReceipt { id: string; runId: string; utteranceId: string; characterId: string; status: 'pending' | 'processing' | 'delivered'; invocationId: string | null; deliveredAt: string | null }
 export interface TokenUsage { inputTokens: number | null; cachedInputTokens: number | null; cacheWriteInputTokens: number | null; outputTokens: number | null; reasoningOutputTokens: number | null; totalTokens: number | null }
+export interface CostSummary { usd: number | null; unpricedCalls: number; assumedCalls: number; pricingDate: string }
+export interface InvocationSummary {
+  calls: number; failed: number; pendingCalls: number; missingUsage: number; tokens: TokenUsage;
+  cost: CostSummary;
+  durationSumMs: number; medianMs: number | null; p95Ms: number | null; failureRate: number | null;
+}
 export interface InvocationMetrics {
   id: string; experimentId: string; runId: string; variantId: string; repetition: number; characterId: string | null;
   kind: CallKind; operationKey: string; attempt: number; retryOf: string | null; threadId: string; turnId: string | null;
