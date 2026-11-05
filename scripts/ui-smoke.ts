@@ -1,8 +1,10 @@
-import { chromium } from 'playwright';
+import { chromium, type Route } from 'playwright';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import { serve } from '../src/server/main.js';
-const server = process.env.NPC_UI_URL ? null : await serve({ port: 4319, mock: true, data: `.cache/ui-smoke-${Date.now()}`, history: false });
+import type { ExperimentSpec } from '../src/shared/schema.js';
+import type { Run, RunDetail } from '../src/shared/types.js';
+const server = process.env.NPC_UI_URL ? null : await serve({ port: 4319, mock: true, data: `.cache/history-ui-dashboard-${Date.now()}`, history: false });
 const base = process.env.NPC_UI_URL ?? 'http://127.0.0.1:4319';
 const channel = process.env.NPC_BROWSER_CHANNEL ?? (process.platform === 'win32' ? 'msedge' : undefined);
 const browser = await chromium.launch({ headless: true, channel, executablePath: process.env.NPC_BROWSER_EXECUTABLE });
@@ -42,5 +44,66 @@ try {
   await page.getByRole('button', { name: '대화 실험실', exact: false }).first().click();
   await page.screenshot({ path: '.cache/screenshots/mobile.png', fullPage: true });
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1); assert.equal(overflow, false);
-  assert.deepEqual(errors, []); console.log('UI_SMOKE_OK: editor, two modes, invocation filter, comparison, ZIP download, mobile, no runtime errors');
+
+  // A successful mutation must release the UI even if background refreshes never
+  // finish or fail. Gate GETs explicitly; the injection POST remains real and local.
+  if (server) {
+    await page.setViewportSize({ width: 1440, height: 1080 });
+    const pausedSpec = await (await page.request.get(`${base}/api/example`)).json() as ExperimentSpec;
+    pausedSpec.name = '상황 투입 후 화면 갱신 회귀 검사';
+    pausedSpec.variants = [{ ...pausedSpec.variants[0], deliveryMode: 'batched_on_turn' }];
+    pausedSpec.evaluation.enabled = false;
+    delete pausedSpec.scenario.environment;
+    const created = await page.request.post(`${base}/api/experiments`, { data: { spec: pausedSpec, start: false } });
+    assert.equal(created.status(), 200);
+    const { runs: [paused] } = await created.json() as { runs: Run[] };
+    await page.locator('.run-card').filter({ hasText: pausedSpec.name }).click();
+    const eventInput = page.getByLabel('새 상황', { exact: true });
+    const eventText = '화면 갱신이 지연되거나 실패해도 한 번만 저장되는 상황.';
+    await eventInput.fill(eventText);
+    const detailPath = `/api/runs/${paused.id}`, injectPath = `${detailPath}/inject`;
+    const matchesRead = (url: URL) => url.pathname === '/api/runs' || url.pathname === detailPath;
+    let releaseReads!: () => void;
+    const readGate = new Promise<void>(resolve => { releaseReads = resolve; });
+    const refreshError = '회귀 검사: 화면 갱신 GET 실패';
+    const delayReads = async (route: Route) => {
+      if (route.request().method() !== 'GET') { await route.continue(); return; }
+      await readGate;
+      await route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: refreshError }) });
+    };
+    await page.route(matchesRead, delayReads);
+    let injectionRequests = 0;
+    const countInjection = (request: import('playwright').Request) => {
+      if (request.method() === 'POST' && new URL(request.url()).pathname === injectPath) injectionRequests++;
+    };
+    page.on('request', countInjection);
+    try {
+      const readStarted = page.waitForRequest(request => request.method() === 'GET' && matchesRead(new URL(request.url())));
+      const injected = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === injectPath);
+      await page.getByRole('button', { name: '투입', exact: true }).click();
+      assert.equal((await injected).status(), 200);
+      await readStarted;
+      await page.waitForFunction(() => {
+        const input = document.querySelector<HTMLInputElement>('input[aria-label="새 상황"]');
+        const resume = Array.from(document.querySelectorAll<HTMLButtonElement>('.controls button')).find(button => button.textContent?.trim() === '재개');
+        return input?.value === '' && resume && !resume.disabled;
+      });
+      assert.equal(await page.getByRole('button', { name: '한 발화 진행', exact: true }).isDisabled(), false);
+
+      releaseReads();
+      await page.locator('.content > .alert.error').filter({ hasText: refreshError }).waitFor();
+      assert.equal(await eventInput.inputValue(), '');
+      assert.equal(await page.getByRole('button', { name: '재개', exact: true }).isDisabled(), false);
+      const stored = await page.request.get(`${base}${detailPath}`); // APIRequestContext bypasses page routes.
+      assert.equal(stored.status(), 200);
+      const saved = await stored.json() as RunDetail;
+      assert.equal(saved.utterances.filter(utterance => utterance.kind === 'event' && utterance.speech === eventText).length, 1);
+      assert.equal(injectionRequests, 1);
+    } finally {
+      releaseReads();
+      await page.unrouteAll({ behavior: 'wait' });
+      page.off('request', countInjection);
+    }
+  }
+  assert.deepEqual(errors, []); console.log(`UI_SMOKE_OK: editor, two modes, invocation filter, comparison, ZIP download, mobile, ${server ? 'mutation success despite delayed/failed refresh, ' : ''}no runtime errors`);
 } finally { await browser.close(); await server?.close(); }

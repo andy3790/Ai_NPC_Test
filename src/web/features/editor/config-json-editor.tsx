@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import type { ExperimentSpec } from '../shared/schema.js';
-import { applyConfigSection, configSectionError, configSectionLabels, readConfigSection, type ConfigSection } from '../shared/config-sections.js';
+import { useState, type Dispatch, type SetStateAction } from 'react';
+import type { ExperimentSpec } from '../../../shared/schema.js';
+import { applyConfigSection, configSectionError, configSectionLabels, readConfigSection, type ConfigSection } from '../../../shared/config-sections.js';
 
-interface Draft { text: string; baseline: string; error?: string }
+export interface ConfigDraft { text: string; baseline: string; error?: string }
 const descriptions: Record<ConfigSection, string> = {
   full: '실험 전체 객체입니다. 기존 전체 JSON 편집과 파일 가져오기를 그대로 사용할 수 있습니다.',
   world: 'scenario에서 characters를 제외한 객체입니다. ID·이름·세계 설정·시작 상황·기본 모델·환경 규칙을 편집합니다.',
@@ -10,12 +10,12 @@ const descriptions: Record<ConfigSection, string> = {
   characters: '모든 NPC 객체의 배열입니다. 배열 순서가 순번제의 발화 순서입니다.',
   conditions: '비교 조건·반복·발화 한도·동시 실행·평가·진행자·예약 사건을 편집합니다. 세계관과 캐릭터는 유지합니다.',
 };
-export function ConfigJsonEditor({ spec, section, setSection, characterIndex, setCharacterIndex, apply, busy, pendingChanged }: {
+export function ConfigJsonEditor({ spec, section, setSection, characterIndex, setCharacterIndex, apply, busy, drafts, setDrafts }: {
   spec: ExperimentSpec; section: ConfigSection; setSection: (value: ConfigSection) => void;
   characterIndex: number; setCharacterIndex: (value: number) => void;
-  apply: (value: ExperimentSpec) => void; busy: boolean; pendingChanged: (count: number) => void;
+  apply: (value: ExperimentSpec) => void; busy: boolean;
+  drafts: Record<string, ConfigDraft>; setDrafts: Dispatch<SetStateAction<Record<string, ConfigDraft>>>;
 }) {
-  const [drafts, setDrafts] = useState<Record<string, Draft>>({});
   const [notice, setNotice] = useState('');
   const index = Math.min(characterIndex, spec.scenario.characters.length - 1);
   const key = section === 'character' ? `character:${spec.scenario.characters[index].id}` : section;
@@ -24,7 +24,6 @@ export function ConfigJsonEditor({ spec, section, setSection, characterIndex, se
   const draft = stored && (stored.text !== stored.baseline || stored.baseline === source) ? stored : { text: source, baseline: source };
   const dirty = draft.text !== draft.baseline, stale = dirty && draft.baseline !== source;
   const count = Object.values(drafts).filter(d => d.text !== d.baseline).length;
-  useEffect(() => pendingChanged(count), [count, pendingChanged]);
   const edit = (text: string) => { setDrafts(all => ({ ...all, [key]: { text, baseline: draft.baseline } })); setNotice(''); };
   const reset = () => { setDrafts(all => { const next = { ...all }; delete next[key]; return next; }); setNotice('현재 설정을 불러왔습니다.'); };
   const commit = () => {

@@ -15,6 +15,48 @@ try {
   await page.goto(server.app.listeningOrigin); await page.getByRole('button', { name: '새 실험', exact: true }).click();
   await dialog.getByRole('button', { name: 'JSON 편집', exact: true }).click();
   const initial = await full(); let expected = structuredClone(initial);
+  // Environment drafts survive tab/dialog/detail changes and cannot be silently omitted at launch.
+  await dialog.getByRole('button', { name: '01 시나리오' }).click();
+  const environmentField = dialog.getByLabel('환경 규칙 JSON', { exact: true });
+  const environmentSummary = dialog.locator('summary').filter({ hasText: '환경 규칙·목표 JSON 편집' });
+  await environmentSummary.click();
+  const environment = JSON.parse(await environmentField.inputValue());
+  environment.actions[0].result += ' 환경 초안 보존 검증';
+  const environmentDraft = JSON.stringify(environment);
+  await environmentField.fill(environmentDraft);
+  for (const name of ['설정 검증', '저장', '대기 상태로 생성', '실험 시작']) {
+    assert.equal(await dialog.getByRole('button', { name, exact: true }).isDisabled(), true);
+  }
+  await environmentSummary.click(); await environmentSummary.click();
+  assert.equal(await environmentField.inputValue(), environmentDraft);
+  await dialog.getByRole('button', { name: '02 캐릭터' }).click();
+  await dialog.getByRole('button', { name: '01 시나리오' }).click();
+  assert.equal(await environmentField.inputValue(), environmentDraft);
+  await dialog.getByRole('button', { name: '설정 닫기' }).click();
+  await dialog.waitFor({ state: 'hidden' });
+  await page.getByRole('button', { name: '새 실험', exact: true }).click();
+  assert.equal(await environmentField.inputValue(), environmentDraft);
+  assert.equal(await dialog.getByRole('button', { name: '실험 시작', exact: true }).isDisabled(), true);
+  await dialog.getByRole('button', { name: '환경 규칙 적용', exact: true }).click();
+  expected.scenario.environment = environment;
+  await dialog.getByRole('button', { name: 'JSON 편집', exact: true }).click();
+  assert.deepEqual(await full(), expected);
+
+  await dialog.getByRole('button', { name: '01 시나리오' }).click();
+  await environmentField.fill(environmentDraft + ' ');
+  await dialog.getByLabel('모든 목표 달성 시 종료').uncheck();
+  expected.scenario.environment.stopOnGoals = false;
+  assert.equal(await dialog.getByRole('button', { name: '환경 규칙 적용', exact: true }).isDisabled(), true);
+  assert.match(await dialog.getByRole('alert').innerText(), /초안은 보존/);
+  await dialog.getByRole('button', { name: '현재 환경 설정 다시 불러오기', exact: true }).click();
+  assert.deepEqual(JSON.parse(await environmentField.inputValue()), expected.scenario.environment);
+  await environmentField.fill('{');
+  await dialog.getByRole('button', { name: '환경 규칙 적용', exact: true }).click();
+  assert.equal(await dialog.getByRole('alert').count(), 1);
+  assert.equal(await dialog.getByRole('button', { name: '저장', exact: true }).isDisabled(), true);
+  await dialog.getByRole('button', { name: '현재 환경 설정 다시 불러오기', exact: true }).click();
+  assert.equal(await dialog.getByRole('button', { name: '저장', exact: true }).isDisabled(), false);
+
   await dialog.getByRole('button', { name: '01 시나리오' }).click();
   await dialog.getByRole('button', { name: '세계관 JSON 편집', exact: true }).click();
   const world = JSON.parse(await field('세계관').inputValue()); assert.equal(world.characters, undefined);
@@ -105,5 +147,5 @@ try {
   await page.screenshot({ path: `${root}/screenshots/mobile.png`, fullPage: true });
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
   assert.deepEqual(errors, []);
-  console.log(`EDITOR_UI_OK: five scopes, contextual entry points, isolation, validation, draft persistence, stale detection, imports, full JSON, save, mobile, zero calls\n${root}`);
+  console.log(`EDITOR_UI_OK: five scopes, environment draft guards, tab/dialog persistence, stale detection, isolation, validation, imports, full JSON, save, mobile, zero calls\n${root}`);
 } finally { await browser.close(); await server.close(); }

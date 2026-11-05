@@ -19,13 +19,19 @@
     "smoke:ui": "tsx scripts/ui-smoke.ts",
     "smoke:history": "tsx scripts/history-ui-smoke.ts",
     "smoke:editor": "tsx scripts/editor-ui-smoke.ts",
+    "smoke:findings": "tsx scripts/finding-ui-smoke.ts",
+    "smoke:management": "tsx scripts/run-management-ui-smoke.ts",
+    "smoke:bulk-delete": "tsx scripts/bulk-delete-ui-smoke.ts",
     "smoke:openai": "node --env-file-if-exists=.env --import tsx scripts/openai-smoke.ts",
     "assets:build": "node assets/npc-canon/build.mjs",
     "assets:validate": "tsx assets/npc-canon/validate.ts",
     "assets:smoke": "tsx assets/npc-canon/smoke.ts",
     "assets:gallery": "node assets/npc-canon/gallery-check.mjs",
     "check:publish": "tsx scripts/check-publish.ts",
-    "verify": "npm run typecheck && npm test && npm run build && npm run assets:validate && npm run assets:smoke && npm run check:publish"
+    "verify": "npm run typecheck && npm test && npm run build && npm run assets:validate && npm run assets:smoke && npm run check:publish",
+    "verify:ui": "npm run smoke:ui && npm run smoke:editor && npm run smoke:history && npm run smoke:findings && npm run smoke:management && npm run smoke:bulk-delete && npm run smoke:world && npm run smoke:spatial && npm run assets:gallery",
+    "smoke:world": "tsx scripts/world-ui-smoke.ts",
+    "smoke:spatial": "tsx scripts/spatial-ui-smoke.ts"
   },
   "dependencies": {
     "@fastify/static": "^10.1.8",

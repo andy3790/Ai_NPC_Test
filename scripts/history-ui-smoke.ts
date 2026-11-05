@@ -46,7 +46,7 @@ try {
   await page.getByLabel('기록 검색', { exact: true }).fill('reports/api');
   await page.waitForFunction(() => document.querySelectorAll('.run-card').length === 1);
   await page.getByRole('button', { name: '기록 다시 검색', exact: true }).click();
-  await page.getByText('저장 위치를 다시 검색했습니다.').waitFor();
+  await page.locator('.alert.success').getByText('저장 위치를 다시 검색했습니다.').waitFor();
   await page.getByRole('button', { name: '데이터 내보내기', exact: false }).first().click();
   const ready = page.waitForEvent('download'); await page.getByRole('link', { name: 'ZIP' }).click();
   await (await ready).saveAs(join(root, 'api-export.zip'));

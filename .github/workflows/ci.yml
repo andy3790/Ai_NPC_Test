@@ -26,8 +26,39 @@ jobs:
       - name: Install browser
         if: runner.os == 'Linux'
         run: npx playwright install --with-deps chromium
-      - name: Check dashboard and offline gallery with mock data
+      - name: Check dashboard with mock data
         if: runner.os == 'Linux'
-        run: |
-          npm run smoke:ui
-          npm run assets:gallery
+        timeout-minutes: 5
+        run: npm run smoke:ui
+      - name: Check configuration editor drafts
+        if: runner.os == 'Linux'
+        timeout-minutes: 5
+        run: npm run smoke:editor
+      - name: Check archived history and mixed-provider comparison
+        if: runner.os == 'Linux'
+        timeout-minutes: 5
+        run: npm run smoke:history
+      - name: Check independent finding review edits
+        if: runner.os == 'Linux'
+        timeout-minutes: 5
+        run: npm run smoke:findings
+      - name: Check run deletion, filters and saved settings
+        if: runner.os == 'Linux'
+        timeout-minutes: 5
+        run: npm run smoke:management
+      - name: Check bulk deletion and filtered selection
+        if: runner.os == 'Linux'
+        timeout-minutes: 5
+        run: npm run smoke:bulk-delete
+      - name: Check AI world engine and saved world state
+        if: runner.os == 'Linux'
+        timeout-minutes: 5
+        run: npm run smoke:world
+      - name: Check distributed spaces and optional situations
+        if: runner.os == 'Linux'
+        timeout-minutes: 5
+        run: npm run smoke:spatial
+      - name: Check offline character gallery
+        if: runner.os == 'Linux'
+        timeout-minutes: 5
+        run: npm run assets:gallery

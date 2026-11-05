@@ -1,0 +1,8 @@
+import type { EvaluationFinding, RunDetail } from '../../../shared/types.js';
+import type { FindingPatch } from '../../api/client.js';
+import { categoryNames } from '../../shared/formatters.js';
+import { Quality } from './quality.js';
+
+export function Findings({ detail, onReview, showDialogue }: { detail: RunDetail; onReview: (id: string, patch: FindingPatch) => void; showDialogue: () => void }) {
+  return <div className="findings"><Quality detail={detail}/>{detail.evaluations.map(e => <div className={`evaluation-note ${e.status}`} key={e.id}>#{e.from}–{e.to} · {e.status === 'completed' ? e.summary : `평가 실패: ${e.error}`}{e.contextTruncated && <small>이전 맥락 일부 제외됨</small>}</div>)}{!detail.evaluations.length && <div className="blank">아직 평가된 구간이 없습니다.</div>}{detail.findings.map(f => <div className="finding" key={f.id}><header><span className="finding-category">{categoryNames[f.category]}</span><span>{f.verdict === 'uncertain' ? '판단 불가' : f.severity}</span><a href="#" onClick={e => { e.preventDefault(); showDialogue(); }}>발화 #{detail.utterances.find(u => u.id === f.utteranceId)?.speechIndex}</a></header><blockquote>{f.quote}</blockquote><p>{f.explanation}</p><small>근거: {f.reference}</small><div className="review-row"><select aria-label="평가 검토 상태" disabled={detail.history?.readOnly} value={f.review} onChange={e => onReview(f.id, { review: e.target.value as EvaluationFinding['review'] })}><option value="unreviewed">미검토</option><option value="confirmed">확정</option><option value="dismissed">기각</option></select><input aria-label="검토 메모" disabled={detail.history?.readOnly} placeholder="검토 메모" defaultValue={f.note} onBlur={e => { if (e.target.value !== f.note) onReview(f.id, { note: e.target.value }); }}/></div></div>)}</div>;
+}
