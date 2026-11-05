@@ -8,6 +8,15 @@ import type { ModelInfo, TokenUsage } from '../shared/types.js';
 import { baseInstructions } from '../core/prompts.js';
 import { normalizeUsage, tokenKeys } from '../core/metrics.js';
 
+interface ActiveTurn {
+  emit: (event: AdapterEvent) => void;
+  finish: (result: TurnResult) => void;
+  accept: (turnId: string) => boolean;
+  turnId: string | null;
+  output: string;
+  items: Map<string, string>;
+}
+
 export function codexCommand(): { command: string; prefix: string[] } {
   if (process.env.CODEX_BIN) {
     const bin = resolve(process.env.CODEX_BIN);
@@ -32,7 +41,8 @@ export class CodexAdapter implements Adapter {
   private ready?: Promise<void>;
   private seq = 0;
   private pending = new Map<number, { resolve: (v: any) => void; reject: (e: Error) => void }>();
-  private active = new Map<string, { emit: (e: AdapterEvent) => void; finish: (r: TurnResult) => void; turnId: string | null; output: string; items: Map<string, string> }>();
+  private active = new Map<string, ActiveTurn>();
+  private cancelledStarts = new Map<string, ActiveTurn>();
   private totals = new Map<string, TokenUsage>();
   private usageTurn = new Map<string, string>();
   private finishedTurn = new Map<string, string>();
@@ -66,7 +76,7 @@ export class CodexAdapter implements Adapter {
     const died = (message: string) => {
       for (const p of this.pending.values()) p.reject(new Error(message)); this.pending.clear();
       for (const a of this.active.values()) a.finish({ turnId: a.turnId ?? '', output: a.output, status: 'uncertain', error: message });
-      this.active.clear(); this.resumed.clear(); this.totals.clear(); this.usageTurn.clear(); this.finishedTurn.clear(); this.observers.clear(); this.ready = undefined;
+      this.active.clear(); this.cancelledStarts.clear(); this.resumed.clear(); this.totals.clear(); this.usageTurn.clear(); this.finishedTurn.clear(); this.observers.clear(); this.ready = undefined;
     };
     this.child.on('error', e => died(e.message));
     this.child.on('exit', code => died(`Codex app-server 종료 (${code}). ${this.diagnostics.slice(-1).join('')}`));
@@ -107,10 +117,16 @@ export class CodexAdapter implements Adapter {
       }
       if ((!a || (a.turnId && a.turnId !== p.turnId)) && this.observers.has(p.turnId)) { this.observers.get(p.turnId)!({ method: message.method, params: p }); return; }
     }
-    if (!a) return;
-    if (message.method === 'turn/started') { a.turnId = p.turn.id; this.observers.set(p.turn.id, a.emit); }
+    if (!a) {
+      // A start notification can arrive after the cancellation grace period.
+      const cancelled = this.cancelledStarts.get(threadId);
+      if (message.method === 'turn/started' && cancelled?.accept(p.turn.id)) cancelled.emit({ method: message.method, params: p });
+      return;
+    }
     // Ignore unrelated late events from older turns, but retain metadata for this turn.
-    if (p.turnId && a.turnId && p.turnId !== a.turnId) return;
+    const eventTurnId = p.turnId ?? p.turn?.id;
+    if (eventTurnId && a.turnId && eventTurnId !== a.turnId) return;
+    if (message.method === 'turn/started') { if (!a.accept(p.turn.id)) return; this.observers.set(p.turn.id, a.emit); }
     a.emit({ method: message.method, params: p });
     if (message.method === 'item/agentMessage/delta') a.output += p.delta;
     if (message.method === 'item/completed' && p.item?.type === 'agentMessage') a.items.set(p.item.id, p.item.text);
@@ -154,22 +170,47 @@ export class CodexAdapter implements Adapter {
     await this.resumeSession(request.threadId);
     if (this.active.has(request.threadId)) throw new Error('동일 세션에 중복 요청이 발생했습니다.');
     return new Promise(resolve => {
-      let finished = false; let grace: ReturnType<typeof setTimeout> | undefined;
-      const finish = (r: TurnResult) => { if (finished) return; finished = true; clearTimeout(timer); clearTimeout(grace); signal?.removeEventListener('abort', abort); this.active.delete(request.threadId); resolve(r); };
-      const abort = () => {
-        const a = this.active.get(request.threadId);
-        if (a?.turnId) void this.rpc('turn/interrupt', { threadId: request.threadId, turnId: a.turnId }).catch(() => {});
-        grace = setTimeout(() => finish({ turnId: a?.turnId ?? '', output: a?.output ?? '', status: 'uncertain', error: '중단 요청 후 완료 상태를 확인하지 못했습니다.' }), 5000);
+      let finished = false, terminal = false, abortRequested = false, interruptSent = false;
+      let grace: ReturnType<typeof setTimeout> | undefined;
+      const finish = (r: TurnResult) => {
+        if (finished) return;
+        finished = true; terminal = r.status !== 'uncertain';
+        clearTimeout(timer); clearTimeout(grace); signal?.removeEventListener('abort', abort);
+        if (this.active.get(request.threadId) === state) this.active.delete(request.threadId);
+        if (terminal && this.cancelledStarts.get(request.threadId) === state) this.cancelledStarts.delete(request.threadId);
+        resolve(r);
       };
+      const interrupt = () => {
+        if (!abortRequested || !state.turnId || interruptSent || terminal) return;
+        interruptSent = true;
+        void this.rpc('turn/interrupt', { threadId: request.threadId, turnId: state.turnId }).catch(() => {});
+      };
+      const accept = (turnId: string) => {
+        if (state.turnId && state.turnId !== turnId) return false;
+        state.turnId = turnId;
+        if (this.cancelledStarts.get(request.threadId) === state) this.cancelledStarts.delete(request.threadId);
+        interrupt();
+        return true;
+      };
+      const abort = () => {
+        if (finished || abortRequested) return;
+        abortRequested = true;
+        if (!state.turnId) this.cancelledStarts.set(request.threadId, state);
+        interrupt();
+        grace = setTimeout(() => finish({ turnId: state.turnId ?? '', output: state.output, status: 'uncertain', error: '중단 요청 후 완료 상태를 확인하지 못했습니다.' }), 5000);
+      };
+      const state: ActiveTurn = { emit, finish, accept, turnId: null, output: '', items: new Map() };
       const timer = setTimeout(abort, request.timeoutMs);
-      this.active.set(request.threadId, { emit, finish, turnId: null, output: '', items: new Map() });
+      this.active.set(request.threadId, state);
       signal?.addEventListener('abort', abort, { once: true });
       if (signal?.aborted) { finish({ turnId: '', output: '', status: 'cancelled', error: '요청 전 취소' }); return; }
       void this.rpc('turn/start', { threadId: request.threadId, input: [{ type: 'text', text: request.input }],
         model: request.config.model, effort: request.config.effort, outputSchema: request.outputSchema, clientUserMessageId: request.clientMessageId,
         approvalPolicy: 'never', environments: [],
-      }).then(r => { const a = this.active.get(request.threadId); if (a) { a.turnId = r.turn.id; emit({ method: 'turn/accepted', params: { threadId: request.threadId, turnId: r.turn.id } }); } })
-        .catch(e => finish({ turnId: this.active.get(request.threadId)?.turnId ?? '', output: '', status: 'uncertain', error: e.message }));
+      }).then(r => {
+        // Keep this call's state: a late acknowledgement must never change a newer turn.
+        if (accept(r.turn.id) && (!finished || abortRequested)) emit({ method: 'turn/accepted', params: { threadId: request.threadId, turnId: r.turn.id } });
+      }).catch(e => finish({ turnId: state.turnId ?? '', output: state.output, status: 'uncertain', error: e.message }));
     });
   }
   async reconcile(threadId: string, turnId: string | null, clientMessageId: string): Promise<TurnResult | null> {
