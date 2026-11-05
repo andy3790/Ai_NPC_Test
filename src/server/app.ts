@@ -10,11 +10,14 @@ import { exportFiles, zipFiles } from '../core/export.js';
 import { groupedMetrics } from '../core/metrics.js';
 import { APP_VERSION } from '../shared/version.js';
 import type { RunHistoryCatalog } from '../core/history.js';
+import { RunDeletionService } from '../core/deletion.js';
+import { runSnapshot } from '../shared/run-snapshot.js';
 import { audienceSchema } from '../shared/spatial-schema.js';
 
 export async function createApp(engine: Engine, options: { history?: RunHistoryCatalog } = {}) {
   const app = Fastify({ logger: false, bodyLimit: 4 * 1024 * 1024 });
   const history = options.history;
+  const deletion = new RunDeletionService(engine, history);
   const detail = (id: string) => history ? history.detail(id) : engine.detail(id);
   const files = (id: string) => history ? history.exports(id) : exportFiles(engine.detail(id), engine.store.events(id));
   // Loopback binding plus Origin/Host checks prevent browser-driven writes from other sites.
@@ -49,6 +52,22 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
     return groupedMetrics(runs.flatMap(r => detail(r.id).invocations.map(c => ({ ...c, metadata: { ...c.metadata, adapter: r.adapter } }))));
   });
   app.get<{ Params: { id: string } }>('/api/runs/:id', async req => detail(req.params.id));
+  app.get<{ Params: { id: string } }>('/api/runs/:id/config.json', async (req, reply) =>
+    reply.type('application/json').header('Content-Disposition', 'attachment; filename="run-config.json"').send(runSnapshot(detail(req.params.id).run)));
+  app.get<{ Params: { id: string } }>('/api/runs/:id/deletion', async req => deletion.preview(req.params.id));
+  const deletionSelection = z.object({ runIds: z.array(z.string().regex(/^[a-zA-Z0-9_-]{1,100}$/)).min(1) });
+  app.post('/api/runs/deletion-preview', async req => {
+    const { runIds } = deletionSelection.strict().parse(req.body);
+    return deletion.previewMany(runIds);
+  });
+  app.delete('/api/runs', async req => {
+    const { runIds, token } = deletionSelection.extend({ confirm: z.literal(true), token: z.string().regex(/^[a-f0-9]{64}$/) }).strict().parse(req.body);
+    return deletion.deleteMany(runIds, token);
+  });
+  app.delete<{ Params: { id: string } }>('/api/runs/:id', async req => {
+    const { confirm, token } = z.object({ confirm: z.literal(true), token: z.string().regex(/^[a-f0-9]{64}$/) }).strict().parse(req.body);
+    return confirm && deletion.delete(req.params.id, token);
+  });
   app.post<{ Params: { id: string; action: string } }>('/api/runs/:id/:action', async req => {
     const { id, action } = req.params;
     history?.assertWritable(id);

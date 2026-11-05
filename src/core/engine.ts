@@ -481,6 +481,19 @@ export class Engine extends EventEmitter {
     const records = this.records(this.run(id));
     return { ...records, summary: this.summarize(records.run, records) };
   }
+  assertDeletable(id: string) {
+    const run = this.run(id);
+    if (['running', 'queued'].includes(run.status) || this.workers.has(id) || this.resuming.has(id)) {
+      throw new Error('실행 또는 요청 처리가 진행 중입니다. 일시정지·중단이 완료된 뒤 삭제하세요.');
+    }
+  }
+  deleteRun(id: string, notify = true) {
+    this.assertDeletable(id);
+    this.store.deleteRun(id);
+    this.summaries.delete(id);
+    if (notify) this.emit('change', { type: 'deleted', runId: id, at: now() });
+  }
+
   async idle() { while (this.workers.size || this.store.list('runs').some(r => r.status === 'queued')) { await Promise.allSettled([...this.workers.values()]); await new Promise(r => setTimeout(r, 5)); } }
   private simulationHost(id: string): SimulationHost {
     return { id, store: this.store, run: () => this.run(id), closing: () => this.closing,

@@ -47,6 +47,14 @@ export class Store {
     const removed = this.db.prepare(`DELETE FROM ${table} WHERE id=? RETURNING run_id`).get(id) as { run_id: string } | undefined;
     if (removed) this.changed(removed.run_id);
   }
+  deleteRun(id: string) {
+    this.transaction(() => {
+      for (const table of ['events', 'utterances', 'receipts', 'invocations', 'findings', 'evaluations', 'runs']) {
+        this.db.prepare(`DELETE FROM ${table} WHERE run_id=?`).run(id);
+      }
+      this.changed(id);
+    });
+  }
   transaction<T>(fn: () => T): T {
     this.db.exec('BEGIN IMMEDIATE');
     const changedRuns = new Set<string>(); this.transactionRuns = changedRuns;

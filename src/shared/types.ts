@@ -75,5 +75,17 @@ export type RunListItem = Omit<Run, 'spec' | 'sessions' | 'helperSessions' | 'wo
   scenario: { id: string; name: string; characterCount: number }; npcConfigs: RunNpcConfig[];
   environmentMode?: Variant['environmentMode'];
 };
+export interface RunDeletionPlan {
+  runId: string; name: string; token: string; allowed: boolean; blockers: string[];
+  targets: { path: string; kind: 'database' | 'archive' | 'export' | 'session' }[];
+  speechCount: number; invocationCount: number;
+}
+export interface BulkRunDeletionPlan {
+  selectedCount: number; deletableCount: number; token: string;
+  entries: { runId: string; plan: RunDeletionPlan | null; error: string | null }[];
+}
+export interface BulkRunDeletionResult {
+  results: { runId: string; status: 'deleted' | 'blocked' | 'failed'; error: string | null }[];
+}
 export interface RunRecords { run: Run; utterances: Utterance[]; receipts: DeliveryReceipt[]; invocations: InvocationMetrics[]; findings: EvaluationFinding[]; evaluations: EvaluationRecord[] }
 export interface RunDetail extends RunRecords { summary: RunSummary; history?: RunHistory | null }

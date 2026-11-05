@@ -68,6 +68,7 @@ export class RunHistoryCatalog {
   };
   private captureChanged() {
     for (const id of this.changedRuns) {
+      if (!this.engine.store.get('runs', id)) continue;
       const detail = this.engine.detail(id);
       if (detail.invocations.some(c => ['running', 'queued'].includes(c.status))) continue;
       this.save(detail, this.engine.store.events(id), this.label(this.engine.store.path), 400);
@@ -195,6 +196,22 @@ export class RunHistoryCatalog {
     return { ...exportFiles(detail, this.events(id)), 'history-source.json': JSON.stringify({ runId: id, ...detail.history }, null, 2) };
   }
   assertWritable(id: string) { if (this.detail(id).history?.readOnly) throw new Error('보관 기록은 조회·비교·내보내기 전용입니다. 실행 제어는 원본 저장소의 서버에서 사용하세요.'); }
+  deletionSources(id: string, refresh = true) {
+    if (refresh) this.refresh();
+    const detail = this.detail(id);
+    return { workspace: this.workspace, archive: this.archiveFile, roots: this.roots,
+      paths: (detail.history?.locations ?? []).filter(path => path !== this.label(':memory:')).map(path => resolve(this.workspace, path)) };
+  }
+  purge(id: string) {
+    this.db.exec('BEGIN IMMEDIATE');
+    try {
+      this.db.prepare('DELETE FROM history_locations WHERE run_id=?').run(id);
+      this.db.prepare('DELETE FROM history_runs WHERE run_id=?').run(id);
+      this.db.exec('COMMIT');
+    } catch (error) { this.db.exec('ROLLBACK'); throw error; }
+    this.changedRuns.delete(id);
+    this.signatures.clear();
+  }
   sources() { return { archive: this.label(this.archiveFile), sources: this.states, runs: Number(this.db.prepare('SELECT COUNT(*) AS n FROM history_runs').get()?.n ?? 0), errors: this.states.filter(s => s.status === 'error') }; }
   close() { if (this.closed) return; this.closed = true; this.engine.off('change', this.onChange); if (this.captureTimer) clearTimeout(this.captureTimer); this.captureChanged(); this.db.close(); }
 }
