@@ -2,6 +2,9 @@ import type { ExperimentSpec, ModelConfig, Variant, State, EnvironmentSpec } fro
 import type { WorldEvent, WorldState } from './world-schema.js';
 import type { Audience, EventGeneratorState, SpatialSpeech } from './spatial-schema.js';
 export interface ModelInfo { id: string; name: string; efforts: string[]; defaultEffort: string; isDefault?: boolean }
+// Only non-secret references are persisted. API key values live in server memory.
+export type ApiCredential = { source: 'environment' } | { source: 'browser'; keyId: string; ownerId: string };
+export interface ApiKeyStatus { source: 'browser' | 'environment' | 'missing'; configured: boolean; environmentAvailable: boolean }
 export type CallKind = 'speech' | 'receive' | 'director' | 'evaluation' | 'environment' | 'event_generation';
 export type RunStatus = 'queued' | 'running' | 'paused' | 'completed' | 'stopped';
 export interface NpcSession { id: string; characterId: string; threadId: string; config: ModelConfig; instructions: string }
@@ -62,6 +65,7 @@ export interface Run {
   evaluatedThrough: number; appliedEvents: number[]; stepRemaining: number | null; pauseRequested: boolean;
   revisions: number; adapter: string; appVersion: string; cliVersion: string;
   promptVersion?: string;
+  apiCredential?: ApiCredential;
   worldState?: WorldState;
   eventGeneratorState?: EventGeneratorState;
   roundRobinCursor?: number;

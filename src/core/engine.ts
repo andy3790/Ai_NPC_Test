@@ -15,7 +15,7 @@ import { runSpatial } from './spatial-runner.js';
 import { advanceSingleRoomSituations } from './single-room-situations.js';
 import { worldOutputSchema } from '../shared/world-schema.js';
 import { applyWorldOutput, initialWorldState, priorityWorldSpeaker, worldInstructions, worldPrompt } from './world.js';
-import type { CallKind, DeliveryReceipt, InvocationMetrics, NpcSession, Run, RunDetail, RunListItem, RunRecords, RunSummary, Utterance } from '../shared/types.js';
+import type { ApiCredential, CallKind, DeliveryReceipt, InvocationMetrics, NpcSession, Run, RunDetail, RunListItem, RunRecords, RunSummary, Utterance } from '../shared/types.js';
 import { progression, progressionPrompt, resolveAction } from './progression.js';
 import { repetitionMetrics } from './quality.js';
 import { APP_VERSION } from '../shared/version.js';
@@ -46,8 +46,8 @@ export class Engine extends EventEmitter {
   }
   private changed(runId: string) { this.emit('change', { runId, at: now() }); }
   run(id: string) { const r = this.store.get('runs', id); if (!r) throw new Error('대화 묶음이 없습니다.'); return r; }
-  async validate(spec: unknown): Promise<ExperimentSpec> {
-    const parsed = experimentSchema.parse(spec); const models = await this.adapter.models();
+  async validate(spec: unknown, credential?: ApiCredential): Promise<ExperimentSpec> {
+    const parsed = experimentSchema.parse(spec); const models = await this.adapter.models(credential);
     const check = (config: ModelConfig) => {
       const model = models.find(m => m.id === config.model);
       if (!model || !model.efforts.includes(config.effort)) throw new Error(`사용할 수 없는 모델·추론 조합: ${config.model} / ${config.effort}`);
@@ -60,14 +60,15 @@ export class Engine extends EventEmitter {
     if (parsed.variants.some(v => v.eventGeneration)) check(parsed.eventGenerator!);
     return parsed;
   }
-  async create(input: unknown, start = true) {
-    const spec = await this.validate(input); const experimentId = randomUUID(); const runs: Run[] = [];
+  async create(input: unknown, start = true, credential?: ApiCredential) {
+    const spec = await this.validate(input, credential); const experimentId = randomUUID(); const runs: Run[] = [];
     for (const variant of spec.variants) for (let repetition = 1; repetition <= spec.repetitions; repetition++) {
       const snapshotHash = createHash('sha256').update(JSON.stringify({ spec, variant, repetition, promptVersion: PROMPT_VERSION })).digest('hex');
       const run: Run = { id: randomUUID(), experimentId, name: `${spec.name} · ${variant.label} · #${repetition}`, variant, repetition, spec, snapshotHash,
         status: start ? 'queued' : 'paused', error: null, createdAt: now(), startedAt: null, completedAt: null, activeMs: 0, pausedMs: 0, pausedAt: start ? null : now(), timingComplete: true,
         sessions: {}, helperSessions: {}, lastSpeakerId: null, nextSpeakerId: null, evaluatedThrough: 0, appliedEvents: [], stepRemaining: null, pauseRequested: false,
-        revisions: 0, adapter: this.adapter.name, appVersion: APP_VERSION, cliVersion: this.adapter.version, promptVersion: PROMPT_VERSION };
+        revisions: 0, adapter: this.adapter.name, appVersion: APP_VERSION, cliVersion: this.adapter.version, promptVersion: PROMPT_VERSION,
+        ...(this.adapter.name === 'openai' ? { apiCredential: credential ?? { source: 'environment' as const } } : {}) };
       this.store.put('runs', run); runs.push(run); this.changed(run.id);
     }
     this.store.setting('lastSpec', spec); this.pump(); return { experimentId, runs };
@@ -104,7 +105,7 @@ export class Engine extends EventEmitter {
       const run = this.run(id); if (Object.hasOwn(run.sessions, c.id)) { await this.restoreSession(id, 'sessions', c.id, run.sessions[c.id]); continue; }
       const config = { model: c.model ?? run.variant.model ?? run.spec.scenario.defaults.model, effort: c.effort ?? run.variant.effort ?? run.spec.scenario.defaults.effort };
       const instructions = persona(run.spec, c, run.variant);
-      const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, c.id));
+      const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, c.id), run.apiCredential);
       this.store.patch('runs', id, { sessions: { ...this.run(id).sessions, [c.id]: { id: randomUUID(), characterId: c.id, threadId, config, instructions } } });
     }
   }
@@ -115,7 +116,7 @@ export class Engine extends EventEmitter {
       // when the ledger proves that no request could have been sent to this thread.
       const everSent = this.store.list('invocations', id).some(c => c.threadId === session.threadId && c.startedAt !== null);
       if (everSent || !err(e).includes('no rollout found for thread id')) throw e;
-      const threadId = await this.adapter.createSession(session.config, session.instructions, join(this.dataDir, 'sessions', id, key));
+      const threadId = await this.adapter.createSession(session.config, session.instructions, join(this.dataDir, 'sessions', id, key), this.run(id).apiCredential);
       const restored = { ...session, threadId };
       this.store.patch('runs', id, { [collection]: { ...this.run(id)[collection], [key]: restored } });
       this.store.event(id, null, 'session/recreated_empty', { sessionId: session.id, oldThreadId: session.threadId, newThreadId: threadId, reason: 'Codex did not persist a never-invoked thread' });
@@ -124,7 +125,7 @@ export class Engine extends EventEmitter {
   }
   private async helper(id: string, key: string, config: ModelConfig, instructions: string): Promise<NpcSession> {
     const helpers = this.run(id).helperSessions; if (Object.hasOwn(helpers, key)) return this.restoreSession(id, 'helperSessions', key, helpers[key]);
-    const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, key));
+    const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, key), this.run(id).apiCredential);
     const session = { id: randomUUID(), characterId: key, threadId, config, instructions };
     this.store.patch('runs', id, { helperSessions: { ...this.run(id).helperSessions, [key]: session } }); return session;
   }

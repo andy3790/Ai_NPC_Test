@@ -103,7 +103,7 @@ export class RunHistoryCatalog {
       const real = realpathSync(path); if (visited.has(real)) return; visited.add(real);
       if (statSync(path).isFile()) { if (/\.(sqlite3?|db)$|[\\/](detail\.json|records\.jsonl)$/.test(path)) files.add(resolve(path)); return; }
       for (const entry of readdirSync(path, { withFileTypes: true })) {
-        if (entry.isSymbolicLink() || ['node_modules', '.git', 'dist', 'history', 'github-ready-check', 'runtime', 'sessions', 'screenshots', 'releases', 'publication-prep'].includes(entry.name) || /^(openai-test-|history-test-|history-ui-)/.test(entry.name)) continue;
+        if (entry.isSymbolicLink() || ['node_modules', '.git', 'dist', 'history', 'github-ready-check', 'runtime', 'sessions', 'screenshots', 'releases', 'publication-prep'].includes(entry.name) || /^(openai-test-|openai-keys-|api-key-ui-|history-test-|history-ui-)/.test(entry.name)) continue;
         if (entry.isDirectory() || /\.(sqlite3?|db)$/.test(entry.name) || ['detail.json', 'records.jsonl'].includes(entry.name)) walk(join(path, entry.name), depth + 1);
       }
       } catch (error) { errors.push({ path: this.label(path), status: 'error', runs: 0, error: error instanceof Error ? error.message : String(error) }); }

@@ -15,6 +15,7 @@ import { RunFilters } from './features/runs/run-filters.js';
 import { DeleteRunDialog } from './features/runs/delete-run-dialog.js';
 import { RunSelectionBar } from './features/runs/run-selection-bar.js';
 import { BulkDeleteRunsDialog } from './features/runs/bulk-delete-runs-dialog.js';
+import { ApiKeySettings } from './features/settings/api-key-settings.js';
 
 export function App() {
   const [view, setView] = useState('lab');
@@ -32,7 +33,7 @@ export function App() {
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const { allRuns, detail, compared, refresh, forgetRun } = useRunData(selected, compareIds, setError);
-  const { health, history, models, spec, setSpec, refreshHistory } = useWorkspaceMetadata(setError);
+  const { health, history, models, spec, setSpec, refreshHistory, keyStatus, refreshConnection } = useWorkspaceMetadata(setError);
   const { action, busy } = useActions(refresh, setError, setNotice);
   const runs = useMemo(() => filterRuns(allRuns, filters, provider, search), [allRuns, filters, provider, search]);
   const checkedRuns = useMemo(() => runs.filter(run => checkedIds.includes(run.id)), [runs, checkedIds]);
@@ -62,7 +63,7 @@ export function App() {
         {notice && <div className="alert success">{notice}<button aria-label="안내 닫기" onClick={() => setNotice('')}>×</button></div>}
         <div className="page-heading"><div><div className="eyebrow">CHARACTER CONSISTENCY / EXPERIMENTS</div><h1>{view === 'compare' ? '조건을 바꾸고, 차이를 발견하세요.' : view === 'data' ? '대화를 분석 가능한 데이터로.' : '대화 속 캐릭터를 관찰하세요.'}</h1><p>캐릭터의 기억과 말투부터 세계관의 경계까지, 같은 조건에서 비교합니다.</p></div><button className="primary" onClick={() => setEditor(true)} disabled={!spec}><Icon name="plus" size={17}/> 새 실험</button></div>
         {health?.adapter === 'mock' && <div className="demo-banner">모의 엔진 · 화면과 실행 흐름을 확인하는 데이터입니다. 실제 AI 평가·사용량이 아닙니다.</div>}
-        {health?.adapter === 'openai' && <div className="api-banner">OpenAI API 연결 · 서버 OPENAI_API_KEY를 사용합니다.</div>}
+        {health?.adapter === 'openai' && <ApiKeySettings status={keyStatus} onChanged={refreshConnection}/>}
         <section className="history-toolbar" aria-label="기록 필터">
           <label>실행 경로<select aria-label="실행 경로" value={provider} onChange={e => setProvider(e.target.value)}><option value="real">실제 모델 전체</option><option value="codex">Codex CLI</option><option value="openai">OpenAI API</option><option value="mock">모의 엔진</option><option value="all">전체 · 모의 포함</option></select></label>
           <label className="history-search">기록 검색<input aria-label="기록 검색" placeholder="실험 이름 · 모델 · 저장 위치" value={search} onChange={e => setSearch(e.target.value)}/></label>

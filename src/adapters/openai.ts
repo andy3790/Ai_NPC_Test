@@ -4,7 +4,8 @@ import { join, resolve } from 'node:path';
 import { z } from 'zod';
 import type { Adapter, AdapterEvent, TurnRequest, TurnResult } from './types.js';
 import type { ModelConfig } from '../shared/schema.js';
-import type { ModelInfo, TokenUsage } from '../shared/types.js';
+import type { ApiCredential, ModelInfo, TokenUsage } from '../shared/types.js';
+import { OpenAIKeys } from './openai-keys.js';
 import { baseInstructions } from '../core/prompts.js';
 import { normalizeUsage } from '../core/metrics.js';
 
@@ -21,7 +22,7 @@ const builtins: Profile[] = [
   { id: 'gpt-6-sol', efforts: ['none', ...thinking], defaultEffort: 'low', reasoning: true },
   { id: 'gpt-4.1-mini', efforts: ['none'], defaultEffort: 'none', reasoning: false },
 ];
-interface Session { id: string; config: ModelConfig; instructions: string; previousResponseId: string | null; maxOutputTokens: number; reasoning: boolean }
+interface Session { id: string; config: ModelConfig; instructions: string; previousResponseId: string | null; maxOutputTokens: number; reasoning: boolean; credential?: ApiCredential }
 interface Attempt { threadId: string; clientMessageId: string; previousResponseId: string | null; responseId: string | null; result?: TurnResult }
 interface Options { apiKey?: string; fetch?: typeof globalThis.fetch; profiles?: Profile[]; maxOutputTokens?: number }
 
@@ -41,15 +42,14 @@ export function responseSchema(value: any): any {
 
 export class OpenAIAdapter implements Adapter {
   name = 'openai'; version = 'responses-http/1';
-  private readonly apiKey: string;
+  readonly keys: OpenAIKeys;
   private readonly fetcher: typeof globalThis.fetch;
   private readonly profiles: Profile[];
   private readonly maxOutputTokens: number;
   private active = new Map<string, AbortController>();
   private root: string;
   constructor(directory: string, options: Options = {}) {
-    this.apiKey = (options.apiKey ?? process.env.OPENAI_API_KEY ?? '').trim();
-    if (!this.apiKey) throw new Error('OpenAI API 실행에는 OPENAI_API_KEY 환경 변수 또는 .env 설정이 필요합니다.');
+    this.keys = new OpenAIKeys(options.apiKey ?? process.env.OPENAI_API_KEY ?? '');
     this.fetcher = options.fetch ?? globalThis.fetch;
     const custom = options.profiles ?? (process.env.NPC_OPENAI_MODELS ? JSON.parse(process.env.NPC_OPENAI_MODELS) : []);
     const parsed = z.array(profileSchema).parse(custom);
@@ -69,30 +69,45 @@ export class OpenAIAdapter implements Adapter {
     const file = this.file(kind, id), temporary = file + '.tmp';
     writeFileSync(temporary, JSON.stringify(value), { mode: 0o600 }); renameSync(temporary, file);
   }
-  private clean(value: any): any {
-    return JSON.parse(JSON.stringify(value, (_key, v) => typeof v === 'string' ? v.split(this.apiKey).join('[REDACTED]') : v));
+  private clean(value: any, key?: string): any {
+    return JSON.parse(JSON.stringify(value, (_key, v) => typeof v === 'string' ? this.keys.redact(v, key) : v));
   }
-  private async request(path: string, init: RequestInit = {}) {
+  private async request(path: string, init: RequestInit = {}, key = this.keys.resolve()) {
     // Fixed official origin; keys cannot be redirected to a configurable proxy.
-    const response = await this.fetcher(`https://api.openai.com/v1${path}`, {
-      ...init, redirect: 'error', headers: { Authorization: `Bearer ${this.apiKey}`, 'Content-Type': 'application/json', ...init.headers },
-    });
-    return response;
+    try {
+      return await this.fetcher(`https://api.openai.com/v1${path}`, {
+        ...init, redirect: 'error', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', ...init.headers },
+      });
+    } catch (error) { throw new Error(this.keys.redact(error instanceof Error ? error.message : String(error), key)); }
   }
-  async models(): Promise<ModelInfo[]> {
-    const response = await this.request('/models', { signal: AbortSignal.timeout(30000) });
+  private async modelsWithKey(key: string): Promise<ModelInfo[]> {
+    const response = await this.request('/models', { signal: AbortSignal.timeout(30000) }, key);
     if (!response.ok) throw new Error(`OpenAI 모델 조회 실패 (HTTP ${response.status}). 키·프로젝트 권한을 확인하세요.`);
     const data = await response.json() as { data: { id: string }[] };
     const available = this.profiles.filter(p => data.data.some(m => m.id === p.id));
     if (!available.length) throw new Error('계정의 모델 목록과 API 지원표가 일치하지 않습니다. NPC_OPENAI_MODELS 설정을 확인하세요.');
     return available.map((p, index) => ({ id: p.id, name: p.name ?? p.id, efforts: p.efforts, defaultEffort: p.defaultEffort, isDefault: index === 0 }));
   }
-  async createSession(config: ModelConfig, instructions: string, _cwd: string) {
+  async models(credential?: ApiCredential) {
+    const key = this.keys.resolve(credential);
+    try { return await this.modelsWithKey(key); }
+    catch (error) { throw new Error(this.keys.redact(error instanceof Error ? error.message : String(error), key)); }
+  }
+  async setBrowserKey(ownerId: string, value: string) {
+    const key = this.keys.normalize(value);
+    // A failed validation leaves the previous selection intact and never falls back.
+    try { await this.modelsWithKey(key); }
+    catch (error) { throw new Error(this.keys.redact(error instanceof Error ? error.message : String(error), key)); }
+    this.keys.set(ownerId, key);
+    return this.keys.status(ownerId);
+  }
+  async createSession(config: ModelConfig, instructions: string, _cwd: string, credential?: ApiCredential) {
+    this.keys.resolve(credential);
     const profile = this.profiles.find(p => p.id === config.model);
     if (!profile?.efforts.includes(config.effort)) throw new Error('지원되지 않는 API 모델·추론 조합');
-    const id = randomUUID(); this.save('sessions', id, { id, config, instructions, previousResponseId: null, maxOutputTokens: this.maxOutputTokens, reasoning: profile.reasoning } satisfies Session); return id;
+    const id = randomUUID(); this.save('sessions', id, { id, config, instructions, previousResponseId: null, maxOutputTokens: this.maxOutputTokens, reasoning: profile.reasoning, credential: credential ?? { source: 'environment' } } satisfies Session); return id;
   }
-  async resumeSession(id: string) { this.load<Session>('sessions', id); }
+  async resumeSession(id: string) { this.keys.resolve(this.load<Session>('sessions', id).credential); }
   baseline(_threadId: string): TokenUsage | null { return null; }
   private commitResponse(attempt: Attempt, response: any): TurnResult {
     if (!response.id || (attempt.responseId && response.id !== attempt.responseId)) throw new Error('API 응답 ID 불일치');
@@ -116,6 +131,7 @@ export class OpenAIAdapter implements Adapter {
   async turn(r: TurnRequest, emit: (event: AdapterEvent) => void, signal?: AbortSignal): Promise<TurnResult> {
     if (this.active.has(r.threadId)) throw new Error('동일 API 세션에 중복 요청이 발생했습니다.');
     const session = this.load<Session>('sessions', r.threadId);
+    const key = this.keys.resolve(session.credential);
     if (session.config.model !== r.config.model || session.config.effort !== r.config.effort) throw new Error('실행 중 API 세션의 모델·추론 강도를 변경할 수 없습니다.');
     const profile = this.profiles.find(p => p.id === r.config.model);
     if (!profile?.efforts.includes(r.config.effort)) throw new Error('지원되지 않는 API 모델·추론 조합');
@@ -136,12 +152,12 @@ export class OpenAIAdapter implements Adapter {
         metadata: { npc_lab_call_id: r.clientMessageId, npc_lab_session_id: r.threadId },
         text: { format: { type: 'json_schema', name: 'npc_lab_output', strict: true, schema: responseSchema(r.outputSchema) } },
       };
-      emit({ method: 'openai/request', params: { body, transportVersion: this.version } });
+      emit(this.clean({ method: 'openai/request', params: { body, transportVersion: this.version } }, key));
       sent = true;
-      const response = await this.request('/responses', { method: 'POST', body: JSON.stringify(body), signal: combined });
-      emit({ method: 'openai/http', params: { status: response.status, requestId: response.headers.get('x-request-id') } });
+      const response = await this.request('/responses', { method: 'POST', body: JSON.stringify(body), signal: combined }, key);
+      emit(this.clean({ method: 'openai/http', params: { status: response.status, requestId: response.headers.get('x-request-id') } }, key));
       if (!response.ok) {
-        let detail: any; try { detail = this.clean(await response.json()); } catch { detail = { error: { message: '응답 본문 없음' } }; }
+        let detail: any; try { detail = this.clean(await response.json(), key); } catch { detail = { error: { message: '응답 본문 없음' } }; }
         const result: TurnResult = { turnId: '', output: '', status: response.status >= 500 ? 'uncertain' : 'failed', inputRetained: false, error: `OpenAI HTTP ${response.status}: ${JSON.stringify(detail.error ?? detail)}` };
         attempt.result = result; this.save('calls', r.clientMessageId, attempt); return result;
       }
@@ -155,7 +171,7 @@ export class OpenAIAdapter implements Adapter {
             const frame = buffer.slice(0, boundary); buffer = buffer.slice(boundary + 2);
             const data = frame.split('\n').filter(line => line.startsWith('data:')).map(line => line.slice(5).trimStart()).join('\n');
             if (!data || data === '[DONE]') continue;
-            const event = this.clean(JSON.parse(data));
+            const event = this.clean(JSON.parse(data), key);
             if (event.response?.id && !attempt.responseId) {
               attempt.responseId = event.response.id; this.save('calls', r.clientMessageId, attempt);
               emit({ method: 'turn/accepted', params: { threadId: r.threadId, turnId: attempt.responseId } });
@@ -176,8 +192,8 @@ export class OpenAIAdapter implements Adapter {
       } finally { await reader.cancel().catch(() => {}); }
       throw new Error('API 스트림이 최종 응답 전에 종료되었습니다.');
     } catch (error) {
-      const result: TurnResult = { turnId: attempt.responseId ?? '', output: delta, status: sent ? 'uncertain' : 'cancelled', inputRetained: false,
-        error: this.clean(error instanceof Error ? error.message : String(error)) };
+      const result: TurnResult = { turnId: attempt.responseId ?? '', output: this.keys.redact(delta, key), status: sent ? 'uncertain' : 'cancelled', inputRetained: false,
+        error: this.keys.redact(error instanceof Error ? error.message : String(error), key) };
       // No automatic retry: after a network timeout the API may still be working.
       attempt.result = result; this.save('calls', r.clientMessageId, attempt); return result;
     } finally { this.active.delete(r.threadId); }
@@ -188,11 +204,14 @@ export class OpenAIAdapter implements Adapter {
     if (attempt.threadId !== threadId || (turnId && turnId !== attempt.responseId)) throw new Error('API 호출과 세션 ID 불일치');
     if (attempt.result && attempt.result.status !== 'uncertain') return attempt.result;
     if (!attempt.responseId) return null;
-    const response = await this.request(`/responses/${encodeURIComponent(attempt.responseId)}`, { signal: AbortSignal.timeout(30000) });
+    const key = this.keys.resolve(this.load<Session>('sessions', threadId).credential);
+    const response = await this.request(`/responses/${encodeURIComponent(attempt.responseId)}`, { signal: AbortSignal.timeout(30000) }, key);
     if (!response.ok) return null;
-    const value = this.clean(await response.json());
+    let value: any;
+    try { value = this.clean(await response.json(), key); }
+    catch (error) { throw new Error(this.keys.redact(error instanceof Error ? error.message : String(error), key)); }
     if (!['completed', 'failed', 'incomplete', 'cancelled'].includes(value.status)) return null;
     return this.commitResponse(attempt, value);
   }
-  async close() { for (const controller of this.active.values()) controller.abort(); }
+  async close() { for (const controller of this.active.values()) controller.abort(); this.keys.close(); }
 }

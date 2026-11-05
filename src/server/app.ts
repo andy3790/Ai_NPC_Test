@@ -1,4 +1,5 @@
-import Fastify from 'fastify';
+import Fastify, { type FastifyReply, type FastifyRequest } from 'fastify';
+import { createHash, randomBytes } from 'node:crypto';
 import fastifyStatic from '@fastify/static';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -13,11 +14,26 @@ import type { RunHistoryCatalog } from '../core/history.js';
 import { RunDeletionService } from '../core/deletion.js';
 import { runSnapshot } from '../shared/run-snapshot.js';
 import { audienceSchema } from '../shared/spatial-schema.js';
+import { OpenAIAdapter } from '../adapters/openai.js';
 
 export async function createApp(engine: Engine, options: { history?: RunHistoryCatalog } = {}) {
   const app = Fastify({ logger: false, bodyLimit: 4 * 1024 * 1024 });
   const history = options.history;
   const deletion = new RunDeletionService(engine, history);
+  const openai = engine.adapter instanceof OpenAIAdapter ? engine.adapter : undefined;
+  const browserOwner = (req: FastifyRequest, reply?: FastifyReply) => {
+    let cookie = req.headers.cookie?.split(';').map(part => part.trim()).find(part => part.startsWith('npc_lab_browser='))?.slice('npc_lab_browser='.length);
+    if (!cookie || !/^[a-f0-9]{64}$/.test(cookie)) {
+      if (!reply) return undefined;
+      cookie = randomBytes(32).toString('hex');
+      // Persistent browser identity only. The cookie never contains the API key.
+      reply.header('Set-Cookie', `npc_lab_browser=${cookie}; Path=/api; HttpOnly; SameSite=Strict; Max-Age=31536000`);
+    }
+    return createHash('sha256').update('npc-lab-browser/v1\0' + cookie).digest('hex');
+  };
+  const credential = (req: FastifyRequest) => openai?.keys.selection(browserOwner(req));
+  const keyAdapter = () => { if (!openai) throw new Error('개인 API 키 설정은 OpenAI API 서버에서 사용하세요.'); return openai; };
+  const keysChanged = () => engine.emit('change', { type: 'credentials-changed', runId: '', at: new Date().toISOString() });
   const detail = (id: string) => history ? history.detail(id) : engine.detail(id);
   const files = (id: string) => history ? history.exports(id) : exportFiles(engine.detail(id), engine.store.events(id));
   // Loopback binding plus Origin/Host checks prevent browser-driven writes from other sites.
@@ -27,21 +43,40 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
     const origin = request.headers.origin;
     if (origin && origin !== `http://${host}`) return reply.code(403).send({ error: '다른 출처의 요청은 허용하지 않습니다.' });
   });
-  app.setErrorHandler((error, _request, reply) => reply.code(400).send({ error: error instanceof Error ? error.message : String(error) }));
+  app.setErrorHandler((error, _request, reply) => {
+    const message = error instanceof Error ? error.message : String(error);
+    return reply.code(400).send({ error: openai ? openai.keys.redact(message) : message });
+  });
   app.get('/api/health', async () => ({ ok: true, adapter: engine.adapter.name, version: APP_VERSION, historyEnabled: !!history }));
+  app.get('/api/openai/key', async (req, reply) => {
+    reply.header('Cache-Control', 'no-store');
+    return keyAdapter().keys.status(browserOwner(req, reply));
+  });
+  app.put('/api/openai/key', async (req, reply) => {
+    reply.header('Cache-Control', 'no-store');
+    const adapter = keyAdapter();
+    const { apiKey } = z.object({ apiKey: z.string().max(4096) }).strict().parse(req.body);
+    const result = await adapter.setBrowserKey(browserOwner(req, reply)!, apiKey);
+    keysChanged(); return result;
+  });
+  app.delete('/api/openai/key', async (req, reply) => {
+    reply.header('Cache-Control', 'no-store');
+    const adapter = keyAdapter(), owner = browserOwner(req, reply)!;
+    adapter.keys.clearSelection(owner); keysChanged(); return adapter.keys.status(owner);
+  });
   app.get('/api/history', async () => history ? { enabled: true, ...history.sources() } : { enabled: false, sources: [], runs: 0, errors: [] });
   app.post('/api/history/refresh', async () => { if (!history) throw new Error('이 서버는 통합 기록 조회가 꺼져 있습니다.'); const result = history.refresh(); engine.emit('change', { runId: '', at: new Date().toISOString() }); return result; });
-  app.get('/api/models', async () => engine.adapter.models());
-  app.get('/api/example', async () => {
-    const models = await engine.adapter.models(); const m = models.find(x => x.isDefault) ?? models[0];
+  app.get('/api/models', async req => engine.adapter.models(credential(req)));
+  app.get('/api/example', async req => {
+    const models = await engine.adapter.models(credential(req)); const m = models.find(x => x.isDefault) ?? models[0];
     const spec = exampleSpec(m.id, m.efforts.includes('low') ? 'low' : m.defaultEffort);
     if (engine.adapter.name === 'openai') { spec.maxUtterances = 6; spec.evaluation.interval = 6; spec.concurrentRuns = 1; spec.maxConcurrentCalls = 1; }
     return spec;
   });
   app.get('/api/config', async () => engine.store.setting('lastSpec') ?? null);
   app.put('/api/config', async req => { const spec = experimentSchema.parse(req.body); engine.store.setting('lastSpec', spec); return spec; });
-  app.post('/api/validate', async req => ({ valid: true, spec: await engine.validate(req.body) }));
-  app.post('/api/experiments', async req => { const { spec, start } = req.body as any; return engine.create(spec, start !== false); });
+  app.post('/api/validate', async req => ({ valid: true, spec: await engine.validate(req.body, credential(req)) }));
+  app.post('/api/experiments', async req => { const { spec, start } = req.body as any; return engine.create(spec, start !== false, credential(req)); });
   app.get<{ Querystring: { provider?: string } }>('/api/runs', async req => {
     const provider = z.enum(['all', 'real', 'codex', 'openai', 'mock']).optional().parse(req.query.provider);
     return history ? history.list(provider) : engine.list(provider);
@@ -71,6 +106,7 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
   app.post<{ Params: { id: string; action: string } }>('/api/runs/:id/:action', async req => {
     const { id, action } = req.params;
     history?.assertWritable(id);
+    if (['resume', 'step', 'inject', 'evaluate'].includes(action)) openai?.keys.assertRunAccess(engine.run(id).apiCredential, browserOwner(req));
     if (action === 'pause') await engine.pause(id);
     else if (action === 'resume' || action === 'step') await engine.resume(id, action === 'step');
     else if (action === 'stop') await engine.stop(id);

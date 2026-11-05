@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ExperimentSpec } from '../../shared/schema.js';
-import type { ModelInfo } from '../../shared/types.js';
+import type { ApiKeyStatus, ModelInfo } from '../../shared/types.js';
 import { api, errorMessage, type HealthResponse, type HistoryResponse } from '../api/client.js';
 
 export function useWorkspaceMetadata(onError: (message: string) => void) {
@@ -8,6 +8,7 @@ export function useWorkspaceMetadata(onError: (message: string) => void) {
   const [history, setHistory] = useState<HistoryResponse | null>(null);
   const [models, setModels] = useState<ModelInfo[]>([]);
   const [spec, setSpec] = useState<ExperimentSpec | null>(null);
+  const [keyStatus, setKeyStatus] = useState<ApiKeyStatus | null>(null);
   const errorHandler = useRef(onError); errorHandler.current = onError;
   const mounted = useRef(false), generation = useRef(0);
 
@@ -17,11 +18,15 @@ export function useWorkspaceMetadata(onError: (message: string) => void) {
     const nextHealth = await api.health();
     if (!current()) return;
     setHealth(nextHealth);
+    // Establish the browser cookie before any request that selects a personal key.
+    const keys = nextHealth.adapter === 'openai' ? await api.keyStatus() : null;
     if (!current()) return;
+    setKeyStatus(keys);
     setModels([]);
     const config = await api.config();
     if (!current()) return;
     if (config) setSpec(previous => previous ?? config);
+    if (keys && !keys.configured) { setModels([]); return; }
     const nextModels = await api.models();
     if (!current()) return;
     setModels(nextModels);
@@ -41,7 +46,7 @@ export function useWorkspaceMetadata(onError: (message: string) => void) {
     events.onmessage = event => {
       try {
         const type = JSON.parse(event.data).type;
-        if (type === 'connected' && connected) refresh();
+        if (type === 'credentials-changed' || (type === 'connected' && connected)) refresh();
         if (type === 'connected') connected = true;
       } catch { /* Ignore non-JSON heartbeats. */ }
     };
@@ -53,5 +58,5 @@ export function useWorkspaceMetadata(onError: (message: string) => void) {
     const catalog = await api.refreshHistory();
     setHistory({ enabled: true, ...catalog });
   };
-  return { health, history, models, spec, setSpec, refreshHistory };
+  return { health, history, models, spec, setSpec, refreshHistory, keyStatus, refreshConnection };
 }

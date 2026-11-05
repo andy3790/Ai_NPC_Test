@@ -1,5 +1,5 @@
 import type { ExperimentSpec } from '../../shared/schema.js';
-import type { BulkRunDeletionPlan, BulkRunDeletionResult, EvaluationFinding, ModelInfo, Run, RunDeletionPlan, RunDetail, RunListItem } from '../../shared/types.js';
+import type { ApiKeyStatus, BulkRunDeletionPlan, BulkRunDeletionResult, EvaluationFinding, ModelInfo, Run, RunDeletionPlan, RunDetail, RunListItem } from '../../shared/types.js';
 
 export interface HealthResponse { ok: boolean; adapter: string; version: string; historyEnabled: boolean }
 export interface HistorySource { path: string; status: 'loaded' | 'unchanged' | 'error'; runs: number; error?: string }
@@ -10,8 +10,9 @@ export type RunControl = 'pause' | 'resume' | 'step' | 'stop' | 'evaluate';
 
 async function request<T>(path: string, body?: unknown, method?: string): Promise<T> {
   const response = await fetch(`/api${path}`, {
+    cache: 'no-store',
     method: method ?? (body === undefined ? 'GET' : 'POST'),
-    headers: { 'Content-Type': 'application/json' },
+    ...(body !== undefined ? { headers: { 'Content-Type': 'application/json' } } : {}),
     ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
   });
   const data: unknown = await response.json();
@@ -25,6 +26,9 @@ async function request<T>(path: string, body?: unknown, method?: string): Promis
 const runPath = (id: string) => `/runs/${encodeURIComponent(id)}`;
 export const api = {
   health: () => request<HealthResponse>('/health'),
+  keyStatus: () => request<ApiKeyStatus>('/openai/key'),
+  setApiKey: (apiKey: string) => request<ApiKeyStatus>('/openai/key', { apiKey }, 'PUT'),
+  clearApiKey: () => request<ApiKeyStatus>('/openai/key', undefined, 'DELETE'),
   history: () => request<HistoryResponse>('/history'),
   refreshHistory: () => request<HistoryCatalog>('/history/refresh', {}),
   models: () => request<ModelInfo[]>('/models'),

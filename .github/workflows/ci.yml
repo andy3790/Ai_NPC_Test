@@ -58,6 +58,10 @@ jobs:
         if: runner.os == 'Linux'
         timeout-minutes: 5
         run: npm run smoke:spatial
+      - name: Check browser API keys with local transport
+        if: runner.os == 'Linux'
+        timeout-minutes: 5
+        run: npm run smoke:keys
       - name: Check offline character gallery
         if: runner.os == 'Linux'
         timeout-minutes: 5

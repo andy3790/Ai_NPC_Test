@@ -29,9 +29,10 @@
     "assets:gallery": "node assets/npc-canon/gallery-check.mjs",
     "check:publish": "tsx scripts/check-publish.ts",
     "verify": "npm run typecheck && npm test && npm run build && npm run assets:validate && npm run assets:smoke && npm run check:publish",
-    "verify:ui": "npm run smoke:ui && npm run smoke:editor && npm run smoke:history && npm run smoke:findings && npm run smoke:management && npm run smoke:bulk-delete && npm run smoke:world && npm run smoke:spatial && npm run assets:gallery",
+    "verify:ui": "npm run smoke:ui && npm run smoke:editor && npm run smoke:history && npm run smoke:findings && npm run smoke:management && npm run smoke:bulk-delete && npm run smoke:world && npm run smoke:spatial && npm run smoke:keys && npm run assets:gallery",
     "smoke:world": "tsx scripts/world-ui-smoke.ts",
-    "smoke:spatial": "tsx scripts/spatial-ui-smoke.ts"
+    "smoke:spatial": "tsx scripts/spatial-ui-smoke.ts",
+    "smoke:keys": "tsx scripts/api-key-ui-smoke.ts"
   },
   "dependencies": {
     "@fastify/static": "^10.1.8",

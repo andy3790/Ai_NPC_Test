@@ -133,6 +133,19 @@
 .world-process { padding: 14px 16px; margin: 10px 0; border: 1px solid #dce2dd; border-radius: 10px; }
 .world-process p { margin: 8px 0; }
 .world-reaction { color: #8b5c24; }
+.api-key-settings { margin-bottom: 20px; padding: 18px 22px; border: 1px solid var(--line); border-radius: 9px; background: #f0f4ed; font-size: 12px; }
+.api-key-settings.needs-key { background: #fff8ec; border-color: #e4d4b4; }
+.api-key-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.api-key-heading strong { font-size: 13px; }
+.api-key-heading p { margin: 7px 0 0; line-height: 1.8; }
+.api-key-heading button { flex-shrink: 0; }
+.api-key-settings form { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.api-key-settings form > label { display: block; margin-bottom: 8px; }
+.api-key-input-row { display: flex; gap: 10px; }
+.api-key-input-row input { min-width: 0; flex: 1; }
+.api-key-input-row button { flex-shrink: 0; }
+.api-key-help { line-height: 1.8; color: #657166; margin: 10px 0 0; }
+@media (max-width: 600px) { .api-key-settings { padding: 16px; } .api-key-heading, .api-key-input-row { flex-direction: column; align-items: stretch; } }
 .spatial-edit-row { padding: 14px; border: 1px solid var(--line, #d9e1d9); border-radius: 10px; }
 .spatial-members, .spatial-places { display: flex; flex-wrap: wrap; gap: 12px; }
 .spatial-places > article { flex: 1 1 160px; }

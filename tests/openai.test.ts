@@ -179,10 +179,12 @@ test('OpenAI reports absent usage as null, omits reasoning for non-reasoning mod
   } finally { await engine.close(); store.close(); }
 });
 
-test('backend selection keeps Codex default available and rejects conflicts or a missing API key', () => {
+test('backend selection keeps Codex default available and allows keyless server startup', async () => {
   assert.equal(adapterName({ adapter: 'codex' }), 'codex'); assert.equal(adapterName({ adapter: 'openai' }), 'openai'); assert.equal(adapterName({ mock: true }), 'mock');
   assert.throws(() => adapterName({ adapter: 'invalid' })); assert.throws(() => adapterName({ adapter: 'openai', mock: true }));
-  assert.throws(() => new OpenAIAdapter('.cache/unused', { apiKey: '' }), /OPENAI_API_KEY/);
+  const adapter = new OpenAIAdapter('.cache/unused', { apiKey: '' });
+  try { assert.equal(adapter.keys.status().source, 'missing'); await assert.rejects(adapter.models(), /OPENAI_API_KEY/); }
+  finally { await adapter.close(); }
 });
 
 test('Responses schema keeps required properties and converts literal receipt to a strict enum', () => {

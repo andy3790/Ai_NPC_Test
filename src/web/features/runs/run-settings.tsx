@@ -17,6 +17,7 @@ export function RunSettings({ detail }: { detail: RunDetail }) {
       <dt>실험 / 조건</dt><dd>{spec.name} / {variant.label} <small>{variant.id} · 반복 {run.repetition}</small></dd>
       <dt>생성 시각</dt><dd>{date(run.createdAt)} (KST)</dd>
       <dt>실행 경로</dt><dd>{providers[run.adapter]}</dd>
+      {run.adapter === 'openai' && <><dt>API 키 출처</dt><dd>{run.apiCredential?.source === 'browser' ? '개인 키 · 생성 당시 키에 고정' : '서버 환경 키 (.env)'}<small>키 원문은 기록하지 않습니다.</small></dd></>}
       <dt>앱 / 실행기 버전</dt><dd>{run.appVersion} / {run.cliVersion || '기록 없음'}</dd>
       <dt>프롬프트 버전</dt><dd>{run.promptVersion ?? (versions.length ? versions.join(', ') : '이전 기록에 버전 정보 없음')}</dd>
       <dt>설정 해시 (SHA-256)</dt><dd><code>{run.snapshotHash}</code></dd>

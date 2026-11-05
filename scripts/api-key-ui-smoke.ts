@@ -1,0 +1,92 @@
+import { chromium } from 'playwright';
+import assert from 'node:assert/strict';
+import { randomUUID } from 'node:crypto';
+import { mkdir, mkdtemp } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
+import { OpenAIAdapter } from '../src/adapters/openai.js';
+import { Engine } from '../src/core/engine.js';
+import { Store } from '../src/core/store.js';
+import { createApp } from '../src/server/app.js';
+import { exampleSpec } from '../src/shared/example.js';
+import { openaiFixture } from '../tests/fixtures/openai.js';
+
+await mkdir('.cache', { recursive: true });
+const root = await mkdtemp(resolve('.cache/api-key-ui-')), fixture = openaiFixture();
+const personal = 'fixture-ui-' + randomUUID(); fixture.acceptedKeys.add(personal);
+async function start(environment: boolean, port = 0) {
+  const store = new Store(join(root, 'test.sqlite'));
+  const engine = new Engine(store, new OpenAIAdapter(root, { apiKey: environment ? fixture.key : '', fetch: fixture.fetch }), root);
+  const app = await createApp(engine); const url = await app.listen({ host: '127.0.0.1', port });
+  return { app, store, engine, url, async close() { await engine.close(); await app.close(); store.close(); } };
+}
+let server = await start(true);
+const baseURL = server.url, port = Number(new URL(baseURL).port);
+const browser = await chromium.launch({ headless: true, channel: process.env.NPC_BROWSER_CHANNEL ?? (process.platform === 'win32' ? 'msedge' : undefined) });
+const contextA = await browser.newContext({ baseURL, viewport: { width: 1440, height: 1000 } });
+const contextB = await browser.newContext({ baseURL });
+const a = await contextA.newPage(), b = await contextB.newPage();
+const errors: string[] = []; [a, b].forEach(page => page.on('pageerror', error => errors.push(error.message)));
+const panelA = a.getByRole('region', { name: 'OpenAI API 키 설정' }), panelB = b.getByRole('region', { name: 'OpenAI API 키 설정' });
+try {
+  await a.goto(baseURL); await b.goto(baseURL);
+  await panelA.getByText('OpenAI API · 서버 환경 키 사용 중', { exact: true }).waitFor();
+  await panelB.getByText('OpenAI API · 서버 환경 키 사용 중', { exact: true }).waitFor();
+  await panelA.getByRole('button', { name: 'API 키 설정', exact: true }).click();
+  const input = a.getByLabel('개인 OpenAI API 키', { exact: true });
+  assert.equal(await input.getAttribute('type'), 'password');
+  await input.fill('invalid-fixture-value'); await panelA.getByRole('button', { name: '키 확인 후 적용' }).click();
+  await panelA.getByRole('alert').waitFor(); assert.equal(await panelA.innerText().then(text => text.includes('invalid-fixture-value')), false);
+  await input.fill(personal); await panelA.getByRole('button', { name: '키 확인 후 적용' }).click();
+  await panelA.getByText('OpenAI API · 개인 키 사용 중', { exact: true }).waitFor();
+  assert.equal(await input.inputValue(), '');
+  await panelB.getByText('OpenAI API · 서버 환경 키 사용 중', { exact: true }).waitFor();
+
+  await a.getByRole('button', { name: '새 실험', exact: true }).click();
+  await a.getByRole('button', { name: '03 실험 조건' }).click();
+  await a.getByLabel('묶음당 공개 발화 수').fill('2');
+  await a.getByLabel('주기 평가와 종료 평가 사용').uncheck();
+  await a.getByRole('button', { name: '실험 시작', exact: true }).click();
+  await a.getByRole('dialog', { name: '실험 구성' }).waitFor({ state: 'hidden' });
+  await a.waitForFunction(async () => { const runs = await fetch('/api/runs').then(r => r.json()); return runs.length === 2 && runs.every((r: any) => r.status === 'completed'); });
+  assert.ok(fixture.authorizations.filter(r => r.body).every(r => r.key === personal));
+  await a.getByRole('button', { name: '실행 설정', exact: true }).click();
+  await a.locator('.run-settings').getByText('개인 키 · 생성 당시 키에 고정', { exact: false }).waitFor();
+  const state = await a.evaluate(() => JSON.stringify({ local: { ...localStorage }, session: { ...sessionStorage }, cookie: document.cookie }));
+  assert.ok(!state.includes(personal)); assert.ok(!state.includes('npc_lab_browser'));
+  const cookies = await contextA.cookies(baseURL + '/api/openai/key');
+  assert.equal(cookies.find(c => c.name === 'npc_lab_browser')?.httpOnly, true);
+  const spec = exampleSpec('gpt-6-luna'); spec.variants = [spec.variants[0]]; spec.maxUtterances = 2; spec.evaluation.enabled = false; delete spec.scenario.environment;
+  spec.name = '브라우저 키 복구 검사';
+  const created = await a.request.post('/api/experiments', { data: { spec, start: false } }); assert.equal(created.status(), 200);
+  const id = (await created.json()).runs[0].id;
+  const clearing = a.waitForResponse(response => response.url().endsWith('/api/openai/key') && response.request().method() === 'DELETE');
+  await panelA.getByRole('button', { name: '개인 키 해제' }).click(); assert.equal((await clearing).status(), 200);
+  await panelA.getByText('OpenAI API · 서버 환경 키 사용 중', { exact: true }).waitFor();
+  const envRun = await b.request.post('/api/experiments', { data: { spec, start: false } });
+  const environmentId = (await envRun.json()).runs[0].id;
+  assert.equal(server.engine.run(environmentId).apiCredential?.source, 'environment');
+  await input.fill(personal); await panelA.getByRole('button', { name: '키 확인 후 적용' }).click();
+  await panelA.getByText('OpenAI API · 개인 키 사용 중', { exact: true }).waitFor();
+  await a.reload(); await panelA.getByText('OpenAI API · 개인 키 사용 중', { exact: true }).waitFor();
+  assert.equal(await a.locator('#personal-api-key').count(), 0, 'saved keys are never populated back into the input');
+
+  await server.close(); server = await start(false, port);
+  // SSE reconnect updates status without requiring a manual page reload.
+  await panelA.getByText('OpenAI API · API 키 입력 필요', { exact: true }).waitFor({ timeout: 20000 });
+  await panelB.getByText('OpenAI API · API 키 입력 필요', { exact: true }).waitFor({ timeout: 20000 });
+  await input.waitFor(); assert.equal(await input.inputValue(), '');
+  assert.equal(await a.locator('.run-card').count(), 4, 'history remains available without a key');
+  assert.equal((await a.request.post(`/api/runs/${id}/resume`)).status(), 400);
+  await mkdir('.cache/screenshots', { recursive: true });
+  await a.screenshot({ path: '.cache/screenshots/api-keys-desktop.png', fullPage: true });
+  await a.setViewportSize({ width: 390, height: 844 });
+  assert.equal(await a.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
+  await a.screenshot({ path: '.cache/screenshots/api-keys-mobile.png', fullPage: true });
+  await input.fill(personal); await panelA.getByRole('button', { name: '키 확인 후 적용' }).click();
+  await panelA.getByText('OpenAI API · 개인 키 사용 중', { exact: true }).waitFor();
+  assert.equal((await a.request.post(`/api/runs/${id}/resume`)).status(), 200); await server.engine.idle();
+  assert.equal(server.engine.run(id).status, 'completed');
+  assert.equal((await (await b.request.get('/api/openai/key')).json()).source, 'missing');
+  assert.deepEqual(errors, []);
+  console.log(JSON.stringify({ ok: true, browserIsolation: true, memoryOnly: true, restartRecovery: true, mobile: true, paidCalls: 0 }));
+} finally { await browser.close(); await server.close(); }
