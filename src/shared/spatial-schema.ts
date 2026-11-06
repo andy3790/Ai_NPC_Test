@@ -46,7 +46,9 @@ export const eventGeneratorSchema = z.object({
   maxProposals: z.number().int().min(1).max(1000).default(10),
   maxChecks: z.number().int().min(1).max(10_000).default(30),
   maxSeverity: z.enum(['low', 'medium', 'high']).default('medium'),
-  allowedEvents: text.min(1), forbiddenEvents: text.default(''),
+  // An unused generator may retain its empty draft. The experiment validates
+  // the required event scope whenever any variant enables generation.
+  allowedEvents: text, forbiddenEvents: text.default(''),
 });
 export const eventProposalSchema = z.object({ proposal: z.object({ title: z.string().min(1).max(200),
   description: z.string().min(1).max(5000), locationIds: z.array(id).max(100), severity: z.enum(['low', 'medium', 'high']),

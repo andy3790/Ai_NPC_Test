@@ -95,6 +95,8 @@ export const experimentSchema = z.object({
     c.addIssue({ code: 'custom', path: ['scenario', 'spatial'], message: '분산 공간의 장소·통로·NPC 시작 위치를 지정하세요.' });
   if (v.variants.some(x => x.eventGeneration) && !v.eventGenerator)
     c.addIssue({ code: 'custom', path: ['eventGenerator'], message: '상황 발생 엔진의 모델·빈도·허용 범위를 지정하세요.' });
+  if (v.variants.some(x => x.eventGeneration) && v.eventGenerator && !v.eventGenerator.allowedEvents.trim())
+    c.addIssue({ code: 'custom', path: ['eventGenerator', 'allowedEvents'], message: '상황 발생 엔진을 사용하려면 ‘발생 가능한 사건 범위’를 입력하세요.' });
   if (v.variants.some(x => x.eventGeneration && !['ai', 'ai_spatial'].includes(x.environmentMode ?? '')))
     c.addIssue({ code: 'custom', message: '상황 발생 엔진은 AI 세계 엔진 환경에서만 사용할 수 있습니다.' });
   if (v.variants.some(x => x.environmentMode === 'rules') && !v.scenario.environment?.enabled)

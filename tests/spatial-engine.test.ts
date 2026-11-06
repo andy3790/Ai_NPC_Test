@@ -45,6 +45,30 @@ test('spatial configuration and section edits validate references, modes and gen
   bad.eventGenerator = s.eventGenerator; bad.variants[0].environmentMode = 'off'; assert.throws(() => experimentSchema.parse(bad));
 });
 
+test('disabled event generation retains empty drafts; any enabled condition requires a nonblank scope', () => {
+  const spec = spatialExample('mock-model');
+  spec.variants.forEach(v => { v.eventGeneration = false; });
+  spec.eventGenerator!.allowedEvents = '';
+  assert.equal(experimentSchema.parse(spec).eventGenerator!.allowedEvents, '');
+  assert.deepEqual(applyConfigSection(spec, 'conditions', readConfigSection(spec, 'conditions')).eventGenerator, spec.eventGenerator);
+  assert.deepEqual(applyConfigSection(spec, 'full', spec).eventGenerator, spec.eventGenerator);
+  for (const scope of ['', ' \n\t ']) {
+    spec.eventGenerator!.allowedEvents = scope;
+    spec.variants[1].eventGeneration = true;
+    const invalid = experimentSchema.safeParse(spec);
+    assert.equal(invalid.success, false);
+    if (!invalid.success) assert.ok(invalid.error.issues.some(issue => issue.path.join('.') === 'eventGenerator.allowedEvents' && issue.message.includes('발생 가능한 사건 범위')));
+    assert.throws(() => applyConfigSection(spec, 'conditions', readConfigSection(spec, 'conditions')));
+    spec.variants[1].eventGeneration = false;
+    assert.equal(experimentSchema.parse(spec).eventGenerator!.allowedEvents, scope);
+  }
+  spec.eventGenerator!.allowedEvents = '기존 설비의 작은 고장';
+  spec.variants[0].eventGeneration = true;
+  assert.deepEqual(experimentSchema.parse(spec).eventGenerator, spec.eventGenerator);
+  spec.variants[0].environmentMode = 'off'; spec.variants[0].eventGeneration = false;
+  assert.deepEqual(experimentSchema.parse(spec).eventGenerator, spec.eventGenerator);
+});
+
 for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`${mode}: whisper, local, remote and solo actions use frozen observers with no private profile leaks`, async () => {
   const store = new Store(':memory:'), adapter = new MockAdapter(), engine = new Engine(store, adapter, '.cache/history-test-spatial'); adapter.delayMs = 0;
   const counts = new Map<string, number>();
