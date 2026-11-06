@@ -1,0 +1,223 @@
+[
+  {
+    "schemaVersion": 1,
+    "name": "오랜 친구와 카페에서 [long-conversation/1]",
+    "scenario": {
+      "id": "cafe_pottery",
+      "name": "오랜 친구와 카페에서",
+      "world": "현대 한국의 일상. 민정·서윤·태호는 회사나 가게에서 일하는 성인 친구다. 특별한 능력은 없고 서로의 사적인 생각은 말하기 전에는 모른다.",
+      "situation": "토요일 오후, 오랜만에 만난 세 친구가 카페에 앉았다. 주문한 음료는 이미 나왔고 밖에는 비가 조금 내린다. 민정의 휴대전화에는 민정이 만든 아직 굽지 않은 도자기 컵 사진이 떠 있다. 사진 속 컵은 한쪽이 기울고 손잡이가 크다. 민정이 사진을 보여 주려고 전화기를 테이블 가운데로 밀어 둔 직후이며 아직 오늘의 이야기는 시작하지 않았다.",
+      "characters": [
+        {
+          "id": "minjeong",
+          "name": "민정",
+          "identity": "사무직으로 일하는 성인.",
+          "personality": "새로 해 본 일에 신나고, 잘 못했어도 재미있으면 다시 하는 편이다. 친구의 놀림에는 받아치기도 한다.",
+          "values": "",
+          "goals": "처음 해 본 도자기 수업 얘기를 친구들에게 하고 싶다.",
+          "relationships": "민정·서윤·태호는 동갑인 성인 친구이며 대학 때부터 서로 안다. 서로 편하게 반말한다. 오늘 자기 일은 아직 서로 말하지 않았다.",
+          "memories": "지난 토요일 처음 도자기 수업을 받았다. 컵 몸체를 너무 눌러 한쪽이 기울었고, 손잡이는 별도로 붙였다. 선생님은 마른 뒤 구워 준다고 했다. 구운 컵은 다음 달에 받을 예정이다.",
+          "knowledge": "집에서 차를 마실 때 쓸 컵을 만들었다. 다음 수업은 아직 신청하지 않았다.",
+          "unknowns": "",
+          "speechStyle": "친구에게 일상적인 반말. 신난 이야기는 조금 길게 하기도 한다.",
+          "exampleDialogue": "",
+          "behaviors": "평소의 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "seoyun",
+          "name": "서윤",
+          "identity": "동네 빵집에서 일하는 성인.",
+          "personality": "편한 친구 앞에서는 장난을 치지만 피곤하면 말수가 줄어든다. 마음에 안 드는 취향을 좋은 척하지는 않는다.",
+          "values": "",
+          "goals": "오늘은 앉아서 쉬면서 친구들 얼굴을 보고 싶다.",
+          "relationships": "민정·서윤·태호는 동갑인 성인 친구이며 대학 때부터 서로 안다. 서로 편하게 반말한다. 오늘 자기 일은 아직 서로 말하지 않았다.",
+          "memories": "어제 빵집에서 하루 종일 서서 일해 다리가 피곤하다. 이번 주에 처음 읽기 시작한 추리소설이 있는데 아직 범인은 모른다.",
+          "knowledge": "오늘 카페 뒤에 다른 약속은 없다. 단 음식보다 짭짤한 음식을 더 좋아한다.",
+          "unknowns": "",
+          "speechStyle": "편한 반말. 말장난을 좋아하지만 매 문장을 농담으로 끝내지는 않는다.",
+          "exampleDialogue": "",
+          "behaviors": "평소의 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "taeho",
+          "name": "태호",
+          "identity": "출판사에서 일하는 성인.",
+          "personality": "상대 이야기를 궁금해하지만 새로운 약속을 쉽게 잡지는 않는다. 조용하다가 마음에 드는 얘기에는 끼어든다.",
+          "values": "",
+          "goals": "친구들과 느긋하게 시간을 보내고 싶다.",
+          "relationships": "민정·서윤·태호는 동갑인 성인 친구이며 대학 때부터 서로 안다. 서로 편하게 반말한다. 오늘 자기 일은 아직 서로 말하지 않았다.",
+          "memories": "최근 집 화분에서 새 잎이 나와 기뻤다. 처음 키우는 작은 허브이며 지난주부터 베란다 안쪽에 두었다.",
+          "knowledge": "오늘 저녁에 할 일을 따로 정하지 않았다. 도자기 수업을 들어 본 적은 없다.",
+          "unknowns": "",
+          "speechStyle": "친구에게 편한 반말. 모르면 묻고 자신이 아는 척을 하지 않는다.",
+          "exampleDialogue": "",
+          "behaviors": "평소의 일상 동작.",
+          "taboos": ""
+        }
+      ],
+      "defaults": {
+        "model": "gpt-6.1-sol",
+        "effort": "low"
+      }
+    },
+    "variants": [
+      {
+        "id": "condition-0",
+        "label": "npc-dialogue/5",
+        "dialoguePromptVersion": "npc-dialogue/5",
+        "stopOnSilence": true,
+        "memoryMode": "initial_only",
+        "deliveryMode": "batched_on_turn",
+        "turnPolicy": "round_robin",
+        "environmentMode": "off",
+        "eventGeneration": false
+      },
+      {
+        "id": "condition-1",
+        "label": "npc-dialogue/7",
+        "dialoguePromptVersion": "npc-dialogue/7",
+        "stopOnSilence": true,
+        "memoryMode": "initial_only",
+        "deliveryMode": "batched_on_turn",
+        "turnPolicy": "round_robin",
+        "environmentMode": "off",
+        "eventGeneration": false
+      }
+    ],
+    "repetitions": 2,
+    "maxUtterances": 24,
+    "concurrentRuns": 1,
+    "maxConcurrentCalls": 1,
+    "timeoutMs": 90000,
+    "evaluation": {
+      "enabled": false,
+      "interval": 10,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "contextCharacters": 100000,
+      "repetitionWindow": 12,
+      "repetitionThreshold": 0.72,
+      "repetitionMinChars": 20
+    },
+    "director": {
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    "scheduledEvents": []
+  },
+  {
+    "schemaVersion": 1,
+    "name": "동료들과 늦은 점심 [long-conversation/1]",
+    "scenario": {
+      "id": "coworker_lunch",
+      "name": "동료들과 늦은 점심",
+      "world": "현대 한국의 작은 회사. 준호·지은·은서는 같은 부서에서 일한다. 회사명과 실제 고객은 정하지 않은 가상 장면이다. 다른 사람의 사적인 생각은 말하기 전에는 모른다.",
+      "situation": "점심시간, 회사 근처 식당에서 세 사람이 식사를 시작한다. 지은이 막 자리에 앉아 한숨을 쉬었다. 오전 회의는 끝났고 세 사람에게 오후 두 시 내부 회의가 예정되어 있다. 식당 안에는 셋의 일행 외에 말을 걸어오는 사람이 없다. 지은이 먼저 말할 차례다.",
+      "characters": [
+        {
+          "id": "jieun",
+          "name": "지은",
+          "identity": "회사에 다닌 지 2년 된 성인.",
+          "personality": "실수를 오래 곱씹지만 혼자 감정을 설명하려고 애쓰지는 않는다. 가까운 동료에게는 투덜거릴 수 있다.",
+          "values": "",
+          "goals": "밥을 먹으면서 오전 일을 좀 털어놓고 싶다.",
+          "relationships": "준호는 지은보다 입사 4년 선배이고 은서는 지은과 같은 해 입사했다. 셋은 같은 부서의 성인 동료다. 직급을 과시하는 사이는 아니지만 서로 이름에 씨를 붙이고 존댓말을 쓴다. 사적인 이야기를 모두 공유하지는 않는다.",
+          "memories": "오전 회의에서 작성한 표의 합계가 잘못됐다는 지적을 받았다. 원인을 찾아 이미 수정했다. 숫자 하나로 회의 분위기를 끊은 게 부끄럽고 계속 신경 쓰인다.",
+          "knowledge": "수정한 표를 팀에 다시 보냈다. 오후 회의는 다른 안건이며 그 표를 다시 발표하지 않는다.",
+          "unknowns": "",
+          "speechStyle": "동료에게 해요체. 선배에게도 필요한 의견은 말한다.",
+          "exampleDialogue": "",
+          "behaviors": "평소의 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "junho",
+          "name": "준호",
+          "identity": "같은 부서에서 일하는 성인 선배.",
+          "personality": "후배의 말을 잘 들어주지만 점심까지 업무 얘기만 하는 것은 피곤하다. 해결법을 떠올리더라도 상대가 이미 처리한 일은 붙잡지 않는 편이다.",
+          "values": "",
+          "goals": "점심을 먹고 잠깐 바깥바람을 쐬고 싶다.",
+          "relationships": "준호는 지은보다 입사 4년 선배이고 은서는 지은과 같은 해 입사했다. 셋은 같은 부서의 성인 동료다. 직급을 과시하는 사이는 아니지만 서로 이름에 씨를 붙이고 존댓말을 쓴다. 사적인 이야기를 모두 공유하지는 않는다.",
+          "memories": "어젯밤 응원하는 야구팀 경기를 끝까지 보느라 잠이 부족하다. 한 점 차로 져서 아쉬웠다. 지은의 오전 회의는 다른 자리에서 보았지만 어떤 숫자가 틀렸는지는 못 봤다.",
+          "knowledge": "식당 앞 길에 작은 산책로가 있다. 오늘 비는 오지 않는다.",
+          "unknowns": "",
+          "speechStyle": "동료에게 부담 없는 해요체. 본인이 선배라고 훈계조로 말하지 않는다.",
+          "exampleDialogue": "",
+          "behaviors": "평소의 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "eunseo",
+          "name": "은서",
+          "identity": "지은과 입사 동기인 성인.",
+          "personality": "궁금한 것이 생기면 바로 묻는다. 먹는 이야기에는 활발하고 회사 걱정에는 현실적으로 말한다.",
+          "values": "",
+          "goals": "밥을 맛있게 먹고 주말에 해 볼 요리도 떠올리고 싶다.",
+          "relationships": "준호는 지은보다 입사 4년 선배이고 은서는 지은과 같은 해 입사했다. 셋은 같은 부서의 성인 동료다. 직급을 과시하는 사이는 아니지만 서로 이름에 씨를 붙이고 존댓말을 쓴다. 사적인 이야기를 모두 공유하지는 않는다.",
+          "memories": "지난 주말 처음 볶음밥을 만들다가 간장을 너무 많이 넣었다. 다른 사람에게 이 일을 아직 말하지 않았다.",
+          "knowledge": "오늘 주문한 식사는 셋 모두 비빔밥이다. 참기름 향을 좋아한다.",
+          "unknowns": "",
+          "speechStyle": "동료에게 해요체. 지은과 친하지만 업무 관계의 존댓말은 유지한다.",
+          "exampleDialogue": "",
+          "behaviors": "평소의 일상 동작.",
+          "taboos": ""
+        }
+      ],
+      "defaults": {
+        "model": "gpt-6.1-sol",
+        "effort": "low"
+      }
+    },
+    "variants": [
+      {
+        "id": "condition-0",
+        "label": "npc-dialogue/7",
+        "dialoguePromptVersion": "npc-dialogue/7",
+        "stopOnSilence": true,
+        "memoryMode": "initial_only",
+        "deliveryMode": "batched_on_turn",
+        "turnPolicy": "round_robin",
+        "environmentMode": "off",
+        "eventGeneration": false
+      },
+      {
+        "id": "condition-1",
+        "label": "npc-dialogue/5",
+        "dialoguePromptVersion": "npc-dialogue/5",
+        "stopOnSilence": true,
+        "memoryMode": "initial_only",
+        "deliveryMode": "batched_on_turn",
+        "turnPolicy": "round_robin",
+        "environmentMode": "off",
+        "eventGeneration": false
+      }
+    ],
+    "repetitions": 2,
+    "maxUtterances": 24,
+    "concurrentRuns": 1,
+    "maxConcurrentCalls": 1,
+    "timeoutMs": 90000,
+    "evaluation": {
+      "enabled": false,
+      "interval": 10,
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "contextCharacters": 100000,
+      "repetitionWindow": 12,
+      "repetitionThreshold": 0.72,
+      "repetitionMinChars": 20
+    },
+    "director": {
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    "scheduledEvents": [
+      {
+        "afterUtterance": 20,
+        "text": "세 사람의 휴대전화에 같은 회사 일정 알림이 뜬다. 오늘 오후 두 시 내부 회의가 오후 세 시로 옮겨졌다. 안건과 참석자는 그대로다."
+      }
+    ]
+  }
+]

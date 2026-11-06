@@ -1,0 +1,20 @@
+{
+  "suite": "voice-contrast/1",
+  "casesSha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+  "focusVersion": "reaction-focus/1",
+  "focusSha256": "cbb01479305f304ab8f8e96cffcd3940b1fe912aea09c1c52d09efef5e0608f0",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "split": "development",
+  "repetitions": 2,
+  "expectedCalls": 32,
+  "maxCalls": 32,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "schemaVersion": "reaction-focus-output/1",
+  "scope": "Fixed input prototype; no production Engine or private-state delivery claims.",
+  "status": "completed",
+  "error": null,
+  "calls": 32,
+  "estimatedUsd": 0.06511999999999998
+}

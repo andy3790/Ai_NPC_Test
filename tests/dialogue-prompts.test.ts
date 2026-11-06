@@ -20,8 +20,21 @@ test('published dialogue policy texts cannot drift silently under an existing ve
     'npc-dialogue/3': 'c8204210b3c3da1779d6556a994fa03fd6e1a81613fb52dffa2f323f7b2c7aae',
     'npc-dialogue/4': 'e1531cc297bb7d5f2b5354985790de335ebdea7b6190b0a0f866079f938c33df',
     'npc-dialogue/5': '15e5ca0e0d2ac96868cfcd2b6c44e8972a828b6e6464b1e483f351da3fc3f8b5',
+    'npc-dialogue/6': 'dd4b5ea4c4d22bd1f94b195278e92c94ba4d0e75b908504e25dbf0876aca5bc8',
+    'npc-dialogue/7': 'dd4b5ea4c4d22bd1f94b195278e92c94ba4d0e75b908504e25dbf0876aca5bc8',
+    'npc-dialogue/8': '2ea1bd820ae7ba27d7b12df20abd274930c576e356dee553e97ef6c1d77bd4d4',
+    'npc-dialogue/9': 'dd4b5ea4c4d22bd1f94b195278e92c94ba4d0e75b908504e25dbf0876aca5bc8',
   };
   assert.deepEqual(Object.keys(expected), [...DIALOGUE_PROMPT_VERSIONS]);
+  // Effective /5 persona recorded before the /7+ layout branch was introduced.
+  assert.equal(caseInput(suite.cases[0], 'npc-dialogue/5', 'mock-model', 'low').instructionsSha256,
+    '29be3ddda6c686819a596cd0470f7d26cc2582d6e396e1371f41f0bb63ad5e59');
+  assert.equal(sha256(dialoguePolicies['npc-dialogue/9'].voiceInstruction),
+    'c34a1cce16729561dd14ce0ecb31e77808ed3766bf2336b7ecba1ad5379a6ab2');
+  assert.equal(caseInput(suite.cases[0], 'npc-dialogue/9', 'mock-model', 'low').instructionsSha256,
+    '0a34c67f606e13c873b31fbd7665083d918d4496787d559f39f613b13fb1c865');
+  assert.deepEqual(Object.entries(dialoguePolicies).filter(([, p]) => 'profilePlacement' in p).map(([version, p]) =>
+    [version, 'profilePlacement' in p ? p.profilePlacement : null]), [['npc-dialogue/7', 'after_rules'], ['npc-dialogue/8', 'after_rules'], ['npc-dialogue/9', 'after_rules']]);
   for (const [version, hash] of Object.entries(expected)) {
     assert.equal(sha256(dialoguePolicies[version as keyof typeof dialoguePolicies].instructions), hash,
       'Add a new policy revision; do not rewrite the baseline/candidate that generated recorded samples.');
@@ -29,7 +42,7 @@ test('published dialogue policy texts cannot drift silently under an existing ve
 });
 
 test('policy comparisons hold the full observed input constant and exclude review/private material', () => {
-  const cases = ['cases.json', 'continuity-cases.json', 'continuity-transfer.json', 'follow-through-cases.json'].flatMap(file =>
+  const cases = ['cases.json', 'continuity-cases.json', 'continuity-transfer.json', 'follow-through-cases.json', 'voice-contrast.json', 'voice-transfer.json'].flatMap(file =>
     dialogueCasesSchema.parse(JSON.parse(readFileSync(new URL('../evals/dialogue/' + file, import.meta.url), 'utf8'))).cases);
   for (const source of cases) {
     const c = structuredClone(source);
@@ -39,8 +52,28 @@ test('policy comparisons hold the full observed input constant and exclude revie
     for (const version of DIALOGUE_PROMPT_VERSIONS) {
       const candidate = caseInput(c, version, 'mock-model', 'low');
       assert.equal(candidate.input, baseline.input);
-      assert.equal(candidate.instructions.replace(dialoguePolicies[version].instructions, '<policy>'),
-        baseline.instructions.replace(dialoguePolicies['npc-dialogue/1'].instructions, '<policy>'));
+      let text = candidate.instructions.replace(dialoguePolicies[version].instructions, '<policy>');
+      const original = baseline.instructions.replace(dialoguePolicies['npc-dialogue/1'].instructions, '<policy>');
+      if (version === 'npc-dialogue/9') {
+        const actor = c.characters.find(a => a.id === c.speakerId)!;
+        const voice = [['말하는 방식', actor.speechStyle], ['말투 예시', actor.exampleDialogue]]
+          .filter(([, value]) => value?.trim()).map(([label, value]) => `${label}: ${value}`).join('\n\n');
+        const suffix = '\n\n이번 인물의 발화 기준:\n' + dialoguePolicies[version].voiceInstruction + '\n\n' + voice;
+        assert.ok(text.endsWith(suffix));
+        text = text.slice(0, -suffix.length);
+        const after = ['몸에 밴 행동', '개인적인 금기'].find(label => text.includes('\n\n' + label + ':'));
+        if (voice) text = after ? text.replace('\n\n' + after + ':', '\n\n' + voice + '\n\n' + after + ':') : text + '\n\n' + voice;
+      }
+      if (['npc-dialogue/7', 'npc-dialogue/8', 'npc-dialogue/9'].includes(version)) {
+        // /7+ preserves the profile while moving it after the common rules. The complete original profile still occurs
+        // exactly once, with all world/authority/output instructions unchanged.
+        const marker = '\n\n이번 역할의 인물 기준:\n';
+        const split = text.indexOf(marker); assert.ok(split > 0);
+        const profile = text.slice(split + marker.length);
+        assert.ok(original.includes('\n\n' + profile + '\n\n함께 아는 배경:'));
+        text = text.slice(0, split).replace('\n\n함께 아는 배경:', '\n\n' + profile + '\n\n함께 아는 배경:');
+      }
+      assert.equal(text, original);
       assert.doesNotMatch(candidate.instructions + candidate.input, /PRIVATE_OTHER_PERSON|REVIEW_ONLY_NEVER_SEND/);
     }
   }

@@ -1,0 +1,2724 @@
+{
+  "date": "2026-11-07",
+  "sourceBaseCommit": "015f195469667fe91a48c33a8b510dc721f59523",
+  "priority": "인물마다 성격과 말투가 비슷함",
+  "decision": "No candidate promoted; production NPC default remains npc-dialogue/5.",
+  "costNote": "Catalogue estimate from API-reported usage; failed unpriced request is not claimed free. Not an invoice.",
+  "totals": {
+    "calls": 513,
+    "successfulCalls": 512,
+    "estimatedUsd": 1.1663491,
+    "unpricedCalls": 1
+  },
+  "experiments": [
+    {
+      "id": "v6-development",
+      "source": ".cache/dialogue-eval/2026-11-06T19-58-30-571Z-development-0883feaf",
+      "kind": "fixed-dialogue",
+      "adapter": "openai",
+      "suiteVersion": "voice-contrast/1",
+      "casesSha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "split": "development",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "promptVersion": "npc-lab/8",
+      "policyVersions": [
+        "npc-dialogue/5",
+        "npc-dialogue/6"
+      ],
+      "repetitions": 2,
+      "expectedCalls": 32,
+      "maxCalls": 32,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+      "status": "completed",
+      "error": null,
+      "calls": 32,
+      "estimatedUsd": 0.08322559999999998,
+      "unpricedCalls": 0,
+      "quality": "non-independent author review; see judgments.json and report.md",
+      "mappings": [
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        }
+      ],
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "requestHashesVerified": true
+    },
+    {
+      "id": "v6-regression",
+      "source": ".cache/dialogue-eval/2026-11-06T19-58-30-505Z-all-a599ac51",
+      "kind": "fixed-dialogue",
+      "adapter": "openai",
+      "suiteVersion": "dialogue-cases/1",
+      "casesSha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+      "split": "all",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "promptVersion": "npc-lab/8",
+      "policyVersions": [
+        "npc-dialogue/5",
+        "npc-dialogue/6"
+      ],
+      "repetitions": 1,
+      "expectedCalls": 24,
+      "maxCalls": 24,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+      "status": "completed",
+      "error": null,
+      "calls": 24,
+      "estimatedUsd": 0.09508,
+      "unpricedCalls": 0,
+      "quality": "non-independent author review; see judgments.json and report.md",
+      "mappings": [
+        {
+          "caseId": "simple_request",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "simple_request",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "decline_invitation",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "decline_invitation",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "ordinary_preference",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "ordinary_preference",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_disappointment",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_disappointment",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "enthusiastic_explanation",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "enthusiastic_explanation",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "polite_service",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "polite_service",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "uncertain_information",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "uncertain_information",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "protect_own_time",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "protect_own_time",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "apology_without_therapy",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "apology_without_therapy",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "workplace_partial_answer",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "workplace_partial_answer",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "third_party_privacy",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "third_party_privacy",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "disengaged_listener",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "disengaged_listener",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        }
+      ],
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "requestHashesVerified": true
+    },
+    {
+      "id": "v7-development",
+      "source": ".cache/dialogue-eval/2026-11-06T20-02-39-121Z-development-efdc560e",
+      "kind": "fixed-dialogue",
+      "adapter": "openai",
+      "suiteVersion": "voice-contrast/1",
+      "casesSha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "split": "development",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "promptVersion": "npc-lab/9",
+      "policyVersions": [
+        "npc-dialogue/6",
+        "npc-dialogue/7"
+      ],
+      "repetitions": 2,
+      "expectedCalls": 32,
+      "maxCalls": 32,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+      "status": "completed",
+      "error": null,
+      "calls": 32,
+      "estimatedUsd": 0.0561964,
+      "unpricedCalls": 0,
+      "quality": "non-independent author review; see judgments.json and report.md",
+      "mappings": [
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        }
+      ],
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "requestHashesVerified": true
+    },
+    {
+      "id": "v7-medium",
+      "source": ".cache/dialogue-eval/2026-11-06T20-03-48-085Z-development-63a9d3d4",
+      "kind": "fixed-dialogue",
+      "adapter": "openai",
+      "suiteVersion": "voice-contrast/1",
+      "casesSha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "split": "development",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "promptVersion": "npc-lab/9",
+      "policyVersions": [
+        "npc-dialogue/6",
+        "npc-dialogue/7"
+      ],
+      "repetitions": 2,
+      "expectedCalls": 32,
+      "maxCalls": 32,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+      "status": "completed",
+      "error": null,
+      "calls": 32,
+      "estimatedUsd": 0.0966768,
+      "unpricedCalls": 0,
+      "quality": "non-independent author review; see judgments.json and report.md",
+      "mappings": [
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/6"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/6"
+        }
+      ],
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "requestHashesVerified": true
+    },
+    {
+      "id": "v8-development",
+      "source": ".cache/dialogue-eval/2026-11-06T20-06-01-716Z-development-e6a52593",
+      "kind": "fixed-dialogue",
+      "adapter": "openai",
+      "suiteVersion": "voice-contrast/1",
+      "casesSha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "split": "development",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "promptVersion": "npc-lab/9",
+      "policyVersions": [
+        "npc-dialogue/7",
+        "npc-dialogue/8"
+      ],
+      "repetitions": 2,
+      "expectedCalls": 32,
+      "maxCalls": 32,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+      "status": "completed",
+      "error": null,
+      "calls": 32,
+      "estimatedUsd": 0.046251200000000006,
+      "unpricedCalls": 0,
+      "quality": "non-independent author review; see judgments.json and report.md",
+      "mappings": [
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        }
+      ],
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "requestHashesVerified": true
+    },
+    {
+      "id": "v8-regression",
+      "source": ".cache/dialogue-eval/2026-11-06T20-07-13-339Z-all-3949d206",
+      "kind": "fixed-dialogue",
+      "adapter": "openai",
+      "suiteVersion": "dialogue-cases/1",
+      "casesSha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+      "split": "all",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "promptVersion": "npc-lab/9",
+      "policyVersions": [
+        "npc-dialogue/5",
+        "npc-dialogue/8"
+      ],
+      "repetitions": 1,
+      "expectedCalls": 24,
+      "maxCalls": 24,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+      "status": "completed",
+      "error": null,
+      "calls": 24,
+      "estimatedUsd": 0.0449827,
+      "unpricedCalls": 0,
+      "quality": "non-independent author review; see judgments.json and report.md",
+      "mappings": [
+        {
+          "caseId": "simple_request",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "simple_request",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "decline_invitation",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "decline_invitation",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "ordinary_preference",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "ordinary_preference",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_disappointment",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_disappointment",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "enthusiastic_explanation",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "enthusiastic_explanation",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "polite_service",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "polite_service",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "uncertain_information",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "uncertain_information",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "protect_own_time",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "protect_own_time",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "apology_without_therapy",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "apology_without_therapy",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "workplace_partial_answer",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "workplace_partial_answer",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "third_party_privacy",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/8"
+        },
+        {
+          "caseId": "third_party_privacy",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "disengaged_listener",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "disengaged_listener",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/8"
+        }
+      ],
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "requestHashesVerified": true
+    },
+    {
+      "id": "v7-heldout",
+      "source": ".cache/dialogue-eval/2026-11-06T20-08-57-932Z-holdout-0af9cd68",
+      "kind": "fixed-dialogue",
+      "adapter": "openai",
+      "suiteVersion": "voice-contrast/1",
+      "casesSha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "split": "holdout",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "promptVersion": "npc-lab/9",
+      "policyVersions": [
+        "npc-dialogue/5",
+        "npc-dialogue/7"
+      ],
+      "repetitions": 2,
+      "expectedCalls": 32,
+      "maxCalls": 32,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+      "status": "completed",
+      "error": null,
+      "calls": 32,
+      "estimatedUsd": 0.0831888,
+      "unpricedCalls": 0,
+      "quality": "non-independent author review; see judgments.json and report.md",
+      "mappings": [
+        {
+          "caseId": "late_apology_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "late_apology_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "late_apology_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "late_apology_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "late_apology_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "late_apology_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "late_apology_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "late_apology_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "late_apology_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "late_apology_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "late_apology_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "late_apology_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "late_apology_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "late_apology_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "late_apology_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "late_apology_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_achievement_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "small_achievement_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_achievement_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_achievement_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "small_achievement_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_achievement_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "small_achievement_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "small_achievement_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_achievement_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "small_achievement_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_achievement_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_achievement_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "small_achievement_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "small_achievement_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "small_achievement_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "small_achievement_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        }
+      ],
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "requestHashesVerified": true
+    },
+    {
+      "id": "v7-seowol-transfer",
+      "source": ".cache/dialogue-eval/2026-11-06T20-08-59-147Z-holdout-21094273",
+      "kind": "fixed-dialogue",
+      "adapter": "openai",
+      "suiteVersion": "voice-transfer/1",
+      "casesSha256": "83788926b46c750cbd484d31b2724f1302e4952b79613c20524d9cfe0f07c277",
+      "split": "holdout",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "promptVersion": "npc-lab/9",
+      "policyVersions": [
+        "npc-dialogue/5",
+        "npc-dialogue/7"
+      ],
+      "repetitions": 2,
+      "expectedCalls": 24,
+      "maxCalls": 24,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+      "status": "completed",
+      "error": null,
+      "calls": 24,
+      "estimatedUsd": 0.10358679999999999,
+      "unpricedCalls": 0,
+      "quality": "non-independent author review; see judgments.json and report.md",
+      "mappings": [
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/5"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/5"
+        }
+      ],
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "requestHashesVerified": true
+    },
+    {
+      "id": "v9-development",
+      "source": ".cache/dialogue-eval/2026-11-06T20-23-35-943Z-development-b1f1d2f2",
+      "kind": "fixed-dialogue",
+      "adapter": "openai",
+      "suiteVersion": "voice-contrast/1",
+      "casesSha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "split": "development",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "promptVersion": "npc-lab/10",
+      "policyVersions": [
+        "npc-dialogue/7",
+        "npc-dialogue/9"
+      ],
+      "repetitions": 2,
+      "expectedCalls": 32,
+      "maxCalls": 32,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+      "status": "completed",
+      "error": null,
+      "calls": 32,
+      "estimatedUsd": 0.05837360000000001,
+      "unpricedCalls": 0,
+      "quality": "non-independent author review; see judgments.json and report.md",
+      "mappings": [
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "restaurant_wait_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "restaurant_wait_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_jisoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "borrowed_joke_minseok",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_hyewon",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "borrowed_joke_sua",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        }
+      ],
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "requestHashesVerified": true
+    },
+    {
+      "id": "v9-seowol-regression",
+      "source": ".cache/dialogue-eval/2026-11-06T20-24-21-703Z-holdout-2a60bb42",
+      "kind": "fixed-dialogue",
+      "adapter": "openai",
+      "suiteVersion": "voice-transfer/1",
+      "casesSha256": "83788926b46c750cbd484d31b2724f1302e4952b79613c20524d9cfe0f07c277",
+      "split": "holdout",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "promptVersion": "npc-lab/10",
+      "policyVersions": [
+        "npc-dialogue/7",
+        "npc-dialogue/9"
+      ],
+      "repetitions": 2,
+      "expectedCalls": 24,
+      "maxCalls": 24,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+      "status": "completed",
+      "error": null,
+      "calls": 24,
+      "estimatedUsd": 0.06628629999999999,
+      "unpricedCalls": 0,
+      "quality": "non-independent author review; see judgments.json and report.md",
+      "mappings": [
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "npc-dialogue/7"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 2,
+          "slot": "A",
+          "version": "npc-dialogue/9"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 2,
+          "slot": "B",
+          "version": "npc-dialogue/7"
+        }
+      ],
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "requestHashesVerified": true
+    },
+    {
+      "id": "focus-schema-rejected",
+      "kind": "fixed-focus-prototype",
+      "source": ".cache/voice-focus-eval/2026-11-06T20-14-45-531Z",
+      "suite": "voice-contrast/1",
+      "casesSha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "focusVersion": "reaction-focus/1",
+      "focusSha256": "cbb01479305f304ab8f8e96cffcd3940b1fe912aea09c1c52d09efef5e0608f0",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "split": "development",
+      "repetitions": 2,
+      "expectedCalls": 32,
+      "maxCalls": 32,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "scope": "Fixed input prototype; no production Engine or private-state delivery claims.",
+      "status": "incomplete",
+      "error": "Invalid, failed or unpriced response; no retry.",
+      "calls": 1,
+      "estimatedUsd": 0,
+      "unpricedCalls": 1,
+      "successfulResponses": 0,
+      "actualModelIds": []
+    },
+    {
+      "id": "focus-prototype",
+      "kind": "fixed-focus-prototype",
+      "source": ".cache/voice-focus-eval/2026-11-06T20-15-31-836Z",
+      "suite": "voice-contrast/1",
+      "casesSha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "focusVersion": "reaction-focus/1",
+      "focusSha256": "cbb01479305f304ab8f8e96cffcd3940b1fe912aea09c1c52d09efef5e0608f0",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "split": "development",
+      "repetitions": 2,
+      "expectedCalls": 32,
+      "maxCalls": 32,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "schemaVersion": "reaction-focus-output/1",
+      "scope": "Fixed input prototype; no production Engine or private-state delivery claims.",
+      "status": "completed",
+      "error": null,
+      "calls": 32,
+      "estimatedUsd": 0.06511999999999998,
+      "unpricedCalls": 0,
+      "successfulResponses": 32,
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ]
+    },
+    {
+      "id": "long-conversations",
+      "kind": "conversation",
+      "source": ".cache/dialogue-soak/2026-11-06T20-09-40-464Z",
+      "calls": 192,
+      "estimatedUsd": 0.3673809,
+      "unpricedCalls": 0,
+      "error": null,
+      "runs": [
+        {
+          "directory": "cafe_pottery-npc-dialogue-5-1",
+          "policy": "npc-dialogue/5",
+          "status": "completed",
+          "choices": 24,
+          "spoken": 22,
+          "quiet": 0,
+          "sourceTranscriptSha256": "92768658c5359b42a5abe5e5a301898a08b59bf14c208b62bc4cf1f9a122b14b",
+          "archivedTranscriptSha256": "2f861a7b1e0c3791208f67f24d637b93d4472060af3c6a05071dc490f2578d91"
+        },
+        {
+          "directory": "cafe_pottery-npc-dialogue-5-2",
+          "policy": "npc-dialogue/5",
+          "status": "completed",
+          "choices": 24,
+          "spoken": 18,
+          "quiet": 3,
+          "sourceTranscriptSha256": "80a9979907f925316dc20583fb2b76246f52fca2e81ba1d7b0053c13e835dc26",
+          "archivedTranscriptSha256": "2177829d280be23ea0cb675f5004f87fa19a113943d20f60e1b7b850801ff979"
+        },
+        {
+          "directory": "cafe_pottery-npc-dialogue-7-1",
+          "policy": "npc-dialogue/7",
+          "status": "completed",
+          "choices": 24,
+          "spoken": 19,
+          "quiet": 3,
+          "sourceTranscriptSha256": "db14380f59d1e3b73e468dca832e35fdc7d2c96a3b71584857eed141c71c9605",
+          "archivedTranscriptSha256": "dad57c38661eabf2c9f160d113710b7ef2a3449ae60c6d2c4c5520be5f1265e7"
+        },
+        {
+          "directory": "cafe_pottery-npc-dialogue-7-2",
+          "policy": "npc-dialogue/7",
+          "status": "completed",
+          "choices": 24,
+          "spoken": 17,
+          "quiet": 2,
+          "sourceTranscriptSha256": "8cc9c6e2b421c6ad76f535e38f5d95bd1e9fd751223e7102dc6e0eeead793b12",
+          "archivedTranscriptSha256": "4cbf585d9f68e01ed921867b8d80f4ba0a4f8dc99fe99975ec658f83b2cd13b9"
+        },
+        {
+          "directory": "coworker_lunch-npc-dialogue-5-1",
+          "policy": "npc-dialogue/5",
+          "status": "completed",
+          "choices": 24,
+          "spoken": 21,
+          "quiet": 0,
+          "sourceTranscriptSha256": "d35938f2015b24b210d39beec9c12a7218ac1c5148522fd6b497f313badcb187",
+          "archivedTranscriptSha256": "013e0292805fe5bf6c05ba8f29c3e9fd0c2651c4964435d1fe82da57113dce37"
+        },
+        {
+          "directory": "coworker_lunch-npc-dialogue-5-2",
+          "policy": "npc-dialogue/5",
+          "status": "completed",
+          "choices": 24,
+          "spoken": 18,
+          "quiet": 3,
+          "sourceTranscriptSha256": "c4328e29fde8b885807826ebba0e05e1e664e7a4dd1eb9166ad44fc5e3a540cb",
+          "archivedTranscriptSha256": "c1c9d558117ca5c75dabcb9f8bd12416705129e3da029677639d9f56d20cf2bf"
+        },
+        {
+          "directory": "coworker_lunch-npc-dialogue-7-1",
+          "policy": "npc-dialogue/7",
+          "status": "completed",
+          "choices": 24,
+          "spoken": 22,
+          "quiet": 0,
+          "sourceTranscriptSha256": "da3ca560f569a003a80dc6c51529e85ad650aa8b29db7e434508dcd61a0906c1",
+          "archivedTranscriptSha256": "f28bbf7a0f0d0f9df1d37f8367f447f83b2042f13a1b428339c2305953d3f1d3"
+        },
+        {
+          "directory": "coworker_lunch-npc-dialogue-7-2",
+          "policy": "npc-dialogue/7",
+          "status": "completed",
+          "choices": 24,
+          "spoken": 22,
+          "quiet": 0,
+          "sourceTranscriptSha256": "76b41aec4d8652c97ee8a8d2aad1b48669e60d1215491ae406361b8d3315f530",
+          "archivedTranscriptSha256": "1107c795c4a3964c6d8df4f3896eb227327080726e233777ff97d534fc51e630"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "v6-development/manifest.json",
+      "sha256": "649bbdb31a49dc2ee8d1472dceb0c4c9d1b387f38bbcb8118ce169001ebe9f14",
+      "bytes": 4838
+    },
+    {
+      "path": "v6-development/plan.json",
+      "sha256": "b2c81022c7d4aeb700e973cd0731aeb5a27d3e54abdbec733a579299b2373fa3",
+      "bytes": 537
+    },
+    {
+      "path": "v6-development/cases.json",
+      "sha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "bytes": 57457
+    },
+    {
+      "path": "v6-development/policies.json",
+      "sha256": "4b809aa379e9535efefdd7abdf7f73a8c85c03621b18aa86ab217a68c2d52805",
+      "bytes": 22139
+    },
+    {
+      "path": "v6-development/requests.jsonl",
+      "sha256": "adc9d144021d0ec3a273ceaadcbc9370100daef8b24bda4f5d5b813d85f197e9",
+      "bytes": 283456
+    },
+    {
+      "path": "v6-development/samples.jsonl",
+      "sha256": "a08b5dfdaf35a6ad5f9468afc9d71424213c7b227d42448880ff42e776d6b28e",
+      "bytes": 23403
+    },
+    {
+      "path": "v6-regression/manifest.json",
+      "sha256": "6b044fd3fb9d918e630f68c1234b5c115e549fecd8dee0a27a0dae209f47fd20",
+      "bytes": 3760
+    },
+    {
+      "path": "v6-regression/plan.json",
+      "sha256": "2bde6387503699e2e5c04a97fb875c59ddf205a3d261cf7a2fba4129de05bcf4",
+      "bytes": 529
+    },
+    {
+      "path": "v6-regression/cases.json",
+      "sha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+      "bytes": 24683
+    },
+    {
+      "path": "v6-regression/policies.json",
+      "sha256": "4b809aa379e9535efefdd7abdf7f73a8c85c03621b18aa86ab217a68c2d52805",
+      "bytes": 22139
+    },
+    {
+      "path": "v6-regression/requests.jsonl",
+      "sha256": "4668dae83b02322003063f057ddf4195c872c6e6f703a8a370d9e6a6d751c5a7",
+      "bytes": 183522
+    },
+    {
+      "path": "v6-regression/samples.jsonl",
+      "sha256": "945cab2ec49f5d9a99d7d7bc72b8b76e9e985b00db47e3f4238aec6965ee4253",
+      "bytes": 18144
+    },
+    {
+      "path": "v7-development/manifest.json",
+      "sha256": "3feb7a82dc65fcadef4a93cecf6c3771def32d1ffe59cb7f7b602480af26844a",
+      "bytes": 4828
+    },
+    {
+      "path": "v7-development/plan.json",
+      "sha256": "08bcb80ac617572f04be2dc42918cd268a09e87165814bc290fb270f815c69d4",
+      "bytes": 537
+    },
+    {
+      "path": "v7-development/cases.json",
+      "sha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "bytes": 57457
+    },
+    {
+      "path": "v7-development/policies.json",
+      "sha256": "be81cc4a8267d54522ac68317ea170fa5bec9ec001f01a242b326b60f4f9f76e",
+      "bytes": 27713
+    },
+    {
+      "path": "v7-development/requests.jsonl",
+      "sha256": "bc543a57488d98045913fb515487b3a05309a48e8c6fecc759d8fc4dcd7fdd92",
+      "bytes": 303856
+    },
+    {
+      "path": "v7-development/samples.jsonl",
+      "sha256": "acb8ac166798cb792d9cce3918ae3028b52ec55485219e19ffcf7a354f2f1d4f",
+      "bytes": 23668
+    },
+    {
+      "path": "v7-medium/manifest.json",
+      "sha256": "27ea2559652b8850fc2a26915df3a65a7030c58c35464ee45a7883978ab71c7e",
+      "bytes": 4831
+    },
+    {
+      "path": "v7-medium/plan.json",
+      "sha256": "8d1308786d907b13f80a32bd5fc6c6f47dcd4200a68a2354422a3baf89abc540",
+      "bytes": 540
+    },
+    {
+      "path": "v7-medium/cases.json",
+      "sha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "bytes": 57457
+    },
+    {
+      "path": "v7-medium/policies.json",
+      "sha256": "be81cc4a8267d54522ac68317ea170fa5bec9ec001f01a242b326b60f4f9f76e",
+      "bytes": 27713
+    },
+    {
+      "path": "v7-medium/requests.jsonl",
+      "sha256": "8c46ec6111198cc2898d28ee313f4be2c73611034fd786f4efd6e4cf97cc38f3",
+      "bytes": 303856
+    },
+    {
+      "path": "v7-medium/samples.jsonl",
+      "sha256": "0990e62852ce24d8c93fe6bfa2900e932cb2d378e5e96a3d8cf76198791817f0",
+      "bytes": 23128
+    },
+    {
+      "path": "v8-development/manifest.json",
+      "sha256": "fc8e66581af0358bd23d07d3b6ce029a0883e5b896b8dcb8e68865d0911a78ca",
+      "bytes": 4839
+    },
+    {
+      "path": "v8-development/plan.json",
+      "sha256": "e3608ba95b0e983afd8b6b71951e0c1ae74e060d0eb50d7bbad377eecab755a6",
+      "bytes": 537
+    },
+    {
+      "path": "v8-development/cases.json",
+      "sha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "bytes": 57457
+    },
+    {
+      "path": "v8-development/policies.json",
+      "sha256": "68524c62fa43038b8f9771aa704077983fabd8b9b6dbe721f29a5aad1e0e1f57",
+      "bytes": 30684
+    },
+    {
+      "path": "v8-development/requests.jsonl",
+      "sha256": "004023c63dc72694d38ce7efe14498c12b4d87c84c52c0d61d703a6e3f9204fa",
+      "bytes": 262016
+    },
+    {
+      "path": "v8-development/samples.jsonl",
+      "sha256": "04829013758fe5c9a47fff26117b7ab7e4edea26b4b1bbca8ecb7cc9b6c51ed9",
+      "bytes": 23876
+    },
+    {
+      "path": "v8-regression/manifest.json",
+      "sha256": "5a26481a07844f1ccb64a72823b795773188364112c19286477b2308fb1e78a9",
+      "bytes": 3762
+    },
+    {
+      "path": "v8-regression/plan.json",
+      "sha256": "40c88978a5c0ca962c9f6f3f3e961df62ffacc700ebb68c496aca68c5364161a",
+      "bytes": 529
+    },
+    {
+      "path": "v8-regression/cases.json",
+      "sha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+      "bytes": 24683
+    },
+    {
+      "path": "v8-regression/policies.json",
+      "sha256": "68524c62fa43038b8f9771aa704077983fabd8b9b6dbe721f29a5aad1e0e1f57",
+      "bytes": 30684
+    },
+    {
+      "path": "v8-regression/requests.jsonl",
+      "sha256": "810f7dd922c38a7ab58a7d902b05b4b698e1f6497a4ec905b12e1bbdeb79a3cf",
+      "bytes": 152142
+    },
+    {
+      "path": "v8-regression/samples.jsonl",
+      "sha256": "816daf4424023c3de07837e0ed62307c0561ecc82481e30dd683bc78fea75500",
+      "bytes": 18135
+    },
+    {
+      "path": "v7-heldout/manifest.json",
+      "sha256": "1635bdf022904abe03251a35373f088d58955bf5e4eeaba0ca3885c9326c96eb",
+      "bytes": 4840
+    },
+    {
+      "path": "v7-heldout/plan.json",
+      "sha256": "7df7cbd8f0b19dd719f8934667ab12d232853d2bb433f62ce4c1ac48762a3241",
+      "bytes": 533
+    },
+    {
+      "path": "v7-heldout/cases.json",
+      "sha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "bytes": 57457
+    },
+    {
+      "path": "v7-heldout/policies.json",
+      "sha256": "68524c62fa43038b8f9771aa704077983fabd8b9b6dbe721f29a5aad1e0e1f57",
+      "bytes": 30684
+    },
+    {
+      "path": "v7-heldout/requests.jsonl",
+      "sha256": "2a14fac51d59715795b8f75a28ef23cd1f125fd6ec407aec738126ec877759f8",
+      "bytes": 280928
+    },
+    {
+      "path": "v7-heldout/samples.jsonl",
+      "sha256": "558d0ba45fc15d83646eebdec1e0c6d3bdad9c3c6602078c8bb438e8715a374f",
+      "bytes": 23261
+    },
+    {
+      "path": "v7-seowol-transfer/manifest.json",
+      "sha256": "585472a346897b050fc8d6321ca87ffd9c6ac57bbf6f2c3bf4c461cb8199f487",
+      "bytes": 3886
+    },
+    {
+      "path": "v7-seowol-transfer/plan.json",
+      "sha256": "37530cb13e9b12a182a647afb1fff7732780693ee68ea0412cde39208e268397",
+      "bytes": 533
+    },
+    {
+      "path": "v7-seowol-transfer/cases.json",
+      "sha256": "83788926b46c750cbd484d31b2724f1302e4952b79613c20524d9cfe0f07c277",
+      "bytes": 62444
+    },
+    {
+      "path": "v7-seowol-transfer/policies.json",
+      "sha256": "68524c62fa43038b8f9771aa704077983fabd8b9b6dbe721f29a5aad1e0e1f57",
+      "bytes": 30684
+    },
+    {
+      "path": "v7-seowol-transfer/requests.jsonl",
+      "sha256": "e88630a9e6b151d8f391c33f6dc176754029ed40e321ad4e323f3a931a7e6afc",
+      "bytes": 377248
+    },
+    {
+      "path": "v7-seowol-transfer/samples.jsonl",
+      "sha256": "d40c28a2a494f34cf6cd06edf6992970d6da3b350f2d8ae45035d16d3148f437",
+      "bytes": 16702
+    },
+    {
+      "path": "v9-development/manifest.json",
+      "sha256": "56bc64cc02b76960fbb0e46ad8b40864af408356133bebcc64ba7a8cc547fb15",
+      "bytes": 4839
+    },
+    {
+      "path": "v9-development/plan.json",
+      "sha256": "21245c1a9a2598d66f10946853a9f7dd461101c8671bc128d382d725c6da9114",
+      "bytes": 538
+    },
+    {
+      "path": "v9-development/cases.json",
+      "sha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "bytes": 57457
+    },
+    {
+      "path": "v9-development/policies.json",
+      "sha256": "7e7ffb552227be8e94d8ee8df814184f8815144e67f9880376a02b97f6be0258",
+      "bytes": 36988
+    },
+    {
+      "path": "v9-development/requests.jsonl",
+      "sha256": "eb9b644bfede230ac76cf381420ca96c69242497b6800ce4baff4b2cb7d0a61e",
+      "bytes": 315424
+    },
+    {
+      "path": "v9-development/samples.jsonl",
+      "sha256": "e93e6a42b937aab5661864e62c4d3aef4b147d4931e8e92bc7736a5ccb97ad51",
+      "bytes": 23345
+    },
+    {
+      "path": "v9-seowol-regression/manifest.json",
+      "sha256": "56c9916496a56e0c3382f73784e248cdf8f03c0a17922800ee602aca7c18f7da",
+      "bytes": 3887
+    },
+    {
+      "path": "v9-seowol-regression/plan.json",
+      "sha256": "8dbfb04533242cfaf0b99dc2a3e05957513ec7835faeed9e84a56a5e003de364",
+      "bytes": 534
+    },
+    {
+      "path": "v9-seowol-regression/cases.json",
+      "sha256": "83788926b46c750cbd484d31b2724f1302e4952b79613c20524d9cfe0f07c277",
+      "bytes": 62444
+    },
+    {
+      "path": "v9-seowol-regression/policies.json",
+      "sha256": "7e7ffb552227be8e94d8ee8df814184f8815144e67f9880376a02b97f6be0258",
+      "bytes": 36988
+    },
+    {
+      "path": "v9-seowol-regression/requests.jsonl",
+      "sha256": "61d3c2ff8a2a1f1ec39d62da327b3ec5ea6e133d1b219c49bd2faaf90f26f425",
+      "bytes": 400828
+    },
+    {
+      "path": "v9-seowol-regression/samples.jsonl",
+      "sha256": "6f0e7836e3a04f98c8f40eaebc71ae74dadf68f42ecbbf88942e86163dbcea92",
+      "bytes": 17054
+    },
+    {
+      "path": "focus-schema-rejected/manifest.json",
+      "sha256": "4e35b3f89d5c36b38652bc26e44f577cbfdfa5d4e2c1992720310d6b4c6f10e4",
+      "bytes": 644
+    },
+    {
+      "path": "focus-schema-rejected/plan.json",
+      "sha256": "992285329b15d03ea74fed35a08293fdb103e061c9f807ddb6594271fa888d10",
+      "bytes": 521
+    },
+    {
+      "path": "focus-schema-rejected/cases.json",
+      "sha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "bytes": 57457
+    },
+    {
+      "path": "focus-schema-rejected/focus.json",
+      "sha256": "cbb01479305f304ab8f8e96cffcd3940b1fe912aea09c1c52d09efef5e0608f0",
+      "bytes": 1230
+    },
+    {
+      "path": "focus-schema-rejected/requests.jsonl",
+      "sha256": "d198b9f982eb46f7a007dc2f259da5e5c2d315136f134886d38d5e29d18dfa12",
+      "bytes": 10157
+    },
+    {
+      "path": "focus-schema-rejected/samples.jsonl",
+      "sha256": "381955496400f3d08327ae5ac6de5e643c5fe3f010cc0e800862b13d865f4429",
+      "bytes": 768
+    },
+    {
+      "path": "focus-prototype/manifest.json",
+      "sha256": "7ed9f89cae4a47e2001aaf37213aebfe49d275af3c61d20130f0c98a8eb02bbb",
+      "bytes": 663
+    },
+    {
+      "path": "focus-prototype/plan.json",
+      "sha256": "4e423e8b9585a0b49e0be9878d6c8e187f6be248002c849c97a63e4c14af9b98",
+      "bytes": 567
+    },
+    {
+      "path": "focus-prototype/cases.json",
+      "sha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "bytes": 57457
+    },
+    {
+      "path": "focus-prototype/focus.json",
+      "sha256": "cbb01479305f304ab8f8e96cffcd3940b1fe912aea09c1c52d09efef5e0608f0",
+      "bytes": 1230
+    },
+    {
+      "path": "focus-prototype/requests.jsonl",
+      "sha256": "4e9eaffd3c9d3589e16434219fec92d623b41d9e71986494a69db11ef94f4349",
+      "bytes": 313184
+    },
+    {
+      "path": "focus-prototype/samples.jsonl",
+      "sha256": "1230ddca376403df49306cf85e85b2b95657fe419a9204c8277a1d3602d9cbc0",
+      "bytes": 26560
+    },
+    {
+      "path": "long-conversations/result.json",
+      "sha256": "8146ce48db053b77b129e8fbed8948b9fb75942603d31a0514334351612f0e2b",
+      "bytes": 52383
+    },
+    {
+      "path": "long-conversations/configs.json",
+      "sha256": "cc7ee200578933bf43c0bd2e05f95113bc23c803f205178947fe532141a196b1",
+      "bytes": 12186
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-5-1/transcript.md",
+      "sha256": "2f861a7b1e0c3791208f67f24d637b93d4472060af3c6a05071dc490f2578d91",
+      "bytes": 4450
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-5-1/calls.jsonl",
+      "sha256": "dc7b9a623672af171a71dc4f7d6e551807c3ad7b89fdb988d9097dbd55bbc6f4",
+      "bytes": 51718
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-5-1/instructions.json",
+      "sha256": "0a68114f0a78c96744c56206b74d0f86329fd374ee78291dd5087b88a2428e9b",
+      "bytes": 20052
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-5-2/transcript.md",
+      "sha256": "2177829d280be23ea0cb675f5004f87fa19a113943d20f60e1b7b850801ff979",
+      "bytes": 3821
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-5-2/calls.jsonl",
+      "sha256": "ae9825c5b07095b66a0632d0d6ab3c6c18548a30c0fb3e6e40565c5db0c778f6",
+      "bytes": 48463
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-5-2/instructions.json",
+      "sha256": "0a68114f0a78c96744c56206b74d0f86329fd374ee78291dd5087b88a2428e9b",
+      "bytes": 20052
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-7-1/transcript.md",
+      "sha256": "dad57c38661eabf2c9f160d113710b7ef2a3449ae60c6d2c4c5520be5f1265e7",
+      "bytes": 3588
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-7-1/calls.jsonl",
+      "sha256": "90f56441cf31de0aca5e3a2ab7fa3ce4ba115fdf9fd57f995d76f9b0474f34f6",
+      "bytes": 47888
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-7-1/instructions.json",
+      "sha256": "a67c19a5d2f06e172b420a2af1dd57d74f26ce7e6ddf5c402165c30846b5eb99",
+      "bytes": 23877
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-7-2/transcript.md",
+      "sha256": "4cbf585d9f68e01ed921867b8d80f4ba0a4f8dc99fe99975ec658f83b2cd13b9",
+      "bytes": 3229
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-7-2/calls.jsonl",
+      "sha256": "cd5835e6ca3c9d9496cda256ffde2ee9b6847a7b7d2762e6e4f0fa5527523077",
+      "bytes": 47187
+    },
+    {
+      "path": "long-conversations/cafe_pottery-npc-dialogue-7-2/instructions.json",
+      "sha256": "a67c19a5d2f06e172b420a2af1dd57d74f26ce7e6ddf5c402165c30846b5eb99",
+      "bytes": 23877
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-5-1/transcript.md",
+      "sha256": "013e0292805fe5bf6c05ba8f29c3e9fd0c2651c4964435d1fe82da57113dce37",
+      "bytes": 3931
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-5-1/calls.jsonl",
+      "sha256": "89dcaa5df470ac4b956eccf053bbea5a38161a6f71026f1070b860837fc9c986",
+      "bytes": 50575
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-5-1/instructions.json",
+      "sha256": "c482bd52c5d0d4f0cec1b92b5a90b8c75bf679835ce60b257a94b4856ad7ae51",
+      "bytes": 20177
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-5-2/transcript.md",
+      "sha256": "c1c9d558117ca5c75dabcb9f8bd12416705129e3da029677639d9f56d20cf2bf",
+      "bytes": 3768
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-5-2/calls.jsonl",
+      "sha256": "34ae7acda5caf34cd4c3e1900ec6e5cdbacf8cdf37d6785585236daca25e4411",
+      "bytes": 48776
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-5-2/instructions.json",
+      "sha256": "c482bd52c5d0d4f0cec1b92b5a90b8c75bf679835ce60b257a94b4856ad7ae51",
+      "bytes": 20177
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-7-1/transcript.md",
+      "sha256": "f28bbf7a0f0d0f9df1d37f8367f447f83b2042f13a1b428339c2305953d3f1d3",
+      "bytes": 4221
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-7-1/calls.jsonl",
+      "sha256": "e4caaea40d835680325a9116f8799fc6e6dcd3a7d851686e8d5a125f3b29a0d9",
+      "bytes": 51321
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-7-1/instructions.json",
+      "sha256": "c7bf511618eaa152e320e0ce4350527e41c765e85e1f27712ef2d91d0260a1f3",
+      "bytes": 24002
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-7-2/transcript.md",
+      "sha256": "1107c795c4a3964c6d8df4f3896eb227327080726e233777ff97d534fc51e630",
+      "bytes": 4453
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-7-2/calls.jsonl",
+      "sha256": "35742b10361dd6f7a6b6830b7feea4ce59912d95379a21ef3c0fd83a7b084464",
+      "bytes": 52117
+    },
+    {
+      "path": "long-conversations/coworker_lunch-npc-dialogue-7-2/instructions.json",
+      "sha256": "c7bf511618eaa152e320e0ce4350527e41c765e85e1f27712ef2d91d0260a1f3",
+      "bytes": 24002
+    },
+    {
+      "path": "judgments.json",
+      "sha256": "8926a23fe266f26f16864f80bbc6fabafd625dd674e0374cb29f14ad3ac6f65d",
+      "bytes": 150912
+    }
+  ]
+}

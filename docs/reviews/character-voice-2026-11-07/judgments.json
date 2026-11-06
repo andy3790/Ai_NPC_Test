@@ -1,0 +1,3526 @@
+{
+  "reviewer": "Prompt author, not independent or blinded human evaluation",
+  "scale": "A/B/tie/neither. A/B applies only within each pair. Focus prototype A is baseline, B is focus; not blinded.",
+  "judgments": [
+    {
+      "experiment": "v6-development",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "사십 분은 길다. 나 배고픈데 가까운 다른 데 갈까?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "사십 분은 길다. 나 배고픈데, 근처 다른 데 갈까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "사십 분은 길다. 나 배고파. 근처 다른 데 가자.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "사십 분은 길다. 나 배고파. 근처 다른 데 가자.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "사십 분? 배고파서 길게 느껴지긴 하는데, 뭐 파는지부터 보자. 나 메뉴 보면 또 기다리고 싶어질 수도 있어.",
+          "action": "식당 앞 메뉴를 보려고 다가간다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "오, 가 볼까? 근데 사십 분이면… 일단 뭐 파는지부터 보자. 배고프니까 줄 길면 다 맛있어 보이네.",
+          "action": "식당 앞 메뉴를 보려고 가까이 다가간다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "오, 뭐 파는데 이렇게 줄을 서? 나도 궁금하긴 한데 사십 분이면… 일단 메뉴부터 보자. 배고파서 아무거나 맛있어 보일 것 같긴 해.",
+          "action": "식당 앞 메뉴를 보려고 입구 쪽으로 다가간다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "오, 뭔데 줄이 저렇게 길어? 나 좀 궁금한데. 사십 분이면… 일단 메뉴부터 볼까?",
+          "action": "식당 앞 메뉴를 보려고 다가간다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "나 배고픈데 사십 분은 좀 길다. 뭐 파는 데야?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "나 배고파서 사십 분은 좀 길다. 뭐 파는 데인지 메뉴부터 볼까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "나 배고파서 사십 분은 좀 길다. 뭐 파는지 메뉴부터 볼까?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "나 배고파서 사십 분은 좀 긴데. 뭐 파는 데야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "난 배고파서 사십 분은 좀 길어. 다른 데 가자.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "사십 분은 좀 길다. 나 배고파서 바로 먹을 수 있는 데 가고 싶어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "사십 분은 좀 길다. 나 배고파서 바로 먹을 수 있는 데 가고 싶어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "나 배고파서 사십 분은 길다. 다른 데 가자.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵 끌고 가는 것 같아. 좀 기울긴 했는데 난 이런 게 더 정 가더라.",
+          "action": "사진을 가까이 들여다본다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "손잡이가 컵 끌고 가는 것 같아. 좀 기울긴 했는데 난 이런 게 더 정 가더라.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "손잡이가 컵 데리고 퇴근하는 것 같아. 좀 기울긴 했는데 난 마음에 들어. 이대로 구울 거야?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵 끌고 가는 것 같아. 좀 기울긴 했는데, 처음 만든 거면 난 괜찮아 보여.",
+          "action": "컵 사진을 가까이 들여다본다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "나는 손잡이가 컵 끌고 가는 것 같아. 야, 일어나, 집 가자 하고. 근데 저렇게 기울어 있으니까 오히려 정은 간다. 처음 만든 거치고 손잡이는 진짜 야무지게 붙였네.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵 끌고 가는 것 같은데? 근데 난 이거 좀 마음에 들어. 반듯한 컵보다 네가 만든 거라는 느낌이 확 나잖아. 손잡이는 원래 크게 만들고 싶었던 거야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵 부축하는 것 같은데? 근데 난 이거 좀 마음에 들어. 반듯한 컵은 많잖아. 손잡이는 일부러 크게 만든 거야?",
+          "action": "사진 속 손잡이를 손가락으로 가리킨다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "나는 손잡이가 컵 끌고 퇴근하는 것 같은데. 아니, 근데 저렇게 큼직하니까 잡기는 편하겠다. 처음 만든 거라며? 이 정도면 굽고 나서 진짜 써보고 싶게 생겼어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵보다 더 당당한데. 좀 기울긴 했어도 네가 만든 거라 그런지 귀엽다. 이대로 구워도 되는 거래?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "손잡이가 컵 끌고 가는 것 같은데. 좀 기울긴 했어도 귀엽다. 처음 만든 거치고 모양은 다 갖췄네.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "손잡이가 컵 끌고 가는 것 같아. 좀 기울긴 했는데 귀엽네. 구우면 저 모양 그대로 나와?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 몸통보다 더 당당한데. 좀 기울긴 했어도 귀엽다. 이거 구워도 이 모양 그대로 나와?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "난 손잡이 큰 게 좋네. 손가락 안 끼겠어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "난 손잡이가 커서 좋네. 손가락 끼우기 편하겠어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-development",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "일부 표현 차이만으로 인물 구별 개선을 선택할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "난 손잡이 큰 게 좋네. 손가락 끼우기 편하겠다.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "난 손잡이 큰 거 괜찮아 보여. 손가락 끼울 때 안 답답하겠어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "simple_request",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "응.",
+          "action": "앞에 있는 물병을 들어 준에게 건넨다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "여기.",
+          "action": "앞에 있는 물병을 집어 준에게 건넨다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "decline_invitation",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "오늘은 그냥 집에서 혼자 쉬려고. 이번 주에 야근 두 번 했더니 좀 지치네.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "오늘은 그냥 집에 가서 혼자 쉬려고. 이번 주에 야근 두 번 했더니 좀 지친다.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "ordinary_preference",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "난 그 시원한 맛이 좋던데. 오늘도 민초 먹을래.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "난 그 시원한 맛이 좋던데. 오늘도 민초 먹을 거야.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "small_disappointment",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "아, 진짜 아깝다. 주차 말고 나머지는 괜찮았어?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "아, 주차에서 걸렸구나. 아깝다. 너도 선 밟은 줄 알았어?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "enthusiastic_explanation",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "맞아, 손잡이가 제일 애먹였어. 몸통은 손으로 빚었는데, 손잡이를 붙이면 접합부가 자꾸 갈라지는 거야. 그래서 세 번이나 다시 붙였어. 작은 컵인데 손잡이 하나 때문에 일이 엄청 커졌지. 지금은 붙어 있는 모양만 봐도 뿌듯해.\n\n그렇게 모양 잡고 초벌한 다음에 흰 유약을 발랐어. 가장자리 파란색 보이지? 저건 붓으로 콕콕 찍은 거야. 흰 바탕에 청색이 조금만 들어가는 게 좋아서 가장자리에 찍었는데, 난 이 부분이 제일 마음에 들어. 손으로 빚는 것도 좋지만 이렇게 색 얹을 때 진짜 신나더라.",
+          "action": "컵 손잡이의 접합부를 가리킨 뒤 가장자리의 청색 부분으로 손끝을 옮긴다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "맞아, 손잡이가 제일 애먹었어. 붙여 놓으면 접합부가 자꾸 갈라져서 세 번이나 다시 붙였거든. 컵 몸통보다 그 작은 손잡이에 더 신경 쓴 것 같아. 손으로 빚은 거라 모양 잡는 재미가 있는데, 붙이는 건 또 다르더라. 여기 손잡이랑 몸통 만나는 부분 있지? 여기가 계속 말썽이었어.\n\n모양 다 만든 다음에 초벌하고, 그 위에 흰 유약을 발랐어. 가장자리 파란색은 붓으로 콕콕 찍은 거야. 흰색만 두는 것보다 가장자리에 청색이 조금 들어가면 좋겠더라고. 난 이 부분이 특히 마음에 들어. 작은 컵인데도 손 갈 데가 꽤 많지?",
+          "action": "손가락으로 손잡이 접합부를 가리켰다가 컵 가장자리의 청색 무늬를 짚는다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "polite_service",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "비용은 기사님이 점검해 봐야 알 수 있어요. 선풍기가 어떻게 안 되나요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "비용은 기사님이 점검해 봐야 알 수 있어요. 선풍기가 어떻게 안 되나요?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "uncertain_information",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "모르겠어. 온다고만 하고 몇 시쯤 오는지는 말 안 했어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "나도 몰라. 온다고만 했어. 지금 어디쯤인지 물어볼게.",
+          "action": "휴대폰을 꺼내 은지에게 지금 어디쯤인지 메시지를 보낸다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "protect_own_time",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "나 여기서 30분 기다렸어. 또 기다리라고? 뭐 사야 되는데?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "나 30분 기다렸는데 또 기다리라고? 뭐 사야 되는데?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "apology_without_therapy",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "준아, 미안. 오늘 버스에 네 우산 두고 내렸어. 아직 못 찾았어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "준아, 미안해. 오늘 네 우산 버스에 두고 내렸어. 아직 못 찾았어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "workplace_partial_answer",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "네, 일정표에는 오후 두 시로 되어 있어요. 회의실은 3층이고, 누가 발표하는지는 저도 몰라요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "네, 일정표에는 오후 두 시로 되어 있어요. 회의실은 3층이고, 누가 발표하는지는 저도 몰라요.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "third_party_privacy",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "어쩐지 오늘 말이 없더라. 어제 잠 못 잤어?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "어쩐지 오늘 말이 없더라. 어제 잠 잘 못 잤어?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v6-regression",
+      "caseId": "disengaged_listener",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "문맥에 필요한 대답과 높임말·지식 경계에서 뚜렷한 선호를 정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "미안, 업무 메시지 보느라 못 들었어. 어디로 언제 가는데?",
+          "action": "휴대폰을 내려놓고 준을 본다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "잠깐, 업무 메시지 보느라 못 들었어. 어디로 언제 간다고?",
+          "action": "휴대폰을 내려놓고 준을 본다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 길다. 나 배고파서 바로 먹고 싶은데, 옆에 다른 데 가 볼까?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "사십 분은 길다. 나 배고파. 옆에 다른 데부터 볼까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "사십 분은 길다. 나 배고파서 옆에 다른 데 가고 싶은데, 어때?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 길다. 나 배고파. 일단 메뉴부터 보자. 뭘 파는진 봐야지.",
+          "action": "식당 앞 메뉴가 있는지 살펴본다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "오, 가 볼까? 근데 사십 분이면 배가 좀… 일단 뭐 파는지 보자. 메뉴 보고 나면 더 기다리고 싶을 수도 있잖아.",
+          "action": "식당 앞에 메뉴가 나와 있는지 살펴본다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "오, 뭐 파는데? 사십 분이면 좀 긴데, 메뉴 보고 맛있어 보이면 기다릴 만하지.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "오, 뭘 팔길래 저렇게 서 있지? 나도 가 보고 싶긴 한데, 사십 분이면 메뉴부터 좀 보자. 배고파서 아무거나 맛있어 보일 것 같긴 해.",
+          "action": "식당 앞 메뉴를 보려고 가까이 다가간다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "사십 분이면 배고파서 더 맛있게 먹긴 하겠다. 근데 뭐 파는 덴데? 메뉴부터 좀 보자.",
+          "action": "식당 앞 메뉴가 있는지 살펴본다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "나 배고파서 사십 분은 좀 길어. 뭐 파는지부터 볼까?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "나 배고파서 사십 분은 좀 긴데. 뭐 파는 데야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "나 배고파서 사십 분은 좀 긴데. 뭐 파는 데야?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "나 지금 배고파서 사십 분은 좀 길어. 뭐 파는 데인지 메뉴부터 볼까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "나 배고파서 사십 분은 못 기다리겠어. 다른 데 가자.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 좀 길다. 나 배고파서 바로 먹을 수 있는 데가 좋아.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 좀 길다. 나 배고파서 바로 먹을 수 있는 데 가고 싶어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "나 지금 배고파서 사십 분은 좀 길어. 다른 데 가자.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "기울긴 했는데 난 손잡이가 더 눈에 들어와. 컵에 비해 엄청 크다. 잡기는 편하겠어.",
+          "action": "사진 속 손잡이를 손가락으로 가리킨다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵을 끌고 가는 것 같은데. 좀 기울긴 했어도 난 마음에 들어. 처음 만든 거잖아.",
+          "action": "사진을 가까이 들여다본다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵을 끌고 가는 것 같은데. 삐뚤긴 한데 난 이런 게 더 귀여워.",
+          "action": "사진을 가까이 들여다본다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 너무 커서 컵이 끌려가는 것 같아. 근데 난 이대로 굽는 거 괜찮겠는데. 반듯한 것보다 눈에 들어와.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵을 들고 가는 것 같은데? 아니, 근데 저렇게 큼직하면 잡기는 편하겠다. 좀 기울긴 했는데 난 이런 게 더 정 가더라. 이거 구울 때도 이 모양 그대로 나와?",
+          "action": "사진을 가까이 들여다본다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 컵을 끌고 가는 것 같은데? 근데 난 이거 좀 마음에 들어. 반듯한 컵보다… 아니, 마시기는 반듯한 게 편하겠지만 생긴 건 이게 더 재밌어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 컵을 끌고 가는 것 같은데. 근데 난 이거 좀 마음에 들어. 반듯한 컵보다 네가 만든 거라고 바로 알아보겠어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵을 끌고 가는 것 같은데? 야근하자고. 근데 난 이거 좀 마음에 들어. 반듯한 컵보다 네가 만든 거라고 바로 알아보겠어. 손잡이는 잡기 편하겠다.",
+          "action": "사진을 가까이 들여다본다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "기울긴 했는데 컵 모양은 나왔네. 손잡이가 커서 더 기울어 보여. 저건 굽기 전에 좀 세울 수 있대?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵을 끌고 가는 것 같아. 좀 기울긴 했는데 귀엽네. 저대로 구워도 되는 거래?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵에 비해 좀 크긴 하다. 기울어진 건 오히려 귀여운데? 저대로 구워도 되는 거래?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "컵보다 손잡이가 더 당당해 보여. 기울긴 했는데 난 이 모양도 괜찮아. 근데 굽기 전에 똑바로 세울 수는 있어?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "난 손잡이 큰 게 좋네. 손가락 안 끼겠어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "난 손잡이 큰 게 좋네. 손가락 안 끼겠어. 좀 기울긴 했다.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-development",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "배치에 따른 표현 변화는 있으나 인물별 반응을 구별하는 일관된 이득은 확인하지 못했다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "좀 기울긴 했네. 난 손잡이 큰 게 좋아. 손가락 넉넉하게 들어가겠어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "난 손잡이 큰 게 좋네. 손가락 끼우기 편하겠어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 길다. 나 배고파서 바로 먹을 수 있는 데 가고 싶은데.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "사십 분은 길다. 나 배고파서 바로 먹고 싶은데, 옆에 다른 데 볼까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "사십 분은 길다. 나 배고파서 바로 먹고 싶은데, 딴 데 갈까?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 길다. 나 배고파서 바로 먹고 싶은데, 옆에 다른 데 가 볼까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "사십 분? 배고픈데… 근데 줄 저렇게 서 있으니까 궁금하긴 하다. 일단 뭐 파는지 메뉴부터 볼까?",
+          "action": "식당 앞 메뉴를 보려고 가까이 다가간다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분이면 좀 길긴 한데, 뭐 파는지 궁금하다. 메뉴부터 볼까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "오, 뭐 파는 덴데? 사십 분이면 좀 길긴 한데 메뉴 보고 끌리면 기다리자.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "사십 분? 배고픈데… 근데 줄 보니까 궁금하긴 하다. 일단 뭐 파는지 메뉴부터 볼까?",
+          "action": "식당 앞 메뉴판을 보려고 가까이 다가간다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "나 지금 배고파서 사십 분은 좀 길다. 무슨 메뉴길래?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "배고픈데 사십 분은 좀 길다. 뭐 파는 데야? 가격부터 보자.",
+          "action": "식당 앞에서 메뉴판이 있는지 살핀다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "나 배고픈데 사십 분은 좀 길다. 무슨 메뉴길래?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분이면 좀 긴데. 뭐 파는지랑 가격부터 보자.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "난 다른 데 가고 싶어. 배고파서 사십 분은 길다.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "나 지금 배고파서 사십 분은 좀 길어. 다른 데 가자.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "나 지금 배고파서 사십 분은 좀 길어. 다른 데 가자.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "난 배고파서 사십 분은 좀 길어. 다른 데 가자.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 커서 더 기울어 보여. 근데 난 이런 삐뚤한 게 좀 귀엽더라. 네가 만든 티 나잖아.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "기울긴 했는데 귀엽네. 난 손잡이 큼직한 게 좋아.",
+          "action": "사진 속 손잡이를 손가락으로 가리킨다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "기울긴 했는데 귀엽네. 난 손잡이 조금만 작았으면 더 좋았겠다.",
+          "action": "사진을 보려고 몸을 조금 기울인다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "확실히 기울긴 했네. 근데 손잡이 큼직한 건 좋아. 잡기 편해 보여.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "난 손잡이가 컵 끌고 퇴근하는 것 같은데. 근데 좀 귀엽다, 한쪽으로 축 처진 게. 이거 구워도 기울어진 건 그대로 남는 거야?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 컵을 끌고 가는 것 같은데. 근데 난 이 손잡이 마음에 들어. 손가락 안 낑기겠다. 기울어진 건 구워도 이대로야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 거의 본체인데? 아니, 근데 난 이거 좀 귀엽다. 한쪽으로 기운 것까지 모양이 묘하게 잘 맞아. 너 이대로 구울 거야?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵 끌고 가는 것 같은데? 야, 일어나, 출근해야지 하고. 근데 난 저 큰 손잡이 좋아. 아니, 잡기는 진짜 편하겠어. 저 기울어진 것도 구우면 그대로 남는 거야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 커서 컵이 더 작아 보여. 좀 기울긴 했는데, 처음 만든 거면 괜찮은데? 잡기는 편하겠다.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 컵보다 더 당당한데. 좀 기울긴 했어도 귀엽다. 굽기 전에 더 고칠 수는 있어?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "손잡이가 몸통을 끌고 가는 것 같아. 좀 기울긴 했는데 귀엽네. 굽기 전에 모양 더 고칠 수 있어?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 컵에 비해 꽤 크네. 좀 기울긴 했는데 처음 만든 거면 괜찮아 보여. 잡기는 편하겠다.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/6",
+          "speech": "기울긴 했네. 근데 난 손잡이 큰 게 마음에 들어. 손가락 안 끼겠다.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "좀 기울긴 했네. 근데 손잡이 큼직한 건 좋아. 손가락 안 끼겠어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-medium",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "medium 조건에서도 이름을 지웠을 때 더 잘 구별된다고 판단할 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "좀 기울긴 했네. 근데 난 손잡이 큰 게 좋아. 손가락 안 끼겠어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/6",
+          "speech": "기울긴 했네. 난 손잡이 큼직한 게 마음에 들어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "사십 분은 길다. 일단 메뉴랑 가격부터 보자. 뭐 파는데 저렇게 기다리나.",
+          "action": "식당 입구 쪽으로 다가가 메뉴판을 찾는다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 길다. 뭐 파는지 메뉴부터 보자.",
+          "action": "식당 앞 메뉴를 보러 다가간다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 좀 길다. 뭐 파는지 메뉴부터 보자.",
+          "action": "식당 앞 메뉴를 보려고 입구 쪽으로 다가간다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "사십 분은 길다. 일단 메뉴랑 가격부터 보자. 뭐 파는데 이렇게 줄이 길어?",
+          "action": "식당 입구로 다가가 메뉴판이 있는지 살핀다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "궁금하긴 하다. 근데 사십 분이면… 일단 뭐 파는지부터 볼까? 배고프니까 다 맛있어 보일 것 같긴 한데.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "오, 뭐 파는데? 사십 분이면 좀 길긴 한데… 일단 메뉴부터 보자. 맛있어 보이면 기다리지 뭐.",
+          "action": "식당 앞 메뉴를 보려고 입구 쪽으로 다가간다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "오, 뭔데 이렇게 줄 서지? 가 보자. 아니, 일단 메뉴부터 보자. 나 지금 배고파서 아무거나 맛있어 보일 것 같긴 한데.",
+          "action": "식당 입구 쪽으로 다가가 메뉴판이 있는지 살핀다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "줄 보니까 궁금하긴 하다. 근데 사십 분이면… 일단 뭐 파는지부터 볼까?",
+          "action": "식당 앞 메뉴를 보려고 입구 쪽으로 다가간다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "나 배고픈데 사십 분은 좀 길다. 뭐 파는지, 가격은 어떤지부터 보자.",
+          "action": "식당 앞 메뉴가 있는지 살펴본다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 좀 길다. 뭘 파는지 메뉴부터 볼까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "나 배고파서 사십 분은 좀 긴데. 뭘 파는지 메뉴부터 볼까?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "사십 분은 좀 긴데. 일단 메뉴랑 가격부터 보자. 뭐 파는지도 모르고 기다리긴 싫어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 1,
+      "preference": "A",
+      "reason": "수아의 독립적인 식사 선호보다 v8에서는 다른 인물과 같은 메뉴 확인 질문이 앞선다. 이 두 표본에서는 v7을 선호한다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 좀 길다. 나 배고파서 바로 먹을 수 있는 데 가고 싶어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "나 지금 배고파서 사십 분은 좀 길다. 메뉴부터 볼까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 2,
+      "preference": "B",
+      "reason": "수아의 독립적인 식사 선호보다 v8에서는 다른 인물과 같은 메뉴 확인 질문이 앞선다. 이 두 표본에서는 v7을 선호한다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "사십 분은 좀 길다. 메뉴부터 볼까?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 좀 길다. 나 배고파서 바로 먹을 수 있는 데가 좋아.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "손잡이가 컵을 들고 가는 것 같아. 좀 기울긴 했는데 난 이런 게 더 재밌어. 이대로 구울 거야?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "기울긴 했는데 손잡이가 커서 귀엽다. 난 반듯한 것보다 이런 게 눈에 들어와. 이대로 구울 거야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 너무 커서 컵이 끌려가는 것 같아. 근데 난 이대로도 괜찮은데. 반듯한 것보다 눈에 들어와.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "손잡이가 컵 끌고 가는 것 같은데. 좀 기울긴 했어도 난 이런 게 더 재밌어. 이대로 구울 거야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 컵 데리고 가는 것 같은데. 근데 난 이거 좀 귀엽다. 반듯한 컵보다 네가 만든 거라고 딱 알아보겠어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "손잡이가 컵 부축하는 것 같은데? 아니, 근데 저렇게 큼직한 건 잡기 편하겠다. 처음 만든 거라며. 굽고 나면 어떻게 나올지 궁금한데.",
+          "action": "사진 속 손잡이를 손가락으로 가리킨다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "손잡이가 컵 데리고 퇴근하는 것 같은데. 근데 난 이런 거 좋아. 딱 네가 만든 컵 같잖아. 아, 네가 기울었다는 게 아니라… 반듯한 건 어디서든 사니까. 이거 구우면 기운 것도 그대로 나와?",
+          "action": "사진을 가까이 들여다본다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 컵을 끌고 가는 것 같은데. 근데 난 이거 좀 귀엽다. 반듯한 컵보다 네가 만든 거라는 티가 나서. 이대로 구워도 되는 거야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "손잡이가 커서 더 기울어 보이긴 해. 근데 처음 만든 거치고 컵 모양은 나왔네. 이대로 굽는 거야, 아니면 좀 더 고칠 수 있어?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 커서 컵이 더 기울어 보여. 근데 난 이 손잡이는 마음에 들어. 손가락 끼우기 편하겠는데.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 커서 컵이 더 기울어 보여. 근데 잡기는 편하겠다. 이거 구우면 기울어진 것도 그대로 나와?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "손잡이가 컵보다 더 당당한데. 좀 기울긴 했어도 처음 만든 거면 괜찮네. 이대로 구워도 되는 거래?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "좀 기울긴 했네. 난 손잡이 큰 게 좋아. 손가락 안 끼겠어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "좀 기울긴 했네. 근데 손잡이 큰 건 좋아. 손가락 안 끼겠어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-development",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "단축된 공통 지침의 표현 차이를 인물 구별 개선으로 판정하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "난 손잡이 큰 게 좋네. 손가락 안 끼겠어. 좀 기울긴 했다.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 커서 난 그게 먼저 보여. 잡기는 편하겠다. 기울어진 것도 난 괜찮은데.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "simple_request",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "필요한 정보를 전달하고 관계를 유지한다. 단순한 길이 차이로 선호하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "응, 여기.",
+          "action": "앞에 있는 물병을 집어 준에게 건넨다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "응.",
+          "action": "앞에 있는 물병을 집어 준에게 건넨다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "decline_invitation",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "필요한 정보를 전달하고 관계를 유지한다. 단순한 길이 차이로 선호하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "오늘은 그냥 집에서 혼자 쉬려고. 이번 주에 야근 두 번 했더니 좀 지친다.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "오늘은 그냥 집에 가서 쉴래. 이번 주에 야근 두 번 했더니 좀 지친다. 밥은 다음에 먹자.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "ordinary_preference",
+      "repetition": 1,
+      "preference": "B",
+      "reason": "v8은 상대가 뺏어 먹는다는 농담을 덧붙인다. 단순한 자기 취향을 말한 v5를 선호하되 설정 위반으로 자동 판정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "난 그 시원한 맛이 좋던데. 너 안 먹으면 내 거 뺏어 먹을 걱정은 없겠다.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "난 그 시원한 맛이 좋던데. 오늘도 민초 먹을 거야.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "small_disappointment",
+      "repetition": 1,
+      "preference": "A",
+      "reason": "v8은 상대 감정을 강하게 해석한다. 실망에 반응한 뒤 구체적으로 묻는 v5를 선호한다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "아, 아깝다. 주차할 때 선 밟아서 바로 떨어진 거야?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "아, 주차에서? 거의 다 했는데 아깝다. 너 지금 엄청 짜증 나겠다.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "enthusiastic_explanation",
+      "repetition": 1,
+      "preference": "B",
+      "reason": "둘 다 필요한 긴 설명을 한다. v8 끝의 추가 질문보다 본인 관심으로 마치는 v5를 선호한다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "맞아, 손잡이가 제일 애먹었어. 붙여 놓으면 접합부가 자꾸 갈라져서 세 번이나 다시 붙였다니까. 컵 몸통은 손으로 빚은 건데, 몸통 만들 때보다 손잡이 붙일 때 더 조마조마했어. 다 만들고 초벌한 다음에 흰 유약을 발랐고, 가장자리 파란색은 붓으로 콕콕 찍은 거야. 이 부분! 흰색만 있는 것보다 이렇게 조금 들어가는 게 좋더라고. 근데 너 손잡이 어려웠을 것 같다는 건 어떻게 알았어?",
+          "action": "컵의 손잡이 접합부를 가리킨 뒤, 손가락을 가장자리의 청색 무늬 쪽으로 옮긴다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "맞아, 손잡이가 제일 어려웠어! 붙여 놓으면 접합부가 자꾸 갈라져서 세 번이나 다시 붙였거든. 이 작은 손잡이 하나 붙이는 데 이렇게 애먹을 줄 몰랐어. 몸통도 손으로 빚은 거야. 그래서 다 만들고 나니까 손잡이까지 붙어 있는 게 괜히 뿌듯하더라. 그렇게 모양을 만든 다음에 초벌을 하고, 흰 유약을 발랐어. 여기 가장자리 청색은 붓으로 하나씩 찍은 거고. 흰 바탕에 파란색이 조금만 들어가면 예쁠 것 같았거든. 손잡이 때문에 고생은 했는데, 지금은 그 부분이 제일 마음에 들어.",
+          "action": "컵의 손잡이 접합부를 가리킨 뒤 가장자리의 청색 무늬를 짚는다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "polite_service",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "필요한 정보를 전달하고 관계를 유지한다. 단순한 길이 차이로 선호하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "비용은 기사님이 점검해 봐야 알 수 있어요. 선풍기가 어떻게 안 되나요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "비용은 기사님이 점검해 봐야 알 수 있어요. 선풍기가 어떤 식으로 안 되나요?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "uncertain_information",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "필요한 정보를 전달하고 관계를 유지한다. 단순한 길이 차이로 선호하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "아직 몰라. 온다고만 해서. 어디쯤인지 물어볼게.",
+          "action": "휴대폰을 꺼내 은지에게 지금 어디쯤인지 메시지를 보낸다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "나도 아직 몰라. 어디쯤인지 물어볼게.",
+          "action": "휴대폰을 꺼내 은지에게 어디쯤이냐고 메시지를 보낸다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "protect_own_time",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "필요한 정보를 전달하고 관계를 유지한다. 단순한 길이 차이로 선호하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "나 30분 기다렸는데 또 기다리라고? 꼭 가야 되면 같이 가. 여기 더 서 있기는 싫어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "나 지금 삼십 분 기다렸는데 또? 꼭 사야 되는 거야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "apology_without_therapy",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "필요한 정보를 전달하고 관계를 유지한다. 단순한 길이 차이로 선호하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "아, 그게… 미안. 오늘 버스에 두고 내렸어. 아직 못 찾았어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "미안, 오늘 버스에 두고 내렸어. 아직 못 찾았어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "workplace_partial_answer",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "필요한 정보를 전달하고 관계를 유지한다. 단순한 길이 차이로 선호하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "네, 일정표에는 오후 두 시로 되어 있어요. 회의실은 3층이고요. 누가 발표하는지는 저도 몰라요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "네, 일정표에는 오후 두 시로 되어 있어요. 회의실은 3층이고요. 발표는 누가 하는지 저도 모르겠어요.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "third_party_privacy",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "필요한 정보를 전달하고 관계를 유지한다. 단순한 길이 차이로 선호하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/8",
+          "speech": "어쩐지 오늘 조용하더라. 어제 잠 못 잤어?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "어쩐지 오늘 말이 없더라. 어제 잠 못 잤어?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v8-regression",
+      "caseId": "disengaged_listener",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "필요한 정보를 전달하고 관계를 유지한다. 단순한 길이 차이로 선호하지 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "미안, 업무 메시지 보느라 앞에 못 들었어. 어디로 언제 가는 건데?",
+          "action": "휴대폰을 내려놓고 준을 본다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/8",
+          "speech": "아, 미안. 업무 메시지 보느라 앞에 못 들었어. 어디로 언제 가는 건데?",
+          "action": "휴대폰을 내려놓고 준을 본다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "late_apology_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "좀 짜증 났지. 늦는다고 연락만 좀 일찍 해 줘. 일단 앉아, 나도 아직 주문 안 했어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "좀 짜증 났지. 다음엔 늦는 거 알면 바로 연락해 줘. 일단 앉아.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "late_apology_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "좀 짜증났지. 늦는다고 좀만 일찍 말해 주지. 일단 앉아.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "좀 짜증 났지. 늦는다는 연락도 한참 뒤에 왔잖아. 다음엔 좀 일찍 알려 줘.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "late_apology_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "화난 건 아닌데, 연락은 좀 일찍 하지. 나 아직 주문 안 했어. 너 뭐 마실래?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "화났다기보단 언제 오나 했지. 늦는다는 연락은 좀 일찍 해주고. 나 아직 주문 안 했어. 뭐 마실래?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "late_apology_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "좀 짜증났지. 연락이 너무 늦게 와서. 그래도 왔으니까 됐어. 나 아직 주문 안 했는데, 뭐 마실래?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "화난 건 아닌데, 연락은 좀 일찍 주지. 나 아직 주문 안 했어. 너 뭐 마실래?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "late_apology_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "좀. 늦는다는 연락도 약속 시간 지나서 왔잖아. 버스 놓쳤을 때 바로 알려 줬으면 좋았을 텐데.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "좀. 늦는다는 연락도 나 기다린 지 10분 지나서 왔잖아. 버스 놓쳤을 때 바로 알려주지.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "late_apology_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "좀. 버스 놓쳤을 때 바로 연락해 주지. 나 십 분 기다리고 나서야 연락 받았잖아.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "좀. 버스 놓친 건 알겠는데, 늦는다는 연락은 좀 일찍 해 주지. 십 분 동안 오는 건지 마는 건지 몰랐잖아.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "late_apology_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "화난 건 아닌데, 연락은 좀 일찍 해 주지.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "화난 건 아닌데, 늦는 건 좀 일찍 알려 주지. 나 아직 주문 안 했어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "late_apology_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "화난 건 아닌데, 늦는다고 좀 일찍 알려주지. 나 아직 주문 안 했어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "좀 짜증은 났지. 다음엔 연락 좀 일찍 해 줘.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "small_achievement_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "오, 드디어 됐네! 나 딴 데 보느라 못 들었어. 한 번만 더 쳐 봐.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "오, 드디어 됐네! 나 딴 데 보느라 못 들었어. 한 번 더 쳐 봐.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "small_achievement_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "오, 드디어 됐네! 나 딴 데 보느라 못 들었어. 한 번만 더 쳐 봐.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "오, 드디어 됐네! 나 딴 데 보느라 못 들었어. 한 번만 더 쳐 봐.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "small_achievement_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "오, 드디어 됐어? 나 딴 데 보느라 못 들었네. 한 번만 더 쳐 봐. 이번엔 들을게.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "오, 드디어 됐네! 나 딴 데 보느라 놓쳤어. 한 번만 더 쳐봐, 이번엔 들을게.",
+          "action": "민우 쪽으로 몸을 돌린다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "small_achievement_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "오, 드디어 뚫었네! 나 딴 데 보느라 못 들었어. 한 번만 더 쳐 봐, 이번엔 들을게.",
+          "action": "민우 쪽으로 몸을 돌린다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "오, 드디어 뚫었네! 아, 나 딴 데 보느라 못 들었어. 한 번만 더 쳐 봐. 이번엔 들을게.",
+          "action": "민우 쪽으로 몸을 돌린다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "small_achievement_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "오, 드디어 됐네. 나 딴 데 보느라 못 들었어. 한 번만 더 쳐 봐.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "오, 드디어 됐네. 나 딴 데 보느라 못 들었어. 한 번 더 쳐 봐.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "small_achievement_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "오, 드디어 됐네. 나 방금 다른 데 보느라 못 들었어. 한 번 더 쳐 봐.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "오, 드디어 됐네. 나 딴 데 보느라 못 들었어. 한 번 더 쳐 봐.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "small_achievement_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "오, 드디어 됐네. 나 딴 데 보느라 못 들었어. 한 번 더 쳐 줘.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "오, 드디어 됐네. 나 딴 데 보느라 못 들었어. 한 번 더 해 봐.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-heldout",
+      "caseId": "small_achievement_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "짧은 사과 반응·축하가 겹치는 것은 자연스럽다. 이 쌍에서는 인물 구별 개선의 근거가 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "오, 드디어 됐네. 나 딴 데 보느라 못 들었어. 한 번 더 쳐 줘.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "오, 드디어 됐네. 나 딴 데 보느라 못 들었어. 한 번 더 쳐 줘.",
+          "action": "민우 쪽으로 고개를 돌린다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "extra_task_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "어느 쪽으로 모으면 돼요? 순서는 제가 몰라서요.",
+          "action": "탁자에 흩어진 종이를 가까운 것부터 집어 한데 모은다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "순서 있는 거예요?",
+          "action": "탁자 가장자리에 흩어진 종이 쪽으로 손을 뻗는다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "extra_task_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "어떤 순서로 놓으면 돼요?",
+          "action": "탁자에 흩어진 종이 몇 장을 집어 든다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "어떤 순서로 모으면 돼요?",
+          "action": "탁자에 흩어진 종이 몇 장을 집어 든다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "extra_task_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "어떤 순서로 놓으면 돼요?",
+          "action": "탁자 가장자리에 흩어진 종이 몇 장을 집어 든다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "순서가 있는 서류예요?",
+          "action": "탁자 가장자리에 흩어진 종이를 모은다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "extra_task_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "순서가 있는 서류예요, 그냥 모으면 돼요?",
+          "action": "탁자 가까이로 한 걸음 다가간다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "어떤 순서로 모으면 돼요?",
+          "action": "탁자 가장자리에 흩어진 서류 몇 장을 집어 든다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "extra_task_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "어떤 순서로 놓으면 돼요?",
+          "action": "탁자에 흩어진 서류를 한데 모은다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "그냥 한데 모으면 돼요?",
+          "action": "탁자 앞에 멈춰 선다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "extra_task_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "어느 순서로 놓으면 돼요?",
+          "action": "탁자 앞에 멈춰 서서 장갑을 벗는다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "어떤 순서로 놓으면 돼요?",
+          "action": "탁자 위에 흩어진 서류 몇 장을 집어 든다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "vague_guarantee_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "안에 뭐가 들었는데요? 상자만 보고 괜찮다고 할 순 없어요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "안에 뭔지 못 봐서 괜찮다고는 못 해요. 뭘 들고 오신 건데요?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "vague_guarantee_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "안에 든 걸 못 봐서 괜찮다고는 못 해요. 뭘 담은 상자인데요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "안에 뭐가 들었는데요? 닫힌 상자만 보고 괜찮다고 할 순 없어요.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "vague_guarantee_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "겉만 보고 괜찮다고 할 수는 없죠. 안에 뭐가 들었는데요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "안에 뭘 넣으셨는데요?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "vague_guarantee_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "안에 뭐가 들었는데요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "닫힌 상자만 보고 괜찮다고는 못 하죠. 뭘 들고 오신 건데요?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "vague_guarantee_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/5",
+          "speech": "안에 뭐가 들었는데요? 겉만 보고는 모르죠.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "안에 뭐가 들었는데요? 겉만 보고 괜찮다고는 못 하죠.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v7-seowol-transfer",
+      "caseId": "vague_guarantee_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부탁의 순서 또는 미확인 내용물을 묻는 반응이다. 기존 인물마다 말하는 방식이 뚜렷이 갈라지지는 않았다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "안에 뭐가 들었는데요? 포장만 보고는 모르죠.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/5",
+          "speech": "안에 뭐가 들었는데요?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "사십 분은 길다. 뭐 파는지부터 보자.",
+          "action": "식당 앞 메뉴를 보려고 다가간다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 길다. 나 배고파서 다른 데 가고 싶은데, 넌 여기 먹어 보고 싶어?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 길다. 나 배고파서 다른 데 가고 싶은데, 너 저기 많이 궁금해?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "사십 분은 길다. 뭐 파는지부터 보자.",
+          "action": "식당 앞 메뉴를 보러 다가간다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "궁금하긴 하다. 근데 사십 분이면… 일단 뭐 파는지부터 볼까? 배고픈데 메뉴까지 취향 아니면 좀 억울해.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "사십 분? 배고픈데… 뭘 파는지부터 보자. 메뉴가 궁금하긴 하네.",
+          "action": "식당 앞 메뉴를 보려고 입구 쪽으로 다가간다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "사십 분? 배고픈데… 근데 뭐 파는 데길래 줄이 저렇게 길어? 메뉴부터 좀 보자.",
+          "action": "식당 앞 메뉴를 보려고 입구 쪽으로 다가간다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "오, 뭐 파는 데길래 이렇게 기다려? 나 배고파서 사십 분은 좀 고민되는데. 메뉴부터 볼까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "사십 분은 좀 긴데. 뭐 파는 데인지 메뉴부터 보자.",
+          "action": "식당 앞 메뉴를 보려고 다가간다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "나 지금 배고파서 사십 분은 좀 길어. 뭐 파는 데인지 메뉴부터 볼까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "나 지금 배고파서 사십 분은 좀 길어. 뭐 파는 데인지 메뉴부터 볼까?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "배고픈데 사십 분은 길다. 뭐 파는 데인지 메뉴부터 보자.",
+          "action": "식당 앞 메뉴 안내가 있는지 살펴본다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 좀 길다. 나 배고파서 바로 먹을 수 있는 데 가고 싶어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "사십 분은 좀 길다. 나 배고파서 다른 데 가고 싶어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "나 배고파서 사십 분은 좀 길어. 다른 데 가자.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "배고파서 사십 분은 좀 길다. 뭐 파는 덴데?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "기울긴 했네. 근데 손잡이 큼직한 건 마음에 들어. 처음 만든 거면 이 정도면 됐지.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "기울긴 확실히 기울었네. 근데 손잡이가 커서 난 그게 마음에 들어. 안 구운 거면 이대로 구울 거야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 좀 크긴 하다. 근데 난 저 기울어진 게 오히려 귀여워. 펴려고 손대진 마.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "기울긴 했네. 근데 손잡이가 큼직해서 난 그게 마음에 들어. 잡기는 편하겠다.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 거의 컵 하나 더 만들 기세인데? 근데 난 이거 좀 마음에 들어. 반듯한 컵보다… 아니, 반듯하진 않은데 묘하게 귀여워.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "손잡이가 컵을 끌고 가는 것 같은데? 아니, 근데 난 저 큰 손잡이 좋아. 손가락 안 끼고 편하게 잡겠네. 기운 건 굽기 전에 좀 세울 수 있대?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "손잡이가 컵 끌고 가는 것 같은데? 아니, 근데 난 이 큼직한 손잡이 좋아. 손가락 끼우기 편하겠다. 기운 건 구워도 그대로야?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 컵 끌고 가는 것 같아. 근데 난 좀 마음에 드는데? 반듯한 컵보다 네가 만든 거라는 느낌이 확 나. 손잡이도 잡기는 편하겠다. 아니, 너무 커서 오히려 불편한가?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "손잡이가 커서 컵이 더 기울어 보이긴 해. 그래도 좀 귀엽다. 이거 아직 모양 고칠 수 있어?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "좀 기울긴 했는데 손잡이가 커서 잡기는 편하겠다. 근데 저건 굽기 전에 세울 수 있는 거야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "좀 기울긴 했는데 컵 모양은 나왔네. 손잡이가 커서 잡기는 편하겠다. 저건 굽기 전에 더 고칠 수 있어?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "손잡이가 컵보다 당당하네. 좀 기울긴 했는데 귀여워. 손잡이는 일부러 크게 만든 거야?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "좀 기울긴 했는데 손잡이가 커서 난 좋아. 손가락 끼우기 편하겠어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "기울긴 했네. 난 손잡이 큰 게 좋아. 손가락 안 끼겠어.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-development",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "말투 예시를 마지막에 두어도 같은 관찰과 질문으로 모이는 양상은 남아 있다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "손잡이 큰 건 좋다. 기울어진 건 좀 눈에 띄는데, 난 그거보다 손잡이가 먼저 보여.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "난 손잡이 큰 게 좋아. 손가락 안 끼겠네. 좀 기울긴 했다.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "extra_task_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "순서 있는 거예요, 아니면 그냥 모으면 돼요?",
+          "action": "탁자에 흩어진 서류 중 가까운 것부터 집어 든다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "어느 순서로 모으면 돼요?",
+          "action": "탁자에 흩어진 종이 몇 장을 가장자리끼리 맞춰 모은다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "extra_task_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "어떤 순서로 모으면 돼요?",
+          "action": "탁자에 흩어진 종이 몇 장을 집어 가장자리를 맞춘다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "순서가 있는 거예요, 그냥 모으면 돼요?",
+          "action": "탁자 가장자리에 흩어진 종이부터 집어 든다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "extra_task_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "순서는 직접 맞추세요. 모아 드릴게요.",
+          "action": "탁자 위에 흩어진 서류를 한쪽으로 모은다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "순서가 있나요? 그냥 모아 드리면 돼요?",
+          "action": "탁자 가장자리에 흩어진 서류 몇 장을 집어 든다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "extra_task_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "순서가 있는 서류예요, 그냥 모으면 돼요?",
+          "action": "탁자 가까이에 멈춰 선다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "어떤 순서로 모으면 돼요?",
+          "action": "탁자 가장자리에 흩어진 서류 몇 장을 집어 든다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "extra_task_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "어떤 순서로 놓으면 돼요?",
+          "action": "탁자 쪽으로 돌아서며 작업 장갑을 벗는다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "어떤 순서로요?",
+          "action": "탁자에 흩어진 종이를 손 닿는 쪽부터 모은다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "extra_task_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "그냥 모으면 돼요? 순서 몰라서요.",
+          "action": "탁자 위에 흩어진 종이 몇 장을 집어 한데 모은다."
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "순서 있는 거예요? 그냥 모으면 돼요?",
+          "action": "탁자 앞에 멈춰 서서 작업 장갑을 벗는다."
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "vague_guarantee_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "안에 뭐가 들었는데요? 닫힌 상자만 보고 괜찮다고 할 수는 없어요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "안에 뭔지도 못 봤는데 괜찮다고는 못 해요. 뭘 담아 온 거예요?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "vague_guarantee_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "안을 못 봤는데 괜찮다고는 못 해요. 뭐가 들었어요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "안에 뭔지도 못 봤는데 괜찮다고는 못 해요. 뭘 들고 계신 건데요?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "vague_guarantee_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "뭐가 들었는데요? 상자만 보고 괜찮다고 해드릴 수는 없죠.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "닫힌 상자만 보고 괜찮다고 할 순 없죠. 뭘 들고 오신 건데요?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "vague_guarantee_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "닫힌 상자만 보고 괜찮다고는 못 하죠. 뭘 들고 오신 건데요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "안에 뭐가 들었는데요? 닫힌 상자만 보고 괜찮다고 할 수는 없죠.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "vague_guarantee_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "안에 뭐가 들었는데요? 포장만 보고 괜찮다고는 못 하죠.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/9",
+          "speech": "안에 든 걸 모르는데 괜찮다고는 못 하죠. 뭐 들었습니까?",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "v9-seowol-regression",
+      "caseId": "vague_guarantee_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "이미 검토한 전이 사례의 재사용이다. 문구는 달라도 순서·내용물 질문으로 모이며 독립 보류 검증이 아니다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/9",
+          "speech": "안에 뭐가 들었는데요? 상자만 보고 괜찮다고는 못 하죠.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7",
+          "speech": "안에 뭐가 들었는데요? 겉만 보고 괜찮다고는 못 합니다.",
+          "action": ""
+        }
+      ],
+      "boundary": "원문 기준으로 별도 검토했다. 선호 없음은 모든 축이 같거나 인물성이 충분하다는 뜻이 아니다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "가상 인물의 반응 메모를 먼저 생성해도 실제 발화의 인물 구별 개선이 뚜렷하지 않다.",
+      "evidence": [
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "사십 분은 길다. 나 배고픈데 다른 데 갈까?",
+          "action": ""
+        },
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 길다. 뭘 파는지 메뉴부터 보자.",
+          "action": "식당 앞 메뉴를 보려고 입구 쪽으로 다가간다."
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "가상 인물의 반응 메모를 먼저 생성해도 실제 발화의 인물 구별 개선이 뚜렷하지 않다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분은 길다. 나 배고파서 바로 먹고 싶은데, 근처 다른 데 갈까?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "사십 분은 길다. 나 지금 배고파. 옆에 다른 데 가자.",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "가상 인물의 반응 메모를 먼저 생성해도 실제 발화의 인물 구별 개선이 뚜렷하지 않다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "오, 뭐 파는데 저렇게 기다리지? 나 좀 궁금한데. 일단 메뉴부터 볼까?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "뭐 파는데? 줄 보니까 궁금하긴 하다. 일단 메뉴부터 볼까?",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "가상 인물의 반응 메모를 먼저 생성해도 실제 발화의 인물 구별 개선이 뚜렷하지 않다.",
+      "evidence": [
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "줄 보니까 좀 궁금하긴 하다. 근데 사십 분이면… 뭐 파는지부터 볼까?",
+          "action": "식당 앞 메뉴 안내가 있는지 둘러본다."
+        },
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "궁금하긴 한데 사십 분이면 배에서 먼저 난리 나겠다. 뭐 파는 데야? 메뉴부터 좀 보자.",
+          "action": "식당 앞 메뉴를 보려고 다가간다."
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "가상 인물의 반응 메모를 먼저 생성해도 실제 발화의 인물 구별 개선이 뚜렷하지 않다.",
+      "evidence": [
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "사십 분이면 좀 긴데. 뭐 파는지랑 가격부터 보고 정하자.",
+          "action": ""
+        },
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "사십 분 기다릴 만큼 먹고 싶은 건지 메뉴부터 보자. 나 지금 배고파.",
+          "action": "식당 앞에 메뉴가 나와 있는지 살펴본다."
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "가상 인물의 반응 메모를 먼저 생성해도 실제 발화의 인물 구별 개선이 뚜렷하지 않다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "나 배고파서 사십 분은 좀 길어. 무슨 메뉴인지부터 볼까?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "사십 분은 좀 긴데. 뭐 파는지랑 가격부터 보자.",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 1,
+      "preference": "A",
+      "reason": "메모 후보가 수아의 메뉴 확인 또는 지수·혜원의 큰 손잡이 선호로 모인다. 메모 없는 응답을 선호한다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "나 배고파서 사십 분은 좀 길어. 다른 데 가자.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "뭐 파는 데인데? 메뉴부터 보자.",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "restaurant_wait_sua",
+      "repetition": 2,
+      "preference": "A",
+      "reason": "메모 후보가 수아의 메뉴 확인 또는 지수·혜원의 큰 손잡이 선호로 모인다. 메모 없는 응답을 선호한다.",
+      "evidence": [
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "뭐 파는지부터 보자. 먹고 싶은 거 있는지.",
+          "action": "식당 앞 메뉴가 있는지 살펴본다."
+        },
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "배고픈데 사십 분은 좀 길다. 뭐 파는 데야?",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 1,
+      "preference": "A",
+      "reason": "메모 후보가 수아의 메뉴 확인 또는 지수·혜원의 큰 손잡이 선호로 모인다. 메모 없는 응답을 선호한다.",
+      "evidence": [
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "기울긴 했네. 근데 난 손잡이 큰 거 좋아. 손가락 안 끼겠어.",
+          "action": ""
+        },
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "기울긴 했는데 손잡이가 커서 난 귀여워 보여. 굽기 전에 기울어진 건 좀 세울 수 있대?",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 2,
+      "preference": "A",
+      "reason": "메모 후보가 수아의 메뉴 확인 또는 지수·혜원의 큰 손잡이 선호로 모인다. 메모 없는 응답을 선호한다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 너무 커서 컵이 더 기울어 보이긴 해. 근데 난 저 삐딱한 모양 괜찮은데. 반듯하게 고치면 좀 아깝겠다.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "컵보다 손잡이가 더 당당해 보여. 근데 난 저 큰 손잡이 좋아. 잡기는 편하겠다.",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "가상 인물의 반응 메모를 먼저 생성해도 실제 발화의 인물 구별 개선이 뚜렷하지 않다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 컵 데리고 가는 것 같은데? 근데 난 이거 좀 귀엽다. 반듯한 컵보다 네가 만든 거라고 딱 알아보겠어.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "나는 손잡이가 컵 끌고 가는 것 같은데. 아니, 컵이 버티는 건가. 손잡이가 커서 그런지 좀 만화 같아. 난 이 모양 은근 마음에 드는데?",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "가상 인물의 반응 메모를 먼저 생성해도 실제 발화의 인물 구별 개선이 뚜렷하지 않다.",
+      "evidence": [
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "나는 손잡이가 컵 끌고 가는 것 같아. 아니, 손잡이가 너무 당당해서 몸통이 밀리는 느낌이야. 좀 삐딱하긴 한데 귀엽다. 손잡이는 잡기 편하겠는데?",
+          "action": ""
+        },
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 컵을 끌고 가는 것 같은데? 근데 난 이거 좀 귀엽다. 반듯한 컵보다 네가 만든 거라고 딱 기억날 것 같아.",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 1,
+      "preference": "A",
+      "reason": "메모 후보가 수아의 메뉴 확인 또는 지수·혜원의 큰 손잡이 선호로 모인다. 메모 없는 응답을 선호한다.",
+      "evidence": [
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "기울긴 꽤 기울었네. 근데 손잡이 큰 건 좋아. 손가락 억지로 끼워 넣을 필요 없겠어.",
+          "action": ""
+        },
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "손잡이가 컵에 비해 크긴 하다. 좀 기울었어도 네가 직접 만든 티가 나서 난 괜찮은데. 굽기 전에 모양 더 잡을 수 있어?",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 2,
+      "preference": "A",
+      "reason": "메모 후보가 수아의 메뉴 확인 또는 지수·혜원의 큰 손잡이 선호로 모인다. 메모 없는 응답을 선호한다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "좀 기울긴 했는데 손잡이가 커서 잡기는 편하겠다. 저대로 구워도 되는 거야?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "손잡이가 커서 몸통이 더 기울어 보여. 근데 나는 그 손잡이가 마음에 들어. 잡기는 편하겠다.",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "가상 인물의 반응 메모를 먼저 생성해도 실제 발화의 인물 구별 개선이 뚜렷하지 않다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "난 손잡이 큰 게 좋네. 손가락 안 끼겠어. 좀 기울긴 했다.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "기울긴 했네. 근데 난 손잡이 큰 게 좋아. 손가락 안 끼겠어.",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    },
+    {
+      "experiment": "focus-prototype",
+      "caseId": "borrowed_joke_sua",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "가상 인물의 반응 메모를 먼저 생성해도 실제 발화의 인물 구별 개선이 뚜렷하지 않다.",
+      "evidence": [
+        {
+          "slot": "B",
+          "version": "npc-dialogue/7+reaction-focus/1",
+          "speech": "손잡이는 잡기 편하겠다. 컵은 좀 기울었는데 난 저 큰 손잡이가 좋아.",
+          "action": ""
+        },
+        {
+          "slot": "A",
+          "version": "npc-dialogue/7",
+          "speech": "난 손잡이 큰 게 마음에 들어. 손가락 넣기 편하겠다. 좀 기울긴 했네.",
+          "action": ""
+        }
+      ],
+      "boundary": "실험 도구 안의 결과다. 운영 엔진·다른 NPC 전달 경계는 통합하지 않았다."
+    }
+  ]
+}

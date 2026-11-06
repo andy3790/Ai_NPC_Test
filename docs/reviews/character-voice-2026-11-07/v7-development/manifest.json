@@ -1,0 +1,219 @@
+{
+  "adapter": "openai",
+  "suiteVersion": "voice-contrast/1",
+  "casesSha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+  "split": "development",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "promptVersion": "npc-lab/9",
+  "policyVersions": [
+    "npc-dialogue/6",
+    "npc-dialogue/7"
+  ],
+  "repetitions": 2,
+  "expectedCalls": 32,
+  "maxCalls": 32,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+  "status": "completed",
+  "error": null,
+  "calls": 32,
+  "estimatedUsd": 0.0561964,
+  "unpricedCalls": 0,
+  "quality": "unreviewed",
+  "mappings": [
+    {
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "restaurant_wait_jisoo",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "restaurant_wait_minseok",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "restaurant_wait_hyewon",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "restaurant_wait_sua",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "restaurant_wait_sua",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "restaurant_wait_sua",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "restaurant_wait_sua",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "borrowed_joke_jisoo",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "borrowed_joke_minseok",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "borrowed_joke_hyewon",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "borrowed_joke_sua",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/6"
+    },
+    {
+      "caseId": "borrowed_joke_sua",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "borrowed_joke_sua",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/7"
+    },
+    {
+      "caseId": "borrowed_joke_sua",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/6"
+    }
+  ]
+}

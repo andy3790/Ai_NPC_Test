@@ -1,0 +1,19 @@
+{
+  "adapter": "openai",
+  "suiteVersion": "voice-transfer/1",
+  "casesSha256": "83788926b46c750cbd484d31b2724f1302e4952b79613c20524d9cfe0f07c277",
+  "split": "holdout",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "promptVersion": "npc-lab/9",
+  "policyVersions": [
+    "npc-dialogue/5",
+    "npc-dialogue/7"
+  ],
+  "repetitions": 2,
+  "expectedCalls": 24,
+  "maxCalls": 24,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry."
+}
