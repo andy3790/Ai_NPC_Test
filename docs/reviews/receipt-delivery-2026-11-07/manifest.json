@@ -1,0 +1,93 @@
+{
+  "version": "receipt-delivery-review/1",
+  "sourceBaseCommit": "5ec61c7ed0b3a4499b5d1fdfa0949aaa705652fd",
+  "change": "Combine only atomically committed speech and immediate authored outcome for each observer. Keep individual receipts and immutable retry membership.",
+  "receiveDeliveryVersion": "receive-delivery/2",
+  "receivePromptVersions": [
+    "npc-receive/1",
+    "npc-receive/2"
+  ],
+  "live": {
+    "runId": "3efc4408-4c39-4949-97b2-5f2786e8cf7c",
+    "calls": 45,
+    "receiveCalls": 26,
+    "bundledCalls": 16,
+    "receiptRows": 42,
+    "pendingReceipts": 0,
+    "duplicateRecipientMessagePairs": 0,
+    "status": "completed",
+    "completionReason": "goals_achieved",
+    "speechCount": 9,
+    "estimatedUsd": 0.120350775,
+    "source": ".cache/harbor-live/2026-11-06T22-42-38-650Z-receipt-delivery",
+    "receivedObservationIdsAndOrderVerified": true,
+    "allActualRequestsVerified": true
+  },
+  "files": [
+    {
+      "path": "live/api-requests.jsonl",
+      "sha256": "f04a0835837d28372b08fceb86b99780676ad69a44e15f448060fed80da3b413",
+      "bytes": 650143
+    },
+    {
+      "path": "live/calls.jsonl",
+      "sha256": "1e2621658dc7e2fbd102768ea3890010b2f2428db6004f8cfb0f0e083cef139a",
+      "bytes": 207904
+    },
+    {
+      "path": "live/config.json",
+      "sha256": "615483929ad74ba095b79aeb2a797e68361b87157e5d56ee6aa51600323ff567",
+      "bytes": 17380
+    },
+    {
+      "path": "live/instructions.json",
+      "sha256": "33a0cf5e4ae3e02a61f8a53be953d3a3f87e0998f37a9f2d1fa2716de6c34789",
+      "bytes": 43450
+    },
+    {
+      "path": "live/plan.json",
+      "sha256": "a191e983321fe2f83e62b8d45cfb998992a40d378482bf253e48bd8dc183dd4d",
+      "bytes": 277
+    },
+    {
+      "path": "live/receipts.jsonl",
+      "sha256": "98ec9a9dd105fe50a84795d724c9177359bd4eabd824906b57492a4048927bdd",
+      "bytes": 12810
+    },
+    {
+      "path": "live/result.json",
+      "sha256": "7a51edcfc5932a7d81eb840f9ee1b3a18ab27499284b0fd7b643ea134f07f557",
+      "bytes": 9134
+    },
+    {
+      "path": "live/runner.snapshot.txt",
+      "sha256": "a9b5d93a453177ea497a772034c656c954e64589684092e3b8bd943c92e01c3b",
+      "bytes": 3561
+    },
+    {
+      "path": "live/transcript.md",
+      "sha256": "ae7af4b075067cb3a9f0a1a11a1796eb158f73408a6ef72df42426d508584d9b",
+      "bytes": 2705
+    },
+    {
+      "path": "live/utterances.jsonl",
+      "sha256": "bf1a5144a7fcbb3bb443452381b614f33f4987e5c4b21c8418b28d0d194566a0",
+      "bytes": 12255
+    },
+    {
+      "path": "replay.json",
+      "sha256": "a752a6507548a45fdcd50ef65e04f0793eda13b011cf93939d5d10558854544c",
+      "bytes": 2410
+    },
+    {
+      "path": "report.md",
+      "sha256": "f8c9aee6d506baa6493aae0f0787d8c30b14656a86f93944ff937cf402b48c91",
+      "bytes": 7102
+    },
+    {
+      "path": "validation.json",
+      "sha256": "9117af58982ed8a967ca2e7ee03515e4303dc721afae141b58186914bac5688c",
+      "bytes": 1536
+    }
+  ]
+}

@@ -17,6 +17,10 @@
 
 발화 생성은 `invocation.utteranceId`, 수신·단일 원인 처리 호출은 `sourceUtteranceId`로 연결합니다. 모아 전달은 여러 수신 기록의 `invocationId`가 같은 발화 호출을 가리킬 수 있습니다.
 
+매 발화 전달도 발화와 직후 규칙 결과를 한 수신 호출로 전달할 수 있습니다. `metadata.receiptIds`와 `metadata.sourceUtteranceIds`는 실제 포함된 원본을, 각 receipt의 `invocationId`는 같은 확인 호출을 가리킵니다. `receiveDeliveryVersion=receive-delivery/2`, `receivePromptVersion=npc-receive/2`인 호출은 복수 관찰 확인이며 단일 관찰 문구는 `/1`입니다. 기존 기록에는 버전을 소급 표기하지 않습니다.
+
+`utterances.csv`의 `receiveInvocationIds`·`sharedReceiveCalls`와 `invocation-links.csv`로 모든 연결을 확인합니다. `receiveTokens`·`receiveCalls`는 묶음의 첫 `sourceUtteranceId`에만 계상하므로 원본별 합계에서 중복되지 않습니다. 전체 토큰·비용의 기준은 계속 고유 호출 ID입니다.
+
 공간별 시간 계획·결과 처리는 여러 행동을 한 호출에서 다룹니다. `metadata.sourceUtteranceIds`와 `invocation-links.csv`가 이 연결을 표현합니다. **호출 ID로 중복 제거한 뒤 합산**하세요. 발화별 연결 비용을 단순히 더하면 공동 호출을 여러 번 계산할 수 있습니다.
 
 ## 여섯 호출 종류

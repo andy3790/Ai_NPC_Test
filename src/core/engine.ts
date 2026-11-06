@@ -5,7 +5,8 @@ import { join } from 'node:path';
 import type { Adapter } from '../adapters/types.js';
 import { Store } from './store.js';
 import { emptyUsage, UsageTracker } from './metrics.js';
-import { evaluationPrompt, persona, PROMPT_VERSION, publicMessage, receiverPrompt, speakerPrompt } from './prompts.js';
+import { evaluationPrompt, persona, PROMPT_VERSION, publicMessage, receiverBatchPrompt, receiverPrompt, speakerPrompt } from './prompts.js';
+import { receiveBarriers, RECEIVE_DELIVERY_VERSION } from './receive-delivery.js';
 import { CURRENT_DIALOGUE_PROMPT, LEGACY_DIALOGUE_PROMPT } from '../shared/dialogue-policy.js';
 import { WORLD_PROMPT_VERSION, LEGACY_WORLD_PROMPT } from '../shared/world-policy.js';
 import { dialogueIsIdle, isSilentTurn } from './dialogue-idle.js';
@@ -221,26 +222,43 @@ export class Engine extends EventEmitter {
     } finally { this.slots.leave(); this.changed(id); }
   }
   private pending(id: string, characterId?: string) { return this.store.list('receipts', id).filter(r => r.status !== 'delivered' && (!characterId || r.characterId === characterId)); }
-  private completeDelivery(id: string, u: Utterance) {
-    const all = this.store.list('receipts', id).filter(r => r.utteranceId === u.id);
+  private completeDelivery(id: string, u: Utterance, receipts = this.store.list('receipts', id)) {
+    const all = receipts.filter(r => r.utteranceId === u.id);
     if (all.every(r => r.status === 'delivered') && !u.deliveryCompletedAt) {
       this.store.patch('utterances', u.id, { deliveryCompletedAt: now(), deliveryMs: Date.now() - Date.parse(u.createdAt) });
     }
   }
   private async flush(id: string) {
     if (this.run(id).variant.deliveryMode !== 'per_utterance') return;
-    // Barrier per public event: preserve order even when resuming multiple pending events.
-    for (const u of this.store.list('utterances', id)) {
-      const receipts = this.pending(id).filter(r => r.utteranceId === u.id);
-      const results = await Promise.allSettled(receipts.map(async receipt => {
-        const session = this.run(id).sessions[receipt.characterId];
-        this.store.patch('receipts', receipt.id, { status: 'processing' });
-        const call = await this.invoke(id, 'receive', session, `receive:${receipt.id}`, receiverPrompt(u, receipt.characterId), { sourceUtteranceId: u.id, receiptIds: [receipt.id] });
-        this.store.patch('receipts', receipt.id, { status: 'delivered', invocationId: call.id, deliveredAt: now() });
+    const receipts = this.store.list('receipts', id), history = this.store.list('utterances', id);
+    const pending = receipts.filter(r => r.status !== 'delivered');
+    if (!pending.length) {
+      // Repair legacy timestamps after a crash following the last receipt write.
+      for (const message of history) if (!message.deliveryCompletedAt) this.completeDelivery(id, message, receipts);
+      return;
+    }
+    const barriers = receiveBarriers(history, pending, this.store.list('invocations', id));
+    for (const barrier of barriers) {
+      const results = await Promise.allSettled(barrier.recipients.map(async batches => {
+        for (const batch of batches) {
+          const { receipts, messages, characterId, operationKey } = batch;
+          const session = this.run(id).sessions[characterId], bundled = messages.length > 1;
+          this.store.transaction(() => { for (const receipt of receipts) this.store.patch('receipts', receipt.id, { status: 'processing' }); });
+          const input = bundled ? receiverBatchPrompt(messages, characterId) : receiverPrompt(messages[0], characterId);
+          const call = await this.invoke(id, 'receive', session, operationKey, input, {
+            sourceUtteranceId: messages[0].id, sourceUtteranceIds: messages.map(u => u.id), receiptIds: receipts.map(r => r.id),
+            receivePromptVersion: bundled ? 'npc-receive/2' : 'npc-receive/1', receiveDeliveryVersion: RECEIVE_DELIVERY_VERSION,
+          });
+          const deliveredAt = now();
+          // A crash cannot leave half of one accepted bundle pending.
+          this.store.transaction(() => {
+            for (const receipt of receipts) this.store.patch('receipts', receipt.id, { status: 'delivered', invocationId: call.id, deliveredAt });
+            for (const message of messages) this.completeDelivery(id, message);
+          });
+        }
       }));
       const failed = results.find(x => x.status === 'rejected');
       if (failed?.status === 'rejected') throw failed.reason;
-      this.completeDelivery(id, u);
     }
   }
   private append(id: string, u: Utterance) {

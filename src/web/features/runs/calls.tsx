@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import type { InvocationMetrics } from '../../../shared/types.js';
 import { estimateCost } from '../../../core/pricing.js';
+import { sourceUtteranceIds } from '../../../core/invocation-links.js';
 import { kinds, number, time, usd } from '../../shared/formatters.js';
 import { Badge } from '../../shared/ui.js';
 
@@ -26,7 +27,7 @@ export function Calls({ calls, adapter }: { calls: InvocationMetrics[]; adapter:
         const cost = estimateCost(call, adapter);
         return <Fragment key={call.id}>
           <tr className="clickable" onClick={() => setExpanded(expanded === call.id ? '' : call.id)}>
-            <td>{kinds[call.kind]}<small>{call.characterId ?? `시도 ${call.attempt}`}</small></td>
+            <td>{kinds[call.kind]}<small>{call.characterId ?? `시도 ${call.attempt}`}</small>{call.kind === 'receive' && <small>관찰 {sourceUtteranceIds(call).length}건{sourceUtteranceIds(call).length > 1 ? ' 함께 수신' : ''}{call.attempt > 1 ? ` · 재시도 ${call.attempt}` : ''}</small>}</td>
             <td>{cost.model}<small>{call.effort}{cost.model !== call.model ? ` · 요청 ${call.model}` : ''}</small></td>
             <td>{number(call.usage.inputTokens)} / {number(call.usage.outputTokens)}</td>
             <td>{number(call.usage.totalTokens)}</td>

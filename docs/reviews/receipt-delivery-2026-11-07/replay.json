@@ -1,0 +1,77 @@
+{
+  "version": "receipt-replay/1",
+  "reports": [
+    {
+      "source": "docs/reviews/harbor-stability-2026-11-07/app-final",
+      "sourceRunId": "f2186ef7-d12b-46e6-8ac0-01949846ab03",
+      "status": "passed",
+      "speechCount": 9,
+      "before": {
+        "calls": 61,
+        "receiveCalls": 42,
+        "duplicateRecipientMessagePairs": 0
+      },
+      "after": {
+        "calls": 45,
+        "receiveCalls": 26,
+        "receiptRows": 42,
+        "pendingReceipts": 0,
+        "completionReason": "goals_achieved"
+      },
+      "observers": [
+        {
+          "characterId": "yoon",
+          "observations": 14,
+          "sha256": "94301b462949186e4e40298fcfc682198e864cf06cf6c05ee0418f2913a99a0d"
+        },
+        {
+          "characterId": "doha",
+          "observations": 14,
+          "sha256": "76c1c413834903823423a37a6ab87d9371c304d127c4830bfb14fc9ee1783743"
+        },
+        {
+          "characterId": "miru",
+          "observations": 14,
+          "sha256": "f8c520f233b739916aa31cde92ce7367a9e39c25eb751288857979bc211cc7f0"
+        }
+      ],
+      "kind": "Deterministic engine replay with recorded NPC/director outputs. No API call, token, latency or dialogue-quality measurement."
+    },
+    {
+      "source": "docs/reviews/harbor-stability-2026-11-07/app-round-robin",
+      "sourceRunId": "2117fc06-5da4-4c9b-9067-e30e5a4e4ca7",
+      "status": "passed",
+      "speechCount": 12,
+      "before": {
+        "calls": 62,
+        "receiveCalls": 48,
+        "duplicateRecipientMessagePairs": 0
+      },
+      "after": {
+        "calls": 46,
+        "receiveCalls": 32,
+        "receiptRows": 48,
+        "pendingReceipts": 0,
+        "completionReason": "goals_achieved"
+      },
+      "observers": [
+        {
+          "characterId": "yoon",
+          "observations": 16,
+          "sha256": "72f5a83bf883976d39b8a877b19f220fa264e8dfdf74cad12ba274d90d67353e"
+        },
+        {
+          "characterId": "doha",
+          "observations": 16,
+          "sha256": "613cde0e25d961f9f8708cb62edae8a53043e7741cedd0c74bd0001360b871e2"
+        },
+        {
+          "characterId": "miru",
+          "observations": 16,
+          "sha256": "07ad335e95b463470e76cf0c30668efef50ca46f6cca39ce2953c1368631ea58"
+        }
+      ],
+      "kind": "Deterministic engine replay with recorded NPC/director outputs. No API call, token, latency or dialogue-quality measurement."
+    }
+  ]
+}

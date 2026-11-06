@@ -1,0 +1,8 @@
+{
+  "source": "/api/example",
+  "sourceBaseCommit": "5ec61c7ed0b3a4499b5d1fdfa0949aaa705652fd",
+  "receiveDeliveryVersion": "receive-delivery/2",
+  "maxCalls": 100,
+  "maxUsd": 0.5,
+  "notes": "Current profile 4 app example, per_utterance only; evaluator enabled; no retry."
+}

@@ -60,6 +60,10 @@ export function publicMessage(original: Utterance, observer?: string | number) {
       ...(!observerId ? { perception: u.perception, knownUtteranceIds: u.knownUtteranceIds } : {}) } : {}) };
 }
 export const receiverPrompt = (u: Utterance, observerId?: string) => JSON.stringify({ task: 'receive', instruction: '다음은 본인이 듣거나 관찰한 내용입니다. 기억하되 지금 발언하지 말고 received:true만 반환하세요.', message: publicMessage(u, observerId) });
+// npc-receive/2: preserve speech and its already-committed outcome in order,
+// while acknowledging the combined input once. npc-receive/1 stays unchanged.
+export const RECEIVE_BATCH_INSTRUCTION = '다음은 본인이 듣거나 관찰한 내용입니다. messages를 순서대로 기억하세요. 발화와 엔진이 확정한 환경 결과는 별개의 기록입니다. 지금 발언하지 말고 모두 수신했으면 received:true만 반환하세요.';
+export const receiverBatchPrompt = (messages: Utterance[], observerId: string) => JSON.stringify({ task: 'receive', instruction: RECEIVE_BATCH_INSTRUCTION, messages: messages.map(u => publicMessage(u, observerId)) });
 export function speakerPrompt(messages: Utterance[], reminder?: string, environment?: unknown, observerId?: string, localContext?: unknown) {
   return JSON.stringify({ task: 'speak', ...(reminder ? { originalCharacterAndWorld: reminder } : {}), ...(environment ? { environment } : {}), ...(localContext ? { localContext } : {}),
     messages: messages.map(u => publicMessage(u, observerId)), instruction: '본인이 알게 된 내용에 이어 한 번 선택하세요. 대사는 speech, 겉으로 보이는 본인 행동만 action에 쓰고 없으면 빈 문자열로 두세요. 사전 정의 환경 규칙이 있으면 actionId로 요청하세요. 분산 공간에서는 본인이 실제로 관찰한 정보만 사용하고 communication·moveToLocationId·activityChoice를 함께 반환하세요. 혼자 행동할 수 있으며 모든 차례에 말할 필요는 없습니다.' });

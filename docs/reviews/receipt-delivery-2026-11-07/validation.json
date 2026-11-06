@@ -1,0 +1,53 @@
+{
+  "version": "receipt-delivery-validation/1",
+  "typecheck": "passed",
+  "build": "passed",
+  "tests": {
+    "passed": 197,
+    "failed": 0
+  },
+  "browser": {
+    "status": "passed",
+    "receiptRows": 5,
+    "receiveCalls": 3,
+    "bundledCalls": 2,
+    "pageErrors": [],
+    "mobileOverflow": false
+  },
+  "live": {
+    "runId": "3efc4408-4c39-4949-97b2-5f2786e8cf7c",
+    "calls": 45,
+    "receiveCalls": 26,
+    "bundledCalls": 16,
+    "receiptRows": 42,
+    "pendingReceipts": 0,
+    "duplicateRecipientMessagePairs": 0,
+    "status": "completed",
+    "completionReason": "goals_achieved",
+    "speechCount": 9,
+    "estimatedUsd": 0.120350775,
+    "source": ".cache/harbor-live/2026-11-06T22-42-38-650Z-receipt-delivery",
+    "receivedObservationIdsAndOrderVerified": true,
+    "allActualRequestsVerified": true
+  },
+  "limits": "Replay proves call counts and exact ordered observations. Live smoke has no matched cost/latency baseline. Existing stored runs are unchanged.",
+  "publication": {
+    "status": "passed",
+    "files": 1130,
+    "issues": [],
+    "scope": "Current working-tree candidates; pattern scan of text and file checks. No archive, image metadata or Git history scan."
+  },
+  "server": {
+    "status": "passed",
+    "beforeRuns": 114,
+    "afterRuns": 115,
+    "addedRunIds": [
+      "3efc4408-4c39-4949-97b2-5f2786e8cf7c"
+    ],
+    "existingRunIdsPreserved": true,
+    "pausedIdsPreserved": true,
+    "pausedCount": 6,
+    "savedConfigUnchanged": true
+  },
+  "baselineCallsComparedWithCurrentApp": true
+}

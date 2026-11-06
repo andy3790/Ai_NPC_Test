@@ -9,6 +9,7 @@ import { progression, resolveAction } from '../src/core/progression.js';
 import { repetitionMetrics } from '../src/core/quality.js';
 import { exportFiles } from '../src/core/export.js';
 import type { Utterance } from '../src/shared/types.js';
+import { sourceUtteranceIds } from '../src/core/invocation-links.js';
 
 for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`${mode}: authored outcomes advance goals, stop early, preserve barriers and export quality`, async () => {
   const store = new Store(':memory:'), adapter = new MockAdapter(), engine = new Engine(store, adapter, '.cache/progression');
@@ -26,10 +27,11 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`${mode}:
     const finalJudge = JSON.parse(d.invocations.filter(c => c.kind === 'evaluation').at(-1)!.input);
     assert.equal(finalJudge.progress.allGoalsAchieved, true); assert.ok(finalJudge.history.at(-1).resolution);
     if (mode === 'per_utterance') {
-      assert.equal(d.summary.byKind.receive.calls, 12 * 2 + 8 * 3); assert.equal(d.summary.pendingReceipts, 0);
+      assert.equal(d.summary.byKind.receive.calls, 12 * 2 + 8); assert.equal(d.summary.pendingReceipts, 0);
+      assert.equal(d.receipts.length, 12 * 2 + 8 * 3);
       for (const u of d.utterances) {
         const next = d.utterances.find(s => s.sequence > u.sequence && s.kind === 'speech');
-        if (next) assert.ok(d.invocations.filter(c => c.sourceUtteranceId === u.id).every(c => c.completedAt! <= d.invocations.find(c => c.id === next.invocationId)!.startedAt!));
+        if (next) assert.ok(d.invocations.filter(c => sourceUtteranceIds(c).includes(u.id)).every(c => c.completedAt! <= d.invocations.find(c => c.id === next.invocationId)!.startedAt!));
       }
     }
     const files = exportFiles(d, store.events(d.run.id));
