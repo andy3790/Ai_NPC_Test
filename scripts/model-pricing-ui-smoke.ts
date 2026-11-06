@@ -41,6 +41,7 @@ try {
   assert.match(await priceField('NPC 모델 재정의').innerText(), /입력 \$1\.20 · 출력 \$5\.00/);
   assert.match(await priceField('NPC 모델 재정의').innerText(), /272,000토큰 초과: 입력 \$2\.00 · 출력 \$7\.50/);
   await dialog.getByRole('button', { name: '03 실험 조건' }).click();
+  await dialog.getByLabel(`${spec.variants[0].label} 진행 방식`, { exact: true }).selectOption('director');
   assert.match(await dialog.locator('.matrix').innerText(), /fixture-new-model[\s\S]*입력 \$0\.33 · 출력 \$1\.70/);
   for (const label of ['모델', '평가 모델', '진행자 모델', '세계 엔진 모델', '상황 발생 모델']) {
     const field = dialog.getByLabel(label, { exact: true });

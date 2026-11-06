@@ -40,6 +40,18 @@ try {
   await page.goto(server.app.listeningOrigin);
   await page.getByRole('button', { name: '새 실험', exact: true }).click();
   await dialog.getByRole('button', { name: '03 실험 조건' }).click();
+  const policies = spec.variants.map(v => dialog.getByLabel(`${v.label} 진행 방식`, { exact: true }));
+  const directorModel = dialog.getByLabel('진행자 모델', { exact: true });
+  assert.equal(await directorModel.isVisible(), false);
+  await policies[0].selectOption('director');
+  assert.equal(await directorModel.isVisible(), true);
+  const directorEffort = dialog.locator('.director-editor').getByLabel('진행자 추론 강도', { exact: true });
+  await directorEffort.selectOption('medium');
+  await policies[1].selectOption('director'); await policies[0].selectOption('round_robin');
+  assert.equal(await directorModel.isVisible(), true);
+  await policies[1].selectOption('round_robin'); assert.equal(await directorModel.isVisible(), false);
+  await policies[0].selectOption('director'); assert.equal(await directorEffort.inputValue(), 'medium');
+  assert.equal(await dialog.locator('.director-editor').evaluate(element => Boolean(element.compareDocumentPosition(document.querySelector('.world-engine-editor')!) & Node.DOCUMENT_POSITION_FOLLOWING)), true);
   assert.equal(await scope.isVisible(), false);
   const unavailable = dialog.getByLabel('세계 엔진 없음 상황 발생', { exact: true });
   assert.equal(await unavailable.isDisabled(), true);
@@ -88,6 +100,8 @@ try {
   await checkAlignment(evaluation);
   await dialog.locator('.evaluation-editor').scrollIntoViewIfNeeded();
   await page.screenshot({ path: '.cache/screenshots/optional-evaluation-desktop.png' });
+  await dialog.locator('.director-editor').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '.cache/screenshots/optional-director-desktop.png' });
 
   await page.setViewportSize({ width: 390, height: 844 });
   await checkAlignment(first);
@@ -96,6 +110,8 @@ try {
   await first.locator('..').locator('.option-toggle-copy').click(); assert.equal(await first.isChecked(), true);
   await checkAlignment(evaluation);
   await page.screenshot({ path: '.cache/screenshots/optional-evaluation-mobile.png' });
+  await dialog.locator('.director-editor').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '.cache/screenshots/optional-director-mobile.png' });
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
   assert.equal(await dialog.locator('.editor-body').evaluate(e => e.scrollWidth > e.clientWidth + 1), false);
   await evaluation.uncheck(); await first.uncheck();
