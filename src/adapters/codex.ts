@@ -1,6 +1,6 @@
 import { spawn, spawnSync, type ChildProcessWithoutNullStreams } from 'node:child_process';
 import { existsSync, mkdirSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { isAbsolute, join, relative, resolve } from 'node:path';
 import { createInterface } from 'node:readline';
 import type { Adapter, AdapterEvent, TurnRequest, TurnResult } from './types.js';
 import type { ModelConfig } from '../shared/schema.js';
@@ -50,6 +50,7 @@ export class CodexAdapter implements Adapter {
   private finishedTurn = new Map<string, string>();
   private observers = new Map<string, (e: AdapterEvent) => void>();
   private resumed = new Set<string>();
+  private createdCwds = new Map<string, string>();
   private overrides: Record<string, unknown> = {};
   diagnostics: string[] = [];
   constructor(private root: string) {}
@@ -79,6 +80,7 @@ export class CodexAdapter implements Adapter {
       for (const p of this.pending.values()) p.reject(new Error(message)); this.pending.clear();
       for (const a of this.active.values()) a.finish({ turnId: a.turnId ?? '', output: a.output, status: 'uncertain', error: message });
       this.active.clear(); this.cancelledStarts.clear(); this.resumed.clear(); this.totals.clear(); this.usageTurn.clear(); this.finishedTurn.clear(); this.observers.clear(); this.ready = undefined;
+      this.createdCwds.clear();
     };
     this.child.on('error', e => died(e.message));
     this.child.on('exit', code => died(`Codex app-server 종료 (${code}). ${this.diagnostics.slice(-1).join('')}`));
@@ -155,6 +157,7 @@ export class CodexAdapter implements Adapter {
       ephemeral: false, serviceName: 'npc-dialogue-lab', allowProviderModelFallback: false,
     });
     const id = result.thread.id; this.resumed.add(id);
+    this.createdCwds.set(id, resolve(cwd));
     this.totals.set(id, Object.fromEntries(tokenKeys.map(k => [k, 0])) as unknown as TokenUsage);
     return id;
   }
@@ -167,6 +170,45 @@ export class CodexAdapter implements Adapter {
     const finished = this.finishedTurn.get(threadId);
     if (finished && this.usageTurn.get(threadId) !== finished) return null;
     return this.totals.get(threadId) ?? null;
+  }
+  async deleteSession(threadId: string, sessionRoot: string): Promise<'deleted' | 'missing'> {
+    await this.start();
+    if (this.active.has(threadId)) throw new Error('진행 중인 Codex 호출은 종료 후 정리해야 합니다.');
+    let cwd: string;
+    try {
+      let result;
+      try { result = await this.rpc('thread/read', { threadId, includeTurns: false }); }
+      catch (e) {
+        if (!/thread not loaded:/i.test(String(e))) throw e;
+        // CLI 0.157 reports "not loaded" for missing persisted IDs. A resume
+        // lookup distinguishes a missing rollout from a thread we can restore.
+        result = await this.rpc('thread/resume', { threadId, excludeTurns: true, config: this.overrides, approvalPolicy: 'never', sandbox: 'read-only' });
+      }
+      const { thread } = result;
+      if (thread.id !== threadId || thread.ephemeral) throw new Error('삭제할 영구 Codex 세션의 ID가 일치하지 않습니다.');
+      cwd = thread.cwd;
+    } catch (e) {
+      // Empty threads may not have a rollout yet. Only the originating adapter
+      // can prove their ownership; an unknown missing ID needs no deletion.
+      if (!/no rollout found for thread id/i.test(String(e))) throw e;
+      const created = this.createdCwds.get(threadId);
+      if (!created) { this.forgetSession(threadId); return 'missing'; }
+      cwd = created;
+    }
+    const child = typeof cwd === 'string' && isAbsolute(cwd) ? relative(resolve(sessionRoot), resolve(cwd)) : '..';
+    if (child === '..' || child.startsWith('..\\') || child.startsWith('../') || isAbsolute(child)) {
+      throw new Error(`Codex 세션 소유 경로가 실험 폴더와 다릅니다: ${threadId}`);
+    }
+    await this.rpc('thread/delete', { threadId });
+    this.forgetSession(threadId);
+    return 'deleted';
+  }
+  private forgetSession(threadId: string) {
+    this.resumed.delete(threadId); this.createdCwds.delete(threadId);
+    this.totals.delete(threadId); this.usageTurn.delete(threadId); this.finishedTurn.delete(threadId);
+    this.cancelledStarts.delete(threadId);
+    // Keep bounded turn observers: usage may arrive after turn/completed and
+    // thread/delete. It still belongs in the durable invocation ledger.
   }
   async turn(request: TurnRequest, emit: (event: AdapterEvent) => void, signal?: AbortSignal): Promise<TurnResult> {
     await this.resumeSession(request.threadId);

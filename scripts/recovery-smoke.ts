@@ -4,11 +4,13 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { Store } from '../src/core/store.js';
 import { Engine } from '../src/core/engine.js';
 import { CodexAdapter } from '../src/adapters/codex.js';
+import { stopTestRuns, interruptTest } from './lib/test-sessions.js';
 import { exampleSpec } from '../src/shared/example.js';
 const root = resolve('.cache', `recovery-smoke-${Date.now()}`); await mkdir(root, { recursive: true });
 let store = new Store(join(root, 'npc-lab.sqlite'));
 let adapter = new CodexAdapter(join(root, 'runtime'));
 let engine = new Engine(store, adapter, root);
+const removeSignals = interruptTest(() => engine);
 try {
   const catalog = await adapter.models(); const model = catalog.find(m => m.isDefault) ?? catalog[0];
   const spec = exampleSpec(model.id, model.efforts.includes('low') ? 'low' : model.defaultEffort);
@@ -30,4 +32,4 @@ try {
   assert.equal(after.utterances[0].id, before.utterances[0].id);
   await writeFile(join(root, 'report.json'), JSON.stringify({ runId: id, status: after.run.status, threadsBefore: threads, threadsAfter: Object.values(after.run.sessions).map(s => s.threadId), summary: after.summary }, null, 2));
   console.log(`RECOVERY_SMOKE_OK ${root}`);
-} finally { await engine.close(); store.close(); }
+} finally { await stopTestRuns(engine); await removeSignals(); await engine.close(); store.close(); }

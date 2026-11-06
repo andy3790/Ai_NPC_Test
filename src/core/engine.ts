@@ -4,6 +4,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import { join } from 'node:path';
 import type { Adapter } from '../adapters/types.js';
 import { Store } from './store.js';
+import { SessionCleanup } from './session-cleanup.js';
 import { emptyUsage, UsageTracker } from './metrics.js';
 import { evaluationPrompt, persona, PROMPT_VERSION, publicMessage, receiverBatchPrompt, receiverPrompt, speakerPrompt } from './prompts.js';
 import { receiveBarriers, RECEIVE_DELIVERY_VERSION } from './receive-delivery.js';
@@ -43,8 +44,10 @@ export class Engine extends EventEmitter {
   private activeStarts = new Map<string, number>();
   private summaries = new Map<string, { revision: number; summary: RunSummary }>();
   private resuming = new Set<string>();
+  private sessionCleanup: SessionCleanup;
   constructor(public store: Store, public adapter: Adapter, public dataDir: string) {
     super();
+    this.sessionCleanup = new SessionCleanup(store, adapter, dataDir);
     for (const run of store.list('runs')) if (['running', 'queued'].includes(run.status)) store.patch('runs', run.id, { status: 'paused', pausedAt: now(), timingComplete: run.status === 'running' ? false : run.timingComplete, error: '서버 재시작: 재개 전에 미확정 호출을 확인합니다.' });
     for (const call of store.list('invocations')) {
       if (call.status === 'running') store.patch('invocations', call.id, { status: 'uncertain', error: '서버 재시작으로 완료 확인 필요' });
@@ -91,8 +94,9 @@ export class Engine extends EventEmitter {
     if (this.workers.has(id)) throw new Error('현재 진행 중인 요청이 끝난 뒤 실행하세요.');
     // Register before any asynchronous work can request a call slot. Manual
     // evaluations and event delivery participate in the same global limit.
-    const worker = Promise.resolve().then(task).finally(() => {
-      this.workers.delete(id); this.refreshCallLimit(); this.changed(id); this.pump();
+    const worker = Promise.resolve().then(task).finally(async () => {
+      try { await this.sessionCleanup.run(id); }
+      finally { this.workers.delete(id); this.refreshCallLimit(); this.changed(id); this.pump(); }
     });
     this.workers.set(id, worker); this.refreshCallLimit(); this.changed(id);
     return worker;
@@ -135,7 +139,11 @@ export class Engine extends EventEmitter {
     }
   }
   private async helper(id: string, key: string, config: ModelConfig, instructions: string, fresh = false): Promise<NpcSession> {
-    const helpers = this.run(id).helperSessions; if (!fresh && Object.hasOwn(helpers, key)) return this.restoreSession(id, 'helperSessions', key, helpers[key]);
+    const helpers = this.run(id).helperSessions;
+    const old = helpers[key];
+    const deleted = old && ['deleted', 'missing'].includes(this.run(id).sessionCleanup?.[old.threadId]?.status ?? '');
+    if (!fresh && old && !deleted) return this.restoreSession(id, 'helperSessions', key, old);
+    if (fresh && old) await this.sessionCleanup.run(id, old.threadId);
     const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, key), this.run(id).apiCredential);
     const session = { id: randomUUID(), characterId: key, threadId, config, instructions };
     this.store.patch('runs', id, { helperSessions: { ...this.run(id).helperSessions, [key]: session } }); return session;
@@ -151,7 +159,8 @@ export class Engine extends EventEmitter {
     const previous = this.priorInvocation(id, operationKey);
     if (previous?.status === 'completed') return previous;
     const session = await this.helper(id, key, this.run(id).spec.director, prompt.instructions, true);
-    return this.invoke(id, 'director', session, operationKey, prompt.input, prompt.metadata, prompt.outputSchema);
+    try { return await this.invoke(id, 'director', session, operationKey, prompt.input, prompt.metadata, prompt.outputSchema); }
+    finally { await this.sessionCleanup.run(id, session.threadId); }
   }
   private async invoke(id: string, kind: CallKind, session: NpcSession, operationKey: string, input: string, metadata: Record<string, unknown> = {}, requestedOutputSchema?: object) {
     const previous = this.priorInvocation(id, operationKey);
@@ -481,13 +490,17 @@ export class Engine extends EventEmitter {
       }
       if (this.run(id).status === 'stopped') throw new Error('상태 확인 중 묶음이 중단되었습니다.');
       this.store.patch('runs', id, { status: 'queued', pauseRequested: false, stepRemaining: step ? 1 : null, error: null }); this.pump();
-    } finally { this.resuming.delete(id); }
+    } finally {
+      this.resuming.delete(id);
+      if (this.run(id).status === 'stopped') await this.sessionCleanup.run(id);
+    }
   }
   async stop(id: string) {
     const run = this.run(id);
-    if (['completed', 'stopped'].includes(run.status)) return;
+    if (['completed', 'stopped'].includes(run.status)) { await this.cleanupSessions(id); return; }
     this.store.patch('runs', id, { status: 'stopped', completedAt: this.workers.has(id) ? null : now(), pausedAt: null, pausedMs: run.pausedMs + (run.pausedAt ? Date.now() - Date.parse(run.pausedAt) : 0) });
     for (const controller of this.aborts.get(id) ?? []) controller.abort();
+    if (!this.workers.has(id) && !this.resuming.has(id)) await this.sessionCleanup.run(id);
     this.changed(id);
   }
   private appendEvent(id: string, text: string, audience?: Audience) {
@@ -561,5 +574,11 @@ export class Engine extends EventEmitter {
       completeDelivery: u => this.completeDelivery(id, u), inject: (text, audience) => this.appendEvent(id, text, audience),
       evaluate: final => this.evaluatePending(id, final) };
   }
-  async close() { this.closing = true; for (const set of this.aborts.values()) for (const c of set) c.abort(); await Promise.allSettled([...this.workers.values()]); await this.adapter.close(); }
+  async cleanupSessions(id?: string) {
+    if (this.adapter.name !== 'codex' || !this.adapter.deleteSession) return;
+    for (const run of id ? [this.run(id)] : this.store.list('runs')) {
+      if (!this.workers.has(run.id) && !this.resuming.has(run.id)) await this.sessionCleanup.run(run.id);
+    }
+  }
+  async close() { this.closing = true; for (const set of this.aborts.values()) for (const c of set) c.abort(); await Promise.allSettled([...this.workers.values()]); await this.cleanupSessions(); await this.adapter.close(); }
 }

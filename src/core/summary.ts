@@ -52,7 +52,7 @@ export function matchesProvider(run: Pick<Run, 'adapter'>, provider?: string) {
 }
 
 export function toRunListItem(run: Run, summary: RunSummary, history?: RunHistory | null): RunListItem {
-  const { spec, sessions: _sessions, helperSessions: _helpers, worldState: _worldState, eventGeneratorState: _eventState, ...item } = run;
+  const { spec, sessions: _sessions, helperSessions: _helpers, worldState: _worldState, eventGeneratorState: _eventState, sessionCleanup: _cleanup, ...item } = run;
   return { ...item, maxUtterances: spec.maxUtterances, summary, environmentMode: environmentMode(spec, run.variant),
     scenario: { id: spec.scenario.id, name: spec.scenario.name, characterCount: spec.scenario.characters.length },
     npcConfigs: resolvedNpcConfigs(run), ...(history !== undefined ? { history } : {}) };

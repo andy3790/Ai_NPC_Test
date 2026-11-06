@@ -65,6 +65,7 @@ export interface Run {
   evaluatedThrough: number; appliedEvents: number[]; stepRemaining: number | null; pauseRequested: boolean;
   revisions: number; adapter: string; appVersion: string; cliVersion: string;
   promptVersion?: string;
+  sessionCleanup?: Record<string, { status: 'deleted' | 'missing' | 'pending'; at: string; error?: string }>;
   apiCredential?: ApiCredential;
   worldState?: WorldState;
   eventGeneratorState?: EventGeneratorState;
@@ -74,7 +75,7 @@ export interface Run {
 export interface RawEvent { id: number; runId: string; invocationId: string | null; receivedAt: string; method: string; params: unknown }
 export interface RunHistory { readOnly: boolean; kind: 'current' | 'archive'; locations: string[]; archivedAt?: string }
 export interface RunNpcConfig { characterId: string; name: string; model: string; effort: string }
-export type RunListItem = Omit<Run, 'spec' | 'sessions' | 'helperSessions' | 'worldState' | 'eventGeneratorState'> & {
+export type RunListItem = Omit<Run, 'spec' | 'sessions' | 'helperSessions' | 'worldState' | 'eventGeneratorState' | 'sessionCleanup'> & {
   maxUtterances: number; summary: RunSummary; history?: RunHistory | null;
   scenario: { id: string; name: string; characterCount: number }; npcConfigs: RunNpcConfig[];
   environmentMode?: Variant['environmentMode'];

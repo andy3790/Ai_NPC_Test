@@ -4,6 +4,7 @@ import { resolve, join } from 'node:path';
 import { parseArgs } from 'node:util';
 import { OpenAIAdapter } from '../src/adapters/openai.js';
 import { CodexAdapter } from '../src/adapters/codex.js';
+import { TestSessions } from './lib/test-sessions.js';
 import { UsageTracker } from '../src/core/metrics.js';
 import { outputSchemas, speechSchema } from '../src/shared/schema.js';
 import { getModelPricing, PRICING_REVISION } from '../src/shared/model-catalog.js';
@@ -67,6 +68,7 @@ else {
   await writeFile(join(root, 'policies.json'), JSON.stringify({ baseInstructions, policies: dialoguePolicies }, null, 2));
   await writeFile(join(root, 'plan.json'), JSON.stringify(plan, null, 2));
   const adapter = values.adapter === 'codex' ? new CodexAdapter(join(root, 'runtime')) : new OpenAIAdapter(join(root, 'runtime'), { maxOutputTokens: 2048 });
+  const sessions = new TestSessions(adapter, root);
   let calls = 0, estimatedUsd = 0;
   const samples: (ReviewSample & Record<string, unknown>)[] = [];
   let status = 'completed', error: string | null = null;
@@ -81,12 +83,12 @@ else {
         if (calls >= maxCalls || estimatedUsd >= maxUsd) throw new Error('Evaluation budget reached.');
         const selectedCase = condition.id === 'candidate' ? candidateSuite.cases.find(o => o.id === c.id)! : c;
         const p = caseInput(selectedCase, version, condition.model, condition.effort);
-        const threadId = await adapter.createSession(condition, p.instructions, root);
+        const threadId = await sessions.create(condition, p.instructions);
         const clientMessageId = randomUUID();
         calls++;
         // Save complete effective instructions, request and response for every attempt.
         await appendFile(join(root, 'requests.jsonl'), JSON.stringify({ caseId: c.id, repetition, version, conditionId: condition.id, config: condition, clientMessageId,
-          ...p, instructions: baseInstructions + '\n' + p.instructions, schema: outputSchemas.speech }) + '\n');
+          threadId, ...p, instructions: baseInstructions + '\n' + p.instructions, schema: outputSchemas.speech }) + '\n');
         const started = performance.now();
         const tracker = new UsageTracker(adapter.baseline(threadId));
         const events: unknown[] = [];
@@ -94,7 +96,7 @@ else {
           clientMessageId, timeoutMs: 90_000 }, event => {
           events.push(event);
           if (event.method === 'thread/tokenUsage/updated') tracker.update(event.params);
-        });
+        }, sessions.signal);
         await appendFile(join(root, 'events.jsonl'), JSON.stringify({ clientMessageId, events }) + '\n');
         const price = getModelPricing(result.actualModel ?? condition.model);
         const usage = result.usage ?? tracker.result().usage;
@@ -109,6 +111,7 @@ else {
           durationMs: performance.now() - started, instructionsSha256: p.instructionsSha256, inputSha256: p.inputSha256, error: result.error ?? null };
         samples.push(sample);
         await appendFile(join(root, 'samples.jsonl'), JSON.stringify(sample) + '\n');
+        await sessions.release(threadId);
         if (cost !== null) estimatedUsd += cost;
         console.log(JSON.stringify({ caseId: c.id, repetition, slot: sample.slot, status: sample.status, calls, estimatedUsd }));
         if (!valid || cost === null) throw new Error('Failed, uncertain, invalid or unpriced response; stopped without retry. Inspect the saved attempt.');
@@ -116,9 +119,10 @@ else {
     }
   } catch (e) { status = 'incomplete'; error = e instanceof Error ? e.message : String(e); process.exitCode = 1; }
   finally {
+    const cleanupErrors = await sessions.close();
     await adapter.close();
     await writeFile(join(root, 'review.md'), renderReview(cases, samples));
-    await writeFile(join(root, 'manifest.json'), JSON.stringify({ ...plan, status, error, calls, estimatedUsd,
+    await writeFile(join(root, 'manifest.json'), JSON.stringify({ ...plan, status, error, calls, estimatedUsd, cleanupErrors,
       unpricedCalls: samples.filter(s => s.costUsd === null).length,
       quality: 'unreviewed', mappings: samples.map(s => ({ caseId: s.caseId, repetition: s.repetition, slot: s.slot, version: s.version,
         conditionId: s.conditionId, model: s.model, effort: s.effort })) }, null, 2));

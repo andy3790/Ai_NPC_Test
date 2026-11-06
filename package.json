@@ -11,6 +11,8 @@
     "dialogue:eval": "node --env-file-if-exists=.env --import tsx scripts/dialogue-eval.ts",
     "receipts:replay": "tsx scripts/receipt-replay.ts",
     "smoke:receipts": "tsx scripts/receipt-ui-smoke.ts",
+    "sessions:cleanup": "tsx scripts/cleanup-codex-sessions.ts",
+    "smoke:codex-cleanup": "tsx scripts/codex-cleanup-smoke.ts",
     "world:eval": "node --env-file-if-exists=.env --import tsx scripts/world-eval.ts",
     "director:eval": "node --env-file-if-exists=.env --import tsx scripts/director-eval.ts",
     "dev": "tsx src/server/main.ts",

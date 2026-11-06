@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { createAdapter } from '../src/adapters/factory.js';
+import { stopTestRuns, interruptTest } from './lib/test-sessions.js';
 import { Engine } from '../src/core/engine.js';
 import { Store } from '../src/core/store.js';
 import { exportFiles } from '../src/core/export.js';
@@ -51,6 +52,7 @@ else {
   const adapter = createAdapter(values.adapter!, join(root, 'runtime'));
   const store = new Store(join(root, 'npc-lab.sqlite'));
   const engine = new Engine(store, adapter, root);
+  const removeSignals = interruptTest(() => engine);
   const turn = adapter.turn.bind(adapter); let calls = 0;
   const reports: unknown[] = [];
   adapter.turn = async (...args) => {
@@ -80,6 +82,7 @@ else {
     }
   } catch (e) { error = e instanceof Error ? e.message : String(e); process.exitCode = 1; }
   finally {
+    await stopTestRuns(engine); await removeSignals();
     const estimatedUsd = engine.list().reduce((n, r) => n + (r.summary.cost.usd ?? 0), 0);
     await writeFile(join(root, 'result.json'), JSON.stringify({ ...plan, calls, estimatedUsd, error, reports }, null, 2));
     console.log(JSON.stringify({ root, calls, estimatedUsd, error }));

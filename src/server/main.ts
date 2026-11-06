@@ -22,6 +22,7 @@ export async function serve(options: { port?: number; data?: string; mock?: bool
   writeFileSync(lock, String(process.pid));
   const store = new Store(join(data, 'npc-lab.sqlite'));
   const engine = new Engine(store, adapter, data);
+  await engine.cleanupSessions();
   const history = options.history === false ? undefined : new RunHistoryCatalog(engine, { roots, workspace: options.historyWorkspace, archive: options.historyArchive ?? process.env.NPC_LAB_HISTORY_DATABASE });
   const app = await createApp(engine, { history });
   let closing = false;

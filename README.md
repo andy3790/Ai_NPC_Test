@@ -4,6 +4,8 @@ NPC가 긴 대화와 행동을 이어 갈 때 캐릭터성과 세계 설정을 �
 
 현재 문서는 **앱 1.4.0 · 설정 schemaVersion 1** 기준입니다. Node.js 24 이상, TypeScript, React, Fastify, SQLite를 사용하며 Windows·한국어 환경을 우선 지원합니다.
 
+Codex 테스트 세션은 완료·중단 또는 일회성 호출 종료 후 자동 정리합니다. 기존 기록의 정리 명령과 일시정지 예외는 [세션 정리 정책](docs/codex-session-cleanup.md)을 참고하세요.
+
 ## 시작하기
 
 프로젝트 폴더에서 설치하고 빌드합니다.
