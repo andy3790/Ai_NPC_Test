@@ -1,0 +1,107 @@
+import assert from 'node:assert/strict';
+import { mkdir, mkdtemp } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { chromium, type Locator } from 'playwright';
+import { serve } from '../src/server/main.js';
+import { spatialExample } from '../src/shared/spatial-example.js';
+import type { ExperimentSpec } from '../src/shared/schema.js';
+import type { MockAdapter } from '../src/adapters/mock.js';
+
+await mkdir('.cache', { recursive: true });
+const root = await mkdtemp(resolve('.cache/optional-settings-ui-'));
+const server = await serve({ port: 0, data: root, mock: true, history: false });
+const spec = spatialExample('mock-model');
+spec.variants.forEach((v, i) => { v.label = i === 0 ? '첫 번째 조건 · 긴 조건 이름의 체크박스 정렬 확인' : '두 번째 조건'; v.eventGeneration = false; });
+spec.variants.push({ ...spec.variants[0], id: 'no-world', label: '세계 엔진 없음', environmentMode: 'off' });
+delete spec.eventGenerator;
+server.engine.store.setting('lastSpec', spec);
+const browser = await chromium.launch({ headless: true, channel: process.platform === 'win32' ? 'msedge' : undefined });
+const page = await browser.newPage({ viewport: { width: 1440, height: 1050 } });
+const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
+const dialog = page.getByRole('dialog', { name: '실험 구성' });
+const first = dialog.getByLabel(`${spec.variants[0].label} 상황 발생`, { exact: true });
+const second = dialog.getByLabel('두 번째 조건 상황 발생', { exact: true });
+const scope = dialog.getByLabel('발생 가능한 사건 범위', { exact: true });
+const evaluation = dialog.getByLabel('주기 평가와 종료 평가 사용', { exact: true });
+async function save() {
+  const response = page.waitForResponse(r => r.url().endsWith('/api/config') && r.request().method() === 'PUT');
+  await dialog.getByRole('button', { name: '저장', exact: true }).click();
+  const saved = await response; assert.equal(saved.status(), 200, await saved.text());
+  return saved.json() as Promise<ExperimentSpec>;
+}
+async function checkAlignment(input: Locator) {
+  const row = input.locator('..'); await row.scrollIntoViewIfNeeded();
+  const box = await input.boundingBox(), bounds = await row.boundingBox(); assert.ok(box && bounds);
+  assert.equal(box.width, 20); assert.equal(box.height, 20); assert.ok(bounds.height >= 48);
+  assert.ok(Math.abs(box.y + box.height / 2 - bounds.y - bounds.height / 2) <= 1);
+  assert.ok(box.x - bounds.x >= 12 && box.x - bounds.x <= 18);
+}
+try {
+  await page.goto(server.app.listeningOrigin);
+  await page.getByRole('button', { name: '새 실험', exact: true }).click();
+  await dialog.getByRole('button', { name: '03 실험 조건' }).click();
+  assert.equal(await scope.isVisible(), false);
+  const unavailable = dialog.getByLabel('세계 엔진 없음 상황 발생', { exact: true });
+  assert.equal(await unavailable.isDisabled(), true);
+  await checkAlignment(first);
+  await first.locator('..').locator('.option-toggle-copy').click();
+  assert.equal(await first.isChecked(), true); assert.equal(await scope.isVisible(), true);
+  assert.equal(await scope.getAttribute('aria-invalid'), 'true');
+  await checkAlignment(first);
+  await first.focus(); await page.keyboard.press('Space');
+  assert.equal(await first.isChecked(), false); assert.equal(await scope.isVisible(), false);
+  const emptyDraft = await save(); assert.equal(emptyDraft.eventGenerator!.allowedEvents, '');
+  assert.ok(emptyDraft.variants.every(v => !v.eventGeneration));
+
+  await first.check();
+  await scope.fill('기존 설비의 작은 고장만 허용한다.');
+  await dialog.getByLabel('검토 간격 (가상 초)', { exact: true }).fill('37');
+  await second.check(); await first.uncheck();
+  assert.equal(await scope.isVisible(), true, 'one active condition keeps shared settings visible');
+  await second.uncheck(); assert.equal(await scope.isVisible(), false);
+  await save(); await page.reload();
+  await page.getByRole('button', { name: '새 실험', exact: true }).click();
+  await dialog.getByRole('button', { name: '03 실험 조건' }).click();
+  await first.check();
+  assert.equal(await scope.inputValue(), '기존 설비의 작은 고장만 허용한다.');
+  assert.equal(await dialog.getByLabel('검토 간격 (가상 초)', { exact: true }).inputValue(), '37');
+  await dialog.getByLabel(`${spec.variants[0].label} 환경 방식`, { exact: true }).selectOption('off');
+  assert.equal(await first.isChecked(), false); assert.equal(await first.isDisabled(), true);
+  assert.equal(await scope.isVisible(), false); await save();
+  await dialog.getByLabel(`${spec.variants[0].label} 환경 방식`, { exact: true }).selectOption('ai_spatial');
+  await first.check();
+  await mkdir('.cache/screenshots', { recursive: true });
+  await dialog.locator('.situation-editor').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '.cache/screenshots/optional-situations-desktop.png' });
+
+  await dialog.getByLabel('평가 간격 (발화)', { exact: true }).fill('7');
+  await dialog.getByLabel('평가 맥락 문자 한도', { exact: true }).fill('12000');
+  await evaluation.uncheck();
+  assert.equal(await dialog.getByLabel('평가 모델', { exact: true }).isVisible(), false);
+  assert.equal(await dialog.getByLabel('진행자 모델', { exact: true }).isVisible(), true);
+  assert.equal(await dialog.getByLabel('반복 유사도 임계값 (0.1~1)', { exact: true }).isVisible(), true);
+  await dialog.getByRole('button', { name: '01 시나리오' }).click();
+  await dialog.getByRole('button', { name: '03 실험 조건' }).click();
+  await evaluation.locator('..').locator('.option-toggle-copy').click();
+  assert.equal(await dialog.getByLabel('평가 간격 (발화)', { exact: true }).inputValue(), '7');
+  assert.equal(await dialog.getByLabel('평가 맥락 문자 한도', { exact: true }).inputValue(), '12000');
+  await checkAlignment(evaluation);
+  await dialog.locator('.evaluation-editor').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '.cache/screenshots/optional-evaluation-desktop.png' });
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await checkAlignment(first);
+  await page.screenshot({ path: '.cache/screenshots/optional-situations-mobile.png' });
+  await first.locator('..').locator('.option-toggle-copy').click(); assert.equal(await first.isChecked(), false);
+  await first.locator('..').locator('.option-toggle-copy').click(); assert.equal(await first.isChecked(), true);
+  await checkAlignment(evaluation);
+  await page.screenshot({ path: '.cache/screenshots/optional-evaluation-mobile.png' });
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
+  assert.equal(await dialog.locator('.editor-body').evaluate(e => e.scrollWidth > e.clientWidth + 1), false);
+  await evaluation.uncheck(); await first.uncheck();
+  const saved = await save(); assert.equal(saved.evaluation.enabled, false); assert.equal(saved.evaluation.interval, 7);
+  assert.equal(saved.eventGenerator!.allowedEvents, '기존 설비의 작은 고장만 허용한다.');
+  assert.ok(saved.variants.every(v => !v.eventGeneration));
+  assert.deepEqual(errors, []); assert.equal((server.engine.adapter as MockAdapter).requests.length, 0);
+  console.log(JSON.stringify({ ok: true, emptyDraftSaved: true, preservedSettings: true, conditionalEvaluation: true, labelAndKeyboard: true, mobile: true, modelCalls: 0 }));
+} finally { await browser.close(); await server.close(); }

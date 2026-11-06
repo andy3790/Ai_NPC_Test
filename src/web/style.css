@@ -147,6 +147,23 @@
 .api-key-help { line-height: 1.8; color: #657166; margin: 10px 0 0; }
 @media (max-width: 600px) { .api-key-settings { padding: 16px; } .api-key-heading, .api-key-input-row { flex-direction: column; align-items: stretch; } }
 .spatial-edit-row { padding: 14px; border: 1px solid var(--line, #d9e1d9); border-radius: 10px; }
+.option-toggle-list { display: grid; gap: 10px; }
+.editor .option-toggle { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; align-items: center; gap: 12px; min-height: 64px; padding: 14px 16px; border: 1px solid #dce4d3; border-radius: 8px; background: #fff; cursor: pointer; }
+.editor .option-toggle input[type=checkbox] { width: 20px; height: 20px; min-width: 20px; margin: 0; padding: 0; cursor: inherit; }
+.option-toggle-copy { display: grid; gap: 4px; min-width: 0; overflow-wrap: anywhere; }
+.option-toggle-copy strong { color: #354d3c; font-size: 13px; line-height: 1.6; font-weight: 600; }
+.option-toggle-copy small { color: #71816e; font-size: 11px; line-height: 1.6; font-weight: 400; }
+.option-toggle-state { color: #71816e; font-size: 11px; white-space: nowrap; }
+.editor .option-toggle.is-enabled { background: #f1f7ec; border-color: #98b28c; }
+.option-toggle.is-enabled .option-toggle-state { color: #386830; font-weight: 600; }
+.editor .option-toggle:not(.is-disabled):hover { border-color: #7b9b6d; }
+.editor .option-toggle:focus-within { outline: 2px solid #568045; outline-offset: 2px; }
+.editor .option-toggle.is-disabled { background: #f4f5f2; cursor: not-allowed; }
+.option-toggle.is-disabled .option-toggle-copy strong { color: #849080; }
+.optional-settings { padding: 18px; border: 1px solid #dce4d3; border-radius: 8px; background: #fafcf8; }
+.optional-settings .form-hint { margin: 0; }
+.editor .field-error { color: #a64d35; }
+@media (max-width: 600px) { .editor .option-toggle { padding: 12px; gap: 10px; } .optional-settings { padding: 14px; } }
 .spatial-members, .spatial-places { display: flex; flex-wrap: wrap; gap: 12px; }
 .spatial-places > article { flex: 1 1 160px; }
 .observation-filters { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid #dde4de; }

@@ -44,6 +44,10 @@ jobs:
         if: runner.os == 'Linux'
         timeout-minutes: 5
         run: npm run smoke:models
+      - name: Check optional engine settings and checkbox layout
+        if: runner.os == 'Linux'
+        timeout-minutes: 5
+        run: npm run smoke:options
       - name: Check archived history and mixed-provider comparison
         if: runner.os == 'Linux'
         timeout-minutes: 5
