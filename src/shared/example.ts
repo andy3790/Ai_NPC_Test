@@ -1,7 +1,8 @@
 import { experimentSchema, type ExperimentSpec } from './schema.js';
 import { harborEnvironment } from './example-environment.js';
-export function exampleSpec(model = 'gpt-6.1-sol', effort = 'low'): ExperimentSpec {
-  return experimentSchema.parse({ schemaVersion: 1, name: '안개항의 마지막 등불',
+import { CURRENT_HARBOR_PROFILE, harborCharacter, type HarborProfileVersion } from './harbor-profiles.js';
+export function exampleSpec(model = 'gpt-6.1-sol', effort = 'low', profileVersion: HarborProfileVersion = CURRENT_HARBOR_PROFILE): ExperimentSpec {
+  const spec = experimentSchema.parse({ schemaVersion: 1, name: '안개항의 마지막 등불',
     scenario: { id: 'fog-harbor', name: '안개항의 마지막 등불',
       world: '안개항은 작은 항구 마을이다. 등대는 기름을 태워 빛을 낸다. 마법과 초자연적 능력은 존재하지 않는다. 오늘 밤 안개가 짙고 등대에 남은 기름은 한 통이다. 마을에는 공개적으로 정해진 통행 금지가 없다. 설정에 없는 인물·장소·역사·조직·능력을 새로운 사실로 만들지 않는다.',
       situation: '세 사람은 등대 입구에서 만났다. 남은 기름을 오늘 밤 모두 쓸지, 다음 날을 위해 나눌지 논의한다.', defaults: { model, effort }, environment: harborEnvironment(),
@@ -13,4 +14,7 @@ export function exampleSpec(model = 'gpt-6.1-sol', effort = 'low'): ExperimentSp
     variants: [ { id: 'batch', label: '차례에 모아 전달', deliveryMode: 'batched_on_turn' }, { id: 'each', label: '매 발화마다 전달', deliveryMode: 'per_utterance' } ],
     evaluation: { enabled: true, interval: 10, model, effort }, director: { model, effort },
   });
+  if (profileVersion !== 'harbor-profile/1') spec.scenario.id = 'fog-harbor-profile2';
+  spec.scenario.characters = spec.scenario.characters.map(c => harborCharacter(c, profileVersion));
+  return spec;
 }

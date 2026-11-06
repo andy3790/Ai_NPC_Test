@@ -1,0 +1,367 @@
+{
+  "adapter": "openai",
+  "suiteVersion": "harbor-dialogue/1",
+  "casesSha256": "155792f1900434c7bcab5137e97aa5f3d3fe46d341d92aff1f1ec609a49320c6",
+  "split": "holdout",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "promptVersion": "npc-lab/10",
+  "policyVersions": [
+    "npc-dialogue/5",
+    "npc-dialogue/5"
+  ],
+  "conditions": [
+    {
+      "id": "baseline",
+      "policy": "npc-dialogue/5",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "id": "candidate",
+      "policy": "npc-dialogue/5",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    }
+  ],
+  "repetitions": 2,
+  "expectedCalls": 36,
+  "maxCalls": 36,
+  "maxUsd": 1,
+  "candidateSuiteVersion": "harbor-dialogue/2",
+  "candidateCasesSha256": "f2928e017f13afb2d152c135f6b4ef116be08a55c1606123aa2918557f9be6ea",
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+  "status": "completed",
+  "error": null,
+  "calls": 36,
+  "estimatedUsd": 0.09340050000000003,
+  "unpricedCalls": 0,
+  "quality": "unreviewed",
+  "mappings": [
+    {
+      "caseId": "duration_yoon",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "duration_yoon",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "duration_yoon",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "duration_yoon",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "duration_doha",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "duration_doha",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "duration_doha",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "duration_doha",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "duration_miru",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "duration_miru",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "duration_miru",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "duration_miru",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_yoon",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_yoon",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_yoon",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_yoon",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_doha",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_doha",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_doha",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_doha",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_miru",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_miru",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_miru",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "premature_agreement_miru",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_yoon",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_yoon",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_yoon",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_yoon",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_doha",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_doha",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_doha",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_doha",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_miru",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_miru",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_miru",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_miru",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    }
+  ]
+}

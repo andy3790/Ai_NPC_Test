@@ -1,0 +1,47 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { resolve, join } from 'node:path';
+import { Engine } from '../src/core/engine.js';
+import { Store } from '../src/core/store.js';
+import { OpenAIAdapter } from '../src/adapters/openai.js';
+import { createApp } from '../src/server/app.js';
+import { exportFiles } from '../src/core/export.js';
+import { experimentSchema } from '../src/shared/schema.js';
+const root = resolve('.cache/harbor-live', new Date().toISOString().replace(/[:.]/g, '-') + '-app-default');
+await mkdir(root, {recursive:true});
+const store = new Store(join(root,'npc-lab.sqlite')), adapter = new OpenAIAdapter(join(root,'runtime'));
+const engine = new Engine(store, adapter, root), app = await createApp(engine);
+const originalTurn = adapter.turn.bind(adapter);
+let calls = 0;
+adapter.turn = async (...args) => {
+  const costs=engine.list().map(r=>r.summary.cost);
+  if(calls>=150 || costs.some(c=>c.unpricedCalls>0) || costs.reduce((n,c)=>n+(c.usd??0),0)>=1.5)throw Error('Budget limit');
+  calls++;
+  const r=await originalTurn(...args);
+  if(r.status==='completed' && JSON.parse(args[0].input).task==='speak')console.log(JSON.stringify({calls,...JSON.parse(r.output)}));
+  return r;
+};
+let error:string|null=null;
+const reports:any[]=[];
+try {
+  const response=await app.inject({method:'GET',url:'/api/example',headers:{host:'localhost:4317'}});
+  if(response.statusCode!==200)throw Error('Example failed');
+  const spec=experimentSchema.parse(response.json());
+  if(spec.scenario.defaults.model!=='gpt-6.1-sol' || spec.maxUtterances!==18 || spec.repetitions!==1 || spec.variants.length!==2)throw Error('Unexpected default');
+  await writeFile(join(root,'config.json'),JSON.stringify(spec,null,2));
+  await writeFile(join(root,'plan.json'),JSON.stringify({source:'/api/example',maxCalls:150,maxUsd:1.5,notes:'Unmodified actual app example; both delivery variants; evaluator enabled; no retry.'},null,2));
+  await writeFile(join(root,'runner.snapshot.txt'),await readFile(new URL(import.meta.url),'utf8'));
+  console.log(JSON.stringify({root,model:spec.scenario.defaults,maxUtterances:spec.maxUtterances,variants:spec.variants}));
+  const {runs}=await engine.create(spec); await engine.idle();
+  for(const run of runs){
+    const detail=engine.detail(run.id), dir=join(root,run.variant.id); await mkdir(dir,{recursive:true});
+    for(const [name,value] of Object.entries(exportFiles(detail,store.events(run.id))))await writeFile(join(dir,name),value);
+    reports.push({runId:run.id,variant:run.variant.id,status:detail.run.status,completionReason:detail.run.completionReason,error:detail.run.error,summary:detail.summary});
+  }
+  if(reports.some(r=>r.status!=='completed'))throw Error('Default run did not complete');
+} catch(e){error=e instanceof Error?e.message:String(e);process.exitCode=1;}
+finally {
+  const result={calls,error,estimatedUsd:engine.list().reduce((n,r)=>n+(r.summary.cost.usd??0),0),reports};
+  await writeFile(join(root,'result.json'),JSON.stringify(result,null,2));
+  console.log(JSON.stringify({root,...result}));
+  await app.close();await engine.close();store.close();
+}

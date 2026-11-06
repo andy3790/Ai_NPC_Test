@@ -15,6 +15,9 @@
 | `npc-dialogue/7` | 공통 지침 뒤에서 본인 설정을 다시 주목 | /6 문구 그대로, 프로필을 끝으로 이동. 실험용 |
 | `npc-dialogue/8` | 누적 공통 지침이 인물 특성을 압도한다는 가설 | 공통 지침 단축. 질문형 수렴 등으로 미채택 |
 | `npc-dialogue/9` | 실제 말투 예문의 적용 강화 | /7 본문 유지, 고유 말투·예문을 마지막 발화 기준으로 분리. 실험용 |
+| `npc-dialogue/10` | 기본 모델의 연속 대화 중 일본어 혼입 | /5에 한국어 유지·이전 언어 혼입 비모방 문구만 추가. 실제 연속 대화에서 실패하여 미채택 |
+| `harbor-profile/1` | 기존 기본 예제 인물 보존 | 요약·중재 목표와 손잡이·팔짱 동작을 포함한 기존 인물 |
+| `harbor-profile/2` | 기본 인물이 공통 지침과 달리 반복 요약·중재를 요구 | 각자의 할 일·입말·필요한 행동으로 수정. 신분·관계·사실·규칙 유지. 새 기본 예제에 채택 |
 | `npc-world/2` | 관찰 분류 오류·중복 중계·조기 완료 | 세계 지침을 /1 대조군과 함께 동결. 기존 검증 경계 유지 |
 | `npc-world/3` | 식사·몸짓의 상태 일지와 재중계 감소 | 지속적 판정 상태와 단순 동작 구별. 다른 인물 상태 변경·동일 fact 교체/삭제 오류로 기본값 미채택 |
 | `npc-world/4` | v3의 상태 갱신 오류 보완 | 현재 행동이 바꾼 상태만 갱신하고 교체·삭제 구별. 이전 세계 기본값 |
@@ -30,7 +33,7 @@
 
 정확한 문구와 이유는 [dialogue-policies.ts](../src/core/dialogue-policies.ts), 기본 버전은 [dialogue-policy.ts](../src/shared/dialogue-policy.ts)에 있다. 이미 기록된 버전의 본문을 수정하지 말고 `/3`, `/4`처럼 추가한다. 회귀 테스트의 고정 SHA-256은 기존 문구를 몰래 바꾸는 것을 감지한다. 새 버전마다 문제 출력, 가설, 비교 조건, 실제 결과, 부작용과 채택 여부를 이 문서와 검토 보고서에 추가한다.
 
-실험 편집기의 **대화 반응 지침**에서 v1~v9를 고를 수 있다. v6~v9는 실험용이며 기본값은 v5다. JSON에서는 조건별 `dialoguePromptVersion`을 지정한다.
+실험 편집기의 **대화 반응 지침**에서 v1~v10을 고를 수 있다. v6~v10은 실험용이며 기본값은 v5다. JSON에서는 조건별 `dialoguePromptVersion`을 지정한다.
 
 ```json
 {"id":"candidate","label":"반응 지침 v5","dialoguePromptVersion":"npc-dialogue/5","stopOnSilence":true}
@@ -45,6 +48,8 @@
 [인물별 말투 검토](reviews/character-voice-2026-11-07/report.md)는 사용자 피드백에 따라 고정 입력 160쌍과 24차례 대화 8회를 비교했다. /6~ /9와 반응 메모의 뚜렷한 개선 근거가 없어 기본값으로 채택하지 않았다. 실패한 출력 형식 실험도 보존한다. /7과 /9의 공통 문단 해시는 같으므로, 배치·추가 발화 지침까지 포함한 전체 세션의 `instructionsSha256`을 함께 확인한다. 정확한 후보 선택·실패 이유·다음 프로필 비교 방향을 보고서에 남겼다.
 
 ## 인물 프로필 비교
+
+기본 예제의 [프로필·언어 안정화](reviews/harbor-stability-2026-11-07/report.md)는 `harbor-profile/2`를 채택했다. [harbor-profiles.ts](../src/shared/harbor-profiles.ts)의 `CURRENT_HARBOR_PROFILE`은 새 예제에 적용하며, `exampleSpec(model, effort, 'harbor-profile/1')`로 원본을 재현할 수 있다. 예제 ID `fog-harbor-profile2`와 저장된 전체 인물 설정으로 실행 당시 버전을 확인한다. 기존 사용자 설정은 자동 교체하지 않는다. 공통 지침·인물 프로필·모델 효과는 별도 비교하며, 새 NPC 예제는 계정에서 사용 가능한 Sol을 우선 선택한다.
 
 인물별 성격·말투 피드백에 따른 후속 [프로필 검토](reviews/profile-voice-2026-11-07/report.md)는 공통 문단 제거 `/2`, 고유 말투·예문 강화 `/3`, 초안 편집과 생활극 집필 틀을 385회 API 호출로 비교했다. 일관된 개선 근거가 없어 원본 `seowol-profile/1`을 유지한다. [프로필 버전 구성](../assets/seowol/profile-versions.json)은 이유와 원본 파일을 기록하며 `current`만 바꿔 운영 프로필을 전환하는 기능은 아니다. 실패 후보와 실제 요청도 보존한다. 재현 방법은 [profile-review.md](../evals/dialogue/profile-review.md)에 있다.
 

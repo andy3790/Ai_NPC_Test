@@ -1,0 +1,35 @@
+{
+  "adapter": "openai",
+  "suiteVersion": "language-recovery/1",
+  "casesSha256": "add9015ac2819d237963112c2a8d690a19480a5560ef7bc5fc22bfe304c55213",
+  "split": "all",
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "promptVersion": "npc-lab/10",
+  "policyVersions": [
+    "npc-dialogue/5",
+    "npc-dialogue/10"
+  ],
+  "conditions": [
+    {
+      "id": "baseline",
+      "policy": "npc-dialogue/5",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "id": "candidate",
+      "policy": "npc-dialogue/10",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    }
+  ],
+  "repetitions": 2,
+  "expectedCalls": 24,
+  "maxCalls": 24,
+  "maxUsd": 1,
+  "candidateSuiteVersion": "language-recovery/1",
+  "candidateCasesSha256": "add9015ac2819d237963112c2a8d690a19480a5560ef7bc5fc22bfe304c55213",
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry."
+}

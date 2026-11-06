@@ -1,0 +1,259 @@
+{
+  "adapter": "openai",
+  "suiteVersion": "dialogue-cases/1",
+  "casesSha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+  "split": "all",
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "promptVersion": "npc-lab/10",
+  "policyVersions": [
+    "npc-dialogue/5",
+    "npc-dialogue/10"
+  ],
+  "conditions": [
+    {
+      "id": "baseline",
+      "policy": "npc-dialogue/5",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "id": "candidate",
+      "policy": "npc-dialogue/10",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    }
+  ],
+  "repetitions": 1,
+  "expectedCalls": 24,
+  "maxCalls": 24,
+  "maxUsd": 1,
+  "candidateSuiteVersion": "dialogue-cases/1",
+  "candidateCasesSha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+  "status": "completed",
+  "error": null,
+  "calls": 24,
+  "estimatedUsd": 0.00410869,
+  "unpricedCalls": 0,
+  "quality": "unreviewed",
+  "mappings": [
+    {
+      "caseId": "simple_request",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "simple_request",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "decline_invitation",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "decline_invitation",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "ordinary_preference",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "ordinary_preference",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "small_disappointment",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "small_disappointment",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "enthusiastic_explanation",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "enthusiastic_explanation",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "polite_service",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "polite_service",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "uncertain_information",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "uncertain_information",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "protect_own_time",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "protect_own_time",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "apology_without_therapy",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "apology_without_therapy",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "workplace_partial_answer",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "workplace_partial_answer",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "third_party_privacy",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "third_party_privacy",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "disengaged_listener",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    {
+      "caseId": "disengaged_listener",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/10",
+      "conditionId": "candidate",
+      "model": "gpt-6-luna",
+      "effort": "low"
+    }
+  ]
+}

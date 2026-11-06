@@ -1,0 +1,6 @@
+{
+  "source": "/api/example",
+  "maxCalls": 150,
+  "maxUsd": 1.5,
+  "notes": "Unmodified actual app example; both delivery variants; evaluator enabled; no retry."
+}

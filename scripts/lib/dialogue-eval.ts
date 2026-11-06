@@ -29,6 +29,15 @@ export const dialogueCasesSchema = z.object({
 export type DialogueCase = z.infer<typeof dialogueCasesSchema>['cases'][number];
 export const sha256 = (text: string) => createHash('sha256').update(text).digest('hex');
 
+// Profile comparisons may change only the current actor's private profile;
+// observations, participant identities and all other profiles remain fixed.
+export function validateProfilePair(baseline: DialogueCase, candidate: DialogueCase) {
+  const observed = (c: DialogueCase) => ({ id: c.id, split: c.split, world: c.world, situation: c.situation, speakerId: c.speakerId,
+    history: c.history, participants: c.characters.map(a => ({ id: a.id, name: a.name })),
+    otherProfiles: c.characters.filter(a => a.id !== c.speakerId) });
+  if (JSON.stringify(observed(baseline)) !== JSON.stringify(observed(candidate))) throw new Error('Profile comparison changed observations or other actors: ' + baseline.id);
+}
+
 export function caseInput(c: DialogueCase, version: DialoguePromptVersion, model: string, effort: string) {
   const spec = experimentSchema.parse({ schemaVersion: 1, name: c.id,
     scenario: { id: c.id, name: c.id, world: c.world, situation: c.situation, characters: c.characters, defaults: { model, effort } },

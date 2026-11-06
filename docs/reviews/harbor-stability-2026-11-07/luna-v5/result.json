@@ -1,0 +1,1203 @@
+{
+  "sourceCommit": "de4fb16d10a3cb23c008db6c09b219514ccfe839",
+  "casts": [
+    "harbor-profile/1",
+    "harbor-profile/2"
+  ],
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "directorVersion": "director/4",
+  "policy": "npc-dialogue/5",
+  "mode": "rules",
+  "maxCalls": 140,
+  "maxUsd": 1,
+  "expectedCalls": 140,
+  "repetitions": 2,
+  "maxUtterances": 18,
+  "notes": "Same authored rule graph. Stop on existing goals; no retry. One in-flight response may exceed the cost limit.",
+  "calls": 72,
+  "estimatedUsd": 0.017424264999999998,
+  "error": null,
+  "reports": [
+    {
+      "profile": "harbor-profile/1",
+      "repetition": 1,
+      "runId": "1bc0f346-0d35-4d72-83bd-2c886cd22fe6",
+      "status": "completed",
+      "completionReason": "goals_achieved",
+      "error": null,
+      "summary": {
+        "calls": 19,
+        "failed": 0,
+        "cost": {
+          "usd": 0.005050405,
+          "unpricedCalls": 0,
+          "assumedCalls": 0,
+          "pricingDate": "2026-11-06",
+          "pricingRevision": "33fd7a5a40495c1a"
+        },
+        "pendingCalls": 0,
+        "missingUsage": 0,
+        "tokens": {
+          "inputTokens": 66616,
+          "cachedInputTokens": 35593,
+          "cacheWriteInputTokens": 29327,
+          "outputTokens": 1718,
+          "reasoningOutputTokens": 581,
+          "totalTokens": 68334
+        },
+        "durationSumMs": 54426.9992,
+        "medianMs": 2520.3786000000036,
+        "p95Ms": 7114.826499999999,
+        "failureRate": 0,
+        "speechCount": 10,
+        "pendingReceipts": 13,
+        "byKind": {
+          "speech": {
+            "calls": 10,
+            "failed": 0,
+            "cost": {
+              "usd": 0.0033640549999999995,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 56280,
+              "cachedInputTokens": 35593,
+              "cacheWriteInputTokens": 20657,
+              "outputTokens": 846,
+              "reasoningOutputTokens": 230,
+              "totalTokens": 57126
+            },
+            "durationSumMs": 27652.606500000005,
+            "medianMs": 2520.3786000000036,
+            "p95Ms": 5662.177599999999,
+            "failureRate": 0
+          },
+          "receive": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "director": {
+            "calls": 9,
+            "failed": 0,
+            "cost": {
+              "usd": 0.0016863499999999999,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 10336,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 8670,
+              "outputTokens": 872,
+              "reasoningOutputTokens": 351,
+              "totalTokens": 11208
+            },
+            "durationSumMs": 26774.392699999997,
+            "medianMs": 2170.3390999999974,
+            "p95Ms": 7114.826499999999,
+            "failureRate": 0
+          },
+          "evaluation": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "environment": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "event_generation": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          }
+        },
+        "tokensPerSpeech": 6833.4,
+        "evaluatedUtterances": 0,
+        "evaluationFailures": 0,
+        "firstIssue": null,
+        "issueRate": null,
+        "categories": {},
+        "confirmedIssues": 0,
+        "quality": {
+          "repetition": {
+            "algorithm": "same-speaker-char-trigram-dice/v1",
+            "window": 12,
+            "threshold": 0.72,
+            "minChars": 20,
+            "totalSpeeches": 10,
+            "eligibleSpeeches": 5,
+            "repeatedSpeeches": 0,
+            "rate": 0,
+            "matches": []
+          },
+          "semanticRepetition": {
+            "flaggedSpeeches": 0,
+            "evaluatedSpeeches": 0,
+            "rate": null
+          },
+          "progression": {
+            "state": {
+              "oilChecked": true,
+              "plan": "tonight",
+              "yoonAgreed": true,
+              "dohaAgreed": true,
+              "miruAgreed": true,
+              "lampReady": true,
+              "lampLit": true,
+              "planRecorded": true
+            },
+            "usedActionIds": [
+              "inspect_oil",
+              "propose_tonight",
+              "agree_miru",
+              "agree_yoon",
+              "agree_doha",
+              "prepare_lamp",
+              "ignite_lamp",
+              "record_plan"
+            ],
+            "goals": [
+              {
+                "id": "agreement",
+                "label": "세 인물이 기름 사용 방침에 직접 동의한다",
+                "conditions": [
+                  {
+                    "key": "yoonAgreed",
+                    "op": "eq",
+                    "value": true
+                  },
+                  {
+                    "key": "dohaAgreed",
+                    "op": "eq",
+                    "value": true
+                  },
+                  {
+                    "key": "miruAgreed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 5
+              },
+              {
+                "id": "light",
+                "label": "등불의 점등을 확인한다 (밤샘 유지 보장과 구분)",
+                "conditions": [
+                  {
+                    "key": "lampLit",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 9
+              },
+              {
+                "id": "record",
+                "label": "미루가 방침과 확인 결과를 기록한다",
+                "conditions": [
+                  {
+                    "key": "planRecorded",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 10
+              }
+            ],
+            "achievedGoals": 3,
+            "totalGoals": 3,
+            "allGoalsAchieved": true,
+            "successfulActions": 8,
+            "lastProgressSpeech": 10,
+            "stalledSpeechCount": 0
+          }
+        },
+        "elapsedMs": 54575,
+        "activeMs": 54575.29029999999,
+        "timingComplete": true,
+        "pausedMs": 0
+      }
+    },
+    {
+      "profile": "harbor-profile/1",
+      "repetition": 2,
+      "runId": "b4111035-85f7-4d45-b98a-cc7fca8009c0",
+      "status": "completed",
+      "completionReason": "goals_achieved",
+      "error": null,
+      "summary": {
+        "calls": 17,
+        "failed": 0,
+        "cost": {
+          "usd": 0.0037121650000000003,
+          "unpricedCalls": 0,
+          "assumedCalls": 0,
+          "pricingDate": "2026-11-06",
+          "pricingRevision": "33fd7a5a40495c1a"
+        },
+        "pendingCalls": 0,
+        "missingUsage": 0,
+        "tokens": {
+          "inputTokens": 58508,
+          "cachedInputTokens": 38039,
+          "cacheWriteInputTokens": 18775,
+          "outputTokens": 1631,
+          "reasoningOutputTokens": 611,
+          "totalTokens": 60139
+        },
+        "durationSumMs": 53579.44090000001,
+        "medianMs": 2753.3961999999883,
+        "p95Ms": 7498.810900000004,
+        "failureRate": 0,
+        "speechCount": 9,
+        "pendingReceipts": 8,
+        "byKind": {
+          "speech": {
+            "calls": 9,
+            "failed": 0,
+            "cost": {
+              "usd": 0.00221034,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 49344,
+              "cachedInputTokens": 38039,
+              "cacheWriteInputTokens": 11278,
+              "outputTokens": 835,
+              "reasoningOutputTokens": 261,
+              "totalTokens": 50179
+            },
+            "durationSumMs": 27376.229799999994,
+            "medianMs": 2640.5039000000106,
+            "p95Ms": 7476.997399999993,
+            "failureRate": 0
+          },
+          "receive": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "director": {
+            "calls": 8,
+            "failed": 0,
+            "cost": {
+              "usd": 0.001501825,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 9164,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 7497,
+              "outputTokens": 796,
+              "reasoningOutputTokens": 350,
+              "totalTokens": 9960
+            },
+            "durationSumMs": 26203.211100000015,
+            "medianMs": 2753.3961999999883,
+            "p95Ms": 7498.810900000004,
+            "failureRate": 0
+          },
+          "evaluation": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "environment": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "event_generation": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          }
+        },
+        "tokensPerSpeech": 6682.111111111111,
+        "evaluatedUtterances": 0,
+        "evaluationFailures": 0,
+        "firstIssue": null,
+        "issueRate": null,
+        "categories": {},
+        "confirmedIssues": 0,
+        "quality": {
+          "repetition": {
+            "algorithm": "same-speaker-char-trigram-dice/v1",
+            "window": 12,
+            "threshold": 0.72,
+            "minChars": 20,
+            "totalSpeeches": 9,
+            "eligibleSpeeches": 3,
+            "repeatedSpeeches": 0,
+            "rate": 0,
+            "matches": []
+          },
+          "semanticRepetition": {
+            "flaggedSpeeches": 0,
+            "evaluatedSpeeches": 0,
+            "rate": null
+          },
+          "progression": {
+            "state": {
+              "oilChecked": true,
+              "plan": "tonight",
+              "yoonAgreed": true,
+              "dohaAgreed": true,
+              "miruAgreed": true,
+              "lampReady": true,
+              "lampLit": true,
+              "planRecorded": true
+            },
+            "usedActionIds": [
+              "inspect_oil",
+              "propose_tonight",
+              "agree_yoon",
+              "agree_miru",
+              "agree_doha",
+              "prepare_lamp",
+              "ignite_lamp",
+              "record_plan"
+            ],
+            "goals": [
+              {
+                "id": "agreement",
+                "label": "세 인물이 기름 사용 방침에 직접 동의한다",
+                "conditions": [
+                  {
+                    "key": "yoonAgreed",
+                    "op": "eq",
+                    "value": true
+                  },
+                  {
+                    "key": "dohaAgreed",
+                    "op": "eq",
+                    "value": true
+                  },
+                  {
+                    "key": "miruAgreed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 5
+              },
+              {
+                "id": "light",
+                "label": "등불의 점등을 확인한다 (밤샘 유지 보장과 구분)",
+                "conditions": [
+                  {
+                    "key": "lampLit",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 8
+              },
+              {
+                "id": "record",
+                "label": "미루가 방침과 확인 결과를 기록한다",
+                "conditions": [
+                  {
+                    "key": "planRecorded",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 9
+              }
+            ],
+            "achievedGoals": 3,
+            "totalGoals": 3,
+            "allGoalsAchieved": true,
+            "successfulActions": 8,
+            "lastProgressSpeech": 9,
+            "stalledSpeechCount": 0
+          }
+        },
+        "elapsedMs": 53714,
+        "activeMs": 53714.532999999996,
+        "timingComplete": true,
+        "pausedMs": 0
+      }
+    },
+    {
+      "profile": "harbor-profile/2",
+      "repetition": 1,
+      "runId": "bf31beea-a404-4720-a215-65dccb0756d6",
+      "status": "completed",
+      "completionReason": "goals_achieved",
+      "error": null,
+      "summary": {
+        "calls": 17,
+        "failed": 0,
+        "cost": {
+          "usd": 0.004870785,
+          "unpricedCalls": 0,
+          "assumedCalls": 0,
+          "pricingDate": "2026-11-06",
+          "pricingRevision": "33fd7a5a40495c1a"
+        },
+        "pendingCalls": 0,
+        "missingUsage": 0,
+        "tokens": {
+          "inputTokens": 60762,
+          "cachedInputTokens": 30341,
+          "cacheWriteInputTokens": 28731,
+          "outputTokens": 1614,
+          "reasoningOutputTokens": 628,
+          "totalTokens": 62376
+        },
+        "durationSumMs": 47108.36039999996,
+        "medianMs": 2517.7974000000104,
+        "p95Ms": 4854.601500000004,
+        "failureRate": 0,
+        "speechCount": 9,
+        "pendingReceipts": 8,
+        "byKind": {
+          "speech": {
+            "calls": 9,
+            "failed": 0,
+            "cost": {
+              "usd": 0.003312735,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 51753,
+              "cachedInputTokens": 30341,
+              "cacheWriteInputTokens": 21385,
+              "outputTokens": 667,
+              "reasoningOutputTokens": 134,
+              "totalTokens": 52420
+            },
+            "durationSumMs": 22475.330999999962,
+            "medianMs": 2443.298299999995,
+            "p95Ms": 3546.3789999999863,
+            "failureRate": 0
+          },
+          "receive": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "director": {
+            "calls": 8,
+            "failed": 0,
+            "cost": {
+              "usd": 0.00155805,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 9009,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 7346,
+              "outputTokens": 947,
+              "reasoningOutputTokens": 494,
+              "totalTokens": 9956
+            },
+            "durationSumMs": 24633.0294,
+            "medianMs": 2850.030999999988,
+            "p95Ms": 4854.601500000004,
+            "failureRate": 0
+          },
+          "evaluation": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "environment": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "event_generation": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          }
+        },
+        "tokensPerSpeech": 6930.666666666667,
+        "evaluatedUtterances": 0,
+        "evaluationFailures": 0,
+        "firstIssue": null,
+        "issueRate": null,
+        "categories": {},
+        "confirmedIssues": 0,
+        "quality": {
+          "repetition": {
+            "algorithm": "same-speaker-char-trigram-dice/v1",
+            "window": 12,
+            "threshold": 0.72,
+            "minChars": 20,
+            "totalSpeeches": 9,
+            "eligibleSpeeches": 4,
+            "repeatedSpeeches": 0,
+            "rate": 0,
+            "matches": []
+          },
+          "semanticRepetition": {
+            "flaggedSpeeches": 0,
+            "evaluatedSpeeches": 0,
+            "rate": null
+          },
+          "progression": {
+            "state": {
+              "oilChecked": true,
+              "plan": "tonight",
+              "yoonAgreed": true,
+              "dohaAgreed": true,
+              "miruAgreed": true,
+              "lampReady": true,
+              "lampLit": true,
+              "planRecorded": true
+            },
+            "usedActionIds": [
+              "inspect_oil",
+              "propose_tonight",
+              "agree_miru",
+              "agree_yoon",
+              "agree_doha",
+              "prepare_lamp",
+              "ignite_lamp",
+              "record_plan"
+            ],
+            "goals": [
+              {
+                "id": "agreement",
+                "label": "세 인물이 기름 사용 방침에 직접 동의한다",
+                "conditions": [
+                  {
+                    "key": "yoonAgreed",
+                    "op": "eq",
+                    "value": true
+                  },
+                  {
+                    "key": "dohaAgreed",
+                    "op": "eq",
+                    "value": true
+                  },
+                  {
+                    "key": "miruAgreed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 5
+              },
+              {
+                "id": "light",
+                "label": "등불의 점등을 확인한다 (밤샘 유지 보장과 구분)",
+                "conditions": [
+                  {
+                    "key": "lampLit",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 8
+              },
+              {
+                "id": "record",
+                "label": "미루가 방침과 확인 결과를 기록한다",
+                "conditions": [
+                  {
+                    "key": "planRecorded",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 9
+              }
+            ],
+            "achievedGoals": 3,
+            "totalGoals": 3,
+            "allGoalsAchieved": true,
+            "successfulActions": 8,
+            "lastProgressSpeech": 9,
+            "stalledSpeechCount": 0
+          }
+        },
+        "elapsedMs": 47246,
+        "activeMs": 47245.957699999984,
+        "timingComplete": true,
+        "pausedMs": 0
+      }
+    },
+    {
+      "profile": "harbor-profile/2",
+      "repetition": 2,
+      "runId": "b131ccbf-b7aa-4479-915a-c3494d9a6ce9",
+      "status": "completed",
+      "completionReason": "goals_achieved",
+      "error": null,
+      "summary": {
+        "calls": 19,
+        "failed": 0,
+        "cost": {
+          "usd": 0.0037909099999999993,
+          "unpricedCalls": 0,
+          "assumedCalls": 0,
+          "pricingDate": "2026-11-06",
+          "pricingRevision": "33fd7a5a40495c1a"
+        },
+        "pendingCalls": 0,
+        "missingUsage": 0,
+        "tokens": {
+          "inputTokens": 68492,
+          "cachedInputTokens": 47041,
+          "cacheWriteInputTokens": 19776,
+          "outputTokens": 1362,
+          "reasoningOutputTokens": 277,
+          "totalTokens": 69854
+        },
+        "durationSumMs": 42628.6391,
+        "medianMs": 2046.360400000005,
+        "p95Ms": 3854.9177999999956,
+        "failureRate": 0,
+        "speechCount": 10,
+        "pendingReceipts": 10,
+        "byKind": {
+          "speech": {
+            "calls": 10,
+            "failed": 0,
+            "cost": {
+              "usd": 0.00216241,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 58383,
+              "cachedInputTokens": 47041,
+              "cacheWriteInputTokens": 11312,
+              "outputTokens": 550,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 58933
+            },
+            "durationSumMs": 20539.761200000008,
+            "medianMs": 1962.366399999999,
+            "p95Ms": 2482.778499999986,
+            "failureRate": 0
+          },
+          "receive": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "director": {
+            "calls": 9,
+            "failed": 0,
+            "cost": {
+              "usd": 0.0016285000000000002,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 10109,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 8464,
+              "outputTokens": 812,
+              "reasoningOutputTokens": 277,
+              "totalTokens": 10921
+            },
+            "durationSumMs": 22088.877899999992,
+            "medianMs": 2117.378399999987,
+            "p95Ms": 3854.9177999999956,
+            "failureRate": 0
+          },
+          "evaluation": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "environment": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          },
+          "event_generation": {
+            "calls": 0,
+            "failed": 0,
+            "cost": {
+              "usd": null,
+              "unpricedCalls": 0,
+              "assumedCalls": 0,
+              "pricingDate": "2026-11-06",
+              "pricingRevision": "33fd7a5a40495c1a"
+            },
+            "pendingCalls": 0,
+            "missingUsage": 0,
+            "tokens": {
+              "inputTokens": 0,
+              "cachedInputTokens": 0,
+              "cacheWriteInputTokens": 0,
+              "outputTokens": 0,
+              "reasoningOutputTokens": 0,
+              "totalTokens": 0
+            },
+            "durationSumMs": 0,
+            "medianMs": null,
+            "p95Ms": null,
+            "failureRate": null
+          }
+        },
+        "tokensPerSpeech": 6985.4,
+        "evaluatedUtterances": 0,
+        "evaluationFailures": 0,
+        "firstIssue": null,
+        "issueRate": null,
+        "categories": {},
+        "confirmedIssues": 0,
+        "quality": {
+          "repetition": {
+            "algorithm": "same-speaker-char-trigram-dice/v1",
+            "window": 12,
+            "threshold": 0.72,
+            "minChars": 20,
+            "totalSpeeches": 10,
+            "eligibleSpeeches": 5,
+            "repeatedSpeeches": 0,
+            "rate": 0,
+            "matches": []
+          },
+          "semanticRepetition": {
+            "flaggedSpeeches": 0,
+            "evaluatedSpeeches": 0,
+            "rate": null
+          },
+          "progression": {
+            "state": {
+              "oilChecked": true,
+              "plan": "tonight",
+              "yoonAgreed": true,
+              "dohaAgreed": true,
+              "miruAgreed": true,
+              "lampReady": true,
+              "lampLit": true,
+              "planRecorded": true
+            },
+            "usedActionIds": [
+              "inspect_oil",
+              "propose_tonight",
+              "agree_yoon",
+              "agree_miru",
+              "agree_doha",
+              "prepare_lamp",
+              "ignite_lamp",
+              "record_plan"
+            ],
+            "goals": [
+              {
+                "id": "agreement",
+                "label": "세 인물이 기름 사용 방침에 직접 동의한다",
+                "conditions": [
+                  {
+                    "key": "yoonAgreed",
+                    "op": "eq",
+                    "value": true
+                  },
+                  {
+                    "key": "dohaAgreed",
+                    "op": "eq",
+                    "value": true
+                  },
+                  {
+                    "key": "miruAgreed",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 5
+              },
+              {
+                "id": "light",
+                "label": "등불의 점등을 확인한다 (밤샘 유지 보장과 구분)",
+                "conditions": [
+                  {
+                    "key": "lampLit",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 9
+              },
+              {
+                "id": "record",
+                "label": "미루가 방침과 확인 결과를 기록한다",
+                "conditions": [
+                  {
+                    "key": "planRecorded",
+                    "op": "eq",
+                    "value": true
+                  }
+                ],
+                "achieved": true,
+                "firstAchievedAtSpeech": 10
+              }
+            ],
+            "achievedGoals": 3,
+            "totalGoals": 3,
+            "allGoalsAchieved": true,
+            "successfulActions": 8,
+            "lastProgressSpeech": 10,
+            "stalledSpeechCount": 0
+          }
+        },
+        "elapsedMs": 42782,
+        "activeMs": 42782.03899999999,
+        "timingComplete": true,
+        "pausedMs": 0
+      }
+    }
+  ]
+}

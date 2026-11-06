@@ -1,0 +1,18 @@
+{
+  "sourceCommit": "de4fb16d10a3cb23c008db6c09b219514ccfe839",
+  "casts": [
+    "harbor-profile/1",
+    "harbor-profile/2"
+  ],
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "directorVersion": "director/4",
+  "policy": "npc-dialogue/5",
+  "mode": "rules",
+  "maxCalls": 140,
+  "maxUsd": 1,
+  "expectedCalls": 140,
+  "repetitions": 2,
+  "maxUtterances": 18,
+  "notes": "Same authored rule graph. Stop on existing goals; no retry. One in-flight response may exceed the cost limit."
+}

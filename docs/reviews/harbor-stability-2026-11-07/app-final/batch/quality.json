@@ -1,0 +1,97 @@
+{
+  "repetition": {
+    "algorithm": "same-speaker-char-trigram-dice/v1",
+    "window": 12,
+    "threshold": 0.72,
+    "minChars": 20,
+    "totalSpeeches": 9,
+    "eligibleSpeeches": 4,
+    "repeatedSpeeches": 0,
+    "rate": 0,
+    "matches": []
+  },
+  "semanticRepetition": {
+    "flaggedSpeeches": 0,
+    "evaluatedSpeeches": 9,
+    "rate": 0
+  },
+  "progression": {
+    "state": {
+      "oilChecked": true,
+      "plan": "tonight",
+      "yoonAgreed": true,
+      "dohaAgreed": true,
+      "miruAgreed": true,
+      "lampReady": true,
+      "lampLit": true,
+      "planRecorded": true
+    },
+    "usedActionIds": [
+      "inspect_oil",
+      "propose_tonight",
+      "agree_yoon",
+      "agree_miru",
+      "agree_doha",
+      "prepare_lamp",
+      "ignite_lamp",
+      "record_plan"
+    ],
+    "goals": [
+      {
+        "id": "agreement",
+        "label": "세 인물이 기름 사용 방침에 직접 동의한다",
+        "conditions": [
+          {
+            "key": "yoonAgreed",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "key": "dohaAgreed",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "key": "miruAgreed",
+            "op": "eq",
+            "value": true
+          }
+        ],
+        "achieved": true,
+        "firstAchievedAtSpeech": 5
+      },
+      {
+        "id": "light",
+        "label": "등불의 점등을 확인한다 (밤샘 유지 보장과 구분)",
+        "conditions": [
+          {
+            "key": "lampLit",
+            "op": "eq",
+            "value": true
+          }
+        ],
+        "achieved": true,
+        "firstAchievedAtSpeech": 8
+      },
+      {
+        "id": "record",
+        "label": "미루가 방침과 확인 결과를 기록한다",
+        "conditions": [
+          {
+            "key": "planRecorded",
+            "op": "eq",
+            "value": true
+          }
+        ],
+        "achieved": true,
+        "firstAchievedAtSpeech": 9
+      }
+    ],
+    "achievedGoals": 3,
+    "totalGoals": 3,
+    "allGoalsAchieved": true,
+    "successfulActions": 8,
+    "lastProgressSpeech": 9,
+    "stalledSpeechCount": 0
+  }
+}

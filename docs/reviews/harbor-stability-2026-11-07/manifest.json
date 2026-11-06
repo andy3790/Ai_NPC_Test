@@ -1,0 +1,1150 @@
+{
+  "version": "harbor-stability-review/1",
+  "date": "2026-11-07",
+  "sourceBaseCommit": "de4fb16d10a3cb23c008db6c09b219514ccfe839",
+  "reviewer": "Non-independent agent review; not human evaluation",
+  "decision": "Adopt harbor-profile/2 and prefer available gpt-6.1-sol for new OpenAI example NPCs. Keep NPC /5 and Seowol /1. Reject language candidate /10; preserve evidence.",
+  "totals": {
+    "calls": 538,
+    "estimatedUsd": 0.7950930600000001,
+    "unpricedCalls": 0
+  },
+  "experiments": [
+    {
+      "id": "terra-effort",
+      "kind": "fixed",
+      "source": ".cache/dialogue-eval/2026-11-06T21-20-13-103Z-development-f2aad14a",
+      "model": "gpt-6.1-terra",
+      "calls": 32,
+      "estimatedUsd": 0.03743599999999999
+    },
+    {
+      "id": "sol-profile-development",
+      "kind": "fixed",
+      "source": ".cache/dialogue-eval/2026-11-06T21-28-33-116Z-development-a39c155e",
+      "model": "gpt-6.1-sol",
+      "calls": 24,
+      "estimatedUsd": 0.0646634
+    },
+    {
+      "id": "sol-profile-holdout",
+      "kind": "fixed",
+      "source": ".cache/dialogue-eval/2026-11-06T21-30-15-872Z-holdout-10c649a1",
+      "model": "gpt-6.1-sol",
+      "calls": 36,
+      "estimatedUsd": 0.09340050000000003
+    },
+    {
+      "id": "luna-profile",
+      "kind": "fixed",
+      "source": ".cache/dialogue-eval/2026-11-06T21-32-45-422Z-all-bcc6559a",
+      "model": "gpt-6-luna",
+      "calls": 30,
+      "estimatedUsd": 0.0071984
+    },
+    {
+      "id": "language-recovery",
+      "kind": "fixed",
+      "source": ".cache/dialogue-eval/2026-11-06T21-39-21-549Z-all-308be75e",
+      "model": "gpt-6-luna",
+      "calls": 24,
+      "estimatedUsd": 0.0027055600000000005
+    },
+    {
+      "id": "language-regression",
+      "kind": "fixed",
+      "source": ".cache/dialogue-eval/2026-11-06T21-39-22-046Z-all-d7df9daf",
+      "model": "gpt-6-luna",
+      "calls": 24,
+      "estimatedUsd": 0.00410869
+    },
+    {
+      "id": "sol-v5",
+      "kind": "conversation",
+      "source": ".cache/harbor-live/2026-11-06T21-30-16-663Z",
+      "model": "gpt-6.1-sol",
+      "calls": 70,
+      "estimatedUsd": 0.19907390000000003,
+      "runs": [
+        {
+          "part": "profile1-run1",
+          "runId": "5d1febaf-b7ab-4220-b49b-5b85ba4bdaf2",
+          "profile": "harbor-profile/1",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        },
+        {
+          "part": "profile1-run2",
+          "runId": "74c473de-a626-4bf5-b037-341f153c22d9",
+          "profile": "harbor-profile/1",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        },
+        {
+          "part": "profile2-run1",
+          "runId": "a4fb399e-60d6-4465-b770-526d07247df6",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 19,
+          "speechCount": 10,
+          "languageFlags": []
+        },
+        {
+          "part": "profile2-run2",
+          "runId": "b4b62ec4-ea20-4298-ad0c-c27d3951f119",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        }
+      ]
+    },
+    {
+      "id": "luna-v5",
+      "kind": "conversation",
+      "source": ".cache/harbor-live/2026-11-06T21-32-46-475Z",
+      "model": "gpt-6-luna",
+      "calls": 72,
+      "estimatedUsd": 0.017424264999999998,
+      "runs": [
+        {
+          "part": "profile1-run1",
+          "runId": "1bc0f346-0d35-4d72-83bd-2c886cd22fe6",
+          "profile": "harbor-profile/1",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 19,
+          "speechCount": 10,
+          "languageFlags": [
+            {
+              "speechIndex": 3,
+              "speakerId": "miru",
+              "speech": "한 통인 것은 확인했고, 연소 시간과 내일 날씨는 아직 모르는 일이네요. 오늘 밤の 사용을 우선하자는 제안에 동의하겠습니다.",
+              "action": "작은 수첩에 오늘 밤 사용 우선이라고 적습니다."
+            },
+            {
+              "speechIndex": 9,
+              "speakerId": "yoon",
+              "speech": "준비はできています。今、火をつけます。",
+              "action": "등불에 불을 붙입니다."
+            }
+          ]
+        },
+        {
+          "part": "profile1-run2",
+          "runId": "b4111035-85f7-4d45-b98a-cc7fca8009c0",
+          "profile": "harbor-profile/1",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        },
+        {
+          "part": "profile2-run1",
+          "runId": "bf31beea-a404-4720-a215-65dccb0756d6",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": [
+            {
+              "speechIndex": 4,
+              "speakerId": "yoon",
+              "speech": "오늘 밤 쓰는 쪽에 동의해요. 다만 밤通し持つとはまだ言えません。まず火をつけて、油の減り方を見ます。",
+              "action": ""
+            },
+            {
+              "speechIndex": 6,
+              "speakerId": "yoon",
+              "speech": "등불에 넣을 기름을 공급할게요. 양は目で確かめます。",
+              "action": "등불에 기름을 조심히 공급한다."
+            },
+            {
+              "speechIndex": 8,
+              "speakerId": "yoon",
+              "speech": "はい、火をつけます。",
+              "action": "準備した灯に火をつける。"
+            }
+          ]
+        },
+        {
+          "part": "profile2-run2",
+          "runId": "b131ccbf-b7aa-4479-915a-c3494d9a6ce9",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 19,
+          "speechCount": 10,
+          "languageFlags": [
+            {
+              "speechIndex": 9,
+              "speakerId": "yoon",
+              "speech": "불을 붙일게요. 밤새 유지된다고는 아직 말え지 않아요.",
+              "action": "준비된 등불に火をつける。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "luna-v10",
+      "kind": "conversation",
+      "source": ".cache/harbor-live/2026-11-06T21-37-58-085Z",
+      "model": "gpt-6-luna",
+      "calls": 70,
+      "estimatedUsd": 0.016530194999999998,
+      "runs": [
+        {
+          "part": "profile1-run1",
+          "runId": "3e8fcdb4-5ad8-4205-9c86-b543d7e24410",
+          "profile": "harbor-profile/1",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": [
+            {
+              "speechIndex": 8,
+              "speakerId": "yoon",
+              "speech": "점화하겠습니다. 밤새 유지될지는 아직 장담할 수 없습니다.",
+              "action": "등불に火をつけます。"
+            },
+            {
+              "speechIndex": 9,
+              "speakerId": "miru",
+              "speech": "불が点いたことと、今夜の使用を優先する方針を記録します。燃焼時間と明日の天気は未確認のままにしておきます。",
+              "action": "수첩에 방침과 등불이 현재 빛을 내는 사실을 적습니다."
+            }
+          ]
+        },
+        {
+          "part": "profile1-run2",
+          "runId": "dd32e378-9698-4588-9300-5dc2829f815c",
+          "profile": "harbor-profile/1",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 19,
+          "speechCount": 10,
+          "languageFlags": [
+            {
+              "speechIndex": 8,
+              "speakerId": "miru",
+              "speech": "기름 공급이 끝났군요. 윤 씨, 준비된 등불に 불을つけていただけますか？",
+              "action": ""
+            }
+          ]
+        },
+        {
+          "part": "profile2-run1",
+          "runId": "155e2b4f-b0bc-4d70-b94b-d6dea044a5dc",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": [
+            {
+              "speechIndex": 1,
+              "speakerId": "yoon",
+              "speech": "기름통을 먼저 확인할게요. 한 통 남았다는 건 알しています만, 지금 눈앞에서 상태を見ます。",
+              "action": "기름통을 살펴본다."
+            },
+            {
+              "speechIndex": 3,
+              "speakerId": "yoon",
+              "speech": "오늘 밤使う方針には同意します。ただ、どれだけ持つかは、火をつけて実際に見ないと約束できません。",
+              "action": ""
+            },
+            {
+              "speechIndex": 6,
+              "speakerId": "yoon",
+              "speech": "그럼 등불に油を入れます。こぼさないよう、口元を見ていてください。",
+              "action": "등불에 기름을 공급한다."
+            },
+            {
+              "speechIndex": 8,
+              "speakerId": "yoon",
+              "speech": "火をつけます。",
+              "action": "準備した灯火に火をつける。"
+            },
+            {
+              "speechIndex": 9,
+              "speakerId": "miru",
+              "speech": "오늘 밤 사용 방침에 세 사람이 동의했고, 등불에 불がついて今光っています。 연소 시간은 확인되지 않은 채로 적을게요.",
+              "action": "수첩에 합의한 방침과 지금 등불이 빛나는 것을 기록한다."
+            }
+          ]
+        },
+        {
+          "part": "profile2-run2",
+          "runId": "aaba3431-70b3-4aff-8e6b-b257ea31d0d4",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        }
+      ]
+    },
+    {
+      "id": "app-round-robin",
+      "kind": "conversation",
+      "source": ".cache/harbor-live/2026-11-06T21-44-53-799Z-app-default",
+      "model": "gpt-6.1-sol",
+      "calls": 76,
+      "estimatedUsd": 0.20471442499999998,
+      "runs": [
+        {
+          "part": "batch",
+          "runId": "51851126-7b9a-4586-a962-487b75e7fb66",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 14,
+          "speechCount": 12,
+          "languageFlags": []
+        },
+        {
+          "part": "each",
+          "runId": "2117fc06-5da4-4c9b-9067-e30e5a4e4ca7",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 62,
+          "speechCount": 12,
+          "languageFlags": []
+        }
+      ]
+    },
+    {
+      "id": "app-final",
+      "kind": "conversation",
+      "source": ".cache/harbor-live/2026-11-06T21-47-41-998Z-app-default",
+      "model": "gpt-6.1-sol",
+      "calls": 80,
+      "estimatedUsd": 0.14783772499999998,
+      "runs": [
+        {
+          "part": "batch",
+          "runId": "70c441f1-71c9-4e5a-8eeb-81d8b1351f18",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 19,
+          "speechCount": 9,
+          "languageFlags": []
+        },
+        {
+          "part": "each",
+          "runId": "f2186ef7-d12b-46e6-8ac0-01949846ab03",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 61,
+          "speechCount": 9,
+          "languageFlags": []
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "terra-effort/manifest.json",
+      "sha256": "ebd22875a799d4ada32cae14c6075bc8edc18306390af37df3e22cae775e07c8",
+      "bytes": 7963
+    },
+    {
+      "path": "terra-effort/plan.json",
+      "sha256": "fde9183588a97173aea223b8d3d29e3335db78af06e65274a8e4e2c10956cd83",
+      "bytes": 814
+    },
+    {
+      "path": "terra-effort/cases.json",
+      "sha256": "05ebef87f8c1b65beade2411d4fe809a5c9af3734d06e362d648f5f67b7e56df",
+      "bytes": 57457
+    },
+    {
+      "path": "terra-effort/policies.json",
+      "sha256": "7e7ffb552227be8e94d8ee8df814184f8815144e67f9880376a02b97f6be0258",
+      "bytes": 36988
+    },
+    {
+      "path": "terra-effort/requests.jsonl",
+      "sha256": "76ceceb0a099f753477f63326d585b0f4451d496278667630917c380948f8884",
+      "bytes": 267376
+    },
+    {
+      "path": "terra-effort/samples.jsonl",
+      "sha256": "0bef0652aef37bb80115449cf864ceec0c4e65b5e78b8cf767925919c211213d",
+      "bytes": 24248
+    },
+    {
+      "path": "terra-effort/api-requests.jsonl",
+      "sha256": "72f5cb4e796c614883d13e06280d18d23be01a92792c9c21f5a5495648ab7b7e",
+      "bytes": 268232
+    },
+    {
+      "path": "sol-profile-development/manifest.json",
+      "sha256": "29826e2e5bdf6be3b4b5b76868b9b3d5bae1eaaa969d2ea4061c11b43edb8e9c",
+      "bytes": 6085
+    },
+    {
+      "path": "sol-profile-development/plan.json",
+      "sha256": "8a5cdfbb47d716d7ab3901e41e95dc28f8607a4ec2795eae9e7cc0f66d2919a4",
+      "bytes": 950
+    },
+    {
+      "path": "sol-profile-development/cases.json",
+      "sha256": "155792f1900434c7bcab5137e97aa5f3d3fe46d341d92aff1f1ec609a49320c6",
+      "bytes": 76095
+    },
+    {
+      "path": "sol-profile-development/candidate-cases.json",
+      "sha256": "f2928e017f13afb2d152c135f6b4ef116be08a55c1606123aa2918557f9be6ea",
+      "bytes": 95865
+    },
+    {
+      "path": "sol-profile-development/policies.json",
+      "sha256": "7e7ffb552227be8e94d8ee8df814184f8815144e67f9880376a02b97f6be0258",
+      "bytes": 36988
+    },
+    {
+      "path": "sol-profile-development/requests.jsonl",
+      "sha256": "888734fe3c92b73b8809e0a36583784ab70f64299d24164f5d36df34176a989b",
+      "bytes": 209108
+    },
+    {
+      "path": "sol-profile-development/samples.jsonl",
+      "sha256": "7385e5004ff5eed6209f2ee47e41beca684b7828328d7636d4ac10c83e438d99",
+      "bytes": 20348
+    },
+    {
+      "path": "sol-profile-development/api-requests.jsonl",
+      "sha256": "17ef7eba4fba96b4240e41c7d87e0045857ed37f44206afb513ac18e58c62cc6",
+      "bytes": 209948
+    },
+    {
+      "path": "sol-profile-holdout/manifest.json",
+      "sha256": "6d2dc58a52afa69ef99f162665d138c6efea6c4403d5d1bc3fc2630fe7817274",
+      "bytes": 8689
+    },
+    {
+      "path": "sol-profile-holdout/plan.json",
+      "sha256": "412c0b3e5e945bdd82a55a9e8718121570ffb0203fe61ee831713370ae86f136",
+      "bytes": 946
+    },
+    {
+      "path": "sol-profile-holdout/cases.json",
+      "sha256": "155792f1900434c7bcab5137e97aa5f3d3fe46d341d92aff1f1ec609a49320c6",
+      "bytes": 76095
+    },
+    {
+      "path": "sol-profile-holdout/candidate-cases.json",
+      "sha256": "f2928e017f13afb2d152c135f6b4ef116be08a55c1606123aa2918557f9be6ea",
+      "bytes": 95865
+    },
+    {
+      "path": "sol-profile-holdout/policies.json",
+      "sha256": "7e7ffb552227be8e94d8ee8df814184f8815144e67f9880376a02b97f6be0258",
+      "bytes": 36988
+    },
+    {
+      "path": "sol-profile-holdout/requests.jsonl",
+      "sha256": "321ed35240673519d8491403078950a9dae44f61c41d2fbbdb6d6babce0f5b3f",
+      "bytes": 316176
+    },
+    {
+      "path": "sol-profile-holdout/samples.jsonl",
+      "sha256": "fd5f961c440c2a96ebca17fa54c9be207b6f468cd392683b5c913923345942f4",
+      "bytes": 29296
+    },
+    {
+      "path": "sol-profile-holdout/api-requests.jsonl",
+      "sha256": "77847eb5b29fdad0c8efe365aa5a33116c6008dc34fdb3f89d46dfbf336ebd79",
+      "bytes": 317328
+    },
+    {
+      "path": "luna-profile/manifest.json",
+      "sha256": "e7e16e07b5d6aa2eb0b76fee5c7ddcf0d634c5d3ede68b3e4ba79aa3c340608c",
+      "bytes": 7343
+    },
+    {
+      "path": "luna-profile/plan.json",
+      "sha256": "6712f4f098dab69eef56d9b760f32631e433f4ad95c75400de08c4ada5fe01f9",
+      "bytes": 939
+    },
+    {
+      "path": "luna-profile/cases.json",
+      "sha256": "155792f1900434c7bcab5137e97aa5f3d3fe46d341d92aff1f1ec609a49320c6",
+      "bytes": 76095
+    },
+    {
+      "path": "luna-profile/candidate-cases.json",
+      "sha256": "f2928e017f13afb2d152c135f6b4ef116be08a55c1606123aa2918557f9be6ea",
+      "bytes": 95865
+    },
+    {
+      "path": "luna-profile/policies.json",
+      "sha256": "7e7ffb552227be8e94d8ee8df814184f8815144e67f9880376a02b97f6be0258",
+      "bytes": 36988
+    },
+    {
+      "path": "luna-profile/requests.jsonl",
+      "sha256": "2bc59f4608def3f670e60269e00de1d758f8385ebf93a84df10a21f18bb6ca86",
+      "bytes": 262612
+    },
+    {
+      "path": "luna-profile/samples.jsonl",
+      "sha256": "9887000aba2c0d553ce77fea7c271b4262c32c3e15e59d4f17ccbc9d94d28d89",
+      "bytes": 24976
+    },
+    {
+      "path": "luna-profile/api-requests.jsonl",
+      "sha256": "d5855667ef182e41356e087f6f7bbceb1e3d2082c577fcaee3434f61bd784ee8",
+      "bytes": 263608
+    },
+    {
+      "path": "language-recovery/manifest.json",
+      "sha256": "05c7f32a3b922c56ecd514cffd8a9ed7458ff02e19ad6d9421e5596561e12678",
+      "bytes": 6196
+    },
+    {
+      "path": "language-recovery/plan.json",
+      "sha256": "a3ad0e034bfc892be5fd0db692e48322bba71650007d517c6a2ab9769991c9cd",
+      "bytes": 945
+    },
+    {
+      "path": "language-recovery/cases.json",
+      "sha256": "add9015ac2819d237963112c2a8d690a19480a5560ef7bc5fc22bfe304c55213",
+      "bytes": 25766
+    },
+    {
+      "path": "language-recovery/policies.json",
+      "sha256": "cd4afb7938c29ea20e2e98681fba710c1cfb8e63712327d9bb55715eec8cd702",
+      "bytes": 41679
+    },
+    {
+      "path": "language-recovery/requests.jsonl",
+      "sha256": "486dda24ebb8668631f19fb80388d5b946d43290663cd743f1eecc6d18129042",
+      "bytes": 206700
+    },
+    {
+      "path": "language-recovery/samples.jsonl",
+      "sha256": "611dfd635eef79bd711037517f4a13fafd16d5ff63a4fa6fef685f144db94db2",
+      "bytes": 19122
+    },
+    {
+      "path": "language-recovery/api-requests.jsonl",
+      "sha256": "01fb02b7e13ed194c5f3c531474df526277da5ded19c1e215dba3bb861ff2c5e",
+      "bytes": 207400
+    },
+    {
+      "path": "language-regression/manifest.json",
+      "sha256": "fee89ce7d779477757d72d13716fba1b64ea7ebd6a7e6d8faeb310221787f56a",
+      "bytes": 6237
+    },
+    {
+      "path": "language-regression/plan.json",
+      "sha256": "c5721eee1f5fd6eed757c23d72df95a0228f9a1caf506364935ce1f87b2f862c",
+      "bytes": 939
+    },
+    {
+      "path": "language-regression/cases.json",
+      "sha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+      "bytes": 24683
+    },
+    {
+      "path": "language-regression/policies.json",
+      "sha256": "cd4afb7938c29ea20e2e98681fba710c1cfb8e63712327d9bb55715eec8cd702",
+      "bytes": 41679
+    },
+    {
+      "path": "language-regression/requests.jsonl",
+      "sha256": "2f7c1df2daa930d3722c3f4aba36ff8ff2ade3e0acf4eed09d429dd7877bddec",
+      "bytes": 175458
+    },
+    {
+      "path": "language-regression/samples.jsonl",
+      "sha256": "81927bc31975549287197311299caa3753596cd31b8be1914e857fa9023d0b58",
+      "bytes": 18881
+    },
+    {
+      "path": "language-regression/api-requests.jsonl",
+      "sha256": "befaabad0ee23beb4dca0ef7e254fb6a63fde636a8a8ae499d90069e13375acb",
+      "bytes": 176100
+    },
+    {
+      "path": "sol-v5/plan.json",
+      "sha256": "da3897f33b7d72455ba5c5025de78faa629a436e260ef46004c7b7504b37a2fe",
+      "bytes": 483
+    },
+    {
+      "path": "sol-v5/configs.json",
+      "sha256": "b491561641f50e886b3b0b7e954284a10a9d67ce0448ec5b75bbccb07766fb8c",
+      "bytes": 31043
+    },
+    {
+      "path": "sol-v5/profiles.json",
+      "sha256": "9415d6d9fca168573ef83c9cd8fb5c1ef82970aa46ea4acaa14e27e19677ee3b",
+      "bytes": 5921
+    },
+    {
+      "path": "sol-v5/runner.snapshot.txt",
+      "sha256": "f3aa4710c343eb2618f4c0be120091361cb4e34a99514bbbf0df2b1a353d008f",
+      "bytes": 4455
+    },
+    {
+      "path": "sol-v5/result.json",
+      "sha256": "c133c5a9d9368b9d44e45c808406f46b9778c85e184d89e678ca00f5898cc165",
+      "bytes": 36491
+    },
+    {
+      "path": "sol-v5/profile1-run1/calls.jsonl",
+      "sha256": "68361573f6c2c6e70f608a46f4a3d683ba510565eaf4356a62a810513c315c3a",
+      "bytes": 97136
+    },
+    {
+      "path": "sol-v5/profile1-run1/api-requests.jsonl",
+      "sha256": "aa5f3850ed9e0cc4c95e748c7291d5a745161937eb0f40d6586cc769b788a118",
+      "bytes": 199120
+    },
+    {
+      "path": "sol-v5/profile1-run1/utterances.jsonl",
+      "sha256": "4fcc4cf023423f8088efae4855d8041e7bb7376651aa9bc29af76c68f522f7f1",
+      "bytes": 12696
+    },
+    {
+      "path": "sol-v5/profile1-run1/instructions.json",
+      "sha256": "5750ad9ea7d4dd5b9662f77929b28334bd1b198b273c22a54899f160baaaaafe",
+      "bytes": 37610
+    },
+    {
+      "path": "sol-v5/profile1-run1/transcript.md",
+      "sha256": "799f5ebb570624bdf86d1a97e13aecda30d77e4962dfac1af9f3a7544aa8e77a",
+      "bytes": 3278
+    },
+    {
+      "path": "sol-v5/profile1-run2/calls.jsonl",
+      "sha256": "f4af95a415905a94ca0bbf3ae7140535baca7125983336c7b04d1ef05f2f00f6",
+      "bytes": 97206
+    },
+    {
+      "path": "sol-v5/profile1-run2/api-requests.jsonl",
+      "sha256": "9c64e74b9770ad3f9215b722efafdec8d8ff9ce4a591682822ee5701f68d3d22",
+      "bytes": 199101
+    },
+    {
+      "path": "sol-v5/profile1-run2/utterances.jsonl",
+      "sha256": "92e37a7c49b1b7ca99dfa542ea94a85029dea40810f686a768916be16072f323",
+      "bytes": 12714
+    },
+    {
+      "path": "sol-v5/profile1-run2/instructions.json",
+      "sha256": "5750ad9ea7d4dd5b9662f77929b28334bd1b198b273c22a54899f160baaaaafe",
+      "bytes": 37610
+    },
+    {
+      "path": "sol-v5/profile1-run2/transcript.md",
+      "sha256": "ed196722d797db0f657cbf0e9c5e2de5491bb30c6dcc64d68401cfbf73316630",
+      "bytes": 3298
+    },
+    {
+      "path": "sol-v5/profile2-run1/calls.jsonl",
+      "sha256": "3ed84b7a83a1ec9cf1e71a7d7ef44cbbe21ffd737b430b0eafccf8f692e24d19",
+      "bytes": 105314
+    },
+    {
+      "path": "sol-v5/profile2-run1/api-requests.jsonl",
+      "sha256": "8f9b8dbe036b2a6a0654efa229d1e3060de2df78d37c65e5eeeea01b9c5541cf",
+      "bytes": 232345
+    },
+    {
+      "path": "sol-v5/profile2-run1/utterances.jsonl",
+      "sha256": "6ed4f0c203279044f454def9576b409c49107e540e7f0c8f6cc689662adb76ff",
+      "bytes": 12887
+    },
+    {
+      "path": "sol-v5/profile2-run1/instructions.json",
+      "sha256": "0ed60d16c19af98a291cc674d7e6b8cf1e1ba758195da578ed8171e8389e815b",
+      "bytes": 41564
+    },
+    {
+      "path": "sol-v5/profile2-run1/transcript.md",
+      "sha256": "38820d64abb58c1afb8796530285d6225d72f9a24ba7f61d42ae041f96fb63f7",
+      "bytes": 3103
+    },
+    {
+      "path": "sol-v5/profile2-run2/calls.jsonl",
+      "sha256": "2f189bffdbd1c7e47aa4b413948ae935d06383b9e05310b3fa654acc97594cea",
+      "bytes": 93544
+    },
+    {
+      "path": "sol-v5/profile2-run2/api-requests.jsonl",
+      "sha256": "765257debe1a6dc62a7b9326024f454a7265def8390ada8619b10523ed9e33a3",
+      "bytes": 207941
+    },
+    {
+      "path": "sol-v5/profile2-run2/utterances.jsonl",
+      "sha256": "6487980950e2962a21db7dd8f20527fbb9388e0d0cdfa953b0e6316c013630b6",
+      "bytes": 12222
+    },
+    {
+      "path": "sol-v5/profile2-run2/instructions.json",
+      "sha256": "0ed60d16c19af98a291cc674d7e6b8cf1e1ba758195da578ed8171e8389e815b",
+      "bytes": 41564
+    },
+    {
+      "path": "sol-v5/profile2-run2/transcript.md",
+      "sha256": "97f570495001a6bbb83ea8a5c43d72454704a86d27b5f20d9ac87a4a11d5a7c8",
+      "bytes": 2866
+    },
+    {
+      "path": "luna-v5/plan.json",
+      "sha256": "eebde7e29a6b93d7cd9e4f566fb61ab9bd877589b78dd470d455d16507ab64cc",
+      "bytes": 482
+    },
+    {
+      "path": "luna-v5/configs.json",
+      "sha256": "043f54224e6ce8296e85f13246e2eda083d29cb9ef1726a65c5aac1eee79f2ef",
+      "bytes": 31039
+    },
+    {
+      "path": "luna-v5/profiles.json",
+      "sha256": "9415d6d9fca168573ef83c9cd8fb5c1ef82970aa46ea4acaa14e27e19677ee3b",
+      "bytes": 5921
+    },
+    {
+      "path": "luna-v5/runner.snapshot.txt",
+      "sha256": "42f268cd510e681c74a869d2aee4d7ecebec2101fd7d8c82e1f2b6eb0b403e86",
+      "bytes": 5117
+    },
+    {
+      "path": "luna-v5/result.json",
+      "sha256": "462d128798313c1002752f7ed16939ad52f29c505ff2887044052242d6337967",
+      "bytes": 36506
+    },
+    {
+      "path": "luna-v5/profile1-run1/calls.jsonl",
+      "sha256": "08bd9b6097e60dfb48c71c09e36f0e59a2cb30fc4773ff2bfd550543d4d8716a",
+      "bytes": 105730
+    },
+    {
+      "path": "luna-v5/profile1-run1/api-requests.jsonl",
+      "sha256": "3667245ed5460c1b6e37bc784208c23ac556c150f2e8bba8ed0bd15700a59fca",
+      "bytes": 219291
+    },
+    {
+      "path": "luna-v5/profile1-run1/utterances.jsonl",
+      "sha256": "c3b966ea2fd662a938f32c9d176d66437f32e9225fbc3ee7013607b90bf93c2e",
+      "bytes": 13132
+    },
+    {
+      "path": "luna-v5/profile1-run1/instructions.json",
+      "sha256": "8d16b25e4924542043c9ccd5bed6e02e4f33c7968307ed691efa112baa73f183",
+      "bytes": 37607
+    },
+    {
+      "path": "luna-v5/profile1-run1/transcript.md",
+      "sha256": "1279a23b4f59c408556b751d260e03153b35092e02abddf010bf69e10ac7767e",
+      "bytes": 3431
+    },
+    {
+      "path": "luna-v5/profile1-run2/calls.jsonl",
+      "sha256": "f4707a1292e053b096ef3e632303e48ca1b7b6fd76a66d611f7645aa7865d9c0",
+      "bytes": 98633
+    },
+    {
+      "path": "luna-v5/profile1-run2/api-requests.jsonl",
+      "sha256": "596855dcd52cf42cc70c09c51169a62f3e3d1b8e59fa92bd3b08f2e6d7c9c914",
+      "bytes": 200491
+    },
+    {
+      "path": "luna-v5/profile1-run2/utterances.jsonl",
+      "sha256": "17f2260d16867e652c7f7a164267d82bfdd319c1c66a8047e6ae89035ab691a8",
+      "bytes": 12749
+    },
+    {
+      "path": "luna-v5/profile1-run2/instructions.json",
+      "sha256": "8d16b25e4924542043c9ccd5bed6e02e4f33c7968307ed691efa112baa73f183",
+      "bytes": 37607
+    },
+    {
+      "path": "luna-v5/profile1-run2/transcript.md",
+      "sha256": "9bf073ed3721d5baf64585e368528f6b6f85dc078acb98586696b9006bb20f0e",
+      "bytes": 3316
+    },
+    {
+      "path": "luna-v5/profile2-run1/calls.jsonl",
+      "sha256": "f17c58f5e021585169b7ae9b61116c145fe18111cdb6b19edac2b917f6ecbf74",
+      "bytes": 97087
+    },
+    {
+      "path": "luna-v5/profile2-run1/api-requests.jsonl",
+      "sha256": "7f0af353cfb068f6f5cb9325fe45595c6e15edb18016c12a57ee6e9048b91c1d",
+      "bytes": 211094
+    },
+    {
+      "path": "luna-v5/profile2-run1/utterances.jsonl",
+      "sha256": "7d1cfe0a7e30b6fa9d62e344b1a2141ecd9277428d73fb108e4584e2613a492d",
+      "bytes": 12518
+    },
+    {
+      "path": "luna-v5/profile2-run1/instructions.json",
+      "sha256": "a1a01e44701d26b3160525897faa2d912ef18dd0d6089c75e67943bb94b39e6a",
+      "bytes": 41561
+    },
+    {
+      "path": "luna-v5/profile2-run1/transcript.md",
+      "sha256": "34ecd324d415c416655d20291d5d9058dfb66c98cc246b6c93fb59d0e10449e2",
+      "bytes": 3073
+    },
+    {
+      "path": "luna-v5/profile2-run2/calls.jsonl",
+      "sha256": "5b59366543506b1d55fa477182eaeaf83e783f24e513d2585d9c8bcc3f62c2dc",
+      "bytes": 104591
+    },
+    {
+      "path": "luna-v5/profile2-run2/api-requests.jsonl",
+      "sha256": "4127719f755b6911df276285c5b88fd5a9d8ed198a91addadebe5c8842563d81",
+      "bytes": 231540
+    },
+    {
+      "path": "luna-v5/profile2-run2/utterances.jsonl",
+      "sha256": "b2a20b25a3adf9caf90ca3ae0397a9bb0a79986912b75a6c72d93db3bb5761e6",
+      "bytes": 12849
+    },
+    {
+      "path": "luna-v5/profile2-run2/instructions.json",
+      "sha256": "a1a01e44701d26b3160525897faa2d912ef18dd0d6089c75e67943bb94b39e6a",
+      "bytes": 41561
+    },
+    {
+      "path": "luna-v5/profile2-run2/transcript.md",
+      "sha256": "210ba9eae52dcaca6b613a01120dcbdd6fbf98c474289280ce26ae0b739fab09",
+      "bytes": 3062
+    },
+    {
+      "path": "luna-v10/plan.json",
+      "sha256": "db8fd3a907954a085b53b74e4e12a68f44316eca25f426b29f3934ef23b1c6d4",
+      "bytes": 483
+    },
+    {
+      "path": "luna-v10/configs.json",
+      "sha256": "c4b336cc377be678cdd6064547bcb18eb19c4d2216ef26ee459891a9d023fe76",
+      "bytes": 31041
+    },
+    {
+      "path": "luna-v10/profiles.json",
+      "sha256": "9415d6d9fca168573ef83c9cd8fb5c1ef82970aa46ea4acaa14e27e19677ee3b",
+      "bytes": 5921
+    },
+    {
+      "path": "luna-v10/runner.snapshot.txt",
+      "sha256": "f4de227a87e49c7af650cc8d1af630b74ff818a9feda0f2421382142bf93cd66",
+      "bytes": 5360
+    },
+    {
+      "path": "luna-v10/result.json",
+      "sha256": "95951d01ff2f2798db1e6dada8278c3d6520c8142a7e0de2de072d5c6cc83426",
+      "bytes": 36475
+    },
+    {
+      "path": "luna-v10/profile1-run1/calls.jsonl",
+      "sha256": "c69dea2ba024339bda590ba39024d073b90e42fa7b1ab0959181472455438856",
+      "bytes": 96726
+    },
+    {
+      "path": "luna-v10/profile1-run1/api-requests.jsonl",
+      "sha256": "d40b58fd40ebb9c403b3d8dce2f3861f998961e3367c58c2b0ebba0efef1f4b3",
+      "bytes": 201620
+    },
+    {
+      "path": "luna-v10/profile1-run1/utterances.jsonl",
+      "sha256": "0115b3bfd679a96d5b099967a7b1c4db22ca009253a6e770f5aa373286b2b07d",
+      "bytes": 12794
+    },
+    {
+      "path": "luna-v10/profile1-run1/instructions.json",
+      "sha256": "119d4771ee9a9faa7ab6db35545d35c3feff4a261b08e1f914c8abf0f9916090",
+      "bytes": 38621
+    },
+    {
+      "path": "luna-v10/profile1-run1/transcript.md",
+      "sha256": "3b2daae192918ff880455d0dbccb76d92c131bc754ac7b9d8af32338ba5ccf89",
+      "bytes": 3455
+    },
+    {
+      "path": "luna-v10/profile1-run2/calls.jsonl",
+      "sha256": "9250515344f46d0f7306e0d2810293daa31ca1eea826488004cb63e5036244ab",
+      "bytes": 105893
+    },
+    {
+      "path": "luna-v10/profile1-run2/api-requests.jsonl",
+      "sha256": "d0bcfd3c82584691e41a22453802fb06a4ae11be3a70f40082cf4de64b8d5fd2",
+      "bytes": 222663
+    },
+    {
+      "path": "luna-v10/profile1-run2/utterances.jsonl",
+      "sha256": "64e2d8abd805ab53a5943113400cd9b72dd03a163da372dd91bed8d436ddda8e",
+      "bytes": 13224
+    },
+    {
+      "path": "luna-v10/profile1-run2/instructions.json",
+      "sha256": "119d4771ee9a9faa7ab6db35545d35c3feff4a261b08e1f914c8abf0f9916090",
+      "bytes": 38621
+    },
+    {
+      "path": "luna-v10/profile1-run2/transcript.md",
+      "sha256": "400db011746fb075963b09d15ae7fc0ce4800e8470d7c69b48c7010d0ae31f0e",
+      "bytes": 3524
+    },
+    {
+      "path": "luna-v10/profile2-run1/calls.jsonl",
+      "sha256": "d6234885a1fa1cf296dda8e8457fcf8949ed99e49495caf56f1b1293b7a854cc",
+      "bytes": 96592
+    },
+    {
+      "path": "luna-v10/profile2-run1/api-requests.jsonl",
+      "sha256": "72f7c1587c5474c7c000fdd3ff6fa1b18434a1e4b4f8234761ba88294efea95c",
+      "bytes": 213800
+    },
+    {
+      "path": "luna-v10/profile2-run1/utterances.jsonl",
+      "sha256": "3a0c8b14b5e601ad3682d80d6645f8deb748f82874ba4def5dd23fe73357ec48",
+      "bytes": 12435
+    },
+    {
+      "path": "luna-v10/profile2-run1/instructions.json",
+      "sha256": "165def735cfaf148cf3ec66c776e6886d200dfb19b37094f4b26f7133b77d82c",
+      "bytes": 42575
+    },
+    {
+      "path": "luna-v10/profile2-run1/transcript.md",
+      "sha256": "59df0c6f1ecfd835eaba7afb60800a1e46eb0f438e3eb6c748cdf00cf2373e53",
+      "bytes": 2987
+    },
+    {
+      "path": "luna-v10/profile2-run2/calls.jsonl",
+      "sha256": "2b50973ae86b9975f9f1b4e1f9777331e6770f76e3a81bf76f128196ba315a13",
+      "bytes": 93116
+    },
+    {
+      "path": "luna-v10/profile2-run2/api-requests.jsonl",
+      "sha256": "906f95394de1e4b8fa3fea3b84f620bc1c2a25e8a2140aefbe53a99689cd4144",
+      "bytes": 210636
+    },
+    {
+      "path": "luna-v10/profile2-run2/utterances.jsonl",
+      "sha256": "3afa9b45e73abe8ed12ba64edfcb20202373977977030a3a5cebd0c59a5634ae",
+      "bytes": 12109
+    },
+    {
+      "path": "luna-v10/profile2-run2/instructions.json",
+      "sha256": "165def735cfaf148cf3ec66c776e6886d200dfb19b37094f4b26f7133b77d82c",
+      "bytes": 42575
+    },
+    {
+      "path": "luna-v10/profile2-run2/transcript.md",
+      "sha256": "c7bbac2105f183a23059454319459e76bffd9ec68ab89dad4299b7151011a714",
+      "bytes": 2750
+    },
+    {
+      "path": "profile-policies.json",
+      "sha256": "e265bf71721a076b4da54771ab87912e05c6831e453935cb7413d233e065559d",
+      "bytes": 5922
+    },
+    {
+      "path": "judgments.json",
+      "sha256": "fa9159aa3467f7927aca4ccde133d75ce32db5202ad04f8de9cf7fe8a9779626",
+      "bytes": 105979
+    },
+    {
+      "path": "app-round-robin/plan.json",
+      "sha256": "ff9eafd61757c57c86d1158ffe2dd133c0ca0171f2dbe9bcd0585b4b13ef2e0f",
+      "bytes": 164
+    },
+    {
+      "path": "app-round-robin/config.json",
+      "sha256": "d7b341279683efca890a6a27020e7fe2c29bc4ee53d5da40238d33ced222cec0",
+      "bytes": 16805
+    },
+    {
+      "path": "app-round-robin/runner.snapshot.txt",
+      "sha256": "3fe795af3e146a3c5a8f5276b069b9f26585b68cee9819008bc0dd5e6f070abb",
+      "bytes": 3138
+    },
+    {
+      "path": "app-round-robin/result.json",
+      "sha256": "ccfae302a2b4eb5a20c7f1fdb8282cbd737a18d11a7199b92798c9744678f439",
+      "bytes": 18055
+    },
+    {
+      "path": "app-round-robin/batch/calls.jsonl",
+      "sha256": "35908bd63b3532edc16a6c43ec44cfa66bd4f6249d00ed81d046bdefcfd60dd8",
+      "bytes": 127797
+    },
+    {
+      "path": "app-round-robin/batch/api-requests.jsonl",
+      "sha256": "cf733dffb604599bf1c7ff26a2047cfd3307db8a447004647bb3d528bcd3b23e",
+      "bytes": 275576
+    },
+    {
+      "path": "app-round-robin/batch/utterances.jsonl",
+      "sha256": "fecd7fb15b0155107519b32ec80f6936d13e92048699bcc2bdcaefc907c3aa19",
+      "bytes": 13783
+    },
+    {
+      "path": "app-round-robin/batch/instructions.json",
+      "sha256": "d86305424d2652fca7e22f34da0e8e63c6c3e31bef9c1155123d73024ae21dee",
+      "bytes": 41039
+    },
+    {
+      "path": "app-round-robin/batch/transcript.md",
+      "sha256": "22d82fe2fc4b7649da4fd6d16b34ecc46e8069f98e86ee57ea909c814e027933",
+      "bytes": 3183
+    },
+    {
+      "path": "app-round-robin/batch/quality.json",
+      "sha256": "a295e1e288ac3a0e3b053312d1bc8c73f706fd2583beade21fbed2102fa7779c",
+      "bytes": 2168
+    },
+    {
+      "path": "app-round-robin/batch/findings.csv",
+      "sha256": "1dfac07a290537315233ab87ef73c9c9cd4373dbe0641e444163e1ce6f3620fe",
+      "bytes": 223
+    },
+    {
+      "path": "app-round-robin/each/calls.jsonl",
+      "sha256": "86f9362dcd13a232f6cdf37362cb51d27f308be8e33011eff25f738a27215fce",
+      "bytes": 221461
+    },
+    {
+      "path": "app-round-robin/each/api-requests.jsonl",
+      "sha256": "4a6799da242aa54782d0a029c37eda0ff9f212a98e4344885ed70da59f83b374",
+      "bytes": 967634
+    },
+    {
+      "path": "app-round-robin/each/utterances.jsonl",
+      "sha256": "98446c5e240bc5580653c75b54c60e3382bb124dac415df6ae79f3649b5af8b7",
+      "bytes": 13805
+    },
+    {
+      "path": "app-round-robin/each/instructions.json",
+      "sha256": "d86305424d2652fca7e22f34da0e8e63c6c3e31bef9c1155123d73024ae21dee",
+      "bytes": 41039
+    },
+    {
+      "path": "app-round-robin/each/transcript.md",
+      "sha256": "aec06dd7cda915c18b737a973f2d0f9fc7932e7e360279c7ce44245dbe540aa9",
+      "bytes": 3113
+    },
+    {
+      "path": "app-round-robin/each/quality.json",
+      "sha256": "44b667a0f7cd6d4bdc20fb5ff0002f3247a3f0d237852da56cb281a1aabe3ee0",
+      "bytes": 2168
+    },
+    {
+      "path": "app-round-robin/each/findings.csv",
+      "sha256": "1dfac07a290537315233ab87ef73c9c9cd4373dbe0641e444163e1ce6f3620fe",
+      "bytes": 223
+    },
+    {
+      "path": "app-final/plan.json",
+      "sha256": "ff9eafd61757c57c86d1158ffe2dd133c0ca0171f2dbe9bcd0585b4b13ef2e0f",
+      "bytes": 164
+    },
+    {
+      "path": "app-final/config.json",
+      "sha256": "5db01bf9d29a181b85e2a9f19225b39dd9d41d549e03e9254fc158d6231d1997",
+      "bytes": 16799
+    },
+    {
+      "path": "app-final/runner.snapshot.txt",
+      "sha256": "3fe795af3e146a3c5a8f5276b069b9f26585b68cee9819008bc0dd5e6f070abb",
+      "bytes": 3138
+    },
+    {
+      "path": "app-final/result.json",
+      "sha256": "add4b9d1f00b10c267195e58548bae25b37fec3c17ec45150e78ddaa79b27327",
+      "bytes": 18142
+    },
+    {
+      "path": "app-final/batch/calls.jsonl",
+      "sha256": "bbd70ef29a96564ca448464c5448990fcb2c1b5079ba031110916e61204516b4",
+      "bytes": 146253
+    },
+    {
+      "path": "app-final/batch/api-requests.jsonl",
+      "sha256": "503557dc5af2984f03f8135a11a1e6a74cbf5f92db67848f96f760f3430f21e2",
+      "bytes": 260415
+    },
+    {
+      "path": "app-final/batch/utterances.jsonl",
+      "sha256": "ba81fe273bfb3a380e2c6896a4713dcaa33f7c546cf607d5c237429829d9a8ce",
+      "bytes": 12293
+    },
+    {
+      "path": "app-final/batch/instructions.json",
+      "sha256": "27066f9c997bdaee94410129d761fdec50b3223bb017abb0fad797b340a3106d",
+      "bytes": 42686
+    },
+    {
+      "path": "app-final/batch/transcript.md",
+      "sha256": "ca4a5cc0ef369fdf5a636393a5dc2a907acbaf5ede2a99ae3adb2d64db36924f",
+      "bytes": 2919
+    },
+    {
+      "path": "app-final/batch/quality.json",
+      "sha256": "ba9e456a0564b4b7cea01996a6c4e4e40dc55f5f5e94917f6a73e7d3641696af",
+      "bytes": 2163
+    },
+    {
+      "path": "app-final/batch/findings.csv",
+      "sha256": "1dfac07a290537315233ab87ef73c9c9cd4373dbe0641e444163e1ce6f3620fe",
+      "bytes": 223
+    },
+    {
+      "path": "app-final/each/calls.jsonl",
+      "sha256": "86cc82a14c0e42a63042b7b52ccec2e456f1d835f3935f8656e056090a6c8969",
+      "bytes": 231276
+    },
+    {
+      "path": "app-final/each/api-requests.jsonl",
+      "sha256": "f8c03e6f80ea9a3ef5a147abc1d6bf8f9abc77dd7eb0607bdc55f4d563c5c79b",
+      "bytes": 868925
+    },
+    {
+      "path": "app-final/each/utterances.jsonl",
+      "sha256": "af759690b9e9730b18c7d012ed2f7ce2a2e8425585743ed728f69b8d0d778d05",
+      "bytes": 12330
+    },
+    {
+      "path": "app-final/each/instructions.json",
+      "sha256": "27066f9c997bdaee94410129d761fdec50b3223bb017abb0fad797b340a3106d",
+      "bytes": 42686
+    },
+    {
+      "path": "app-final/each/transcript.md",
+      "sha256": "afd04b9392ffddc72e4ffedb6de71efeb7723ac7f9548981c780b48b1579e33b",
+      "bytes": 2772
+    },
+    {
+      "path": "app-final/each/quality.json",
+      "sha256": "608785147b1e66be56f8389146be034d8bb9e4ba9ea5452c49c509cece8deadc",
+      "bytes": 2163
+    },
+    {
+      "path": "app-final/each/findings.csv",
+      "sha256": "1dfac07a290537315233ab87ef73c9c9cd4373dbe0641e444163e1ce6f3620fe",
+      "bytes": 223
+    }
+  ]
+}

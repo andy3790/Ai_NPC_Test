@@ -1,0 +1,57 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { resolve, join } from 'node:path';
+import { parseArgs } from 'node:util';
+import { Engine } from '../src/core/engine.js';
+import { Store } from '../src/core/store.js';
+import { OpenAIAdapter } from '../src/adapters/openai.js';
+import { exportFiles } from '../src/core/export.js';
+import { exampleSpec } from '../src/shared/example.js';
+import { harborProfilePolicies } from '../src/shared/harbor-profiles.js';
+import { experimentSchema } from '../src/shared/schema.js';
+const { values } = parseArgs({ options: { live: { type: 'boolean', default: false } } });
+const specs = ['harbor-profile/1', 'harbor-profile/2'].map(version => {
+  const spec = exampleSpec('gpt-6.1-sol', 'low', version as 'harbor-profile/1' | 'harbor-profile/2');
+  spec.name += ' [' + version + ']'; spec.maxUtterances = 18; spec.repetitions = 2; spec.concurrentRuns = 1; spec.maxConcurrentCalls = 1;
+  spec.timeoutMs = 90_000; spec.evaluation.enabled = false; spec.director = { model: 'gpt-6-luna', effort: 'low' };
+  spec.variants = [{ ...spec.variants[0], environmentMode: 'rules', dialoguePromptVersion: 'npc-dialogue/5', turnPolicy: 'director', memoryMode: 'initial_only' }];
+  return experimentSchema.parse(spec);
+});
+const plan = { sourceCommit: 'de4fb16d10a3cb23c008db6c09b219514ccfe839', casts: Object.keys(harborProfilePolicies),
+  model: 'gpt-6.1-sol', effort: 'low', directorVersion: 'director/4', policy: 'npc-dialogue/5', mode: 'rules', maxCalls: 140, maxUsd: 1,
+  expectedCalls: 140, repetitions: 2, maxUtterances: 18, notes: 'Same authored rule graph. Stop on existing goals; no retry. One in-flight response may exceed the cost limit.' };
+if (!values.live) console.log(JSON.stringify({ live: false, ...plan }, null, 2));
+else {
+  const root = resolve('.cache/harbor-live', new Date().toISOString().replace(/[:.]/g, '-')); await mkdir(root, { recursive: true });
+  await writeFile(join(root, 'plan.json'), JSON.stringify(plan, null, 2)); await writeFile(join(root, 'configs.json'), JSON.stringify(specs, null, 2));
+  await writeFile(join(root, 'profiles.json'), JSON.stringify(harborProfilePolicies, null, 2));
+  await writeFile(join(root, 'runner.snapshot.txt'), await readFile('.cache/harbor-live.ts', 'utf8'));
+  const store = new Store(join(root, 'npc-lab.sqlite')), adapter = new OpenAIAdapter(join(root, 'runtime'));
+  const engine = new Engine(store, adapter, root), turn = adapter.turn.bind(adapter);
+  let calls = 0, error: string | null = null; const reports = [];
+  adapter.turn = async (...args) => {
+    const summaries = engine.list().map(r => r.summary);
+    if (calls >= plan.maxCalls || summaries.some(s => s.cost.unpricedCalls > 0) || summaries.reduce((n, s) => n + (s.cost.usd ?? 0), 0) >= plan.maxUsd) throw Error('Budget or usage limit');
+    calls++; const r = await turn(...args);
+    if (r.status === 'completed' && JSON.parse(args[0].input).task === 'speak') console.log(JSON.stringify({ calls, ...JSON.parse(r.output) }));
+    return r;
+  };
+  console.log(JSON.stringify({ root, ...plan }));
+  try {
+    for (const [index, spec] of specs.entries()) {
+      const { runs } = await engine.create(spec); await engine.idle();
+      for (const run of runs) {
+        const detail = engine.detail(run.id), folder = join(root, 'profile' + (index + 1) + '-run' + run.repetition); await mkdir(folder, { recursive: true });
+        for (const [name, value] of Object.entries(exportFiles(detail, store.events(run.id)))) await writeFile(join(folder, name), value);
+        reports.push({ profile: plan.casts[index], repetition: run.repetition, runId: run.id, status: detail.run.status,
+          completionReason: detail.run.completionReason, error: detail.run.error, summary: detail.summary });
+      }
+      if (runs.some(r => engine.run(r.id).status !== 'completed')) throw Error('Conversation did not complete; no retry');
+    }
+  } catch (e) { error = e instanceof Error ? e.message : String(e); process.exitCode = 1; }
+  finally {
+    const cost = engine.list().reduce((n, r) => n + (r.summary.cost.usd ?? 0), 0);
+    await writeFile(join(root, 'result.json'), JSON.stringify({ ...plan, calls, estimatedUsd: cost, error, reports }, null, 2));
+    console.log(JSON.stringify({ root, calls, estimatedUsd: cost, error, reports: reports.map(r => ({ ...r, summary: { speechCount: r.summary.speechCount, cost: r.summary.cost } })) }));
+    await engine.close(); store.close();
+  }
+}

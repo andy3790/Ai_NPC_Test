@@ -1,0 +1,35 @@
+{
+  "adapter": "openai",
+  "suiteVersion": "harbor-dialogue/1",
+  "casesSha256": "155792f1900434c7bcab5137e97aa5f3d3fe46d341d92aff1f1ec609a49320c6",
+  "split": "development",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "promptVersion": "npc-lab/10",
+  "policyVersions": [
+    "npc-dialogue/5",
+    "npc-dialogue/5"
+  ],
+  "conditions": [
+    {
+      "id": "baseline",
+      "policy": "npc-dialogue/5",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "id": "candidate",
+      "policy": "npc-dialogue/5",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    }
+  ],
+  "repetitions": 2,
+  "expectedCalls": 24,
+  "maxCalls": 24,
+  "maxUsd": 1,
+  "candidateSuiteVersion": "harbor-dialogue/2",
+  "candidateCasesSha256": "f2928e017f13afb2d152c135f6b4ef116be08a55c1606123aa2918557f9be6ea",
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry."
+}

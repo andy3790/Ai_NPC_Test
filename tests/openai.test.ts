@@ -194,14 +194,15 @@ test('Responses schema keeps required properties and converts literal receipt to
   assert.equal(schema.properties.received.const, undefined);
 });
 
-test('OpenAI local API exposes the provider and conservative example settings without disclosing credentials', async () => {
+test('OpenAI local API exposes the provider and bounded example settings without disclosing credentials', async () => {
   const { api, store, engine } = await setup(); const app = await createApp(engine);
   const headers = { host: 'localhost' };
   try {
     const health = await app.inject({ url: '/api/health', headers });
     assert.equal(health.json().adapter, 'openai'); assert.ok(!health.body.includes(api.key));
     const example = await app.inject({ url: '/api/example', headers }); const spec = example.json();
-    assert.equal(spec.maxUtterances, 6); assert.equal(spec.evaluation.interval, 6); assert.equal(spec.concurrentRuns, 1); assert.equal(spec.maxConcurrentCalls, 1);
+    assert.equal(spec.maxUtterances, 18); assert.equal(spec.evaluation.interval, 6); assert.equal(spec.concurrentRuns, 1); assert.equal(spec.maxConcurrentCalls, 1);
+    assert.ok(spec.variants.every((v: any) => v.turnPolicy === 'director'));
     const created = await app.inject({ method: 'POST', url: '/api/experiments', headers, payload: { spec, start: false } });
     assert.equal(created.statusCode, 200); assert.equal(created.json().runs[0].adapter, 'openai');
     assert.equal(created.json().runs[0].status, 'paused'); assert.equal(api.requests.length, 0); assert.ok(!created.body.includes(api.key));

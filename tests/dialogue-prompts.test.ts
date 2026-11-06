@@ -24,8 +24,10 @@ test('published dialogue policy texts cannot drift silently under an existing ve
     'npc-dialogue/7': 'dd4b5ea4c4d22bd1f94b195278e92c94ba4d0e75b908504e25dbf0876aca5bc8',
     'npc-dialogue/8': '2ea1bd820ae7ba27d7b12df20abd274930c576e356dee553e97ef6c1d77bd4d4',
     'npc-dialogue/9': 'dd4b5ea4c4d22bd1f94b195278e92c94ba4d0e75b908504e25dbf0876aca5bc8',
+    'npc-dialogue/10': '8db1181b42e7360cd0badfa25ff227ddf1a399321e05d6f6d95e1e2633fcf871',
   };
   assert.deepEqual(Object.keys(expected), [...DIALOGUE_PROMPT_VERSIONS]);
+  assert.ok(dialoguePolicies['npc-dialogue/10'].instructions.startsWith(dialoguePolicies['npc-dialogue/5'].instructions + '\n'));
   // Effective /5 persona recorded before the /7+ layout branch was introduced.
   assert.equal(caseInput(suite.cases[0], 'npc-dialogue/5', 'mock-model', 'low').instructionsSha256,
     '29be3ddda6c686819a596cd0470f7d26cc2582d6e396e1371f41f0bb63ad5e59');
