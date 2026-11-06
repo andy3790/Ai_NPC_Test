@@ -1,0 +1,33 @@
+name: Validate model catalogue
+
+on:
+  push:
+    paths:
+      - 'src/config/models.json'
+      - 'src/shared/model-catalog.ts'
+      - 'src/core/load-model-catalog.ts'
+      - 'scripts/check-models.ts'
+      - '.github/workflows/models.yml'
+  pull_request:
+    paths:
+      - 'src/config/models.json'
+      - 'src/shared/model-catalog.ts'
+      - 'src/core/load-model-catalog.ts'
+      - 'scripts/check-models.ts'
+      - '.github/workflows/models.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  catalogue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run models:check

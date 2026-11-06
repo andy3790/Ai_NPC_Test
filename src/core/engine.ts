@@ -20,6 +20,7 @@ import { progression, progressionPrompt, resolveAction } from './progression.js'
 import { repetitionMetrics } from './quality.js';
 import { APP_VERSION } from '../shared/version.js';
 import { directorInstructions, directorPrompt } from './director.js';
+import './load-model-catalog.js';
 
 const now = () => new Date().toISOString();
 const err = (e: unknown) => e instanceof Error ? e.message : String(e);

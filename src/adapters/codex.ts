@@ -5,6 +5,8 @@ import { createInterface } from 'node:readline';
 import type { Adapter, AdapterEvent, TurnRequest, TurnResult } from './types.js';
 import type { ModelConfig } from '../shared/schema.js';
 import type { ModelInfo, TokenUsage } from '../shared/types.js';
+import { isModelEnabled } from '../shared/model-catalog.js';
+import '../core/load-model-catalog.js';
 import { baseInstructions } from '../core/prompts.js';
 import { normalizeUsage, tokenKeys } from '../core/metrics.js';
 
@@ -144,7 +146,7 @@ export class CodexAdapter implements Adapter {
       result.push(...page.data.map((x: any) => ({ id: x.model, name: x.displayName, efforts: x.supportedReasoningEfforts.map((e: any) => e.reasoningEffort), defaultEffort: x.defaultReasoningEffort, isDefault: x.isDefault })));
       cursor = page.nextCursor;
     } while (cursor);
-    return result;
+    return result.filter(model => isModelEnabled(model.id));
   }
   async createSession(config: ModelConfig, instructions: string, cwd: string) {
     await this.start(); mkdirSync(cwd, { recursive: true });

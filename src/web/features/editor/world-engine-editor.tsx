@@ -1,5 +1,6 @@
 import { environmentMode, isAiEnvironment, type ExperimentSpec, type Variant } from '../../../shared/schema.js';
 import type { ModelInfo } from '../../../shared/types.js';
+import { ModelSelect, modelDefaultEffort } from './model-select.js';
 import { environmentModes } from '../../shared/formatters.js';
 
 export function WorldEngineEditor({ spec, update, models }: { spec: ExperimentSpec; update: (fn: (s: ExperimentSpec) => void) => void; models: ModelInfo[] }) {
@@ -18,7 +19,7 @@ export function WorldEngineEditor({ spec, update, models }: { spec: ExperimentSp
     </label>)}</div>
     {enabled && <>
       <div className="form-grid">
-        <label>세계 엔진 모델<select aria-label="세계 엔진 모델" value={config.model} onChange={e => update(s => { s.worldEngine = { model: e.target.value, effort: efforts(e.target.value)[0] }; })}>{models.map(m => <option key={m.id} value={m.id}>{m.id}</option>)}</select></label>
+        <label>세계 엔진 모델<ModelSelect label="세계 엔진 모델" value={config.model} models={models} onChange={value => update(s => { s.worldEngine = { model: value, effort: modelDefaultEffort(models, value) }; })}/></label>
         <label>세계 엔진 추론 강도<select aria-label="세계 엔진 추론 강도" value={config.effort} onChange={e => update(s => { s.worldEngine = { ...config, effort: e.target.value }; })}>{efforts(config.model).map(e => <option key={e}>{e}</option>)}</select></label>
       </div>
       <label>세계 엔진 추가 규칙 (선택)<textarea aria-label="세계 엔진 추가 규칙" rows={3} value={spec.scenario.worldEngineInstructions ?? ''} onChange={e => update(s => { s.scenario.worldEngineInstructions = e.target.value; })} placeholder="예: 연락은 즉답하지 않으며 장면의 가상 시간에 맞춰 도착한다."/></label>

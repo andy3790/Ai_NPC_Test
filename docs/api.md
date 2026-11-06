@@ -30,6 +30,7 @@ OpenAI API 서버에서만 제공합니다. 키가 없어도 health·config·his
 |---|---|
 | `GET /health` | `{ok, adapter, version, historyEnabled}` |
 | `GET /models` | 현재 어댑터의 모델 목록. `id, name, efforts, defaultEffort, isDefault` |
+| `GET /model-catalog` | 서버가 읽은 모델·추론·단가 JSON. API 키 없이 조회 가능. `enabled: false`인 과거 모델 가격도 포함 |
 | `GET /example` | 서버 모델을 적용한 ExperimentSpec. API 서버는 일반 예제를 6차례·평가 간격 6·동시 묶음/호출 1로 조정 |
 | `GET /config` | 마지막 편집 ExperimentSpec 또는 `null` |
 | `PUT /config` | 본문 ExperimentSpec 구조 검증·저장 후 정규화된 spec 반환. 이미 생성된 묶음은 변경하지 않음 |

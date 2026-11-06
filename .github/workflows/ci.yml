@@ -2,7 +2,13 @@ name: Verify
 
 on:
   push:
+    paths-ignore:
+      - 'src/config/models.json'
+      - 'docs/model-catalog.md'
   pull_request:
+    paths-ignore:
+      - 'src/config/models.json'
+      - 'docs/model-catalog.md'
   workflow_dispatch:
 
 permissions:
@@ -34,6 +40,10 @@ jobs:
         if: runner.os == 'Linux'
         timeout-minutes: 5
         run: npm run smoke:editor
+      - name: Check runtime model catalogue and prices
+        if: runner.os == 'Linux'
+        timeout-minutes: 5
+        run: npm run smoke:models
       - name: Check archived history and mixed-provider comparison
         if: runner.os == 'Linux'
         timeout-minutes: 5

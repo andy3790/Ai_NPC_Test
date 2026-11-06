@@ -73,7 +73,7 @@
 
 ## USD 환산 비용
 
-현재 [pricing.ts](../src/core/pricing.ts)의 단가 스냅샷 날짜는 **2026-11-05**입니다. 공식 [OpenAI API 가격표](https://developers.openai.com/api/docs/pricing)의 Standard 텍스트 요금을 기준으로 등록된 모델만 계산합니다. 단가 숫자의 원본은 코드 한 곳에 두며 문서에 별도 가격표를 복제하지 않습니다.
+현재 [models.json](../src/config/models.json)의 단가 스냅샷 날짜는 **2026-11-06**입니다. 공식 [OpenAI API 가격표](https://developers.openai.com/api/docs/pricing)의 Standard 텍스트 요금을 기준으로 등록된 모델만 계산합니다. 숫자는 이 JSON 한 곳에서 관리하며 [pricing.ts](../src/core/pricing.ts)는 계산만 담당합니다. 모델 선택기에도 같은 입력·출력 단가를 표시합니다. 변경 절차는 [모델 설정 관리](model-catalog.md)를 참고하세요.
 
 짧은 문맥의 기본식은 다음과 같습니다. 단가는 100만 토큰당 USD입니다.
 
@@ -98,9 +98,9 @@
 | pending | 아직 계측 대기 |
 | not_applicable | 모의 실행 또는 미전송 |
 
-묶음 `cost.usd`는 계산 가능한 호출의 부분 합계입니다. `unpricedCalls`는 단가/사용량 부족 수, `assumedCalls`는 가정 포함 수입니다. CSV에서는 `estimatedCostUsd, unpricedCalls, assumedPricingCalls, pricingDate`를 사용합니다.
+묶음 `cost.usd`는 계산 가능한 호출의 부분 합계입니다. `unpricedCalls`는 단가/사용량 부족 수, `assumedCalls`는 가정 포함 수입니다. CSV에서는 `estimatedCostUsd, unpricedCalls, assumedPricingCalls, pricingDate, pricingRevision`을 사용합니다.
 
-CLI 비용은 API 단가로 비교한 환산치이며 Codex 구독 청구액이 아닙니다. API도 크레딧 잔액·세금·할인·실제 처리 등급·지역 가산을 조회하는 청구 기능이 아닙니다. USD만 표시하며 원화 환율 변환은 없습니다. 앱의 단가가 바뀌면 과거 관측 토큰도 새 스냅샷으로 환산될 수 있으므로 분석 시 pricingDate를 보존하세요.
+CLI 비용은 API 단가로 비교한 환산치이며 Codex 구독 청구액이 아닙니다. API도 크레딧 잔액·세금·할인·실제 처리 등급·지역 가산을 조회하는 청구 기능이 아닙니다. USD만 표시하며 원화 환율 변환은 없습니다. 앱의 단가가 바뀌면 과거 관측 토큰도 새 스냅샷으로 환산될 수 있으므로 분석 시 pricingDate와 pricingRevision을 보존하세요. revision은 설정 내용에서 자동 생성하며, 날짜가 같아도 가격이 달라지면 보관 비용 요약을 갱신합니다.
 
 ## 평가와 사람의 검토
 

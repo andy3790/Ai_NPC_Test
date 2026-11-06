@@ -16,7 +16,7 @@ export interface Utterance { id: string; runId: string; sequence: number; speech
 }
 export interface DeliveryReceipt { id: string; runId: string; utteranceId: string; characterId: string; status: 'pending' | 'processing' | 'delivered'; invocationId: string | null; deliveredAt: string | null }
 export interface TokenUsage { inputTokens: number | null; cachedInputTokens: number | null; cacheWriteInputTokens: number | null; outputTokens: number | null; reasoningOutputTokens: number | null; totalTokens: number | null }
-export interface CostSummary { usd: number | null; unpricedCalls: number; assumedCalls: number; pricingDate: string }
+export interface CostSummary { usd: number | null; unpricedCalls: number; assumedCalls: number; pricingDate: string; pricingRevision?: string }
 export interface InvocationSummary {
   calls: number; failed: number; pendingCalls: number; missingUsage: number; tokens: TokenUsage;
   cost: CostSummary;

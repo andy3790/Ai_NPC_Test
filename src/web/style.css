@@ -155,3 +155,4 @@
 .spatial-message-meta { color: #68786b; font-size: 11px; margin: 5px 0 8px; }
 .inject select { max-width: 180px; min-width: 100px; }
 @media (max-width: 600px) { .inject { flex-wrap: wrap; } .inject select { width: 100%; max-width: none; } .observation-filters label { width: 100%; } }
+.model-field{display:grid;gap:6px;min-width:0;width:100%}.model-field select{width:100%;min-width:0;max-width:100%;text-overflow:ellipsis}.model-price{display:grid;gap:3px;color:#728174;font-size:10px;font-weight:400;line-height:1.6;overflow-wrap:anywhere}.model-price-main{color:#236c55;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}.model-pricing-note{border:1px solid #dce6d8;border-radius:6px;background:#f3f7ef;padding:12px 14px;color:#60705e;font-size:11px;line-height:1.8;margin:0 0 20px}.model-pricing-note a{color:#236c55}.matrix-model{display:grid;gap:5px;min-width:0}.model-inherited{display:grid;gap:3px}.model-unavailable{color:#a64d35}

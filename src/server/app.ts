@@ -15,6 +15,7 @@ import { RunDeletionService } from '../core/deletion.js';
 import { runSnapshot } from '../shared/run-snapshot.js';
 import { audienceSchema } from '../shared/spatial-schema.js';
 import { OpenAIAdapter } from '../adapters/openai.js';
+import { getModelCatalog } from '../shared/model-catalog.js';
 
 export async function createApp(engine: Engine, options: { history?: RunHistoryCatalog } = {}) {
   const app = Fastify({ logger: false, bodyLimit: 4 * 1024 * 1024 });
@@ -67,6 +68,9 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
   app.get('/api/history', async () => history ? { enabled: true, ...history.sources() } : { enabled: false, sources: [], runs: 0, errors: [] });
   app.post('/api/history/refresh', async () => { if (!history) throw new Error('이 서버는 통합 기록 조회가 꺼져 있습니다.'); const result = history.refresh(); engine.emit('change', { runId: '', at: new Date().toISOString() }); return result; });
   app.get('/api/models', async req => engine.adapter.models(credential(req)));
+  app.get('/api/model-catalog', async (_req, reply) => {
+    reply.header('Cache-Control', 'no-store'); return getModelCatalog();
+  });
   app.get('/api/example', async req => {
     const models = await engine.adapter.models(credential(req)); const m = models.find(x => x.isDefault) ?? models[0];
     const spec = exampleSpec(m.id, m.efforts.includes('low') ? 'low' : m.defaultEffort);

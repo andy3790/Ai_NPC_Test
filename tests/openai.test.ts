@@ -56,7 +56,7 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI $
 for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI ${mode}: independent response chains, delivery, raw usage and exports`, async () => {
   const { root, api, adapter, store, engine, spec } = await setup(mode);
   try {
-    assert.deepEqual((await adapter.models()).map(m => m.id), [model, 'gpt-4.1-mini']);
+    assert.deepEqual((await adapter.models()).map(m => m.id), [model]);
     const { runs } = await engine.create(spec); await engine.idle(); const d = engine.detail(runs[0].id);
     assert.equal(d.run.status, 'completed', d.run.error ?? undefined);
     assert.equal(d.utterances.length, 6); assert.equal(d.evaluations.length, 1);

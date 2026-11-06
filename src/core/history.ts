@@ -5,7 +5,7 @@ import { Engine } from './engine.js';
 import { buildRunDetail } from './detail.js';
 import { matchesProvider, toRunListItem } from './summary.js';
 import { exportFiles } from './export.js';
-import { aggregateCost, PRICING_DATE } from './pricing.js';
+import { aggregateCost, PRICING_REVISION } from './pricing.js';
 import { aggregate } from './metrics.js';
 import type { RawEvent, Run, RunDetail, RunHistory, RunListItem, RunSummary } from '../shared/types.js';
 
@@ -43,7 +43,7 @@ export class RunHistoryCatalog {
     // An archive may be the only copy of a run. Refresh derived summaries even
     // when its original DB or export is no longer available to the scanner.
     const rows = this.db.prepare(`SELECT run_id, summary_json, detail_json FROM history_runs
-      WHERE json_extract(summary_json, '$.cost.pricingDate') IS NOT ? OR json_extract(summary_json, '$.byKind.environment') IS NULL OR json_extract(summary_json, '$.byKind.event_generation') IS NULL`).all(PRICING_DATE);
+      WHERE json_extract(summary_json, '$.cost.pricingRevision') IS NOT ? OR json_extract(summary_json, '$.byKind.environment') IS NULL OR json_extract(summary_json, '$.byKind.event_generation') IS NULL`).all(PRICING_REVISION);
     const update = this.db.prepare('UPDATE history_runs SET summary_json=? WHERE run_id=?');
     for (const row of rows) {
       const { run, invocations } = JSON.parse(row.detail_json as string) as RunDetail;

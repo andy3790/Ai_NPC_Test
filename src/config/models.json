@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "pricingDate": "2026-11-06",
+  "pricingSource": "https://developers.openai.com/api/docs/pricing",
+  "models": [
+    {
+      "id": "gpt-6-luna",
+      "enabled": true,
+      "api": {
+        "efforts": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "defaultEffort": "low",
+        "reasoning": true
+      },
+      "pricing": {
+        "input": 0.1,
+        "cached": 0.01,
+        "output": 0.5,
+        "write30m": 0.125,
+        "longContext": {
+          "aboveInputTokens": 272000,
+          "input": 0.2,
+          "cached": 0.02,
+          "output": 0.75,
+          "write30m": 0.25
+        }
+      }
+    },
+    {
+      "id": "gpt-6.1-terra",
+      "enabled": true,
+      "api": {
+        "efforts": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "defaultEffort": "low",
+        "reasoning": true
+      },
+      "pricing": {
+        "input": 1,
+        "cached": 0.05,
+        "output": 5,
+        "write30m": 1.25,
+        "longContext": {
+          "aboveInputTokens": 272000,
+          "input": 2,
+          "cached": 0.1,
+          "output": 7.5,
+          "write30m": 2.5
+        }
+      }
+    },
+    {
+      "id": "gpt-6.1-sol",
+      "enabled": true,
+      "api": {
+        "efforts": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "defaultEffort": "low",
+        "reasoning": true
+      },
+      "pricing": {
+        "input": 2,
+        "cached": 0.1,
+        "output": 10,
+        "write30m": 2.5,
+        "longContext": {
+          "aboveInputTokens": 272000,
+          "input": 4,
+          "cached": 0.2,
+          "output": 15,
+          "write30m": 5
+        }
+      }
+    },
+    {
+      "id": "gpt-6-astra",
+      "enabled": true,
+      "api": {
+        "efforts": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "defaultEffort": "low",
+        "reasoning": true
+      },
+      "pricing": {
+        "input": 10,
+        "cached": 1,
+        "output": 50,
+        "write30m": 12.5,
+        "longContext": {
+          "aboveInputTokens": 272000,
+          "input": 20,
+          "cached": 2,
+          "output": 75,
+          "write30m": 25
+        }
+      }
+    },
+    {
+      "id": "gpt-6-sol",
+      "enabled": true,
+      "api": {
+        "efforts": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "defaultEffort": "low",
+        "reasoning": true
+      },
+      "pricing": {
+        "input": 2,
+        "cached": 0.2,
+        "output": 10,
+        "write30m": 2.5,
+        "longContext": {
+          "aboveInputTokens": 272000,
+          "input": 4,
+          "cached": 0.4,
+          "output": 15,
+          "write30m": 5
+        }
+      }
+    },
+    {
+      "id": "gpt-5.3-codex",
+      "enabled": true,
+      "api": null,
+      "pricing": {
+        "input": 1.75,
+        "cached": 0.175,
+        "output": 14
+      },
+      "source": "https://developers.openai.com/api/docs/models/gpt-5.3-codex"
+    },
+    {
+      "id": "gpt-4.1-mini",
+      "enabled": false,
+      "api": {
+        "efforts": [
+          "none"
+        ],
+        "defaultEffort": "none",
+        "reasoning": false
+      },
+      "pricing": {
+        "input": 0.4,
+        "cached": 0.1,
+        "output": 1.6
+      },
+      "source": "https://developers.openai.com/api/docs/models/gpt-4.1-mini"
+    },
+    {
+      "id": "gpt-4.1-mini-2025-04-14",
+      "enabled": false,
+      "api": {
+        "efforts": [
+          "none"
+        ],
+        "defaultEffort": "none",
+        "reasoning": false
+      },
+      "pricing": {
+        "input": 0.4,
+        "cached": 0.1,
+        "output": 1.6
+      },
+      "source": "https://developers.openai.com/api/docs/models/gpt-4.1-mini"
+    }
+  ]
+}

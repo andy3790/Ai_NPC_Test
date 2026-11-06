@@ -1,4 +1,5 @@
 import type { ExperimentSpec } from '../../shared/schema.js';
+import type { ModelCatalog } from '../../shared/model-catalog.js';
 import type { ApiKeyStatus, BulkRunDeletionPlan, BulkRunDeletionResult, EvaluationFinding, ModelInfo, Run, RunDeletionPlan, RunDetail, RunListItem } from '../../shared/types.js';
 
 export interface HealthResponse { ok: boolean; adapter: string; version: string; historyEnabled: boolean }
@@ -32,6 +33,7 @@ export const api = {
   history: () => request<HistoryResponse>('/history'),
   refreshHistory: () => request<HistoryCatalog>('/history/refresh', {}),
   models: () => request<ModelInfo[]>('/models'),
+  modelCatalog: () => request<ModelCatalog>('/model-catalog'),
   config: () => request<ExperimentSpec | null>('/config'),
   example: () => request<ExperimentSpec>('/example'),
   saveConfig: (spec: ExperimentSpec) => request<ExperimentSpec>('/config', spec, 'PUT'),

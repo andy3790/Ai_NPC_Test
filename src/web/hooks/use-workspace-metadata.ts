@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ExperimentSpec } from '../../shared/schema.js';
 import type { ApiKeyStatus, ModelInfo } from '../../shared/types.js';
 import { api, errorMessage, type HealthResponse, type HistoryResponse } from '../api/client.js';
+import { installModelCatalog } from '../../shared/model-catalog.js';
 
 export function useWorkspaceMetadata(onError: (message: string) => void) {
   const [health, setHealth] = useState<HealthResponse | null>(null);
@@ -17,6 +18,10 @@ export function useWorkspaceMetadata(onError: (message: string) => void) {
     const current = () => mounted.current && requestId === generation.current;
     const nextHealth = await api.health();
     if (!current()) return;
+    // Prices come from the running server, so a JSON edit needs no web rebuild.
+    const catalog = await api.modelCatalog();
+    if (!current()) return;
+    installModelCatalog(catalog);
     setHealth(nextHealth);
     // Establish the browser cookie before any request that selects a personal key.
     const keys = nextHealth.adapter === 'openai' ? await api.keyStatus() : null;

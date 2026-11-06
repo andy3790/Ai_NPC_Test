@@ -9,6 +9,7 @@
 | 최근 기능 변경 확인 | [변경 이력](../CHANGELOG.md) |
 | 처음 설치하고 화면 열기 | [프로젝트 README](../README.md) → [실험 운영](running-experiments.md) |
 | API 키로 실행 | [OpenAI API 실행](openai-api.md) |
+| 모델 추가·제외·단가 수정 | [모델 설정 관리](model-catalog.md) |
 | 시나리오·조건 만들기 | [실험 JSON 가이드](experiment-json-guide.md) → [변환 프롬프트](prompts/requirements-to-experiment-json.txt) |
 | 행동 결과·이동·사건 실험 | [세계 엔진·분산 공간](world-engine.md) |
 | 기존 기록 조회·비교·삭제·백업 | [기록 관리](run-management.md) |
@@ -31,6 +32,7 @@
 | 설정·참조 검증 | [schema.ts](../src/shared/schema.ts), [spatial-schema.ts](../src/shared/spatial-schema.ts) |
 | 부분 JSON 교체 | [config-sections.ts](../src/shared/config-sections.ts) |
 | 타입·지표·단가 | [types.ts](../src/shared/types.ts), [metrics.ts](../src/core/metrics.ts), [pricing.ts](../src/core/pricing.ts) |
+| 모델 목록·추론·공식 단가 데이터 | [models.json](../src/config/models.json) |
 | 프롬프트·세계 진행 | [prompts.ts](../src/core/prompts.ts), [spatial-runner.ts](../src/core/spatial-runner.ts), [world.ts](../src/core/world.ts) |
 | HTTP·CLI | [app.ts](../src/server/app.ts), [cli.ts](../src/cli.ts) |
 | 내보내기 동봉 데이터 사전 | [export.ts](../src/core/export.ts)의 템플릿 |

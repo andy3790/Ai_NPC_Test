@@ -8,20 +8,11 @@ import type { ApiCredential, ModelInfo, TokenUsage } from '../shared/types.js';
 import { OpenAIKeys } from './openai-keys.js';
 import { baseInstructions } from '../core/prompts.js';
 import { normalizeUsage } from '../core/metrics.js';
+import { getModelCatalog, isModelEnabled } from '../shared/model-catalog.js';
+import '../core/load-model-catalog.js';
 
 const profileSchema = z.object({ id: z.string().min(1), name: z.string().optional(), efforts: z.array(z.enum(['none', 'minimal', 'low', 'medium', 'high', 'xhigh', 'max'])).min(1), defaultEffort: z.string(), reasoning: z.boolean().default(true) });
 type Profile = { id: string; name?: string; efforts: string[]; defaultEffort: string; reasoning: boolean };
-const thinking = ['low', 'medium', 'high', 'xhigh', 'max'];
-// /models lists account access, not reasoning capabilities. Keep a documented
-// capability table, overridable for additional Responses-compatible models.
-const builtins: Profile[] = [
-  { id: 'gpt-6-luna', efforts: ['none', ...thinking], defaultEffort: 'low', reasoning: true },
-  { id: 'gpt-6.1-terra', efforts: ['none', ...thinking], defaultEffort: 'low', reasoning: true },
-  { id: 'gpt-6.1-sol', efforts: thinking, defaultEffort: 'low', reasoning: true },
-  { id: 'gpt-6-astra', efforts: thinking, defaultEffort: 'low', reasoning: true },
-  { id: 'gpt-6-sol', efforts: ['none', ...thinking], defaultEffort: 'low', reasoning: true },
-  { id: 'gpt-4.1-mini', efforts: ['none'], defaultEffort: 'none', reasoning: false },
-];
 interface Session { id: string; config: ModelConfig; instructions: string; previousResponseId: string | null; maxOutputTokens: number; reasoning: boolean; credential?: ApiCredential }
 interface Attempt { threadId: string; clientMessageId: string; previousResponseId: string | null; responseId: string | null; result?: TurnResult }
 interface Options { apiKey?: string; fetch?: typeof globalThis.fetch; profiles?: Profile[]; maxOutputTokens?: number }
@@ -53,6 +44,9 @@ export class OpenAIAdapter implements Adapter {
     this.fetcher = options.fetch ?? globalThis.fetch;
     const custom = options.profiles ?? (process.env.NPC_OPENAI_MODELS ? JSON.parse(process.env.NPC_OPENAI_MODELS) : []);
     const parsed = z.array(profileSchema).parse(custom);
+    // Account access still comes from /models; capabilities and selection policy
+    // come from the editable catalogue. Keep disabled profiles for saved sessions.
+    const builtins: Profile[] = getModelCatalog().models.flatMap(m => m.api ? [{ id: m.id, name: m.name, ...m.api }] : []);
     this.profiles = [...builtins.filter(p => !parsed.some(x => x.id === p.id)), ...parsed];
     for (const p of this.profiles) if (!p.efforts.includes(p.defaultEffort) || (!p.reasoning && p.efforts.some(e => e !== 'none'))) throw new Error(`잘못된 API 모델 설정: ${p.id}`);
     this.maxOutputTokens = Number(options.maxOutputTokens ?? process.env.OPENAI_MAX_OUTPUT_TOKENS ?? 4096);
@@ -84,8 +78,8 @@ export class OpenAIAdapter implements Adapter {
     const response = await this.request('/models', { signal: AbortSignal.timeout(30000) }, key);
     if (!response.ok) throw new Error(`OpenAI 모델 조회 실패 (HTTP ${response.status}). 키·프로젝트 권한을 확인하세요.`);
     const data = await response.json() as { data: { id: string }[] };
-    const available = this.profiles.filter(p => data.data.some(m => m.id === p.id));
-    if (!available.length) throw new Error('계정의 모델 목록과 API 지원표가 일치하지 않습니다. NPC_OPENAI_MODELS 설정을 확인하세요.');
+    const available = this.profiles.filter(p => isModelEnabled(p.id) && data.data.some(m => m.id === p.id));
+    if (!available.length) throw new Error('계정에서 사용 가능한 모델과 활성 모델 설정이 일치하지 않습니다. src/config/models.json을 확인하세요.');
     return available.map((p, index) => ({ id: p.id, name: p.name ?? p.id, efforts: p.efforts, defaultEffort: p.defaultEffort, isDefault: index === 0 }));
   }
   async models(credential?: ApiCredential) {

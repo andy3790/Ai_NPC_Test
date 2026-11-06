@@ -18,6 +18,7 @@ Node.js 24 이상을 사용합니다. 공통 설정은 schemaVersion 1, 앱 버�
 | src/core/situations.ts, single-room-situations.ts | 선택형 상황 제안·검토 |
 | src/core/simulation-host.ts | 분산 실행과 공통 엔진 사이 계약 |
 | src/core/metrics.ts, pricing.ts | 사용량 귀속·통계·환산 비용 |
+| src/config/models.json, src/shared/model-catalog.ts, src/core/load-model-catalog.ts | 모델·가격 데이터, 공통 검증·revision, 서버 시작 시 원본 JSON 읽기 |
 | src/core/summary.ts, detail.ts | 공통 목록 요약·상세와 캐시 |
 | src/core/history.ts, deletion.ts | 외부 기록 읽기 전용 통합·확인 후 실제 삭제 |
 | src/core/export.ts, invocation-links.ts | 분석 파일·공동 호출 연결 |
@@ -72,9 +73,9 @@ verify는 typecheck·전체 테스트·build·팩 검증·팩 모의 실행·공
 | 설정 필드 | schema·공통 타입·폼·부분 JSON 범위·예제·변환 프롬프트·JSON 가이드 |
 | 프롬프트 | 버전·비공개 격리·기억 방식·모의/실제 출력 규격·팩 호환 해시 |
 | 호출 종류 | adapter·계측·요약·필터·비용·내보내기·보관 요약 갱신 |
-| API 모델 | 계정 목록과 능력표의 교집합·구조화 출력·effort·공식 규격. 단가는 별도로 검증 |
+| 모델 데이터 | models.json만 수정 후 서버 재시작. 시작 시 자동 형식 검사. 데이터만 바뀌면 빌드·회귀 테스트 불필요 |
 | API 키 | 브라우저별 선택·실험/세션의 출처 고정·모든 보조 역할·재시작 복구·원문 비저장·오류 가림. openai-keys 테스트와 smoke:keys |
-| 가격 | pricing.ts의 날짜·출처·정확한 모델 ID·가정 표시·과거 파생 요약 |
+| 가격 데이터 | models.json의 단가·날짜·출처·정확한 ID. 내용 revision으로 과거 파생 요약 자동 갱신 |
 | 세계 상태 | 공간 관찰·시간 경계·반응 기회·중단·복구·트랜잭션 |
 | 영구 삭제 | 경로 검증·잠금·선택 변경·부분 실패·다른 실행 보존 |
 | 내보내기 | 공통 ID·null·단위·공동 호출 중복 방지·동봉 데이터 사전 |

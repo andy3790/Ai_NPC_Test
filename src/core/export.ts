@@ -1,12 +1,12 @@
 import { aggregate, groupedMetrics, tokenKeys } from './metrics.js';
-import { estimateCost, PRICING_DATE, PRICING_SOURCE } from './pricing.js';
+import { estimateCost, PRICING_DATE, PRICING_SOURCE, PRICING_REVISION } from './pricing.js';
 import type { CostSummary, RunDetail, RawEvent } from '../shared/types.js';
 import { runSnapshot } from '../shared/run-snapshot.js';
 import { environmentMode } from '../shared/schema.js';
 import { sourceUtteranceIds } from './invocation-links.js';
 
 function costColumns(cost: CostSummary) {
-  return { estimatedCostUsd: cost.usd, unpricedCalls: cost.unpricedCalls, assumedPricingCalls: cost.assumedCalls, pricingDate: cost.pricingDate };
+  return { estimatedCostUsd: cost.usd, unpricedCalls: cost.unpricedCalls, assumedPricingCalls: cost.assumedCalls, pricingDate: cost.pricingDate, pricingRevision: cost.pricingRevision ?? null };
 }
 function csv(rows: Record<string, unknown>[], columns?: string[]) {
   const keys = columns ?? [...new Set(rows.flatMap(r => Object.keys(r)))];
@@ -18,7 +18,7 @@ export function exportFiles(detail: RunDetail, events: RawEvent[]): Record<strin
   const ids = { experimentId: run.experimentId, runId: run.id, variantId: run.variant.id, repetition: run.repetition, adapter: run.adapter, deliveryMode: run.variant.deliveryMode, memoryMode: run.variant.memoryMode, environmentMode: environmentMode(run.spec, run.variant) };
   const calls = invocations.map(c => {
     const cost = estimateCost(c, run.adapter);
-    return { ...c, ...c.usage, usage: undefined, estimatedCostUsd: cost.usd, costStatus: cost.status, pricingModel: cost.model, pricingDate: PRICING_DATE };
+    return { ...c, ...c.usage, usage: undefined, estimatedCostUsd: cost.usd, costStatus: cost.status, pricingModel: cost.model, pricingDate: PRICING_DATE, pricingRevision: PRICING_REVISION };
   });
   const messages = utterances.map(u => {
     const generated = invocations.filter(c => c.kind === 'speech' && c.utteranceId === u.id);
@@ -39,7 +39,7 @@ export function exportFiles(detail: RunDetail, events: RawEvent[]): Record<strin
     'invocation-links.csv': csv(invocations.flatMap(c => sourceUtteranceIds(c).map(id => ({ ...ids, invocationId: c.id, utteranceId: id, phase: c.metadata.phase ?? c.kind, shared: sourceUtteranceIds(c).length > 1 }))), [...Object.keys(ids), 'invocationId', 'utteranceId', 'phase', 'shared']),
     'situations.json': JSON.stringify(run.eventGeneratorState ?? null, null, 2),
     'spatial-timeline.csv': csv(events.filter(e => e.method.startsWith('spatial/') || e.method.startsWith('situation/')).map(e => ({ ...ids, invocationId: e.invocationId, recordedAt: e.receivedAt, method: e.method, params: e.params })), [...Object.keys(ids), 'invocationId', 'recordedAt', 'method', 'params']),
-    'invocations.csv': csv(calls, ['id', 'experimentId', 'runId', 'variantId', 'repetition', 'characterId', 'kind', 'operationKey', 'attempt', 'retryOf', 'threadId', 'turnId', 'sourceUtteranceId', 'utteranceId', 'model', 'effort', 'actualModel', 'deliveryMode', 'memoryMode', 'environmentMode', 'status', 'queuedAt', 'startedAt', 'firstOutputAt', 'completedAt', 'queueMs', 'firstOutputMs', 'durationMs', ...tokenKeys, 'usageStatus', 'error', 'input', 'output', 'metadata', 'estimatedCostUsd', 'costStatus', 'pricingModel', 'pricingDate']),
+    'invocations.csv': csv(calls, ['id', 'experimentId', 'runId', 'variantId', 'repetition', 'characterId', 'kind', 'operationKey', 'attempt', 'retryOf', 'threadId', 'turnId', 'sourceUtteranceId', 'utteranceId', 'model', 'effort', 'actualModel', 'deliveryMode', 'memoryMode', 'environmentMode', 'status', 'queuedAt', 'startedAt', 'firstOutputAt', 'completedAt', 'queueMs', 'firstOutputMs', 'durationMs', ...tokenKeys, 'usageStatus', 'error', 'input', 'output', 'metadata', 'estimatedCostUsd', 'costStatus', 'pricingModel', 'pricingDate', 'pricingRevision']),
     'receipts.csv': csv(receipts.map(r => ({ ...ids, ...r })), [...Object.keys(ids), 'id', 'utteranceId', 'characterId', 'status', 'invocationId', 'deliveredAt']),
     'summary.csv': csv([{ ...ids, name: run.name, status: run.status, snapshotHash: run.snapshotHash, ...summary, ...summary.tokens, ...costColumns(summary.cost) }]),
     'quality.json': JSON.stringify(summary.quality ?? null, null, 2),
@@ -61,6 +61,7 @@ export function exportFiles(detail: RunDetail, events: RawEvent[]): Record<strin
   if (run.worldState?.spatial) files['transcript.md'] = `# ${run.name}\n\n관리자 전체 기록입니다. 가상 시각이 같으면 다른 공간에서 겹쳐 진행된 선택입니다.\n\n` + utterances.map(u => `### ${u.kind === 'speech' ? `#${u.speechIndex}` : '상황'} · ${u.speakerName} · 가상 ${u.perception?.virtualSeconds ?? u.worldEvent?.virtualSeconds ?? 0}초 · ${u.perception?.locationId ?? '통로/공통'}\n\n${u.spatialIntent ? `전달: ${u.spatialIntent.communication.mode} · 선택: ${u.spatialIntent.activityChoice}\n\n` : ''}${u.speech}\n\n${u.action ? `*${u.action}*\n\n` : ''}`).join('');
   files['data-dictionary.md'] += '\n## API 키 출처\n\nconfig.json의 apiKeySource는 browser(개인 키), environment(서버 환경 키), 또는 API 외 경로의 null입니다. records.jsonl의 run.apiCredential에는 키·브라우저의 해시 식별자가 있을 수 있습니다. 키 원문과 브라우저 쿠키는 저장·내보내지 않습니다. 개인 키 실험은 서버 재시작 후 같은 키를 다시 입력해야 재개합니다.\n';
   files['data-dictionary.md'] += '\n## 진행자 입력 정책\n\n- invocations.metadata.directorContext: 진행자의 version과 sessionMode, 최근 관찰 수 상한 maxMessages, 직렬화 길이 상한 maxHistoryCharacters/maxInputCharacters, 관찰 가능한 기록 수 availableMessages, 제공한 수 includedMessages, 생략 여부 truncated, 실제 길이 historyCharacters/inputCharacters입니다. 길이는 UTF-16 코드 단위이며 토큰 수가 아닙니다. 실제 사용량은 usage로 확인하세요.\n- sessionMode=fresh_per_attempt: 진행자 호출 시도마다 독립 세션을 사용합니다. 이전 진행자 요청·응답을 연결하지 않으며 NPC 기억 세션은 유지합니다. 완료 결과는 재사용하고 미확정 결과는 먼저 대조합니다. 정책 필드가 없는 과거 호출과 구분해 비교하세요.\n';
+  files['data-dictionary.md'] += '\n- pricingRevision: 모델 설정 내용으로 자동 생성한 비용 계산 revision입니다. 날짜가 같아도 단가가 바뀌면 값이 달라집니다. 모델 목록에서 제외한 항목도 가격을 보존하면 과거 비용을 계속 계산할 수 있습니다. 단가 원본은 src/config/models.json입니다.\n';
   return files;
 }
 
