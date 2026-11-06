@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { Engine } from '../src/core/engine.js';
 import { Store } from '../src/core/store.js';
-import { DIRECTOR_CONTEXT, directorInstructions, directorObservations, directorOutputSchema, directorPrompt } from '../src/core/director.js';
+import { DIRECTOR_CONTEXT, legacyDirectorInstructions, directorInstructions, directorObservations, directorOutputSchema, directorPrompt } from '../src/core/director.js';
 import { MockAdapter } from '../src/adapters/mock.js';
 import { OpenAIAdapter } from '../src/adapters/openai.js';
 import { exampleSpec } from '../src/shared/example.js';
@@ -53,13 +53,16 @@ test('escaped text, long IDs, maximum candidates and surrogate pairs respect ser
     speakerId: characters[n % 30].id, speakerName: characters[0].name,
     speech: '\u0001'.repeat(10_000), action: '😀'.repeat(10_000),
   }));
-  const { input } = directorPrompt({ characters, allowedSpeakerIds: characters.map(c => c.id), history, speeches: history, location: 'x'.repeat(100) });
+  const { input } = directorPrompt({ characters, allowedSpeakerIds: characters.map(c => c.id), history, speeches: history,
+    location: 'x'.repeat(100), initialScene: '\u0001😀'.repeat(10_000) });
   const parsed = JSON.parse(input);
   assert.equal(parsed.allowedSpeakerIds.length, 30); assert.equal(parsed.participants.length, 30);
   assert.ok(input.length <= DIRECTOR_CONTEXT.maxInputCharacters);
   assert.ok(JSON.stringify(parsed.history).length <= DIRECTOR_CONTEXT.maxHistoryCharacters);
   assert.equal(parsed.history.at(-1).sequence, 120);
   assert.ok(parsed.history.every((u: any) => u.action.isWellFormed()));
+  assert.ok(parsed.initialScene.isWellFormed());
+  assert.ok(JSON.stringify(parsed.initialScene).length <= DIRECTOR_CONTEXT.maxInitialSceneCharacters);
 });
 
 test('spatial director receives local observations and incoming remote speech, not unrelated speech or remote actions', () => {
@@ -72,6 +75,24 @@ test('spatial director receives local observations and incoming remote speech, n
   assert.deepEqual(observations.map(u => u.id), [local.id, remote.id]);
   assert.equal(observations[1].action, ''); assert.equal(observations[1].speech, remote.speech);
   assert.equal(remote.action, 'REMOTE_UNSEEN_ACTION', 'source record remains unchanged');
+});
+
+test('director v4 includes public opening context while v3 replay and private profiles stay isolated', () => {
+  const characters = exampleSpec('mock-model').scenario.characters.map(c => ({ ...c, memories: 'PRIVATE_PROFILE_SENTINEL' }));
+  const history = [record(1, { speech: '여기 표시한 게 궁금한 거예요?' })];
+  const options = { characters, allowedSpeakerIds: ['doha', 'miru'], history, speeches: history,
+    initialScene: '미루가 고지서를 가져왔고 도하는 옆에 앉은 동행이다.' };
+  const current = directorPrompt(options), legacy = directorPrompt({ ...options, version: 'director/3' });
+  assert.equal(JSON.parse(current.input).initialScene, options.initialScene);
+  assert.equal(JSON.parse(legacy.input).initialScene, undefined);
+  assert.equal(current.metadata.directorContext.version, 'director/4');
+  assert.equal(legacy.metadata.directorContext.version, 'director/3');
+  assert.doesNotMatch(current.input + current.instructions, /PRIVATE_PROFILE_SENTINEL/);
+  assert.equal(current.instructions, directorInstructions);
+  assert.equal(createHash('sha256').update(directorInstructions).digest('hex'), '9075d7ea75d0d4f386273e47a73cb304a1e478205f13c687812c784125021971');
+  assert.equal(legacy.instructions, legacyDirectorInstructions);
+  assert.deepEqual(current.outputSchema, legacy.outputSchema);
+  assert.deepEqual(JSON.parse(current.input).history, JSON.parse(legacy.input).history);
 });
 
 test('120-turn run uses bounded fresh director sessions while NPC sessions and fairness remain intact', async () => {
@@ -125,7 +146,7 @@ test('a forced waiting speaker is the only schema choice and invalid provider ou
     assert.equal(d.utterances.filter(u => u.kind === 'speech').length, 5);
     const failed = d.invocations.at(-1)!; assert.equal(failed.status, 'failed');
     assert.equal(failed.metadata.outputSchemaSha256, createHash('sha256').update(JSON.stringify(directorOutputSchema(['miru']))).digest('hex'));
-    assert.equal(createHash('sha256').update(directorInstructions).digest('hex'), '5cbf1f16ab0e054b6f2f09f157136cd308ed26c04ccd2b876d99cec2707c1b92');
+    assert.equal(createHash('sha256').update(legacyDirectorInstructions).digest('hex'), '5cbf1f16ab0e054b6f2f09f157136cd308ed26c04ccd2b876d99cec2707c1b92');
   } finally { await engine.close(); store.close(); }
 });
 
@@ -173,6 +194,9 @@ for (const spatial of [false, true]) test(`OpenAI ${spatial ? 'spatial' : 'singl
   const api = openaiFixture(), store = new Store(':memory:'), adapter = new OpenAIAdapter(root, { apiKey: api.key, fetch: api.fetch });
   const engine = new Engine(store, adapter, root);
   const spec = spatial ? spatialExample('gpt-6-luna') : exampleSpec('gpt-6-luna'); delete spec.scenario.environment;
+  spec.scenario.situation = 'PUBLIC_OPENING_SCENE';
+  spec.scenario.characters[0].memories = 'PRIVATE_PROFILE_SENTINEL';
+  spec.scenario.worldEngineInstructions = 'WORLD_ENGINE_PRIVATE_SENTINEL';
   if (spatial) spec.scenario.spatial!.initialPositions = spec.scenario.characters.map(c => ({ npcId: c.id, locationId: c.id === 'serin' ? 'workshop' : 'lounge' }));
   spec.variants = [{ ...spec.variants[0], turnPolicy: 'director' }]; spec.maxUtterances = 16; spec.evaluation.enabled = false;
   try {
@@ -183,6 +207,9 @@ for (const spatial of [false, true]) test(`OpenAI ${spatial ? 'spatial' : 'singl
       const request = api.requests.find(b => b.metadata.npc_lab_call_id === c.id);
       assert.equal(request.previous_response_id, null); assert.equal(request.input, c.input);
       const allowed = JSON.parse(c.input).allowedSpeakerIds;
+      assert.equal(JSON.parse(c.input).initialScene, spatial ? undefined : spec.scenario.situation);
+      assert.doesNotMatch(c.input, /PRIVATE_PROFILE_SENTINEL|WORLD_ENGINE_PRIVATE_SENTINEL/);
+      if (spatial) assert.doesNotMatch(c.input, /PUBLIC_OPENING_SCENE/);
       assert.deepEqual(request.text.format.schema.properties.speakerId.enum, allowed);
       assert.equal(c.metadata.outputSchemaSha256, createHash('sha256').update(JSON.stringify(directorOutputSchema(allowed))).digest('hex'));
       assert.equal(c.usage.totalTokens, 120); assert.ok(c.durationMs! >= 0); assert.ok(c.firstOutputMs! >= 0);

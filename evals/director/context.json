@@ -1,0 +1,409 @@
+{
+  "version": "director-context/1",
+  "sourceBaseCommit": "0bad3697c7142548a7312aecf3d4928e7310cde2",
+  "instructionsSha256": "5cbf1f16ab0e054b6f2f09f157136cd308ed26c04ccd2b876d99cec2707c1b92",
+  "review": "Opening context distinguishes owner from bystander. Explicit later questions supersede initial scene; allowed IDs remain binding.",
+  "cases": [
+    {
+      "id": "bill_owner_0",
+      "split": "development",
+      "sourceRunId": "1a21aebe-79c4-487d-8eff-1257b1f60549",
+      "sourceCallId": "9c815dab-5a48-4c19-9953-ba067b6aa6c8",
+      "sourceOutput": "{\"speakerId\":\"lee_harin\",\"reason\":\"차유진이 표시된 두 항목을 보겠다고 했으므로, 표시한 사람이 설명을 이어갈 기회를 주는 것이 자연스럽습니다.\"}",
+      "options": {
+        "characters": [
+          {
+            "id": "cha_yujin",
+            "name": "차유진"
+          },
+          {
+            "id": "lee_harin",
+            "name": "이하린"
+          },
+          {
+            "id": "na_yeonwoo",
+            "name": "나연우"
+          }
+        ],
+        "allowedSpeakerIds": [
+          "lee_harin",
+          "na_yeonwoo"
+        ],
+        "history": [
+          {
+            "id": "784b1b4b-19a2-4693-9c15-dd16f9690268",
+            "sequence": 1,
+            "speakerId": "cha_yujin",
+            "speakerName": "차유진",
+            "kind": "speech",
+            "speech": "표시한 두 항목이 헷갈리는 거예요? 좀 볼게요.",
+            "action": "테이블로 다가가 표시된 부분을 들여다본다."
+          }
+        ],
+        "speeches": [
+          {
+            "id": "784b1b4b-19a2-4693-9c15-dd16f9690268",
+            "sequence": 1,
+            "speakerId": "cha_yujin",
+            "speakerName": "차유진",
+            "kind": "speech",
+            "speech": "표시한 두 항목이 헷갈리는 거예요? 좀 볼게요.",
+            "action": "테이블로 다가가 표시된 부분을 들여다본다."
+          }
+        ],
+        "initialScene": "서월시는 겉으로 평온하다. 그러나 서진항에서는 **출처가 불분명한 응상 용기**가 돌기 시작했고, 연무동의 월세형 보호 숙소들은 차폐 도구 유지비 인상에 시달리고 있다. 제7조정실은 사건 은폐 비용을 줄이려 하고, 봉합조합은 예전보다 복잡해진 현상 대응 계약을 꺼린다. 흑조상회 내부에서는 안전 절차를 줄일지 논쟁하며, 청문서고는 무연역 사고 기록의 누락을 의심한다.\n\n이는 모든 인물이 반드시 해결해야 하는 단일 과제가 아니라 동시대 지역의 배경이다. 각자는 자기 생활과 가까운 문제를 마주하며, 모든 대화가 도시 전체의 사건으로 이어질 필요는 없다.\n\n2026년 늦가을 저녁, 마감을 앞둔 회류로 겹문 1층. 나연우는 퇴근 뒤 함께 들른 이하린과 테이블에 앉아 공백여관의 정비비 고지서를 펼쳤다. 방 번호가 적힌 부분은 접어 가려 두었다. 이름이 비슷한 비용 항목 두 곳에 표시가 있지만, 같은 비용을 두 번 청구한 것인지 서로 다른 작업의 비용인지는 아직 확인되지 않았다.\n\n차유진은 카운터를 정리하던 손을 잠시 멈추고 두 사람이 앉은 쪽을 바라본다. 나연우는 고지서의 표시한 부분을 테이블 가운데로 돌려 놓는다. 이하린은 나연우와 저녁을 함께할 겸 들른 지인으로 옆에 앉아 있다. 세 사람은 고지서에서 무엇이 헷갈리는지 이제 이야기를 나누려는 참이다.\n\n현재 장면에 있는 인물은 차유진·이하린·나연우다. 차유진이 정비소를 운영한다는 사실만으로 여관의 청구 내역 전체를 알고 있거나 정비비를 변경할 권한이 생기지는 않는다. 고지서 외에 작업 내역이나 산정 근거가 확인된 상태는 아니며, 장비 검사·수리·비용 조정도 아직 이루어지지 않았다. 중복 청구나 부정행위가 있었다는 결론은 정해져 있지 않다."
+      },
+      "input": "{\"task\":\"direct\",\"allowedSpeakerIds\":[\"lee_harin\",\"na_yeonwoo\"],\"participants\":[{\"id\":\"cha_yujin\",\"name\":\"차유진\",\"turnsSinceLastSpeech\":0},{\"id\":\"lee_harin\",\"name\":\"이하린\",\"turnsSinceLastSpeech\":null},{\"id\":\"na_yeonwoo\",\"name\":\"나연우\",\"turnsSinceLastSpeech\":null}],\"lastSpeakerId\":\"cha_yujin\",\"history\":[{\"id\":\"784b1b4b-19a2-4693-9c15-dd16f9690268\",\"sequence\":1,\"speakerId\":\"cha_yujin\",\"speakerName\":\"차유진\",\"kind\":\"speech\",\"speech\":\"표시한 두 항목이 헷갈리는 거예요? 좀 볼게요.\",\"action\":\"테이블로 다가가 표시된 부분을 들여다본다.\"}]}",
+      "expectedSpeakerId": "na_yeonwoo"
+    },
+    {
+      "id": "bill_owner_1",
+      "split": "development",
+      "sourceRunId": "1a21aebe-79c4-487d-8eff-1257b1f60549",
+      "sourceCallId": "899e410d-52ef-402b-ac5d-f1566f18ce38",
+      "sourceOutput": "{\"speakerId\":\"cha_yujin\",\"reason\":\"차유진이 표시된 부분을 보겠다고 나서 이미 확인을 시작했으므로, 그 행동에 이어 응답할 차례입니다.\"}",
+      "options": {
+        "characters": [
+          {
+            "id": "cha_yujin",
+            "name": "차유진"
+          },
+          {
+            "id": "lee_harin",
+            "name": "이하린"
+          },
+          {
+            "id": "na_yeonwoo",
+            "name": "나연우"
+          }
+        ],
+        "allowedSpeakerIds": [
+          "na_yeonwoo",
+          "cha_yujin"
+        ],
+        "history": [
+          {
+            "id": "784b1b4b-19a2-4693-9c15-dd16f9690268",
+            "sequence": 1,
+            "speakerId": "cha_yujin",
+            "speakerName": "차유진",
+            "kind": "speech",
+            "speech": "표시한 두 항목이 헷갈리는 거예요? 좀 볼게요.",
+            "action": "테이블로 다가가 표시된 부분을 들여다본다."
+          },
+          {
+            "id": "8ce1c4d7-2c0f-4727-81d0-392ff1c2a35e",
+            "sequence": 2,
+            "speakerId": "lee_harin",
+            "speakerName": "이하린",
+            "kind": "speech",
+            "speech": "",
+            "action": ""
+          }
+        ],
+        "speeches": [
+          {
+            "id": "784b1b4b-19a2-4693-9c15-dd16f9690268",
+            "sequence": 1,
+            "speakerId": "cha_yujin",
+            "speakerName": "차유진",
+            "kind": "speech",
+            "speech": "표시한 두 항목이 헷갈리는 거예요? 좀 볼게요.",
+            "action": "테이블로 다가가 표시된 부분을 들여다본다."
+          },
+          {
+            "id": "8ce1c4d7-2c0f-4727-81d0-392ff1c2a35e",
+            "sequence": 2,
+            "speakerId": "lee_harin",
+            "speakerName": "이하린",
+            "kind": "speech",
+            "speech": "",
+            "action": ""
+          }
+        ],
+        "initialScene": "서월시는 겉으로 평온하다. 그러나 서진항에서는 **출처가 불분명한 응상 용기**가 돌기 시작했고, 연무동의 월세형 보호 숙소들은 차폐 도구 유지비 인상에 시달리고 있다. 제7조정실은 사건 은폐 비용을 줄이려 하고, 봉합조합은 예전보다 복잡해진 현상 대응 계약을 꺼린다. 흑조상회 내부에서는 안전 절차를 줄일지 논쟁하며, 청문서고는 무연역 사고 기록의 누락을 의심한다.\n\n이는 모든 인물이 반드시 해결해야 하는 단일 과제가 아니라 동시대 지역의 배경이다. 각자는 자기 생활과 가까운 문제를 마주하며, 모든 대화가 도시 전체의 사건으로 이어질 필요는 없다.\n\n2026년 늦가을 저녁, 마감을 앞둔 회류로 겹문 1층. 나연우는 퇴근 뒤 함께 들른 이하린과 테이블에 앉아 공백여관의 정비비 고지서를 펼쳤다. 방 번호가 적힌 부분은 접어 가려 두었다. 이름이 비슷한 비용 항목 두 곳에 표시가 있지만, 같은 비용을 두 번 청구한 것인지 서로 다른 작업의 비용인지는 아직 확인되지 않았다.\n\n차유진은 카운터를 정리하던 손을 잠시 멈추고 두 사람이 앉은 쪽을 바라본다. 나연우는 고지서의 표시한 부분을 테이블 가운데로 돌려 놓는다. 이하린은 나연우와 저녁을 함께할 겸 들른 지인으로 옆에 앉아 있다. 세 사람은 고지서에서 무엇이 헷갈리는지 이제 이야기를 나누려는 참이다.\n\n현재 장면에 있는 인물은 차유진·이하린·나연우다. 차유진이 정비소를 운영한다는 사실만으로 여관의 청구 내역 전체를 알고 있거나 정비비를 변경할 권한이 생기지는 않는다. 고지서 외에 작업 내역이나 산정 근거가 확인된 상태는 아니며, 장비 검사·수리·비용 조정도 아직 이루어지지 않았다. 중복 청구나 부정행위가 있었다는 결론은 정해져 있지 않다."
+      },
+      "input": "{\"task\":\"direct\",\"allowedSpeakerIds\":[\"na_yeonwoo\",\"cha_yujin\"],\"participants\":[{\"id\":\"cha_yujin\",\"name\":\"차유진\",\"turnsSinceLastSpeech\":1},{\"id\":\"lee_harin\",\"name\":\"이하린\",\"turnsSinceLastSpeech\":0},{\"id\":\"na_yeonwoo\",\"name\":\"나연우\",\"turnsSinceLastSpeech\":null}],\"lastSpeakerId\":\"lee_harin\",\"history\":[{\"id\":\"784b1b4b-19a2-4693-9c15-dd16f9690268\",\"sequence\":1,\"speakerId\":\"cha_yujin\",\"speakerName\":\"차유진\",\"kind\":\"speech\",\"speech\":\"표시한 두 항목이 헷갈리는 거예요? 좀 볼게요.\",\"action\":\"테이블로 다가가 표시된 부분을 들여다본다.\"},{\"id\":\"8ce1c4d7-2c0f-4727-81d0-392ff1c2a35e\",\"sequence\":2,\"speakerId\":\"lee_harin\",\"speakerName\":\"이하린\",\"kind\":\"speech\",\"speech\":\"\",\"action\":\"\"}]}",
+      "expectedSpeakerId": "na_yeonwoo"
+    },
+    {
+      "id": "bill_owner_2",
+      "split": "development",
+      "sourceRunId": "1a21aebe-79c4-487d-8eff-1257b1f60549",
+      "sourceCallId": "e2bb4e72-aa81-4c2d-81cd-f3b5265404c2",
+      "sourceOutput": "{\"speakerId\":\"lee_harin\",\"reason\":\"표시한 항목을 봐주겠다고 나선 차유진에게 응답할 기회를 우선해야 하므로, 직접 요청의 당사자인 이하린을 선택합니다.\"}",
+      "options": {
+        "characters": [
+          {
+            "id": "cha_yujin",
+            "name": "차유진"
+          },
+          {
+            "id": "lee_harin",
+            "name": "이하린"
+          },
+          {
+            "id": "na_yeonwoo",
+            "name": "나연우"
+          }
+        ],
+        "allowedSpeakerIds": [
+          "na_yeonwoo",
+          "lee_harin"
+        ],
+        "history": [
+          {
+            "id": "784b1b4b-19a2-4693-9c15-dd16f9690268",
+            "sequence": 1,
+            "speakerId": "cha_yujin",
+            "speakerName": "차유진",
+            "kind": "speech",
+            "speech": "표시한 두 항목이 헷갈리는 거예요? 좀 볼게요.",
+            "action": "테이블로 다가가 표시된 부분을 들여다본다."
+          },
+          {
+            "id": "8ce1c4d7-2c0f-4727-81d0-392ff1c2a35e",
+            "sequence": 2,
+            "speakerId": "lee_harin",
+            "speakerName": "이하린",
+            "kind": "speech",
+            "speech": "",
+            "action": ""
+          },
+          {
+            "id": "b94e2e73-6aef-4153-a927-6b71bf5022b1",
+            "sequence": 3,
+            "speakerId": "cha_yujin",
+            "speakerName": "차유진",
+            "kind": "speech",
+            "speech": "",
+            "action": ""
+          }
+        ],
+        "speeches": [
+          {
+            "id": "784b1b4b-19a2-4693-9c15-dd16f9690268",
+            "sequence": 1,
+            "speakerId": "cha_yujin",
+            "speakerName": "차유진",
+            "kind": "speech",
+            "speech": "표시한 두 항목이 헷갈리는 거예요? 좀 볼게요.",
+            "action": "테이블로 다가가 표시된 부분을 들여다본다."
+          },
+          {
+            "id": "8ce1c4d7-2c0f-4727-81d0-392ff1c2a35e",
+            "sequence": 2,
+            "speakerId": "lee_harin",
+            "speakerName": "이하린",
+            "kind": "speech",
+            "speech": "",
+            "action": ""
+          },
+          {
+            "id": "b94e2e73-6aef-4153-a927-6b71bf5022b1",
+            "sequence": 3,
+            "speakerId": "cha_yujin",
+            "speakerName": "차유진",
+            "kind": "speech",
+            "speech": "",
+            "action": ""
+          }
+        ],
+        "initialScene": "서월시는 겉으로 평온하다. 그러나 서진항에서는 **출처가 불분명한 응상 용기**가 돌기 시작했고, 연무동의 월세형 보호 숙소들은 차폐 도구 유지비 인상에 시달리고 있다. 제7조정실은 사건 은폐 비용을 줄이려 하고, 봉합조합은 예전보다 복잡해진 현상 대응 계약을 꺼린다. 흑조상회 내부에서는 안전 절차를 줄일지 논쟁하며, 청문서고는 무연역 사고 기록의 누락을 의심한다.\n\n이는 모든 인물이 반드시 해결해야 하는 단일 과제가 아니라 동시대 지역의 배경이다. 각자는 자기 생활과 가까운 문제를 마주하며, 모든 대화가 도시 전체의 사건으로 이어질 필요는 없다.\n\n2026년 늦가을 저녁, 마감을 앞둔 회류로 겹문 1층. 나연우는 퇴근 뒤 함께 들른 이하린과 테이블에 앉아 공백여관의 정비비 고지서를 펼쳤다. 방 번호가 적힌 부분은 접어 가려 두었다. 이름이 비슷한 비용 항목 두 곳에 표시가 있지만, 같은 비용을 두 번 청구한 것인지 서로 다른 작업의 비용인지는 아직 확인되지 않았다.\n\n차유진은 카운터를 정리하던 손을 잠시 멈추고 두 사람이 앉은 쪽을 바라본다. 나연우는 고지서의 표시한 부분을 테이블 가운데로 돌려 놓는다. 이하린은 나연우와 저녁을 함께할 겸 들른 지인으로 옆에 앉아 있다. 세 사람은 고지서에서 무엇이 헷갈리는지 이제 이야기를 나누려는 참이다.\n\n현재 장면에 있는 인물은 차유진·이하린·나연우다. 차유진이 정비소를 운영한다는 사실만으로 여관의 청구 내역 전체를 알고 있거나 정비비를 변경할 권한이 생기지는 않는다. 고지서 외에 작업 내역이나 산정 근거가 확인된 상태는 아니며, 장비 검사·수리·비용 조정도 아직 이루어지지 않았다. 중복 청구나 부정행위가 있었다는 결론은 정해져 있지 않다."
+      },
+      "input": "{\"task\":\"direct\",\"allowedSpeakerIds\":[\"na_yeonwoo\",\"lee_harin\"],\"participants\":[{\"id\":\"cha_yujin\",\"name\":\"차유진\",\"turnsSinceLastSpeech\":0},{\"id\":\"lee_harin\",\"name\":\"이하린\",\"turnsSinceLastSpeech\":1},{\"id\":\"na_yeonwoo\",\"name\":\"나연우\",\"turnsSinceLastSpeech\":null}],\"lastSpeakerId\":\"cha_yujin\",\"history\":[{\"id\":\"784b1b4b-19a2-4693-9c15-dd16f9690268\",\"sequence\":1,\"speakerId\":\"cha_yujin\",\"speakerName\":\"차유진\",\"kind\":\"speech\",\"speech\":\"표시한 두 항목이 헷갈리는 거예요? 좀 볼게요.\",\"action\":\"테이블로 다가가 표시된 부분을 들여다본다.\"},{\"id\":\"8ce1c4d7-2c0f-4727-81d0-392ff1c2a35e\",\"sequence\":2,\"speakerId\":\"lee_harin\",\"speakerName\":\"이하린\",\"kind\":\"speech\",\"speech\":\"\",\"action\":\"\"},{\"id\":\"b94e2e73-6aef-4153-a927-6b71bf5022b1\",\"sequence\":3,\"speakerId\":\"cha_yujin\",\"speakerName\":\"차유진\",\"kind\":\"speech\",\"speech\":\"\",\"action\":\"\"}]}",
+      "expectedSpeakerId": "na_yeonwoo"
+    },
+    {
+      "id": "heldout_package_owner",
+      "split": "holdout",
+      "sourceRunId": "",
+      "sourceCallId": "",
+      "sourceOutput": "",
+      "options": {
+        "characters": [
+          {
+            "id": "minji",
+            "name": "민지"
+          },
+          {
+            "id": "jiho",
+            "name": "지호"
+          },
+          {
+            "id": "sumin",
+            "name": "수민"
+          }
+        ],
+        "history": [
+          {
+            "id": "message-1",
+            "sequence": 1,
+            "kind": "speech",
+            "speakerId": "minji",
+            "speakerName": "민지",
+            "speech": "이 종이도 같이 가져가실 거예요?",
+            "action": ""
+          }
+        ],
+        "speeches": [
+          {
+            "id": "message-1",
+            "sequence": 1,
+            "kind": "speech",
+            "speakerId": "minji",
+            "speakerName": "민지",
+            "speech": "이 종이도 같이 가져가실 거예요?",
+            "action": ""
+          }
+        ],
+        "allowedSpeakerIds": [
+          "jiho",
+          "sumin"
+        ],
+        "initialScene": "수민이 맡긴 소포를 찾으러 와 있다. 민지는 소포 옆의 접은 포장지를 들고 있다. 지호는 자기 차례를 기다리는 다른 손님이다."
+      },
+      "input": "{\"task\":\"direct\",\"allowedSpeakerIds\":[\"jiho\",\"sumin\"],\"participants\":[{\"id\":\"minji\",\"name\":\"민지\",\"turnsSinceLastSpeech\":0},{\"id\":\"jiho\",\"name\":\"지호\",\"turnsSinceLastSpeech\":null},{\"id\":\"sumin\",\"name\":\"수민\",\"turnsSinceLastSpeech\":null}],\"lastSpeakerId\":\"minji\",\"history\":[{\"id\":\"message-1\",\"sequence\":1,\"speakerId\":\"minji\",\"speakerName\":\"민지\",\"kind\":\"speech\",\"speech\":\"이 종이도 같이 가져가실 거예요?\",\"action\":\"\"}]}",
+      "expectedSpeakerId": "sumin"
+    },
+    {
+      "id": "heldout_new_question",
+      "split": "holdout",
+      "sourceRunId": "",
+      "sourceCallId": "",
+      "sourceOutput": "",
+      "options": {
+        "characters": [
+          {
+            "id": "minji",
+            "name": "민지"
+          },
+          {
+            "id": "jiho",
+            "name": "지호"
+          },
+          {
+            "id": "sumin",
+            "name": "수민"
+          }
+        ],
+        "history": [
+          {
+            "id": "message-1",
+            "sequence": 1,
+            "kind": "speech",
+            "speakerId": "minji",
+            "speakerName": "민지",
+            "speech": "소포 여기 있어요.",
+            "action": ""
+          },
+          {
+            "id": "message-2",
+            "sequence": 2,
+            "kind": "speech",
+            "speakerId": "sumin",
+            "speakerName": "수민",
+            "speech": "고마워요. 저는 갈게요.",
+            "action": ""
+          },
+          {
+            "id": "message-3",
+            "sequence": 3,
+            "kind": "speech",
+            "speakerId": "jiho",
+            "speakerName": "지호",
+            "speech": "민지 씨, 이 가게 내일도 열어요?",
+            "action": ""
+          }
+        ],
+        "speeches": [
+          {
+            "id": "message-1",
+            "sequence": 1,
+            "kind": "speech",
+            "speakerId": "minji",
+            "speakerName": "민지",
+            "speech": "소포 여기 있어요.",
+            "action": ""
+          },
+          {
+            "id": "message-2",
+            "sequence": 2,
+            "kind": "speech",
+            "speakerId": "sumin",
+            "speakerName": "수민",
+            "speech": "고마워요. 저는 갈게요.",
+            "action": ""
+          },
+          {
+            "id": "message-3",
+            "sequence": 3,
+            "kind": "speech",
+            "speakerId": "jiho",
+            "speakerName": "지호",
+            "speech": "민지 씨, 이 가게 내일도 열어요?",
+            "action": ""
+          }
+        ],
+        "allowedSpeakerIds": [
+          "sumin",
+          "minji"
+        ],
+        "initialScene": "수민이 소포를 찾으러 왔다. 민지가 소포를 내주고 지호는 옆에서 기다린다."
+      },
+      "input": "{\"task\":\"direct\",\"allowedSpeakerIds\":[\"sumin\",\"minji\"],\"participants\":[{\"id\":\"minji\",\"name\":\"민지\",\"turnsSinceLastSpeech\":2},{\"id\":\"jiho\",\"name\":\"지호\",\"turnsSinceLastSpeech\":0},{\"id\":\"sumin\",\"name\":\"수민\",\"turnsSinceLastSpeech\":1}],\"lastSpeakerId\":\"jiho\",\"history\":[{\"id\":\"message-1\",\"sequence\":1,\"speakerId\":\"minji\",\"speakerName\":\"민지\",\"kind\":\"speech\",\"speech\":\"소포 여기 있어요.\",\"action\":\"\"},{\"id\":\"message-2\",\"sequence\":2,\"speakerId\":\"sumin\",\"speakerName\":\"수민\",\"kind\":\"speech\",\"speech\":\"고마워요. 저는 갈게요.\",\"action\":\"\"},{\"id\":\"message-3\",\"sequence\":3,\"speakerId\":\"jiho\",\"speakerName\":\"지호\",\"kind\":\"speech\",\"speech\":\"민지 씨, 이 가게 내일도 열어요?\",\"action\":\"\"}]}",
+      "expectedSpeakerId": "minji"
+    },
+    {
+      "id": "heldout_allowed_only",
+      "split": "holdout",
+      "sourceRunId": "",
+      "sourceCallId": "",
+      "sourceOutput": "",
+      "options": {
+        "characters": [
+          {
+            "id": "minji",
+            "name": "민지"
+          },
+          {
+            "id": "jiho",
+            "name": "지호"
+          },
+          {
+            "id": "sumin",
+            "name": "수민"
+          }
+        ],
+        "history": [
+          {
+            "id": "message-1",
+            "sequence": 1,
+            "kind": "speech",
+            "speakerId": "minji",
+            "speakerName": "민지",
+            "speech": "수민 씨, 이것도 같이 가져가요?",
+            "action": ""
+          }
+        ],
+        "speeches": [
+          {
+            "id": "message-1",
+            "sequence": 1,
+            "kind": "speech",
+            "speakerId": "minji",
+            "speakerName": "민지",
+            "speech": "수민 씨, 이것도 같이 가져가요?",
+            "action": ""
+          }
+        ],
+        "allowedSpeakerIds": [
+          "jiho"
+        ],
+        "initialScene": "수민이 소포를 찾으러 와 민지와 이야기하고 있다. 지호는 자기 차례를 기다리는 다른 손님이다."
+      },
+      "input": "{\"task\":\"direct\",\"allowedSpeakerIds\":[\"jiho\"],\"participants\":[{\"id\":\"minji\",\"name\":\"민지\",\"turnsSinceLastSpeech\":0},{\"id\":\"jiho\",\"name\":\"지호\",\"turnsSinceLastSpeech\":null},{\"id\":\"sumin\",\"name\":\"수민\",\"turnsSinceLastSpeech\":null}],\"lastSpeakerId\":\"minji\",\"history\":[{\"id\":\"message-1\",\"sequence\":1,\"speakerId\":\"minji\",\"speakerName\":\"민지\",\"kind\":\"speech\",\"speech\":\"수민 씨, 이것도 같이 가져가요?\",\"action\":\"\"}]}",
+      "expectedSpeakerId": "jiho"
+    }
+  ]
+}

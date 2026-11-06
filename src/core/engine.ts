@@ -23,7 +23,7 @@ import type { ApiCredential, CallKind, DeliveryReceipt, InvocationMetrics, NpcSe
 import { progression, progressionPrompt, resolveAction } from './progression.js';
 import { repetitionMetrics } from './quality.js';
 import { APP_VERSION } from '../shared/version.js';
-import { directorInstructions, directorPrompt } from './director.js';
+import { directorPrompt } from './director.js';
 import './load-model-catalog.js';
 
 const now = () => new Date().toISOString();
@@ -149,7 +149,7 @@ export class Engine extends EventEmitter {
     // and ambiguous decisions must never be sent twice.
     const previous = this.priorInvocation(id, operationKey);
     if (previous?.status === 'completed') return previous;
-    const session = await this.helper(id, key, this.run(id).spec.director, directorInstructions, true);
+    const session = await this.helper(id, key, this.run(id).spec.director, prompt.instructions, true);
     return this.invoke(id, 'director', session, operationKey, prompt.input, prompt.metadata, prompt.outputSchema);
   }
   private async invoke(id: string, kind: CallKind, session: NpcSession, operationKey: string, input: string, metadata: Record<string, unknown> = {}, requestedOutputSchema?: object) {
@@ -266,6 +266,7 @@ export class Engine extends EventEmitter {
       const allowed = age(candidates[0].id) >= chars.length * 2 ? [candidates[0]] : candidates;
       const call = await this.direct(id, 'director', `director:${speeches.length + 1}`, directorPrompt({
         characters: chars, allowedSpeakerIds: allowed.map(c => c.id), history: this.store.list('utterances', id), speeches,
+        initialScene: run.spec.scenario.situation,
       }));
       selected = JSON.parse(call.output).speakerId;
       if (!allowed.some(c => c.id === selected)) { this.store.patch('invocations', call.id, { status: 'failed', error: '허용되지 않은 화자 ID' }); throw new Error('진행자가 허용되지 않은 화자를 선택했습니다.'); }

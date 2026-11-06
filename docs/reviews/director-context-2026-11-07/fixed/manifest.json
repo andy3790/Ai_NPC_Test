@@ -1,0 +1,17 @@
+{
+  "suite": "director-context/1",
+  "casesSha256": "1a4b6356809b12b65f93711dbdd5a1201965753e0e692f12584740ecfe87c97b",
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "repetitions": 5,
+  "comparison": "context",
+  "expectedCalls": 60,
+  "maxCalls": 60,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "review": "Opening-scene recipient selection and explicit-topic-change regression. Not a naturalness or character-voice score. New session per sample. No retry.",
+  "status": "completed",
+  "calls": 60,
+  "estimatedUsd": 0.00512804,
+  "error": null
+}

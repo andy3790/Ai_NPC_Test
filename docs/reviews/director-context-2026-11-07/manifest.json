@@ -1,0 +1,210 @@
+{
+  "version": "director-context-review/1",
+  "date": "2026-11-07",
+  "sourceBaseCommit": "0bad3697c7142548a7312aecf3d4928e7310cde2",
+  "decision": "Adopt director/4 for missing shared opening context. Keep NPC /5 and profile/1. Not a character-voice quality score.",
+  "fixedSource": ".cache/director-eval/2026-11-06T21-05-42-967Z",
+  "conversationSource": ".cache/seowol-live/2026-11-06T21-05-44-353Z-director4-maintenance",
+  "totals": {
+    "calls": 166,
+    "successfulCalls": 166,
+    "estimatedUsd": 0.130228865,
+    "unpricedCalls": 0
+  },
+  "fixed": [
+    {
+      "id": "bill_owner_0",
+      "results": [
+        {
+          "version": "director/3",
+          "total": 5,
+          "valid": 5,
+          "correct": 0
+        },
+        {
+          "version": "director/4",
+          "total": 5,
+          "valid": 5,
+          "correct": 5
+        }
+      ]
+    },
+    {
+      "id": "bill_owner_1",
+      "results": [
+        {
+          "version": "director/3",
+          "total": 5,
+          "valid": 5,
+          "correct": 0
+        },
+        {
+          "version": "director/4",
+          "total": 5,
+          "valid": 5,
+          "correct": 5
+        }
+      ]
+    },
+    {
+      "id": "bill_owner_2",
+      "results": [
+        {
+          "version": "director/3",
+          "total": 5,
+          "valid": 5,
+          "correct": 2
+        },
+        {
+          "version": "director/4",
+          "total": 5,
+          "valid": 5,
+          "correct": 5
+        }
+      ]
+    },
+    {
+      "id": "heldout_package_owner",
+      "results": [
+        {
+          "version": "director/3",
+          "total": 5,
+          "valid": 5,
+          "correct": 0
+        },
+        {
+          "version": "director/4",
+          "total": 5,
+          "valid": 5,
+          "correct": 5
+        }
+      ]
+    },
+    {
+      "id": "heldout_new_question",
+      "results": [
+        {
+          "version": "director/3",
+          "total": 5,
+          "valid": 5,
+          "correct": 5
+        },
+        {
+          "version": "director/4",
+          "total": 5,
+          "valid": 5,
+          "correct": 5
+        }
+      ]
+    },
+    {
+      "id": "heldout_allowed_only",
+      "results": [
+        {
+          "version": "director/3",
+          "total": 5,
+          "valid": 5,
+          "correct": 5
+        },
+        {
+          "version": "director/4",
+          "total": 5,
+          "valid": 5,
+          "correct": 5
+        }
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "runId": "2166434d-939a-4fef-8255-5d0155bc02b2",
+      "status": "completed",
+      "choices": 18,
+      "ownerFirstTurn": 2,
+      "quietBeforeOwner": 0,
+      "quiet": 0,
+      "calls": 53
+    },
+    {
+      "runId": "9fd4854c-ac88-44e8-9cb1-48b172515fdd",
+      "status": "completed",
+      "choices": 18,
+      "ownerFirstTurn": 2,
+      "quietBeforeOwner": 0,
+      "quiet": 1,
+      "calls": 53
+    }
+  ],
+  "files": [
+    {
+      "path": "fixed/manifest.json",
+      "sha256": "98dd3194f700be036e70eff186d091bbf618d6e188f48fac43c80f54a0ab7328",
+      "bytes": 560
+    },
+    {
+      "path": "fixed/cases.json",
+      "sha256": "1a4b6356809b12b65f93711dbdd5a1201965753e0e692f12584740ecfe87c97b",
+      "bytes": 22882
+    },
+    {
+      "path": "fixed/requests.jsonl",
+      "sha256": "45fd83c095d9089600841fcf4efa7e7518947a7b05574a5413af45d66533743a",
+      "bytes": 194020
+    },
+    {
+      "path": "fixed/samples.jsonl",
+      "sha256": "2889145386d3a0ea2669da284e6a9080ff587c18ff356a6a9ec12bb70936a7ab",
+      "bytes": 64907
+    },
+    {
+      "path": "fixed/instructions.txt",
+      "sha256": "137b943b14a3a61f4ada1175ba99db90b62485eef31da539bb6e2037570988bb",
+      "bytes": 1313
+    },
+    {
+      "path": "conversation/plan.json",
+      "sha256": "6be72e642c773434c677a8ed6d961d0e12c22203a86fee4bf3e1202eabad6f7f",
+      "bytes": 448
+    },
+    {
+      "path": "conversation/config.json",
+      "sha256": "8259288b5d8c109e200c4a909c0940b27d2616d396bdee1fbc8cdd5e25ea0f90",
+      "bytes": 41863
+    },
+    {
+      "path": "conversation/result.json",
+      "sha256": "8600600f73b21cbe7af51ff0c730f73835c0442daa6e81203b6660ec0b21765c",
+      "bytes": 13590
+    },
+    {
+      "path": "conversation/run-1/calls.jsonl",
+      "sha256": "596bda28f8e51cb54c873d1bb15812d119b882abfe3556d9f6559f93107521fe",
+      "bytes": 540896
+    },
+    {
+      "path": "conversation/run-1/transcript.md",
+      "sha256": "e8c88791bf647030105aab930bffc2fa2239579c1f1194037c834097f8cdd682",
+      "bytes": 2886
+    },
+    {
+      "path": "conversation/run-1/instructions.json",
+      "sha256": "9e366f2ebb16bc1cad078dcaab9af77836fd040b0edeacb5138ea1116cb6d7e2",
+      "bytes": 60853
+    },
+    {
+      "path": "conversation/run-2/calls.jsonl",
+      "sha256": "b3b1b8697a25487c1a2a3e9ff6a196c567015df2d16185094d2ebb56ff81776d",
+      "bytes": 534938
+    },
+    {
+      "path": "conversation/run-2/transcript.md",
+      "sha256": "d5d7514ef5e537db5481bc3cdebd9f25efde83519f64d7e236b0eef385f3cc5f",
+      "bytes": 2743
+    },
+    {
+      "path": "conversation/run-2/instructions.json",
+      "sha256": "9e366f2ebb16bc1cad078dcaab9af77836fd040b0edeacb5138ea1116cb6d7e2",
+      "bytes": 60853
+    }
+  ]
+}
