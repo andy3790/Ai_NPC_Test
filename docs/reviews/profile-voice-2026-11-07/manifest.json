@@ -1,0 +1,1496 @@
+{
+  "date": "2026-11-07",
+  "sourceBaseCommit": "0bad3697c7142548a7312aecf3d4928e7310cde2",
+  "decision": "Keep original profile/1 and NPC /5; no voice candidate promoted. Director opening-context defect is a separate follow-up.",
+  "totals": {
+    "calls": 385,
+    "successfulCalls": 385,
+    "estimatedUsd": 1.589388055,
+    "unpricedCalls": 0
+  },
+  "experiments": [
+    {
+      "id": "common-removal",
+      "kind": "fixed-profile",
+      "source": ".cache/profile-eval/2026-11-06T20-43-45-929Z-63d6660e",
+      "suiteVersion": "voice-transfer/1",
+      "casesSha256": "83788926b46c750cbd484d31b2724f1302e4952b79613c20524d9cfe0f07c277",
+      "profileVersions": [
+        "seowol-profile/1",
+        "seowol-profile/2"
+      ],
+      "dialoguePromptVersion": "npc-dialogue/5",
+      "promptVersion": "npc-lab/10",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "repetitions": 2,
+      "split": "all",
+      "expectedCalls": 24,
+      "maxCalls": 24,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response may exceed it. No retry.",
+      "status": "completed",
+      "calls": 24,
+      "estimatedUsd": 0.09263759999999999,
+      "unpricedCalls": 0,
+      "error": null,
+      "mappings": [
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/1"
+        },
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/1"
+        },
+        {
+          "caseId": "extra_task_cha_yujin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/1"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "extra_task_jang_serim",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/1"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/1"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/1"
+        },
+        {
+          "caseId": "extra_task_ryu_taekyung",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/1"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "vague_guarantee_cha_yujin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/1"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/1"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/1"
+        },
+        {
+          "caseId": "vague_guarantee_jang_serim",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/1"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "vague_guarantee_ryu_taekyung",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/1"
+        }
+      ],
+      "successfulCalls": 24
+    },
+    {
+      "id": "profile3-development",
+      "kind": "fixed-profile",
+      "source": ".cache/profile-eval/2026-11-06T20-43-46-037Z-b25d9ea0",
+      "suiteVersion": "profile-contrast/1",
+      "casesSha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "profileVersions": [
+        "seowol-profile/2",
+        "seowol-profile/3"
+      ],
+      "dialoguePromptVersion": "npc-dialogue/5",
+      "promptVersion": "npc-lab/10",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "repetitions": 2,
+      "split": "development",
+      "expectedCalls": 40,
+      "maxCalls": 40,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response may exceed it. No retry.",
+      "status": "completed",
+      "calls": 40,
+      "estimatedUsd": 0.14904119999999998,
+      "unpricedCalls": 0,
+      "error": null,
+      "mappings": [
+        {
+          "caseId": "assumed_help_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_cha_yujin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_cha_yujin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_jang_serim",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_jang_serim",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_ryu_taekyung",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_ryu_taekyung",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_lee_harin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_lee_harin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_lee_harin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_lee_harin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_na_yeonwoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_na_yeonwoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_na_yeonwoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_na_yeonwoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_cha_yujin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_cha_yujin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_jang_serim",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_jang_serim",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_ryu_taekyung",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_ryu_taekyung",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_lee_harin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_lee_harin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_lee_harin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_lee_harin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_na_yeonwoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_na_yeonwoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_na_yeonwoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_na_yeonwoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        }
+      ],
+      "successfulCalls": 40
+    },
+    {
+      "id": "profile3-terra",
+      "kind": "fixed-profile",
+      "source": ".cache/profile-eval/2026-11-06T20-46-13-409Z-e0dcfc67",
+      "suiteVersion": "profile-contrast/1",
+      "casesSha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "profileVersions": [
+        "seowol-profile/2",
+        "seowol-profile/3"
+      ],
+      "dialoguePromptVersion": "npc-dialogue/5",
+      "promptVersion": "npc-lab/10",
+      "model": "gpt-6.1-terra",
+      "effort": "low",
+      "repetitions": 1,
+      "split": "development",
+      "expectedCalls": 20,
+      "maxCalls": 20,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response may exceed it. No retry.",
+      "status": "completed",
+      "calls": 20,
+      "estimatedUsd": 0.06630700000000002,
+      "unpricedCalls": 0,
+      "error": null,
+      "mappings": [
+        {
+          "caseId": "assumed_help_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_lee_harin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_lee_harin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_na_yeonwoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_na_yeonwoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_lee_harin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_lee_harin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_na_yeonwoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_na_yeonwoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        }
+      ],
+      "successfulCalls": 20
+    },
+    {
+      "id": "profile3-astra",
+      "kind": "fixed-profile",
+      "source": ".cache/profile-eval/2026-11-06T20-46-13-875Z-5c66f627",
+      "suiteVersion": "profile-contrast/1",
+      "casesSha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "profileVersions": [
+        "seowol-profile/2",
+        "seowol-profile/3"
+      ],
+      "dialoguePromptVersion": "npc-dialogue/5",
+      "promptVersion": "npc-lab/10",
+      "model": "gpt-6-astra",
+      "effort": "low",
+      "repetitions": 1,
+      "split": "development",
+      "expectedCalls": 20,
+      "maxCalls": 20,
+      "maxUsd": 2,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response may exceed it. No retry.",
+      "status": "completed",
+      "calls": 20,
+      "estimatedUsd": 0.67117,
+      "unpricedCalls": 0,
+      "error": null,
+      "mappings": [
+        {
+          "caseId": "assumed_help_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_lee_harin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "assumed_help_lee_harin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_na_yeonwoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "assumed_help_na_yeonwoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_lee_harin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "taste_override_lee_harin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_na_yeonwoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "taste_override_na_yeonwoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        }
+      ],
+      "successfulCalls": 20
+    },
+    {
+      "id": "profile3-heldout",
+      "kind": "fixed-profile",
+      "source": ".cache/profile-eval/2026-11-06T20-49-46-604Z-6268e8a9",
+      "suiteVersion": "profile-contrast/1",
+      "casesSha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "profileVersions": [
+        "seowol-profile/2",
+        "seowol-profile/3"
+      ],
+      "dialoguePromptVersion": "npc-dialogue/5",
+      "promptVersion": "npc-lab/10",
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "repetitions": 2,
+      "split": "holdout",
+      "expectedCalls": 40,
+      "maxCalls": 40,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "costLimit": "Recorded catalogue estimate; one in-flight response may exceed it. No retry.",
+      "status": "completed",
+      "calls": 40,
+      "estimatedUsd": 0.1510432,
+      "unpricedCalls": 0,
+      "error": null,
+      "mappings": [
+        {
+          "caseId": "changed_price_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "changed_price_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "changed_price_cha_yujin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "changed_price_cha_yujin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "changed_price_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "changed_price_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "changed_price_jang_serim",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "changed_price_jang_serim",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "changed_price_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "changed_price_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "changed_price_ryu_taekyung",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "changed_price_ryu_taekyung",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "changed_price_lee_harin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "changed_price_lee_harin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "changed_price_lee_harin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "changed_price_lee_harin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "changed_price_na_yeonwoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "changed_price_na_yeonwoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "changed_price_na_yeonwoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "changed_price_na_yeonwoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "small_gift_cha_yujin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "small_gift_cha_yujin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "small_gift_cha_yujin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "small_gift_cha_yujin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "small_gift_jang_serim",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "small_gift_jang_serim",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "small_gift_jang_serim",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "small_gift_jang_serim",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "small_gift_ryu_taekyung",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "small_gift_ryu_taekyung",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "small_gift_ryu_taekyung",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "small_gift_ryu_taekyung",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "small_gift_lee_harin",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "small_gift_lee_harin",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "small_gift_lee_harin",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "small_gift_lee_harin",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "small_gift_na_yeonwoo",
+          "repetition": 1,
+          "slot": "A",
+          "version": "seowol-profile/2"
+        },
+        {
+          "caseId": "small_gift_na_yeonwoo",
+          "repetition": 1,
+          "slot": "B",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "small_gift_na_yeonwoo",
+          "repetition": 2,
+          "slot": "A",
+          "version": "seowol-profile/3"
+        },
+        {
+          "caseId": "small_gift_na_yeonwoo",
+          "repetition": 2,
+          "slot": "B",
+          "version": "seowol-profile/2"
+        }
+      ],
+      "successfulCalls": 40
+    },
+    {
+      "id": "realization",
+      "kind": "prototype",
+      "source": ".cache/profile-eval/2026-11-06T20-43-46-037Z-b25d9ea0",
+      "version": "voice-realization/1",
+      "policySha256": "089c2265ddc0ed83ef357e767764db2bbf3ac6f1e80d3d7001a15ded92627f87",
+      "sourceSamplesSha256": "2d5b743e1e58fabe9a2980043c0b199594c2331e67185366cc1e5a1a124d818e",
+      "casesSha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "profile": "seowol-profile/3",
+      "profileHashes": {
+        "registry": "371976526e27818f70c042b5715ae8501414d0a6acb6de5572dca85be8d0fcf9",
+        "voice": "677a98137ab4c45f54e1b7ffd353eeba98ff38cc3795543e1263f96ab9213fdb",
+        "interaction": "ba33a4390a93e564826620ab1a264be90e577ee823c5bfb5dd6f2f663f34307a"
+      },
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "expectedCalls": 10,
+      "maxCalls": 10,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "scope": "Reuse already generated drafts; new paid calls edit only speech. Original action is preserved outside the model output.",
+      "calls": 10,
+      "estimatedUsd": 0.02373,
+      "unpricedCalls": 0,
+      "error": null,
+      "status": "completed",
+      "successfulCalls": 10
+    },
+    {
+      "id": "scene-framing",
+      "kind": "prototype",
+      "source": ".cache/profile-eval/2026-11-06T20-43-46-037Z-b25d9ea0",
+      "version": "scene-framing/1",
+      "policySha256": "3eef329b7712f58d943c355e2a5c7de89dd1f503dc0cf6b3fc9160140693ef44",
+      "sourceSamplesSha256": "2d5b743e1e58fabe9a2980043c0b199594c2331e67185366cc1e5a1a124d818e",
+      "casesSha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "profile": "seowol-profile/3",
+      "profileHashes": {
+        "registry": "371976526e27818f70c042b5715ae8501414d0a6acb6de5572dca85be8d0fcf9",
+        "voice": "677a98137ab4c45f54e1b7ffd353eeba98ff38cc3795543e1263f96ab9213fdb",
+        "interaction": "ba33a4390a93e564826620ab1a264be90e577ee823c5bfb5dd6f2f663f34307a"
+      },
+      "model": "gpt-6.1-sol",
+      "effort": "low",
+      "expectedCalls": 20,
+      "maxCalls": 20,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "scope": "New independent outputs with the same public observations and own profile. Baseline comes from a completed earlier run; order is not counterbalanced.",
+      "calls": 20,
+      "estimatedUsd": 0.06069509999999999,
+      "unpricedCalls": 0,
+      "error": null,
+      "status": "completed",
+      "successfulCalls": 20
+    },
+    {
+      "id": "profile1-maintenance",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T20-46-59-761Z-profile1-maintenance",
+      "calls": 53,
+      "successfulCalls": 53,
+      "estimatedUsd": 0.09039445999999997,
+      "unpricedCalls": 0,
+      "choices": 18,
+      "spoken": 14,
+      "quiet": 4,
+      "sourceRunId": "1a21aebe-79c4-487d-8eff-1257b1f60549",
+      "error": null
+    },
+    {
+      "id": "profile3-maintenance",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T20-47-00-063Z-profile3-maintenance",
+      "calls": 53,
+      "successfulCalls": 53,
+      "estimatedUsd": 0.087101175,
+      "unpricedCalls": 0,
+      "choices": 18,
+      "spoken": 14,
+      "quiet": 2,
+      "sourceRunId": "d78c0548-a9f5-4a95-a29b-7db9b74a4576",
+      "error": null
+    },
+    {
+      "id": "profile1-return",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T20-52-43-452Z-profile1-return",
+      "calls": 53,
+      "successfulCalls": 53,
+      "estimatedUsd": 0.09682705000000004,
+      "unpricedCalls": 0,
+      "choices": 18,
+      "spoken": 16,
+      "quiet": 0,
+      "sourceRunId": "c26830e2-ea81-4fba-8a68-a2d7a71caef1",
+      "error": null
+    },
+    {
+      "id": "profile3-return",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T20-52-43-920Z-profile3-return",
+      "calls": 52,
+      "successfulCalls": 52,
+      "estimatedUsd": 0.10044126999999999,
+      "unpricedCalls": 0,
+      "choices": 18,
+      "spoken": 17,
+      "quiet": 0,
+      "sourceRunId": "182ba1d1-39ba-4be7-ac8b-1d06596cbb2a",
+      "error": null
+    }
+  ],
+  "files": [
+    {
+      "path": "common-removal/plan.json",
+      "sha256": "d27da46062de28e23cce906a33c111dc55a88b0daacb31bb455e48bb66a2bb28",
+      "bytes": 553
+    },
+    {
+      "path": "common-removal/manifest.json",
+      "sha256": "bf3794316c73aee913b43e241756a8a70afb07d75d91b0404df77d61d3411053",
+      "bytes": 3927
+    },
+    {
+      "path": "common-removal/cases.json",
+      "sha256": "83788926b46c750cbd484d31b2724f1302e4952b79613c20524d9cfe0f07c277",
+      "bytes": 62444
+    },
+    {
+      "path": "common-removal/profiles.json",
+      "sha256": "bce64658a77c30b247d41e0234fdf50ed536aeffd04ccdafbb27d4693f15b522",
+      "bytes": 15294
+    },
+    {
+      "path": "common-removal/requests.jsonl",
+      "sha256": "fbc6ff17601c62a93b96dde24632e3aed9d89cb6d99339929666193bc29be604",
+      "bytes": 333688
+    },
+    {
+      "path": "common-removal/samples.jsonl",
+      "sha256": "f3111f293776c52ae4641116fac233c24a2d0f9887eaf202c508d88bf328f70b",
+      "bytes": 16792
+    },
+    {
+      "path": "profile3-development/plan.json",
+      "sha256": "665752c62d214ae599883df75e970ccbe8eb1a8cb93e609e00a2a74840555de6",
+      "bytes": 563
+    },
+    {
+      "path": "profile3-development/manifest.json",
+      "sha256": "40bffbb2f43cd2ad7639c316f94b841d04d7b914b90e65b9409370f9aea0223a",
+      "bytes": 6101
+    },
+    {
+      "path": "profile3-development/cases.json",
+      "sha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "bytes": 214084
+    },
+    {
+      "path": "profile3-development/profiles.json",
+      "sha256": "306cab83aaae9f5b6d7c9258d757de50e6ec41701f35a04ac498966821d77f19",
+      "bytes": 17593
+    },
+    {
+      "path": "profile3-development/requests.jsonl",
+      "sha256": "e9821d491d0a00b72154f2d9d01f7ea7ba0874c8cf7f992d16b99bd2555f1aca",
+      "bytes": 527308
+    },
+    {
+      "path": "profile3-development/samples.jsonl",
+      "sha256": "2d5b743e1e58fabe9a2980043c0b199594c2331e67185366cc1e5a1a124d818e",
+      "bytes": 28876
+    },
+    {
+      "path": "profile3-terra/plan.json",
+      "sha256": "2874b293ccb09d3da20bd5907fd5f605e0823467c9d37cf4c0bf0e18409f8a8a",
+      "bytes": 565
+    },
+    {
+      "path": "profile3-terra/manifest.json",
+      "sha256": "bacafcfb1099d6bd623de462402161accac6ca451eae87839e61d01f99579234",
+      "bytes": 3403
+    },
+    {
+      "path": "profile3-terra/cases.json",
+      "sha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "bytes": 214084
+    },
+    {
+      "path": "profile3-terra/profiles.json",
+      "sha256": "306cab83aaae9f5b6d7c9258d757de50e6ec41701f35a04ac498966821d77f19",
+      "bytes": 17593
+    },
+    {
+      "path": "profile3-terra/requests.jsonl",
+      "sha256": "1339ae7b5dd1e6018f0606feff0dc1e204e20ea036c282b2ff3c507b1b07d7f7",
+      "bytes": 263654
+    },
+    {
+      "path": "profile3-terra/samples.jsonl",
+      "sha256": "fe1838b0d9b06e7dbaeb0bcccd1e9dca594c2b00f10042648daae7dafb44124c",
+      "bytes": 14060
+    },
+    {
+      "path": "profile3-astra/plan.json",
+      "sha256": "291767c5f98773cd7edc338851d29d7d42a21fc637e9ac58cdfd78dd1f1a0159",
+      "bytes": 563
+    },
+    {
+      "path": "profile3-astra/manifest.json",
+      "sha256": "e1e55384553496eb95b28729beee3304c5504fff18a73be92580bf833363c311",
+      "bytes": 3389
+    },
+    {
+      "path": "profile3-astra/cases.json",
+      "sha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "bytes": 214084
+    },
+    {
+      "path": "profile3-astra/profiles.json",
+      "sha256": "306cab83aaae9f5b6d7c9258d757de50e6ec41701f35a04ac498966821d77f19",
+      "bytes": 17593
+    },
+    {
+      "path": "profile3-astra/requests.jsonl",
+      "sha256": "0f336460aeba72631755b5c3e3819aabd9b7ccf43c2c02d153f68b0774ebc448",
+      "bytes": 263654
+    },
+    {
+      "path": "profile3-astra/samples.jsonl",
+      "sha256": "5a11cf7a2c52cfd7afe39845dc125d054f1497286de93d4e4d202971e5a2f790",
+      "bytes": 14462
+    },
+    {
+      "path": "profile3-heldout/plan.json",
+      "sha256": "4175900429087072ca0310cd8d2d4283e004fc395097685f8fca6c00bb469278",
+      "bytes": 559
+    },
+    {
+      "path": "profile3-heldout/manifest.json",
+      "sha256": "ac640918f34029b5f6cb4ea97907bd643e8fa36a5b3ab9f9cda78818e21cc2dd",
+      "bytes": 6027
+    },
+    {
+      "path": "profile3-heldout/cases.json",
+      "sha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "bytes": 214084
+    },
+    {
+      "path": "profile3-heldout/profiles.json",
+      "sha256": "306cab83aaae9f5b6d7c9258d757de50e6ec41701f35a04ac498966821d77f19",
+      "bytes": 17593
+    },
+    {
+      "path": "profile3-heldout/requests.jsonl",
+      "sha256": "90c40913bc793639f78df6c4cf7a14efdfcf2bc121379ccbaf5e74ac2e020526",
+      "bytes": 525608
+    },
+    {
+      "path": "profile3-heldout/samples.jsonl",
+      "sha256": "a3637a47b3addf95ced960336ded7d0e8e149bea1d57279b8a445a96763fd83c",
+      "bytes": 29958
+    },
+    {
+      "path": "realization/plan.json",
+      "sha256": "77f22fdc23c6c1a13dab842121b8db26dc15c9d6b86e5db426c85394bb16e2d8",
+      "bytes": 957
+    },
+    {
+      "path": "realization/manifest.json",
+      "sha256": "76cb69bbc66e5127a21865d1ca5e605faa44e3236798005c22700ac651a74f0d",
+      "bytes": 1063
+    },
+    {
+      "path": "realization/cases.json",
+      "sha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "bytes": 214084
+    },
+    {
+      "path": "realization/profile.json",
+      "sha256": "6fe999fc3203492093768e64f0de0484e79957743630f38e6916bd123366eb49",
+      "bytes": 9817
+    },
+    {
+      "path": "realization/policy.json",
+      "sha256": "089c2265ddc0ed83ef357e767764db2bbf3ac6f1e80d3d7001a15ded92627f87",
+      "bytes": 1636
+    },
+    {
+      "path": "realization/source-samples.jsonl",
+      "sha256": "2d5b743e1e58fabe9a2980043c0b199594c2331e67185366cc1e5a1a124d818e",
+      "bytes": 28876
+    },
+    {
+      "path": "realization/requests.jsonl",
+      "sha256": "e87a6fa61b2f995494636643fb10085b193c82fa2faff57ef8352f382aa812e9",
+      "bytes": 41334
+    },
+    {
+      "path": "realization/samples.jsonl",
+      "sha256": "9a487c9d89fa440c41c73d1521afff1ee5b963ae6aec3cfd362f3282b313a84f",
+      "bytes": 9334
+    },
+    {
+      "path": "scene-framing/plan.json",
+      "sha256": "f320310394d70ce96b062cbbaacc6e93d9010cc8a4f7c12f69aecac2f0945057",
+      "bytes": 983
+    },
+    {
+      "path": "scene-framing/manifest.json",
+      "sha256": "7e43dfcc68b070a31f5046734d42fa4e2abc30648c4a89128a6e001a1691a35b",
+      "bytes": 1101
+    },
+    {
+      "path": "scene-framing/cases.json",
+      "sha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+      "bytes": 214084
+    },
+    {
+      "path": "scene-framing/profile.json",
+      "sha256": "6fe999fc3203492093768e64f0de0484e79957743630f38e6916bd123366eb49",
+      "bytes": 9817
+    },
+    {
+      "path": "scene-framing/policy.json",
+      "sha256": "3eef329b7712f58d943c355e2a5c7de89dd1f503dc0cf6b3fc9160140693ef44",
+      "bytes": 2207
+    },
+    {
+      "path": "scene-framing/source-samples.jsonl",
+      "sha256": "2d5b743e1e58fabe9a2980043c0b199594c2331e67185366cc1e5a1a124d818e",
+      "bytes": 28876
+    },
+    {
+      "path": "scene-framing/requests.jsonl",
+      "sha256": "f885ed76a5f3fa86fe448a284de5e277a373b0a7692a6152e32abfd354eaa59c",
+      "bytes": 193894
+    },
+    {
+      "path": "scene-framing/samples.jsonl",
+      "sha256": "af4bc4b74bd78bfc067e0225235dcb988a224273f43874286a22ccd8bcf15f93",
+      "bytes": 14476
+    },
+    {
+      "path": "profile1-maintenance/config.json",
+      "sha256": "0893ae18dd3cc2accb2e46c0bb70397b146ddc5616e0c602d85d2fc86691dd3d",
+      "bytes": 41861
+    },
+    {
+      "path": "profile1-maintenance/plan.json",
+      "sha256": "13ba8ae2ac89883054aa9ad06be87e4e76bc74ebaa412c9239e28f4a8b4f94dc",
+      "bytes": 446
+    },
+    {
+      "path": "profile1-maintenance/result.json",
+      "sha256": "55472d2cf8ecd8f255c40e9c54d7b55b15fb9abc8808f483a56380cfd4558207",
+      "bytes": 7012
+    },
+    {
+      "path": "profile1-maintenance/calls.jsonl",
+      "sha256": "fc8a6996b7354ca5552c1d612249bc42d517f96b27cd76e79b6033ce7aa10629",
+      "bytes": 496035
+    },
+    {
+      "path": "profile1-maintenance/instructions.json",
+      "sha256": "16718d93181ce1ceaf428014ab9310c71f29f6803ea91045ba68867c5450656c",
+      "bytes": 60405
+    },
+    {
+      "path": "profile1-maintenance/transcript.md",
+      "sha256": "ee3796681dc6f8a9df0f3819e6bf9c11df9a0235e84703a19b1d75953fc5ddef",
+      "bytes": 2684
+    },
+    {
+      "path": "profile3-maintenance/config.json",
+      "sha256": "da63b9854996a25c79d14bf7d567bfbfe3958b86697735e06a9bc8c25499af26",
+      "bytes": 36008
+    },
+    {
+      "path": "profile3-maintenance/plan.json",
+      "sha256": "13ba8ae2ac89883054aa9ad06be87e4e76bc74ebaa412c9239e28f4a8b4f94dc",
+      "bytes": 446
+    },
+    {
+      "path": "profile3-maintenance/result.json",
+      "sha256": "b29401eec02aaa8b0f71a3c242384c11d5c4f0dd6d439969afdcf0b323a2b9f7",
+      "bytes": 7042
+    },
+    {
+      "path": "profile3-maintenance/calls.jsonl",
+      "sha256": "51eb7159ca398069852a64a9b2629b1b5c60581b93249ff0f52318cfff0f7c86",
+      "bytes": 502310
+    },
+    {
+      "path": "profile3-maintenance/instructions.json",
+      "sha256": "969c5443bcc772b5d8042797d8b16691f6acb4b311af80ed8065253f578a9c09",
+      "bytes": 54552
+    },
+    {
+      "path": "profile3-maintenance/transcript.md",
+      "sha256": "6c4d1d6f5ee89f5c0208c7ca651fd2dbb6ecaad4e43ad75b6b3219c907a4a569",
+      "bytes": 3205
+    },
+    {
+      "path": "profile1-return/config.json",
+      "sha256": "3bf084eb081d46d0e33db3c1c0d33bc9856f8453d5fd98e478ddfbf23884dec5",
+      "bytes": 44275
+    },
+    {
+      "path": "profile1-return/plan.json",
+      "sha256": "faf767eb662d2da44c3aa3d871234f36919de0957217318421dd080cda0a6b2c",
+      "bytes": 431
+    },
+    {
+      "path": "profile1-return/result.json",
+      "sha256": "80b1f09b57f649476c94ba849c3263c9b11dcbc2ac91a36dc630cb37559db956",
+      "bytes": 7027
+    },
+    {
+      "path": "profile1-return/calls.jsonl",
+      "sha256": "de5af74f995fa2439952b957d99b679144bb45db277b358a7c393680db5bb477",
+      "bytes": 558994
+    },
+    {
+      "path": "profile1-return/instructions.json",
+      "sha256": "62a3d7a13516349fa34b94361d9f5e53c2720e801c940aef73862a07972e9136",
+      "bytes": 59806
+    },
+    {
+      "path": "profile1-return/transcript.md",
+      "sha256": "18c3469c2bf315459265b3fce099a738d77c89d743c1bf0d4833ed4aa4a1235d",
+      "bytes": 3323
+    },
+    {
+      "path": "profile3-return/config.json",
+      "sha256": "3156309d1cb2eb0c043b686a84e9f5d373588b0a94c0d35f9d4fc74762d6ea24",
+      "bytes": 38530
+    },
+    {
+      "path": "profile3-return/plan.json",
+      "sha256": "faf767eb662d2da44c3aa3d871234f36919de0957217318421dd080cda0a6b2c",
+      "bytes": 431
+    },
+    {
+      "path": "profile3-return/result.json",
+      "sha256": "e261979a9b8ccbf5a26aac107556a75e2f1d3dfe5f7bf2e2682532175db2ce9c",
+      "bytes": 7015
+    },
+    {
+      "path": "profile3-return/calls.jsonl",
+      "sha256": "606a61ac00ed8a64f9b19930770ca4af9b00de6807fb7bf2fc92bf7be44e0cc9",
+      "bytes": 565802
+    },
+    {
+      "path": "profile3-return/instructions.json",
+      "sha256": "7fb06a2925761659439b26d8a51168071441809c4cc3cca5e322c82d3b294992",
+      "bytes": 54061
+    },
+    {
+      "path": "profile3-return/transcript.md",
+      "sha256": "a8fd7f2e8c5706b77af6795aca56eb958e00b677686918cb91a81268d6a68c9f",
+      "bytes": 3893
+    },
+    {
+      "path": "judgments.json",
+      "sha256": "87f6933132a087a7b4a2f175ea5231d4186f221683bd4d8212e65241880c9924",
+      "bytes": 103005
+    }
+  ]
+}

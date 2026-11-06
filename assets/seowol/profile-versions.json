@@ -1,0 +1,26 @@
+{
+  "current": "seowol-profile/1",
+  "versions": {
+    "seowol-profile/1": {
+      "introduced": "2026-11-07",
+      "origin": "77a867c",
+      "reason": "기존 실행 프로필의 interaction/4 공통 문단과 voice/2 고유 말투·예문 결합을 대조군으로 동결한다.",
+      "voiceFile": "voices.json",
+      "includeCommonGuidance": true
+    },
+    "seowol-profile/2": {
+      "introduced": "2026-11-07",
+      "origin": "seowol-profile/1",
+      "reason": "NPC 공통 정책과 겹치는 긴 공통 지침이 고유 말투 앞에 반복된다. 고유 말투·예문과 인물 사실은 그대로 두고 이 중복만 제거해 효과를 분리한다.",
+      "voiceFile": "voices.json",
+      "includeCommonGuidance": false
+    },
+    "seowol-profile/3": {
+      "introduced": "2026-11-07",
+      "origin": "seowol-profile/2",
+      "reason": "모두 짧은 해요체라는 설명보다 무엇을 먼저 짚고 어디서 말을 끊는지가 드러나도록 고유 말투와 별개의 예문을 보강한다. 공통 정책·정체성·성격·관계·기억·능력은 고정한다.",
+      "voiceFile": "review-variants/voices-v3.json",
+      "includeCommonGuidance": false
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "version": "scene-framing/1",
+  "policySha256": "3eef329b7712f58d943c355e2a5c7de89dd1f503dc0cf6b3fc9160140693ef44",
+  "source": ".cache/profile-eval/2026-11-06T20-43-46-037Z-b25d9ea0",
+  "sourceSamplesSha256": "2d5b743e1e58fabe9a2980043c0b199594c2331e67185366cc1e5a1a124d818e",
+  "casesSha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+  "profile": "seowol-profile/3",
+  "profileHashes": {
+    "registry": "371976526e27818f70c042b5715ae8501414d0a6acb6de5572dca85be8d0fcf9",
+    "voice": "677a98137ab4c45f54e1b7ffd353eeba98ff38cc3795543e1263f96ab9213fdb",
+    "interaction": "ba33a4390a93e564826620ab1a264be90e577ee823c5bfb5dd6f2f663f34307a"
+  },
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "expectedCalls": 20,
+  "maxCalls": 20,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "scope": "New independent outputs with the same public observations and own profile. Baseline comes from a completed earlier run; order is not counterbalanced.",
+  "calls": 20,
+  "estimatedUsd": 0.06069509999999999,
+  "unpricedCalls": 0,
+  "error": null,
+  "status": "completed"
+}

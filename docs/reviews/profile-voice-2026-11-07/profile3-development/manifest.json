@@ -1,0 +1,266 @@
+{
+  "suiteVersion": "profile-contrast/1",
+  "casesSha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+  "profileVersions": [
+    "seowol-profile/2",
+    "seowol-profile/3"
+  ],
+  "dialoguePromptVersion": "npc-dialogue/5",
+  "promptVersion": "npc-lab/10",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "repetitions": 2,
+  "split": "development",
+  "expectedCalls": 40,
+  "maxCalls": 40,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response may exceed it. No retry.",
+  "status": "completed",
+  "calls": 40,
+  "estimatedUsd": 0.14904119999999998,
+  "unpricedCalls": 0,
+  "error": null,
+  "mappings": [
+    {
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "taste_override_cha_yujin",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "taste_override_cha_yujin",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "taste_override_cha_yujin",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "taste_override_cha_yujin",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "taste_override_jang_serim",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "taste_override_jang_serim",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "taste_override_jang_serim",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "taste_override_jang_serim",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "taste_override_ryu_taekyung",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "taste_override_ryu_taekyung",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "taste_override_ryu_taekyung",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "taste_override_ryu_taekyung",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "taste_override_lee_harin",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "taste_override_lee_harin",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "taste_override_lee_harin",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "taste_override_lee_harin",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "taste_override_na_yeonwoo",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "taste_override_na_yeonwoo",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "taste_override_na_yeonwoo",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/3"
+    },
+    {
+      "caseId": "taste_override_na_yeonwoo",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    }
+  ]
+}

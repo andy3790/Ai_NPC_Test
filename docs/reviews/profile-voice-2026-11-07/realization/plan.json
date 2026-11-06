@@ -1,0 +1,20 @@
+{
+  "version": "voice-realization/1",
+  "policySha256": "089c2265ddc0ed83ef357e767764db2bbf3ac6f1e80d3d7001a15ded92627f87",
+  "source": ".cache/profile-eval/2026-11-06T20-43-46-037Z-b25d9ea0",
+  "sourceSamplesSha256": "2d5b743e1e58fabe9a2980043c0b199594c2331e67185366cc1e5a1a124d818e",
+  "casesSha256": "acc8a29ecb4463f9a5767f6d9457ae562ed0fed90de72bfcd1bb2413144d0132",
+  "profile": "seowol-profile/3",
+  "profileHashes": {
+    "registry": "371976526e27818f70c042b5715ae8501414d0a6acb6de5572dca85be8d0fcf9",
+    "voice": "677a98137ab4c45f54e1b7ffd353eeba98ff38cc3795543e1263f96ab9213fdb",
+    "interaction": "ba33a4390a93e564826620ab1a264be90e577ee823c5bfb5dd6f2f663f34307a"
+  },
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "expectedCalls": 10,
+  "maxCalls": 10,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "scope": "Reuse already generated drafts; new paid calls edit only speech. Original action is preserved outside the model output."
+}

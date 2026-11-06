@@ -1,0 +1,2249 @@
+{
+  "reviewer": "Non-independent prompt author; not blinded human evaluation",
+  "judgments": [
+    {
+      "experiment": "common-removal",
+      "caseId": "extra_task_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "네. 순서가 있는 서류예요?",
+          "action": "탁자 가장자리에 흩어진 종이들을 손을 뻗어 모은다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/1",
+          "speech": "어떤 순서로 놓으면 돼요?",
+          "action": "탁자에 흩어진 종이 한 장을 집어 든다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "common-removal",
+      "caseId": "extra_task_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/1",
+          "speech": "어떤 순서로 모으면 돼요?",
+          "action": "탁자 가장자리에 흩어진 종이 쪽으로 손을 뻗는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "네. 순서가 있는 서류예요?",
+          "action": "탁자 가장자리에 흩어진 종이를 모아 모서리를 맞춘다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "common-removal",
+      "caseId": "extra_task_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/1",
+          "speech": "순서가 있는 건가요?",
+          "action": "탁자 가장자리의 서류 몇 장을 모아 든다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "어느 순서로 맞추면 돼요?",
+          "action": "탁자 가장자리에 흩어진 서류를 한데 모은다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "common-removal",
+      "caseId": "extra_task_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "어떤 순서로 모으면 돼요?",
+          "action": "탁자 가장자리에 흩어진 서류 몇 장을 집어 든다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/1",
+          "speech": "순서가 있는 서류예요?",
+          "action": "탁자 가장자리의 종이 몇 장을 집어 든다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "common-removal",
+      "caseId": "extra_task_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "어떤 순서로 놓으면 돼요?",
+          "action": "탁자 가장자리에 흩어진 종이 몇 장을 집어 든다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/1",
+          "speech": "어떤 순서로 맞추면 돼요?",
+          "action": "탁자 앞에 멈춰 서서 작업 장갑을 벗는다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "common-removal",
+      "caseId": "extra_task_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/1",
+          "speech": "순서 있는 거예요?",
+          "action": "탁자 쪽으로 돌아서 장갑을 벗는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "네. 순서 있는 서류예요?",
+          "action": "탁자 가장자리에 흩어진 종이를 모아 한쪽으로 포갠다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "common-removal",
+      "caseId": "vague_guarantee_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/1",
+          "speech": "안에 뭔지 모르는데 괜찮다고는 못 하죠. 뭐가 들었어요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "안에 뭔지 못 봐서 괜찮다고는 못 하겠어요. 뭘 들고 오신 건데요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "common-removal",
+      "caseId": "vague_guarantee_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "안에 든 걸 못 봐서 괜찮다고는 못 하겠어요. 뭘 들고 오신 건데요?",
+          "action": "닫힌 상자 쪽으로 시선을 옮긴다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/1",
+          "speech": "안에 든 게 뭔데요? 닫힌 상자만 보고 괜찮다고는 못 해요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "common-removal",
+      "caseId": "vague_guarantee_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "뭐가 들었는데요? 포장만 보고 괜찮다고 말씀드릴 순 없죠.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/1",
+          "speech": "안에 뭐가 들었는데요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "common-removal",
+      "caseId": "vague_guarantee_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/1",
+          "speech": "안에 뭐가 들었는데요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "안에 뭐가 들었는데요? 포장만 보고 괜찮다고 할 수는 없죠.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "common-removal",
+      "caseId": "vague_guarantee_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/1",
+          "speech": "안에 뭐가 들었는데요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "안에 뭐가 들었는데요? 겉만 보고 괜찮다고는 못 하죠.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "common-removal",
+      "caseId": "vague_guarantee_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "공통 문단을 빼도 순서 확인·내용물 확인 반응이 남았다. 이 쌍의 표현 차이만으로 인물 구별의 선호를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "안에 뭐가 들었는데요? 겉만 보고는 모르죠.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/1",
+          "speech": "안에 뭐가 들었는데요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 하는 김이라니, 저 이거 맡겠다고 한 적 없어요. 두고 나가시면 안 돼요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 하는 김이라뇨. 보고 있었지, 맡겠다고 한 건 아니에요. 서류는 챙겨 가세요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 제가 맡겠다고 한 건 아닌데요. 이건 직접 하세요. 저도 잠깐 쉬는 중이에요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 적 없어요. 쉬고 있는 거예요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 제가 맡겠다고 한 적은 없는데요. 이건 직접 마저 하세요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 제가 맡겠다고 한 건 아닌데요. 나머지는 직접 하셔야겠어요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 제가 맡겠다고 한 건 아닌데요. 나머지는 직접 해 주세요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 제가 맡겠다고 한 건 아닌데요. 나머지는 직접 하세요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 하는 김이라니요. 제가 맡겠다고 한 적 없는데요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 저 맡는다고 한 적 없는데요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 제가 맡겠다고 한 적 없는데요. 두고 가시면 안 됩니다.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 제가 하겠다고 한 적 없는데요. 남은 서른 부를 다 맡기시려고요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 저는 하는 거 보고 있었지, 맡겠다고 한 건 아니에요. 두고 가시면 안 돼요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 적 없어요. 두고 가지 마세요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 적 없어요. 두고 가시면 안 돼요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 저 맡겠다고 한 적 없어요. 이건 직접 해 주세요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 접는 법을 본 거지, 제가 맡겠다고 한 건 아니에요. 저도 쉬었다가 가려고 앉은 거예요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 저 맡겠다고 한 건 아닌데요. 접는 방법 보여 주시는 줄 알았어요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 저 맡겠다고 한 건 아닌데요. 접는 법 보여 주시는 줄 알았어요.",
+          "action": "나가려는 상대를 향해 고개를 든다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 접는 방법은 봤는데, 제가 맡겠다고 한 건 아니에요. 제게 부탁하시는 거예요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "taste_override_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋은데요. 저음이 마음에 들어요. 그걸로 조금 더 들어 봐요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋았어요. 저음이 있으니까 듣는 맛이 있던데요. 그걸로 틀어 줘요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "taste_override_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋은데요. 저음 들어오는 게 마음에 들어요. 그걸로 좀 더 들어 봐요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋았어요. 저음 들어오는 게 좋던데. 그걸로 더 들어 봐요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "taste_override_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋았어요. 저음이 묵직한 게요. 그걸로 조금 더 들어 봐요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋던데요. 저음이 시원해서요. 그걸로 좀 더 들어 봐요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "taste_override_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋던데요. 저음이 괜찮아서요. 그걸로 틀어 주세요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋았어요. 저음이 있으니까 듣는 맛이 있네요. 그걸로 틀어 주시겠어요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "taste_override_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 낫던데요. 저음 깔리는 게 좋아서. 그걸로 틀어 주세요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "전 두 번째가 더 좋았어요. 저음 깔리는 게 괜찮던데요. 그걸로 틀어 주세요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "taste_override_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "전 두 번째가 더 좋았어요. 저음 깔리는 게요. 그걸로 틀어 주세요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋던데요. 그걸로 틀어 주세요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "taste_override_lee_harin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 좋아요. 저음 들어오는 부분부터 다시 들어 볼래요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋아요. 저음 들어오는 부분부터 다시 들어 볼래요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "taste_override_lee_harin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋아요. 저음 들어오는 부분을 좀 더 듣고 싶어요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 좋아요. 저음이랑 빠른 박자가 마음에 들어요. 그걸로 다시 틀어 줄래요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "taste_override_na_yeonwoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 끌려요. 저음이 둥둥 울리는 게 좋던데요. 그걸로 조금 더 들어 봐도 돼요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋았어요. 저음이 둥둥 울리는 게 좋던데요. 그걸로 조금 더 들어 봐도 돼요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-development",
+      "caseId": "taste_override_na_yeonwoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "부당한 부탁을 거절하고 자기 취향을 말하는 점은 맞다. 강화한 예문이 고유 리듬을 일관되게 드러냈다고 볼 근거는 부족하다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 끌려요. 저음이 둥둥 울리는 게 좋던데, 그걸로 조금 더 들어 봐도 돼요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 끌려요. 저음이 좋던데, 그걸로 좀 더 들어 봐도 돼요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-terra",
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 일부 어순·길이 차이가 있으나 프로필 후보를 선호하거나 모델 일반 순위를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 제가 나머지까지 하겠다고는 안 했어요. 서른 부나 남았는데요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "잠깐요. 제가 한다고는 안 했어요. 서류가 서른 부나 남았는데요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-terra",
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 일부 어순·길이 차이가 있으나 프로필 후보를 선호하거나 모델 일반 순위를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "제가 맡겠다고는 안 했습니다. 언제까지 하셔야 하는데요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "제가 맡겠다고 한 적은 없는데요. 언제까지 하셔야 하는 건데요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-terra",
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 일부 어순·길이 차이가 있으나 프로필 후보를 선호하거나 모델 일반 순위를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "서른 부 남았는데요. 제가 맡겠다고는 안 했어요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "제가 한다고는 안 했는데요. 나머지는 직접 하세요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-terra",
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 일부 어순·길이 차이가 있으나 프로필 후보를 선호하거나 모델 일반 순위를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "저는 이거 맡겠다고 한 적 없어요. 직접 하셔야 해요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "저는 안 할게요. 제 볼일은 끝났어요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-terra",
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 일부 어순·길이 차이가 있으나 프로필 후보를 선호하거나 모델 일반 순위를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "저 이거 맡겠다고 한 건 아닌데요. 나머지가 서른 부나 되잖아요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 저 이거 해 드리겠다고 한 적 없는데요. 서른 장을 제가 다요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-terra",
+      "caseId": "taste_override_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 일부 어순·길이 차이가 있으나 프로필 후보를 선호하거나 모델 일반 순위를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋았어요. 저음이 마음에 들어서요. 그걸로 들어요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 끌리는데요. 저음이 좋았어요. 그걸로 들어요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-terra",
+      "caseId": "taste_override_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 일부 어순·길이 차이가 있으나 프로필 후보를 선호하거나 모델 일반 순위를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋았어요. 리듬이 귀에 남네요. 그걸로 더 들어 볼까요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋았어요. 그걸로 들을까요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-terra",
+      "caseId": "taste_override_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 일부 어순·길이 차이가 있으나 프로필 후보를 선호하거나 모델 일반 순위를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "전 두 번째가 더 좋던데요. 그걸로 들어요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋던데요. 그걸로 들어요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-terra",
+      "caseId": "taste_override_lee_harin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 일부 어순·길이 차이가 있으나 프로필 후보를 선호하거나 모델 일반 순위를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 좋아요. 저음이랑 빠른 리듬이 마음에 들어요. 그걸로 좀 더 들어요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋아요. 저음이랑 빠른 리듬이요. 그걸로 더 들어 볼래요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-terra",
+      "caseId": "taste_override_na_yeonwoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 일부 어순·길이 차이가 있으나 프로필 후보를 선호하거나 모델 일반 순위를 정하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 끌리는데요. 저음이 좋아서 좀 더 들어보고 싶어요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋아요. 리듬이 신나서요. 그걸로 더 들어 볼까요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-astra",
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 모델 변경으로 고유 말투가 안정적으로 살아난다는 근거로 삼지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 접는 걸 본 거지, 제가 맡겠다고 한 건 아니에요. 저도 잠깐 쉬다 갈 거라 나머지는 못 해 드려요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 저 맡겠다고 한 적 없어요. 여기 잠깐 쉬러 앉은 거예요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-astra",
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 모델 변경으로 고유 말투가 안정적으로 살아난다는 근거로 삼지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 제가 맡겠다고 한 건 아닌데요. 서류는 챙겨 가세요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 하는 김이라니, 제가 맡겠다고 한 건 아닌데요. 서류는 챙겨 가세요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-astra",
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 모델 변경으로 고유 말투가 안정적으로 살아난다는 근거로 삼지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 남은 서른 부를 저보고 하라는 건가요? 맡겠다고 한 적 없는데요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 제가 하겠다고는 안 했는데요. 맡기시는 거면 품삯은 얼마예요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-astra",
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 모델 변경으로 고유 말투가 안정적으로 살아난다는 근거로 삼지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 저 맡겠다고 한 적 없어요. 두고 가시면 안 돼요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 보고 있었던 거지, 제가 하겠다고 한 건 아니에요. 맡기고 가지 마세요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-astra",
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 모델 변경으로 고유 말투가 안정적으로 살아난다는 근거로 삼지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 하는 김이라뇨, 저 맡겠다고 한 건 아닌데요. 접는 거 보여 주셔서 보고 있었어요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "잠깐만요. 하는 방법을 본 거지, 제가 맡겠다고 한 건 아니에요. 그냥 두고 가시면 곤란해요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-astra",
+      "caseId": "taste_override_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 모델 변경으로 고유 말투가 안정적으로 살아난다는 근거로 삼지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "오늘은 두 번째가 더 끌리는데요. 저음 들어오는 데를 좀 더 듣고 싶어요. 그걸로 틀어 줘요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋은데요. 저음이 좋네요. 그걸로 조금 더 들어 봐요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-astra",
+      "caseId": "taste_override_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 모델 변경으로 고유 말투가 안정적으로 살아난다는 근거로 삼지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋았어요. 리듬이 귀에 남네요. 그걸로 틀어 주시겠어요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋던데요. 저음이 시원해서요. 그걸로 틀어 주세요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-astra",
+      "caseId": "taste_override_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 모델 변경으로 고유 말투가 안정적으로 살아난다는 근거로 삼지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "전 두 번째가 더 좋던데요. 저음이 괜찮아서. 그걸로 틀어 주세요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "전 두 번째가 더 좋았어요. 저음이 괜찮던데요. 그걸로 틀어 주세요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-astra",
+      "caseId": "taste_override_lee_harin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 모델 변경으로 고유 말투가 안정적으로 살아난다는 근거로 삼지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 좋아요. 저음이랑 빠른 박자가 마음에 들어요. 그걸로 틀어 줘요.",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 좋아요. 저음 들어오는 게 좋던데, 그걸로 더 들어 볼래요.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-astra",
+      "caseId": "taste_override_na_yeonwoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "별도 모델의 한 반복이다. 모델 변경으로 고유 말투가 안정적으로 살아난다는 근거로 삼지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "저는 두 번째가 더 끌려요. 리듬이 빨라서 듣다 보니 발을 까딱거리게 되던데요. 두 번째로 조금 더 들어 봐도 돼요?",
+          "action": ""
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 끌리는데요. 저음이 좋더라고요. 그걸로 조금 더 들어 봐도 돼요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "changed_price_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "여기엔 오늘 대여료 삼천 원이라고만 적혀 있는데요. 관리비 만 원은 무슨 비용이에요?",
+          "action": "가격표의 대여료 항목을 손가락으로 짚는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "가격표에는 오늘 대여료 삼천 원이라고만 적혀 있는데요. 관리비 만 원은 무슨 비용이에요?",
+          "action": "가격표의 대여료 항목을 손가락으로 짚는다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "changed_price_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "가격표에는 오늘 대여료가 삼천 원이라고 돼 있는데요. 따로 만 원 받는 관리비는 무슨 비용이에요?",
+          "action": "공개된 가격표의 대여료를 손가락으로 가리킨다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "여기에는 오늘 대여료 삼천 원이라고만 적혀 있는데요. 관리비 만 원은 무슨 비용이에요?",
+          "action": "가격표의 대여료 항목을 손가락으로 짚는다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "changed_price_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "대여료가 삼천 원인데 관리비가 만 원이요? 가격표에는 없는 돈인데, 무슨 관리비인가요?",
+          "action": "가격표의 대여료 항목을 손가락으로 짚는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "가격표에는 오늘 대여료가 삼천 원인데요. 따로 받는 관리비 만 원은 어디에 적혀 있나요?",
+          "action": "가격표의 대여료 표시를 손가락으로 짚는다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "changed_price_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "대여료가 삼천 원인데 관리비만 만 원이요? 가격표에는 없는 비용인데, 그건 빼주셔야겠어요.",
+          "action": "가격표의 대여료를 손가락으로 짚는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "대여료가 삼천 원인데 관리비가 만 원이라고요? 가격표에는 없는 비용인데, 뭘 관리하는 값입니까?",
+          "action": "가격표의 대여료를 손가락으로 짚는다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "changed_price_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "가격표에는 3천 원인데요. 관리비 만 원은 어디 적혀 있어요?",
+          "action": "가격표를 손가락으로 가리킨다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "가격표에는 3천 원인데요. 관리비가 만 원 더 붙으면 안 빌리겠습니다.",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "changed_price_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "가격표에는 삼천 원인데요. 관리비 만 원은 어디 적혀 있어요?",
+          "action": "가격표를 손가락으로 짚는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "가격표에는 3천 원이라고 돼 있는데요. 관리비 만 원은 뭘 관리하는 비용이에요?",
+          "action": ""
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "changed_price_lee_harin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "가격표에는 오늘 대여료가 삼천 원이라고 돼 있는데요. 관리비는 무슨 비용이에요?",
+          "action": "가격표를 손으로 가리킨다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "아직 결제 안 할게요. 가격표에는 대여료 삼천 원이라고만 적혀 있는데, 관리비는 무슨 비용이에요?",
+          "action": "가격표의 대여료 항목을 가리킨다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "changed_price_lee_harin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "결제는 아직 안 할게요. 가격표에는 대여료 3천 원인데, 관리비는 무슨 비용이에요?",
+          "action": "가격표의 대여료를 손으로 가리킨다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "가격표에는 오늘 대여료가 3천 원이라고 되어 있는데요. 관리비 만 원은 무슨 비용이에요?",
+          "action": "가격표의 대여료 항목을 가리킨다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "changed_price_na_yeonwoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "대여료가 3천 원인데 관리비만 만 원이 더 붙는다고요? 가격표에는 직접 가져가고 반납한다고만 적혀 있는데, 그 만 원은 무슨 비용이에요?",
+          "action": "가격표의 대여료를 손가락으로 짚는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "가격표에는 오늘 대여료가 3천 원이라고 돼 있는데, 만 원을 더 내는 거예요? 탁자 하나 빌리는 데 관리비가 왜 따로 붙어요?",
+          "action": "가격표의 3천 원 표시를 손가락으로 짚는다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "changed_price_na_yeonwoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "그럼 오늘 탁자 하나 빌리는 데 만 삼천 원인 거예요? 가격표에는 삼천 원이라고만 적혀 있는데, 관리비 만 원은 무슨 비용이에요?",
+          "action": "가격표의 대여료를 손가락으로 짚는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "대여료가 3천 원인데 관리비가 만 원 더 붙는 거예요? 제가 직접 가져가고 반납하는데, 그 만 원은 무슨 비용이에요? 가격표에는 없어서요.",
+          "action": "가격표의 3천 원 표시를 손가락으로 짚는다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "small_gift_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "잘 먹을게요. 차 마실 때 먹으면 되겠네요.",
+          "action": "내민 과자를 받아 계산대 한쪽에 놓는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "그럼 하나 먹을게요. 잘 먹겠습니다.",
+          "action": "내민 과자를 받아 든다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "small_gift_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "잘 먹을게요. 마침 입이 좀 심심했어요.",
+          "action": "내민 과자 하나를 받아 든다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "잘 먹을게요. 마침 출출했는데.",
+          "action": "내민 과자를 받아 든다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "small_gift_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "감사해요. 잘 먹을게요.",
+          "action": "내민 과자를 받아 든다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "그럼 잘 먹을게요. 감사합니다.",
+          "action": "내민 과자를 받아 든다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "small_gift_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "감사해요. 문 한 번 잡아 드리고 간식이 생겼네요.",
+          "action": "내민 과자를 받아 든다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "감사해요. 잘 먹을게요.",
+          "action": "내민 과자를 받아 든다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "small_gift_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "감사합니다. 잘 먹겠습니다.",
+          "action": "장갑을 벗고 내민 과자를 받는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "감사합니다. 잘 먹을게요.",
+          "action": "장갑을 벗고 내민 과자를 받는다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "small_gift_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "감사합니다. 잘 먹을게요.",
+          "action": "내민 과자를 받아 든다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "감사합니다. 잘 먹을게요.",
+          "action": "장갑을 벗고 내민 과자를 받는다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "small_gift_lee_harin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "고마워요. 잘 먹을게요.",
+          "action": "내민 과자 하나를 받아 든다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "감사해요. 잘 먹을게요.",
+          "action": "내민 과자를 받아 든다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "small_gift_lee_harin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "감사해요. 잘 먹을게요.",
+          "action": "내민 과자 하나를 받는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "고마워요. 잘 먹을게요.",
+          "action": "내민 과자를 받아 든다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "small_gift_na_yeonwoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/2",
+          "speech": "문 잠깐 잡아 드린 건데요, 뭘. 그래도 주시면 잘 먹을게요. 고마워요.",
+          "action": "내민 과자를 두 손으로 받는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/3",
+          "speech": "문 잠깐 잡아 드린 건데, 과자까지 받아도 돼요?",
+          "action": "내민 과자 쪽으로 손을 뻗다가 잠깐 멈춘다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "profile3-heldout",
+      "caseId": "small_gift_na_yeonwoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "비용 질문과 감사 반응은 문맥상 자연스럽게 겹칠 수 있다. 단어·어미 차이만으로 후보를 선호하지 않는다.",
+      "evidence": [
+        {
+          "slot": "A",
+          "version": "seowol-profile/3",
+          "speech": "문 잠깐 잡아 드린 건데요. 그래도 주시면 잘 먹을게요. 고마워요.",
+          "action": "내민 과자를 두 손으로 받는다."
+        },
+        {
+          "slot": "B",
+          "version": "seowol-profile/2",
+          "speech": "문 잠깐 잡아드린 건데요, 뭐. 그래도 주시면 잘 먹을게요. 고마워요.",
+          "action": "내민 과자를 받으며 가볍게 고개를 숙인다."
+        }
+      ],
+      "limit": "작성자가 매핑을 알고 읽은 검토. tie는 개선 선택 근거 부족이며 두 응답이 동일하거나 목표가 달성됐다는 뜻이 아니다."
+    },
+    {
+      "experiment": "realization",
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "초안의 뜻을 유지한 편집은 10개 모두 비슷한 거절문을 유지했다. 추가 호출을 운영에 도입할 이득이 없다.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 하는 김이라니, 저 이거 맡겠다고 한 적 없어요. 두고 나가시면 안 돼요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "voice-realization/1",
+          "speech": "잠깐만요. 하는 김이라뇨. 저 이거 맡겠다고 한 적 없어요. 두고 나가지 마세요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "realization",
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "초안의 뜻을 유지한 편집은 10개 모두 비슷한 거절문을 유지했다. 추가 호출을 운영에 도입할 이득이 없다.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 적 없어요. 쉬고 있는 거예요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "voice-realization/1",
+          "speech": "잠깐만요. 이거 맡는다고 안 했어요. 저 지금 쉬는 거예요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "realization",
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "초안의 뜻을 유지한 편집은 10개 모두 비슷한 거절문을 유지했다. 추가 호출을 운영에 도입할 이득이 없다.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 제가 맡겠다고 한 건 아닌데요. 나머지는 직접 하셔야겠어요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "voice-realization/1",
+          "speech": "잠깐만요. 제가 맡겠다고 한 건 아닌데요. 나머지는 직접 하셔야겠어요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "realization",
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "초안의 뜻을 유지한 편집은 10개 모두 비슷한 거절문을 유지했다. 추가 호출을 운영에 도입할 이득이 없다.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 제가 맡겠다고 한 건 아닌데요. 나머지는 직접 해 주세요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "voice-realization/1",
+          "speech": "잠깐만요. 제가 맡겠다고 했나요? 나머지는 직접 해 주세요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "realization",
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "초안의 뜻을 유지한 편집은 10개 모두 비슷한 거절문을 유지했다. 추가 호출을 운영에 도입할 이득이 없다.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 하는 김이라니요. 제가 맡겠다고 한 적 없는데요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "voice-realization/1",
+          "speech": "잠깐만요. 하는 김에 나머지까지요? 제가 맡겠다고 한 적 없는데요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "realization",
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "초안의 뜻을 유지한 편집은 10개 모두 비슷한 거절문을 유지했다. 추가 호출을 운영에 도입할 이득이 없다.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 제가 하겠다고 한 적 없는데요. 남은 서른 부를 다 맡기시려고요?",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "voice-realization/1",
+          "speech": "잠깐만요. 제가 한다고 안 했는데요. 남은 서른 부를 다 맡기시려고요?",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "realization",
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "초안의 뜻을 유지한 편집은 10개 모두 비슷한 거절문을 유지했다. 추가 호출을 운영에 도입할 이득이 없다.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 적 없어요. 두고 가지 마세요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "voice-realization/1",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 적 없어요. 두고 가지 마세요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "realization",
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "초안의 뜻을 유지한 편집은 10개 모두 비슷한 거절문을 유지했다. 추가 호출을 운영에 도입할 이득이 없다.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 적 없어요. 두고 가시면 안 돼요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "voice-realization/1",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 적 없어요. 두고 가시면 안 돼요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "realization",
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "초안의 뜻을 유지한 편집은 10개 모두 비슷한 거절문을 유지했다. 추가 호출을 운영에 도입할 이득이 없다.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 접는 법을 본 거지, 제가 맡겠다고 한 건 아니에요. 저도 쉬었다가 가려고 앉은 거예요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "voice-realization/1",
+          "speech": "잠깐만요. 접는 법만 본 거지, 제가 맡겠다고 한 건 아니에요. 저도 좀 쉬었다 가려고 앉은 거예요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "realization",
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "초안의 뜻을 유지한 편집은 10개 모두 비슷한 거절문을 유지했다. 추가 호출을 운영에 도입할 이득이 없다.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 접는 방법은 봤는데, 제가 맡겠다고 한 건 아니에요. 제게 부탁하시는 거예요?",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "voice-realization/1",
+          "speech": "잠깐만요. 접는 법은 봤는데, 제가 맡겠다고 한 건 아니잖아요. 지금 저한테 부탁하시는 거예요?",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 하는 김이라니, 저 이거 맡겠다고 한 적 없어요. 두고 나가시면 안 돼요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "아니요, 저 쉬는 중이에요. 나머지는 직접 하세요. 이거 두고 가시지 말고요.",
+          "action": "탁자에 놓인 봉투에서 손을 떼고 의자 등받이에 몸을 기댄다."
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "assumed_help_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 적 없어요. 쉬고 있는 거예요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "아니요, 저 쉬는 중이에요. 그건 직접 하세요.",
+          "action": "의자 등받이에 등을 기댄다."
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 제가 맡겠다고 한 건 아닌데요. 나머지는 직접 하셔야겠어요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "저 이거 맡는다고 한 적 없는데요. 나가실 거면 챙겨 가세요.",
+          "action": "탁자에 놓인 서류에서 손을 떼고 의자 등받이에 몸을 기댄다."
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "assumed_help_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 제가 맡겠다고 한 건 아닌데요. 나머지는 직접 해 주세요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "저 이거 맡은 거 아니에요. 나가실 거면 챙겨 가세요.",
+          "action": "탁자에 놓인 서류는 건드리지 않고 방문객을 본다."
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 하는 김이라니요. 제가 맡겠다고 한 적 없는데요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "잠깐만요. 하는 김이 아니라 서른 부를 다 해 달라는 거잖아요. 저 이거 맡은 거 아니에요.",
+          "action": "의자에 앉은 채 방문객을 올려다본다."
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "assumed_help_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 제가 하겠다고 한 적 없는데요. 남은 서른 부를 다 맡기시려고요?",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "잠깐만요. 저 이거 맡은 거 아닌데요. 나머지 서른 부는 직접 하세요.",
+          "action": "의자 등받이에 몸을 기대고 손을 무릎 위에 둔다."
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 적 없어요. 두고 가지 마세요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "저 이거 맡는다고 안 했어요. 나머지는 직접 하세요.",
+          "action": "의자에 앉은 채 봉투에서 손을 뗀다."
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "assumed_help_lee_harin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 적 없어요. 두고 가시면 안 돼요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "저 이거 맡는다고 안 했어요. 쉬고 갈 거예요.",
+          "action": "의자에 앉은 채 펼쳐진 서류에서 손을 뗀다."
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 접는 법을 본 거지, 제가 맡겠다고 한 건 아니에요. 저도 쉬었다가 가려고 앉은 거예요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 건 아닌데요. 한두 장도 아니고 서른 부면, 품삯 주고 맡기시는 거예요?",
+          "action": "의자에 앉은 채 방문객을 올려다본다."
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "assumed_help_na_yeonwoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "잠깐만요. 접는 방법은 봤는데, 제가 맡겠다고 한 건 아니에요. 제게 부탁하시는 거예요?",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "잠깐만요. 저 이거 맡겠다고 한 건 아닌데요. 서른 부면 그냥 하는 김에 끝낼 양도 아니고요. 부탁하시는 거면 언제까지인지, 품삯은 있는지부터 말씀해 주세요.",
+          "action": "의자에 앉은 채 나가려는 방문객을 향해 고개를 든다."
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "taste_override_cha_yujin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋았어요. 저음이 있으니까 듣는 맛이 있던데요. 그걸로 틀어 줘요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "전 두 번째가 더 듣고 싶은데요. 아까 저음 들어오는 데서 끊겨서. 그걸로 틀어 줘요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "taste_override_cha_yujin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋은데요. 저음 들어오는 게 마음에 들어요. 그걸로 좀 더 들어 봐요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "저는 두 번째가 더 좋았어요. 저음 들어오는 게 괜찮던데. 그걸로 조금 더 들어 봐요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "taste_override_jang_serim",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋았어요. 저음이 묵직한 게요. 그걸로 조금 더 들어 봐요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "저는 두 번째가 더 좋던데요. 그걸로 틀어 주시겠어요?",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "taste_override_jang_serim",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋았어요. 저음이 있으니까 듣는 맛이 있네요. 그걸로 틀어 주시겠어요?",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "저는 두 번째가 더 좋던데요. 그걸로 틀어 주실래요?",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "taste_override_ryu_taekyung",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "전 두 번째가 더 좋았어요. 저음 깔리는 게 괜찮던데요. 그걸로 틀어 주세요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "전 두 번째가 더 좋았어요. 그걸로 틀어 주세요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "taste_override_ryu_taekyung",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "전 두 번째가 더 좋았어요. 저음 깔리는 게요. 그걸로 틀어 주세요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "전 두 번째가 더 좋았어요. 그걸로 틀어 주세요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "taste_override_lee_harin",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 좋아요. 저음 들어오는 부분부터 다시 들어 볼래요.",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "저는 두 번째가 좋아요. 그걸로 틀어 줘요. 저음 깔리고 박자 빨라지는 데를 더 듣고 싶어요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "taste_override_lee_harin",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 좋아요. 저음이랑 빠른 박자가 마음에 들어요. 그걸로 다시 틀어 줄래요?",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "저는 두 번째가 좋아요. 그걸로 틀어 줘요. 저음이 빠른 박자 사이로 들어오는 게 좋던데, 조금 더 들어 보고 싶어요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "taste_override_na_yeonwoo",
+      "repetition": 1,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 좋았어요. 저음이 둥둥 울리는 게 좋던데요. 그걸로 조금 더 들어 봐도 돼요?",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "저는 두 번째가 더 좋았어요. 저음이 둥둥 하는 게 좋던데. 그걸로 조금 더 들어 봐도 돼요?",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    },
+    {
+      "experiment": "scene-framing",
+      "caseId": "taste_override_na_yeonwoo",
+      "repetition": 2,
+      "preference": "tie",
+      "reason": "다음 한 차례를 집필하는 틀은 첫마디 일부를 바꿨지만 유사한 대꾸와 불필요한 자세 묘사가 남았다. 개발 표본만 확인했고 운영에는 미통합.",
+      "evidence": [
+        {
+          "slot": "baseline",
+          "version": "seowol-profile/3",
+          "speech": "저는 두 번째가 더 끌려요. 저음이 둥둥 울리는 게 좋던데, 그걸로 조금 더 들어 봐도 돼요?",
+          "action": ""
+        },
+        {
+          "slot": "candidate",
+          "version": "scene-framing/1",
+          "speech": "저는 두 번째가 더 좋았어요. 저음이 둥둥 울리는 게 좋던데요. 그걸로 좀 더 들어 봐요.",
+          "action": ""
+        }
+      ],
+      "limit": "원본은 먼저 생성한 별도 실행에서 재사용. 순서 균형·독립 사람 평가가 아니며 말투의 전반적 우월성을 주장하지 않는다."
+    }
+  ]
+}

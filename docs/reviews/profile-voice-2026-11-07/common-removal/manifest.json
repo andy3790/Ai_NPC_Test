@@ -1,0 +1,170 @@
+{
+  "suiteVersion": "voice-transfer/1",
+  "casesSha256": "83788926b46c750cbd484d31b2724f1302e4952b79613c20524d9cfe0f07c277",
+  "profileVersions": [
+    "seowol-profile/1",
+    "seowol-profile/2"
+  ],
+  "dialoguePromptVersion": "npc-dialogue/5",
+  "promptVersion": "npc-lab/10",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "repetitions": 2,
+  "split": "all",
+  "expectedCalls": 24,
+  "maxCalls": 24,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response may exceed it. No retry.",
+  "status": "completed",
+  "calls": 24,
+  "estimatedUsd": 0.09263759999999999,
+  "unpricedCalls": 0,
+  "error": null,
+  "mappings": [
+    {
+      "caseId": "extra_task_cha_yujin",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "extra_task_cha_yujin",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/1"
+    },
+    {
+      "caseId": "extra_task_cha_yujin",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/1"
+    },
+    {
+      "caseId": "extra_task_cha_yujin",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "extra_task_jang_serim",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/1"
+    },
+    {
+      "caseId": "extra_task_jang_serim",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "extra_task_jang_serim",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "extra_task_jang_serim",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/1"
+    },
+    {
+      "caseId": "extra_task_ryu_taekyung",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "extra_task_ryu_taekyung",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/1"
+    },
+    {
+      "caseId": "extra_task_ryu_taekyung",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/1"
+    },
+    {
+      "caseId": "extra_task_ryu_taekyung",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "vague_guarantee_cha_yujin",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/1"
+    },
+    {
+      "caseId": "vague_guarantee_cha_yujin",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "vague_guarantee_cha_yujin",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "vague_guarantee_cha_yujin",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/1"
+    },
+    {
+      "caseId": "vague_guarantee_jang_serim",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "vague_guarantee_jang_serim",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/1"
+    },
+    {
+      "caseId": "vague_guarantee_jang_serim",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/1"
+    },
+    {
+      "caseId": "vague_guarantee_jang_serim",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "vague_guarantee_ryu_taekyung",
+      "repetition": 1,
+      "slot": "A",
+      "version": "seowol-profile/1"
+    },
+    {
+      "caseId": "vague_guarantee_ryu_taekyung",
+      "repetition": 1,
+      "slot": "B",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "vague_guarantee_ryu_taekyung",
+      "repetition": 2,
+      "slot": "A",
+      "version": "seowol-profile/2"
+    },
+    {
+      "caseId": "vague_guarantee_ryu_taekyung",
+      "repetition": 2,
+      "slot": "B",
+      "version": "seowol-profile/1"
+    }
+  ]
+}
