@@ -29,3 +29,14 @@ test('conversation comparisons preserve world, private profiles and scheduled ev
   input.variants[0].environmentMode = 'off';
   assert.equal(prepareConversations([input], options).expectedCalls, 72);
 });
+
+test('world comparisons fix NPC instructions and vary only the world policy', () => {
+  const selected = { ...options, baseline: options.candidate, worldBaseline: 'npc-world/2' as const, worldCandidate: 'npc-world/4' as const };
+  const { specs: [spec], expectedCalls } = prepareConversations([fixture], selected);
+  assert.equal(expectedCalls, 144);
+  assert.ok(spec.variants.every(v => v.dialoguePromptVersion === 'npc-dialogue/5'));
+  assert.deepEqual(spec.variants.map(v => v.worldPromptVersion), ['npc-world/2', 'npc-world/4']);
+  assert.throws(() => prepareConversations([fixture], { ...selected, baseline: 'npc-dialogue/3' }), /one fixed NPC policy/);
+  const off = structuredClone(fixture); off.variants[0].environmentMode = 'off';
+  assert.throws(() => prepareConversations([off], selected), /AI mode/);
+});

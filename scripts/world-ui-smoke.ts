@@ -26,6 +26,8 @@ try {
   await page.getByRole('button', { name: '03 실험 조건' }).click();
   await page.getByLabel('차례에 모아 전달 환경 방식', { exact: true }).selectOption('ai');
   await page.getByLabel('매 발화마다 전달 환경 방식', { exact: true }).selectOption('ai');
+  await page.getByLabel('차례에 모아 전달 세계 결과 지침', { exact: true }).selectOption('npc-world/2');
+  await page.getByLabel('매 발화마다 전달 세계 결과 지침', { exact: true }).selectOption('npc-world/4');
   await page.getByLabel('세계 엔진 추론 강도', { exact: true }).selectOption('medium');
   await page.getByLabel('세계 엔진 추가 규칙', { exact: true }).fill('메시지 답장은 장면의 가상 시간에 맞춰 늦게 도착할 수 있다.');
   await page.getByLabel('묶음당 공개 발화 수').fill('4');
@@ -37,6 +39,9 @@ try {
   for (const run of runs) {
     const detail = await (await page.request.get(`/api/runs/${run.id}`)).json() as RunDetail;
     assert.equal(detail.summary.byKind.environment.calls, 4); assert.equal(detail.run.spec.worldEngine?.effort, 'medium');
+    const expectedPolicy = run.variant.deliveryMode === 'batched_on_turn' ? 'npc-world/2' : 'npc-world/4';
+    assert.equal(detail.run.variant.worldPromptVersion, expectedPolicy);
+    assert.ok(detail.invocations.filter(c => c.kind === 'environment').every(c => c.metadata.worldPromptVersion === expectedPolicy));
     assert.ok(detail.run.worldState?.virtualSeconds); assert.equal(detail.run.worldState?.processes[0].status, 'pending');
   }
   await page.locator('.run-card').first().click();

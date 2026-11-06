@@ -10,6 +10,7 @@ import { sha256 } from './lib/dialogue-eval.js';
 import { worldPolicies, WORLD_PROMPT_VERSION } from '../src/core/world-policies.js';
 import { outputSchemas } from '../src/shared/schema.js';
 import { CURRENT_DIALOGUE_PROMPT, DIALOGUE_PROMPT_VERSIONS, type DialoguePromptVersion } from '../src/shared/dialogue-policy.js';
+import { WORLD_PROMPT_VERSIONS, type WorldPromptVersion } from '../src/shared/world-policy.js';
 import { dialoguePolicies } from '../src/core/dialogue-policies.js';
 import { baseInstructions, PROMPT_VERSION } from '../src/core/prompts.js';
 
@@ -20,23 +21,27 @@ const { values } = parseArgs({ options: {
   baseline: { type: 'string', default: 'npc-dialogue/1' }, candidate: { type: 'string', default: CURRENT_DIALOGUE_PROMPT },
   turns: { type: 'string', default: '18' }, repetitions: { type: 'string', default: '1' },
   'world-model': { type: 'string' }, 'world-effort': { type: 'string', default: 'medium' },
+  'world-baseline': { type: 'string' }, 'world-candidate': { type: 'string' },
   'max-calls': { type: 'string', default: '200' },
   'max-usd': { type: 'string', default: '3' },
 } });
 const maxUsd = Number(values['max-usd']);
 const maxCalls = Number(values['max-calls']), turns = Number(values.turns), repetitions = Number(values.repetitions);
 const baseline = values.baseline as DialoguePromptVersion, candidate = values.candidate as DialoguePromptVersion;
+const worldBaseline = values['world-baseline'] as WorldPromptVersion | undefined, worldCandidate = values['world-candidate'] as WorldPromptVersion | undefined;
+if ((worldBaseline || worldCandidate) && (!worldBaseline || !worldCandidate || !WORLD_PROMPT_VERSIONS.includes(worldBaseline) ||
+    !WORLD_PROMPT_VERSIONS.includes(worldCandidate) || worldBaseline === worldCandidate || baseline !== candidate)) throw new Error('Invalid world comparison; keep the NPC policy fixed.');
 if (!['openai', 'codex'].includes(values.adapter!) || !Number.isFinite(maxUsd) || maxUsd <= 0 || maxUsd > 10 ||
     !Number.isSafeInteger(maxCalls) || maxCalls < 1 || maxCalls > 500 || !Number.isSafeInteger(turns) || turns < 3 || turns > 60 ||
     !Number.isSafeInteger(repetitions) || repetitions < 1 || repetitions > 3 ||
-    !DIALOGUE_PROMPT_VERSIONS.includes(baseline) || !DIALOGUE_PROMPT_VERSIONS.includes(candidate) || baseline === candidate) throw new Error('Invalid limits/adapter/policies.');
+    !DIALOGUE_PROMPT_VERSIONS.includes(baseline) || !DIALOGUE_PROMPT_VERSIONS.includes(candidate) || (baseline === candidate && !worldBaseline)) throw new Error('Invalid limits/adapter/policies.');
 const raw = await readFile(resolve(values.specs!), 'utf8');
 const fixtures = JSON.parse(raw) as unknown[];
 if (!Array.isArray(fixtures) || !fixtures.length) throw new Error('At least one conversation fixture is required.');
-const { specs, expectedCalls } = prepareConversations(fixtures, { model: values.model!, effort: values.effort!, baseline, candidate, turns, repetitions, worldModel: values['world-model'], worldEffort: values['world-effort']! });
+const { specs, expectedCalls } = prepareConversations(fixtures, { model: values.model!, effort: values.effort!, baseline, candidate, turns, repetitions, worldModel: values['world-model'], worldEffort: values['world-effort']!, worldBaseline, worldCandidate });
 if (expectedCalls > maxCalls) throw new Error(`Plan needs up to ${expectedCalls} calls; limit is ${maxCalls}.`);
 const plan = { adapter: values.adapter, model: values.model, effort: values.effort, maxCalls, expectedCalls, maxUsd, turns, repetitions,
-  promptVersion: PROMPT_VERSION, worldPromptVersion: WORLD_PROMPT_VERSION, fixturesSha256: sha256(raw), baseline, candidate, costLimit: 'API catalogue equivalent, not subscription billing; last response may overshoot. No retry.' };
+  promptVersion: PROMPT_VERSION, worldPromptVersion: WORLD_PROMPT_VERSION, fixturesSha256: sha256(raw), baseline, candidate, worldBaseline, worldCandidate, costLimit: 'API catalogue equivalent, not subscription billing; last response may overshoot. No retry.' };
 if (!values.live) console.log(JSON.stringify({ live: false, ...plan }, null, 2));
 else {
   const root = resolve('.cache/dialogue-soak', new Date().toISOString().replace(/[:.]/g, '-'));
@@ -65,10 +70,10 @@ else {
       const { runs } = await engine.create(spec); await engine.idle();
       for (const run of runs) {
         const detail = engine.detail(run.id);
-        const directory = join(root, `${spec.scenario.id}-${run.variant.dialoguePromptVersion!.replace('/', '-')}-${run.repetition}`);
+        const directory = join(root, `${spec.scenario.id}-${run.variant.dialoguePromptVersion!.replace('/', '-')}${worldBaseline ? '-' + run.variant.worldPromptVersion!.replace('/', '-') : ''}-${run.repetition}`);
         await mkdir(directory, { recursive: true });
         for (const [name, content] of Object.entries(exportFiles(detail, store.events(run.id)))) await writeFile(join(directory, name), content);
-        reports.push({ scene: spec.scenario.id, policy: run.variant.dialoguePromptVersion, repetition: run.repetition, status: detail.run.status,
+        reports.push({ scene: spec.scenario.id, policy: run.variant.dialoguePromptVersion, worldPolicy: run.variant.worldPromptVersion, repetition: run.repetition, status: detail.run.status,
           completionReason: detail.run.completionReason, error: detail.run.error, summary: detail.summary });
       }
       if (runs.some(r => engine.run(r.id).status !== 'completed')) throw new Error('Conversation did not complete; stopped without retry.');

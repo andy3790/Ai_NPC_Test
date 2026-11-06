@@ -1,0 +1,326 @@
+{
+  "date": "2026-11-07",
+  "reviewer": "Prompt author (non-independent qualitative review)",
+  "prices": "Local 2026-11-06 catalogue estimate using reported API usage; not account balance or an invoice.",
+  "totals": {
+    "calls": 472,
+    "estimatedUsd": 0.30407545999999996
+  },
+  "experiments": [
+    {
+      "id": "v3-development",
+      "kind": "fixed-context",
+      "source": ".cache/world-eval/2026-11-06T18-56-40-619Z-development-0ae1f34e",
+      "suite": "world-observations/1",
+      "casesSha256": "14f83820b9b7d8e3164eb44b827f9428c891480cd6e3c9d00446c41f160e0ff6",
+      "split": "development",
+      "baseline": "npc-world/2",
+      "candidate": "npc-world/3",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "repetitions": 2,
+      "expectedCalls": 32,
+      "maxCalls": 32,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "schemaSha256": "a156e1d1da3a599ef2bc72096142ab17fe18adb681337dac6f7739aa856915ff",
+      "review": "Event presence and runtime validation are mechanical checks, not semantic correctness.",
+      "status": "completed",
+      "error": null,
+      "calls": 32,
+      "estimatedUsd": 0.005015180000000001,
+      "quality": "unreviewed",
+      "invalidOutputs": 1,
+      "actualModelIds": [
+        "gpt-6-luna"
+      ],
+      "samplesSha256": "82d1adf4639136eacf7ba3e04226e587c2a077db819294264b6a381d3dc2e7df",
+      "byPolicy": {
+        "npc-world/3": {
+          "calls": 16,
+          "valid": 15,
+          "eventExpectationMet": 15
+        },
+        "npc-world/2": {
+          "calls": 16,
+          "valid": 16,
+          "eventExpectationMet": 15
+        }
+      }
+    },
+    {
+      "id": "v4-development",
+      "kind": "fixed-context",
+      "source": ".cache/world-eval/2026-11-06T18-59-31-903Z-development-f4f421a1",
+      "suite": "world-observations/1",
+      "casesSha256": "14f83820b9b7d8e3164eb44b827f9428c891480cd6e3c9d00446c41f160e0ff6",
+      "split": "development",
+      "baseline": "npc-world/2",
+      "candidate": "npc-world/4",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "repetitions": 3,
+      "expectedCalls": 48,
+      "maxCalls": 48,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "schemaSha256": "a156e1d1da3a599ef2bc72096142ab17fe18adb681337dac6f7739aa856915ff",
+      "review": "Event presence and runtime validation are mechanical checks, not semantic correctness.",
+      "status": "completed",
+      "error": null,
+      "calls": 48,
+      "estimatedUsd": 0.00634436,
+      "quality": "unreviewed",
+      "invalidOutputs": 0,
+      "actualModelIds": [
+        "gpt-6-luna"
+      ],
+      "samplesSha256": "5ea006ca4c764815dcc562b911234e6f5d2c6df27f4461f380439e0637232c20",
+      "byPolicy": {
+        "npc-world/4": {
+          "calls": 24,
+          "valid": 24,
+          "eventExpectationMet": 24
+        },
+        "npc-world/2": {
+          "calls": 24,
+          "valid": 24,
+          "eventExpectationMet": 22
+        }
+      }
+    },
+    {
+      "id": "v4-holdout",
+      "kind": "fixed-context",
+      "source": ".cache/world-eval/2026-11-06T18-59-31-023Z-holdout-3b195097",
+      "suite": "world-observations/1",
+      "casesSha256": "14f83820b9b7d8e3164eb44b827f9428c891480cd6e3c9d00446c41f160e0ff6",
+      "split": "holdout",
+      "baseline": "npc-world/2",
+      "candidate": "npc-world/4",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "repetitions": 3,
+      "expectedCalls": 36,
+      "maxCalls": 36,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "schemaSha256": "a156e1d1da3a599ef2bc72096142ab17fe18adb681337dac6f7739aa856915ff",
+      "review": "Event presence and runtime validation are mechanical checks, not semantic correctness.",
+      "status": "completed",
+      "error": null,
+      "calls": 36,
+      "estimatedUsd": 0.0067599900000000004,
+      "quality": "unreviewed",
+      "invalidOutputs": 0,
+      "actualModelIds": [
+        "gpt-6-luna"
+      ],
+      "samplesSha256": "c9fbab57c3387478548a471854786a4884dd57bbea6858959a2a4569987b3aa2",
+      "byPolicy": {
+        "npc-world/4": {
+          "calls": 18,
+          "valid": 18,
+          "eventExpectationMet": 18
+        },
+        "npc-world/2": {
+          "calls": 18,
+          "valid": 18,
+          "eventExpectationMet": 18
+        }
+      }
+    },
+    {
+      "id": "charger-world-comparison",
+      "kind": "conversation",
+      "source": ".cache/dialogue-soak/2026-11-06T19-02-38-204Z",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 144,
+      "estimatedUsd": 0.104328595,
+      "error": null,
+      "completedRuns": 4,
+      "totalRuns": 4,
+      "transcripts": [
+        {
+          "file": "charger_with_observation-npc-dialogue-5-npc-world-2-1.md",
+          "sha256": "e71853341fb68c97dd3cb06cc431afba646917bfac93643dbc3ce0f8c38ef964",
+          "sourceSha256": "a3e32322b669b6bc8dc269f386acb1c963c96c4f7466b529989062ba9ae487fb",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "charger_with_observation-npc-dialogue-5-npc-world-2-2.md",
+          "sha256": "c5bf0f2273edca1e2286adf48c375f08532786a6606f1127e79e13b607561a16",
+          "sourceSha256": "e06ea1aa0658acf89876a0cfbf92c0e51fc441fd07028acfd2585ca10e0a0375",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "charger_with_observation-npc-dialogue-5-npc-world-4-1.md",
+          "sha256": "b3279bff4ffefbf4d90e37a4afc06361f4ccb18010503b1003c495ff9e230e81",
+          "sourceSha256": "bb68fbc400adca183c11c6b9caf8eb69671a9fd4156795481b6d2c939aa0782d",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "charger_with_observation-npc-dialogue-5-npc-world-4-2.md",
+          "sha256": "cc05c13c1f7746c71ca88113ecbdf833e85f09f647ff13dadb84ca26fe884f4e",
+          "sourceSha256": "08ddf60c4c9f7d88a2b9f66912de2ef0d732f8374b148408d8f9088f07509e30",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        }
+      ],
+      "worldCalls": [
+        {
+          "file": "charger_with_observation-npc-dialogue-5-npc-world-2-1-world.jsonl",
+          "sha256": "27a658d375126b20c17fd6249111c7363b18101e4060a867b56bc3af2668a1bc",
+          "calls": 18,
+          "eventCount": 4,
+          "policies": [
+            "npc-world/2"
+          ],
+          "actualModelIds": [
+            "gpt-6-luna"
+          ]
+        },
+        {
+          "file": "charger_with_observation-npc-dialogue-5-npc-world-2-2-world.jsonl",
+          "sha256": "4a6376a1c736f9c59e9e1266fd357f4b89fdd26123483cb61069d8d4a7ece2ad",
+          "calls": 18,
+          "eventCount": 5,
+          "policies": [
+            "npc-world/2"
+          ],
+          "actualModelIds": [
+            "gpt-6-luna"
+          ]
+        },
+        {
+          "file": "charger_with_observation-npc-dialogue-5-npc-world-4-1-world.jsonl",
+          "sha256": "6ef3cd1bc4096a7ba41812420cfd7694fa81e526c3d013d734665a357e4322c5",
+          "calls": 18,
+          "eventCount": 4,
+          "policies": [
+            "npc-world/4"
+          ],
+          "actualModelIds": [
+            "gpt-6-luna"
+          ]
+        },
+        {
+          "file": "charger_with_observation-npc-dialogue-5-npc-world-4-2-world.jsonl",
+          "sha256": "64f7b59634db3edf7e2126d84891876e7581e78ed42bfa5b049266fd725121a6",
+          "calls": 18,
+          "eventCount": 4,
+          "policies": [
+            "npc-world/4"
+          ],
+          "actualModelIds": [
+            "gpt-6-luna"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "seowol-world-v2",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T19-02-38-027Z-world-v2",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 106,
+      "estimatedUsd": 0.09332436499999999,
+      "error": null,
+      "completedRuns": 2,
+      "totalRuns": 2,
+      "transcripts": [
+        {
+          "file": "run-1.md",
+          "sha256": "896705b61f4e1028e59cba4fd2e5b22b2fe6ea7457732b5b34c70920f94d23c0",
+          "sourceSha256": "79034f719a7177c4111503e11fc7d1560cf9e790d8ff6d0a684909ab27505f31",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "run-2.md",
+          "sha256": "b92e3a54fc2af05d714aec6f4a2020d9d61413b0e58c7e35756ad74615b8a8d1",
+          "sourceSha256": "017c3eea40143ebe721eeb115faefc359c40ab60dd018f4425d54be0eb002fbf",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        }
+      ],
+      "worldCalls": [
+        {
+          "file": "run-1-world.jsonl",
+          "sha256": "3694747d93e55298caa5a9daf4cd7000064bc153b60d3590cd2645d1653797d0",
+          "calls": 18,
+          "eventCount": 3,
+          "policies": [
+            "npc-world/2"
+          ],
+          "actualModelIds": [
+            "gpt-6-luna"
+          ]
+        },
+        {
+          "file": "run-2-world.jsonl",
+          "sha256": "da9aa83d014fa96419af053f610d49aad50610e720bd2db029ec5407c275fcf0",
+          "calls": 18,
+          "eventCount": 5,
+          "policies": [
+            "npc-world/2"
+          ],
+          "actualModelIds": [
+            "gpt-6-luna"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "seowol-world-v4",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T19-02-37-937Z-world-v4",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 106,
+      "estimatedUsd": 0.08830297,
+      "error": null,
+      "completedRuns": 2,
+      "totalRuns": 2,
+      "transcripts": [
+        {
+          "file": "run-1.md",
+          "sha256": "fda90a1f14784d355ba84a9c5cc7a82df58f2ee3458264b3c3bb483cf79cc751",
+          "sourceSha256": "4437c7ef29b7b682abd33dfa2b4f6973a52c56716d3f1e873a55e37caf3e6a18",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "run-2.md",
+          "sha256": "3208bb4329b647a17759a87b955e951895dc1d061946d5e4efca2a7929f8aaf2",
+          "sourceSha256": "31b0454f8760155a45fb90c31be7ff56033f08caac0d419ef66c5c63e3da1c1d",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        }
+      ],
+      "worldCalls": [
+        {
+          "file": "run-1-world.jsonl",
+          "sha256": "d9eb8b45e0f4a6afc74c2e11875153ecebb537f77e3cc2e392f0521bb293d09a",
+          "calls": 18,
+          "eventCount": 1,
+          "policies": [
+            "npc-world/4"
+          ],
+          "actualModelIds": [
+            "gpt-6-luna"
+          ]
+        },
+        {
+          "file": "run-2-world.jsonl",
+          "sha256": "e4fe67721e8e7d40069300deb1ffa506b575c5d2ac10b3ff237baca80de92a49",
+          "calls": 18,
+          "eventCount": 3,
+          "policies": [
+            "npc-world/4"
+          ],
+          "actualModelIds": [
+            "gpt-6-luna"
+          ]
+        }
+      ]
+    }
+  ]
+}

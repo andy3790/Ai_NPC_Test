@@ -1,0 +1,46 @@
+{
+  "promptVersion": "npc-lab/8",
+  "worldPromptVersion": "npc-world/2",
+  "dialoguePromptVersion": "npc-dialogue/5",
+  "scenario": "테이프 감은 앰프",
+  "model": "gpt-6.1-sol",
+  "turns": 18,
+  "repetitions": 2,
+  "expectedCalls": 106,
+  "maxCalls": 106,
+  "maxUsd": 1,
+  "costLimit": "Stop before a new request once recorded catalogue estimate reaches maxUsd; one request can overshoot.",
+  "requests": 106,
+  "reports": [
+    {
+      "id": "194aeaa1-5e2e-4749-ac50-e3a1ccab59ca",
+      "status": "completed",
+      "error": null,
+      "calls": 53,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.045884069999999985,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "id": "6082b033-3418-422a-b5e6-d8ce3ac9256a",
+      "status": "completed",
+      "error": null,
+      "calls": 53,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.047440295,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    }
+  ]
+}

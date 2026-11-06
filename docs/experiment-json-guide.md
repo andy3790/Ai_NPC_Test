@@ -159,10 +159,15 @@ ExperimentSpec
 | `memoryMode` | `initial_only` 기본 / `reinject_on_speech` |
 | `deliveryMode` | `batched_on_turn` 기본 / `per_utterance` |
 | `turnPolicy` | `round_robin` 기본 / `director` |
+| `dialoguePromptVersion` | 선택 사항. `npc-dialogue/1`~`/5`. 생략하면 새 실행 생성 시 현재 기본값을 고정 |
+| `worldPromptVersion` | 선택 사항. `npc-world/1`~`/4`. 단일 공간 `ai`에서만 사용. 생략하면 새 실행 생성 시 현재 기본값을 고정 |
+| `stopOnSilence` | 선택 불리언. 기본 꺼짐. `off`에서 모두 조용하고 미적용 예정 사건이 없으면 종료 |
 | `environmentMode` | `off`, `rules`, `ai`, `ai_spatial`. 생략 시 활성 environment가 있으면 rules, 없으면 off |
 | `eventGeneration` | 선택 불리언. 생략은 꺼짐. true는 ai/ai_spatial과 eventGenerator 필요 |
 
 `batched_on_turn`은 다른 NPC의 발언을 수신함에 쌓았다가 자기 차례에 아직 받지 않은 내용을 순서대로 전달합니다. 별도 수신 모델 호출은 없고 종료 시 미처리 수신함이 남을 수 있습니다.
+
+프롬프트의 실제 선택은 생성된 실행의 `variant`와 호출 메타데이터에서 확인합니다. 원본 spec은 입력 당시 값을 보존합니다. 이미 생성된 세션의 지침은 재개할 때 바꾸지 않습니다. 세계 버전 필드가 없던 실행에서 새로 만드는 세계 세션은 이전 기본값 `/2`를 사용합니다. 그보다 오래된 임의 지침을 정확히 복원한다는 뜻은 아닙니다. 변경 이유와 검증은 [프롬프트 관리](dialogue-prompts.md)에 있습니다.
 
 `per_utterance`는 발화마다 실제 관찰 대상 NPC가 같은 세션·모델·추론으로 수신 확인 호출을 수행합니다. 필요한 확인을 모두 처리한 뒤 다음 단계가 시작됩니다. 분산 공간에서는 위치·통신 방식에 따라 수신 대상이 줄고, 혼자 행동은 수신 호출이 없을 수 있습니다. 수신 출력은 공개 대사에 섞이지 않습니다.
 

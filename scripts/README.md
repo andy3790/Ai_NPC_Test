@@ -99,3 +99,7 @@ python scripts/verify-comparison.py reports/delivery-comparison
 `node --env-file-if-exists=.env --import tsx scripts/dialogue-soak.ts`는 여러 차례 대화를 비교합니다. `--specs`의 원래 환경 모드와 예정 사건을 유지하고 반복별로 내보냅니다. `--world-model`로 세계 모델을 따로 지정할 수 있습니다. 세계 호출까지 포함한 상한을 시작 전에 확인합니다.
 
 서월 실행 도구의 `--policy npc-dialogue/5`는 공통 지침만 선택하며 캐릭터 프로필은 원본 설정대로 유지합니다. 원문·버전·비용·실패 해석은 [프롬프트 변경과 검증](../docs/dialogue-prompts.md)을 참고하세요.
+
+`npm run world:eval`은 세계 엔진의 고정 입력 비교 계획을 출력합니다. `--live`로만 API를 사용하고 `--baseline`, `--candidate`, `--split`, `--repetitions`, `--max-calls`, `--max-usd`로 범위를 고정합니다. 참고 판정 기준은 요청에 넣지 않습니다. 잘못된 결과도 원문과 기존 런타임 검증 오류를 저장하며 독립 사례를 계속 검사합니다. 전송 실패·예산·사용량 누락에서는 중단하며 자동 재시도하지 않습니다. 사건 개수 검사는 의미 정확성 평가가 아닙니다.
+
+여러 차례 세계 비교는 `dialogue-soak.ts`의 NPC `--baseline`과 `--candidate`를 동일하게 두고 `--world-baseline npc-world/2 --world-candidate npc-world/4`를 지정합니다. NPC 정책까지 동시에 바꾸는 혼합 비교는 거부합니다. 서월은 `seowol-live.ts --world-policy npc-world/4`로 지정합니다.

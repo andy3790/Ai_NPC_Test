@@ -1,9 +1,11 @@
 import { environmentMode, experimentSchema } from '../../src/shared/schema.js';
 import type { DialoguePromptVersion } from '../../src/shared/dialogue-policy.js';
+import type { WorldPromptVersion } from '../../src/shared/world-policy.js';
 
 interface ConversationOptions {
   model: string; effort: string; baseline: DialoguePromptVersion; candidate: DialoguePromptVersion;
   turns: number; repetitions: number; worldModel?: string; worldEffort: string;
+  worldBaseline?: WorldPromptVersion; worldCandidate?: WorldPromptVersion;
 }
 
 export function prepareConversations(fixtures: unknown[], options: ConversationOptions) {
@@ -15,9 +17,13 @@ export function prepareConversations(fixtures: unknown[], options: ConversationO
     spec.repetitions = options.repetitions; spec.maxUtterances = options.turns;
     const mode = environmentMode(spec, spec.variants[0]);
     if (!['off', 'ai'].includes(mode)) throw new Error('This probe supports off/ai environments only.');
+    if ((options.worldBaseline || options.worldCandidate) && (mode !== 'ai' || !options.worldBaseline || !options.worldCandidate ||
+        options.worldBaseline === options.worldCandidate || options.baseline !== options.candidate)) throw new Error('World comparisons require AI mode, distinct world policies and one fixed NPC policy.');
     if (options.worldModel) spec.worldEngine = { model: options.worldModel, effort: options.worldEffort };
-    const versions = i % 2 ? [options.candidate, options.baseline] : [options.baseline, options.candidate];
-    spec.variants = versions.map((version, index) => ({ id: `condition-${index}`, label: version, dialoguePromptVersion: version,
+    const conditions = [{ dialoguePromptVersion: options.baseline, worldPromptVersion: options.worldBaseline },
+      { dialoguePromptVersion: options.candidate, worldPromptVersion: options.worldCandidate }];
+    if (i % 2) conditions.reverse();
+    spec.variants = conditions.map((condition, index) => ({ id: `condition-${index}`, label: [condition.dialoguePromptVersion, condition.worldPromptVersion].filter(Boolean).join(' + '), ...condition,
       environmentMode: mode, stopOnSilence: true, deliveryMode: 'batched_on_turn', memoryMode: 'initial_only', turnPolicy: 'round_robin', eventGeneration: false }));
     return experimentSchema.parse(spec);
   });

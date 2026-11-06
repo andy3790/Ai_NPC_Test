@@ -8,6 +8,7 @@ import { exportFiles } from '../src/core/export.js';
 import { experimentSchema } from '../src/shared/schema.js';
 import { PROMPT_VERSION } from '../src/core/prompts.js';
 import { WORLD_PROMPT_VERSION } from '../src/core/world-policies.js';
+import { WORLD_PROMPT_VERSIONS, type WorldPromptVersion } from '../src/shared/world-policy.js';
 import { CURRENT_DIALOGUE_PROMPT, DIALOGUE_PROMPT_VERSIONS, type DialoguePromptVersion } from '../src/shared/dialogue-policy.js';
 
 // Explicit paid experiment. Each run has fresh NPC sessions and an isolated DB.
@@ -16,6 +17,7 @@ const { values } = parseArgs({ options: {
   live: { type: 'boolean', default: false }, spec: { type: 'string' },
   label: { type: 'string', default: 'review' }, model: { type: 'string' },
   policy: { type: 'string', default: CURRENT_DIALOGUE_PROMPT },
+  'world-policy': { type: 'string', default: WORLD_PROMPT_VERSION },
   turns: { type: 'string', default: '12' }, repetitions: { type: 'string', default: '1' },
   'max-calls': { type: 'string', default: '80' }, 'max-usd': { type: 'string', default: '1' },
 } });
@@ -23,9 +25,10 @@ if (!values.spec) throw new Error('--spec is required. Add --live only to make p
 const turns = Number(values.turns), repetitions = Number(values.repetitions);
 const maxCalls = Number(values['max-calls']), maxUsd = Number(values['max-usd']);
 const dialoguePromptVersion = values.policy as DialoguePromptVersion;
+const worldPromptVersion = values['world-policy'] as WorldPromptVersion;
 if (!Number.isSafeInteger(turns) || turns < 3 || turns > 60 || !Number.isSafeInteger(repetitions) || repetitions < 1 || repetitions > 3 ||
     !Number.isSafeInteger(maxCalls) || maxCalls < 1 || maxCalls > 600 || !Number.isFinite(maxUsd) || maxUsd <= 0 || maxUsd > 10 ||
-    !DIALOGUE_PROMPT_VERSIONS.includes(dialoguePromptVersion)) {
+    !DIALOGUE_PROMPT_VERSIONS.includes(dialoguePromptVersion) || !WORLD_PROMPT_VERSIONS.includes(worldPromptVersion)) {
   throw new Error('Invalid live experiment limits.');
 }
 const spec = experimentSchema.parse(JSON.parse(await readFile(resolve(values.spec), 'utf8')));
@@ -35,12 +38,12 @@ spec.maxUtterances = turns; spec.repetitions = repetitions;
 spec.concurrentRuns = 1; spec.maxConcurrentCalls = 1; spec.timeoutMs = 120_000;
 spec.evaluation.enabled = false;
 spec.variants = [{ ...spec.variants[0], id: 'review', label: `${model} / low / ${values.label}`,
-  model, dialoguePromptVersion, effort: 'low', environmentMode: 'ai', eventGeneration: false,
+  model, dialoguePromptVersion, worldPromptVersion, effort: 'low', environmentMode: 'ai', eventGeneration: false,
   memoryMode: 'initial_only', deliveryMode: 'batched_on_turn', turnPolicy: 'director' }];
 for (const c of spec.scenario.characters) { delete c.model; delete c.effort; }
 spec.director = { model: 'gpt-6-luna', effort: 'low' };
 spec.worldEngine = { model: 'gpt-6-luna', effort: 'medium' };
-const plan = { promptVersion: PROMPT_VERSION, worldPromptVersion: WORLD_PROMPT_VERSION, dialoguePromptVersion, scenario: spec.scenario.name, model,
+const plan = { promptVersion: PROMPT_VERSION, worldPromptVersion, dialoguePromptVersion, scenario: spec.scenario.name, model,
   turns, repetitions, expectedCalls: repetitions * (3 * turns - 1), maxCalls, maxUsd,
   costLimit: 'Stop before a new request once recorded catalogue estimate reaches maxUsd; one request can overshoot.' };
 experimentSchema.parse(spec);

@@ -18,13 +18,14 @@
   },
   "compatibility": {
     "schemaPath": "src/shared/schema.ts",
-    "schemaSha256": "36093ce9e1b5a860da8e368b2c711547cc1fffeaa5c99c7800476010067edf66",
+    "schemaSha256": "3c2f01c726b9e25a01c5bc330d0d664a2471f5cddafc3340c75e68e558076e3c",
     "promptPath": "src/core/prompts.ts",
     "promptSha256": "af7cfd9171a79c4f32c78baf7b367533e9fe20c547771cc22b8a97f0d4244ad8",
     "promptDependencies": {
       "src/core/dialogue-policies.ts": "e15b2d59c3b2d8a2630f1f08c642d875000bf608c496ba09c054cd121284a5aa",
       "src/shared/dialogue-policy.ts": "7d018d7208cf8cee5badbf27402b726171e711e5e3ee1919106e965613679653",
-      "src/core/world-policies.ts": "f47f024054b221fda475da9811e1fa5ac3aaa9bda21026c62d82308aa4f5d437",
+      "src/core/world-policies.ts": "6aa554a46fb5bd7e73e68f7309adf82e31d40899b4c768b85382b1883a85e7eb",
+      "src/shared/world-policy.ts": "b0438e9484f2c0a500475899dc8eea8a28c05aef499f4657300cab36d9903024",
       "src/shared/world-schema.ts": "302dbf2b8e656a4f9c7a143bad2b54c76fd8b49161cb99f1f37ba7d0748142bc",
       "src/core/director.ts": "407a6cc1895d7de211c37155a29f0f9c383fc973e52642d8694b8c1b60405bb3"
     },

@@ -7,6 +7,7 @@ import { Store } from './store.js';
 import { emptyUsage, UsageTracker } from './metrics.js';
 import { evaluationPrompt, persona, PROMPT_VERSION, publicMessage, receiverPrompt, speakerPrompt } from './prompts.js';
 import { CURRENT_DIALOGUE_PROMPT, LEGACY_DIALOGUE_PROMPT } from '../shared/dialogue-policy.js';
+import { WORLD_PROMPT_VERSION, LEGACY_WORLD_PROMPT } from '../shared/world-policy.js';
 import { dialogueIsIdle, isSilentTurn } from './dialogue-idle.js';
 import { directorSchema, evaluationSchema, experimentSchema, outputSchemas, receiveSchema, speechSchema, environmentMode, isAiEnvironment, responseValidator, type ExperimentSpec, type ModelConfig } from '../shared/schema.js';
 import { receives } from './perception.js';
@@ -16,8 +17,8 @@ import type { SimulationHost } from './simulation-host.js';
 import { runSpatial } from './spatial-runner.js';
 import { advanceSingleRoomSituations } from './single-room-situations.js';
 import { worldOutputSchema } from '../shared/world-schema.js';
-import { applyWorldOutput, initialWorldState, priorityWorldSpeaker, worldInstructions, worldPrompt } from './world.js';
-import { worldPromptVersion } from './world-policies.js';
+import { applyWorldOutput, initialWorldState, priorityWorldSpeaker, worldPrompt } from './world.js';
+import { worldPromptVersion, worldPolicies } from './world-policies.js';
 import type { ApiCredential, CallKind, DeliveryReceipt, InvocationMetrics, NpcSession, Run, RunDetail, RunListItem, RunRecords, RunSummary, Utterance } from '../shared/types.js';
 import { progression, progressionPrompt, resolveAction } from './progression.js';
 import { repetitionMetrics } from './quality.js';
@@ -69,7 +70,8 @@ export class Engine extends EventEmitter {
     const spec = await this.validate(input, credential); const experimentId = randomUUID(); const runs: Run[] = [];
     for (const sourceVariant of spec.variants) for (let repetition = 1; repetition <= spec.repetitions; repetition++) {
       // Pin the resolved policy before any session is created, including paused runs.
-      const variant = { ...sourceVariant, dialoguePromptVersion: sourceVariant.dialoguePromptVersion ?? CURRENT_DIALOGUE_PROMPT };
+      const variant = { ...sourceVariant, dialoguePromptVersion: sourceVariant.dialoguePromptVersion ?? CURRENT_DIALOGUE_PROMPT,
+        ...(environmentMode(spec, sourceVariant) === 'ai' ? { worldPromptVersion: sourceVariant.worldPromptVersion ?? WORLD_PROMPT_VERSION } : {}) };
       const snapshotHash = createHash('sha256').update(JSON.stringify({ spec, variant, repetition, promptVersion: PROMPT_VERSION })).digest('hex');
       const run: Run = { id: randomUUID(), experimentId, name: `${spec.name} · ${variant.label} · #${repetition}`, variant, repetition, spec, snapshotHash,
         status: start ? 'queued' : 'paused', error: null, createdAt: now(), startedAt: null, completedAt: null, activeMs: 0, pausedMs: 0, pausedAt: start ? null : now(), timingComplete: true,
@@ -277,7 +279,7 @@ export class Engine extends EventEmitter {
     const state = run.worldState ?? initialWorldState();
     const source = history.find(u => u.kind === 'speech' && u.speechIndex! > state.processedSpeechCount);
     if (!source) return;
-    const session = await this.helper(id, 'world-engine', run.spec.worldEngine!, worldInstructions);
+    const session = await this.helper(id, 'world-engine', run.spec.worldEngine!, worldPolicies[run.variant.worldPromptVersion ?? LEGACY_WORLD_PROMPT].instructions);
     const call = await this.invoke(id, 'environment', session, `environment:${source.id}`, worldPrompt(run.spec, state, history, source), { sourceUtteranceId: source.id });
     let result: ReturnType<typeof applyWorldOutput>;
     try { result = applyWorldOutput(state, JSON.parse(call.output), source, run.spec.scenario.characters.map(c => c.id)); }

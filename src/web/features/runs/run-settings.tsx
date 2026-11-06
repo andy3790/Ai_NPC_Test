@@ -21,6 +21,7 @@ export function RunSettings({ detail }: { detail: RunDetail }) {
       <dt>앱 / 실행기 버전</dt><dd>{run.appVersion} / {run.cliVersion || '기록 없음'}</dd>
       <dt>프롬프트 버전</dt><dd>{run.promptVersion ?? (versions.length ? versions.join(', ') : '이전 기록에 버전 정보 없음')}</dd>
       <dt>대화 반응 지침</dt><dd>{variant.dialoguePromptVersion ?? '이전 기록 · 저장된 인물 지침 유지'}</dd>
+      {environmentMode(spec, variant) === 'ai' && <><dt>세계 결과 지침</dt><dd>{variant.worldPromptVersion ?? '이전 기록 · 저장된 세계 지침 유지'}</dd></>}
       <dt>설정 해시 (SHA-256)</dt><dd><code>{run.snapshotHash}</code></dd>
     </dl>
     <section><h3>세계관</h3><p className="snapshot-text">{scenario.world}</p><h4>시작 상황</h4><p className="snapshot-text">{scenario.situation}</p></section>

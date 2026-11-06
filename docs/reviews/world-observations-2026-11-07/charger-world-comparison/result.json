@@ -1,0 +1,99 @@
+{
+  "adapter": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "maxCalls": 144,
+  "expectedCalls": 144,
+  "maxUsd": 1,
+  "turns": 18,
+  "repetitions": 2,
+  "promptVersion": "npc-lab/8",
+  "worldPromptVersion": "npc-world/2",
+  "fixturesSha256": "1d0bd835737f7de4a30cb9c0bc256bab385b00904cb50991a517017052b66482",
+  "baseline": "npc-dialogue/5",
+  "candidate": "npc-dialogue/5",
+  "worldBaseline": "npc-world/2",
+  "worldCandidate": "npc-world/4",
+  "costLimit": "API catalogue equivalent, not subscription billing; last response may overshoot. No retry.",
+  "calls": 144,
+  "estimatedUsd": 0.104328595,
+  "error": null,
+  "reports": [
+    {
+      "scene": "charger_with_observation",
+      "policy": "npc-dialogue/5",
+      "worldPolicy": "npc-world/2",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.026128020000000005,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "charger_with_observation",
+      "policy": "npc-dialogue/5",
+      "worldPolicy": "npc-world/2",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.026445535,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "charger_with_observation",
+      "policy": "npc-dialogue/5",
+      "worldPolicy": "npc-world/4",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.026117865,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "charger_with_observation",
+      "policy": "npc-dialogue/5",
+      "worldPolicy": "npc-world/4",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.025637175,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    }
+  ]
+}

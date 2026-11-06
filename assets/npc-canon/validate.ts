@@ -12,7 +12,7 @@ const schemaHash=createHash('sha256').update(await readFile(path.join(root,'../.
 assert.equal(pack.compatibility.schemaSha256,schemaHash,'현재 스키마가 변경되었습니다. build.mjs로 다시 생성하세요.');
 const promptHash=createHash('sha256').update(await readFile(path.join(root,'../../src/core/prompts.ts'))).digest('hex');
 assert.equal(pack.compatibility.promptSha256,promptHash,'현재 프롬프트가 변경되었습니다. build.mjs로 다시 생성하세요.');
-for (const file of ['src/core/dialogue-policies.ts','src/shared/dialogue-policy.ts','src/core/world-policies.ts','src/shared/world-schema.ts','src/core/director.ts']) {
+for (const file of ['src/core/dialogue-policies.ts','src/shared/dialogue-policy.ts','src/core/world-policies.ts','src/shared/world-policy.ts','src/shared/world-schema.ts','src/core/director.ts']) {
   const hash=createHash('sha256').update(await readFile(path.join(root,'../..',file))).digest('hex');
   assert.equal(pack.compatibility.promptDependencies?.[file],hash,'대화 정책이 변경되었습니다. build.mjs로 다시 생성하세요.');
 }

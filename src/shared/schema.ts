@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { DIALOGUE_PROMPT_VERSIONS } from './dialogue-policy.js';
+import { WORLD_PROMPT_VERSIONS } from './world-policy.js';
 import { worldOutputSchema } from './world-schema.js';
 import { audienceSchema, eventGeneratorSchema, eventProposalSchema, spatialPlanSchema, spatialResolutionSchema, spatialSchema, spatialSpeechSchema } from './spatial-schema.js';
 
@@ -65,6 +66,7 @@ export const experimentSchema = z.object({
   variants: z.array(z.object({
     id, label: z.string().min(1), model: z.string().optional(), effort: z.string().optional(),
     dialoguePromptVersion: z.enum(DIALOGUE_PROMPT_VERSIONS).optional(),
+    worldPromptVersion: z.enum(WORLD_PROMPT_VERSIONS).optional(),
     stopOnSilence: z.boolean().optional(),
     memoryMode: z.enum(['initial_only', 'reinject_on_speech']).default('initial_only'),
     deliveryMode: z.enum(['batched_on_turn', 'per_utterance']).default('batched_on_turn'),
