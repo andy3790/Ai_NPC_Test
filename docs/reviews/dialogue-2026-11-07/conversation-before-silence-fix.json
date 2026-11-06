@@ -1,0 +1,67 @@
+{
+  "adapter": "codex",
+  "model": "gpt-6-sol",
+  "effort": "low",
+  "maxCalls": 72,
+  "maxUsd": 3,
+  "promptVersion": "npc-lab/7",
+  "candidate": "npc-dialogue/3",
+  "costLimit": "API catalogue equivalent, not subscription billing; last response may overshoot. No retry.",
+  "calls": 53,
+  "estimatedUsd": 0.37967839999999997,
+  "error": "Conversation did not complete; stopped without retry.",
+  "reports": [
+    {
+      "scene": "sofa_evening",
+      "policy": "npc-dialogue/1",
+      "status": "completed",
+      "completionReason": null,
+      "error": null,
+      "choices": 18,
+      "spoken": 11,
+      "silent": 0,
+      "calls": 18,
+      "failed": 0,
+      "costUsd": 0.1024056
+    },
+    {
+      "scene": "sofa_evening",
+      "policy": "npc-dialogue/3",
+      "status": "completed",
+      "completionReason": null,
+      "error": null,
+      "choices": 18,
+      "spoken": 14,
+      "silent": 0,
+      "calls": 18,
+      "failed": 0,
+      "costUsd": 0.1165744
+    },
+    {
+      "scene": "borrowed_charger",
+      "policy": "npc-dialogue/3",
+      "status": "paused",
+      "completionReason": null,
+      "error": "speech 호출 failed: 출력 형식 오류: [\n  {\n    \"code\": \"custom\",\n    \"path\": [],\n    \"message\": \"대사 또는 행동이 필요합니다.\"\n  }\n]",
+      "choices": 8,
+      "spoken": 7,
+      "silent": 0,
+      "calls": 9,
+      "failed": 1,
+      "costUsd": 0.0959312
+    },
+    {
+      "scene": "borrowed_charger",
+      "policy": "npc-dialogue/1",
+      "status": "paused",
+      "completionReason": null,
+      "error": "speech 호출 failed: 출력 형식 오류: [\n  {\n    \"code\": \"custom\",\n    \"path\": [],\n    \"message\": \"대사 또는 행동이 필요합니다.\"\n  }\n]",
+      "choices": 7,
+      "spoken": 6,
+      "silent": 0,
+      "calls": 8,
+      "failed": 1,
+      "costUsd": 0.0647672
+    }
+  ]
+}

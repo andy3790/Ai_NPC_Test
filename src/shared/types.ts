@@ -69,7 +69,7 @@ export interface Run {
   worldState?: WorldState;
   eventGeneratorState?: EventGeneratorState;
   roundRobinCursor?: number;
-  completionReason?: 'goals_achieved' | 'utterance_limit';
+  completionReason?: 'goals_achieved' | 'utterance_limit' | 'conversation_idle';
 }
 export interface RawEvent { id: number; runId: string; invocationId: string | null; receivedAt: string; method: string; params: unknown }
 export interface RunHistory { readOnly: boolean; kind: 'current' | 'archive'; locations: string[]; archivedAt?: string }

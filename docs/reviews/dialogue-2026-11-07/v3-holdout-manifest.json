@@ -1,0 +1,172 @@
+{
+  "adapter": "codex",
+  "suiteVersion": "dialogue-cases/1",
+  "casesSha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+  "split": "holdout",
+  "model": "gpt-6-sol",
+  "effort": "low",
+  "promptVersion": "npc-lab/7",
+  "policyVersions": [
+    "npc-dialogue/1",
+    "npc-dialogue/3"
+  ],
+  "repetitions": 3,
+  "expectedCalls": 24,
+  "maxCalls": 24,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+  "status": "completed",
+  "error": null,
+  "calls": 24,
+  "estimatedUsd": 0.29903559999999996,
+  "quality": "non-independent qualitative review; see report.md",
+  "mappings": [
+    {
+      "caseId": "apology_without_therapy",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "apology_without_therapy",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "apology_without_therapy",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "apology_without_therapy",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "apology_without_therapy",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "apology_without_therapy",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "workplace_partial_answer",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "workplace_partial_answer",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "workplace_partial_answer",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "workplace_partial_answer",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "workplace_partial_answer",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "workplace_partial_answer",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "third_party_privacy",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "third_party_privacy",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "third_party_privacy",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "third_party_privacy",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "third_party_privacy",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "third_party_privacy",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "disengaged_listener",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "disengaged_listener",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "disengaged_listener",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "disengaged_listener",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "disengaged_listener",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "disengaged_listener",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    }
+  ],
+  "sourceDirectory": "2026-11-06T17-58-23-554Z-holdout-0c6d2e72",
+  "reviewer": "prompt-author-agent"
+}

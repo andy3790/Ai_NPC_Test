@@ -102,8 +102,16 @@ try {
   assert.deepEqual(await full(), expected);
 
   await dialog.getByRole('button', { name: '03 실험 조건' }).click();
+  const policy = dialog.getByLabel(`${expected.variants[0].label} 대화 반응 지침`, { exact: true });
+  assert.equal(await policy.inputValue(), 'npc-dialogue/3');
+  await policy.selectOption('npc-dialogue/1');
+  expected.variants[0].dialoguePromptVersion = 'npc-dialogue/1';
+  await dialog.getByLabel(`${expected.variants[0].label} 대화 마무리`, { exact: true }).selectOption('silence');
+  expected.variants[0].stopOnSilence = true;
   await dialog.getByRole('button', { name: '실험 조건 JSON 편집', exact: true }).click();
   const conditions = JSON.parse(await field('실험 조건').inputValue()); assert.equal(conditions.scenario, undefined);
+  assert.equal(conditions.variants[0].dialoguePromptVersion, 'npc-dialogue/1');
+  assert.equal(conditions.variants[0].stopOnSilence, true);
   conditions.variants = [conditions.variants[0]]; conditions.variants[0].label = '부분 편집 조건';
   conditions.maxUtterances = 12; conditions.repetitions = 2; conditions.evaluation.interval = 4;
   conditions.maxConcurrentCalls = 1; conditions.scheduledEvents = [{ afterUtterance: 0, text: '시작 사건' }];

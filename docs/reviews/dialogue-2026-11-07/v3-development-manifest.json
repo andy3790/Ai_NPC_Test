@@ -1,0 +1,316 @@
+{
+  "adapter": "codex",
+  "suiteVersion": "dialogue-cases/1",
+  "casesSha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+  "split": "development",
+  "model": "gpt-6-sol",
+  "effort": "low",
+  "promptVersion": "npc-lab/7",
+  "policyVersions": [
+    "npc-dialogue/1",
+    "npc-dialogue/3"
+  ],
+  "repetitions": 3,
+  "expectedCalls": 48,
+  "maxCalls": 48,
+  "maxUsd": 2,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+  "status": "completed",
+  "error": null,
+  "calls": 48,
+  "estimatedUsd": 0.5635731999999999,
+  "quality": "non-independent qualitative review; see report.md",
+  "mappings": [
+    {
+      "caseId": "simple_request",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "simple_request",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "simple_request",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "simple_request",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "simple_request",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "simple_request",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "decline_invitation",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "decline_invitation",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "decline_invitation",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "decline_invitation",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "decline_invitation",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "decline_invitation",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "ordinary_preference",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "ordinary_preference",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "ordinary_preference",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "ordinary_preference",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "ordinary_preference",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "ordinary_preference",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "small_disappointment",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "small_disappointment",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "small_disappointment",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "small_disappointment",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "small_disappointment",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "small_disappointment",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "enthusiastic_explanation",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "enthusiastic_explanation",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "enthusiastic_explanation",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "enthusiastic_explanation",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "enthusiastic_explanation",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "enthusiastic_explanation",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "polite_service",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "polite_service",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "polite_service",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "polite_service",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "polite_service",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "polite_service",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "uncertain_information",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "uncertain_information",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "uncertain_information",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "uncertain_information",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "uncertain_information",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "uncertain_information",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "protect_own_time",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "protect_own_time",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "protect_own_time",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "protect_own_time",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "protect_own_time",
+      "repetition": 3,
+      "slot": "A",
+      "version": "npc-dialogue/1"
+    },
+    {
+      "caseId": "protect_own_time",
+      "repetition": 3,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    }
+  ],
+  "sourceDirectory": "2026-11-06T17-57-40-234Z-development-ee9f613d",
+  "reviewer": "prompt-author-agent"
+}

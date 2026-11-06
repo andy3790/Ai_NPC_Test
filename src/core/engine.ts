@@ -6,6 +6,8 @@ import type { Adapter } from '../adapters/types.js';
 import { Store } from './store.js';
 import { emptyUsage, UsageTracker } from './metrics.js';
 import { evaluationPrompt, persona, PROMPT_VERSION, publicMessage, receiverPrompt, speakerPrompt } from './prompts.js';
+import { CURRENT_DIALOGUE_PROMPT, LEGACY_DIALOGUE_PROMPT } from '../shared/dialogue-policy.js';
+import { dialogueIsIdle, isSilentTurn } from './dialogue-idle.js';
 import { directorSchema, evaluationSchema, experimentSchema, outputSchemas, receiveSchema, speechSchema, environmentMode, isAiEnvironment, responseValidator, type ExperimentSpec, type ModelConfig } from '../shared/schema.js';
 import { receives } from './perception.js';
 import { audienceNpcIds } from './perception.js';
@@ -64,7 +66,9 @@ export class Engine extends EventEmitter {
   }
   async create(input: unknown, start = true, credential?: ApiCredential) {
     const spec = await this.validate(input, credential); const experimentId = randomUUID(); const runs: Run[] = [];
-    for (const variant of spec.variants) for (let repetition = 1; repetition <= spec.repetitions; repetition++) {
+    for (const sourceVariant of spec.variants) for (let repetition = 1; repetition <= spec.repetitions; repetition++) {
+      // Pin the resolved policy before any session is created, including paused runs.
+      const variant = { ...sourceVariant, dialoguePromptVersion: sourceVariant.dialoguePromptVersion ?? CURRENT_DIALOGUE_PROMPT };
       const snapshotHash = createHash('sha256').update(JSON.stringify({ spec, variant, repetition, promptVersion: PROMPT_VERSION })).digest('hex');
       const run: Run = { id: randomUUID(), experimentId, name: `${spec.name} · ${variant.label} · #${repetition}`, variant, repetition, spec, snapshotHash,
         status: start ? 'queued' : 'paused', error: null, createdAt: now(), startedAt: null, completedAt: null, activeMs: 0, pausedMs: 0, pausedAt: start ? null : now(), timingComplete: true,
@@ -106,7 +110,8 @@ export class Engine extends EventEmitter {
     for (const c of this.run(id).spec.scenario.characters) {
       const run = this.run(id); if (Object.hasOwn(run.sessions, c.id)) { await this.restoreSession(id, 'sessions', c.id, run.sessions[c.id]); continue; }
       const config = { model: c.model ?? run.variant.model ?? run.spec.scenario.defaults.model, effort: c.effort ?? run.variant.effort ?? run.spec.scenario.defaults.effort };
-      const instructions = persona(run.spec, c, run.variant);
+      const instructions = persona(run.spec, c, { ...run.variant,
+        dialoguePromptVersion: run.variant.dialoguePromptVersion ?? LEGACY_DIALOGUE_PROMPT });
       const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, c.id), run.apiCredential);
       this.store.patch('runs', id, { sessions: { ...this.run(id).sessions, [c.id]: { id: randomUUID(), characterId: c.id, threadId, config, instructions } } });
     }
@@ -157,7 +162,11 @@ export class Engine extends EventEmitter {
       model: session.config.model, effort: session.config.effort, actualModel: null, deliveryMode: run.variant.deliveryMode, memoryMode: run.variant.memoryMode,
       environmentMode: environmentMode(run.spec, run.variant),
       queuedAt: now(), startedAt: null, firstOutputAt: null, completedAt: null, queueMs: null, firstOutputMs: null, durationMs: null,
-      status: 'queued', usage: emptyUsage(), usageStatus: 'not_started', input, output: '', error: null, metadata: { ...metadata, adapter: run.adapter, appVersion: run.appVersion, cliVersion: run.cliVersion, promptVersion: PROMPT_VERSION },
+      status: 'queued', usage: emptyUsage(), usageStatus: 'not_started', input, output: '', error: null,
+      metadata: { ...metadata, adapter: run.adapter, appVersion: run.appVersion, cliVersion: run.cliVersion,
+        promptVersion: run.promptVersion ?? null, runtimePromptVersion: PROMPT_VERSION,
+        dialoguePromptVersion: run.variant.dialoguePromptVersion ?? null,
+        instructionsSha256: createHash('sha256').update(session.instructions).digest('hex') },
     };
     this.store.put('invocations', call); this.changed(id); const queued = performance.now();
     await this.slots.enter();
@@ -228,6 +237,10 @@ export class Engine extends EventEmitter {
     }
   }
   private append(id: string, u: Utterance) {
+    if (!u.perception && isSilentTurn(u)) {
+      this.store.put('utterances', { ...u, deliveryCompletedAt: now(), deliveryMs: 0 });
+      return;
+    }
     this.store.put('utterances', u);
     for (const c of this.run(id).spec.scenario.characters) if (c.id !== u.speakerId && receives(u, c.id)) {
       const receipt: DeliveryReceipt = { id: `${u.id}:${c.id}`, runId: id, utteranceId: u.id, characterId: c.id, status: 'pending', invocationId: null, deliveredAt: null };
@@ -299,10 +312,11 @@ export class Engine extends EventEmitter {
         await this.flush(id);
         const rules = environmentMode(run.spec, run.variant) === 'rules';
         const goalsDone = !!(rules && run.spec.scenario.environment?.stopOnGoals && progression(run.spec, this.store.list('utterances', id))?.allGoalsAchieved);
-        await this.evaluatePending(id, speeches.length >= run.spec.maxUtterances || goalsDone);
+        const dialogueDone = dialogueIsIdle(this.run(id), this.store.list('utterances', id));
+        await this.evaluatePending(id, speeches.length >= run.spec.maxUtterances || goalsDone || dialogueDone);
         run = this.run(id);
         if (run.status !== 'running') break;
-        if (speeches.length >= run.spec.maxUtterances || goalsDone) { this.store.patch('runs', id, { status: 'completed', completedAt: now(), completionReason: goalsDone ? 'goals_achieved' : 'utterance_limit' }); break; }
+        if (speeches.length >= run.spec.maxUtterances || goalsDone || dialogueDone) { this.store.patch('runs', id, { status: 'completed', completedAt: now(), completionReason: goalsDone ? 'goals_achieved' : dialogueDone ? 'conversation_idle' : 'utterance_limit' }); break; }
         if (run.pauseRequested || run.stepRemaining === 0) { this.store.patch('runs', id, { status: 'paused', pausedAt: now(), pauseRequested: false }); break; }
         const speakerId = await this.speaker(id, speeches); const session = this.run(id).sessions[speakerId];
         const receipts = this.pending(id, speakerId); all = this.store.list('utterances', id);

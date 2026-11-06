@@ -1,0 +1,67 @@
+{
+  "adapter": "codex",
+  "model": "gpt-6-sol",
+  "effort": "low",
+  "maxCalls": 72,
+  "maxUsd": 3,
+  "promptVersion": "npc-lab/7",
+  "candidate": "npc-dialogue/3",
+  "costLimit": "API catalogue equivalent, not subscription billing; last response may overshoot. No retry.",
+  "calls": 72,
+  "estimatedUsd": 0.3717152,
+  "error": null,
+  "reports": [
+    {
+      "scene": "sofa_evening",
+      "policy": "npc-dialogue/1",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "choices": 18,
+      "spoken": 8,
+      "silent": 0,
+      "calls": 18,
+      "failed": 0,
+      "costUsd": 0.0889788
+    },
+    {
+      "scene": "sofa_evening",
+      "policy": "npc-dialogue/3",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "choices": 18,
+      "spoken": 14,
+      "silent": 0,
+      "calls": 18,
+      "failed": 0,
+      "costUsd": 0.08771880000000001
+    },
+    {
+      "scene": "borrowed_charger",
+      "policy": "npc-dialogue/3",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "choices": 18,
+      "spoken": 9,
+      "silent": 7,
+      "calls": 18,
+      "failed": 0,
+      "costUsd": 0.09592279999999999
+    },
+    {
+      "scene": "borrowed_charger",
+      "policy": "npc-dialogue/1",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "choices": 18,
+      "spoken": 8,
+      "silent": 0,
+      "calls": 18,
+      "failed": 0,
+      "costUsd": 0.09909480000000001
+    }
+  ]
+}

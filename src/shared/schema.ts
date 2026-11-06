@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { DIALOGUE_PROMPT_VERSIONS } from './dialogue-policy.js';
 import { worldOutputSchema } from './world-schema.js';
 import { audienceSchema, eventGeneratorSchema, eventProposalSchema, spatialPlanSchema, spatialResolutionSchema, spatialSchema, spatialSpeechSchema } from './spatial-schema.js';
 
@@ -63,6 +64,8 @@ export const experimentSchema = z.object({
   schemaVersion: z.literal(1), name: z.string().min(1), scenario: scenarioSchema,
   variants: z.array(z.object({
     id, label: z.string().min(1), model: z.string().optional(), effort: z.string().optional(),
+    dialoguePromptVersion: z.enum(DIALOGUE_PROMPT_VERSIONS).optional(),
+    stopOnSilence: z.boolean().optional(),
     memoryMode: z.enum(['initial_only', 'reinject_on_speech']).default('initial_only'),
     deliveryMode: z.enum(['batched_on_turn', 'per_utterance']).default('batched_on_turn'),
     turnPolicy: z.enum(['round_robin', 'director']).default('round_robin'),
@@ -113,7 +116,9 @@ export type Scenario = z.infer<typeof scenarioSchema>;
 export type Character = z.infer<typeof characterSchema>;
 export type ModelConfig = z.infer<typeof modelConfig>;
 export type Variant = ExperimentSpec['variants'][number];
-export const speechSchema = z.object({ speech: z.string(), action: z.string(), actionId: z.string().nullable().optional() }).refine(v => !!(v.speech.trim() || v.action.trim()), '대사 또는 행동이 필요합니다.');
+// Silence is a valid choice. Requiring a gesture here encourages filler and
+// pauses otherwise valid conversations when the model chooses to just listen.
+export const speechSchema = z.object({ speech: z.string(), action: z.string(), actionId: z.string().nullable().optional() });
 export const progressSpeechSchema = z.object({ speech: z.string(), action: z.string(), actionId: z.string().nullable() });
 export const receiveSchema = z.object({ received: z.literal(true) });
 export const situationResolutionSchema = worldOutputSchema.extend({ proposalDecision: z.object({ accepted: z.boolean(), reason: z.string().min(1) }) });

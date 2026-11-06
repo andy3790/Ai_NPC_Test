@@ -15,6 +15,7 @@ export function runSnapshot(run: Run) {
     repetition: run.repetition, adapter: run.adapter, createdAt: run.createdAt,
     snapshotHash: run.snapshotHash, appVersion: run.appVersion, cliVersion: run.cliVersion,
     promptVersion: run.promptVersion ?? null,
+    dialoguePromptVersion: run.variant.dialoguePromptVersion ?? null,
     apiKeySource: run.adapter === 'openai' ? run.apiCredential?.source ?? 'environment' : null,
     resolvedEnvironmentMode: environmentMode(run.spec, run.variant),
     spec: run.spec, variant: run.variant, resolvedNpcConfigs: resolvedNpcConfigs(run), resolvedSessions: run.sessions,

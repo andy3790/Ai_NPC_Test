@@ -20,6 +20,7 @@ export function RunSettings({ detail }: { detail: RunDetail }) {
       {run.adapter === 'openai' && <><dt>API 키 출처</dt><dd>{run.apiCredential?.source === 'browser' ? '개인 키 · 생성 당시 키에 고정' : '서버 환경 키 (.env)'}<small>키 원문은 기록하지 않습니다.</small></dd></>}
       <dt>앱 / 실행기 버전</dt><dd>{run.appVersion} / {run.cliVersion || '기록 없음'}</dd>
       <dt>프롬프트 버전</dt><dd>{run.promptVersion ?? (versions.length ? versions.join(', ') : '이전 기록에 버전 정보 없음')}</dd>
+      <dt>대화 반응 지침</dt><dd>{variant.dialoguePromptVersion ?? '이전 기록 · 저장된 인물 지침 유지'}</dd>
       <dt>설정 해시 (SHA-256)</dt><dd><code>{run.snapshotHash}</code></dd>
     </dl>
     <section><h3>세계관</h3><p className="snapshot-text">{scenario.world}</p><h4>시작 상황</h4><p className="snapshot-text">{scenario.situation}</p></section>

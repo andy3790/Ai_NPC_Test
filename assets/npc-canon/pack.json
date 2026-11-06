@@ -18,9 +18,13 @@
   },
   "compatibility": {
     "schemaPath": "src/shared/schema.ts",
-    "schemaSha256": "5c86932839453c50be8e2220073feb52ccf821ba4048535f4035d6963c3eacd8",
+    "schemaSha256": "36093ce9e1b5a860da8e368b2c711547cc1fffeaa5c99c7800476010067edf66",
     "promptPath": "src/core/prompts.ts",
-    "promptSha256": "cf3157d7e138e0ae1f411b4e3206c3a056220f458775d5dd027e641385a665a5",
+    "promptSha256": "488ce575ba4f5a88a498e8bd41acdd81e4178c95c50f5e00ddca528d001d37de",
+    "promptDependencies": {
+      "src/core/dialogue-policies.ts": "0fc58bbb2c1ee458bbc5881e9c78a0cd31b3f5fcbbb48f78fdcd8bd4f6e0dcdc",
+      "src/shared/dialogue-policy.ts": "0d9bdf492da0f90dc78590ecc2f9453340171b6f63f9d11825be40f593a8275e"
+    },
     "imageInputSupported": false,
     "defaultModel": "gpt-6.1-sol",
     "defaultEffort": "low",
