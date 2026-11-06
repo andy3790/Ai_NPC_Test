@@ -1,0 +1,21 @@
+{
+  "version": "director-selection/1",
+  "sourceCommit": "cd6c0465467a81306338b8ad601c9204579b0ee5",
+  "instructionsSha256": "5cbf1f16ab0e054b6f2f09f157136cd308ed26c04ccd2b876d99cec2707c1b92",
+  "cases": [
+    {
+      "id": "two_candidates",
+      "input": "{\"task\":\"direct\",\"allowedSpeakerIds\":[\"test_im_sojin\",\"test_go_bokman\"],\"participants\":[{\"id\":\"test_baek_doha\",\"name\":\"백도하\",\"turnsSinceLastSpeech\":0},{\"id\":\"test_im_sojin\",\"name\":\"임소진\",\"turnsSinceLastSpeech\":null},{\"id\":\"test_go_bokman\",\"name\":\"고복만\",\"turnsSinceLastSpeech\":null}],\"lastSpeakerId\":\"test_baek_doha\",\"history\":[{\"id\":\"f877d354-64c0-40d0-9e30-acdd0146dd7e\",\"sequence\":1,\"speakerId\":\"test_baek_doha\",\"speakerName\":\"백도하\",\"kind\":\"speech\",\"speech\":\"누나, 지난주에 이거 어디까지 봤어? 뒤에 베이스만 나오는 데 있는데.\",\"action\":\"\"}]}",
+      "sourceCallId": "2a02f88f-d769-4eea-bef9-569bf452a965",
+      "sourceOutput": "{\"speakerId\":\"test_im_sojin\",\"reason\":\"백도하가 ‘누나’라고 부르며 지난주에 본 부분을 직접 물었으므로 임소진이 답할 차례입니다.\"}",
+      "sourceStatus": "completed"
+    },
+    {
+      "id": "forced_waiting_speaker",
+      "input": "{\"task\":\"direct\",\"allowedSpeakerIds\":[\"test_go_bokman\"],\"participants\":[{\"id\":\"test_baek_doha\",\"name\":\"백도하\",\"turnsSinceLastSpeech\":0},{\"id\":\"test_im_sojin\",\"name\":\"임소진\",\"turnsSinceLastSpeech\":1},{\"id\":\"test_go_bokman\",\"name\":\"고복만\",\"turnsSinceLastSpeech\":null}],\"lastSpeakerId\":\"test_baek_doha\",\"history\":[{\"id\":\"f877d354-64c0-40d0-9e30-acdd0146dd7e\",\"sequence\":1,\"speakerId\":\"test_baek_doha\",\"speakerName\":\"백도하\",\"kind\":\"speech\",\"speech\":\"누나, 지난주에 이거 어디까지 봤어? 뒤에 베이스만 나오는 데 있는데.\",\"action\":\"\"},{\"id\":\"2a660216-246c-4455-9542-f5281b79a805\",\"sequence\":2,\"speakerId\":\"test_im_sojin\",\"speakerName\":\"임소진\",\"kind\":\"speech\",\"speech\":\"끝까지 봤어. 베이스만 나오는 데도 소리가 작더라. 연주가 별로라는 소린 아니고.\",\"action\":\"\"},{\"id\":\"6f0dbcaa-8667-4aeb-bc6b-b0fc8be1f2cf\",\"sequence\":3,\"speakerId\":\"test_baek_doha\",\"speakerName\":\"백도하\",\"kind\":\"speech\",\"speech\":\"그럼 그 말도 해주지. 소리 작다고만 하니까 제대로 안 본 줄 알았잖아.\",\"action\":\"\"},{\"id\":\"9edd0a7b-4302-46c3-a8bf-b0ddcdf2e1b1\",\"sequence\":4,\"speakerId\":\"test_im_sojin\",\"speakerName\":\"임소진\",\"kind\":\"speech\",\"speech\":\"안 봤으면 소리 작은 줄은 어떻게 아냐. 끝까지 봤다고는 안 했네.\",\"action\":\"\"},{\"id\":\"95db0900-6028-42d9-b1e4-86e05d7c7b41\",\"sequence\":5,\"speakerId\":\"test_baek_doha\",\"speakerName\":\"백도하\",\"kind\":\"speech\",\"speech\":\"앞에 조금만 들어도 작은 건 알지. 난 연주 어땠냐고 보낸 건데.\",\"action\":\"\"}]}",
+      "sourceCallId": "efb2c07e-be0e-414f-b3f1-a00228f88bc6",
+      "sourceOutput": "{\"speakerId\":\"test_im_sojin\",\"reason\":\"백도하가 연주가 어땠는지 물었고, 이에 답할 차례는 끝까지 봤다고 밝힌 임소진에게 있습니다.\"}",
+      "sourceStatus": "failed"
+    }
+  ]
+}

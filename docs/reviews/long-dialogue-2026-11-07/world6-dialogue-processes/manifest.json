@@ -1,0 +1,23 @@
+{
+  "suite": "world-dialogue-processes/1",
+  "casesSha256": "3c229a61b8c1760e61c9a478b13f0d3e595aa1a92ab0eea8b58b4a15ef3c1872",
+  "split": "all",
+  "baseline": "npc-world/4",
+  "candidate": "npc-world/6",
+  "model": "gpt-6-luna",
+  "effort": "medium",
+  "repetitions": 2,
+  "expectedCalls": 16,
+  "maxCalls": 16,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "baseSchemaSha256": "a156e1d1da3a599ef2bc72096142ab17fe18adb681337dac6f7739aa856915ff",
+  "schemaMode": "per-policy-and-action",
+  "review": "Event presence and runtime validation are mechanical checks, not semantic correctness.",
+  "status": "completed",
+  "error": null,
+  "calls": 16,
+  "estimatedUsd": 0.00430506,
+  "quality": "unreviewed",
+  "invalidOutputs": 0
+}

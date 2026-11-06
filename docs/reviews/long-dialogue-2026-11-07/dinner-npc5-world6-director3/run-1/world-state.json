@@ -1,0 +1,33 @@
+{
+  "virtualSeconds": 102,
+  "facts": [],
+  "processes": [
+    {
+      "id": "phone_video_playback",
+      "description": "백도하의 휴대전화에서 재생 중인 밴드 연습 영상이 끝난다.",
+      "readyAtSeconds": 45,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [],
+      "status": "completed",
+      "createdAtSeconds": 3,
+      "sourceUtteranceId": "956a771e-2c00-4f15-a92b-3db741bd734e",
+      "finishedAtSeconds": 46,
+      "reason": "재생 중이던 연습 영상이 끝났다."
+    },
+    {
+      "id": "phone_song_playback",
+      "description": "백도하의 휴대전화에서 재생 중인 송창식의 「한 번쯤」이 끝난다.",
+      "readyAtSeconds": 231,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [],
+      "status": "pending",
+      "createdAtSeconds": 54,
+      "sourceUtteranceId": "db7a0849-2d75-4605-bd73-4b4dcee8721d",
+      "finishedAtSeconds": null,
+      "reason": null
+    }
+  ],
+  "processedSpeechId": "b152c1a8-db37-4b4e-aabf-2c3f8aeb4f68",
+  "processedSequence": 51,
+  "processedSpeechCount": 48
+}

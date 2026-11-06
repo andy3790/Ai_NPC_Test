@@ -1,0 +1,164 @@
+{
+  "virtualSeconds": 82,
+  "facts": [],
+  "processes": [
+    {
+      "id": "1409284d-5329-47eb-9bef-d60ef29fb5fa_response",
+      "description": "백도하의 질문에 임소진이 답할 기회",
+      "readyAtSeconds": 2,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [
+        "test_im_sojin"
+      ],
+      "status": "completed",
+      "createdAtSeconds": 2,
+      "sourceUtteranceId": "1409284d-5329-47eb-9bef-d60ef29fb5fa",
+      "finishedAtSeconds": 5,
+      "reason": "임소진이 답하고 질문에 이어 대화가 진행됨"
+    },
+    {
+      "id": "c6091416-620a-4a65-9cb6-a706ace5d0e0_response",
+      "description": "임소진의 질문에 백도하가 답할 기회",
+      "readyAtSeconds": 5,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [
+        "test_baek_doha"
+      ],
+      "status": "completed",
+      "createdAtSeconds": 5,
+      "sourceUtteranceId": "c6091416-620a-4a65-9cb6-a706ace5d0e0",
+      "finishedAtSeconds": 10,
+      "reason": "백도하가 임소진의 질문에 답함"
+    },
+    {
+      "id": "a93a5646-014a-4e30-93e8-1f9013f6d85e_response",
+      "description": "임소진의 요청에 백도하가 휴대전화 영상을 되감거나 답할 기회",
+      "readyAtSeconds": 12,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [
+        "test_baek_doha"
+      ],
+      "status": "completed",
+      "createdAtSeconds": 12,
+      "sourceUtteranceId": "a93a5646-014a-4e30-93e8-1f9013f6d85e",
+      "finishedAtSeconds": 14,
+      "reason": "백도하가 휴대전화 영상 재생 위치를 옮김"
+    },
+    {
+      "id": "ff0c9986-14e5-45bb-a0ba-be5902690109_response",
+      "description": "고복만의 질문에 백도하가 답할 기회",
+      "readyAtSeconds": 16,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [
+        "test_baek_doha"
+      ],
+      "status": "completed",
+      "createdAtSeconds": 16,
+      "sourceUtteranceId": "ff0c9986-14e5-45bb-a0ba-be5902690109",
+      "finishedAtSeconds": 19,
+      "reason": "백도하가 고복만의 질문에 답함"
+    },
+    {
+      "id": "d89e6cef-6c99-4826-bf05-a0879cdfb9de_response",
+      "description": "임소진의 말에 백도하가 답할 기회",
+      "readyAtSeconds": 22,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [
+        "test_baek_doha"
+      ],
+      "status": "completed",
+      "createdAtSeconds": 22,
+      "sourceUtteranceId": "d89e6cef-6c99-4826-bf05-a0879cdfb9de",
+      "finishedAtSeconds": 25,
+      "reason": "백도하가 임소진의 말에 답함"
+    },
+    {
+      "id": "1a87aa5f-4c58-4058-a19e-384e651a6562_response",
+      "description": "백도하의 질문에 임소진이 답할 기회",
+      "readyAtSeconds": 49,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [
+        "test_im_sojin"
+      ],
+      "status": "completed",
+      "createdAtSeconds": 49,
+      "sourceUtteranceId": "1a87aa5f-4c58-4058-a19e-384e651a6562",
+      "finishedAtSeconds": 52,
+      "reason": "임소진이 백도하의 질문에 답함"
+    },
+    {
+      "id": "1a041926-b0bf-409a-a5e1-a15a6cdb7476_response",
+      "description": "고복만의 질문에 백도하와 임소진이 답할 기회",
+      "readyAtSeconds": 60,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [
+        "test_baek_doha",
+        "test_im_sojin"
+      ],
+      "status": "completed",
+      "createdAtSeconds": 60,
+      "sourceUtteranceId": "1a041926-b0bf-409a-a5e1-a15a6cdb7476",
+      "finishedAtSeconds": 65,
+      "reason": "백도하와 임소진 모두 답할 기회를 얻었으며, 추가 답변을 기다릴 대상은 없음"
+    },
+    {
+      "id": "045de2b3-b510-46d2-ba20-b3f3414e6ddd_response",
+      "description": "고복만의 부탁에 백도하가 답하거나 응할 기회",
+      "readyAtSeconds": 68,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [
+        "test_baek_doha"
+      ],
+      "status": "completed",
+      "createdAtSeconds": 68,
+      "sourceUtteranceId": "045de2b3-b510-46d2-ba20-b3f3414e6ddd",
+      "finishedAtSeconds": 71,
+      "reason": "백도하가 고복만의 부탁에 답함"
+    },
+    {
+      "id": "a65b6b4f-5b94-4cc0-b2e2-bdf1ba38c1a8_response",
+      "description": "백도하의 질문에 고복만이 곡을 답할 기회",
+      "readyAtSeconds": 71,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [
+        "test_go_bokman"
+      ],
+      "status": "completed",
+      "createdAtSeconds": 71,
+      "sourceUtteranceId": "a65b6b4f-5b94-4cc0-b2e2-bdf1ba38c1a8",
+      "finishedAtSeconds": 74,
+      "reason": "고복만이 백도하의 질문에 곡을 답함"
+    },
+    {
+      "id": "0bfda289-a8cc-45ba-bafb-70f3a0e190f7_response",
+      "description": "고복만의 곡 재생 요청에 백도하가 답하거나 응할 기회",
+      "readyAtSeconds": 74,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [
+        "test_baek_doha"
+      ],
+      "status": "completed",
+      "createdAtSeconds": 74,
+      "sourceUtteranceId": "0bfda289-a8cc-45ba-bafb-70f3a0e190f7",
+      "finishedAtSeconds": 76,
+      "reason": "백도하가 고복만의 요청에 답함"
+    },
+    {
+      "id": "41d5725d-be50-47dc-8486-0073f3926b72_response",
+      "description": "임소진의 질문에 고복만이 답할 기회",
+      "readyAtSeconds": 79,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [
+        "test_go_bokman"
+      ],
+      "status": "completed",
+      "createdAtSeconds": 79,
+      "sourceUtteranceId": "41d5725d-be50-47dc-8486-0073f3926b72",
+      "finishedAtSeconds": 82,
+      "reason": "고복만이 임소진의 질문에 답함"
+    }
+  ],
+  "processedSpeechId": "2c8b629d-3ac6-48a4-89aa-a8f829cf500c",
+  "processedSequence": 30,
+  "processedSpeechCount": 29
+}

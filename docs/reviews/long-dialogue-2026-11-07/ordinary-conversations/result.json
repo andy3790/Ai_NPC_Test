@@ -1,0 +1,229 @@
+{
+  "adapter": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "maxCalls": 288,
+  "expectedCalls": 288,
+  "maxUsd": 2,
+  "turns": 36,
+  "repetitions": 2,
+  "promptVersion": "npc-lab/8",
+  "worldPromptVersion": "npc-world/4",
+  "fixturesSha256": "4aaebe64a6c4b44f903a9332eb44add8f6ce4a11613c8d2b3d00ee336b489224",
+  "baseline": "npc-dialogue/3",
+  "candidate": "npc-dialogue/5",
+  "costLimit": "API catalogue equivalent, not subscription billing; last response may overshoot. No retry.",
+  "calls": 288,
+  "estimatedUsd": 0.5548411,
+  "error": null,
+  "reports": [
+    {
+      "scene": "cafe_pottery",
+      "policy": "npc-dialogue/3",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "choices": 36,
+      "cost": {
+        "usd": 0.07669539999999998,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "tokens": {
+        "inputTokens": 132922,
+        "cachedInputTokens": 115719,
+        "cacheWriteInputTokens": 17095,
+        "outputTokens": 2217,
+        "reasoningOutputTokens": 0,
+        "totalTokens": 135139
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "cafe_pottery",
+      "policy": "npc-dialogue/3",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "choices": 36,
+      "cost": {
+        "usd": 0.0667321,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "tokens": {
+        "inputTokens": 133285,
+        "cachedInputTokens": 120286,
+        "cacheWriteInputTokens": 12891,
+        "outputTokens": 2226,
+        "reasoningOutputTokens": 60,
+        "totalTokens": 135511
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "cafe_pottery",
+      "policy": "npc-dialogue/5",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "choices": 36,
+      "cost": {
+        "usd": 0.0806019,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "tokens": {
+        "inputTokens": 143163,
+        "cachedInputTokens": 125059,
+        "cacheWriteInputTokens": 17996,
+        "outputTokens": 2289,
+        "reasoningOutputTokens": 30,
+        "totalTokens": 145452
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "cafe_pottery",
+      "policy": "npc-dialogue/5",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "choices": 36,
+      "cost": {
+        "usd": 0.06439180000000001,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "tokens": {
+        "inputTokens": 139558,
+        "cachedInputTokens": 127258,
+        "cacheWriteInputTokens": 12192,
+        "outputTokens": 2097,
+        "reasoningOutputTokens": 80,
+        "totalTokens": 141655
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "coworker_lunch",
+      "policy": "npc-dialogue/5",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "choices": 36,
+      "cost": {
+        "usd": 0.07106249999999999,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "tokens": {
+        "inputTokens": 134785,
+        "cachedInputTokens": 118040,
+        "cacheWriteInputTokens": 16637,
+        "outputTokens": 1745,
+        "reasoningOutputTokens": 31,
+        "totalTokens": 136530
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "coworker_lunch",
+      "policy": "npc-dialogue/5",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "choices": 36,
+      "cost": {
+        "usd": 0.05875369999999999,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "tokens": {
+        "inputTokens": 132689,
+        "cachedInputTokens": 121202,
+        "cacheWriteInputTokens": 11379,
+        "outputTokens": 1797,
+        "reasoningOutputTokens": 44,
+        "totalTokens": 134486
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "coworker_lunch",
+      "policy": "npc-dialogue/3",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "choices": 36,
+      "cost": {
+        "usd": 0.07144969999999999,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "tokens": {
+        "inputTokens": 126129,
+        "cachedInputTokens": 109612,
+        "cacheWriteInputTokens": 16409,
+        "outputTokens": 1925,
+        "reasoningOutputTokens": 25,
+        "totalTokens": 128054
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "coworker_lunch",
+      "policy": "npc-dialogue/3",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "choices": 36,
+      "cost": {
+        "usd": 0.065154,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "tokens": {
+        "inputTokens": 130436,
+        "cachedInputTokens": 117480,
+        "cacheWriteInputTokens": 12848,
+        "outputTokens": 2107,
+        "reasoningOutputTokens": 53,
+        "totalTokens": 132543
+      },
+      "failedCalls": 0
+    }
+  ]
+}

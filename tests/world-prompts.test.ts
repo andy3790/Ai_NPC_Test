@@ -15,6 +15,8 @@ test('world instruction revisions are immutable and unknown text is not attribut
     'npc-world/2': '71a8f03ede0bcb2e566ef419bbd66b318ea4e32f131393acb2196fe0c4839ded',
     'npc-world/3': 'd6cd33f95b9c0a14570d0e78d6c0ff7eadeadf8960ffee5f65639d75e8f1e13f',
     'npc-world/4': '2a83f78ee8084dbc841de3e02ddcafc7be53280bb7c311c9e1631c7af614811d',
+    'npc-world/5': '78ec22753b8e66cc751fee60f6d9e066ac46803759be800452f9c1b4fbad6725',
+    'npc-world/6': 'e85484ba007f5d80f5a7c95f5cb5e683e413bcc4cd2e54c4c1c6beecd57a9f03',
   };
   assert.deepEqual(Object.keys(worldPolicies), Object.keys(expected));
   assert.deepEqual([...WORLD_PROMPT_VERSIONS], Object.keys(expected));

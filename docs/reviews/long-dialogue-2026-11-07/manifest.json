@@ -1,0 +1,1004 @@
+{
+  "date": "2026-11-07",
+  "sourceBaseCommit": "cd6c0465467a81306338b8ad601c9204579b0ee5",
+  "reviewer": "Prompt author; non-independent qualitative review",
+  "prices": "Local catalogue estimate from API-reported usage, not an invoice or account balance.",
+  "totals": {
+    "calls": 1017,
+    "estimatedUsd": 1.081147025
+  },
+  "experiments": [
+    {
+      "id": "director-selection",
+      "kind": "fixed-director",
+      "source": ".cache/director-eval/2026-11-06T19-30-34-773Z",
+      "suite": "director-selection/1",
+      "casesSha256": "3b6d402d8a8d200eb6c58870933c68a9203de8380d911c036c8435b1446baca8",
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "repetitions": 5,
+      "expectedCalls": 20,
+      "maxCalls": 20,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "review": "Allowed-speaker compliance only; no naturalness score. New session per sample. No retry.",
+      "status": "completed",
+      "calls": 20,
+      "estimatedUsd": 0.0019310000000000002,
+      "error": null,
+      "actualModelIds": [
+        "gpt-6-luna"
+      ],
+      "byPolicy": {
+        "director/3": {
+          "calls": 10,
+          "valid": 10
+        },
+        "director/2": {
+          "calls": 10,
+          "valid": 5
+        }
+      }
+    },
+    {
+      "id": "world5-dialogue-processes",
+      "kind": "fixed-world",
+      "source": ".cache/world-eval/2026-11-06T19-30-34-730Z-development-f80e3386",
+      "suite": "world-dialogue-processes/1",
+      "casesSha256": "3c229a61b8c1760e61c9a478b13f0d3e595aa1a92ab0eea8b58b4a15ef3c1872",
+      "split": "development",
+      "baseline": "npc-world/4",
+      "candidate": "npc-world/5",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "repetitions": 3,
+      "expectedCalls": 24,
+      "maxCalls": 24,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "schemaSha256": "a156e1d1da3a599ef2bc72096142ab17fe18adb681337dac6f7739aa856915ff",
+      "review": "Event presence and runtime validation are mechanical checks, not semantic correctness.",
+      "status": "completed",
+      "error": null,
+      "calls": 24,
+      "estimatedUsd": 0.00478492,
+      "quality": "unreviewed",
+      "invalidOutputs": 0,
+      "actualModelIds": [
+        "gpt-6-luna"
+      ],
+      "byPolicy": {
+        "npc-world/5": {
+          "calls": 12,
+          "valid": 12,
+          "eventExpectationMet": 12
+        },
+        "npc-world/4": {
+          "calls": 12,
+          "valid": 12,
+          "eventExpectationMet": 12
+        }
+      }
+    },
+    {
+      "id": "world5-regression",
+      "kind": "fixed-world",
+      "source": ".cache/world-eval/2026-11-06T19-30-34-735Z-all-e5438368",
+      "suite": "world-observations/1",
+      "casesSha256": "14f83820b9b7d8e3164eb44b827f9428c891480cd6e3c9d00446c41f160e0ff6",
+      "split": "all",
+      "baseline": "npc-world/4",
+      "candidate": "npc-world/5",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "repetitions": 2,
+      "expectedCalls": 56,
+      "maxCalls": 56,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "schemaSha256": "a156e1d1da3a599ef2bc72096142ab17fe18adb681337dac6f7739aa856915ff",
+      "review": "Event presence and runtime validation are mechanical checks, not semantic correctness.",
+      "status": "completed",
+      "error": null,
+      "calls": 56,
+      "estimatedUsd": 0.00973705,
+      "quality": "unreviewed",
+      "invalidOutputs": 0,
+      "actualModelIds": [
+        "gpt-6-luna"
+      ],
+      "byPolicy": {
+        "npc-world/5": {
+          "calls": 28,
+          "valid": 28,
+          "eventExpectationMet": 28
+        },
+        "npc-world/4": {
+          "calls": 28,
+          "valid": 28,
+          "eventExpectationMet": 28
+        }
+      }
+    },
+    {
+      "id": "world6-quiet-time",
+      "kind": "fixed-world",
+      "source": ".cache/world-eval/2026-11-06T19-39-07-729Z-all-c20c7aaa",
+      "suite": "world-quiet-time/1",
+      "casesSha256": "c152c3db7c222d45cff6ba791cc20beeb0daf9f5f3ecf46ab4a19471afc2b7b3",
+      "split": "all",
+      "baseline": "npc-world/5",
+      "candidate": "npc-world/6",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "repetitions": 3,
+      "expectedCalls": 36,
+      "maxCalls": 36,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "baseSchemaSha256": "a156e1d1da3a599ef2bc72096142ab17fe18adb681337dac6f7739aa856915ff",
+      "schemaMode": "per-policy-and-action",
+      "review": "Event presence and runtime validation are mechanical checks, not semantic correctness.",
+      "status": "completed",
+      "error": null,
+      "calls": 36,
+      "estimatedUsd": 0.004466489999999999,
+      "quality": "unreviewed",
+      "invalidOutputs": 0,
+      "actualModelIds": [
+        "gpt-6-luna"
+      ],
+      "byPolicy": {
+        "npc-world/6": {
+          "calls": 18,
+          "valid": 18,
+          "eventExpectationMet": 18
+        },
+        "npc-world/5": {
+          "calls": 18,
+          "valid": 18,
+          "eventExpectationMet": 16
+        }
+      }
+    },
+    {
+      "id": "world6-regression",
+      "kind": "fixed-world",
+      "source": ".cache/world-eval/2026-11-06T19-39-07-730Z-all-5152e0c8",
+      "suite": "world-observations/1",
+      "casesSha256": "14f83820b9b7d8e3164eb44b827f9428c891480cd6e3c9d00446c41f160e0ff6",
+      "split": "all",
+      "baseline": "npc-world/4",
+      "candidate": "npc-world/6",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "repetitions": 2,
+      "expectedCalls": 56,
+      "maxCalls": 56,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "baseSchemaSha256": "a156e1d1da3a599ef2bc72096142ab17fe18adb681337dac6f7739aa856915ff",
+      "schemaMode": "per-policy-and-action",
+      "review": "Event presence and runtime validation are mechanical checks, not semantic correctness.",
+      "status": "completed",
+      "error": null,
+      "calls": 56,
+      "estimatedUsd": 0.008950060000000001,
+      "quality": "unreviewed",
+      "invalidOutputs": 0,
+      "actualModelIds": [
+        "gpt-6-luna"
+      ],
+      "byPolicy": {
+        "npc-world/6": {
+          "calls": 28,
+          "valid": 28,
+          "eventExpectationMet": 28
+        },
+        "npc-world/4": {
+          "calls": 28,
+          "valid": 28,
+          "eventExpectationMet": 28
+        }
+      }
+    },
+    {
+      "id": "world6-dialogue-processes",
+      "kind": "fixed-world",
+      "source": ".cache/world-eval/2026-11-06T19-39-07-862Z-all-17463f47",
+      "suite": "world-dialogue-processes/1",
+      "casesSha256": "3c229a61b8c1760e61c9a478b13f0d3e595aa1a92ab0eea8b58b4a15ef3c1872",
+      "split": "all",
+      "baseline": "npc-world/4",
+      "candidate": "npc-world/6",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "repetitions": 2,
+      "expectedCalls": 16,
+      "maxCalls": 16,
+      "maxUsd": 1,
+      "pricingRevision": "33fd7a5a40495c1a",
+      "baseSchemaSha256": "a156e1d1da3a599ef2bc72096142ab17fe18adb681337dac6f7739aa856915ff",
+      "schemaMode": "per-policy-and-action",
+      "review": "Event presence and runtime validation are mechanical checks, not semantic correctness.",
+      "status": "completed",
+      "error": null,
+      "calls": 16,
+      "estimatedUsd": 0.00430506,
+      "quality": "unreviewed",
+      "invalidOutputs": 0,
+      "actualModelIds": [
+        "gpt-6-luna"
+      ],
+      "byPolicy": {
+        "npc-world/6": {
+          "calls": 8,
+          "valid": 8,
+          "eventExpectationMet": 8
+        },
+        "npc-world/4": {
+          "calls": 8,
+          "valid": 8,
+          "eventExpectationMet": 8
+        }
+      }
+    },
+    {
+      "id": "ordinary-conversations",
+      "kind": "conversation",
+      "source": ".cache/dialogue-soak/2026-11-06T19-20-46-145Z",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 288,
+      "estimatedUsd": 0.5548411,
+      "error": null,
+      "runs": [
+        {
+          "directory": "cafe_pottery-npc-dialogue-3-1",
+          "id": "a1a5ea0c-6f46-426b-98ba-101f0308b762",
+          "policy": "npc-dialogue/3",
+          "status": "completed",
+          "error": null,
+          "choices": 36,
+          "spoken": 34,
+          "actionOnly": 2,
+          "quiet": 0,
+          "longestQuiet": 0,
+          "worldEvents": 0,
+          "quietWorldSeconds": [],
+          "instructionsFile": "ordinary-conversations/cafe_pottery-npc-dialogue-3-1/instructions.json",
+          "sourceTranscriptSha256": "a650c6ea40b06c58d139c7df98e718960570889cfb7f9252898f70cd4668be9a",
+          "archivedTranscriptSha256": "344906a8aec3b4c0fdd467b39b9ed4e002fb8eaa31bd4b9de526e6e9dfad725e",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        },
+        {
+          "directory": "cafe_pottery-npc-dialogue-3-2",
+          "id": "c24b24f8-2d72-4280-a3d9-650c748ff54b",
+          "policy": "npc-dialogue/3",
+          "status": "completed",
+          "error": null,
+          "choices": 36,
+          "spoken": 36,
+          "actionOnly": 0,
+          "quiet": 0,
+          "longestQuiet": 0,
+          "worldEvents": 0,
+          "quietWorldSeconds": [],
+          "instructionsFile": "ordinary-conversations/cafe_pottery-npc-dialogue-3-2/instructions.json",
+          "sourceTranscriptSha256": "f0941cb78c420ce206f5fa51acc20204a03b0a77a855708113043258fd523de8",
+          "archivedTranscriptSha256": "f371fdd846319e09c655369866c894e5ed86155515742a78d75d63e16af96075",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        },
+        {
+          "directory": "cafe_pottery-npc-dialogue-5-1",
+          "id": "5ca07669-8a6e-416d-bc2d-f136d0d14c65",
+          "policy": "npc-dialogue/5",
+          "status": "completed",
+          "error": null,
+          "choices": 36,
+          "spoken": 35,
+          "actionOnly": 0,
+          "quiet": 1,
+          "longestQuiet": 1,
+          "worldEvents": 0,
+          "quietWorldSeconds": [],
+          "instructionsFile": "ordinary-conversations/cafe_pottery-npc-dialogue-5-1/instructions.json",
+          "sourceTranscriptSha256": "b36cc1a06e813d0f15fe5f477964c1748b3cfca19ce36cf3e9677aa3d9fb7f07",
+          "archivedTranscriptSha256": "f029ca8b04b3eeae1d708f6696e6c78e86a6cc0af8756e47a1f816a2be03f7a1",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        },
+        {
+          "directory": "cafe_pottery-npc-dialogue-5-2",
+          "id": "0056933e-e057-4574-a742-1551d34ce111",
+          "policy": "npc-dialogue/5",
+          "status": "completed",
+          "error": null,
+          "choices": 36,
+          "spoken": 32,
+          "actionOnly": 2,
+          "quiet": 2,
+          "longestQuiet": 1,
+          "worldEvents": 0,
+          "quietWorldSeconds": [],
+          "instructionsFile": "ordinary-conversations/cafe_pottery-npc-dialogue-5-2/instructions.json",
+          "sourceTranscriptSha256": "b84f6c36b873be2b8ac3623e0cbe6496ba6b16b0ef520fb6b5ae1206eccfd0ec",
+          "archivedTranscriptSha256": "5479d4b21a6728f260675f2b528e583225eb29f32793f1dff33124abf3c08dbe",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        },
+        {
+          "directory": "coworker_lunch-npc-dialogue-3-1",
+          "id": "0d9f7c94-92b9-4e97-b788-8bed79a31d65",
+          "policy": "npc-dialogue/3",
+          "status": "completed",
+          "error": null,
+          "choices": 36,
+          "spoken": 33,
+          "actionOnly": 3,
+          "quiet": 0,
+          "longestQuiet": 0,
+          "worldEvents": 0,
+          "quietWorldSeconds": [],
+          "instructionsFile": "ordinary-conversations/coworker_lunch-npc-dialogue-3-1/instructions.json",
+          "sourceTranscriptSha256": "b336d87267296d45b1c2e13b1de18b7f145dde4e80dbfcdf31e8e3c492c59463",
+          "archivedTranscriptSha256": "fb023d0de242d256dc8cd30452c731f330ef4139798bc650c3938d8721c8e064",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        },
+        {
+          "directory": "coworker_lunch-npc-dialogue-3-2",
+          "id": "c7442b3a-95de-4318-925f-586389810fb8",
+          "policy": "npc-dialogue/3",
+          "status": "completed",
+          "error": null,
+          "choices": 36,
+          "spoken": 31,
+          "actionOnly": 5,
+          "quiet": 0,
+          "longestQuiet": 0,
+          "worldEvents": 0,
+          "quietWorldSeconds": [],
+          "instructionsFile": "ordinary-conversations/coworker_lunch-npc-dialogue-3-2/instructions.json",
+          "sourceTranscriptSha256": "9fba7db34cbbdbb9db9f087da6d4e5536cd762c5e50e3e97e4ef6ab69ef3e18b",
+          "archivedTranscriptSha256": "b16300996eb782958ea8a2d9b6242a59e8acd18df1248f1543e35e291548232a",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        },
+        {
+          "directory": "coworker_lunch-npc-dialogue-5-1",
+          "id": "ef39f293-0041-40c9-a2bb-af625c827bc7",
+          "policy": "npc-dialogue/5",
+          "status": "completed",
+          "error": null,
+          "choices": 36,
+          "spoken": 28,
+          "actionOnly": 6,
+          "quiet": 2,
+          "longestQuiet": 1,
+          "worldEvents": 0,
+          "quietWorldSeconds": [],
+          "instructionsFile": "ordinary-conversations/coworker_lunch-npc-dialogue-5-1/instructions.json",
+          "sourceTranscriptSha256": "bf46335e052bd4b2f33b79d19ead01ba8664c30deac8842bcc306547c97fc0c5",
+          "archivedTranscriptSha256": "ca9b5dc5ad9a6927dd02c5c7c60e0f6f039938d8bb22daeb0add905b3284b857",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        },
+        {
+          "directory": "coworker_lunch-npc-dialogue-5-2",
+          "id": "965fc5de-18e1-400f-8d45-ff4fffe81ac8",
+          "policy": "npc-dialogue/5",
+          "status": "completed",
+          "error": null,
+          "choices": 36,
+          "spoken": 28,
+          "actionOnly": 4,
+          "quiet": 4,
+          "longestQuiet": 2,
+          "worldEvents": 0,
+          "quietWorldSeconds": [],
+          "instructionsFile": "ordinary-conversations/coworker_lunch-npc-dialogue-5-2/instructions.json",
+          "sourceTranscriptSha256": "c4b181604fd89a4673292ead08e87da934aeadb4cbed208d9ded0fb2f71d3ef6",
+          "archivedTranscriptSha256": "15924fe004f2edd52b136b044c625030110794442b9e3ca99647484f4bcf4248",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        }
+      ]
+    },
+    {
+      "id": "dinner-npc3-world4-director2",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T19-20-45-634Z-dinner-long-v3",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 77,
+      "estimatedUsd": 0.098803875,
+      "error": null,
+      "runs": [
+        {
+          "directory": "run-1",
+          "id": "6249250b-3bf3-4e9e-9d0c-f216a2ea0801",
+          "policy": "npc-dialogue/3",
+          "worldPolicy": "npc-world/4",
+          "status": "paused",
+          "error": "세계 엔진 결과 오류: 이미 발언한 NPC에게 같은 반응을 다시 요청: test_baek_doha",
+          "choices": 30,
+          "spoken": 23,
+          "actionOnly": 7,
+          "quiet": 0,
+          "longestQuiet": 0,
+          "worldEvents": 1,
+          "virtualSeconds": 82,
+          "quietWorldSeconds": [],
+          "instructionsFile": "dinner-npc3-world4-director2/run-1/instructions.json",
+          "sourceTranscriptSha256": "71924f0f8e557bc7b4ae658b1c08583a8aec2b13e3dc51f22a6a04d99103ac1b",
+          "archivedTranscriptSha256": "1799013c51b623fec4cd59b7ff166b620fde255ffe19bfa532cecc91a4c9b007",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        }
+      ]
+    },
+    {
+      "id": "dinner-npc5-world4-director2",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T19-20-45-851Z-dinner-long-v5",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 15,
+      "estimatedUsd": 0.02615348,
+      "error": null,
+      "runs": [
+        {
+          "directory": "run-1",
+          "id": "710f0636-270f-463e-8a77-3dcaa2c8175d",
+          "policy": "npc-dialogue/5",
+          "worldPolicy": "npc-world/4",
+          "status": "paused",
+          "error": "진행자가 허용되지 않은 화자를 선택했습니다.",
+          "choices": 5,
+          "spoken": 5,
+          "actionOnly": 0,
+          "quiet": 0,
+          "longestQuiet": 0,
+          "worldEvents": 0,
+          "virtualSeconds": 15,
+          "quietWorldSeconds": [],
+          "instructionsFile": "dinner-npc5-world4-director2/run-1/instructions.json",
+          "sourceTranscriptSha256": "a76ca9a6d221c8a31e2111214613d2c388b100bacb5e1e22635ff96138e34b57",
+          "archivedTranscriptSha256": "adfe6aa6602c12bd9d222c5ffdefc22874c52586c7d3284b9713d1ba544d329d",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        }
+      ]
+    },
+    {
+      "id": "dinner-npc5-world4-director3",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T19-26-18-786Z-dinner-v5-director3",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 143,
+      "estimatedUsd": 0.11618758000000004,
+      "error": null,
+      "runs": [
+        {
+          "directory": "run-1",
+          "id": "5189727b-b231-4eaf-b3cc-5ed1f4295207",
+          "policy": "npc-dialogue/5",
+          "worldPolicy": "npc-world/4",
+          "status": "completed",
+          "error": null,
+          "choices": 48,
+          "spoken": 24,
+          "actionOnly": 1,
+          "quiet": 23,
+          "longestQuiet": 23,
+          "worldEvents": 0,
+          "virtualSeconds": 76,
+          "quietWorldSeconds": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "instructionsFile": "dinner-npc5-world4-director3/run-1/instructions.json",
+          "sourceTranscriptSha256": "c474f3dcdcbb69d70a1857eb7aa0a5db1ee245b947240f42e9c2c88b06ea4d70",
+          "archivedTranscriptSha256": "488e176f11fd4b49fad69318309ed39d98b0f46261d3f99aacf7654ecdf845b2",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        }
+      ]
+    },
+    {
+      "id": "dinner-npc5-world6-director3",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T19-39-08-175Z-dinner-v5-world6",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 286,
+      "estimatedUsd": 0.2509864100000001,
+      "error": null,
+      "runs": [
+        {
+          "directory": "run-1",
+          "id": "17878e2d-82f5-4cc8-9e4d-c7ba95eccd4c",
+          "policy": "npc-dialogue/5",
+          "worldPolicy": "npc-world/6",
+          "status": "completed",
+          "error": null,
+          "choices": 48,
+          "spoken": 24,
+          "actionOnly": 4,
+          "quiet": 20,
+          "longestQuiet": 16,
+          "worldEvents": 3,
+          "virtualSeconds": 102,
+          "quietWorldSeconds": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "instructionsFile": "dinner-npc5-world6-director3/run-1/instructions.json",
+          "sourceTranscriptSha256": "f243048a86ae56bf690a0525cff9d3c487904dc37834df4ef1f18b53438a8633",
+          "archivedTranscriptSha256": "2ca3b42817c9f49b5b1f548d8762fd40e0da7ae595c76c8129cd37af79cc8f79",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        },
+        {
+          "directory": "run-2",
+          "id": "62e6bd4b-aeab-4728-82e6-d9a201c685f1",
+          "policy": "npc-dialogue/5",
+          "worldPolicy": "npc-world/6",
+          "status": "completed",
+          "error": null,
+          "choices": 48,
+          "spoken": 28,
+          "actionOnly": 5,
+          "quiet": 15,
+          "longestQuiet": 9,
+          "worldEvents": 4,
+          "virtualSeconds": 114,
+          "quietWorldSeconds": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "instructionsFile": "dinner-npc5-world6-director3/run-2/instructions.json",
+          "sourceTranscriptSha256": "811e1b8140e93a2b9c7a425ceb3581ed202967eab5c66c701dbeed4607c8b37f",
+          "archivedTranscriptSha256": "d88671fc01936202fc1429b78d13b2e784bea0b85f97a80212a1c7c9c5607114",
+          "formatting": "Only trailing blank lines normalized; dialogue unchanged."
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "director-selection/manifest.json",
+      "sha256": "52b081a0f6f99e88ea12cedc3106e33ac9344008e01921de55b6515ed45f794f",
+      "bytes": 485
+    },
+    {
+      "path": "director-selection/samples.jsonl",
+      "sha256": "d703c7c8ce7718a8bed6d5f432f2f6c895ba51f53ab9f7334a1f59065572ff00",
+      "bytes": 19990
+    },
+    {
+      "path": "director-selection/cases.json",
+      "sha256": "3b6d402d8a8d200eb6c58870933c68a9203de8380d911c036c8435b1446baca8",
+      "bytes": 3336
+    },
+    {
+      "path": "director-selection/instructions.txt",
+      "sha256": "137b943b14a3a61f4ada1175ba99db90b62485eef31da539bb6e2037570988bb",
+      "bytes": 1313
+    },
+    {
+      "path": "world5-dialogue-processes/manifest.json",
+      "sha256": "b022abe1707c4f97a24b51cb6fc84b3f7206aba86261b487f362d63b9e0202ba",
+      "bytes": 702
+    },
+    {
+      "path": "world5-dialogue-processes/samples.jsonl",
+      "sha256": "c6faa4de7b2ebb172d0bb977f5fbc9b7f0e5adf686472266e5c63b3ae1948eb7",
+      "bytes": 29450
+    },
+    {
+      "path": "world5-dialogue-processes/cases.json",
+      "sha256": "3c229a61b8c1760e61c9a478b13f0d3e595aa1a92ab0eea8b58b4a15ef3c1872",
+      "bytes": 25218
+    },
+    {
+      "path": "world5-dialogue-processes/policies.json",
+      "sha256": "70b68268c37728a81a4316be2adc491809a6c414a95f623f180e9e8a6662600a",
+      "bytes": 41693
+    },
+    {
+      "path": "world5-regression/manifest.json",
+      "sha256": "f49f3eb76a0e7928070345df6163b9db30a79851605dfb2316c457172cd3bc26",
+      "bytes": 688
+    },
+    {
+      "path": "world5-regression/samples.jsonl",
+      "sha256": "f39f9eedf23e1a0ec34c0887f1bb079e1d82606330568ce8ff530c4159e1cac9",
+      "bytes": 78142
+    },
+    {
+      "path": "world5-regression/cases.json",
+      "sha256": "14f83820b9b7d8e3164eb44b827f9428c891480cd6e3c9d00446c41f160e0ff6",
+      "bytes": 31987
+    },
+    {
+      "path": "world5-regression/policies.json",
+      "sha256": "70b68268c37728a81a4316be2adc491809a6c414a95f623f180e9e8a6662600a",
+      "bytes": 41693
+    },
+    {
+      "path": "world6-quiet-time/manifest.json",
+      "sha256": "578bdb53652250b6c7736479f2468cd8bd9a043f900af63968ae4cb2aa7ddeae",
+      "bytes": 741
+    },
+    {
+      "path": "world6-quiet-time/samples.jsonl",
+      "sha256": "503a3483b8448eb86f999a4294029778929f0ae086a0e054b92bfe8148427121",
+      "bytes": 167436
+    },
+    {
+      "path": "world6-quiet-time/cases.json",
+      "sha256": "c152c3db7c222d45cff6ba791cc20beeb0daf9f5f3ecf46ab4a19471afc2b7b3",
+      "bytes": 12197
+    },
+    {
+      "path": "world6-quiet-time/policies.json",
+      "sha256": "066e87f07acbc2ed660771dad4fc0904426206d2e5cc8b6963486623ed54f2a5",
+      "bytes": 51948
+    },
+    {
+      "path": "world6-regression/manifest.json",
+      "sha256": "b8b703b561bdb194b98582e324e37002fce609d1629aca5752c3f9c47c14e268",
+      "bytes": 743
+    },
+    {
+      "path": "world6-regression/samples.jsonl",
+      "sha256": "9adfe9051560fca8f8989ce207854a52fbb195ba365c008d9c7bdcc450165d7d",
+      "bytes": 270143
+    },
+    {
+      "path": "world6-regression/cases.json",
+      "sha256": "14f83820b9b7d8e3164eb44b827f9428c891480cd6e3c9d00446c41f160e0ff6",
+      "bytes": 31987
+    },
+    {
+      "path": "world6-regression/policies.json",
+      "sha256": "066e87f07acbc2ed660771dad4fc0904426206d2e5cc8b6963486623ed54f2a5",
+      "bytes": 51948
+    },
+    {
+      "path": "world6-dialogue-processes/manifest.json",
+      "sha256": "0ddf7eadb4692d0b3dbb203a388e67cf635c10f84b35391abb2ca96c4f0fd411",
+      "bytes": 739
+    },
+    {
+      "path": "world6-dialogue-processes/samples.jsonl",
+      "sha256": "10246b8b7c6e55d4fcba5b0db0833440cdedbe3514a2226fa9bbe752cf786621",
+      "bytes": 77819
+    },
+    {
+      "path": "world6-dialogue-processes/cases.json",
+      "sha256": "3c229a61b8c1760e61c9a478b13f0d3e595aa1a92ab0eea8b58b4a15ef3c1872",
+      "bytes": 25218
+    },
+    {
+      "path": "world6-dialogue-processes/policies.json",
+      "sha256": "066e87f07acbc2ed660771dad4fc0904426206d2e5cc8b6963486623ed54f2a5",
+      "bytes": 51948
+    },
+    {
+      "path": "ordinary-conversations/result.json",
+      "sha256": "c4a33fe1a18c9d7e65a8df8fe934338d612657b86e87987c8dbb81aad49e2c2b",
+      "bytes": 6074
+    },
+    {
+      "path": "ordinary-conversations/configs.json",
+      "sha256": "e461edfa83368c13c9530055f1f68e0dc2b53e9603d97d031baa5873f4c8fb29",
+      "bytes": 12186
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-3-1/transcript.md",
+      "sha256": "344906a8aec3b4c0fdd467b39b9ed4e002fb8eaa31bd4b9de526e6e9dfad725e",
+      "bytes": 6924
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-3-1/calls.jsonl",
+      "sha256": "c12704a2fd3325b3a2f88fa59639ccb78b7b7022436bc9016a86df5ccb86d58e",
+      "bytes": 82579
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-3-1/instructions.json",
+      "sha256": "39981088dc307ef0c8aec7027e33a26b2d006e4b7fdf2861a132d025da294d70",
+      "bytes": 16110
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-3-2/transcript.md",
+      "sha256": "f371fdd846319e09c655369866c894e5ed86155515742a78d75d63e16af96075",
+      "bytes": 6668
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-3-2/calls.jsonl",
+      "sha256": "1a20be22bdee8e7a269553620b13f49ec7ffacbd61a1e197928f89b7710e3834",
+      "bytes": 82041
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-3-2/instructions.json",
+      "sha256": "39981088dc307ef0c8aec7027e33a26b2d006e4b7fdf2861a132d025da294d70",
+      "bytes": 16110
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-5-1/transcript.md",
+      "sha256": "f029ca8b04b3eeae1d708f6696e6c78e86a6cc0af8756e47a1f816a2be03f7a1",
+      "bytes": 7038
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-5-1/calls.jsonl",
+      "sha256": "5fd7ae7371a648c43f52bbad0f74d8bbf36231172973f99e44c255e48cc810f6",
+      "bytes": 82577
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-5-1/instructions.json",
+      "sha256": "0a68114f0a78c96744c56206b74d0f86329fd374ee78291dd5087b88a2428e9b",
+      "bytes": 20052
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-5-2/transcript.md",
+      "sha256": "5479d4b21a6728f260675f2b528e583225eb29f32793f1dff33124abf3c08dbe",
+      "bytes": 6204
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-5-2/calls.jsonl",
+      "sha256": "d18ca90d972977ad2c23b0135f86ac59a515bf1bc16fc178cdfe1d4fa57d31c1",
+      "bytes": 79727
+    },
+    {
+      "path": "ordinary-conversations/cafe_pottery-npc-dialogue-5-2/instructions.json",
+      "sha256": "0a68114f0a78c96744c56206b74d0f86329fd374ee78291dd5087b88a2428e9b",
+      "bytes": 20052
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-3-1/transcript.md",
+      "sha256": "fb023d0de242d256dc8cd30452c731f330ef4139798bc650c3938d8721c8e064",
+      "bytes": 5937
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-3-1/calls.jsonl",
+      "sha256": "4aad69677a91e888aeed7a89981a9eb01e4c3bd01b15bc42750f73a5af7be708",
+      "bytes": 79974
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-3-1/instructions.json",
+      "sha256": "f102dcaafa06889d010d09ba3bf7c02044a7e9c356c75f1a3e51a3e2a5b45759",
+      "bytes": 16235
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-3-2/transcript.md",
+      "sha256": "b16300996eb782958ea8a2d9b6242a59e8acd18df1248f1543e35e291548232a",
+      "bytes": 6322
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-3-2/calls.jsonl",
+      "sha256": "986c68c84cde74990e74d1ca8581be33379dc33288e534ee20651cbdcc5a0af4",
+      "bytes": 81330
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-3-2/instructions.json",
+      "sha256": "f102dcaafa06889d010d09ba3bf7c02044a7e9c356c75f1a3e51a3e2a5b45759",
+      "bytes": 16235
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-5-1/transcript.md",
+      "sha256": "ca9b5dc5ad9a6927dd02c5c7c60e0f6f039938d8bb22daeb0add905b3284b857",
+      "bytes": 5233
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-5-1/calls.jsonl",
+      "sha256": "4518e6a76b44d95c1e8b539cf737c6973b41c84800c19d4c7095d858037126ec",
+      "bytes": 77235
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-5-1/instructions.json",
+      "sha256": "c482bd52c5d0d4f0cec1b92b5a90b8c75bf679835ce60b257a94b4856ad7ae51",
+      "bytes": 20177
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-5-2/transcript.md",
+      "sha256": "15924fe004f2edd52b136b044c625030110794442b9e3ca99647484f4bcf4248",
+      "bytes": 5405
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-5-2/calls.jsonl",
+      "sha256": "7f260499754a876bc797f8af590fd29ac900848f487e62cd4c1cae2e6629f30e",
+      "bytes": 76859
+    },
+    {
+      "path": "ordinary-conversations/coworker_lunch-npc-dialogue-5-2/instructions.json",
+      "sha256": "c482bd52c5d0d4f0cec1b92b5a90b8c75bf679835ce60b257a94b4856ad7ae51",
+      "bytes": 20177
+    },
+    {
+      "path": "dinner-npc3-world4-director2/result.json",
+      "sha256": "28ef0a4c647988fca0eba9fcff7a81adae6e5b34f68a1be2e5bc913c92a2545a",
+      "bytes": 1149
+    },
+    {
+      "path": "dinner-npc3-world4-director2/config.json",
+      "sha256": "91a20937b52496e9ae7d87bab0eb9c89a4fbbc21ca421cbe953a789dd510e69f",
+      "bytes": 24270
+    },
+    {
+      "path": "dinner-npc3-world4-director2/run-1/transcript.md",
+      "sha256": "1799013c51b623fec4cd59b7ff166b620fde255ffe19bfa532cecc91a4c9b007",
+      "bytes": 3876
+    },
+    {
+      "path": "dinner-npc3-world4-director2/run-1/calls.jsonl",
+      "sha256": "3aac81c14d3f9074955bf6989bb84b9453f0ddb97dcc969e8dac0137740f7d9d",
+      "bytes": 340723
+    },
+    {
+      "path": "dinner-npc3-world4-director2/run-1/instructions.json",
+      "sha256": "4255f4e00a493cee332ed48b49c3b58dc37dafc4b83121c832ee8acdc1eefcc3",
+      "bytes": 49479
+    },
+    {
+      "path": "dinner-npc3-world4-director2/run-1/world-state.json",
+      "sha256": "bf870a67fdd29f9b944da466cf07d0509d0d2aa4fea49bc2e4579b623433fb9e",
+      "bytes": 5668
+    },
+    {
+      "path": "dinner-npc5-world4-director2/result.json",
+      "sha256": "b115b3aee3d41a211efbb0b3e11fb9318572915b88c1fa57f71bad05edc17426",
+      "bytes": 1100
+    },
+    {
+      "path": "dinner-npc5-world4-director2/config.json",
+      "sha256": "9a7f700fa718d73489cc0c516d9d354f460db3022116442a199ade3157391a27",
+      "bytes": 24270
+    },
+    {
+      "path": "dinner-npc5-world4-director2/run-1/transcript.md",
+      "sha256": "adfe6aa6602c12bd9d222c5ffdefc22874c52586c7d3284b9713d1ba544d329d",
+      "bytes": 819
+    },
+    {
+      "path": "dinner-npc5-world4-director2/run-1/calls.jsonl",
+      "sha256": "0a8fab7efb77f43c15d978526d8927a7d8d78b5c784e73aad6d373977b23ce63",
+      "bytes": 54605
+    },
+    {
+      "path": "dinner-npc5-world4-director2/run-1/instructions.json",
+      "sha256": "1c9f1d45b00a59fdb92061ee9a46fea85ed9c2bf04cb8ce0e11b7698adeb4c31",
+      "bytes": 53421
+    },
+    {
+      "path": "dinner-npc5-world4-director2/run-1/world-state.json",
+      "sha256": "796f6bd17ad158b03c488a49eca030a1a62758d378ecdb21ba9af64ac87d141b",
+      "bytes": 179
+    },
+    {
+      "path": "dinner-npc5-world4-director3/result.json",
+      "sha256": "091543a28fd9a91e3a4d1f7da6756875297c3170f189e1497cf533d9f97095ff",
+      "bytes": 1099
+    },
+    {
+      "path": "dinner-npc5-world4-director3/config.json",
+      "sha256": "f9dda5466b97b822085caab02de3c0238fed199d29d87248c166b6ab25ed9f80",
+      "bytes": 24280
+    },
+    {
+      "path": "dinner-npc5-world4-director3/run-1/transcript.md",
+      "sha256": "488e176f11fd4b49fad69318309ed39d98b0f46261d3f99aacf7654ecdf845b2",
+      "bytes": 3904
+    },
+    {
+      "path": "dinner-npc5-world4-director3/run-1/calls.jsonl",
+      "sha256": "6a3e6bcadd6cb485246493e175530b4e9c3d294ae5ed86e821c028b26a73e00d",
+      "bytes": 567232
+    },
+    {
+      "path": "dinner-npc5-world4-director3/run-1/instructions.json",
+      "sha256": "1c9f1d45b00a59fdb92061ee9a46fea85ed9c2bf04cb8ce0e11b7698adeb4c31",
+      "bytes": 53421
+    },
+    {
+      "path": "dinner-npc5-world4-director3/run-1/world-state.json",
+      "sha256": "16d3b676594e8e9bb76b3b72f68af462a950d946306a3d9d4fb3792561fc679f",
+      "bytes": 181
+    },
+    {
+      "path": "dinner-npc5-world6-director3/result.json",
+      "sha256": "d3510b587082e9f4d38d90320ce5e1f6e9060f4769108b9ef64a376f6c1df858",
+      "bytes": 1715
+    },
+    {
+      "path": "dinner-npc5-world6-director3/config.json",
+      "sha256": "d69294254510442d8cb9b1c664f690716004da7c809f1d0a1bb6724b4d847ffa",
+      "bytes": 24274
+    },
+    {
+      "path": "dinner-npc5-world6-director3/run-1/transcript.md",
+      "sha256": "2ca3b42817c9f49b5b1f548d8762fd40e0da7ae595c76c8129cd37af79cc8f79",
+      "bytes": 4343
+    },
+    {
+      "path": "dinner-npc5-world6-director3/run-1/calls.jsonl",
+      "sha256": "b5756d8852e7dc3756ec4488be9378805f1350154f7ccd50f0ffd813c032161d",
+      "bytes": 592416
+    },
+    {
+      "path": "dinner-npc5-world6-director3/run-1/instructions.json",
+      "sha256": "8edbadb168de78c7a64ee7c1a7e374cfab8ff77a5ab74b2140a9dbc4cbef5db3",
+      "bytes": 55460
+    },
+    {
+      "path": "dinner-npc5-world6-director3/run-1/world-state.json",
+      "sha256": "6650054de99a96361d406cdae65c8291fe6567fe192087ac08895162ef9c577e",
+      "bytes": 1062
+    },
+    {
+      "path": "dinner-npc5-world6-director3/run-2/transcript.md",
+      "sha256": "d88671fc01936202fc1429b78d13b2e784bea0b85f97a80212a1c7c9c5607114",
+      "bytes": 4454
+    },
+    {
+      "path": "dinner-npc5-world6-director3/run-2/calls.jsonl",
+      "sha256": "8f200ddccee8bbd4be4b61206232674ecab2d23fae8dc96a8ad9458ab8ea7ec5",
+      "bytes": 593878
+    },
+    {
+      "path": "dinner-npc5-world6-director3/run-2/instructions.json",
+      "sha256": "8edbadb168de78c7a64ee7c1a7e374cfab8ff77a5ab74b2140a9dbc4cbef5db3",
+      "bytes": 55460
+    },
+    {
+      "path": "dinner-npc5-world6-director3/run-2/world-state.json",
+      "sha256": "f202764805883de0f06cd8b4552c40e881312a70172a53ed291a4988bfe0bdf8",
+      "bytes": 1012
+    }
+  ]
+}

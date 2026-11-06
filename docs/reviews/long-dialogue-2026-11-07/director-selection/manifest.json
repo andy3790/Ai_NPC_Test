@@ -1,0 +1,16 @@
+{
+  "suite": "director-selection/1",
+  "casesSha256": "3b6d402d8a8d200eb6c58870933c68a9203de8380d911c036c8435b1446baca8",
+  "model": "gpt-6-luna",
+  "effort": "low",
+  "repetitions": 5,
+  "expectedCalls": 20,
+  "maxCalls": 20,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "review": "Allowed-speaker compliance only; no naturalness score. New session per sample. No retry.",
+  "status": "completed",
+  "calls": 20,
+  "estimatedUsd": 0.0019310000000000002,
+  "error": null
+}

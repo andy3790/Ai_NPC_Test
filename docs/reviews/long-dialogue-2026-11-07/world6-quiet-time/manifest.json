@@ -1,0 +1,23 @@
+{
+  "suite": "world-quiet-time/1",
+  "casesSha256": "c152c3db7c222d45cff6ba791cc20beeb0daf9f5f3ecf46ab4a19471afc2b7b3",
+  "split": "all",
+  "baseline": "npc-world/5",
+  "candidate": "npc-world/6",
+  "model": "gpt-6-luna",
+  "effort": "medium",
+  "repetitions": 3,
+  "expectedCalls": 36,
+  "maxCalls": 36,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "baseSchemaSha256": "a156e1d1da3a599ef2bc72096142ab17fe18adb681337dac6f7739aa856915ff",
+  "schemaMode": "per-policy-and-action",
+  "review": "Event presence and runtime validation are mechanical checks, not semantic correctness.",
+  "status": "completed",
+  "error": null,
+  "calls": 36,
+  "estimatedUsd": 0.004466489999999999,
+  "quality": "unreviewed",
+  "invalidOutputs": 0
+}

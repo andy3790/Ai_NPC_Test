@@ -1,0 +1,23 @@
+{
+  "suite": "world-observations/1",
+  "casesSha256": "14f83820b9b7d8e3164eb44b827f9428c891480cd6e3c9d00446c41f160e0ff6",
+  "split": "all",
+  "baseline": "npc-world/4",
+  "candidate": "npc-world/6",
+  "model": "gpt-6-luna",
+  "effort": "medium",
+  "repetitions": 2,
+  "expectedCalls": 56,
+  "maxCalls": 56,
+  "maxUsd": 1,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "baseSchemaSha256": "a156e1d1da3a599ef2bc72096142ab17fe18adb681337dac6f7739aa856915ff",
+  "schemaMode": "per-policy-and-action",
+  "review": "Event presence and runtime validation are mechanical checks, not semantic correctness.",
+  "status": "completed",
+  "error": null,
+  "calls": 56,
+  "estimatedUsd": 0.008950060000000001,
+  "quality": "unreviewed",
+  "invalidOutputs": 0
+}

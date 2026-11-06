@@ -2,9 +2,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdir, mkdtemp } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { createHash } from 'node:crypto';
 import { Engine } from '../src/core/engine.js';
 import { Store } from '../src/core/store.js';
-import { DIRECTOR_CONTEXT, directorObservations, directorPrompt } from '../src/core/director.js';
+import { DIRECTOR_CONTEXT, directorInstructions, directorObservations, directorOutputSchema, directorPrompt } from '../src/core/director.js';
 import { MockAdapter } from '../src/adapters/mock.js';
 import { OpenAIAdapter } from '../src/adapters/openai.js';
 import { exampleSpec } from '../src/shared/example.js';
@@ -101,6 +102,33 @@ test('120-turn run uses bounded fresh director sessions while NPC sessions and f
   } finally { await engine.close(); store.close(); }
 });
 
+test('a forced waiting speaker is the only schema choice and invalid provider output is still rejected', async () => {
+  const { engine, store, adapter, spec } = setup(); spec.maxUtterances = 9;
+  const turn = adapter.turn.bind(adapter); let forced = false;
+  adapter.turn = async (...args) => {
+    const request = args[0], p = JSON.parse(request.input), result = await turn(...args);
+    if (p.task === 'direct') {
+      const schema = request.outputSchema as any;
+      assert.deepEqual(schema.properties.speakerId.enum, p.allowedSpeakerIds);
+      // Keep the first pair talking until the real scheduler offers the third.
+      const pair = p.allowedSpeakerIds.find((id: string) => id === 'yoon' || id === 'doha');
+      if (!pair) {
+        forced = true; assert.deepEqual(p.allowedSpeakerIds, ['miru']);
+        result.output = JSON.stringify({ speakerId: 'yoon', reason: 'Invalid provider ignores the enum' });
+      } else result.output = JSON.stringify({ speakerId: pair, reason: 'Reply to the pair' });
+    }
+    return result;
+  };
+  try {
+    const { runs: [run] } = await engine.create(spec); await engine.idle(); const d = engine.detail(run.id);
+    assert.ok(forced); assert.equal(d.run.status, 'paused'); assert.match(d.run.error!, /허용되지 않은 화자/);
+    assert.equal(d.utterances.filter(u => u.kind === 'speech').length, 5);
+    const failed = d.invocations.at(-1)!; assert.equal(failed.status, 'failed');
+    assert.equal(failed.metadata.outputSchemaSha256, createHash('sha256').update(JSON.stringify(directorOutputSchema(['miru']))).digest('hex'));
+    assert.equal(createHash('sha256').update(directorInstructions).digest('hex'), '5cbf1f16ab0e054b6f2f09f157136cd308ed26c04ccd2b876d99cec2707c1b92');
+  } finally { await engine.close(); store.close(); }
+});
+
 test('failed director retry gets the full bounded input in a fresh session and preserves attempt accounting', async () => {
   const { engine, store, adapter, spec } = setup(); adapter.failNextKind = 'direct';
   try {
@@ -154,6 +182,9 @@ for (const spatial of [false, true]) test(`OpenAI ${spatial ? 'spatial' : 'singl
     for (const c of calls) {
       const request = api.requests.find(b => b.metadata.npc_lab_call_id === c.id);
       assert.equal(request.previous_response_id, null); assert.equal(request.input, c.input);
+      const allowed = JSON.parse(c.input).allowedSpeakerIds;
+      assert.deepEqual(request.text.format.schema.properties.speakerId.enum, allowed);
+      assert.equal(c.metadata.outputSchemaSha256, createHash('sha256').update(JSON.stringify(directorOutputSchema(allowed))).digest('hex'));
       assert.equal(c.usage.totalTokens, 120); assert.ok(c.durationMs! >= 0); assert.ok(c.firstOutputMs! >= 0);
     }
     assert.ok(api.requests.some(b => JSON.parse(b.input).task === 'speak' && b.previous_response_id !== null));

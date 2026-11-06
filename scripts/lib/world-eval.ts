@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import type { WorldState } from '../../src/shared/world-schema.js';
 import type { Utterance } from '../../src/shared/types.js';
-import { applyWorldOutput } from '../../src/core/world.js';
+import { applyWorldOutput, worldResponseContract } from '../../src/core/world.js';
 
 export const worldCasesSchema = z.object({
   version: z.string().min(1),
@@ -19,11 +19,12 @@ export const worldCasesSchema = z.object({
 });
 export type WorldCase = z.infer<typeof worldCasesSchema>['cases'][number];
 
-export function inspectWorldResponse(c: WorldCase, output: string) {
+export function inspectWorldResponse(c: WorldCase, output: string, version: string | null = null) {
   const p = JSON.parse(c.input);
   const source = { ...p.currentAction, speechIndex: p.state.processedSpeechCount + 1 } as Utterance;
   try {
-    const applied = applyWorldOutput(p.state as WorldState, JSON.parse(output), source, p.npcs.map((n: { id: string }) => n.id));
+    const validated = worldResponseContract(version, source).validator.parse(JSON.parse(output));
+    const applied = applyWorldOutput(p.state as WorldState, validated, source, p.npcs.map((n: { id: string }) => n.id));
     return { valid: true, error: null, eventExpectationMet: c.eventExpectation === 'silent' ? applied.output.events.length === 0 : applied.output.events.length > 0,
       eventCount: applied.output.events.length, nextState: applied.state };
   } catch (error) {

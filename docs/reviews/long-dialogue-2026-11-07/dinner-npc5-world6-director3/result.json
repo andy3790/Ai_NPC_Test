@@ -1,0 +1,63 @@
+{
+  "promptVersion": "npc-lab/8",
+  "worldPromptVersion": "npc-world/6",
+  "dialoguePromptVersion": "npc-dialogue/5",
+  "directorVersion": "director/3",
+  "scenario": "연습 영상 틀어 놓은 저녁",
+  "model": "gpt-6.1-sol",
+  "turns": 48,
+  "repetitions": 2,
+  "expectedCalls": 286,
+  "maxCalls": 286,
+  "maxUsd": 1,
+  "costLimit": "Stop before a new request once recorded catalogue estimate reaches maxUsd; one request can overshoot.",
+  "requests": 286,
+  "reports": [
+    {
+      "id": "17878e2d-82f5-4cc8-9e4d-c7ba95eccd4c",
+      "status": "completed",
+      "error": null,
+      "calls": 143,
+      "choices": 48,
+      "cost": {
+        "usd": 0.12297590000000007,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "tokens": {
+        "inputTokens": 2458180,
+        "cachedInputTokens": 2267066,
+        "cacheWriteInputTokens": 171419,
+        "outputTokens": 9407,
+        "reasoningOutputTokens": 3082,
+        "totalTokens": 2467587
+      },
+      "failedCalls": 0
+    },
+    {
+      "id": "62e6bd4b-aeab-4728-82e6-d9a201c685f1",
+      "status": "completed",
+      "error": null,
+      "calls": 143,
+      "choices": 48,
+      "cost": {
+        "usd": 0.12801051000000002,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "tokens": {
+        "inputTokens": 2444271,
+        "cachedInputTokens": 2230134,
+        "cacheWriteInputTokens": 190864,
+        "outputTokens": 9749,
+        "reasoningOutputTokens": 3473,
+        "totalTokens": 2454020
+      },
+      "failedCalls": 0
+    }
+  ]
+}

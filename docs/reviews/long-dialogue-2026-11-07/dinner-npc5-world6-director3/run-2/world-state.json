@@ -1,0 +1,33 @@
+{
+  "virtualSeconds": 114,
+  "facts": [],
+  "processes": [
+    {
+      "id": "phone-video-playback",
+      "description": "휴대전화에서 재생 중인 밴드 연습 영상이 끝난다.",
+      "readyAtSeconds": 50,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [],
+      "status": "completed",
+      "createdAtSeconds": 3,
+      "sourceUtteranceId": "e5cae57e-6603-48ec-83ac-590db7ca3a19",
+      "finishedAtSeconds": 50,
+      "reason": "영상 재생이 끝났다."
+    },
+    {
+      "id": "song-playback",
+      "description": "휴대전화에서 재생 중인 송창식의 「우리는」이 끝난다.",
+      "readyAtSeconds": 250,
+      "waitingNpcIds": [],
+      "offeredNpcIds": [],
+      "status": "pending",
+      "createdAtSeconds": 72,
+      "sourceUtteranceId": "12e50124-04a6-4342-a307-948454a3e508",
+      "finishedAtSeconds": null,
+      "reason": null
+    }
+  ],
+  "processedSpeechId": "a492af51-15a6-48e7-a217-a5c0c6f163ee",
+  "processedSequence": 52,
+  "processedSpeechCount": 48
+}

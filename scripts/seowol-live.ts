@@ -10,6 +10,7 @@ import { PROMPT_VERSION } from '../src/core/prompts.js';
 import { WORLD_PROMPT_VERSION } from '../src/core/world-policies.js';
 import { WORLD_PROMPT_VERSIONS, type WorldPromptVersion } from '../src/shared/world-policy.js';
 import { CURRENT_DIALOGUE_PROMPT, DIALOGUE_PROMPT_VERSIONS, type DialoguePromptVersion } from '../src/shared/dialogue-policy.js';
+import { DIRECTOR_CONTEXT } from '../src/core/director.js';
 
 // Explicit paid experiment. Each run has fresh NPC sessions and an isolated DB.
 // No auto-retry, production DB access, or automatic quality grading.
@@ -43,7 +44,7 @@ spec.variants = [{ ...spec.variants[0], id: 'review', label: `${model} / low / $
 for (const c of spec.scenario.characters) { delete c.model; delete c.effort; }
 spec.director = { model: 'gpt-6-luna', effort: 'low' };
 spec.worldEngine = { model: 'gpt-6-luna', effort: 'medium' };
-const plan = { promptVersion: PROMPT_VERSION, worldPromptVersion, dialoguePromptVersion, scenario: spec.scenario.name, model,
+const plan = { promptVersion: PROMPT_VERSION, worldPromptVersion, dialoguePromptVersion, directorVersion: DIRECTOR_CONTEXT.version, scenario: spec.scenario.name, model,
   turns, repetitions, expectedCalls: repetitions * (3 * turns - 1), maxCalls, maxUsd,
   costLimit: 'Stop before a new request once recorded catalogue estimate reaches maxUsd; one request can overshoot.' };
 experimentSchema.parse(spec);

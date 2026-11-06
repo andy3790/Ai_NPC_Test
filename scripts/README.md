@@ -103,3 +103,7 @@ python scripts/verify-comparison.py reports/delivery-comparison
 `npm run world:eval`은 세계 엔진의 고정 입력 비교 계획을 출력합니다. `--live`로만 API를 사용하고 `--baseline`, `--candidate`, `--split`, `--repetitions`, `--max-calls`, `--max-usd`로 범위를 고정합니다. 참고 판정 기준은 요청에 넣지 않습니다. 잘못된 결과도 원문과 기존 런타임 검증 오류를 저장하며 독립 사례를 계속 검사합니다. 전송 실패·예산·사용량 누락에서는 중단하며 자동 재시도하지 않습니다. 사건 개수 검사는 의미 정확성 평가가 아닙니다.
 
 여러 차례 세계 비교는 `dialogue-soak.ts`의 NPC `--baseline`과 `--candidate`를 동일하게 두고 `--world-baseline npc-world/2 --world-candidate npc-world/4`를 지정합니다. NPC 정책까지 동시에 바꾸는 혼합 비교는 거부합니다. 서월은 `seowol-live.ts --world-policy npc-world/4`로 지정합니다.
+
+세계 고정 입력 도구의 현재 기본 비교는 /4 대 /6입니다. /6의 무언·무동작 사례는 운영 엔진과 동일한 1초 스키마를 사용합니다. `baseSchemaSha256`은 기본 형식이며 각 표본의 `outputSchema`와 `outputSchemaSha256`이 실제 요청 형식입니다. [긴 대화 검토](../docs/reviews/long-dialogue-2026-11-07/report.md)에 회귀·조용한 시간·대화 사건화 사례와 명령을 보존합니다.
+
+`npm run director:eval`은 /2의 자유 문자열 화자 ID와 /3의 허용 후보 enum을 같은 입력·지침으로 비교합니다. 기본은 호출 없는 계획이며 `--live --repetitions 5 --max-calls 20 --max-usd 1`로 실제 실행합니다. 실제 실패에서 추출한 입력·지침 해시를 동결했고, 원문·스키마·사용량·후보 준수 여부를 저장합니다. 지침 해시가 바뀌면 기존 비교 데이터와 혼합하지 않고 거부합니다. 이 검사는 화자 후보 준수만 확인합니다.

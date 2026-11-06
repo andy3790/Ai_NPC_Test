@@ -160,7 +160,7 @@ ExperimentSpec
 | `deliveryMode` | `batched_on_turn` 기본 / `per_utterance` |
 | `turnPolicy` | `round_robin` 기본 / `director` |
 | `dialoguePromptVersion` | 선택 사항. `npc-dialogue/1`~`/5`. 생략하면 새 실행 생성 시 현재 기본값을 고정 |
-| `worldPromptVersion` | 선택 사항. `npc-world/1`~`/4`. 단일 공간 `ai`에서만 사용. 생략하면 새 실행 생성 시 현재 기본값을 고정 |
+| `worldPromptVersion` | 선택 사항. `npc-world/1`~`/6`. 단일 공간 `ai`에서만 사용. 생략하면 새 실행 생성 시 현재 기본값 `/6`을 고정 |
 | `stopOnSilence` | 선택 불리언. 기본 꺼짐. `off`에서 모두 조용하고 미적용 예정 사건이 없으면 종료 |
 | `environmentMode` | `off`, `rules`, `ai`, `ai_spatial`. 생략 시 활성 environment가 있으면 rules, 없으면 off |
 | `eventGeneration` | 선택 불리언. 생략은 꺼짐. true는 ai/ai_spatial과 eventGenerator 필요 |

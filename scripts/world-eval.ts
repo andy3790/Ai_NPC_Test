@@ -9,10 +9,11 @@ import { outputSchemas } from '../src/shared/schema.js';
 import { getModelPricing, PRICING_REVISION } from '../src/shared/model-catalog.js';
 import { sha256 } from './lib/dialogue-eval.js';
 import { worldCasesSchema, inspectWorldResponse } from './lib/world-eval.js';
+import { worldResponseContract } from '../src/core/world.js';
 
 const { values } = parseArgs({ options: {
   live: { type: 'boolean', default: false }, cases: { type: 'string', default: 'evals/world/observations.json' },
-  baseline: { type: 'string', default: 'npc-world/2' }, candidate: { type: 'string', default: 'npc-world/4' },
+  baseline: { type: 'string', default: 'npc-world/4' }, candidate: { type: 'string', default: 'npc-world/6' },
   split: { type: 'string', default: 'development' }, model: { type: 'string', default: 'gpt-6-luna' },
   effort: { type: 'string', default: 'medium' }, repetitions: { type: 'string', default: '2' },
   'max-calls': { type: 'string', default: '80' }, 'max-usd': { type: 'string', default: '1' },
@@ -30,7 +31,7 @@ const expectedCalls = cases.length * repetitions * 2;
 if (!expectedCalls || expectedCalls > maxCalls) throw new Error(`Plan needs ${expectedCalls} calls, limit ${maxCalls}.`);
 const plan = { suite: suite.version, casesSha256: sha256(rawCases), split: values.split, baseline, candidate, model: values.model!, effort: values.effort!,
   repetitions, expectedCalls, maxCalls, maxUsd, pricingRevision: PRICING_REVISION,
-  schemaSha256: sha256(JSON.stringify(outputSchemas.environment)), review: 'Event presence and runtime validation are mechanical checks, not semantic correctness.' };
+  baseSchemaSha256: sha256(JSON.stringify(outputSchemas.environment)), schemaMode: 'per-policy-and-action', review: 'Event presence and runtime validation are mechanical checks, not semantic correctness.' };
 if (!values.live) console.log(JSON.stringify({ live: false, ...plan }, null, 2));
 else {
   const root = resolve('.cache/world-eval', `${new Date().toISOString().replace(/[:.]/g, '-')}-${values.split}-${randomUUID().slice(0, 8)}`);
@@ -52,7 +53,8 @@ else {
         const instructions = worldPolicies[version].instructions;
         const threadId = await adapter.createSession(plan, instructions, root);
         const clientMessageId = randomUUID(); calls++;
-        const request = { threadId, config: plan, input: c.input, outputSchema: outputSchemas.environment, clientMessageId, timeoutMs: 90_000 };
+        const outputSchema = worldResponseContract(version, JSON.parse(c.input).currentAction).outputSchema;
+        const request = { threadId, config: plan, input: c.input, outputSchema, clientMessageId, timeoutMs: 90_000 };
         await appendFile(join(root, 'requests.jsonl'), JSON.stringify({ ...request, instructions: baseInstructions + '\n' + instructions }) + '\n');
         const started = performance.now();
         const result = await adapter.turn(request, () => {});
@@ -60,10 +62,10 @@ else {
         const rate = price && usage?.inputTokens != null && price.longContext && usage.inputTokens > price.longContext.aboveInputTokens ? price.longContext : price;
         const cost = rate && usage?.inputTokens != null && usage.outputTokens != null ?
           ((usage.inputTokens - (usage.cachedInputTokens ?? 0)) * rate.input + (usage.cachedInputTokens ?? 0) * rate.cached + usage.outputTokens * rate.output) / 1_000_000 : null;
-        const check = result.status === 'completed' ? inspectWorldResponse(c, result.output) : null;
+        const check = result.status === 'completed' ? inspectWorldResponse(c, result.output, version) : null;
         const sample = { caseId: c.id, repetition, slot: slot ? 'B' : 'A', version, clientMessageId, status: result.status,
           output: result.output, usage, actualModel: result.actualModel, costUsd: cost, durationMs: performance.now() - started,
-          instructionsSha256: sha256(baseInstructions + '\n' + instructions), inputSha256: sha256(c.input), error: result.error ?? null, check };
+          instructionsSha256: sha256(baseInstructions + '\n' + instructions), inputSha256: sha256(c.input), outputSchemaSha256: sha256(JSON.stringify(outputSchema)), outputSchema, error: result.error ?? null, check };
         samples.push(sample); await appendFile(join(root, 'samples.jsonl'), JSON.stringify(sample) + '\n');
         if (cost !== null) estimatedUsd += cost;
         console.log(JSON.stringify({ caseId: c.id, repetition, version, valid: check?.valid, eventExpectationMet: check?.eventExpectationMet, calls }));

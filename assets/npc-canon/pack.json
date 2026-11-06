@@ -24,10 +24,10 @@
     "promptDependencies": {
       "src/core/dialogue-policies.ts": "e15b2d59c3b2d8a2630f1f08c642d875000bf608c496ba09c054cd121284a5aa",
       "src/shared/dialogue-policy.ts": "7d018d7208cf8cee5badbf27402b726171e711e5e3ee1919106e965613679653",
-      "src/core/world-policies.ts": "6aa554a46fb5bd7e73e68f7309adf82e31d40899b4c768b85382b1883a85e7eb",
-      "src/shared/world-policy.ts": "b0438e9484f2c0a500475899dc8eea8a28c05aef499f4657300cab36d9903024",
+      "src/core/world-policies.ts": "35bc21412b75a3a818e9630eb0b4e332a9f83d0baf885d1df48fe7603a1bcea0",
+      "src/shared/world-policy.ts": "545bf73af3af57026182ea7395116557f7b2ae0405c890f1ea8af2754649c149",
       "src/shared/world-schema.ts": "302dbf2b8e656a4f9c7a143bad2b54c76fd8b49161cb99f1f37ba7d0748142bc",
-      "src/core/director.ts": "407a6cc1895d7de211c37155a29f0f9c383fc973e52642d8694b8c1b60405bb3"
+      "src/core/director.ts": "7ace5694c18c1af4ae2084c21e809cad3b457848aff3d858a5409e7f1335d99a"
     },
     "imageInputSupported": false,
     "defaultModel": "gpt-6.1-sol",

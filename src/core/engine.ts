@@ -17,7 +17,7 @@ import type { SimulationHost } from './simulation-host.js';
 import { runSpatial } from './spatial-runner.js';
 import { advanceSingleRoomSituations } from './single-room-situations.js';
 import { worldOutputSchema } from '../shared/world-schema.js';
-import { applyWorldOutput, initialWorldState, priorityWorldSpeaker, worldPrompt } from './world.js';
+import { applyWorldOutput, initialWorldState, priorityWorldSpeaker, worldPrompt, worldResponseContract } from './world.js';
 import { worldPromptVersion, worldPolicies } from './world-policies.js';
 import type { ApiCredential, CallKind, DeliveryReceipt, InvocationMetrics, NpcSession, Run, RunDetail, RunListItem, RunRecords, RunSummary, Utterance } from '../shared/types.js';
 import { progression, progressionPrompt, resolveAction } from './progression.js';
@@ -150,9 +150,9 @@ export class Engine extends EventEmitter {
     const previous = this.priorInvocation(id, operationKey);
     if (previous?.status === 'completed') return previous;
     const session = await this.helper(id, key, this.run(id).spec.director, directorInstructions, true);
-    return this.invoke(id, 'director', session, operationKey, prompt.input, prompt.metadata);
+    return this.invoke(id, 'director', session, operationKey, prompt.input, prompt.metadata, prompt.outputSchema);
   }
-  private async invoke(id: string, kind: CallKind, session: NpcSession, operationKey: string, input: string, metadata: Record<string, unknown> = {}) {
+  private async invoke(id: string, kind: CallKind, session: NpcSession, operationKey: string, input: string, metadata: Record<string, unknown> = {}, requestedOutputSchema?: object) {
     const previous = this.priorInvocation(id, operationKey);
     if (previous?.status === 'completed') return previous;
     // A failed accepted turn already appended its input. A retry asks to complete that input,
@@ -160,7 +160,7 @@ export class Engine extends EventEmitter {
     if (previous?.turnId && previous.threadId === session.threadId && previous.metadata.inputRetained !== false) input = JSON.stringify({ task: JSON.parse(input).task, previousFailure: previous.error?.slice(0, 5000), instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 해당 호출의 결과는 아직 공개·적용되지 않았습니다. previousFailure는 이전 결과가 거부된 이유입니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
     const run = this.run(id);
     const format = metadata.outputType as keyof typeof outputSchemas | undefined;
-    const outputSchema = format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind];
+    const outputSchema = requestedOutputSchema ?? (format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind]);
     const call: InvocationMetrics = {
       id: randomUUID(), experimentId: run.experimentId, runId: id, variantId: run.variant.id, repetition: run.repetition,
       kind, characterId: ['speech', 'receive'].includes(kind) ? session.characterId : null, operationKey, attempt: (previous?.attempt ?? 0) + 1, retryOf: previous?.id ?? null,
@@ -280,9 +280,10 @@ export class Engine extends EventEmitter {
     const source = history.find(u => u.kind === 'speech' && u.speechIndex! > state.processedSpeechCount);
     if (!source) return;
     const session = await this.helper(id, 'world-engine', run.spec.worldEngine!, worldPolicies[run.variant.worldPromptVersion ?? LEGACY_WORLD_PROMPT].instructions);
-    const call = await this.invoke(id, 'environment', session, `environment:${source.id}`, worldPrompt(run.spec, state, history, source), { sourceUtteranceId: source.id });
+    const contract = worldResponseContract(worldPromptVersion(session.instructions), source);
+    const call = await this.invoke(id, 'environment', session, `environment:${source.id}`, worldPrompt(run.spec, state, history, source), { sourceUtteranceId: source.id }, contract.outputSchema);
     let result: ReturnType<typeof applyWorldOutput>;
-    try { result = applyWorldOutput(state, JSON.parse(call.output), source, run.spec.scenario.characters.map(c => c.id)); }
+    try { result = applyWorldOutput(state, contract.validator.parse(JSON.parse(call.output)), source, run.spec.scenario.characters.map(c => c.id)); }
     catch (e) { this.store.patch('invocations', call.id, { status: 'failed', error: err(e) }); throw e; }
     this.store.transaction(() => {
       let sequence = this.store.list('utterances', id).length;

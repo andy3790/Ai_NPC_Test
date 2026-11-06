@@ -10,6 +10,7 @@
   "scripts": {
     "dialogue:eval": "node --env-file-if-exists=.env --import tsx scripts/dialogue-eval.ts",
     "world:eval": "node --env-file-if-exists=.env --import tsx scripts/world-eval.ts",
+    "director:eval": "node --env-file-if-exists=.env --import tsx scripts/director-eval.ts",
     "dev": "tsx src/server/main.ts",
     "start": "node dist/server/main.js",
     "start:openai": "node --env-file-if-exists=.env dist/cli.js serve --adapter openai --port 4318",

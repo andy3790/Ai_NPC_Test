@@ -6,7 +6,7 @@ import { MockAdapter } from '../src/adapters/mock.js';
 import { exampleSpec } from '../src/shared/example.js';
 import { environmentMode, experimentSchema } from '../src/shared/schema.js';
 import { applyConfigSection, readConfigSection } from '../src/shared/config-sections.js';
-import { initialWorldState, applyWorldOutput, worldPrompt } from '../src/core/world.js';
+import { initialWorldState, applyWorldOutput, worldPrompt, worldResponseContract } from '../src/core/world.js';
 import { exportFiles } from '../src/core/export.js';
 import { aggregate } from '../src/core/metrics.js';
 import { filterRuns, emptyRunFilters } from '../src/shared/run-filters.js';
@@ -118,6 +118,72 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`${mode}:
 });
 
 const source: Utterance = { id: 'speech-1', runId: 'r', sequence: 1, speechIndex: 1, speakerId: 'a', speakerName: 'A', kind: 'speech', speech: '받아!', action: 'B에게 공을 던진다.', createdAt: '', invocationId: null, deliveryCompletedAt: null, deliveryMs: null };
+
+test('quiet-time contract is versioned; v6 cannot freeze or jump time while old sessions retain their schema', () => {
+  const quiet = { ...source, speech: '', action: '' };
+  for (const version of [null, 'npc-world/4', 'npc-world/5']) assert.doesNotThrow(() => worldResponseContract(version, quiet).validator.parse(silent(0)));
+  for (const seconds of [0, 2, 120]) assert.throws(() => worldResponseContract('npc-world/6', quiet).validator.parse(silent(seconds)));
+  assert.doesNotThrow(() => worldResponseContract('npc-world/6', quiet).validator.parse(silent(1)));
+  assert.doesNotThrow(() => worldResponseContract('npc-world/6', source).validator.parse(silent(4)));
+});
+
+test('quiet NPC choices advance a delayed result at its due time without inventing NPC speech or actions', async () => {
+  const store = new Store(':memory:'), adapter = new MockAdapter(), engine = new Engine(store, adapter, '.cache/world-quiet');
+  adapter.delayMs = 0; const turn = adapter.turn.bind(adapter);
+  adapter.turn = async (...args) => {
+    const request = args[0], p = JSON.parse(request.input), result = await turn(...args);
+    if (p.task === 'speak') result.output = JSON.stringify({ speech: '', action: '' });
+    if (p.task === 'environment') {
+      assert.equal((request.outputSchema as any).properties.elapsedSeconds.const, 1);
+      const out = silent(1);
+      if (p.state.processes.some((p: any) => p.id === 'reply') && p.state.virtualSeconds + 1 >= 2) {
+        out.finishProcesses = [{ id: 'reply', outcome: 'completed', reason: '응답 도착' }];
+        out.events = [{ type: 'external_signal', text: '화면에 확인 응답이 뜬다.', npcId: null, evidence: null, processId: 'reply' }];
+      }
+      result.output = JSON.stringify(out);
+    }
+    return result;
+  };
+  try {
+    const spec = specFor(); spec.maxUtterances = 3; spec.variants[0].worldPromptVersion = 'npc-world/6';
+    const { runs: [run] } = await engine.create(spec, false);
+    store.patch('runs', run.id, { worldState: { ...initialWorldState(), processes: [{ id: 'reply', description: '확인 응답', readyAtSeconds: 2, createdAtSeconds: 0,
+      sourceUtteranceId: 'initial', waitingNpcIds: [], offeredNpcIds: [], status: 'pending', finishedAtSeconds: null, reason: null }] } });
+    await engine.resume(run.id); await engine.idle(); const d = engine.detail(run.id);
+    assert.equal(d.run.status, 'completed', d.run.error ?? ''); assert.equal(d.run.worldState!.virtualSeconds, 3);
+    assert.equal(d.run.worldState!.processes[0].finishedAtSeconds, 2);
+    assert.ok(d.utterances.filter(u => u.kind === 'speech').every(u => !u.speech && !u.action));
+    const calls = d.invocations.filter(c => c.kind === 'environment');
+    assert.equal(JSON.parse(calls[0].output).events.length, 0); assert.equal(JSON.parse(calls[1].output).events.length, 1);
+    const lastSpeaker = d.invocations.filter(c => c.kind === 'speech').at(-1)!;
+    assert.ok(JSON.parse(lastSpeaker.input).messages.some((u: any) => u.speech === '화면에 확인 응답이 뜬다.'));
+  } finally { await engine.close(); store.close(); }
+});
+test('a provider ignoring the quiet-time schema pauses before commit and resumes without replaying the NPC choice', async () => {
+  const store = new Store(':memory:'), adapter = new MockAdapter(), engine = new Engine(store, adapter, '.cache/world-quiet-invalid');
+  adapter.delayMs = 0; const turn = adapter.turn.bind(adapter); let invalid = true;
+  adapter.turn = async (...args) => {
+    const result = await turn(...args), input = JSON.parse(args[0].input);
+    if (input.task === 'speak') result.output = JSON.stringify({ speech: '', action: '' });
+    if (input.task === 'environment') { result.output = JSON.stringify(silent(invalid ? 0 : 1)); invalid = false; }
+    return result;
+  };
+  try {
+    const spec = specFor(); spec.maxUtterances = 1; spec.variants[0].worldPromptVersion = 'npc-world/6';
+    const { runs: [run] } = await engine.create(spec); await engine.idle(); let d = engine.detail(run.id);
+    assert.equal(d.run.status, 'paused'); assert.match(d.run.error!, /elapsedSeconds/);
+    assert.equal(d.run.worldState, undefined); assert.equal(d.utterances.length, 1);
+    const failed = d.invocations.at(-1)!; assert.equal(failed.status, 'failed');
+    assert.equal(JSON.parse(failed.output).elapsedSeconds, 0);
+    await engine.resume(run.id); await engine.idle(); d = engine.detail(run.id);
+    assert.equal(d.run.status, 'completed', d.run.error ?? ''); assert.equal(d.run.worldState?.virtualSeconds, 1);
+    assert.equal(d.summary.byKind.speech.calls, 1); assert.equal(d.summary.byKind.environment.calls, 2);
+    assert.equal(d.invocations.at(-1)!.retryOf, failed.id);
+    assert.match(JSON.parse(d.invocations.at(-1)!.input).previousFailure, /elapsedSeconds/);
+    assert.equal(d.utterances.length, 1);
+  } finally { await engine.close(); store.close(); }
+});
+
 test('world validator rejects choices for other NPCs, premature physical effects, unknown IDs and early completion', () => {
   const state = initialWorldState();
   const out = silent(); out.processes.push({ id: 'ball', description: '공이 날아감', readyAtSeconds: 2, requestNpcIds: ['b'] });

@@ -3,10 +3,21 @@ export { WORLD_PROMPT_VERSION } from './world-policies.js';
 import type { ExperimentSpec } from '../shared/schema.js';
 import type { Utterance } from '../shared/types.js';
 import { worldOutputSchema, type WorldOutput, type WorldState } from '../shared/world-schema.js';
+import { z } from 'zod';
+import { isSilentTurn } from './dialogue-idle.js';
 
 export const initialWorldState = (): WorldState => ({ virtualSeconds: 0, facts: [], processes: [], processedSpeechId: null, processedSequence: 0, processedSpeechCount: 0 });
 
 export const worldInstructions = worldPolicies[WORLD_PROMPT_VERSION].instructions;
+
+// A quiet choice advances simulated time, independently of API latency.
+// Opt in by the actual session revision; archived/custom sessions retain their contract.
+export function worldResponseContract(version: string | null, source: Utterance) {
+  const validator = version === 'npc-world/6' && isSilentTurn(source)
+    ? worldOutputSchema.extend({ elapsedSeconds: z.literal(1).describe('무언·무동작 선택의 고정 가상 시간: 1초.') })
+    : worldOutputSchema;
+  return { validator, outputSchema: z.toJSONSchema(validator) };
+}
 
 // Receiving an opportunity is based on a committed NPC turn, never on an AI
 // claim that another character reacted. New processes cannot clear this gate.

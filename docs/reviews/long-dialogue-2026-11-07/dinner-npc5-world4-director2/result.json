@@ -1,0 +1,39 @@
+{
+  "promptVersion": "npc-lab/8",
+  "worldPromptVersion": "npc-world/4",
+  "dialoguePromptVersion": "npc-dialogue/5",
+  "scenario": "연습 영상 틀어 놓은 저녁",
+  "model": "gpt-6.1-sol",
+  "turns": 48,
+  "repetitions": 1,
+  "expectedCalls": 143,
+  "maxCalls": 143,
+  "maxUsd": 1,
+  "costLimit": "Stop before a new request once recorded catalogue estimate reaches maxUsd; one request can overshoot.",
+  "requests": 15,
+  "reports": [
+    {
+      "id": "710f0636-270f-463e-8a77-3dcaa2c8175d",
+      "status": "paused",
+      "error": "진행자가 허용되지 않은 화자를 선택했습니다.",
+      "calls": 15,
+      "choices": 5,
+      "cost": {
+        "usd": 0.02615348,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "tokens": {
+        "inputTokens": 60937,
+        "cachedInputTokens": 41495,
+        "cacheWriteInputTokens": 16005,
+        "outputTokens": 847,
+        "reasoningOutputTokens": 177,
+        "totalTokens": 61784
+      },
+      "failedCalls": 1
+    }
+  ]
+}
