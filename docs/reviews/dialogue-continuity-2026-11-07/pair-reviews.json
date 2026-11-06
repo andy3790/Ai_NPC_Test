@@ -1,0 +1,550 @@
+{
+  "reviewer": "Prompt author; non-independent",
+  "scope": "Context fit and boundaries, not a calibrated human-likeness score",
+  "pairs": [
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "simple_request",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 물병 부탁에 짧게 답하고 자기 행동만 쓴다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "응, 여기.",
+        "action": "앞에 있는 물병을 집어 준에게 건넨다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "응.",
+        "action": "앞에 있는 물병을 집어 준에게 건넨다."
+      }
+    },
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "decline_invitation",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 야근 뒤 쉬겠다고 거절하고 새로운 약속을 억지로 붙이지 않는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "오늘은 집에 가서 혼자 좀 쉬려고. 이번 주에 야근 두 번 했더니 피곤하네.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "오늘은 그냥 집에서 혼자 쉬려고. 이번 주에 야근 두 번 했더니 좀 지친다.",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "ordinary_preference",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 민트 취향을 간단히 말하며 화해나 교훈을 만들지 않는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "난 그 시원한 맛이 좋던데. 오늘도 민초 먹을 거야.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "난 그 시원한 맛이 좋던데. 민초 먹을래.",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "small_disappointment",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 친구 말에 반응한다. 위로와 질문의 차이를 우열로 단정하지 않는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "아, 주차에서 걸렸구나. 준비하느라 고생했는데 속상하겠다. 밥부터 먹자, 오늘은 내가 살게.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "아, 아깝다. 주차할 때 선 밟으면 바로 탈락이야?",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "enthusiastic_explanation",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 요청한 제작 과정과 손잡이 실패를 길게 설명한다. 길이만으로 우열을 정하지 않는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "맞아, 손잡이가 제일 어려웠어! 몸통은 손으로 빚었는데, 손잡이를 붙이니까 접합부가 자꾸 갈라지는 거야. 붙여 놓고 보면 또 갈라져 있고. 그래서 세 번이나 다시 붙였어. 작은 컵인데 손잡이 하나에 그렇게 애먹을 줄은 몰랐지. 초벌하고 나서는 흰 유약을 발랐고, 여기 가장자리 파란 부분은 붓으로 콕콕 찍은 거야. 전부 파랗게 두르는 것보다 흰색 사이로 조금씩 보이는 게 좋더라고. 난 이 부분이 제일 마음에 들어.",
+        "action": "컵 가장자리의 청색 무늬를 손가락으로 가리킨다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "맞아, 손잡이가 제일 어려웠어! 몸통은 손으로 빚었는데, 손잡이를 붙이면 접합부가 자꾸 갈라지는 거야. 붙여 놓고 보면 또 갈라져 있고. 그래서 세 번 다시 붙였어. 작은 컵인데 손잡이 하나 때문에 한참 붙잡고 있었지.\n\n모양 만든 다음에는 초벌을 하고, 그 뒤에 흰 유약을 발랐어. 여기 가장자리 파란색은 붓으로 하나씩 찍은 거야. 흰색 바탕에 가장자리만 파랗게 하고 싶었거든. 손잡이 붙일 때는 애먹었는데, 이렇게 색까지 입혀 놓으니까 자꾸 들여다보게 돼.",
+        "action": "컵의 손잡이 접합부를 가리킨 뒤 가장자리의 청색 무늬를 짚는다."
+      }
+    },
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "polite_service",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 점검 전 가격을 만들지 않고 존댓말로 증상을 묻는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "비용은 기사님이 점검해 봐야 알 수 있어요. 선풍기가 어떤 증상인가요?",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "비용은 기사님이 점검해 봐야 알 수 있어요. 선풍기가 어떻게 안 되나요?",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "uncertain_information",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 모른다고 답한 뒤 직접 묻는 행동을 고른다. 상대의 답을 만들어내지 않는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "아직 몰라. 온다고만 했어. 내가 한번 물어볼게.",
+        "action": "휴대폰을 꺼내 은지에게 어디쯤인지 묻는 메시지를 보낸다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "나도 몰라. 온다고만 했어. 어디쯤인지 물어볼게.",
+        "action": "휴대폰을 꺼내 은지에게 어디쯤인지 묻는 메시지를 보낸다."
+      }
+    },
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "protect_own_time",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 30분 기다린 불만과 같이 가겠다는 자기 뜻을 말한다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "나 여기서 30분 기다렸어. 또 기다리라고? 갈 거면 나도 같이 가.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "나 이미 30분 기다렸는데 또 기다리라고? 갈 거면 같이 가.",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "apology_without_therapy",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 잃어버린 우산에 사과하고 확인하지 않은 발견 결과를 만들지 않는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "준아, 미안해. 오늘 네 우산 버스에 두고 내렸어. 아직 못 찾았어.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "준아, 미안해. 오늘 네 우산 버스에 두고 내렸어. 아직 못 찾았어.",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "workplace_partial_answer",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 아는 시간·층과 모르는 발표자를 구별하고 존댓말을 쓴다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "네, 일정표에는 오후 두 시로 되어 있어요. 회의실은 3층이고, 누가 발표하는지는 저도 몰라요.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "네, 일정표에는 오후 두 시로 되어 있어요. 회의실은 3층이고, 누가 발표하는지는 저도 몰라요.",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "third_party_privacy",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 피곤함에 반응하며 상대의 집주인·보증금 기억을 누설하지 않는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "어쩐지 오늘 말이 없더라. 잠을 잘 못 잤어?",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "안색도 좀 안 좋아 보이네. 어제 잠 못 잤어?",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-regression",
+      "caseId": "disengaged_listener",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 못 들은 내용을 인정하고 장소·때를 다시 묻는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "미안, 업무 메시지 보느라 앞에 못 들었어. 어디로 언제 간다고?",
+        "action": "휴대폰을 내려놓고 준을 본다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "미안, 업무 메시지 보느라 놓쳤어. 어디로 언제 간다고?",
+        "action": "휴대폰을 내려놓고 준을 본다."
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "quiet_radio",
+      "repetition": 1,
+      "decision": "candidate",
+      "reason": "v5는 이미 듣는 동작을 새 동작으로 반복하지 않았다. 이 문맥에서는 후보 선호; 침묵 일반을 우수하다고 보지 않는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "",
+        "action": "손끝으로 무릎을 가볍게 두드리며 노래를 듣는다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "quiet_radio",
+      "repetition": 2,
+      "decision": "candidate",
+      "reason": "v5는 이미 듣는 동작을 새 동작으로 반복하지 않았다. 이 문맥에서는 후보 선호; 침묵 일반을 우수하다고 보지 않는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "",
+        "action": "음악에 맞춰 손끝으로 무릎을 가볍게 두드린다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "offer_after_pause",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 새로운 라면 제안에 먹겠다고 답했다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "응, 나도 먹을래. 마침 배고팠어.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "응, 나도 먹을래. 마침 배고팠어.",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "offer_after_pause",
+      "repetition": 2,
+      "decision": "tie",
+      "reason": "둘 다 새로운 라면 제안에 먹겠다고 답했다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "응, 나도 먹을래. 마침 배고팠어.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "응, 나도 먹을래. 마침 배고팠어.",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "answer_has_changed",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 비 예보에 계획을 바꿔 제안한다. 끝난 합의라고 무시하지 않는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "비 맞으면서 걷긴 싫은데. 내일은 카페에서 볼까?",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "비 맞으면서 걷긴 싫은데. 대신 두 시에 카페에서 볼까?",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "answer_has_changed",
+      "repetition": 2,
+      "decision": "tie",
+      "reason": "둘 다 비 예보에 계획을 바꿔 제안한다. 끝난 합의라고 무시하지 않는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "비 맞으면서 걷긴 싫은데. 내일은 카페에서 볼까?",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "비 맞으면서 걷기는 싫은데. 내일은 산책 말고 카페 갈까?",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "still_angry",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 사과를 자동 화해로 처리하지 않고 남은 불만을 표현한다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "됐지라니. 내가 괜히 트집 잡는 것 같아? 말없이 가져가지 말라는 거잖아.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "됐지라니. 내가 괜히 트집 잡는 것처럼 말하지 마. 말없이 가져간 게 싫다는 거잖아.",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "still_angry",
+      "repetition": 2,
+      "decision": "tie",
+      "reason": "둘 다 사과를 자동 화해로 처리하지 않고 남은 불만을 표현한다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "됐지라니, 내가 괜히 뭐라고 하는 것 같아? 다음엔 가져가기 전에 물어봐.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "됐지라니. 그냥 사과했으니까 그만하라는 말로 들려. 다음엔 가져가기 전에 물어봐.",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "curiosity_after_return",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 좋아하는 책의 감상을 먼저 묻는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "읽어 보니까 어땠어? 난 되게 좋아하는 소설이라 네 감상이 궁금해.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "읽어 보니까 어땠어? 난 되게 좋았는데, 네 감상도 궁금해.",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "curiosity_after_return",
+      "repetition": 2,
+      "decision": "tie",
+      "reason": "둘 다 좋아하는 책의 감상을 먼저 묻는다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "읽어 보니까 어땠어? 난 되게 좋아하는 책이라 네 감상 궁금해.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "읽어 보니까 어땠어? 난 꽤 좋아하는 책이라 궁금하네.",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "share_news_after_pause",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 질문을 기다리지 않고 합격 소식을 전한다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "준아, 나 오늘 아침에 합격 연락 받았어. 가고 싶었던 그 회사!",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "준아, 나 오늘 아침에 합격 연락 받았어. 나 가고 싶어 하던 회사!",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-transfer",
+      "caseId": "share_news_after_pause",
+      "repetition": 2,
+      "decision": "tie",
+      "reason": "둘 다 질문을 기다리지 않고 합격 소식을 전한다.",
+      "baseline": "npc-dialogue/3",
+      "baselineOutput": {
+        "speech": "나 오늘 아침에 합격 연락 받았어. 가고 싶었던 그 회사! 아직도 좀 얼떨떨해.",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "준아, 나 오늘 아침에 합격 연락 받았어. 가고 싶었던 그 회사!",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-follow-through",
+      "caseId": "agreed_not_started",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 재생 버튼을 누른다. 고정 입력에서는 v4 중단을 재현하지 못했다.",
+      "baseline": "npc-dialogue/4",
+      "baselineOutput": {
+        "speech": "",
+        "action": "리모컨으로 골라 둔 코미디 영화의 재생 버튼을 누른다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "",
+        "action": "리모컨으로 골라 둔 코미디 영화의 재생 버튼을 누른다."
+      }
+    },
+    {
+      "experiment": "api-v5-follow-through",
+      "caseId": "agreed_not_started",
+      "repetition": 2,
+      "decision": "tie",
+      "reason": "둘 다 재생 버튼을 누른다. 고정 입력에서는 v4 중단을 재현하지 못했다.",
+      "baseline": "npc-dialogue/4",
+      "baselineOutput": {
+        "speech": "",
+        "action": "리모컨으로 골라 둔 코미디 영화의 재생 버튼을 누른다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "",
+        "action": "리모컨으로 골라 둔 코미디 영화의 재생 버튼을 누른다."
+      }
+    },
+    {
+      "experiment": "api-v5-follow-through",
+      "caseId": "brought_not_connected",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 직접 연결한다. 여러 차례 대화와 다른 결과다.",
+      "baseline": "npc-dialogue/4",
+      "baselineOutput": {
+        "speech": "",
+        "action": "충전기를 콘센트에 꽂고 휴대전화에 연결한다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "",
+        "action": "충전기를 콘센트에 꽂고 휴대전화에 케이블을 연결한다."
+      }
+    },
+    {
+      "experiment": "api-v5-follow-through",
+      "caseId": "brought_not_connected",
+      "repetition": 2,
+      "decision": "tie",
+      "reason": "둘 다 직접 연결한다. 여러 차례 대화와 다른 결과다.",
+      "baseline": "npc-dialogue/4",
+      "baselineOutput": {
+        "speech": "",
+        "action": "충전기를 콘센트에 꽂고 휴대전화에 연결한다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "",
+        "action": "충전기를 콘센트에 꽂고 휴대전화에 연결한다."
+      }
+    },
+    {
+      "experiment": "api-v5-follow-through",
+      "caseId": "done_not_restart",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 이미 충전 중인 전화에 새 행동을 덧붙이지 않았다.",
+      "baseline": "npc-dialogue/4",
+      "baselineOutput": {
+        "speech": "",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-follow-through",
+      "caseId": "done_not_restart",
+      "repetition": 2,
+      "decision": "tie",
+      "reason": "둘 다 이미 충전 중인 전화에 새 행동을 덧붙이지 않았다.",
+      "baseline": "npc-dialogue/4",
+      "baselineOutput": {
+        "speech": "",
+        "action": ""
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "",
+        "action": ""
+      }
+    },
+    {
+      "experiment": "api-v5-follow-through",
+      "caseId": "accepted_small_request",
+      "repetition": 1,
+      "decision": "tie",
+      "reason": "둘 다 책을 건네는 자기 행동을 한다.",
+      "baseline": "npc-dialogue/4",
+      "baselineOutput": {
+        "speech": "",
+        "action": "가방에서 책을 꺼내 준에게 건넨다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "",
+        "action": "가방에서 책을 꺼내 준에게 건넨다."
+      }
+    },
+    {
+      "experiment": "api-v5-follow-through",
+      "caseId": "accepted_small_request",
+      "repetition": 2,
+      "decision": "tie",
+      "reason": "둘 다 책을 건네는 자기 행동을 한다.",
+      "baseline": "npc-dialogue/4",
+      "baselineOutput": {
+        "speech": "잘 읽었어.",
+        "action": "가방에서 책을 꺼내 준에게 내민다."
+      },
+      "candidate": "npc-dialogue/5",
+      "candidateOutput": {
+        "speech": "",
+        "action": "가방에서 책을 꺼내 준에게 건넨다."
+      }
+    }
+  ]
+}

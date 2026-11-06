@@ -8,20 +8,25 @@
 |---|---|---|
 | `npc-dialogue/1` | 변경 전 대조군 보존 | 이 작업 시작 때의 로컬 `npc-lab/6` 공통 연기 문단을 그대로 동결. 예전 Git HEAD의 `/5` 전체 프롬프트와 같다는 뜻은 아님 |
 | `npc-dialogue/2` | 답변 뒤 해명·대안·조건·부탁을 묶는 상담형 발화 감소 | 상대 답을 기다릴 자리, 각자의 관심사, 아는 정보를 말할 이유, 관계에 맞는 존댓말과 필요한 긴 설명을 명시 |
-| `npc-dialogue/3` | v2의 친구 연습 경험 단정 보완 | 새 공유 과거와 상대의 알려지지 않은 경위를 즉흥적으로 보태지 않도록 경계 복원. 현재 기본값 |
+| `npc-dialogue/3` | v2의 친구 연습 경험 단정 보완 | 새 공유 과거와 상대의 알려지지 않은 경위를 즉흥적으로 보태지 않도록 경계 복원. 이전 기본값 |
+| `npc-dialogue/4` | 합의·몸짓의 반복 감소 | 지속 활동의 불필요한 재서술 억제. 실제 후속 행동도 멈춘 사례로 기본값 미채택 |
+| `npc-dialogue/5` | v4의 행동 중단 보완 | 합의와 실행을 구별하고 자기 행동·관심은 계속할 수 있게 함. 현재 기본값 |
+| `npc-world/2` | 관찰 분류 오류·중복 중계·조기 완료 | 세계 지침을 /1 대조군과 함께 동결. 기존 검증 경계 유지 |
+| `director/2` | 응답 기회를 억지 중재로 채우는 문제 | 직접 지목된 응답과 급한 행동을 우선. 입력 한도 유지 |
+| `npc-lab/8` | 평가자가 갈등 자체를 오류로 삼는 문제 | 기존 미커밋 평가 입력을 편입. 세계 판정 자료는 평가자에게만 전달 |
 | `npc-lab/7` | 선택한 지침과 실제 사용된 지침의 추적 | 공통 연기 문단을 버전 모듈로 분리하고 실행별 선택을 고정. 세계·공간·행동 결과 권한은 유지 |
 
 정확한 문구와 이유는 [dialogue-policies.ts](../src/core/dialogue-policies.ts), 기본 버전은 [dialogue-policy.ts](../src/shared/dialogue-policy.ts)에 있다. 이미 기록된 버전의 본문을 수정하지 말고 `/3`, `/4`처럼 추가한다. 회귀 테스트의 고정 SHA-256은 기존 문구를 몰래 바꾸는 것을 감지한다. 새 버전마다 문제 출력, 가설, 비교 조건, 실제 결과, 부작용과 채택 여부를 이 문서와 검토 보고서에 추가한다.
 
-실험 편집기의 **대화 반응 지침**에서 v1/v2/v3를 고를 수 있다. JSON에서는 조건별 `dialoguePromptVersion`을 지정한다.
+실험 편집기의 **대화 반응 지침**에서 v1~v5를 고를 수 있다. JSON에서는 조건별 `dialoguePromptVersion`을 지정한다.
 
 ```json
-{"id":"candidate","label":"반응 지침 v3","dialoguePromptVersion":"npc-dialogue/3","stopOnSilence":true}
+{"id":"candidate","label":"반응 지침 v5","dialoguePromptVersion":"npc-dialogue/5","stopOnSilence":true}
 ```
 
 생략하면 새 실행 생성 시 현재 기본값을 `run.variant`에 고정한다. 원본 spec은 보존하므로 실제 선택은 실행 스냅샷의 variant에서 확인한다. 대기 중에 기본값을 바꾸어도 생성된 실행은 따라 바뀌지 않는다. 이미 생성된 NPC 세션의 지침은 재개 시 다시 작성하지 않는다. 버전이 없던 이전 실행에서 아직 생성되지 않은 세션은 대조군 `/1`로 만든다. 이 경우 정확한 과거 `/5` 재현이라고 주장하지 않는다.
 
-호출의 `metadata.promptVersion`은 실행 생성 때의 버전, `runtimePromptVersion`은 현재 실행 코드의 버전이다. `dialoguePromptVersion`과 `instructionsSha256`으로 선택한 정책과 실제 세션 지침을 확인한다. 과거에 없던 버전은 `null`로 남기며 현재 버전으로 소급 표기하지 않는다. 원본 세션 지침과 호출 입력은 기존 내보내기에 보존된다.
+호출의 `metadata.promptVersion`은 실행 생성 때의 버전, `runtimePromptVersion`은 현재 실행 코드의 버전이다. `dialoguePromptVersion`과 `instructionsSha256`으로 선택한 정책과 실제 세션 지침을 확인한다. 과거에 없던 버전은 `null`로 남기며 현재 버전으로 소급 표기하지 않는다. `worldPromptVersion`은 실제 저장된 세계 세션의 본문과 동결 버전을 대조해 정하며 알 수 없으면 `null`이다. `outputSchemaSha256`은 실제 전송 스키마(설명 포함)의 해시다. 원본 세션 지침과 호출 입력은 기존 내보내기에 보존된다.
 
 캐릭터 프로필의 지침도 출력에 영향을 준다. 예를 들어 ‘상대의 말을 요약한 뒤 의견을 말한다’, ‘합의할 선택지를 정리한다’는 프로필은 상담형 발화를 유도한다. 인물 고유 특성이면 보존하고, 모든 인물에 복사한 공통 문구라면 별도 프로필 버전으로 비교한다. 공통 정책과 프로필을 동시에 바꾼 결과를 공통 정책만의 효과로 주장하지 않는다.
 
@@ -63,6 +68,20 @@ node --import tsx scripts/dialogue-soak.ts --adapter codex --model gpt-6-sol --l
 
 `stopOnSilence:true`는 **환경 꺼짐**에서만 적용한다. 마지막 실제 발언·행동·상황 뒤 모든 NPC가 한 번 이상 연속해서 조용히 차례를 넘겼고 예정된 미적용 사건이 없으면 `conversation_idle`로 끝난다. 한 인물의 침묵, 몸짓이 있는 차례, 규칙·AI 세계·분산 공간은 이 종료 조건을 적용하지 않는다. 기본값은 꺼짐이며 기존 고정 발화 수 실험은 유지한다. 새 일상 예제와 대화 검토 도구만 이 옵션을 켠다. 분산 공간의 선택/활동 계약은 이번에 변경하지 않았다.
 
-현재 실행 결과와 한계는 [2026-11-07 검토 기록](reviews/dialogue-2026-11-07/report.md)에 남긴다.
+첫 단계는 [v1~v3 검토](reviews/dialogue-2026-11-07/report.md), API 복구 뒤 반복·행동 지속 및 서월 검증은 [v4~v5 검토](reviews/dialogue-continuity-2026-11-07/report.md)에 남긴다. 실패한 후보와 전이 세트 재사용 한계도 보존한다.
 
 평가 절차는 [OpenAI의 평가 지침](https://developers.openai.com/api/docs/guides/evaluation-best-practices)과 [코드로 관리하는 프롬프트 지침](https://developers.openai.com/api/docs/guides/prompting)을 참고했다. 이 저장소의 통과 여부는 자체 실행 증거이며 공식 지침 자체가 품질을 보증하지 않는다.
+
+## 연속성과 행동 지속 비교
+
+`continuity-cases.json`은 끝난 용건과 아직 답하지 않은 질문을 구별한다. `continuity-transfer.json`은 다른 지속 활동, 새 제안, 남은 불만, 자발적 관심·소식의 6개 사례다. v4 검토에 사용한 뒤 v5에서 재사용하므로 이후에는 독립 holdout으로 부르지 않는다. `follow-through-cases.json`은 합의 뒤 실행과 이미 끝난 행동을 구별하는 회귀 세트다.
+
+`dialogue-soak.ts`는 원본의 환경 꺼짐/AI 모드·세계 판정 자료·예정 사건을 유지한다. 규칙·분산 공간은 이 도구의 대상이 아니다. 각 반복은 별도 폴더로 보존한다.
+
+```powershell
+# 세계 관찰과 실제 행동 결과를 포함, 정책별 2회. 계획만 보려면 --live 제거
+node --env-file-if-exists=.env --import tsx scripts/dialogue-soak.ts --specs evals/dialogue/observed-conversations.json --baseline npc-dialogue/3 --candidate npc-dialogue/5 --world-model gpt-6-luna --repetitions 2 --max-calls 144 --max-usd 2 --live
+
+# 고정된 후속 행동 회귀
+npm run dialogue:eval -- --cases evals/dialogue/follow-through-cases.json --baseline npc-dialogue/4 --candidate npc-dialogue/5 --split all --repetitions 2 --max-calls 16 --max-usd 1 --live
+```

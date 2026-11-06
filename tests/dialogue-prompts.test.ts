@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { dialoguePolicies } from '../src/core/dialogue-policies.js';
-import { CURRENT_DIALOGUE_PROMPT } from '../src/shared/dialogue-policy.js';
+import { CURRENT_DIALOGUE_PROMPT, DIALOGUE_PROMPT_VERSIONS } from '../src/shared/dialogue-policy.js';
 import { persona, PROMPT_VERSION } from '../src/core/prompts.js';
 import { exampleSpec } from '../src/shared/example.js';
 import { experimentSchema } from '../src/shared/schema.js';
@@ -18,7 +18,10 @@ test('published dialogue policy texts cannot drift silently under an existing ve
     'npc-dialogue/1': '9e5b7796eeb9a79fae4e1be1d9d4431e7abc72a74743a97ca6c6693790f1d577',
     'npc-dialogue/2': 'e8192591ec62b0d6e52fb268e8a0ae8116744b1ad8238af06794c09728ce40e2',
     'npc-dialogue/3': 'c8204210b3c3da1779d6556a994fa03fd6e1a81613fb52dffa2f323f7b2c7aae',
+    'npc-dialogue/4': 'e1531cc297bb7d5f2b5354985790de335ebdea7b6190b0a0f866079f938c33df',
+    'npc-dialogue/5': '15e5ca0e0d2ac96868cfcd2b6c44e8972a828b6e6464b1e483f351da3fc3f8b5',
   };
+  assert.deepEqual(Object.keys(expected), [...DIALOGUE_PROMPT_VERSIONS]);
   for (const [version, hash] of Object.entries(expected)) {
     assert.equal(sha256(dialoguePolicies[version as keyof typeof dialoguePolicies].instructions), hash,
       'Add a new policy revision; do not rewrite the baseline/candidate that generated recorded samples.');
@@ -26,19 +29,20 @@ test('published dialogue policy texts cannot drift silently under an existing ve
 });
 
 test('policy comparisons hold the full observed input constant and exclude review/private material', () => {
-  for (const source of suite.cases) {
+  const cases = ['cases.json', 'continuity-cases.json', 'continuity-transfer.json', 'follow-through-cases.json'].flatMap(file =>
+    dialogueCasesSchema.parse(JSON.parse(readFileSync(new URL('../evals/dialogue/' + file, import.meta.url), 'utf8'))).cases);
+  for (const source of cases) {
     const c = structuredClone(source);
     c.characters.find(a => a.id !== c.speakerId)!.memories += ' PRIVATE_OTHER_PERSON';
     c.review.push('REVIEW_ONLY_NEVER_SEND');
-    const a = caseInput(c, 'npc-dialogue/1', 'mock-model', 'low');
-    const b = caseInput(c, 'npc-dialogue/2', 'mock-model', 'low');
-    assert.equal(a.input, b.input);
-    assert.equal(a.instructions.replace(dialoguePolicies['npc-dialogue/1'].instructions, '<policy>'),
-      b.instructions.replace(dialoguePolicies['npc-dialogue/2'].instructions, '<policy>'));
-    for (const p of [a, b]) assert.doesNotMatch(p.instructions + p.input, /PRIVATE_OTHER_PERSON|REVIEW_ONLY_NEVER_SEND/);
-    const latest = caseInput(c, 'npc-dialogue/3', 'mock-model', 'low');
-    assert.equal(a.input, latest.input);
-    assert.doesNotMatch(latest.instructions + latest.input, /PRIVATE_OTHER_PERSON|REVIEW_ONLY_NEVER_SEND/);
+    const baseline = caseInput(c, 'npc-dialogue/1', 'mock-model', 'low');
+    for (const version of DIALOGUE_PROMPT_VERSIONS) {
+      const candidate = caseInput(c, version, 'mock-model', 'low');
+      assert.equal(candidate.input, baseline.input);
+      assert.equal(candidate.instructions.replace(dialoguePolicies[version].instructions, '<policy>'),
+        baseline.instructions.replace(dialoguePolicies['npc-dialogue/1'].instructions, '<policy>'));
+      assert.doesNotMatch(candidate.instructions + candidate.input, /PRIVATE_OTHER_PERSON|REVIEW_ONLY_NEVER_SEND/);
+    }
   }
   assert.ok(suite.cases.some(c => c.split === 'holdout'));
   assert.notDeepEqual(policyOrder(0, 1), policyOrder(0, 2));
@@ -103,7 +107,7 @@ test('all policies keep private information and outcome authority boundaries', (
   spec.scenario.characters[0].memories += ' OWN_PRIVATE';
   spec.scenario.characters[1].memories += ' OTHER_PRIVATE';
   spec.scenario.worldEngineInstructions = 'ENGINE_PRIVATE';
-  for (const dialoguePromptVersion of ['npc-dialogue/1', 'npc-dialogue/2', 'npc-dialogue/3'] as const) {
+  for (const dialoguePromptVersion of DIALOGUE_PROMPT_VERSIONS) {
     const prompt = persona(spec, spec.scenario.characters[0], { ...spec.variants[0], environmentMode: 'ai', dialoguePromptVersion });
     assert.match(prompt, /OWN_PRIVATE/);
     assert.doesNotMatch(prompt, /OTHER_PRIVATE|ENGINE_PRIVATE/);

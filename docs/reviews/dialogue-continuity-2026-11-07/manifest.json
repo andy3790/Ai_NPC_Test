@@ -1,0 +1,464 @@
+{
+  "date": "2026-11-07",
+  "reviewer": "Prompt author (non-independent qualitative review)",
+  "prices": "Local 2026-11-06 catalogue estimate; Codex values are API-equivalent, not subscription billing.",
+  "totals": {
+    "calls": 799,
+    "estimatedUsd": 2.7996346250000004
+  },
+  "byAdapter": {
+    "openai": {
+      "calls": 584,
+      "estimatedUsd": 0.8122919249999999
+    },
+    "codex": {
+      "calls": 215,
+      "estimatedUsd": 1.9873427000000001
+    }
+  },
+  "experiments": [
+    {
+      "id": "codex-v4-development",
+      "kind": "fixed-context",
+      "source": ".cache/dialogue-eval/2026-11-06T18-22-06-473Z-development-6bdddab0",
+      "adapter": "codex",
+      "model": "gpt-6-sol",
+      "actualModelIds": [
+        null
+      ],
+      "policies": [
+        "npc-dialogue/3",
+        "npc-dialogue/4"
+      ],
+      "status": "completed",
+      "calls": 32,
+      "estimatedUsd": 0.4600928,
+      "casesSha256": "7815c5751a923637dc931ccf04d38058a1b093c32c33b748bb3fe95498997ca6",
+      "split": "development",
+      "repetitions": 2,
+      "samplesSha256": "dfc3bdde9fc5b00eb0ee0bba67aab337b760af7d930c003347c48734b5cf26f9"
+    },
+    {
+      "id": "codex-v4-transfer",
+      "kind": "fixed-context",
+      "source": ".cache/dialogue-eval/2026-11-06T18-25-22-916Z-holdout-ab181474",
+      "adapter": "codex",
+      "model": "gpt-6-sol",
+      "actualModelIds": [
+        null
+      ],
+      "policies": [
+        "npc-dialogue/3",
+        "npc-dialogue/4"
+      ],
+      "status": "completed",
+      "calls": 24,
+      "estimatedUsd": 0.339334,
+      "casesSha256": "863c8d599652c259523d3b0b11603dfdfd5713c9ff944780d07ec8601503b50c",
+      "split": "holdout",
+      "repetitions": 2,
+      "samplesSha256": "87f4cb628ecd5facc50557b60f643dc903119c5b286645235a40550ccf2eb428"
+    },
+    {
+      "id": "codex-v4-regression",
+      "kind": "fixed-context",
+      "source": ".cache/dialogue-eval/2026-11-06T18-27-03-035Z-all-b75fc063",
+      "adapter": "codex",
+      "model": "gpt-6-sol",
+      "actualModelIds": [
+        null
+      ],
+      "policies": [
+        "npc-dialogue/3",
+        "npc-dialogue/4"
+      ],
+      "status": "completed",
+      "calls": 24,
+      "estimatedUsd": 0.34130600000000005,
+      "casesSha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+      "split": "all",
+      "repetitions": 1,
+      "samplesSha256": "4aeceb7c8b4336d622ef31531c1038bb012cc9acfc91d248f8bf31126cdb791b"
+    },
+    {
+      "id": "api-v4-development",
+      "kind": "fixed-context",
+      "source": ".cache/dialogue-eval/2026-11-06T18-29-32-462Z-development-60f26a6b",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "policies": [
+        "npc-dialogue/3",
+        "npc-dialogue/4"
+      ],
+      "status": "completed",
+      "calls": 32,
+      "estimatedUsd": 0.0564012,
+      "casesSha256": "7815c5751a923637dc931ccf04d38058a1b093c32c33b748bb3fe95498997ca6",
+      "split": "development",
+      "repetitions": 2,
+      "samplesSha256": "70bfcc8fe6153ea52d1c62b5f9c437ac31a700b80787da5f1a692b14c9be07c9"
+    },
+    {
+      "id": "api-v4-transfer",
+      "kind": "fixed-context",
+      "source": ".cache/dialogue-eval/2026-11-06T18-34-50-629Z-holdout-104b0d35",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "policies": [
+        "npc-dialogue/3",
+        "npc-dialogue/4"
+      ],
+      "status": "completed",
+      "calls": 24,
+      "estimatedUsd": 0.044003,
+      "casesSha256": "863c8d599652c259523d3b0b11603dfdfd5713c9ff944780d07ec8601503b50c",
+      "split": "holdout",
+      "repetitions": 2,
+      "samplesSha256": "d5c20ea6f077ce0a37608798002b8611b18c46a5c5fc08ada4f85ee06b50c075"
+    },
+    {
+      "id": "api-v4-regression",
+      "kind": "fixed-context",
+      "source": ".cache/dialogue-eval/2026-11-06T18-34-48-696Z-all-b0a0ff31",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "policies": [
+        "npc-dialogue/3",
+        "npc-dialogue/4"
+      ],
+      "status": "completed",
+      "calls": 24,
+      "estimatedUsd": 0.07791400000000001,
+      "casesSha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+      "split": "all",
+      "repetitions": 1,
+      "samplesSha256": "914ef89705b6161d2d367c03788571392dc8f4667699e9367e4435d98e6819f3"
+    },
+    {
+      "id": "api-v5-regression",
+      "kind": "fixed-context",
+      "source": ".cache/dialogue-eval/2026-11-06T18-36-07-614Z-all-9116efe4",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "policies": [
+        "npc-dialogue/3",
+        "npc-dialogue/5"
+      ],
+      "status": "completed",
+      "calls": 24,
+      "estimatedUsd": 0.0518847,
+      "casesSha256": "42bd030c1f1aa9368008a680f9b89414cad97cb5c6b2f42ec3b4479c620c2150",
+      "split": "all",
+      "repetitions": 1,
+      "samplesSha256": "268873db96c1ddbfcf53bcb092c662aafff27b1d0dff26feb5db7628b94f3cb9"
+    },
+    {
+      "id": "api-v5-transfer",
+      "kind": "fixed-context",
+      "source": ".cache/dialogue-eval/2026-11-06T18-37-38-176Z-holdout-9281696e",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "policies": [
+        "npc-dialogue/3",
+        "npc-dialogue/5"
+      ],
+      "status": "completed",
+      "calls": 24,
+      "estimatedUsd": 0.030737800000000003,
+      "casesSha256": "863c8d599652c259523d3b0b11603dfdfd5713c9ff944780d07ec8601503b50c",
+      "split": "holdout",
+      "repetitions": 2,
+      "samplesSha256": "c1f95daf6cd66742c4a33358e463cb8d59d72a02556e7b057c9efea214b142ee"
+    },
+    {
+      "id": "api-v5-follow-through",
+      "kind": "fixed-context",
+      "source": ".cache/dialogue-eval/2026-11-06T18-37-37-852Z-all-7c2f1fc1",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "actualModelIds": [
+        "gpt-6.1-sol"
+      ],
+      "policies": [
+        "npc-dialogue/4",
+        "npc-dialogue/5"
+      ],
+      "status": "completed",
+      "calls": 16,
+      "estimatedUsd": 0.0306038,
+      "casesSha256": "51e85f5ed3acfa41e99926b327fc7420c4ad5ed89da05c14e7c2eb47daeada54",
+      "split": "all",
+      "repetitions": 2,
+      "samplesSha256": "fe94d53b4c4c4df49e6eacf295065654c052140d2e91c31193a8133f7b97497f"
+    },
+    {
+      "id": "codex-v4-conversations",
+      "kind": "conversation",
+      "source": ".cache/dialogue-soak/2026-11-06T18-23-33-888Z",
+      "adapter": "codex",
+      "model": "gpt-6-sol",
+      "calls": 123,
+      "estimatedUsd": 0.7570824,
+      "error": null,
+      "completedRuns": 8,
+      "totalRuns": 8,
+      "transcripts": [
+        {
+          "file": "borrowed_charger-npc-dialogue-3-1.md",
+          "sha256": "827593db8f6a0f762865ec69d1e0275ba16bf30cffca3c1cf07400628c8a8c2f",
+          "sourceSha256": "63568693bb2da958bb3042f2ae21681214eac674520072c87d824964f60a7d8f",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "borrowed_charger-npc-dialogue-3-2.md",
+          "sha256": "461ba17e113e6441a8642a5f0da83e95afbe19c1fc1c7865bffdd38e0394cf7a",
+          "sourceSha256": "e8d7ace528a983d3a70a0131bd68bd6967553289282be4efc01ecca805f86c5d",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "borrowed_charger-npc-dialogue-4-1.md",
+          "sha256": "763057ae8467003859d6271ebdcb816aa22f2ebcbbd8afb39ab59bd7037de593",
+          "sourceSha256": "e2605a054bb15390c728522efc7138f4dabfdc210f654d7d542d5bd5b2999e0c",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "borrowed_charger-npc-dialogue-4-2.md",
+          "sha256": "61d35cf8cdbcfebde52ec63cda398464be6b4c6ac8c35144a015fceea19ddf6d",
+          "sourceSha256": "85b3744c368522033ac405d10d90a73e1d61f8d2553b4327161788d08189521a",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "sofa_evening-npc-dialogue-3-1.md",
+          "sha256": "fad0a2bfb5ca7f96f218ea8ccc281295cc002ff2af7badc2c7cf2db130b935ef",
+          "sourceSha256": "4323f6ec076383b7c2b8f822c6f413d04c97f321a12756a04d3c1fd6d3438e11",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "sofa_evening-npc-dialogue-3-2.md",
+          "sha256": "dc0f8a5ec19ca0ae7eda16cd9a261031110cb98dcb5612ecb83c3591944dcede",
+          "sourceSha256": "7b2f9eff77583b037d1ae125deaa44d6f8ff55955eb12cef49f10260cbc800d5",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "sofa_evening-npc-dialogue-4-1.md",
+          "sha256": "093f6104b0a666b71423ba8065936af78ff7f9ddac92e649f015c689eca80c5a",
+          "sourceSha256": "3067e83ae86a531392631a29386da797f748821fea3d2cf7e8660adba5024256",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "sofa_evening-npc-dialogue-4-2.md",
+          "sha256": "d1b229098e77d3cac5c4fdf8860c47b50b77b07d60ad096cd56c8d0a1ef99603",
+          "sourceSha256": "d599276fc8098dbb6b63ed0a1117f5aa63c1d35f1c8b85f436ec4e3079174c75",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        }
+      ]
+    },
+    {
+      "id": "world-v1-failure",
+      "kind": "conversation",
+      "source": ".cache/dialogue-continuity-runtime/.cache/dialogue-soak/2026-11-06T18-25-44-505Z",
+      "adapter": "codex",
+      "model": "gpt-6-sol",
+      "calls": 12,
+      "estimatedUsd": 0.08952750000000001,
+      "error": "Conversation did not complete; stopped without retry.",
+      "completedRuns": 0,
+      "totalRuns": 2,
+      "transcripts": [
+        {
+          "file": "charger_with_observation-npc-dialogue-3-1.md",
+          "sha256": "b2c2b747f4689ee40eeef260f3653bc0a164fed9830a9b47767fe3739854c1da",
+          "sourceSha256": "60d69e18dc3503340642de4be4a737e87569b389c283273f93fecb280ff20955",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "charger_with_observation-npc-dialogue-4-1.md",
+          "sha256": "6523c5021b41fc1225d1ea5a6c717aa8b569dd650771cf160eba0546e5f51a39",
+          "sourceSha256": "79050d3bafed5a2fd63cd89a35ecf738e8a4db73f19ae16371f01fb9c4857126",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        }
+      ]
+    },
+    {
+      "id": "api-v4-observed",
+      "kind": "conversation",
+      "source": ".cache/dialogue-soak/2026-11-06T18-29-46-343Z",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 72,
+      "estimatedUsd": 0.06999390999999999,
+      "error": null,
+      "completedRuns": 2,
+      "totalRuns": 2,
+      "transcripts": [
+        {
+          "file": "charger_with_observation-npc-dialogue-3-1.md",
+          "sha256": "edbddce063199f06cdaf34d5a7574b0ace1513a4056207ffbacb672f35ddde42",
+          "sourceSha256": "d13bdc1bc84bfccf3ec7d72f51d635a5a08e8ae8cae9814f97633ce58d874026",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "charger_with_observation-npc-dialogue-4-1.md",
+          "sha256": "060cb3fa1568ca10eb4d9acd311b5416d3a72f6da2607036497ea896e445bbab",
+          "sourceSha256": "1a7840401fef08f3e88320547d2246ba67a6c77c0671f15e254ef6eedd9052a6",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        }
+      ]
+    },
+    {
+      "id": "api-v5-conversations",
+      "kind": "conversation",
+      "source": ".cache/dialogue-soak/2026-11-06T18-36-06-649Z",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 123,
+      "estimatedUsd": 0.1836067,
+      "error": null,
+      "completedRuns": 8,
+      "totalRuns": 8,
+      "transcripts": [
+        {
+          "file": "borrowed_charger-npc-dialogue-3-1.md",
+          "sha256": "d12f4e57c4973b4fd2093c322c3e4af6c539e8cb8479cef27f1f21496feddc2b",
+          "sourceSha256": "0d1f4d52830fa92d1c299f73317897cd8951bb0a26a25d32dcd6b3859b5972c5",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "borrowed_charger-npc-dialogue-3-2.md",
+          "sha256": "a749110a9c83a6968903167261c54210c589c0c1994169cec3cfdc3cdb7bb876",
+          "sourceSha256": "f9aa77207fc949d672456ba74045f5ebf6de36dac57ed24dcf2c2bd11d282b39",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "borrowed_charger-npc-dialogue-5-1.md",
+          "sha256": "33db5f3f6c18344fcd6b69afbac15273935952d7d1efaff58bfc0dadc95aca4a",
+          "sourceSha256": "9890e8c0477d2c8ea6b916b5ade3c6416f057b68ee9814895cd46aee6e360188",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "borrowed_charger-npc-dialogue-5-2.md",
+          "sha256": "8b154a3a9b8e5410667cb9f38ee4d4cad572efdb778275c452ea8c28abfaf3ab",
+          "sourceSha256": "cf594ccd0a056757938c84c09cc93e49d75eb0155946132e5aefd589c87519e0",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "sofa_evening-npc-dialogue-3-1.md",
+          "sha256": "f2ce565eff5a7722a94616f1f067bd94e2837bdc51550e25503f50c010de3ef7",
+          "sourceSha256": "70867a2da6b658b18d9de050e8bcc9e8eee41e09e569e2f8a68367c8be7f52c5",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "sofa_evening-npc-dialogue-3-2.md",
+          "sha256": "0ece60d9ad6650bb8ebf117cdb1106eea6a49c5243da24737af9e177d3148fc1",
+          "sourceSha256": "1bf4df40bf12ee0e79bd6eb5fc357478a00329d90a097fda9a53c0a53564ddfd",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "sofa_evening-npc-dialogue-5-1.md",
+          "sha256": "3d636b98dc588b8a53c4726e097038ef2721922d8a709b0b1533239a728c58d2",
+          "sourceSha256": "b258073ba2a2605e9b85fae1947e02bb60ff89e6af90cb5da3b92e13f613e86a",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "sofa_evening-npc-dialogue-5-2.md",
+          "sha256": "720002653d9047e690f09e17cfc1ad68dd2589108eda8dbd6ae21bb418fc3691",
+          "sourceSha256": "9fe84fc628c562130faf9b7f275fd55f677f18c15e7665b93870adf70768321e",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        }
+      ]
+    },
+    {
+      "id": "api-v5-observed",
+      "kind": "conversation",
+      "source": ".cache/dialogue-soak/2026-11-06T18-36-06-426Z",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 144,
+      "estimatedUsd": 0.11925188499999999,
+      "error": null,
+      "completedRuns": 4,
+      "totalRuns": 4,
+      "transcripts": [
+        {
+          "file": "charger_with_observation-npc-dialogue-3-1.md",
+          "sha256": "402ce52e9565e9000f383fe007e0474a07c57587ebf4b1fa9308a30c29595087",
+          "sourceSha256": "4670b410960c25bcd87697c1cb84f95a337480daacc477e6b01ee9e5dcd81cdf",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "charger_with_observation-npc-dialogue-3-2.md",
+          "sha256": "e9a7628e2f0efe16782ed4188b8cc8bc40848fe4a7e365b9097b0d0e05a9997d",
+          "sourceSha256": "c03ffade5803efe198e446f0b382d66c3d88e4e73e862028fdc5da96bb9c69cb",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "charger_with_observation-npc-dialogue-5-1.md",
+          "sha256": "7c30e7d1967d2a1eb936866d82e91d3d5c46eb925751ed817b1a7e0bc9fc328f",
+          "sourceSha256": "800555c88ad64ec8bb4029d83d920410a6610725e1f06576c80d5a488e0036c2",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        },
+        {
+          "file": "charger_with_observation-npc-dialogue-5-2.md",
+          "sha256": "2e8bf589b3112c651a9039e4ea2547ec6b6d04d45b21f5cfd69aa889bb02e6a2",
+          "sourceSha256": "0d511d881fc3d6a94268c93eaea8f7c663695d5bdf234a018059921d71a7eb60",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        }
+      ]
+    },
+    {
+      "id": "seowol-v3",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T18-40-33-178Z-continuity-v3",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 53,
+      "estimatedUsd": 0.07223511500000002,
+      "error": null,
+      "completedRuns": 1,
+      "totalRuns": 1,
+      "transcripts": [
+        {
+          "file": "run-1.md",
+          "sha256": "c521386a7deb1dfa3fc43b93e5bf5e375c1c79b8e6ef2d412b5327d33a76896b",
+          "sourceSha256": "da13d6ebe4d5d984fcdc16defe86bca019e6bcd10695f9f71f9e3dc6062e3db5",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        }
+      ]
+    },
+    {
+      "id": "seowol-v5",
+      "kind": "conversation",
+      "source": ".cache/seowol-live/2026-11-06T18-39-51-620Z-continuity-v5",
+      "adapter": "openai",
+      "model": "gpt-6.1-sol",
+      "calls": 48,
+      "estimatedUsd": 0.07565981499999999,
+      "error": null,
+      "completedRuns": 1,
+      "totalRuns": 1,
+      "transcripts": [
+        {
+          "file": "run-1.md",
+          "sha256": "b4ca369d864bd800ccf40477ad47470bfe72ee36d2d0f09d2b28e5e09f684fbc",
+          "sourceSha256": "4d6bccfdab64eefd6ac2c579790df200cdc661a21835b7e21db342cebec7c032",
+          "formatting": "Trailing blank lines normalized; dialogue unchanged"
+        }
+      ]
+    }
+  ]
+}

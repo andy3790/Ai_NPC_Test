@@ -1,0 +1,373 @@
+{
+  "version": "dialogue-continuity-transfer/1",
+  "cases": [
+    {
+      "id": "quiet_radio",
+      "split": "holdout",
+      "focus": "다른 지속 활동으로 전이",
+      "situation": "두 친구가 라디오를 들으며 쉬고 있다. 새 질문이나 외부 사건은 없다.",
+      "world": "현대 한국의 일상. 등장인물은 특별한 능력이 없는 성인이다.",
+      "speakerId": "mina",
+      "characters": [
+        {
+          "id": "mina",
+          "name": "민아",
+          "identity": "성인 직장인.",
+          "personality": "보통은 무난하게 지내지만 자기 시간과 취향이 있다.",
+          "values": "",
+          "goals": "",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "jun",
+          "name": "준",
+          "identity": "성인 직장인.",
+          "personality": "보통은 무난하게 지내지만 자기 시간과 취향이 있다.",
+          "values": "",
+          "goals": "",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        }
+      ],
+      "history": [
+        {
+          "speakerId": "mina",
+          "speech": "이 노래는 좀 듣자.",
+          "action": ""
+        },
+        {
+          "speakerId": "jun",
+          "speech": "응.",
+          "action": ""
+        },
+        {
+          "speakerId": "mina",
+          "speech": "",
+          "action": "등받이에 기대 라디오를 듣는다."
+        },
+        {
+          "speakerId": "jun",
+          "speech": "",
+          "action": "라디오를 듣는다."
+        }
+      ],
+      "review": [
+        "계속 듣는 장면을 새 동작으로 매번 써서 채우지 않는다.",
+        "실제로 주어지지 않은 가사나 노래 정보를 지어내지 않는다."
+      ]
+    },
+    {
+      "id": "offer_after_pause",
+      "split": "holdout",
+      "focus": "쉬던 중 새 제안에 반응",
+      "situation": "두 친구가 거실에서 각자 쉬던 중 준이 말을 걸었다.",
+      "world": "현대 한국의 일상. 등장인물은 특별한 능력이 없는 성인이다.",
+      "speakerId": "mina",
+      "characters": [
+        {
+          "id": "mina",
+          "name": "민아",
+          "identity": "성인 직장인.",
+          "personality": "보통은 무난하게 지내지만 자기 시간과 취향이 있다.",
+          "values": "",
+          "goals": "좀 배가 고프고 준과 간단히 먹고 싶다.",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "jun",
+          "name": "준",
+          "identity": "성인 직장인.",
+          "personality": "보통은 무난하게 지내지만 자기 시간과 취향이 있다.",
+          "values": "",
+          "goals": "",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        }
+      ],
+      "history": [
+        {
+          "speakerId": "mina",
+          "speech": "",
+          "action": "소파에 앉아 쉰다."
+        },
+        {
+          "speakerId": "jun",
+          "speech": "나 라면 끓일 건데 너도 먹을래?",
+          "action": ""
+        }
+      ],
+      "review": [
+        "새 제안에 관심을 드러낸다. 쉬고 있다는 이유로 침묵을 고집하지 않는다.",
+        "요청하지 않은 재료·조리 계획을 대신 정리하지 않는다."
+      ]
+    },
+    {
+      "id": "answer_has_changed",
+      "split": "holdout",
+      "focus": "합의 뒤 실제 조건 변화",
+      "situation": "내일 산책하기로 한 두 친구가 새로 알려진 비 소식에 관해 이야기한다.",
+      "world": "현대 한국의 일상. 등장인물은 특별한 능력이 없는 성인이다.",
+      "speakerId": "mina",
+      "characters": [
+        {
+          "id": "mina",
+          "name": "민아",
+          "identity": "성인 직장인.",
+          "personality": "보통은 무난하게 지내지만 자기 시간과 취향이 있다.",
+          "values": "",
+          "goals": "",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "jun",
+          "name": "준",
+          "identity": "성인 직장인.",
+          "personality": "보통은 무난하게 지내지만 자기 시간과 취향이 있다.",
+          "values": "",
+          "goals": "",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        }
+      ],
+      "history": [
+        {
+          "speakerId": "mina",
+          "speech": "내일 두 시에 공원에서 걷자.",
+          "action": ""
+        },
+        {
+          "speakerId": "jun",
+          "speech": "좋아.",
+          "action": ""
+        },
+        {
+          "speakerId": "mina",
+          "speech": "응.",
+          "action": ""
+        },
+        {
+          "speakerId": "jun",
+          "speech": "방금 예보 보니까 내일 비 온대. 어떡하지?",
+          "action": ""
+        }
+      ],
+      "review": [
+        "새 조건이 있으므로 이미 끝난 계획을 다시 이야기할 수 있다.",
+        "의논하거나 선택하되 날씨가 확정됐다고 단정하지 않는다."
+      ]
+    },
+    {
+      "id": "still_angry",
+      "split": "holdout",
+      "focus": "상대가 닫은 갈등을 자동 종료하지 않기",
+      "situation": "민아의 물건을 말없이 가져간 준이 사과했지만 민아는 아직 불쾌하다.",
+      "world": "현대 한국의 일상. 등장인물은 특별한 능력이 없는 성인이다.",
+      "speakerId": "mina",
+      "characters": [
+        {
+          "id": "mina",
+          "name": "민아",
+          "identity": "성인 직장인.",
+          "personality": "사과 한마디로 바로 마음이 풀리는 편은 아니다.",
+          "values": "",
+          "goals": "말없이 가져가는 일이 반복되지 않기를 바란다.",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "jun",
+          "name": "준",
+          "identity": "성인 직장인.",
+          "personality": "보통은 무난하게 지내지만 자기 시간과 취향이 있다.",
+          "values": "",
+          "goals": "",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        }
+      ],
+      "history": [
+        {
+          "speakerId": "mina",
+          "speech": "말하고 가져가라고 했잖아.",
+          "action": ""
+        },
+        {
+          "speakerId": "jun",
+          "speech": "알았어, 미안. 됐지?",
+          "action": ""
+        }
+      ],
+      "review": [
+        "준의 됐지라는 말을 합의 확정으로 받아들이지 않는다.",
+        "민아가 아직 불쾌한 반응을 보이거나 대화를 멈추는 것은 모두 가능하다. 기계적으로 화해 문구를 붙이지 않는다."
+      ]
+    },
+    {
+      "id": "curiosity_after_return",
+      "split": "holdout",
+      "focus": "완료된 용건 이후에도 실제 관심에서 새 질문 가능",
+      "situation": "민아가 좋아하는 소설을 준이 돌려줬다. 책은 이미 가방에 넣었다. 민아는 준이 읽고 어땠는지 궁금하다.",
+      "world": "현대 한국의 일상. 등장인물은 특별한 능력이 없는 성인이다.",
+      "speakerId": "mina",
+      "characters": [
+        {
+          "id": "mina",
+          "name": "민아",
+          "identity": "성인 직장인.",
+          "personality": "보통은 무난하게 지내지만 자기 시간과 취향이 있다.",
+          "values": "",
+          "goals": "준이 자기가 좋아하는 소설을 어떻게 읽었는지 듣고 싶다.",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "jun",
+          "name": "준",
+          "identity": "성인 직장인.",
+          "personality": "보통은 무난하게 지내지만 자기 시간과 취향이 있다.",
+          "values": "",
+          "goals": "",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        }
+      ],
+      "history": [
+        {
+          "speakerId": "jun",
+          "speech": "네 책 여기.",
+          "action": "민아 앞에 책을 놓는다."
+        },
+        {
+          "speakerId": "mina",
+          "speech": "고마워.",
+          "action": "책을 가방에 넣는다."
+        },
+        {
+          "speakerId": "jun",
+          "speech": "응.",
+          "action": ""
+        }
+      ],
+      "review": [
+        "책을 돌려받는 용건이 끝나도 인물의 관심에서 새 질문을 꺼낼 수 있다.",
+        "모든 새 화제를 금지하는 침묵 규칙으로 바뀌지 않았는지 본다."
+      ]
+    },
+    {
+      "id": "share_news_after_pause",
+      "split": "holdout",
+      "focus": "질문받지 않아도 자기에게 중요한 말 시작 가능",
+      "situation": "두 친구가 카페에서 잠시 조용히 앉아 있다. 민아는 오늘 아침 원하던 회사에 합격했다는 연락을 받았고 준에게 알려주고 싶다.",
+      "world": "현대 한국의 일상. 등장인물은 특별한 능력이 없는 성인이다.",
+      "speakerId": "mina",
+      "characters": [
+        {
+          "id": "mina",
+          "name": "민아",
+          "identity": "성인 직장인.",
+          "personality": "보통은 무난하게 지내지만 자기 시간과 취향이 있다.",
+          "values": "",
+          "goals": "오늘 받은 합격 소식을 준에게 말하고 싶다.",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "오늘 아침 원하던 회사에 합격했다는 연락을 받았다.",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "jun",
+          "name": "준",
+          "identity": "성인 직장인.",
+          "personality": "보통은 무난하게 지내지만 자기 시간과 취향이 있다.",
+          "values": "",
+          "goals": "",
+          "relationships": "서로 평소 알고 지내는 사이.",
+          "memories": "",
+          "knowledge": "",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        }
+      ],
+      "history": [
+        {
+          "speakerId": "jun",
+          "speech": "",
+          "action": "커피를 한 모금 마신다."
+        }
+      ],
+      "review": [
+        "현재 자신의 중요한 소식을 먼저 말할 수 있다. 질문이 없다고 침묵하지 않는다.",
+        "급여·직책·회사 이름 등 제공하지 않은 상세 정보를 지어내지 않는다."
+      ]
+    }
+  ]
+}

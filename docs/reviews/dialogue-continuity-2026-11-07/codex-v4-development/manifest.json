@@ -1,0 +1,219 @@
+{
+  "adapter": "codex",
+  "suiteVersion": "dialogue-continuity/1",
+  "casesSha256": "7815c5751a923637dc931ccf04d38058a1b093c32c33b748bb3fe95498997ca6",
+  "split": "development",
+  "model": "gpt-6-sol",
+  "effort": "low",
+  "promptVersion": "npc-lab/7",
+  "policyVersions": [
+    "npc-dialogue/3",
+    "npc-dialogue/4"
+  ],
+  "repetitions": 2,
+  "expectedCalls": 32,
+  "maxCalls": 32,
+  "maxUsd": 2,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+  "status": "completed",
+  "error": null,
+  "calls": 32,
+  "estimatedUsd": 0.4600928,
+  "unpricedCalls": 0,
+  "quality": "unreviewed",
+  "mappings": [
+    {
+      "caseId": "settled_plan",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "settled_plan",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "settled_plan",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "settled_plan",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "continuing_movie",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "continuing_movie",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "continuing_movie",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "continuing_movie",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "question_breaks_quiet",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "question_breaks_quiet",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "question_breaks_quiet",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "question_breaks_quiet",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "unanswered_request",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "unanswered_request",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "unanswered_request",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "unanswered_request",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "thanks_not_a_summary",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "thanks_not_a_summary",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "thanks_not_a_summary",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "thanks_not_a_summary",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "clarification_received",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "clarification_received",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "clarification_received",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "clarification_received",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "polite_further_question",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "polite_further_question",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "polite_further_question",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "polite_further_question",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "disputed_agreement",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "disputed_agreement",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "disputed_agreement",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "disputed_agreement",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    }
+  ]
+}

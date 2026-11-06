@@ -17,6 +17,7 @@ import { runSpatial } from './spatial-runner.js';
 import { advanceSingleRoomSituations } from './single-room-situations.js';
 import { worldOutputSchema } from '../shared/world-schema.js';
 import { applyWorldOutput, initialWorldState, priorityWorldSpeaker, worldInstructions, worldPrompt } from './world.js';
+import { worldPromptVersion } from './world-policies.js';
 import type { ApiCredential, CallKind, DeliveryReceipt, InvocationMetrics, NpcSession, Run, RunDetail, RunListItem, RunRecords, RunSummary, Utterance } from '../shared/types.js';
 import { progression, progressionPrompt, resolveAction } from './progression.js';
 import { repetitionMetrics } from './quality.js';
@@ -155,7 +156,10 @@ export class Engine extends EventEmitter {
     // A failed accepted turn already appended its input. A retry asks to complete that input,
     // without appending the dialogue payload a second time to the same persistent session.
     if (previous?.turnId && previous.threadId === session.threadId && previous.metadata.inputRetained !== false) input = JSON.stringify({ task: JSON.parse(input).task, previousFailure: previous.error?.slice(0, 5000), instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 해당 호출의 결과는 아직 공개·적용되지 않았습니다. previousFailure는 이전 결과가 거부된 이유입니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
-    const run = this.run(id); const call: InvocationMetrics = {
+    const run = this.run(id);
+    const format = metadata.outputType as keyof typeof outputSchemas | undefined;
+    const outputSchema = format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind];
+    const call: InvocationMetrics = {
       id: randomUUID(), experimentId: run.experimentId, runId: id, variantId: run.variant.id, repetition: run.repetition,
       kind, characterId: ['speech', 'receive'].includes(kind) ? session.characterId : null, operationKey, attempt: (previous?.attempt ?? 0) + 1, retryOf: previous?.id ?? null,
       threadId: session.threadId, turnId: null, sourceUtteranceId: (metadata.sourceUtteranceId as string) ?? null, utteranceId: null,
@@ -166,6 +170,8 @@ export class Engine extends EventEmitter {
       metadata: { ...metadata, adapter: run.adapter, appVersion: run.appVersion, cliVersion: run.cliVersion,
         promptVersion: run.promptVersion ?? null, runtimePromptVersion: PROMPT_VERSION,
         dialoguePromptVersion: run.variant.dialoguePromptVersion ?? null,
+        worldPromptVersion: kind === 'environment' ? worldPromptVersion(session.instructions) : null,
+        outputSchemaSha256: createHash('sha256').update(JSON.stringify(outputSchema)).digest('hex'),
         instructionsSha256: createHash('sha256').update(session.instructions).digest('hex') },
     };
     this.store.put('invocations', call); this.changed(id); const queued = performance.now();
@@ -179,8 +185,7 @@ export class Engine extends EventEmitter {
       const controller = new AbortController(); const set = this.aborts.get(id) ?? new Set(); set.add(controller); this.aborts.set(id, set);
       let result;
       try {
-        const format = metadata.outputType as keyof typeof outputSchemas | undefined;
-        result = await this.adapter.turn({ threadId: session.threadId, config: session.config, input, outputSchema: format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind], clientMessageId: call.id, timeoutMs: run.spec.timeoutMs }, event => {
+        result = await this.adapter.turn({ threadId: session.threadId, config: session.config, input, outputSchema, clientMessageId: call.id, timeoutMs: run.spec.timeoutMs }, event => {
           // Late usage events must preserve fields committed after the turn completed.
           Object.assign(call, this.store.get('invocations', call.id));
           this.store.event(id, call.id, event.method, event.params);

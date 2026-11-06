@@ -103,7 +103,7 @@ try {
 
   await dialog.getByRole('button', { name: '03 실험 조건' }).click();
   const policy = dialog.getByLabel(`${expected.variants[0].label} 대화 반응 지침`, { exact: true });
-  assert.equal(await policy.inputValue(), 'npc-dialogue/3');
+  assert.equal(await policy.inputValue(), 'npc-dialogue/5');
   await policy.selectOption('npc-dialogue/1');
   expected.variants[0].dialoguePromptVersion = 'npc-dialogue/1';
   await dialog.getByLabel(`${expected.variants[0].label} 대화 마무리`, { exact: true }).selectOption('silence');

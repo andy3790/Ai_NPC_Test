@@ -1,0 +1,90 @@
+[
+  {
+    "schemaVersion": 1,
+    "name": "충전기 찾기와 실제 관찰",
+    "scenario": {
+      "id": "charger_with_observation",
+      "name": "충전기 찾기와 실제 관찰",
+      "world": "현대 한국. 민아·준·수현은 작은 집에 함께 사는 친구다. 특별한 능력은 없고 서로의 사적인 생각은 말하기 전에는 모른다.",
+      "situation": "저녁. 민아가 자기 방 책상에 있던 충전기를 찾으러 거실로 나왔다. 준과 수현이 거실에 있다.",
+      "characters": [
+        {
+          "id": "mina",
+          "name": "민아",
+          "identity": "직장에 다니는 성인.",
+          "personality": "물건을 말없이 빌려 가는 것을 싫어한다.",
+          "values": "",
+          "goals": "배터리가 얼마 남지 않아 자기 충전기를 찾고 싶다.",
+          "relationships": "민아·준·수현은 함께 사는 성인 친구다. 서로 반말한다.",
+          "memories": "",
+          "knowledge": "자기 충전기는 흰색이며 원래 자기 방 책상에 두었다.",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "jun",
+          "name": "준",
+          "identity": "회사에 다니는 성인.",
+          "personality": "잘못을 대수롭지 않게 여기다가 지적받으면 변명하는 편이다.",
+          "values": "",
+          "goals": "충전기를 빌려 쓴 일로 크게 잔소리를 듣고 싶지는 않다.",
+          "relationships": "민아·준·수현은 함께 사는 성인 친구다. 서로 반말한다.",
+          "memories": "오늘 민아의 충전기를 말없이 빌려 쓰고 부엌 식탁에 두었다.",
+          "knowledge": "충전기는 부엌 식탁에 두었다.",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        },
+        {
+          "id": "suhyeon",
+          "name": "수현",
+          "identity": "카페에서 일하는 성인.",
+          "personality": "말이 적지만 하고 싶은 말은 하는 편이다.",
+          "values": "",
+          "goals": "퇴근 후 쉬고 싶고 남의 다툼에 끼기 귀찮다.",
+          "relationships": "민아·준·수현은 함께 사는 성인 친구다. 서로 반말한다.",
+          "memories": "",
+          "knowledge": "충전기의 행방은 모른다.",
+          "unknowns": "",
+          "speechStyle": "친구에게 평소 쓰는 일상적인 반말.",
+          "exampleDialogue": "",
+          "behaviors": "필요한 일상 동작.",
+          "taboos": ""
+        }
+      ],
+      "defaults": {
+        "model": "gpt-6.1-sol",
+        "effort": "low"
+      },
+      "worldEngineInstructions": "장면 시작 시 흰색 충전기는 부엌 식탁 위 컵 옆에 놓여 있다. 아직 살펴보지 않은 NPC에게 이 위치를 미리 공개하지 않는다. 식탁 위를 보거나 찾는 시도가 있으면 실제로 보이는 충전기의 위치를 짧게 알려 준다. 집는 시도에는 손에 든 결과, 휴대폰에 연결하면 충전 표시가 켜진 결과를 준다. 물건의 위치와 연결 상태는 시도에 따른 실제 결과로 계속 유지한다. 대사나 같은 자세를 다시 해설하지 않으며 새 관찰이나 결과가 없으면 events를 비운다. 인물의 동의·사과·속마음을 엔진이 결정하지 않는다."
+    },
+    "variants": [
+      {
+        "id": "default",
+        "label": "현재 기본값",
+        "environmentMode": "ai",
+        "stopOnSilence": true
+      }
+    ],
+    "repetitions": 1,
+    "maxUtterances": 18,
+    "evaluation": {
+      "enabled": false,
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    "director": {
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    "worldEngine": {
+      "model": "gpt-6-luna",
+      "effort": "medium"
+    }
+  }
+]

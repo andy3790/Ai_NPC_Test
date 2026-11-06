@@ -1,0 +1,171 @@
+{
+  "adapter": "openai",
+  "suiteVersion": "dialogue-continuity-transfer/1",
+  "casesSha256": "863c8d599652c259523d3b0b11603dfdfd5713c9ff944780d07ec8601503b50c",
+  "split": "holdout",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "promptVersion": "npc-lab/7",
+  "policyVersions": [
+    "npc-dialogue/3",
+    "npc-dialogue/4"
+  ],
+  "repetitions": 2,
+  "expectedCalls": 24,
+  "maxCalls": 24,
+  "maxUsd": 2,
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+  "status": "completed",
+  "error": null,
+  "calls": 24,
+  "estimatedUsd": 0.044003,
+  "unpricedCalls": 0,
+  "quality": "unreviewed",
+  "mappings": [
+    {
+      "caseId": "quiet_radio",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "quiet_radio",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "quiet_radio",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "quiet_radio",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "offer_after_pause",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "offer_after_pause",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "offer_after_pause",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "offer_after_pause",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "answer_has_changed",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "answer_has_changed",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "answer_has_changed",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "answer_has_changed",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "still_angry",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "still_angry",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "still_angry",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "still_angry",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "curiosity_after_return",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "curiosity_after_return",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "curiosity_after_return",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "curiosity_after_return",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "share_news_after_pause",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/3"
+    },
+    {
+      "caseId": "share_news_after_pause",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "share_news_after_pause",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/4"
+    },
+    {
+      "caseId": "share_news_after_pause",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/3"
+    }
+  ]
+}

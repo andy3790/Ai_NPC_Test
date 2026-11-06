@@ -1,0 +1,163 @@
+{
+  "adapter": "codex",
+  "model": "gpt-6-sol",
+  "effort": "low",
+  "maxCalls": 144,
+  "expectedCalls": 144,
+  "maxUsd": 3,
+  "turns": 18,
+  "repetitions": 2,
+  "promptVersion": "npc-lab/7",
+  "baseline": "npc-dialogue/3",
+  "candidate": "npc-dialogue/4",
+  "costLimit": "API catalogue equivalent, not subscription billing; last response may overshoot. No retry.",
+  "calls": 123,
+  "estimatedUsd": 0.7570824,
+  "error": null,
+  "reports": [
+    {
+      "scene": "sofa_evening",
+      "policy": "npc-dialogue/3",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 18,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.1453056,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "sofa_evening",
+      "policy": "npc-dialogue/3",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 18,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.0685284,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "sofa_evening",
+      "policy": "npc-dialogue/4",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "error": null,
+      "calls": 15,
+      "speechCount": 15,
+      "cost": {
+        "usd": 0.08896480000000001,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "sofa_evening",
+      "policy": "npc-dialogue/4",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "error": null,
+      "calls": 16,
+      "speechCount": 16,
+      "cost": {
+        "usd": 0.09638920000000002,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "borrowed_charger",
+      "policy": "npc-dialogue/4",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "error": null,
+      "calls": 10,
+      "speechCount": 10,
+      "cost": {
+        "usd": 0.09917319999999999,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "borrowed_charger",
+      "policy": "npc-dialogue/4",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "error": null,
+      "calls": 10,
+      "speechCount": 10,
+      "cost": {
+        "usd": 0.05923120000000001,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "borrowed_charger",
+      "policy": "npc-dialogue/3",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 18,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.126716,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "borrowed_charger",
+      "policy": "npc-dialogue/3",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 18,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.072774,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    }
+  ]
+}

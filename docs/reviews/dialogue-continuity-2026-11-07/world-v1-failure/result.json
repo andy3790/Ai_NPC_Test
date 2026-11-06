@@ -1,0 +1,53 @@
+{
+  "adapter": "codex",
+  "model": "gpt-6-sol",
+  "effort": "low",
+  "maxCalls": 72,
+  "expectedCalls": 72,
+  "maxUsd": 2,
+  "turns": 18,
+  "repetitions": 1,
+  "promptVersion": "npc-lab/7",
+  "baseline": "npc-dialogue/3",
+  "candidate": "npc-dialogue/4",
+  "costLimit": "API catalogue equivalent, not subscription billing; last response may overshoot. No retry.",
+  "calls": 12,
+  "estimatedUsd": 0.08952750000000001,
+  "error": "Conversation did not complete; stopped without retry.",
+  "reports": [
+    {
+      "scene": "charger_with_observation",
+      "policy": "npc-dialogue/3",
+      "repetition": 1,
+      "status": "paused",
+      "error": "세계 엔진 결과 오류: NPC의 행동·물리 결과는 전용 유형으로 기록하세요.",
+      "calls": 8,
+      "speechCount": 4,
+      "cost": {
+        "usd": 0.05460948,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 1
+    },
+    {
+      "scene": "charger_with_observation",
+      "policy": "npc-dialogue/4",
+      "repetition": 1,
+      "status": "paused",
+      "error": "세계 엔진 결과 오류: NPC의 행동·물리 결과는 전용 유형으로 기록하세요.",
+      "calls": 4,
+      "speechCount": 2,
+      "cost": {
+        "usd": 0.03491802,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 1
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "adapter": "openai",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "maxCalls": 144,
+  "expectedCalls": 144,
+  "maxUsd": 2,
+  "turns": 18,
+  "repetitions": 2,
+  "promptVersion": "npc-lab/7",
+  "baseline": "npc-dialogue/3",
+  "candidate": "npc-dialogue/5",
+  "costLimit": "API catalogue equivalent, not subscription billing; last response may overshoot. No retry.",
+  "calls": 144,
+  "estimatedUsd": 0.11925188499999999,
+  "error": null,
+  "reports": [
+    {
+      "scene": "charger_with_observation",
+      "policy": "npc-dialogue/3",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.027841964999999996,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "charger_with_observation",
+      "policy": "npc-dialogue/3",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.02789793,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "charger_with_observation",
+      "policy": "npc-dialogue/5",
+      "repetition": 1,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.03821984,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    },
+    {
+      "scene": "charger_with_observation",
+      "policy": "npc-dialogue/5",
+      "repetition": 2,
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "error": null,
+      "calls": 36,
+      "speechCount": 18,
+      "cost": {
+        "usd": 0.025292149999999996,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failedCalls": 0
+    }
+  ]
+}
