@@ -1,0 +1,1347 @@
+{
+  "reviewer": "Non-independent agent review; not human or blind evaluation",
+  "criteria": [
+    "문맥에 맞는 대꾸",
+    "불필요한 설명과 임무 덧말",
+    "인물 구별과 존댓말",
+    "필요한 정보와 질문",
+    "지식 및 행동 권한"
+  ],
+  "limitations": [
+    "v4-followup은 v3 결과를 보고 재사용한 사례다. 독립 holdout이 아니다.",
+    "v4-transfer만 v4 동결 후 새로 만들었다.",
+    "짧은 인사의 말투 유사성은 해결됐다고 판정하지 않았다."
+  ],
+  "judgments": [
+    {
+      "experiment": "v3-development",
+      "caseId": "tea_yoon",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "4bfb34cd-19d4-4d4d-8cd6-79f6e577d870",
+          "quote": "{\"speech\":\"고마워요. 아직 반쯤 남아서, 이것부터 마실게요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "0ae956bf-fc8c-4af0-a73a-f1a4dcf01265",
+          "quote": "{\"speech\":\"아직 반이나 남았어요. 이것만 마실게요. 고마워요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-development",
+      "caseId": "tea_yoon",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "b80b9e3f-1108-433b-b35c-8e3b83a51571",
+          "quote": "{\"speech\":\"아직 반이나 남았어요. 이것만 마실게요. 고마워요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "9e935075-cc4e-41d3-b4b9-6b90a46fecd9",
+          "quote": "{\"speech\":\"아직 반쯤 남았어요. 이것만 마실게요. 고마워요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-development",
+      "caseId": "shared_caveat_yoon",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "0c878f67-ffeb-4c67-a92f-55f0ad5fa60a",
+          "quote": "{\"speech\":\"좋아요. 먼저 켜고 기름이 얼마나 줄어드는지 볼게요.\",\"action\":\"기름통을 가져와 등대에 기름을 넣을 준비를 한다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "1b1084fa-a95e-447e-9423-7ae700d7dde7",
+          "quote": "{\"speech\":\"저도 오늘 밤 쓰는 게 낫겠어요. 점검하고 불은 제가 켤게요.\",\"action\":\"기름통을 직접 받아 들고 점등 준비를 시작한다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-development",
+      "caseId": "shared_caveat_yoon",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "4bdd95e3-225b-42f1-8b1f-fe1c2ddc326f",
+          "quote": "{\"speech\":\"저도 오늘 밤 쓰는 게 낫겠어요. 점검하고 불은 제가 켤게요.\",\"action\":\"기름통을 직접 들어 놓인 자리가 안정적인지 확인한다.\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "bdca94ac-6ff7-4929-9dbe-33b9fe09dea6",
+          "quote": "{\"speech\":\"저도 오늘 밤 쓰는 게 좋겠어요. 불은 제가 켤게요. 기름이 얼마나 줄어드는지 봐야겠어요.\",\"action\":\"기름통을 열고 등대에 기름을 넣을 준비를 한다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-development",
+      "caseId": "opening_yoon",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "0020df3d-fab6-4668-ab1d-929002b2cda2",
+          "quote": "{\"speech\":\"저는 오늘 밤 불을 밝히는 데 먼저 쓰겠어요. 다만 한 통으로 밤새 갈지는 아직 확인이 필요해요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "66569913-f448-49fd-b3bb-8ca0fa3f87ca",
+          "quote": "{\"speech\":\"먼저 불을 켜고 기름이 얼마나 줄어드는지 볼게요. 한 통으로 밤새 갈지는 아직 몰라요.\",\"action\":\"등대 안으로 들어가 점등 준비를 시작한다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-development",
+      "caseId": "opening_yoon",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "0e78b9d9-ba20-4968-be95-09931257d9fd",
+          "quote": "{\"speech\":\"먼저 불을 켜고 기름이 얼마나 줄어드는지 볼게요. 밤새 갈지는 아직 몰라요.\",\"action\":\"점등 준비를 하러 등대 안으로 들어간다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "18526e17-aa1f-437c-aa6e-2fce71b5ca9c",
+          "quote": "{\"speech\":\"저는 오늘 밤 불을 켜 두는 쪽이 낫겠어요. 다만 한 통으로 밤새 갈지는 아직 확인이 필요해요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-development",
+      "caseId": "tea_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "72b0c54c-21aa-4bca-90b4-c9314f166925",
+          "quote": "{\"speech\":\"아직 반쯤 남아서 괜찮아요. 고마워요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "0954d631-5a56-4943-ad48-a3b7da553217",
+          "quote": "{\"speech\":\"고마워요. 아직 반쯤 남아서 이걸 마저 마실게요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-development",
+      "caseId": "tea_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "00de1e48-da63-4a7c-ae58-cb81a012e7a0",
+          "quote": "{\"speech\":\"고마워요. 아직 반쯤 남아서, 이것부터 마실게요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "e38773c4-0f68-4171-88f7-659442565481",
+          "quote": "{\"speech\":\"고마워요. 아직 반쯤 남아서 이걸 마실게요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-development",
+      "caseId": "shared_caveat_miru",
+      "repetition": 1,
+      "verdict": "candidate",
+      "reason": "이미 들은 연소 시간의 불확실성을 다시 붙이지 않는다. 첫 반복에는 켜고 지켜보자는 덧말이 남아 있다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "29ba81ab-5f69-436d-898d-5fd76865a130",
+          "quote": "{\"speech\":\"저도 오늘 밤 쓰는 데 동의해요. 켜고 지켜봐요.\",\"action\":\"수첩에 오늘 밤 기름 사용을 우선하기로 했다고 적는다.\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "fbc2eed6-9e56-4d7d-a21b-546585d124c5",
+          "quote": "{\"speech\":\"저도 오늘 밤 쓰는 쪽에 동의해요. 아침까지 켜 둘 수 있는지는 아직 모르는 거고요.\",\"action\":\"수첩에 오늘 밤 기름 사용을 우선하기로 했다고 적는다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-development",
+      "caseId": "shared_caveat_miru",
+      "repetition": 2,
+      "verdict": "candidate",
+      "reason": "이미 들은 연소 시간의 불확실성을 다시 붙이지 않는다. 첫 반복에는 켜고 지켜보자는 덧말이 남아 있다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "6439c528-53ea-42fb-88a6-ad67e2f94036",
+          "quote": "{\"speech\":\"저도 오늘 밤 쓰는 데 동의해요. 아침까지 켜 둘 수 있을지는 아직 모르는 걸로 적을게요.\",\"action\":\"수첩에 오늘 밤 기름 사용을 우선하기로 했다고 적는다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "6a5f8caf-6f98-47f2-9203-bcd94b6e14c2",
+          "quote": "{\"speech\":\"저도 오늘 밤 쓰는 데 동의해요.\",\"action\":\"수첩에 오늘 밤 기름 사용을 우선하기로 했다고 적는다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-development",
+      "caseId": "opening_miru",
+      "repetition": 1,
+      "verdict": "candidate",
+      "reason": "결정되지 않은 답을 되묻는 대신 논의에 자기 선택을 보탠다. 일부를 남기려는 판단은 허용된 의견이며 인물 구별의 증거로 세지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "4e2b06b6-1122-47a0-8ef8-56ea55dde369",
+          "quote": "{\"speech\":\"오늘 밤에 한 통을 다 쓰자는 건가요, 내일 쓸 몫을 남기자는 건가요? 아직 어느 쪽으로 정한 건지 못 들었어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "b05ab652-cf8e-4f8e-8b1a-5413f2b6bb0c",
+          "quote": "{\"speech\":\"저는 오늘 밤에 더 쓰되, 내일 쓸 몫도 조금 남기는 쪽이 좋아요. 지금 안개가 짙으니 반씩 나누는 건 망설여져요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-development",
+      "caseId": "opening_miru",
+      "repetition": 2,
+      "verdict": "candidate",
+      "reason": "결정되지 않은 답을 되묻는 대신 논의에 자기 선택을 보탠다. 일부를 남기려는 판단은 허용된 의견이며 인물 구별의 증거로 세지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "faf94254-69d8-47ac-a11f-7f695f552941",
+          "quote": "{\"speech\":\"저는 오늘 밤에 쓸 기름을 좀 더 넉넉히 잡되, 내일 몫도 남기는 쪽이 좋아요. 지금 안개가 짙으니 반씩 나누는 건 망설여져요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "f422df11-e13d-4bf7-9cd5-5b495ca4f7c0",
+          "quote": "{\"speech\":\"오늘 밤에 한 통을 다 쓰자는 건가요, 내일 쓸 몫을 남기자는 건가요? 아직 어느 쪽으로 정했는지 못 들었어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-regression",
+      "caseId": "opening_miru",
+      "repetition": 1,
+      "verdict": "candidate",
+      "reason": "기록할 결론을 기다리기만 하던 반응에서 자기 의견을 보태는 반응으로 바뀌었다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "1019a83f-c65f-4292-8cac-2d12e1d48c07",
+          "quote": "{\"speech\":\"저는 오늘 밤 쓸 기름을 넉넉히 두고, 조금은 내일을 위해 남기고 싶어요. 지금 안개가 짙은 게 마음에 걸려요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "493292ad-5dde-4428-bc86-fa032db879e2",
+          "quote": "{\"speech\":\"오늘 밤 다 쓰자는 쪽인가요, 내일 쓸 몫을 남기자는 쪽인가요? 아직 정하지 않은 거면 기록은 비워 둘게요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-regression",
+      "caseId": "opening_miru",
+      "repetition": 2,
+      "verdict": "candidate",
+      "reason": "기록할 결론을 기다리기만 하던 반응에서 자기 의견을 보태는 반응으로 바뀌었다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "4fbb03ad-2df1-4f73-8385-919251f043ca",
+          "quote": "{\"speech\":\"오늘 밤 다 쓰자는 쪽과 내일 몫을 남기자는 쪽 중에, 아직 정해진 건 없는 거죠?\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "b7f6c91e-5881-4205-b89c-0cea2bfefad0",
+          "quote": "{\"speech\":\"저는 오늘 밤에 모두 쓰는 쪽이 좋겠어요. 지금 안개가 이렇게 짙으니까요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-regression",
+      "caseId": "tea_yoon",
+      "repetition": 1,
+      "verdict": "candidate",
+      "reason": "차 권유에 답한 뒤 점등 준비를 덧붙이던 현상이 사라졌다. 후보의 윤은 최종 v4와 같은 프로필이다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "3d82c7cf-0b60-4487-9003-b44b42a711d6",
+          "quote": "{\"speech\":\"아직 반쯤 남았어요. 고마워요. 저는 이제 불 켤 준비를 해야겠어요.\",\"action\":\"잔을 내려놓고 자리에서 일어난다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "ffba1e5d-54d9-4c52-945a-775f373f8ded",
+          "quote": "{\"speech\":\"아직 반쯤 남았어요. 이걸로 충분해요. 고마워요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-regression",
+      "caseId": "tea_yoon",
+      "repetition": 2,
+      "verdict": "candidate",
+      "reason": "차 권유에 답한 뒤 점등 준비를 덧붙이던 현상이 사라졌다. 후보의 윤은 최종 v4와 같은 프로필이다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "20abc1db-c955-4cc8-be4d-74557eb369e6",
+          "quote": "{\"speech\":\"아직 반쯤 남았어요. 이걸로 충분해요. 고마워요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "8070f7d6-9011-4811-bb7b-bb702df7489e",
+          "quote": "{\"speech\":\"아직 반쯤 남았어요. 고마워요. 이것만 마시고 불 켤 준비를 해야겠어요.\",\"action\":\"잔을 들어 차를 한 모금 마신다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-regression",
+      "caseId": "tea_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "15f912ab-4cdc-4328-821c-5e07e8e842ee",
+          "quote": "{\"speech\":\"아직 반 잔 남아 있어요. 더 안 주셔도 돼요. 고마워요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "e310d875-bc18-428a-a28c-b86c31211753",
+          "quote": "{\"speech\":\"고마워요. 아직 반쯤 남아서, 이걸 마저 마실게요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-regression",
+      "caseId": "tea_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "e561fa53-155e-4da4-aaf1-3e5cba60da77",
+          "quote": "{\"speech\":\"고마워요. 아직 반쯤 남아서, 이걸 마저 마실게요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "230a1a27-416f-4043-9661-187376306b54",
+          "quote": "{\"speech\":\"아직 반 잔 남았어요. 더 안 주셔도 돼요, 고마워요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "snack_yoon",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "5db5d604-38a7-41cd-8658-2e909f854878",
+          "quote": "{\"speech\":\"네, 하나 먹을게요. 고마워요.\",\"action\":\"내민 봉지에서 과자 하나를 집는다.\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "73a36bdd-abc2-4d6c-9520-c46d031d462b",
+          "quote": "{\"speech\":\"고마워요. 하나만 먹을게요.\",\"action\":\"내민 봉지에서 과자 하나를 집는다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "snack_yoon",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "d8ef0c8d-f5d0-411d-a07a-e12817063ab6",
+          "quote": "{\"speech\":\"고마워요. 하나만 먹을게요.\",\"action\":\"내민 봉지에서 과자 하나를 집는다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "40bc1718-1041-4561-a517-bdc6da9e12e0",
+          "quote": "{\"speech\":\"네, 하나 먹을게요. 고마워요.\",\"action\":\"봉지에서 과자 하나를 집는다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "breeze_yoon",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "17081ec9-ec94-46f1-9f65-9a1731c56adc",
+          "quote": "{\"speech\":\"안쪽으로 조금 들어와 쉬어요. 여기서는 차도 금방 식겠어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "b6f02281-dc17-42a4-ac08-bf82b6788a3d",
+          "quote": "{\"speech\":\"그러네요. 차가 식기 전에 마셔야겠어요.\",\"action\":\"찻잔을 들어 한 모금 마신다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "breeze_yoon",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "4ff2dcee-d7fe-46d4-a8f0-811e180c3291",
+          "quote": "{\"speech\":\"그러네요. 차가 아직 따뜻해서 다행이에요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "107558e9-8c5a-4290-827a-c9a6f859080b",
+          "quote": "{\"speech\":\"그러게요. 차가 식기 전에 마셔야겠어요.\",\"action\":\"찻잔을 입에 대고 한 모금 마신다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "duration_asked_yoon",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 필요한 사실 또는 불확실성을 답한다. 짧아진 길이만으로 우열을 매기지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "19259a7d-bb29-428b-9d23-cdf52e730c95",
+          "quote": "{\"speech\":\"아직 그렇게 말씀드릴 수는 없어요. 한 통이 남은 건 확인했지만, 정확한 양과 얼마나 타는지는 재 봐야 해요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "61bb6858-09c9-4de6-9ce1-04c0d83dd4ec",
+          "quote": "{\"speech\":\"아침까지 갈지는 아직 몰라요. 먼저 켜고 기름이 얼마나 줄어드는지 봐야 해요.\",\"action\":\"기름통을 열어 남은 양을 살피며 점등 준비를 시작한다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "duration_asked_yoon",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 필요한 사실 또는 불확실성을 답한다. 짧아진 길이만으로 우열을 매기지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "3e2491b9-ef6d-461b-9854-7a06011d8a78",
+          "quote": "{\"speech\":\"아침까지 갈지는 아직 몰라요. 먼저 불을 켜고 얼마나 쓰는지 봐야 해요.\",\"action\":\"남은 기름통을 열어 안의 양을 살핀다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "5c403d37-e6f5-414a-a73c-716d35d70d87",
+          "quote": "{\"speech\":\"아직 그렇게 보시면 안 돼요. 한 통 남은 건 확인했지만, 정확한 양과 얼마나 타는지는 재 보지 않았어요. 먼저 양부터 확인할게요.\",\"action\":\"남은 기름통을 열어 안을 살핀다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "false_consensus_yoon",
+      "repetition": 1,
+      "verdict": "candidate",
+      "reason": "합의하지 않았음을 바로잡고 묻지 않은 점등 계획을 덧붙이지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "be1c4ddb-8d11-4d7d-98af-eca33befc778",
+          "quote": "{\"speech\":\"잠깐만요. 저는 아직 동의하지 않았어요. 먼저 불을 켜고 기름이 얼마나 줄어드는지 보려고 해요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "9a3b0f8c-f229-4224-a279-a300c9c284a0",
+          "quote": "{\"speech\":\"잠깐만요. 일부 남기자는 제안만 나왔지, 저는 아직 동의하지 않았어요. 모두 동의했다고 적지는 마세요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "false_consensus_yoon",
+      "repetition": 2,
+      "verdict": "candidate",
+      "reason": "합의하지 않았음을 바로잡고 묻지 않은 점등 계획을 덧붙이지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "d1cd2bb4-34c0-4905-9c92-1b81d42f2988",
+          "quote": "{\"speech\":\"잠깐만요. 일부 남기자는 제안만 나왔지, 모두 동의한 건 아니에요. 저도 아직 동의하지 않았어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "19f84843-0dca-4eff-837f-09e1aebf390f",
+          "quote": "{\"speech\":\"잠깐만요. 저는 아직 동의하지 않았어요. 먼저 불을 켜고 기름이 얼마나 줄어드는지 보고 싶어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "urgent_oil_yoon",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 긴급한 기름통 대응을 선택한다. 환경 꺼짐의 행동 서술을 물리 결과 검증으로 해석하지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "c7ff351c-e907-4cab-8a5f-8a66a9a04556",
+          "quote": "{\"speech\":\"제가 잡을게요.\",\"action\":\"기울어지는 기름통을 두 손으로 붙잡아 바로 세운다.\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "e0e70966-ec45-4634-8f50-96e03bc9d479",
+          "quote": "{\"speech\":\"제가 잡을게요.\",\"action\":\"몸을 숙여 기울어지는 기름통을 두 손으로 붙들고 똑바로 세운다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "urgent_oil_yoon",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 긴급한 기름통 대응을 선택한다. 환경 꺼짐의 행동 서술을 물리 결과 검증으로 해석하지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "e62e7b48-f42c-49ed-a48b-d3d5cb1572c2",
+          "quote": "{\"speech\":\"제가 잡을게요.\",\"action\":\"기울어지는 기름통을 두 손으로 붙잡아 바로 세우고 바닥에 안정되게 놓는다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "6f307c8c-bd7b-4f53-81a1-2dec67d9eac8",
+          "quote": "{\"speech\":\"\",\"action\":\"기울어지는 기름통을 두 손으로 붙잡아 바로 세우고, 바닥에 안정되게 놓였는지 확인한다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "snack_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "1c2b7e90-df36-4f3d-a184-5eaab88e1795",
+          "quote": "{\"speech\":\"네, 고마워요. 차랑 같이 먹으면 좋겠어요.\",\"action\":\"봉지에서 과자 하나를 집는다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "37b10de3-bee3-47fc-b5b1-df4b31be994b",
+          "quote": "{\"speech\":\"네, 하나 먹을게요. 고마워요.\",\"action\":\"봉지에서 과자 하나를 꺼낸다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "snack_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "865d6e27-f5f5-4ce1-8079-b02cdaf52199",
+          "quote": "{\"speech\":\"네, 하나 먹을게요. 고마워요.\",\"action\":\"봉지에서 과자 하나를 집는다.\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "3635076f-cea5-4424-9317-d052faf5ed60",
+          "quote": "{\"speech\":\"고마워요. 하나 먹을게요.\",\"action\":\"봉지에서 과자 하나를 집는다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "breeze_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "b2706d55-e63d-4059-a4ed-ae534ff89058",
+          "quote": "{\"speech\":\"그러게요. 차가 식기 전에 마셔야겠어요.\",\"action\":\"찻잔을 입가로 가져가 한 모금 마신다.\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "c2389697-1d61-460f-b519-d4695f01e8be",
+          "quote": "{\"speech\":\"그러게요. 차가 아직 남아서 다행이에요.\",\"action\":\"찻잔을 두 손으로 감싸 쥔다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "breeze_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "b7162d6b-ddd1-4d48-af17-be58705ae7a2",
+          "quote": "{\"speech\":\"그러게요. 차가 더 식기 전에 마셔야겠어요.\",\"action\":\"찻잔을 두 손으로 감싸 쥐고 한 모금 마신다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "2cc12246-b04d-4cd1-9c7b-51f2dd4f4bdc",
+          "quote": "{\"speech\":\"그러게요. 차가 더 식기 전에 마셔야겠어요.\",\"action\":\"찻잔을 입가로 가져가 차를 한 모금 마신다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "duration_asked_miru",
+      "repetition": 1,
+      "verdict": "baseline",
+      "reason": "후보는 필요한 불확실성을 답하지만 질문하지 않은 오늘 밤 사용 찬성을 덧붙인다. v4를 만든 이유다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "b6114413-5b55-4be6-9c2c-78db9e0d52e2",
+          "quote": "{\"speech\":\"아직은 그렇게 볼 수 없어요. 기름 양과 얼마나 타는지 재지 않아서 아침까지 버틸지는 몰라요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "d028957d-876e-4038-bfbe-1633bccdf96f",
+          "quote": "{\"speech\":\"아침까지 버틸지는 아직 몰라요. 남은 양과 연소 시간을 재 보지 않았으니까요. 저도 우선 오늘 밤 쓰는 쪽에 동의해요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "duration_asked_miru",
+      "repetition": 2,
+      "verdict": "baseline",
+      "reason": "후보는 필요한 불확실성을 답하지만 질문하지 않은 오늘 밤 사용 찬성을 덧붙인다. v4를 만든 이유다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "9d774735-fb5e-4936-995d-a80de97f445a",
+          "quote": "{\"speech\":\"아직은 그렇게 볼 수 없어요. 기름의 양과 얼마나 타는지 확인하지 않았으니까요. 저도 우선 오늘 밤 쓰는 쪽에 찬성해요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "7c9c53eb-0e4f-4f1f-b7dc-d9351ff4c601",
+          "quote": "{\"speech\":\"아직은 그렇게 볼 수 없어요. 기름 양과 얼마나 오래 탈지를 재 보지 않아서요. 오늘 밤 쓰자는 말과 아침까지 버틴다는 건 달라요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "false_consensus_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "둘 다 성급한 합의 기록을 정정한다. 2회차 기존 답의 추가 확인 질문은 다소 반복적이다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "a6568b1f-a29a-42a9-8543-c7f9ffa7ddc7",
+          "quote": "{\"speech\":\"아직 모두 동의한 건 아니에요. 일부 남기자는 제안이 나온 데까지 적어 주세요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "a8de7828-f668-49f7-bec3-7a096746aada",
+          "quote": "{\"speech\":\"일부 남기자는 제안은 나왔지만, 모두 동의한다는 말은 아직 못 들었어요. 그 부분은 비워 두세요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "false_consensus_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "둘 다 성급한 합의 기록을 정정한다. 2회차 기존 답의 추가 확인 질문은 다소 반복적이다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "3d304d23-f61c-45ef-92c0-e7c3277f87f2",
+          "quote": "{\"speech\":\"일부 남기자는 제안은 나왔지만, 모두 동의했다는 말은 아직 못 들었어요. 그사이에 윤과 도하가 둘 다 동의한다고 했나요?\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "a71172f8-1573-48ca-a89e-8dad6109e5fd",
+          "quote": "{\"speech\":\"아직 모두 동의한 건 아니에요. 일부 남기자는 제안이 나온 데까지 적어 주세요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "urgent_oil_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 긴급한 기름통 대응을 선택한다. 환경 꺼짐의 행동 서술을 물리 결과 검증으로 해석하지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "4c5d974a-e325-4d5e-bc6a-6f0092080416",
+          "quote": "{\"speech\":\"\",\"action\":\"기름통 쪽으로 손을 뻗어 기울어진 통을 붙잡고 바로 세우려 한다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "d43f958e-57fe-492e-a2fc-687f82e47dac",
+          "quote": "{\"speech\":\"제가 잡을게요.\",\"action\":\"찻잔을 내려놓고 기울어지는 기름통에 손을 뻗어 받친다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v3-holdout",
+      "caseId": "urgent_oil_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 긴급한 기름통 대응을 선택한다. 환경 꺼짐의 행동 서술을 물리 결과 검증으로 해석하지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "b7778a3a-a012-4623-8cae-4dccb8ded186",
+          "quote": "{\"speech\":\"제가 잡을게요.\",\"action\":\"기울어지는 기름통에 손을 뻗어 붙잡고 똑바로 세우려 한다.\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "78103398-05fb-4c57-b6f2-a677be96fdde",
+          "quote": "{\"speech\":\"\",\"action\":\"기울어지는 기름통에 손을 뻗어 넘어지지 않도록 붙잡는다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "tea_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "aef7c30e-c723-45b9-a30c-ba8d345eeb45",
+          "quote": "{\"speech\":\"고마워요. 아직 반쯤 남아서 이걸 마저 마실게요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "a8194785-4be7-47ea-8e82-a579f731ff97",
+          "quote": "{\"speech\":\"고마워요. 아직 반쯤 남아서, 이걸 마저 마실게요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "tea_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "239aa1d2-a9e2-4746-a58a-4e4e38ca1b6a",
+          "quote": "{\"speech\":\"아직 반쯤 남아 있어요. 고마워요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "2e70ec5b-0540-49f7-bf09-2ca2eb3763b0",
+          "quote": "{\"speech\":\"아직 반쯤 남았어요. 마음만 받을게요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "shared_caveat_miru",
+      "repetition": 1,
+      "verdict": "candidate",
+      "reason": "자기 동의만 답하며 공유된 주의사항이나 기록 계획을 다시 말하지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "97de08a8-bdfa-497c-839b-d2e8dff4731c",
+          "quote": "{\"speech\":\"저도 오늘 밤 쓰는 데 동의해요. 오늘 밤 우선 쓰기로 했다고 적을게요. 불을 켰는지는 켠 뒤에 적고요.\",\"action\":\"수첩에 오늘 밤 기름 사용을 우선하기로 했다고 적는다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "40d4a920-5412-43bc-99f9-ae8fb67f4f85",
+          "quote": "{\"speech\":\"저도 오늘 밤 쓰는 쪽에 동의해요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "shared_caveat_miru",
+      "repetition": 2,
+      "verdict": "candidate",
+      "reason": "자기 동의만 답하며 공유된 주의사항이나 기록 계획을 다시 말하지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "c3de3eaa-bfc9-410d-97c4-9409e0f60c29",
+          "quote": "{\"speech\":\"저도 오늘 밤 쓰는 쪽에 동의해요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "2877faba-2dd3-45bf-8ec5-aee851fc5467",
+          "quote": "{\"speech\":\"저도 오늘 밤 쓰는 쪽에 동의해요. 아침까지 갈지는 모르는 채로, 우선 켜고 지켜보는 거네요.\",\"action\":\"수첩에 오늘 밤 기름 사용을 우선하기로 했다고 적는다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "opening_miru",
+      "repetition": 1,
+      "verdict": "candidate",
+      "reason": "선택을 논의하는 상황에서 아직 정해지지 않은 결론을 재질문하지 않고 본인의 선택을 말한다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "2d7024bf-bcf8-4c66-b0b9-8e0228ca339f",
+          "quote": "{\"speech\":\"저는 오늘 밤에 기름을 모두 쓰는 쪽이 좋겠어요. 지금 안개가 짙으니까요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "28f475ed-307d-4adc-93ce-dffa97c471fb",
+          "quote": "{\"speech\":\"남은 한 통을 오늘 밤 다 쓰자는 건가요, 내일 쓸 몫을 남기자는 건가요? 아직 어느 쪽으로 정했는지 못 들었어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "opening_miru",
+      "repetition": 2,
+      "verdict": "candidate",
+      "reason": "선택을 논의하는 상황에서 아직 정해지지 않은 결론을 재질문하지 않고 본인의 선택을 말한다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "63d1f627-4fb7-469d-99c7-58465c8af021",
+          "quote": "{\"speech\":\"오늘 밤 한 통을 다 쓰자는 건가요, 내일 쓸 몫을 남기자는 건가요? 어느 쪽으로 정했는지 아직 못 들었어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "ffb7b899-4aee-4feb-a00c-f267c8f3b84f",
+          "quote": "{\"speech\":\"저는 오늘 밤에 기름을 모두 쓰는 쪽이 좋겠어요. 지금 안개가 짙으니까요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "snack_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "d0db9f8c-6133-402d-a61c-7948b8ad8496",
+          "quote": "{\"speech\":\"네, 하나 먹을게요. 고마워요.\",\"action\":\"내민 봉지에서 과자 하나를 집는다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "671cdb78-b236-40b6-bc1d-c71e6786a650",
+          "quote": "{\"speech\":\"좋아요. 하나 먹을게요. 고마워요.\",\"action\":\"봉지에서 과자 하나를 집는다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "snack_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "bf3c6f1e-f1dd-46c9-867e-e452a855d1f0",
+          "quote": "{\"speech\":\"네, 하나 먹을게요. 고마워요.\",\"action\":\"봉지에서 과자 하나를 집는다.\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "2f3e9a9c-8728-4c30-b883-12669a77c6a0",
+          "quote": "{\"speech\":\"고마워요. 하나 먹을게요.\",\"action\":\"봉지에서 과자 하나를 집는다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "breeze_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "70271d17-f92f-4eab-8cfe-96926161bc1d",
+          "quote": "{\"speech\":\"그러게요. 찻잔을 쥐고 있으니 손은 좀 따뜻해요.\",\"action\":\"찻잔을 두 손으로 감싸 쥔다.\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "6d709f8a-9f05-4749-913e-f958e915f192",
+          "quote": "{\"speech\":\"그러게요. 차가 더 식기 전에 마셔야겠어요.\",\"action\":\"찻잔을 입가로 가져가 한 모금 마신다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "breeze_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "d4cd4372-99b6-46fa-ac37-107621b1f73d",
+          "quote": "{\"speech\":\"그러게요. 차가 식기 전에 마셔야겠어요.\",\"action\":\"찻잔을 들어 한 모금 마신다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "92f05e6a-b9d6-44b2-97c9-290fedbf5f70",
+          "quote": "{\"speech\":\"그러게요. 찻잔이 따뜻해서 다행이에요.\",\"action\":\"찻잔을 두 손으로 감싸 쥔다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "duration_asked_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "v2와 v4 모두 질문받은 지속 시간의 불확실성을 답한다. v3의 요청받지 않은 찬성은 v4 두 표본에서 사라졌다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "62e08211-b2f9-488b-9542-45fcf7b1ecbf",
+          "quote": "{\"speech\":\"아침까지 버틸지는 아직 몰라요. 도하 씨가 오늘 밤 쓰자고 한 건 맞지만, 얼마나 오래 켤 수 있는지는 확인되지 않았어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "eee5e695-5a67-4e92-b79c-375b91e30378",
+          "quote": "{\"speech\":\"아직은 그렇게 볼 수 없어요. 기름의 정확한 양과 얼마나 오래 타는지 확인하지 않았어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "duration_asked_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "v2와 v4 모두 질문받은 지속 시간의 불확실성을 답한다. v3의 요청받지 않은 찬성은 v4 두 표본에서 사라졌다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "63651dfb-e15e-4680-aea3-8a507e0a057a",
+          "quote": "{\"speech\":\"아직은 그렇게 볼 수 없어요. 기름의 정확한 양도, 얼마나 오래 타는지도 재지 않았어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "6384b300-7f1d-4d0e-80ff-8c80d8a29dfd",
+          "quote": "{\"speech\":\"아침까지 버틸지는 아직 몰라요. 도하 씨도 오늘 밤 쓰자고 했지, 아침까지 켤 수 있다고 한 건 아니에요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "false_consensus_miru",
+      "repetition": 1,
+      "verdict": "candidate",
+      "reason": "아직 제안뿐이라는 점을 직접 정정한다. 이미 같은 자리에 있었는데 다시 동의를 확인하라는 질문을 붙이지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "72cb35f8-dc70-4c2e-a37a-83a705c9eb02",
+          "quote": "{\"speech\":\"아직 모두 동의한 건 아니에요. 일부 남기자는 제안만 나왔어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "8d7327da-3c8b-43e7-a626-93c01ac7e5e5",
+          "quote": "{\"speech\":\"일부 남기자는 제안은 나왔지만, 모두 동의한다는 말은 아직 못 들었어요. 윤과 도하도 동의한 건가요?\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "false_consensus_miru",
+      "repetition": 2,
+      "verdict": "candidate",
+      "reason": "아직 제안뿐이라는 점을 직접 정정한다. 이미 같은 자리에 있었는데 다시 동의를 확인하라는 질문을 붙이지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "fd632ee1-6e7a-4015-b18c-2f09c627f8cd",
+          "quote": "{\"speech\":\"일부 남기자는 제안은 나왔지만, 모두 동의한다는 말은 아직 못 들었어요. 동의는 확인하셨어요?\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "498e234d-3524-4543-b9ca-c82b40ce17ac",
+          "quote": "{\"speech\":\"아직 제안만 나왔지, 모두 동의한 건 아니에요. 그렇게 적기엔 일러요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "urgent_oil_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 긴급한 기름통 대응을 선택한다. 환경 꺼짐의 행동 서술을 물리 결과 검증으로 해석하지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "a0edf67a-a272-4be3-b7d9-54d744f26f71",
+          "quote": "{\"speech\":\"\",\"action\":\"기울어지는 기름통 쪽으로 몸을 숙여 두 손으로 통을 붙잡는다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "94f35650-f35e-4046-8342-c5766e8a1531",
+          "quote": "{\"speech\":\"\",\"action\":\"찻잔을 내려놓고 기울어지는 기름통을 양손으로 붙잡아 세우려 한다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "urgent_oil_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 긴급한 기름통 대응을 선택한다. 환경 꺼짐의 행동 서술을 물리 결과 검증으로 해석하지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "61fa10b6-d004-455f-9032-b4259897b468",
+          "quote": "{\"speech\":\"\",\"action\":\"찻잔을 내려놓고 기울어지는 기름통을 두 손으로 붙잡아 바로 세우려 한다.\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "e06a94ac-77d2-4a77-a32b-cea2d0fba2ad",
+          "quote": "{\"speech\":\"\",\"action\":\"기울어지는 기름통 쪽으로 몸을 숙여 두 손으로 통을 붙잡는다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "previous_opening_miru",
+      "repetition": 1,
+      "verdict": "candidate",
+      "reason": "이전 문제 입력에서도 기록할 결론을 기다리기보다 자신의 의견을 낸다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "ef840b0c-2f16-4101-a77d-726446cb26d9",
+          "quote": "{\"speech\":\"저는 오늘 밤에 모두 쓰는 쪽이 좋아요. 지금 안개가 이렇게 짙으니까요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "0986109d-4982-4e6f-a768-cc9602ca8ea1",
+          "quote": "{\"speech\":\"오늘 밤에 기름을 모두 쓰자는 건가요, 내일 쓸 몫을 남기자는 건가요? 아직 어느 쪽으로 정했는지 못 들었어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "previous_opening_miru",
+      "repetition": 2,
+      "verdict": "candidate",
+      "reason": "이전 문제 입력에서도 기록할 결론을 기다리기보다 자신의 의견을 낸다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "c1635a05-3ca7-4275-944b-b8841ede4ae4",
+          "quote": "{\"speech\":\"기름을 나눠 쓰자는 건, 오늘 밤에는 얼마나 쓰자는 뜻이에요?\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "b4472037-4033-4ba8-9da5-e7e30e37e867",
+          "quote": "{\"speech\":\"저는 오늘 밤에 기름을 모두 쓰는 쪽이 좋겠어요. 지금 안개가 이렇게 짙으니까요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "previous_tea_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "e93094d9-9285-4b58-95ae-fb10b7c21cf8",
+          "quote": "{\"speech\":\"고마워요. 아직 반쯤 남아서, 이것부터 마실게요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "040a4798-2e1e-4085-9b38-af2d942290eb",
+          "quote": "{\"speech\":\"아직 반쯤 남았어요. 고마워요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-followup",
+      "caseId": "previous_tea_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "0c0d7afd-1168-4848-b021-820c5fa24fad",
+          "quote": "{\"speech\":\"아직 반쯤 남았어요. 마음만 받을게요, 고마워요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "ac8b9743-c2e0-419c-a3b2-af9b4bf72d4a",
+          "quote": "{\"speech\":\"고마워요. 아직 반쯤 남아서 더 안 주셔도 돼요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "oil_count_yoon",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 필요한 사실 또는 불확실성을 답한다. 짧아진 길이만으로 우열을 매기지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "42cd7df5-c975-4875-b249-0e9dd65026e8",
+          "quote": "{\"speech\":\"한 통 남아 있어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "734d4c05-da7e-4f17-9e16-b7a5dc104eab",
+          "quote": "{\"speech\":\"한 통 남아 있어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "oil_count_yoon",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 필요한 사실 또는 불확실성을 답한다. 짧아진 길이만으로 우열을 매기지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "4875ed19-4ae0-4f84-a8c1-d6bc546ae121",
+          "quote": "{\"speech\":\"한 통 남았어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "0731c4c1-3739-48cc-9c1b-f1d3ddf1acdb",
+          "quote": "{\"speech\":\"한 통 남아 있어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "thanks_yoon",
+      "repetition": 1,
+      "verdict": "candidate",
+      "reason": "감사 인사에 답한 뒤 자리에서 일어나 점등 준비를 하겠다는 덧말이 사라졌다. v4 동결 후 만든 새 사례다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "1e558515-aa1e-4bf9-9aca-7d9549bdd758",
+          "quote": "{\"speech\":\"별일 아니에요. 차는 천천히 드세요. 저는 점등 준비하러 가 봐야겠어요.\",\"action\":\"찻잔을 탁자에 내려놓고 자리에서 일어난다.\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "75b526fb-8c9d-4218-9a22-1758e1b0a661",
+          "quote": "{\"speech\":\"천만에요. 편히 쉬세요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "thanks_yoon",
+      "repetition": 2,
+      "verdict": "candidate",
+      "reason": "감사 인사에 답한 뒤 자리에서 일어나 점등 준비를 하겠다는 덧말이 사라졌다. v4 동결 후 만든 새 사례다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "fff9727b-8981-4643-8109-5aafbed907c4",
+          "quote": "{\"speech\":\"별일 아니에요. 편히 쉬세요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "3545af47-fe76-4020-b8b8-096a2a683a49",
+          "quote": "{\"speech\":\"별일 아니에요. 차는 조금 더 드세요. 저는 점등 준비를 하러 가야겠어요.\",\"action\":\"찻잔을 탁자에 내려놓고 자리에서 일어난다.\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "recorded_status_yoon",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 필요한 사실 또는 불확실성을 답한다. 짧아진 길이만으로 우열을 매기지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "2f2f3af7-77f7-4447-a670-5726987e5d42",
+          "quote": "{\"speech\":\"네. 오늘 밤 기름 사용을 우선하기로 한 방침만 적었어요. 아직 불은 붙이지 않았어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "11b6680c-3411-475c-b742-8f5e5e7f281a",
+          "quote": "{\"speech\":\"네. 오늘 밤 기름을 우선 쓰기로 한 방침만 적었어요. 불은 아직 안 붙였어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "recorded_status_yoon",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 필요한 사실 또는 불확실성을 답한다. 짧아진 길이만으로 우열을 매기지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "40180606-9e50-4161-9b2a-54436c396a2e",
+          "quote": "{\"speech\":\"네. 오늘 밤 기름을 쓰기로 한 방침만 적었어요. 불은 아직 안 붙였어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "b45eedc7-a272-43a1-a1f6-07575ec448fc",
+          "quote": "{\"speech\":\"네. 오늘 밤 기름 사용을 우선하기로 한 방침만 적었어요. 아직 불은 붙이지 않았어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "oil_count_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 필요한 사실 또는 불확실성을 답한다. 짧아진 길이만으로 우열을 매기지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "9870ca27-1e41-4ee8-86df-9c2f9b899e9e",
+          "quote": "{\"speech\":\"한 통 남았다고 했어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "e4b21d7d-da56-470e-be60-a36053e2a123",
+          "quote": "{\"speech\":\"한 통 남았어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "oil_count_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 필요한 사실 또는 불확실성을 답한다. 짧아진 길이만으로 우열을 매기지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "25829fe8-9b47-4798-a328-c0d424a16fe4",
+          "quote": "{\"speech\":\"한 통 남아 있다고 했어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "c774d895-8816-461f-b4c1-9f40af52dcc7",
+          "quote": "{\"speech\":\"한 통 남았다고 했어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "thanks_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "d949f7d9-8556-4861-a91c-17eb2a214018",
+          "quote": "{\"speech\":\"별말씀을요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "104d9505-2537-47f4-b866-c15ae93a9e0e",
+          "quote": "{\"speech\":\"천만에요. 차 마시면서 좀 쉬어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "thanks_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 장면에 맞는 대꾸다. 표현 차이는 있으나 자연스러움이나 인물 식별 개선을 입증할 정도는 아니다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "7fb3401a-eb7b-43b0-ac69-e7dc85b8147d",
+          "quote": "{\"speech\":\"별말씀을요. 차 마시며 잠깐 쉬어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "99a97616-ec16-47cf-8d6c-ab90ec9ac555",
+          "quote": "{\"speech\":\"아니에요. 편히 쉬세요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "recorded_status_miru",
+      "repetition": 1,
+      "verdict": "tie",
+      "reason": "두 조건 모두 필요한 사실 또는 불확실성을 답한다. 짧아진 길이만으로 우열을 매기지 않는다.",
+      "evidence": [
+        {
+          "condition": "baseline",
+          "clientMessageId": "cff32409-4353-460d-be2f-3ff0ee5bdc26",
+          "quote": "{\"speech\":\"네, 오늘 밤 기름 사용을 우선하기로 셋이 동의했다고만 적었어요. 등불에는 아직 불을 붙이지 않았어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "candidate",
+          "clientMessageId": "c023e945-2443-41f7-adf6-274803c58841",
+          "quote": "{\"speech\":\"네, 오늘 밤 기름 사용을 우선하기로 했다는 방침만 적었어요. 불이 켜졌다고는 적지 않았어요.\",\"action\":\"\"}"
+        }
+      ]
+    },
+    {
+      "experiment": "v4-transfer",
+      "caseId": "recorded_status_miru",
+      "repetition": 2,
+      "verdict": "tie",
+      "reason": "두 조건 모두 필요한 사실 또는 불확실성을 답한다. 짧아진 길이만으로 우열을 매기지 않는다.",
+      "evidence": [
+        {
+          "condition": "candidate",
+          "clientMessageId": "c0252429-7a58-4b47-b89c-2856b758efdf",
+          "quote": "{\"speech\":\"네, 오늘 밤 기름 사용을 우선한다는 방침만 적었어요. 불이 켜졌다고는 적지 않았어요.\",\"action\":\"\"}"
+        },
+        {
+          "condition": "baseline",
+          "clientMessageId": "25116a1a-9615-449f-ad77-963aee7c3c5f",
+          "quote": "{\"speech\":\"네, 오늘 밤 기름 사용을 우선하기로 했다는 것만 적었어요. 불은 아직 붙이지 않았어요.\",\"action\":\"\"}"
+        }
+      ]
+    }
+  ]
+}

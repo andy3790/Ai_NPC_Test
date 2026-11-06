@@ -1,0 +1,985 @@
+{
+  "version": "harbor-refinement-review/1",
+  "date": "2026-11-07",
+  "sourceBaseCommit": "37530adbfb291f17a3f8620a19eb62f2bd307f9e",
+  "reviewer": "Non-independent agent review; not human evaluation",
+  "decision": "Adopt harbor-profile/4. Keep personality, facts, Doha, NPC /5, director /4 and model settings. Preserve intermediate profile /3 and its unsolicited-assent regression. Short greetings still sound similar; Doha still reintroduces work in breaks.",
+  "totals": {
+    "calls": 462,
+    "estimatedUsd": 0.838077925,
+    "unpricedCalls": 0
+  },
+  "experiments": [
+    {
+      "id": "v3-development",
+      "kind": "fixed",
+      "source": ".cache/dialogue-eval/2026-11-06T22-04-22-222Z-development-9944f2e3",
+      "model": "gpt-6.1-sol",
+      "calls": 24,
+      "estimatedUsd": 0.0665902
+    },
+    {
+      "id": "v3-regression",
+      "kind": "fixed",
+      "source": ".cache/dialogue-eval/2026-11-06T22-05-53-552Z-all-6d588538",
+      "model": "gpt-6.1-sol",
+      "calls": 12,
+      "estimatedUsd": 0.0323132
+    },
+    {
+      "id": "v3-holdout",
+      "kind": "fixed",
+      "source": ".cache/dialogue-eval/2026-11-06T22-06-23-640Z-holdout-1bb9e6d5",
+      "model": "gpt-6.1-sol",
+      "calls": 40,
+      "estimatedUsd": 0.1100644
+    },
+    {
+      "id": "v4-followup",
+      "kind": "fixed",
+      "source": ".cache/dialogue-eval/2026-11-06T22-10-48-037Z-all-1b3a5ba2",
+      "model": "gpt-6.1-sol",
+      "calls": 40,
+      "estimatedUsd": 0.06874519999999998
+    },
+    {
+      "id": "v4-transfer",
+      "kind": "fixed",
+      "source": ".cache/dialogue-eval/2026-11-06T22-10-46-947Z-holdout-7c40af73",
+      "model": "gpt-6.1-sol",
+      "calls": 24,
+      "estimatedUsd": 0.06243329999999999
+    },
+    {
+      "id": "v3-lighthouse",
+      "kind": "conversation",
+      "scene": "lighthouse",
+      "source": ".cache/harbor-live/2026-11-06T22-04-24-548Z",
+      "model": "gpt-6.1-sol",
+      "calls": 70,
+      "estimatedUsd": 0.170694775,
+      "runs": [
+        {
+          "part": "profile2-run1",
+          "runId": "e0f13c6f-884c-4d22-a4df-2da3ee92b3f7",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        },
+        {
+          "part": "profile2-run2",
+          "runId": "e16beba9-34ba-41b9-847d-2d06bfb75563",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        },
+        {
+          "part": "profile3-run1",
+          "runId": "87e41464-072e-407b-ac84-198aa793ce5f",
+          "profile": "harbor-profile/3",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        },
+        {
+          "part": "profile3-run2",
+          "runId": "b77075aa-621b-49b3-89d2-6e472e3e92a1",
+          "profile": "harbor-profile/3",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 19,
+          "speechCount": 10,
+          "languageFlags": []
+        }
+      ]
+    },
+    {
+      "id": "v3-break",
+      "kind": "conversation",
+      "scene": "break",
+      "source": ".cache/harbor-live/2026-11-06T22-07-59-877Z",
+      "model": "gpt-6.1-sol",
+      "calls": 92,
+      "estimatedUsd": 0.09648192500000001,
+      "runs": [
+        {
+          "part": "profile2-run1",
+          "runId": "a97b5b51-6721-4de0-9244-4d9af3523cf4",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "utterance_limit",
+          "calls": 23,
+          "speechCount": 12,
+          "languageFlags": []
+        },
+        {
+          "part": "profile2-run2",
+          "runId": "be8c99a0-1182-4366-aca0-001feb68a94f",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "utterance_limit",
+          "calls": 23,
+          "speechCount": 12,
+          "languageFlags": []
+        },
+        {
+          "part": "profile3-run1",
+          "runId": "ab19d27c-be6d-41b1-8442-7e4e4142a3ad",
+          "profile": "harbor-profile/3",
+          "status": "completed",
+          "completionReason": "utterance_limit",
+          "calls": 23,
+          "speechCount": 12,
+          "languageFlags": []
+        },
+        {
+          "part": "profile3-run2",
+          "runId": "0769d141-ece0-4b64-8ede-d21790aaf6fa",
+          "profile": "harbor-profile/3",
+          "status": "completed",
+          "completionReason": "utterance_limit",
+          "calls": 23,
+          "speechCount": 12,
+          "languageFlags": []
+        }
+      ]
+    },
+    {
+      "id": "v4-lighthouse",
+      "kind": "conversation",
+      "scene": "lighthouse",
+      "source": ".cache/harbor-live/2026-11-06T22-10-47-330Z",
+      "model": "gpt-6.1-sol",
+      "calls": 68,
+      "estimatedUsd": 0.154372975,
+      "runs": [
+        {
+          "part": "profile2-run1",
+          "runId": "dbb40702-c255-44eb-8992-cb85ed2bb89f",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        },
+        {
+          "part": "profile2-run2",
+          "runId": "e4c002dd-ac81-4115-9ee3-053b2cccf280",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        },
+        {
+          "part": "profile4-run1",
+          "runId": "c3055dc1-1219-48a4-b5fd-b233695affe6",
+          "profile": "harbor-profile/4",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        },
+        {
+          "part": "profile4-run2",
+          "runId": "3691565c-37ef-4b69-9b11-1191798f5e88",
+          "profile": "harbor-profile/4",
+          "status": "completed",
+          "completionReason": "goals_achieved",
+          "calls": 17,
+          "speechCount": 9,
+          "languageFlags": []
+        }
+      ]
+    },
+    {
+      "id": "v4-break",
+      "kind": "conversation",
+      "scene": "break",
+      "source": ".cache/harbor-live/2026-11-06T22-15-06-558Z",
+      "model": "gpt-6.1-sol",
+      "calls": 92,
+      "estimatedUsd": 0.07638195,
+      "runs": [
+        {
+          "part": "profile2-run1",
+          "runId": "c6f59900-caee-4029-a104-fded3f643bcb",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "utterance_limit",
+          "calls": 23,
+          "speechCount": 12,
+          "languageFlags": []
+        },
+        {
+          "part": "profile2-run2",
+          "runId": "0ed2e01e-c8c5-4c2f-a350-1a7227546c50",
+          "profile": "harbor-profile/2",
+          "status": "completed",
+          "completionReason": "utterance_limit",
+          "calls": 23,
+          "speechCount": 12,
+          "languageFlags": []
+        },
+        {
+          "part": "profile4-run1",
+          "runId": "98c17a00-693a-4e9a-ad58-4efe357dd864",
+          "profile": "harbor-profile/4",
+          "status": "completed",
+          "completionReason": "utterance_limit",
+          "calls": 23,
+          "speechCount": 12,
+          "languageFlags": []
+        },
+        {
+          "part": "profile4-run2",
+          "runId": "57c81cae-5c8e-4299-8968-01270422ffe0",
+          "profile": "harbor-profile/4",
+          "status": "completed",
+          "completionReason": "utterance_limit",
+          "calls": 23,
+          "speechCount": 12,
+          "languageFlags": []
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "comparison.md",
+      "sha256": "3769e7b4086d5d3dd6243629754ed26e26ec808a517c669e610e2fac4a95ce59",
+      "bytes": 14078
+    },
+    {
+      "path": "judgments.json",
+      "sha256": "f3b1ed47d40f9c269e7dd78c68f33c52a3885af2181c310f7b51dba155a03399",
+      "bytes": 62217
+    },
+    {
+      "path": "profile-policies.json",
+      "sha256": "1815edc872b7ed2117bebb4a149fb001b6efb0aa8bec189a66320ae09170a533",
+      "bytes": 11037
+    },
+    {
+      "path": "report.md",
+      "sha256": "8fb43bb748000008b0b26f51247bc3a2059fc0340d0c25ae6a171c0e4a7eac11",
+      "bytes": 12171
+    },
+    {
+      "path": "v3-break/configs.json",
+      "sha256": "b37e25a77aad63d780bfe63223f3a6ec2756afd9a37a7e04cde201d71ffb5f70",
+      "bytes": 18093
+    },
+    {
+      "path": "v3-break/plan.json",
+      "sha256": "ad5fcad4e66fa7fa32563e3a9e1770f8ca93c1998f22d7762d9a2c938156a0ad",
+      "bytes": 560
+    },
+    {
+      "path": "v3-break/profile2-run1/api-requests.jsonl",
+      "sha256": "2b4e6c5ccb05c55b8afc3776bee3ad56a65259b5b78aea5eb2eadd52fdc02ea6",
+      "bytes": 167232
+    },
+    {
+      "path": "v3-break/profile2-run1/calls.jsonl",
+      "sha256": "10413ac7c66c470be7b25722dc7b6163a161a976fddd7ec6b145a50f3cb1c12d",
+      "bytes": 77547
+    },
+    {
+      "path": "v3-break/profile2-run1/instructions.json",
+      "sha256": "00daceb70703f8942e71137d651ebd90afef6ad647050309b4391b8b42e0dc1d",
+      "bytes": 25550
+    },
+    {
+      "path": "v3-break/profile2-run1/transcript.md",
+      "sha256": "972685566458b69e735e2f18d21e5554d9fb88a4c2383ec9aa9150664eae6c21",
+      "bytes": 1566
+    },
+    {
+      "path": "v3-break/profile2-run1/utterances.jsonl",
+      "sha256": "713b1bed31ce88d8ac987b00c5fb569eefe481396c51a605d7b2991e0cc29501",
+      "bytes": 5844
+    },
+    {
+      "path": "v3-break/profile2-run2/api-requests.jsonl",
+      "sha256": "afbc34c2a376a37c0023345b9055d0776708db4caa149639121844c25ef7b772",
+      "bytes": 167368
+    },
+    {
+      "path": "v3-break/profile2-run2/calls.jsonl",
+      "sha256": "9210f0ccd64675cd5186563d10734540d13a06fd0695baa45b5be0282839c5e7",
+      "bytes": 77969
+    },
+    {
+      "path": "v3-break/profile2-run2/instructions.json",
+      "sha256": "00daceb70703f8942e71137d651ebd90afef6ad647050309b4391b8b42e0dc1d",
+      "bytes": 25550
+    },
+    {
+      "path": "v3-break/profile2-run2/transcript.md",
+      "sha256": "237c6302b2617f43eb2b25ece054cd7d7225d8d842ed11d7f520afd94b1fd0f9",
+      "bytes": 1663
+    },
+    {
+      "path": "v3-break/profile2-run2/utterances.jsonl",
+      "sha256": "312512cee87fd615e65e429789b8f70ac6e29cc2eabda84d52374d7731deb614",
+      "bytes": 5941
+    },
+    {
+      "path": "v3-break/profile3-run1/api-requests.jsonl",
+      "sha256": "60dd8535f858ca210ac969443396add3f20f20f33428bcdd6bf75277ff941950",
+      "bytes": 169551
+    },
+    {
+      "path": "v3-break/profile3-run1/calls.jsonl",
+      "sha256": "fd98d3d1ed6273de12d13b62b0527f78202f316567bdf1d992de313a023c025d",
+      "bytes": 77985
+    },
+    {
+      "path": "v3-break/profile3-run1/instructions.json",
+      "sha256": "e608a74025efc480fad1938b4df8641d26ca7bd9d1748dc0d19fed6b3365a201",
+      "bytes": 26166
+    },
+    {
+      "path": "v3-break/profile3-run1/transcript.md",
+      "sha256": "ed9328a73c35ac8487d87171723d4201feab3b1eee72b313b7a12b4860d87355",
+      "bytes": 1636
+    },
+    {
+      "path": "v3-break/profile3-run1/utterances.jsonl",
+      "sha256": "257dbe031c8a092c4a22b679c7932498d852a3e9727825c1430e7fb2f7f8cf07",
+      "bytes": 5904
+    },
+    {
+      "path": "v3-break/profile3-run2/api-requests.jsonl",
+      "sha256": "c78dff0461fb7934407c224166a719ae5222fa7df2ff177d6ccb2229f75ebbe0",
+      "bytes": 169623
+    },
+    {
+      "path": "v3-break/profile3-run2/calls.jsonl",
+      "sha256": "7af2b1dd773cf7afc11530c965c5b5d377963708dae42e7c4c2050d65c5d2cc3",
+      "bytes": 77866
+    },
+    {
+      "path": "v3-break/profile3-run2/instructions.json",
+      "sha256": "e608a74025efc480fad1938b4df8641d26ca7bd9d1748dc0d19fed6b3365a201",
+      "bytes": 26166
+    },
+    {
+      "path": "v3-break/profile3-run2/transcript.md",
+      "sha256": "bc231edfa81c9ba94c0cd3ad06343a1a5b9988a80e46ac0e14c421acaf3950dc",
+      "bytes": 1675
+    },
+    {
+      "path": "v3-break/profile3-run2/utterances.jsonl",
+      "sha256": "cd7ba756a2b7d66aee7d648824ec13980656d1f9fcc3978a2b7b6cbac1292e87",
+      "bytes": 5938
+    },
+    {
+      "path": "v3-break/profiles.json",
+      "sha256": "e9cc2d040ce04660de0e19f986c2fb2395be79957b2d8fed6feba4917732f666",
+      "bytes": 9357
+    },
+    {
+      "path": "v3-break/result.json",
+      "sha256": "70262059c5f1ece9ded7f7ef6961c15592eada137320ec3025c7aa9790cf6da1",
+      "bytes": 26894
+    },
+    {
+      "path": "v3-break/runner.snapshot.txt",
+      "sha256": "909e8378ad56ce72c9c6e0c13f497eadae15345ba63e03a4f774df51bbe108e8",
+      "bytes": 6727
+    },
+    {
+      "path": "v3-development/api-requests.jsonl",
+      "sha256": "7d9ee79492bcbb3d357c58dcb9d421e4852e1048d70a155681cdc34f3e1ee9ac",
+      "bytes": 231512
+    },
+    {
+      "path": "v3-development/candidate-cases.json",
+      "sha256": "f64dcac27146d17cd42ec3b3a6c1783258575c7df4926b5a2af112ae449650de",
+      "bytes": 144105
+    },
+    {
+      "path": "v3-development/cases.json",
+      "sha256": "4d36a10e9fd8b995dc9493caa714bffe05aae0b090ac056e6782efe59571c9a1",
+      "bytes": 139177
+    },
+    {
+      "path": "v3-development/manifest.json",
+      "sha256": "8a8d76eb1a119334894a6b0ef3244667ac66ae2344e89d738f2bd6a4a527c999",
+      "bytes": 6124
+    },
+    {
+      "path": "v3-development/plan.json",
+      "sha256": "88ff8267552a1381d7b168e605aa4e7600bbc6daa506dd5b694c2d46e3a4d851",
+      "bytes": 973
+    },
+    {
+      "path": "v3-development/policies.json",
+      "sha256": "cdfcf75725f6e035cbc66182bb6318b032c7315b5c312c2ff624211a19607338",
+      "bytes": 41680
+    },
+    {
+      "path": "v3-development/requests.jsonl",
+      "sha256": "52c083888cd88bb9bd26a6549d9811bc36003abda6e60497f4ad3261ed93c557",
+      "bytes": 230688
+    },
+    {
+      "path": "v3-development/samples.jsonl",
+      "sha256": "58a10a7c96686757e8e5063ef4d922a7ef00918277436e6184bf7a4db5492302",
+      "bytes": 19009
+    },
+    {
+      "path": "v3-holdout/api-requests.jsonl",
+      "sha256": "eef4a4b434b6db6e1342b8571057a19c2b1f7cdbc8269b632d647ffa2177ddf4",
+      "bytes": 387516
+    },
+    {
+      "path": "v3-holdout/candidate-cases.json",
+      "sha256": "f64dcac27146d17cd42ec3b3a6c1783258575c7df4926b5a2af112ae449650de",
+      "bytes": 144105
+    },
+    {
+      "path": "v3-holdout/cases.json",
+      "sha256": "4d36a10e9fd8b995dc9493caa714bffe05aae0b090ac056e6782efe59571c9a1",
+      "bytes": 139177
+    },
+    {
+      "path": "v3-holdout/manifest.json",
+      "sha256": "0888c75ad3d9625ad466de2d7a713875d54c3ec77909295cf05a1f9bdbedf290",
+      "bytes": 9544
+    },
+    {
+      "path": "v3-holdout/plan.json",
+      "sha256": "6a02e9b1ddbde28520a87c66d92dfa7d1a756e52bc8a6f575f948263a7fda445",
+      "bytes": 969
+    },
+    {
+      "path": "v3-holdout/policies.json",
+      "sha256": "cdfcf75725f6e035cbc66182bb6318b032c7315b5c312c2ff624211a19607338",
+      "bytes": 41680
+    },
+    {
+      "path": "v3-holdout/requests.jsonl",
+      "sha256": "b6f1b855836b1fbb3f9aaab11a2c59357af6101e4b198d2b3381590b7491afbe",
+      "bytes": 386236
+    },
+    {
+      "path": "v3-holdout/samples.jsonl",
+      "sha256": "5926d0d850097ef1fd68d55962ebf1bcf1117560ff326eba6791135e4d173b4c",
+      "bytes": 31478
+    },
+    {
+      "path": "v3-lighthouse/configs.json",
+      "sha256": "5735ad80e041fab57a7b883c3d7ae83ed34d2a9e7fb8657eabbbfadb700246f1",
+      "bytes": 35623
+    },
+    {
+      "path": "v3-lighthouse/plan.json",
+      "sha256": "0fb8476a913bd6d4efeec3387772e1a26c8a6b080905c5ddf4bec0ec6bacc7aa",
+      "bytes": 507
+    },
+    {
+      "path": "v3-lighthouse/profile2-run1/api-requests.jsonl",
+      "sha256": "e1de53b4cba545225f1b2f6bc8dcde510e54f18da0e942b6e576edb294522dc3",
+      "bytes": 210426
+    },
+    {
+      "path": "v3-lighthouse/profile2-run1/calls.jsonl",
+      "sha256": "f9456a3598c396fb1cbece89f1319dd2c53815e4124200772a93c70bd071b056",
+      "bytes": 95995
+    },
+    {
+      "path": "v3-lighthouse/profile2-run1/instructions.json",
+      "sha256": "0ed60d16c19af98a291cc674d7e6b8cf1e1ba758195da578ed8171e8389e815b",
+      "bytes": 41564
+    },
+    {
+      "path": "v3-lighthouse/profile2-run1/transcript.md",
+      "sha256": "ce03ecf06c33187811e5966b85d35d29ecc2aec5affc6d6f36f56c50a7feaecc",
+      "bytes": 2878
+    },
+    {
+      "path": "v3-lighthouse/profile2-run1/utterances.jsonl",
+      "sha256": "fc477909c58bb75d2417935d17fac4b7830974ccfe59c19f7d6ae01bf00834e6",
+      "bytes": 12321
+    },
+    {
+      "path": "v3-lighthouse/profile2-run2/api-requests.jsonl",
+      "sha256": "5cc3a91c2d4fb25fa6460f61ca5a91b73f388afc39a01f7999538ae6332fbd40",
+      "bytes": 210824
+    },
+    {
+      "path": "v3-lighthouse/profile2-run2/calls.jsonl",
+      "sha256": "55e7b9e4dcacbe23f574bc1ee31d0ebdbae886bb3e86403d42990729e3bde589",
+      "bytes": 96677
+    },
+    {
+      "path": "v3-lighthouse/profile2-run2/instructions.json",
+      "sha256": "0ed60d16c19af98a291cc674d7e6b8cf1e1ba758195da578ed8171e8389e815b",
+      "bytes": 41564
+    },
+    {
+      "path": "v3-lighthouse/profile2-run2/transcript.md",
+      "sha256": "aa2ef9854e03ad6be80a1a55d7eadc9410fc20bab0fb0f9d97677bab47890701",
+      "bytes": 2960
+    },
+    {
+      "path": "v3-lighthouse/profile2-run2/utterances.jsonl",
+      "sha256": "9d78e26a7db8009e62dad1b8747543fd0db5afc9034198d63b0c03aa9c572b8a",
+      "bytes": 12403
+    },
+    {
+      "path": "v3-lighthouse/profile3-run1/api-requests.jsonl",
+      "sha256": "b2f090e4d1229a6200b833320df0c282459a3262298e8f0c5c8fc5ae97e69fbe",
+      "bytes": 212132
+    },
+    {
+      "path": "v3-lighthouse/profile3-run1/calls.jsonl",
+      "sha256": "5bc5d2430b97901da10fde9c4d504b8bdfb3a66f5716d53fa3e7d7c5f933c95c",
+      "bytes": 96274
+    },
+    {
+      "path": "v3-lighthouse/profile3-run1/instructions.json",
+      "sha256": "8a469d3d9f6c24098c601ff19bd767d499403526ba1be413f11f91ea802eb802",
+      "bytes": 42180
+    },
+    {
+      "path": "v3-lighthouse/profile3-run1/transcript.md",
+      "sha256": "5c968de4fe5b27482cef0b45756e8a84b14d371887319d22c25931c1823c6981",
+      "bytes": 2921
+    },
+    {
+      "path": "v3-lighthouse/profile3-run1/utterances.jsonl",
+      "sha256": "cd0019f0ac16a165de763afe5ed679eeb7d446b46bb555bed9d376c175b8f9cd",
+      "bytes": 12367
+    },
+    {
+      "path": "v3-lighthouse/profile3-run2/api-requests.jsonl",
+      "sha256": "93ed981d97104dcc3bb7ec5ac41bda42d03cc75a6d72e7517999dc948dc0154c",
+      "bytes": 235191
+    },
+    {
+      "path": "v3-lighthouse/profile3-run2/calls.jsonl",
+      "sha256": "35374793f3b919b1062703430994c2025ce6af8c57cd44a3b00369df22085681",
+      "bytes": 105820
+    },
+    {
+      "path": "v3-lighthouse/profile3-run2/instructions.json",
+      "sha256": "8a469d3d9f6c24098c601ff19bd767d499403526ba1be413f11f91ea802eb802",
+      "bytes": 42180
+    },
+    {
+      "path": "v3-lighthouse/profile3-run2/transcript.md",
+      "sha256": "34e64e24d33614d32c199d2401a0f8afc6f79b3064988cb9706c00e7f489217e",
+      "bytes": 2847
+    },
+    {
+      "path": "v3-lighthouse/profile3-run2/utterances.jsonl",
+      "sha256": "49ac61acd1e433e0d1ad0c8cef2ada66bc2f5e98cfd5f4e0efbfeefd8e9fea6e",
+      "bytes": 12678
+    },
+    {
+      "path": "v3-lighthouse/profiles.json",
+      "sha256": "e9cc2d040ce04660de0e19f986c2fb2395be79957b2d8fed6feba4917732f666",
+      "bytes": 9357
+    },
+    {
+      "path": "v3-lighthouse/result.json",
+      "sha256": "a8707bfd9bc199227856cabb74f3e4e221fc2db75223b730d910d1d25b17c53a",
+      "bytes": 36485
+    },
+    {
+      "path": "v3-lighthouse/runner.snapshot.txt",
+      "sha256": "42fcebfbf987b424a42bb974f555a1deb990950169f01d1191e1896428690e57",
+      "bytes": 5870
+    },
+    {
+      "path": "v3-regression/api-requests.jsonl",
+      "sha256": "bbb0ef0f8ac712da1feb34fff195e0a9a4ccb6713e088e8292eaa0d1b88b476f",
+      "bytes": 114176
+    },
+    {
+      "path": "v3-regression/candidate-cases.json",
+      "sha256": "0f7a97b54287f0574c8a8d612faf9738312aace79f4cbb3ed0d6c460d44ef6ae",
+      "bytes": 20039
+    },
+    {
+      "path": "v3-regression/cases.json",
+      "sha256": "951cba9e803a8d8c85a46ca6a8624955d57fb34a0378e8172577d21c25f6cd86",
+      "bytes": 18997
+    },
+    {
+      "path": "v3-regression/manifest.json",
+      "sha256": "560f3dc3298307888409743dfbfd3c28beae0d164a72777fe929fa17db7b36ea",
+      "bytes": 3600
+    },
+    {
+      "path": "v3-regression/plan.json",
+      "sha256": "c10883737ee724bc6abc8227515152947f2a4e179627c6892727eeaff92e30e1",
+      "bytes": 987
+    },
+    {
+      "path": "v3-regression/policies.json",
+      "sha256": "cdfcf75725f6e035cbc66182bb6318b032c7315b5c312c2ff624211a19607338",
+      "bytes": 41680
+    },
+    {
+      "path": "v3-regression/requests.jsonl",
+      "sha256": "509671e7bc68ea634da0e5b25dee9861c5135fd1ddeec544af76e75995f8d0bb",
+      "bytes": 113724
+    },
+    {
+      "path": "v3-regression/samples.jsonl",
+      "sha256": "087f987e76956511281c4079598d95f1c61a021081bd8d9d2661476dbab2ee26",
+      "bytes": 9161
+    },
+    {
+      "path": "v4-break/configs.json",
+      "sha256": "8461f0b22c06ebf64ddea4ee0f38f7afefdede51bc90734b07eca3b2f0e23eb2",
+      "bytes": 18241
+    },
+    {
+      "path": "v4-break/plan.json",
+      "sha256": "a969bc25b81f48168b0f92f39425e127e058f8c8054c83459bf9a7b1bbe03401",
+      "bytes": 560
+    },
+    {
+      "path": "v4-break/profile2-run1/api-requests.jsonl",
+      "sha256": "68c382f42124812d22ffa297e5cf68600ae57b8277316dada833d9763de06aa1",
+      "bytes": 167884
+    },
+    {
+      "path": "v4-break/profile2-run1/calls.jsonl",
+      "sha256": "3a7c03d00255c6ffa0df8691748ad4530ad16064a8a40951e3742613cac07496",
+      "bytes": 78499
+    },
+    {
+      "path": "v4-break/profile2-run1/instructions.json",
+      "sha256": "00daceb70703f8942e71137d651ebd90afef6ad647050309b4391b8b42e0dc1d",
+      "bytes": 25550
+    },
+    {
+      "path": "v4-break/profile2-run1/transcript.md",
+      "sha256": "9618956025fc1def8a797a01b3cb4f26f1450609f8e0f0a79efbe4b439dcb503",
+      "bytes": 1650
+    },
+    {
+      "path": "v4-break/profile2-run1/utterances.jsonl",
+      "sha256": "201218ecdece29372c29cb04bc578cbb6b92afe386438e7a381c72ca9b53e02a",
+      "bytes": 5940
+    },
+    {
+      "path": "v4-break/profile2-run2/api-requests.jsonl",
+      "sha256": "6175526552f482938ed3d5644174c5a839f1f07baede4172f49eeb9e7025b53d",
+      "bytes": 168693
+    },
+    {
+      "path": "v4-break/profile2-run2/calls.jsonl",
+      "sha256": "e3918a34f45d716a1f20b5f32562cbc50164baf9b08659b5e2793248a4dbcd37",
+      "bytes": 79370
+    },
+    {
+      "path": "v4-break/profile2-run2/instructions.json",
+      "sha256": "00daceb70703f8942e71137d651ebd90afef6ad647050309b4391b8b42e0dc1d",
+      "bytes": 25550
+    },
+    {
+      "path": "v4-break/profile2-run2/transcript.md",
+      "sha256": "c5ebda9662fdbc5f4eeeacd2d223e7d5d1d06d68656c6f008e1b2494c92a557e",
+      "bytes": 1908
+    },
+    {
+      "path": "v4-break/profile2-run2/utterances.jsonl",
+      "sha256": "0e0674591ef69e4eee397873f7dba9e92294e4eac2053d7d21dff4011ecc0d7a",
+      "bytes": 6135
+    },
+    {
+      "path": "v4-break/profile4-run1/api-requests.jsonl",
+      "sha256": "4a3066b1be526768d7065e068b646b9b7194c2643d1edbce135a4a58eaa4c0ef",
+      "bytes": 168232
+    },
+    {
+      "path": "v4-break/profile4-run1/calls.jsonl",
+      "sha256": "df3f96ac5e4d9a7fc177b0e1962ec3566bfbf7e22c8bb8bdc6d10eb3586a9afb",
+      "bytes": 75742
+    },
+    {
+      "path": "v4-break/profile4-run1/instructions.json",
+      "sha256": "137b0b2e378475815fb8857e81741af8cdad16421d5b068d30181d14a55a2613",
+      "bytes": 26314
+    },
+    {
+      "path": "v4-break/profile4-run1/transcript.md",
+      "sha256": "5a33f92cfeb0568fff60fcd257307402799bb97405b96a850449d269ed871944",
+      "bytes": 1401
+    },
+    {
+      "path": "v4-break/profile4-run1/utterances.jsonl",
+      "sha256": "ad9466677016ad3211322cf4cd37bbad8ba7fde472ce82df24ae325a79082ada",
+      "bytes": 5650
+    },
+    {
+      "path": "v4-break/profile4-run2/api-requests.jsonl",
+      "sha256": "69d25ad678a5475c81908bb09c5ed087c25bd533ecea0e73de8df0ffd81574ea",
+      "bytes": 168792
+    },
+    {
+      "path": "v4-break/profile4-run2/calls.jsonl",
+      "sha256": "4b64af29be7d697cd0edebb7627834ece7c5f536104635ee69f05a61d724fa85",
+      "bytes": 76186
+    },
+    {
+      "path": "v4-break/profile4-run2/instructions.json",
+      "sha256": "137b0b2e378475815fb8857e81741af8cdad16421d5b068d30181d14a55a2613",
+      "bytes": 26314
+    },
+    {
+      "path": "v4-break/profile4-run2/transcript.md",
+      "sha256": "f8fe4a8e774e8779bba30abf9ce85a75fcb06914f2342534571c04be97ef6898",
+      "bytes": 1430
+    },
+    {
+      "path": "v4-break/profile4-run2/utterances.jsonl",
+      "sha256": "9d77eb35368cd173c98edeea54c9d23b8138b9d3b279de66c114e33be2e6f089",
+      "bytes": 5700
+    },
+    {
+      "path": "v4-break/profiles.json",
+      "sha256": "1815edc872b7ed2117bebb4a149fb001b6efb0aa8bec189a66320ae09170a533",
+      "bytes": 11037
+    },
+    {
+      "path": "v4-break/result.json",
+      "sha256": "788e48fd004700e4796e94835a056a697c7f1f33b2c191c1f961b0eb1680d763",
+      "bytes": 26882
+    },
+    {
+      "path": "v4-break/runner.snapshot.txt",
+      "sha256": "909e8378ad56ce72c9c6e0c13f497eadae15345ba63e03a4f774df51bbe108e8",
+      "bytes": 6727
+    },
+    {
+      "path": "v4-followup/api-requests.jsonl",
+      "sha256": "0ad7158e5b3f64f816e683dbd33358fc99cf27e938c3a18f6c54c7534298e1c4",
+      "bytes": 389100
+    },
+    {
+      "path": "v4-followup/candidate-cases.json",
+      "sha256": "db0f9f11e6a038fde8b76b94da93975933f62ab02c468cbf81d2369a556ca2e2",
+      "bytes": 87840
+    },
+    {
+      "path": "v4-followup/cases.json",
+      "sha256": "bf4af3c287390dd019005dd4186683827223e74cda3c18543cea6d59480f74bf",
+      "bytes": 82100
+    },
+    {
+      "path": "v4-followup/manifest.json",
+      "sha256": "65c46ff5f064608b5f5c3f725ccfb32b57955f018290aeedd47346a6a9c8ba59",
+      "bytes": 9550
+    },
+    {
+      "path": "v4-followup/plan.json",
+      "sha256": "b32a90a7d5049e8afdcae1fc7f0d48c993470549bf6ed1a31b7d786e4dc9e97a",
+      "bytes": 961
+    },
+    {
+      "path": "v4-followup/policies.json",
+      "sha256": "cdfcf75725f6e035cbc66182bb6318b032c7315b5c312c2ff624211a19607338",
+      "bytes": 41680
+    },
+    {
+      "path": "v4-followup/requests.jsonl",
+      "sha256": "3263950bbf8c808f34601ea85135210fa9a841fcdc98d0c13851b37a5e9598e5",
+      "bytes": 387824
+    },
+    {
+      "path": "v4-followup/samples.jsonl",
+      "sha256": "18337158e7ce1ee9a824bc5f47d7fe94e3080f14a8f32f68a81deb67562884d4",
+      "bytes": 30865
+    },
+    {
+      "path": "v4-lighthouse/configs.json",
+      "sha256": "31c446ba5108d2c3f6da3e0f836026cda575665eac11418709ff58592bb08ab9",
+      "bytes": 35771
+    },
+    {
+      "path": "v4-lighthouse/plan.json",
+      "sha256": "669dffdbe8980892ec048f4a3f9153ca7100719226799c25471759cccde69699",
+      "bytes": 569
+    },
+    {
+      "path": "v4-lighthouse/profile2-run1/api-requests.jsonl",
+      "sha256": "5d5545989ec049d3f0b1f3d8100770798ab8001212b6fe280abbb6c96cdf9087",
+      "bytes": 209087
+    },
+    {
+      "path": "v4-lighthouse/profile2-run1/calls.jsonl",
+      "sha256": "8cd3c0b7cf6bf0f123c67450d295b3b0941f5b15277f60495a8ea4e6a55f5fa6",
+      "bytes": 94714
+    },
+    {
+      "path": "v4-lighthouse/profile2-run1/instructions.json",
+      "sha256": "0ed60d16c19af98a291cc674d7e6b8cf1e1ba758195da578ed8171e8389e815b",
+      "bytes": 41564
+    },
+    {
+      "path": "v4-lighthouse/profile2-run1/transcript.md",
+      "sha256": "6f8f3c92e9efaeb3099bc3b9e4bfd1fc0d9ed85aa537e07c00df5ed1ae0183bb",
+      "bytes": 3058
+    },
+    {
+      "path": "v4-lighthouse/profile2-run1/utterances.jsonl",
+      "sha256": "f1aea9f2295bec62a1e914d5af7383f9ca996aed71fa4f34752e5563909b462d",
+      "bytes": 12414
+    },
+    {
+      "path": "v4-lighthouse/profile2-run2/api-requests.jsonl",
+      "sha256": "6aeab07996e38cf93475538fa67258f61db4d5d90a40926c1eece0c675178c84",
+      "bytes": 210603
+    },
+    {
+      "path": "v4-lighthouse/profile2-run2/calls.jsonl",
+      "sha256": "4ee59cccd4adf63c050d0d9f0bd83c24472daf98dd0b9a1ba005155f23312a91",
+      "bytes": 96525
+    },
+    {
+      "path": "v4-lighthouse/profile2-run2/instructions.json",
+      "sha256": "0ed60d16c19af98a291cc674d7e6b8cf1e1ba758195da578ed8171e8389e815b",
+      "bytes": 41564
+    },
+    {
+      "path": "v4-lighthouse/profile2-run2/transcript.md",
+      "sha256": "a7ceabe891829784d6fc914150eb8dafda4975a1a6bd9570cb56e5f1dc830ff8",
+      "bytes": 2882
+    },
+    {
+      "path": "v4-lighthouse/profile2-run2/utterances.jsonl",
+      "sha256": "13f623361ed6131e970abc5edbf32f8b3e0f9780365bf245a4b73d87c76b95d9",
+      "bytes": 12331
+    },
+    {
+      "path": "v4-lighthouse/profile4-run1/api-requests.jsonl",
+      "sha256": "0224cfc0a6aac79c27231c82f1a68e9e09cc416b6c90c973d8716746bd40fb21",
+      "bytes": 210330
+    },
+    {
+      "path": "v4-lighthouse/profile4-run1/calls.jsonl",
+      "sha256": "67949781dc695cc17206990d059484122ef072ae3fd9168187d362e6c441221a",
+      "bytes": 93363
+    },
+    {
+      "path": "v4-lighthouse/profile4-run1/instructions.json",
+      "sha256": "badbc92bafef5cd4cada3656d6a9e17c3bc7f037d0e4e1cf296e3726008070e3",
+      "bytes": 42328
+    },
+    {
+      "path": "v4-lighthouse/profile4-run1/transcript.md",
+      "sha256": "3a47cacf6439e747e9c761d2d6ea5ecef36e158a76c2811ccb785a3c795ef29e",
+      "bytes": 2806
+    },
+    {
+      "path": "v4-lighthouse/profile4-run1/utterances.jsonl",
+      "sha256": "f7e13acdbfc0de3d7d29be093f4dd0fe8ae9ffe844a2cc7a5646ebdb534e5273",
+      "bytes": 12161
+    },
+    {
+      "path": "v4-lighthouse/profile4-run2/api-requests.jsonl",
+      "sha256": "8a194a56059a132a865e2452b9eb98256384b7f37b1c321c4f3637a3a0bbe765",
+      "bytes": 211931
+    },
+    {
+      "path": "v4-lighthouse/profile4-run2/calls.jsonl",
+      "sha256": "e0dced6d78a82caf6733a78b2e7c400ff881910ce4fa0f63ea29daf0459eb04c",
+      "bytes": 95554
+    },
+    {
+      "path": "v4-lighthouse/profile4-run2/instructions.json",
+      "sha256": "badbc92bafef5cd4cada3656d6a9e17c3bc7f037d0e4e1cf296e3726008070e3",
+      "bytes": 42328
+    },
+    {
+      "path": "v4-lighthouse/profile4-run2/transcript.md",
+      "sha256": "dc69d0c8d240836fd9beaa143bb965b78bacc6f3ea661cbbe823a8f5745c9c94",
+      "bytes": 2788
+    },
+    {
+      "path": "v4-lighthouse/profile4-run2/utterances.jsonl",
+      "sha256": "1189dc3907c22f5c776e5d2617a6de33713944cc8f3d545517ef05715d2c44c4",
+      "bytes": 12231
+    },
+    {
+      "path": "v4-lighthouse/profiles.json",
+      "sha256": "1815edc872b7ed2117bebb4a149fb001b6efb0aa8bec189a66320ae09170a533",
+      "bytes": 11037
+    },
+    {
+      "path": "v4-lighthouse/result.json",
+      "sha256": "829c7a361d0d39e97e5b67af616581066a9cf4554e0bad232f8d637f8b6b8cdf",
+      "bytes": 36547
+    },
+    {
+      "path": "v4-lighthouse/runner.snapshot.txt",
+      "sha256": "909e8378ad56ce72c9c6e0c13f497eadae15345ba63e03a4f774df51bbe108e8",
+      "bytes": 6727
+    },
+    {
+      "path": "v4-transfer/api-requests.jsonl",
+      "sha256": "20ddc2d7484b93c3a5e1c33e99b1eab5703110a9fb86f4df656ae1980c8bbce4",
+      "bytes": 230568
+    },
+    {
+      "path": "v4-transfer/candidate-cases.json",
+      "sha256": "4dee62355a097bb691631a32318c16bf13a4d9c16830e22730306040438d04b9",
+      "bytes": 53515
+    },
+    {
+      "path": "v4-transfer/cases.json",
+      "sha256": "ae73128a4b4a67f945e279b79a672bd043114e7b9d7c639e68684f0c2cdbb6b7",
+      "bytes": 51223
+    },
+    {
+      "path": "v4-transfer/manifest.json",
+      "sha256": "7b5606cde58c6282e09dc58cfb416fcbe1503aaaaf98c1aacc3124a7dbfde5c2",
+      "bytes": 6182
+    },
+    {
+      "path": "v4-transfer/plan.json",
+      "sha256": "00181d0e8b19200101828a00e3118087eeccd0ab34e0597b7ee4e7dcfc8079c0",
+      "bytes": 965
+    },
+    {
+      "path": "v4-transfer/policies.json",
+      "sha256": "cdfcf75725f6e035cbc66182bb6318b032c7315b5c312c2ff624211a19607338",
+      "bytes": 41680
+    },
+    {
+      "path": "v4-transfer/requests.jsonl",
+      "sha256": "d9b0107b3412eb2ddea9d585e0b93293611d7dee55de02069e8dfe262c833ac2",
+      "bytes": 229800
+    },
+    {
+      "path": "v4-transfer/samples.jsonl",
+      "sha256": "4a04adc4f563e7a6ee1dd4c25d4e6525ab1538749f0ef294ab4bc451568e1930",
+      "bytes": 17774
+    },
+    {
+      "path": "validation.json",
+      "sha256": "3c36b7c9e24682ef1691274e1c84f19644e3d2307a18afd51b6c7de3f3cf5948",
+      "bytes": 1885
+    }
+  ]
+}

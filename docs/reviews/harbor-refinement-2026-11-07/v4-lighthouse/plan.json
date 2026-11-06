@@ -1,0 +1,20 @@
+{
+  "sourceCommit": "37530adbfb291f17a3f8620a19eb62f2bd307f9e",
+  "sourceDirty": true,
+  "casts": [
+    "harbor-profile/2",
+    "harbor-profile/4"
+  ],
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "directorVersion": "director/4",
+  "policy": "npc-dialogue/5",
+  "scene": "lighthouse",
+  "mode": "rules",
+  "maxCalls": 140,
+  "maxUsd": 1,
+  "expectedCalls": 140,
+  "repetitions": 2,
+  "maxUtterances": 18,
+  "notes": "Same public context and per-scene rules. Stop on existing goals or quiet conversation; no retry. One in-flight response may exceed the cost limit."
+}

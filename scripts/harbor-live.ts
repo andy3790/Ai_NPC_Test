@@ -1,31 +1,46 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { parseArgs } from 'node:util';
+import { execFileSync } from 'node:child_process';
 import { Engine } from '../src/core/engine.js';
 import { Store } from '../src/core/store.js';
 import { OpenAIAdapter } from '../src/adapters/openai.js';
 import { exportFiles } from '../src/core/export.js';
 import { exampleSpec } from '../src/shared/example.js';
-import { harborProfilePolicies } from '../src/shared/harbor-profiles.js';
+import { HARBOR_PROFILE_VERSIONS, harborProfilePolicies, type HarborProfileVersion } from '../src/shared/harbor-profiles.js';
 import { experimentSchema } from '../src/shared/schema.js';
 import { DIALOGUE_PROMPT_VERSIONS, type DialoguePromptVersion } from '../src/shared/dialogue-policy.js';
 const { values } = parseArgs({ options: { live: { type: 'boolean', default: false }, model: { type: 'string', default: 'gpt-6.1-sol' },
   policy: { type: 'string', default: 'npc-dialogue/5' },
+  scene: { type: 'string', default: 'lighthouse' },
+  'baseline-profile': { type: 'string', default: 'harbor-profile/1' }, 'candidate-profile': { type: 'string', default: 'harbor-profile/2' },
   repetitions: { type: 'string', default: '2' }, 'max-calls': { type: 'string', default: '140' }, 'max-usd': { type: 'string', default: '1' } } });
 const repetitions = Number(values.repetitions), maxCalls = Number(values['max-calls']), maxUsd = Number(values['max-usd']);
 const policy = values.policy as DialoguePromptVersion;
+const casts = [values['baseline-profile'], values['candidate-profile']] as HarborProfileVersion[];
+if (!['lighthouse', 'break'].includes(values.scene!)) throw Error('Unknown conversation scene');
+const rest = values.scene === 'break';
 if (!Number.isSafeInteger(repetitions) || repetitions < 1 || repetitions > 3 || !Number.isSafeInteger(maxCalls) || maxCalls < 1 || maxCalls > 210 ||
     !Number.isFinite(maxUsd) || maxUsd <= 0 || maxUsd > 3 || !DIALOGUE_PROMPT_VERSIONS.includes(policy)) throw Error('Invalid budget, repetitions or policy');
-const specs = ['harbor-profile/1', 'harbor-profile/2'].map(version => {
-  const spec = exampleSpec(values.model, 'low', version as 'harbor-profile/1' | 'harbor-profile/2');
+if (casts.some(v => !HARBOR_PROFILE_VERSIONS.includes(v)) || casts[0] === casts[1]) throw Error('Choose two different known profiles');
+const specs = casts.map(version => {
+  const spec = exampleSpec(values.model, 'low', version);
   spec.name += ' [' + version + ']'; spec.maxUtterances = 18; spec.repetitions = repetitions; spec.concurrentRuns = 1; spec.maxConcurrentCalls = 1;
   spec.timeoutMs = 90_000; spec.evaluation.enabled = false; spec.director = { model: 'gpt-6-luna', effort: 'low' };
   spec.variants = [{ ...spec.variants[0], environmentMode: 'rules', dialoguePromptVersion: policy, turnPolicy: 'director', memoryMode: 'initial_only' }];
+  if (rest) {
+    spec.name = '등대 입구의 잠깐 휴식 [' + version + ']'; spec.maxUtterances = 12;
+    spec.scenario.situation = '윤, 도하, 미루가 등대 입구에서 함께 잠깐 쉰다. 점등 준비는 잠시 멈추고 차를 마시기로 했다. 각자 찻잔에 차가 반쯤 남아 있다. 지금 바로 대응해야 할 위험이나 새 부탁은 없다. 미루가 윤에게 "차 더 드릴까요?"라고 물었다.';
+    delete spec.scenario.environment;
+    Object.assign(spec.variants[0], { environmentMode: 'off', stopOnSilence: true });
+  }
   return experimentSchema.parse(spec);
 });
-const plan = { sourceCommit: 'de4fb16d10a3cb23c008db6c09b219514ccfe839', casts: Object.keys(harborProfilePolicies),
-  model: values.model, effort: 'low', directorVersion: 'director/4', policy, mode: 'rules', maxCalls, maxUsd,
-  expectedCalls: 70 * repetitions, repetitions, maxUtterances: 18, notes: 'Same authored rule graph. Stop on existing goals; no retry. One in-flight response may exceed the cost limit.' };
+const plan = { sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+  sourceDirty: Boolean(execFileSync('git', ['status', '--porcelain'], { encoding: 'utf8' }).trim()), casts,
+  model: values.model, effort: 'low', directorVersion: 'director/4', policy, scene: values.scene, mode: rest ? 'off' : 'rules', maxCalls, maxUsd,
+  expectedCalls: (rest ? 46 : 70) * repetitions, repetitions, maxUtterances: rest ? 12 : 18,
+  notes: 'Same public context and per-scene rules. Stop on existing goals or quiet conversation; no retry. One in-flight response may exceed the cost limit.' };
 if (plan.expectedCalls > maxCalls) throw Error('Plan exceeds the call limit');
 if (!values.live) console.log(JSON.stringify({ live: false, ...plan }, null, 2));
 else {
@@ -48,7 +63,7 @@ else {
     for (const [index, spec] of specs.entries()) {
       const { runs } = await engine.create(spec); await engine.idle();
       for (const run of runs) {
-        const detail = engine.detail(run.id), folder = join(root, 'profile' + (index + 1) + '-run' + run.repetition); await mkdir(folder, { recursive: true });
+        const detail = engine.detail(run.id), folder = join(root, 'profile' + casts[index].split('/')[1] + '-run' + run.repetition); await mkdir(folder, { recursive: true });
         for (const [name, value] of Object.entries(exportFiles(detail, store.events(run.id)))) await writeFile(join(folder, name), value);
         reports.push({ profile: plan.casts[index], repetition: run.repetition, runId: run.id, status: detail.run.status,
           completionReason: detail.run.completionReason, error: detail.run.error, summary: detail.summary });

@@ -1,0 +1,151 @@
+{
+  "adapter": "openai",
+  "suiteVersion": "harbor-refinement-regression/1-profile2",
+  "casesSha256": "951cba9e803a8d8c85a46ca6a8624955d57fb34a0378e8172577d21c25f6cd86",
+  "split": "all",
+  "model": "gpt-6.1-sol",
+  "effort": "low",
+  "promptVersion": "npc-lab/10",
+  "policyVersions": [
+    "npc-dialogue/5",
+    "npc-dialogue/5"
+  ],
+  "conditions": [
+    {
+      "id": "baseline",
+      "policy": "npc-dialogue/5",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "id": "candidate",
+      "policy": "npc-dialogue/5",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    }
+  ],
+  "repetitions": 2,
+  "expectedCalls": 12,
+  "maxCalls": 12,
+  "maxUsd": 1,
+  "candidateSuiteVersion": "harbor-refinement-regression/1-profile3",
+  "candidateCasesSha256": "0f7a97b54287f0574c8a8d612faf9738312aace79f4cbb3ed0d6c460d44ef6ae",
+  "pricingRevision": "33fd7a5a40495c1a",
+  "costLimit": "Recorded catalogue estimate; one in-flight response can exceed maxUsd. No retry.",
+  "status": "completed",
+  "error": null,
+  "calls": 12,
+  "estimatedUsd": 0.0323132,
+  "unpricedCalls": 0,
+  "quality": "unreviewed",
+  "mappings": [
+    {
+      "caseId": "opening_miru",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "opening_miru",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "opening_miru",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "opening_miru",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_yoon",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_yoon",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_yoon",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_yoon",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_miru",
+      "repetition": 1,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_miru",
+      "repetition": 1,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_miru",
+      "repetition": 2,
+      "slot": "A",
+      "version": "npc-dialogue/5",
+      "conditionId": "baseline",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    {
+      "caseId": "tea_miru",
+      "repetition": 2,
+      "slot": "B",
+      "version": "npc-dialogue/5",
+      "conditionId": "candidate",
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    }
+  ]
+}

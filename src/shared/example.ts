@@ -14,7 +14,7 @@ export function exampleSpec(model = 'gpt-6.1-sol', effort = 'low', profileVersio
     variants: [ { id: 'batch', label: '차례에 모아 전달', deliveryMode: 'batched_on_turn' }, { id: 'each', label: '매 발화마다 전달', deliveryMode: 'per_utterance' } ],
     evaluation: { enabled: true, interval: 10, model, effort }, director: { model, effort },
   });
-  if (profileVersion !== 'harbor-profile/1') spec.scenario.id = 'fog-harbor-profile2';
+  if (profileVersion !== 'harbor-profile/1') spec.scenario.id = 'fog-harbor-profile' + profileVersion.split('/')[1];
   spec.scenario.characters = spec.scenario.characters.map(c => harborCharacter(c, profileVersion));
   return spec;
 }

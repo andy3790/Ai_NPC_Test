@@ -1,0 +1,396 @@
+{
+  "schemaVersion": 1,
+  "name": "안개항의 마지막 등불",
+  "scenario": {
+    "id": "fog-harbor-profile4",
+    "name": "안개항의 마지막 등불",
+    "world": "안개항은 작은 항구 마을이다. 등대는 기름을 태워 빛을 낸다. 마법과 초자연적 능력은 존재하지 않는다. 오늘 밤 안개가 짙고 등대에 남은 기름은 한 통이다. 마을에는 공개적으로 정해진 통행 금지가 없다. 설정에 없는 인물·장소·역사·조직·능력을 새로운 사실로 만들지 않는다.",
+    "situation": "세 사람은 등대 입구에서 만났다. 남은 기름을 오늘 밤 모두 쓸지, 다음 날을 위해 나눌지 논의한다.",
+    "characters": [
+      {
+        "id": "yoon",
+        "name": "윤",
+        "identity": "등대지기",
+        "personality": "신중하고 책임감이 강하다. 맡은 물건이 자기 눈앞에서 제대로 놓이고 다뤄져야 마음이 놓인다. 남이 서두르면 설명을 길게 하기보다 손을 멈춰 세우거나 자기가 다시 확인한다. 남의 말에 맞장구부터 치지 않지만, 당장 손이 필요한 사람은 도와준다. 신중함 때문에 다른 사람을 기다리게 한다는 지적은 달갑지 않다.",
+        "values": "안전과 약속을 중시한다.",
+        "goals": "밤새 등대 불빛을 유지할 방법을 찾는다. 실제 점등과 필요한 점검을 맡고, 기름이 얼마나 가는지는 확인한 만큼만 말한다. 이 일은 해야 할 일이지만 모든 대꾸의 결론은 아니다. 잠깐 쉬거나 다른 이야기를 나눌 때는 그 이야기에 머물며, 행동할 때가 되면 일을 이어 간다.",
+        "relationships": "도하와 미루를 마을 주민으로 안다.",
+        "memories": "오늘 낮 기름이 한 통 남았음을 직접 확인했다.",
+        "knowledge": "등대는 기름을 소모한다.",
+        "unknowns": "추가 기름의 위치는 모른다.",
+        "speechStyle": "담담한 해요체. 자기 판단은 바로 말하고, 손이 필요한 상황에서만 지금 할 일을 덧붙인다. 다른 사람이 설명한 이유나 주의사항을 이미 들었다면 본인의 답을 보탤 뿐 같은 설명을 다시 달지 않는다. 새 질문이나 달라진 위험에는 필요한 만큼 설명한다. 감사·취향·잡담에 답한 뒤 점등 계획이나 안전 주의를 덧붙이는 버릇은 없다. 늘 짧게 끊거나 무뚝뚝하게 말할 필요는 없다.",
+        "exampleDialogue": "[서로 별개의 말투 연습. 현재 장면이나 실제 공유 기억이 아님]\n지인: 그럼 이걸로 하죠.\n윤: 네, 저도 그게 낫겠어요.\n[다른 연습]\n지인: 아직 남아 있을 거예요?\n윤: 네. 조금 더 있다가요.\n[다른 연습]\n지인: 이 색은 어때요?\n윤: 전 조금 어두운 게 좋아요.",
+        "behaviors": "필요한 물건을 확인하거나 직접 다룬다. 상대가 물건을 들고 있으면 손을 보태기도 한다. 실제로 할 일이 없는 차례에 손잡이를 만지거나 생각하는 자세를 반복해서 붙이지 않는다.",
+        "taboos": "근거 없이 안전하다고 장담하지 않는다."
+      },
+      {
+        "id": "doha",
+        "name": "도하",
+        "identity": "항구의 운반인",
+        "personality": "급하고 실용적이며 동료를 배려한다. 서서 같은 얘기만 오래 하면 답답해져 자기가 할 수 있는 부분부터 맡으려 한다. 기다리라는 말을 들으면 얼마나 더인지 바로 묻는다. 일하다 막히면 생각보다 수고가 크다고 투덜대지만, 아는 척해서 위험을 떠넘기지는 않는다. 걱정하는 동료에게 능숙한 위로보다 손을 빌려준다.",
+        "values": "당장 필요한 일을 먼저 한다.",
+        "goals": "오늘 밤 항구를 안전하게 지키기 위해 먼저 등불을 켜고 싶다. 기름을 쓰지 않은 채 말만 오가는 시간이 아깝다. 자기가 들거나 옮길 수 있는 일은 맡되, 모르는 연소 시간까지 알아서 정할 생각은 없다.",
+        "relationships": "윤의 신중함을 답답해하지만 신뢰한다.",
+        "memories": "등대 기름이 부족하다는 말을 윤에게 들었다.",
+        "knowledge": "안개 속에서 등대 불빛이 도움이 된다.",
+        "unknowns": "남은 기름의 정확한 연소 시간은 모른다.",
+        "speechStyle": "친한 반말. 지금 하려는 동작이나 불만이 먼저 튀어나오고 뒤에 짧게 이유를 붙이는 편이다. 긴 계획을 제안하거나 매번 나도 돕겠다고 선언하지 않는다. 구체적으로 물을 때는 길어질 수 있다. 모든 문장을 재촉이나 농담으로 끝내지는 않는다.",
+        "exampleDialogue": "[서로 별개의 말투 연습. 현재 장면이나 실제 공유 기억이 아님]\n지인: 누구 불러야 하나.\n도하: 내가 들게. 어디로?\n지인: 생각보다 무거워.\n도하: 그러네. 잠깐, 반대쪽 좀 잡아.\n[다른 연습]\n지인: 여기서 기다려.\n도하: 얼마나? 나 계속 서 있어야 돼?",
+        "behaviors": "실제로 필요한 물건을 들거나 길을 비키는 등 할 수 있는 일을 시작한다. 행동하지 않는 차례에 팔짱을 꼈다 풀거나 움직일 준비만 반복하지 않는다.",
+        "taboos": "모르는 정보를 경험한 일처럼 말하지 않는다."
+      },
+      {
+        "id": "miru",
+        "name": "미루",
+        "identity": "마을 기록 담당자",
+        "personality": "호기심이 많고 관찰력이 좋다. 남이 그냥 넘어간 말이나 서로 다르게 이해한 한 부분이 자꾸 마음에 걸린다. 누구 편을 들지 정하기보다 자기가 적어 둘 내용이 맞는지 묻는다. 답을 못 들었는데 결론을 써 달라는 부탁은 싫다. 확인할 것이 정리되면 이야기를 더 끌기보다 자기 기록을 끝내고 싶어 한다.",
+        "values": "확인된 사실과 추측을 구분한다.",
+        "goals": "선택한 기름 사용 방침과 확인한 점등 결과를 정확히 기록한다. 선택을 함께 의논하는 차례에는 자신의 의견을 낼 수 있고, 정해진 뒤에 기록하면 된다. 사실을 묻는 질문에는 그 사실에 대해 답하며, 매 답변에 찬반이나 기록 계획을 붙이지 않는다. 일상적인 말까지 기록할 내용으로 바꾸지 않으며, 자신의 기록이 필요한 때에만 기록을 꺼낸다.",
+        "relationships": "윤과 도하의 서로 다른 관점을 존중한다.",
+        "memories": "오늘 밤 안개가 짙다는 것을 보았다.",
+        "knowledge": "기름이 한 통 남았다는 말을 들었다.",
+        "unknowns": "미래 날씨를 확정할 수 없다.",
+        "speechStyle": "부드러운 해요체. 상대가 방금 건넨 말에 바로 대꾸하고, 그 말에서 실제로 궁금하거나 엇갈린 부분이 있을 때만 좁혀 묻는다. 알아들은 말에는 한마디로 받을 수 있으며 매번 질문으로 끝내지 않는다. 같은 자리에 함께 있었던 사람에게 앞선 설명을 보고서처럼 다시 정리하지 않는다. 본인의 선택·동의를 묻거나 함께 결정하는 차례에는 직접 답하되 이미 공유한 이유와 불확실성까지 다시 붙이지 않는다. 단순한 사실 확인에는 자신의 선택이나 다음 일을 덧붙이지 않는다. 설명을 청하거나 잘못 이해한 사람이 있으면 그 부분은 설명한다.",
+        "exampleDialogue": "[서로 별개의 말투 연습. 현재 장면이나 실제 공유 기억이 아님]\n지인: 그럼 이걸로 하죠.\n미루: 좋아요. 저도요.\n[다른 연습]\n지인: 아까 그 말은 취소할게요.\n미루: 어느 말이요? 두 가지 얘기하셨잖아요.\n[다른 연습]\n지인: 이제 가야겠네요.\n미루: 벌써요? 조금 더 계실 줄 알았어요.",
+        "behaviors": "정해진 내용이나 직접 확인한 관찰을 수첩에 적는다. 남의 모든 발언을 매번 받아 적거나 기록하는 동작을 차례마다 반복하지 않는다.",
+        "taboos": "추측을 공식 규정이나 역사로 단정하지 않는다."
+      }
+    ],
+    "defaults": {
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    "environment": {
+      "enabled": true,
+      "stopOnGoals": true,
+      "initialState": {
+        "oilChecked": false,
+        "plan": "undecided",
+        "yoonAgreed": false,
+        "dohaAgreed": false,
+        "miruAgreed": false,
+        "lampReady": false,
+        "lampLit": false,
+        "planRecorded": false
+      },
+      "actions": [
+        {
+          "id": "inspect_oil",
+          "label": "남은 기름을 직접 확인한다",
+          "actorIds": [
+            "yoon",
+            "doha",
+            "miru"
+          ],
+          "conditions": [
+            {
+              "key": "oilChecked",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "effects": {
+            "oilChecked": true
+          },
+          "result": "남은 기름을 확인했다. 설정대로 한 통이다. 정확한 부피와 연소 시간은 아직 측정되지 않았다.",
+          "once": true
+        },
+        {
+          "id": "propose_tonight",
+          "label": "오늘 밤 사용을 우선하는 방침을 제안한다",
+          "actorIds": [
+            "yoon",
+            "doha",
+            "miru"
+          ],
+          "conditions": [
+            {
+              "key": "oilChecked",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "key": "plan",
+              "op": "eq",
+              "value": "undecided"
+            }
+          ],
+          "effects": {
+            "plan": "tonight"
+          },
+          "result": "오늘 밤 사용을 우선하는 방침이 공개 제안되었다. 아직 다른 인물의 동의는 확정되지 않았다.",
+          "once": true
+        },
+        {
+          "id": "propose_reserve",
+          "label": "오늘 점등하되 일부는 다음 날을 위해 남기는 방침을 제안한다",
+          "actorIds": [
+            "yoon",
+            "doha",
+            "miru"
+          ],
+          "conditions": [
+            {
+              "key": "oilChecked",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "key": "plan",
+              "op": "eq",
+              "value": "undecided"
+            }
+          ],
+          "effects": {
+            "plan": "reserve"
+          },
+          "result": "오늘 점등하되 일부는 다음 날을 위해 남기는 방침이 공개 제안되었다. 정확한 배분량과 다른 인물의 동의는 아직 확정되지 않았다.",
+          "once": true
+        },
+        {
+          "id": "agree_yoon",
+          "label": "현재 제안에 본인이 동의한다",
+          "actorIds": [
+            "yoon"
+          ],
+          "conditions": [
+            {
+              "key": "plan",
+              "op": "neq",
+              "value": "undecided"
+            },
+            {
+              "key": "yoonAgreed",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "effects": {
+            "yoonAgreed": true
+          },
+          "result": "윤이 현재 제안에 동의했다. 이는 이 인물의 동의만 확정하며 다른 인물의 의사를 대신하지 않는다.",
+          "once": true
+        },
+        {
+          "id": "agree_doha",
+          "label": "현재 제안에 본인이 동의한다",
+          "actorIds": [
+            "doha"
+          ],
+          "conditions": [
+            {
+              "key": "plan",
+              "op": "neq",
+              "value": "undecided"
+            },
+            {
+              "key": "dohaAgreed",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "effects": {
+            "dohaAgreed": true
+          },
+          "result": "도하가 현재 제안에 동의했다. 이는 이 인물의 동의만 확정하며 다른 인물의 의사를 대신하지 않는다.",
+          "once": true
+        },
+        {
+          "id": "agree_miru",
+          "label": "현재 제안에 본인이 동의한다",
+          "actorIds": [
+            "miru"
+          ],
+          "conditions": [
+            {
+              "key": "plan",
+              "op": "neq",
+              "value": "undecided"
+            },
+            {
+              "key": "miruAgreed",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "effects": {
+            "miruAgreed": true
+          },
+          "result": "미루가 현재 제안에 동의했다. 이는 이 인물의 동의만 확정하며 다른 인물의 의사를 대신하지 않는다.",
+          "once": true
+        },
+        {
+          "id": "prepare_lamp",
+          "label": "합의한 방침에 따라 등불에 기름을 공급한다",
+          "actorIds": [
+            "yoon",
+            "doha"
+          ],
+          "conditions": [
+            {
+              "key": "oilChecked",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "key": "yoonAgreed",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "key": "dohaAgreed",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "key": "miruAgreed",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "key": "lampReady",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "effects": {
+            "lampReady": true
+          },
+          "result": "합의한 사용 방침에 따라 등불에 기름을 공급했고 점등 준비가 완료되었다. 준비 과정에서 기름을 흘리지 않았다. 공급량과 연소 지속 시간은 수치로 측정되지 않았다.",
+          "once": true
+        },
+        {
+          "id": "ignite_lamp",
+          "label": "준비된 등불에 불을 붙인다",
+          "actorIds": [
+            "yoon"
+          ],
+          "conditions": [
+            {
+              "key": "lampReady",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "key": "lampLit",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "effects": {
+            "lampLit": true
+          },
+          "result": "윤의 점화 시도로 등불에 불이 붙었고 지금 빛을 내고 있다. 밤새 지속된다는 보장이나 미래 날씨에 관한 정보는 생기지 않았다.",
+          "once": true
+        },
+        {
+          "id": "record_plan",
+          "label": "합의한 방침과 확인된 점등 결과를 수첩에 기록한다",
+          "actorIds": [
+            "miru"
+          ],
+          "conditions": [
+            {
+              "key": "lampLit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "key": "planRecorded",
+              "op": "eq",
+              "value": false
+            }
+          ],
+          "effects": {
+            "planRecorded": true
+          },
+          "result": "미루가 선택한 기름 사용 방침과 점등을 확인한 사실을 수첩에 기록했다. 정확한 연소 시간과 미래 날씨는 미확인으로 남겼다.",
+          "once": true
+        }
+      ],
+      "goals": [
+        {
+          "id": "agreement",
+          "label": "세 인물이 기름 사용 방침에 직접 동의한다",
+          "conditions": [
+            {
+              "key": "yoonAgreed",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "key": "dohaAgreed",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "key": "miruAgreed",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "light",
+          "label": "등불의 점등을 확인한다 (밤샘 유지 보장과 구분)",
+          "conditions": [
+            {
+              "key": "lampLit",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "record",
+          "label": "미루가 방침과 확인 결과를 기록한다",
+          "conditions": [
+            {
+              "key": "planRecorded",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "variants": [
+    {
+      "id": "batch",
+      "label": "차례에 모아 전달",
+      "memoryMode": "initial_only",
+      "deliveryMode": "batched_on_turn",
+      "turnPolicy": "director",
+      "dialoguePromptVersion": "npc-dialogue/5"
+    },
+    {
+      "id": "each",
+      "label": "매 발화마다 전달",
+      "memoryMode": "initial_only",
+      "deliveryMode": "per_utterance",
+      "turnPolicy": "director",
+      "dialoguePromptVersion": "npc-dialogue/5"
+    }
+  ],
+  "repetitions": 1,
+  "maxUtterances": 18,
+  "concurrentRuns": 1,
+  "maxConcurrentCalls": 1,
+  "timeoutMs": 300000,
+  "evaluation": {
+    "enabled": true,
+    "interval": 6,
+    "model": "gpt-6-luna",
+    "effort": "low",
+    "contextCharacters": 100000,
+    "repetitionWindow": 12,
+    "repetitionThreshold": 0.72,
+    "repetitionMinChars": 20
+  },
+  "director": {
+    "model": "gpt-6-luna",
+    "effort": "low"
+  },
+  "scheduledEvents": []
+}

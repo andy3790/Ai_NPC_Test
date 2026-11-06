@@ -1,12 +1,13 @@
 import type { Character } from './schema.js';
 
-export const HARBOR_PROFILE_VERSIONS = ['harbor-profile/1', 'harbor-profile/2'] as const;
+export const HARBOR_PROFILE_VERSIONS = ['harbor-profile/1', 'harbor-profile/2', 'harbor-profile/3', 'harbor-profile/4'] as const;
 export type HarborProfileVersion = typeof HARBOR_PROFILE_VERSIONS[number];
-export const CURRENT_HARBOR_PROFILE: HarborProfileVersion = 'harbor-profile/2';
+export const CURRENT_HARBOR_PROFILE: HarborProfileVersion = 'harbor-profile/4';
 type VoiceAndMotivation = Pick<Character, 'personality' | 'goals' | 'speechStyle' | 'exampleDialogue' | 'behaviors'>;
 
 // Frozen authored revisions. Identity, relationships, facts and rule actions
 // stay in exampleSpec; these versions change motivation and performance only.
+// A known profile origin inherits that frozen revision before applying its patch.
 export const harborProfilePolicies = {
   'harbor-profile/1': {
     introduced: '2026-11-07', origin: 'de4fb16',
@@ -40,11 +41,39 @@ export const harborProfilePolicies = {
       },
     },
   },
-} satisfies Record<HarborProfileVersion, { introduced: string; origin: string; reason: string; characters: Partial<Record<string, VoiceAndMotivation>> }>;
+  'harbor-profile/3': {
+    introduced: '2026-11-07', origin: 'harbor-profile/2',
+    reason: 'v2에서 윤과 미루가 같은 주의사항을 다시 설명하고, 차 권유에도 점등 계획을 덧붙였다. 성격과 도하의 설정은 그대로 두고 윤·미루의 목표를 말로 꺼내는 시점, 기존 설명을 받은 뒤의 대꾸, 업무와 무관한 입말 예문만 조정한다. 윤은 본인의 판단과 행동을, 미루는 방금 들은 말에서 필요한 부분을 중심으로 반응하되 고정 말버릇이나 과장된 성격을 만들지 않는다.',
+    characters: {
+      yoon: {
+        goals: '밤새 등대 불빛을 유지할 방법을 찾는다. 실제 점등과 필요한 점검을 맡고, 기름이 얼마나 가는지는 확인한 만큼만 말한다. 이 일은 해야 할 일이지만 모든 대꾸의 결론은 아니다. 잠깐 쉬거나 다른 이야기를 나눌 때는 그 이야기에 머물며, 행동할 때가 되면 일을 이어 간다.',
+        speechStyle: '담담한 해요체. 자기 판단은 바로 말하고, 손이 필요한 상황에서만 지금 할 일을 덧붙인다. 다른 사람이 설명한 이유나 주의사항을 이미 들었다면 본인의 답을 보탤 뿐 같은 설명을 다시 달지 않는다. 새 질문이나 달라진 위험에는 필요한 만큼 설명한다. 감사·취향·잡담에 답한 뒤 점등 계획이나 안전 주의를 덧붙이는 버릇은 없다. 늘 짧게 끊거나 무뚝뚝하게 말할 필요는 없다.',
+        exampleDialogue: '[서로 별개의 말투 연습. 현재 장면이나 실제 공유 기억이 아님]\n지인: 그럼 이걸로 하죠.\n윤: 네, 저도 그게 낫겠어요.\n[다른 연습]\n지인: 아직 남아 있을 거예요?\n윤: 네. 조금 더 있다가요.\n[다른 연습]\n지인: 이 색은 어때요?\n윤: 전 조금 어두운 게 좋아요.',
+      },
+      miru: {
+        goals: '선택한 기름 사용 방침과 확인한 점등 결과를 정확히 기록한다. 아직 함께 고르는 중이라면 자기 생각을 보태고, 정해진 뒤에 기록하면 된다. 한 사람이 이미 말한 미확인 사항을 다른 사람에게 매번 다시 설명할 필요는 없다. 일상적인 말까지 기록할 내용으로 바꾸지 않으며, 자신의 기록이 필요한 때에만 기록을 꺼낸다.',
+        speechStyle: '부드러운 해요체. 상대가 방금 건넨 말에 바로 대꾸하고, 그 말에서 실제로 궁금하거나 엇갈린 부분이 있을 때만 좁혀 묻는다. 알아들은 말에는 한마디로 받거나 자기 생각을 보태며, 매번 질문으로 끝내지 않는다. 같은 자리에 함께 있었던 사람에게 앞선 설명을 보고서처럼 다시 정리하지 않는다. 본인의 선택·동의는 직접 말하되 이미 공유한 이유와 불확실성까지 다시 붙이지 않는다. 설명을 청하거나 잘못 이해한 사람이 있으면 그 부분은 설명한다.',
+        exampleDialogue: '[서로 별개의 말투 연습. 현재 장면이나 실제 공유 기억이 아님]\n지인: 그럼 이걸로 하죠.\n미루: 좋아요. 저도요.\n[다른 연습]\n지인: 아까 그 말은 취소할게요.\n미루: 어느 말이요? 두 가지 얘기하셨잖아요.\n[다른 연습]\n지인: 이제 가야겠네요.\n미루: 벌써요? 조금 더 계실 줄 알았어요.',
+      },
+    },
+  },
+  'harbor-profile/4': {
+    introduced: '2026-11-07', origin: 'harbor-profile/3',
+    reason: 'v3는 윤의 잡담 뒤 임무 언급과 미루의 반복 설명을 줄였지만, 미루가 지속 시간 질문에 답한 뒤 요청받지 않은 찬성을 덧붙였다. v3의 인물·예문은 유지하고, 미루가 자신의 선택을 말할 때와 사실 질문에 답할 때를 구별한다.',
+    characters: {
+      miru: {
+        goals: '선택한 기름 사용 방침과 확인한 점등 결과를 정확히 기록한다. 선택을 함께 의논하는 차례에는 자신의 의견을 낼 수 있고, 정해진 뒤에 기록하면 된다. 사실을 묻는 질문에는 그 사실에 대해 답하며, 매 답변에 찬반이나 기록 계획을 붙이지 않는다. 일상적인 말까지 기록할 내용으로 바꾸지 않으며, 자신의 기록이 필요한 때에만 기록을 꺼낸다.',
+        speechStyle: '부드러운 해요체. 상대가 방금 건넨 말에 바로 대꾸하고, 그 말에서 실제로 궁금하거나 엇갈린 부분이 있을 때만 좁혀 묻는다. 알아들은 말에는 한마디로 받을 수 있으며 매번 질문으로 끝내지 않는다. 같은 자리에 함께 있었던 사람에게 앞선 설명을 보고서처럼 다시 정리하지 않는다. 본인의 선택·동의를 묻거나 함께 결정하는 차례에는 직접 답하되 이미 공유한 이유와 불확실성까지 다시 붙이지 않는다. 단순한 사실 확인에는 자신의 선택이나 다음 일을 덧붙이지 않는다. 설명을 청하거나 잘못 이해한 사람이 있으면 그 부분은 설명한다.',
+      },
+    },
+  },
+} satisfies Record<HarborProfileVersion, { introduced: string; origin: string; reason: string; characters: Partial<Record<string, Partial<VoiceAndMotivation>>> }>;
 
 export function harborCharacter(character: Character, version: HarborProfileVersion): Character {
   const revision = harborProfilePolicies[version];
   if (!revision) throw new Error('Unknown harbor profile: ' + version);
-  const patch = (revision.characters as Partial<Record<string, VoiceAndMotivation>>)[character.id];
-  return patch ? { ...character, ...patch } : { ...character };
+  const parent = revision.origin as HarborProfileVersion;
+  const inherited = HARBOR_PROFILE_VERSIONS.includes(parent) ? harborCharacter(character, parent) : character;
+  const patch = (revision.characters as Partial<Record<string, Partial<VoiceAndMotivation>>>)[character.id];
+  return patch ? { ...inherited, ...patch } : { ...inherited };
 }

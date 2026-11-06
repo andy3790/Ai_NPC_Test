@@ -16,7 +16,7 @@ test('harbor profile revisions preserve the legacy cast and freeze authored chan
   assert.equal(sha256(JSON.stringify(harborProfilePolicies['harbor-profile/1'])), 'c1d8510e71515fea3395914e36b95673096570da1bb0bde433607cc76265aac6');
   assert.equal(sha256(JSON.stringify(harborProfilePolicies['harbor-profile/2'])), '837d048d27eb9f7dfc4a7826c5ca7e55a6ee94008c90bc1eb469cda98ba2de01');
   const revised = exampleSpec('mock-model', 'low', 'harbor-profile/2');
-  assert.deepEqual(exampleSpec('mock-model'), revised);
+  assert.deepEqual(exampleSpec('mock-model'), exampleSpec('mock-model', 'low', 'harbor-profile/4'));
   assert.deepEqual(revised.scenario.environment, original.scenario.environment);
   assert.equal(revised.scenario.world, original.scenario.world);
   assert.equal(revised.scenario.situation, original.scenario.situation);
@@ -27,6 +27,36 @@ test('harbor profile revisions preserve the legacy cast and freeze authored chan
     assert.deepEqual(facts, Object.fromEntries(Object.entries(before).filter(([k]) => !['personality', 'goals', 'speechStyle', 'exampleDialogue', 'behaviors'].includes(k))));
   }
   assert.throws(() => harborCharacter(original.scenario.characters[0], 'harbor-profile/999' as any), /Unknown harbor profile/);
+});
+
+test('profile 3 inherits profile 2 while changing only Yoon and Miru goals, delivery and examples', () => {
+  assert.equal(sha256(JSON.stringify(harborProfilePolicies['harbor-profile/3'])), 'cd401120a56394594b52628f18f951756086fb817c418918426af6cc72a4815f');
+  const baseline = exampleSpec('mock-model', 'low', 'harbor-profile/2');
+  const candidate = exampleSpec('mock-model', 'low', 'harbor-profile/3');
+  assert.equal(candidate.scenario.id, 'fog-harbor-profile3');
+  for (const c of candidate.scenario.characters) {
+    const original = baseline.scenario.characters.find(a => a.id === c.id)!;
+    if (c.id === 'doha') assert.deepEqual(c, original);
+    const { goals: _g, speechStyle: _s, exampleDialogue: _e, ...rest } = c;
+    assert.deepEqual(rest, Object.fromEntries(Object.entries(original).filter(([key]) => !['goals', 'speechStyle', 'exampleDialogue'].includes(key))));
+  }
+  const withoutCast = (s: typeof baseline) => ({ ...s, scenario: { ...s.scenario, id: '<version>', characters: [] } });
+  assert.deepEqual(withoutCast(candidate), withoutCast(baseline));
+});
+
+test('profile 4 preserves the frozen profile 3 except Miru motivation and delivery', () => {
+  assert.equal(sha256(JSON.stringify(harborProfilePolicies['harbor-profile/4'])), 'a09fd8b01e6155084b055f2cab0bf703e17133b358408d6fbc02b44d8619fa2e');
+  const baseline = exampleSpec('mock-model', 'low', 'harbor-profile/3');
+  const candidate = exampleSpec('mock-model', 'low', 'harbor-profile/4');
+  assert.equal(candidate.scenario.id, 'fog-harbor-profile4');
+  for (const c of candidate.scenario.characters) {
+    const original = baseline.scenario.characters.find(a => a.id === c.id)!;
+    if (c.id !== 'miru') assert.deepEqual(c, original);
+    const { goals: _g, speechStyle: _s, ...rest } = c;
+    assert.deepEqual(rest, Object.fromEntries(Object.entries(original).filter(([key]) => !['goals', 'speechStyle'].includes(key))));
+  }
+  const withoutCast = (s: typeof baseline) => ({ ...s, scenario: { ...s.scenario, id: '<version>', characters: [] } });
+  assert.deepEqual(withoutCast(candidate), withoutCast(baseline));
 });
 
 test('new API examples prefer verified dialogue models only when available and preserve saved config', async () => {
@@ -47,7 +77,7 @@ test('new API examples prefer verified dialogue models only when available and p
       const spec = response.json();
       assert.deepEqual(spec.scenario.defaults, { model: npc, effort });
       assert.equal(spec.director.model, helper); assert.equal(spec.evaluation.model, helper);
-      assert.equal(spec.scenario.id, 'fog-harbor-profile2');
+      assert.equal(spec.scenario.id, 'fog-harbor-profile4');
       if (adapterName === 'openai') {
         assert.equal(spec.maxUtterances, 18); assert.equal(spec.maxConcurrentCalls, 1);
         assert.ok(spec.variants.every((v: any) => v.turnPolicy === 'director'));
@@ -72,4 +102,40 @@ test('paired profile fixtures keep observations and other actors fixed and rejec
   const onlyReview = { ...other, review: ['PRIVATE_REVIEW_SENTINEL'], characters: other.characters.map(a => a.id === c.speakerId ? a : { ...a, unknowns: 'OTHER_PRIVATE_SENTINEL' }) };
   const p = caseInput(onlyReview, 'npc-dialogue/5', 'mock-model', 'low');
   assert.doesNotMatch(p.instructions + p.input, /PRIVATE_REVIEW_SENTINEL|OTHER_PRIVATE_SENTINEL/);
+});
+
+test('refinement comparison freezes identical observations and changes only the current speaker profile', () => {
+  const load = (n: number) => dialogueCasesSchema.parse(JSON.parse(readFileSync(new URL('../evals/dialogue/harbor-refinement-profile' + n + '.json', import.meta.url), 'utf8'))).cases;
+  const before = load(2), after = load(3);
+  assert.equal(before.length, 16); assert.equal(after.length, before.length);
+  assert.equal(before.filter(c => c.split === 'holdout').length, 10);
+  for (const c of before) {
+    const candidate = after.find(a => a.id === c.id)!;
+    validateProfilePair(c, candidate);
+    const original = caseInput(c, 'npc-dialogue/5', 'mock-model', 'low');
+    const revised = caseInput(candidate, 'npc-dialogue/5', 'mock-model', 'low');
+    assert.equal(original.input, revised.input); assert.notEqual(original.instructions, revised.instructions);
+    for (const [version, fixture] of [[2, c], [3, candidate]] as const) {
+      assert.deepEqual(fixture.characters.find(a => a.id === c.speakerId), exampleSpec('mock-model', 'low', `harbor-profile/${version}`).scenario.characters.find(a => a.id === c.speakerId));
+    }
+  }
+});
+
+test('followup and fresh transfer fixtures match the adopted profile without changing observations', () => {
+  for (const [suite, count] of [['harbor-followup', 10], ['harbor-transfer', 6]] as const) {
+    const load = (n: number) => dialogueCasesSchema.parse(JSON.parse(readFileSync(new URL('../evals/dialogue/' + suite + '-profile' + n + '.json', import.meta.url), 'utf8'))).cases;
+    const before = load(2), after = load(4);
+    assert.equal(before.length, count); assert.equal(after.length, count);
+    if (suite === 'harbor-transfer') assert.ok(before.every(c => c.split === 'holdout'));
+    for (const c of before) {
+      const candidate = after.find(a => a.id === c.id)!;
+      validateProfilePair(c, candidate);
+      const original = caseInput(c, 'npc-dialogue/5', 'mock-model', 'low');
+      const revised = caseInput(candidate, 'npc-dialogue/5', 'mock-model', 'low');
+      assert.equal(original.input, revised.input); assert.notEqual(original.instructions, revised.instructions);
+      for (const [version, fixture] of [[2, c], [4, candidate]] as const) {
+        assert.deepEqual(fixture.characters.find(a => a.id === c.speakerId), exampleSpec('mock-model', 'low', `harbor-profile/${version}`).scenario.characters.find(a => a.id === c.speakerId));
+      }
+    }
+  }
 });

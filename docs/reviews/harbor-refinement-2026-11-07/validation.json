@@ -1,0 +1,79 @@
+{
+  "version": "harbor-refinement-validation/1",
+  "date": "2026-11-07",
+  "typecheck": "passed",
+  "build": "passed",
+  "tests": {
+    "initial": {
+      "total": 187,
+      "passed": 186,
+      "failed": 1,
+      "reason": "Windows rename EPERM"
+    },
+    "targetedBeforeFix": {
+      "total": 15,
+      "passed": 14,
+      "failed": 1,
+      "reason": "Windows rename EPERM"
+    },
+    "targetedAfterFix": {
+      "total": 18,
+      "passed": 18,
+      "failed": 0
+    },
+    "final": {
+      "total": 190,
+      "passed": 190,
+      "failed": 0
+    }
+  },
+  "browser": {
+    "mode": "headless Edge with local mock server",
+    "completedRuns": 2,
+    "defaultProfile": "harbor-profile/4",
+    "defaultPolicy": "npc-dialogue/5",
+    "pageErrors": [],
+    "status": "passed"
+  },
+  "server": {
+    "beforeRuns": 98,
+    "afterRuns": 114,
+    "addedReviewRuns": 16,
+    "existingRunsPreserved": true,
+    "pausedBefore": 6,
+    "pausedAfter": 6,
+    "pausedIdsPreserved": true,
+    "savedConfigUnchanged": true,
+    "activeRuns": 0,
+    "example": {
+      "id": "fog-harbor-profile4",
+      "npc": {
+        "model": "gpt-6.1-sol",
+        "effort": "low"
+      },
+      "director": {
+        "model": "gpt-6-luna",
+        "effort": "low"
+      },
+      "maxUtterances": 18
+    },
+    "status": "passed"
+  },
+  "provenance": {
+    "status": "passed",
+    "fixedRequests": 140,
+    "conversationRequests": 322,
+    "exactQuotedResponses": 140,
+    "verifiedInputAndInstructions": true,
+    "verifiedActualModels": true,
+    "identicalPublicInputsAndSimulationConditions": true,
+    "importableExample": "schema and profile 4 verified"
+  },
+  "publication": {
+    "status": "passed",
+    "files": 1112,
+    "bytes": 83784703,
+    "issues": [],
+    "scope": "Current working-tree candidates; pattern scan of text and file checks. No archive, image metadata or Git history scan."
+  }
+}
