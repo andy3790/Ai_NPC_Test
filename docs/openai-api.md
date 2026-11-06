@@ -75,6 +75,7 @@ OPENAI_MAX_OUTPUT_TOKENS=4096
 ## 세션·계측·복구
 
 - NPC마다 별도 로컬 세션과 `previous_response_id` 연결을 유지합니다. 다른 묶음의 응답 ID를 사용하지 않습니다. 수신 확인도 같은 NPC 응답 연결에 포함하며 공개 대화에는 넣지 않습니다.
+- AI 진행자는 호출 시도마다 별도 세션을 생성하고 `previous_response_id: null`로 요청합니다. 최근 관찰과 화자별 대기 순서만 전달하며, 이전 진행자 요청·응답을 연결하지 않습니다. [입력 한도와 복구 정책](running-experiments.md#ai-진행자의-입력-범위)은 단일 공간과 분산 공간에 동일하게 적용합니다.
 - 앱은 동일한 역할·캐릭터 `instructions`를 매 요청에 명시합니다. 이전 응답 연결의 지시문이 자동으로 이어진다고 가정하지 않습니다. `reinject_on_speech`는 기존과 같이 공개 발화 요청의 `input.originalCharacterAndWorld`에 추가 상기 입력을 넣으며, 수신 확인에는 추가 상기를 넣지 않습니다.
 - API의 `usage`를 호출 단위로 직접 기록하고 `usageStatus=reported_response`로 구분합니다. 누적 카운터로 환산하지 않습니다. 캐시 입력·캐시 쓰기·추론 출력은 제공된 경우만 기록하고 전체 토큰에 다시 더하지 않습니다. 누락 항목은 `null`입니다.
 - 실제 응답 모델, response ID, 요청 ID, 요청 본문, 구조화 출력, 원본 스트리밍·사용량 이벤트를 기록합니다. 첫 출력 시간은 첫 `response.output_text.delta`의 관측 시점입니다. 기존 CSV·JSONL·ZIP과 분석 화면을 그대로 사용합니다.

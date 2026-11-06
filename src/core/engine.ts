@@ -19,6 +19,7 @@ import type { ApiCredential, CallKind, DeliveryReceipt, InvocationMetrics, NpcSe
 import { progression, progressionPrompt, resolveAction } from './progression.js';
 import { repetitionMetrics } from './quality.js';
 import { APP_VERSION } from '../shared/version.js';
+import { directorInstructions, directorPrompt } from './director.js';
 
 const now = () => new Date().toISOString();
 const err = (e: unknown) => e instanceof Error ? e.message : String(e);
@@ -123,19 +124,31 @@ export class Engine extends EventEmitter {
       return restored;
     }
   }
-  private async helper(id: string, key: string, config: ModelConfig, instructions: string): Promise<NpcSession> {
-    const helpers = this.run(id).helperSessions; if (Object.hasOwn(helpers, key)) return this.restoreSession(id, 'helperSessions', key, helpers[key]);
+  private async helper(id: string, key: string, config: ModelConfig, instructions: string, fresh = false): Promise<NpcSession> {
+    const helpers = this.run(id).helperSessions; if (!fresh && Object.hasOwn(helpers, key)) return this.restoreSession(id, 'helperSessions', key, helpers[key]);
     const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, key), this.run(id).apiCredential);
     const session = { id: randomUUID(), characterId: key, threadId, config, instructions };
     this.store.patch('runs', id, { helperSessions: { ...this.run(id).helperSessions, [key]: session } }); return session;
   }
-  private async invoke(id: string, kind: CallKind, session: NpcSession, operationKey: string, input: string, metadata: Record<string, unknown> = {}) {
+  private priorInvocation(id: string, operationKey: string) {
     const previous = this.store.list('invocations', id).filter(c => c.operationKey === operationKey).at(-1);
-    if (previous?.status === 'completed') return previous;
     if (previous && ['uncertain', 'running'].includes(previous.status)) throw new Error(`미확정 호출 ${previous.id}: 자동 재전송하지 않습니다. 재개하여 상태를 확인하세요.`);
+    return previous;
+  }
+  private async direct(id: string, key: string, operationKey: string, prompt: ReturnType<typeof directorPrompt>) {
+    // Check before creating a thread: completed decisions survive commit failures,
+    // and ambiguous decisions must never be sent twice.
+    const previous = this.priorInvocation(id, operationKey);
+    if (previous?.status === 'completed') return previous;
+    const session = await this.helper(id, key, this.run(id).spec.director, directorInstructions, true);
+    return this.invoke(id, 'director', session, operationKey, prompt.input, prompt.metadata);
+  }
+  private async invoke(id: string, kind: CallKind, session: NpcSession, operationKey: string, input: string, metadata: Record<string, unknown> = {}) {
+    const previous = this.priorInvocation(id, operationKey);
+    if (previous?.status === 'completed') return previous;
     // A failed accepted turn already appended its input. A retry asks to complete that input,
     // without appending the dialogue payload a second time to the same persistent session.
-    if (previous?.turnId && previous.metadata.inputRetained !== false) input = JSON.stringify({ task: JSON.parse(input).task, previousFailure: previous.error?.slice(0, 5000), instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 해당 호출의 결과는 아직 공개·적용되지 않았습니다. previousFailure는 이전 결과가 거부된 이유입니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
+    if (previous?.turnId && previous.threadId === session.threadId && previous.metadata.inputRetained !== false) input = JSON.stringify({ task: JSON.parse(input).task, previousFailure: previous.error?.slice(0, 5000), instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 해당 호출의 결과는 아직 공개·적용되지 않았습니다. previousFailure는 이전 결과가 거부된 이유입니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
     const run = this.run(id); const call: InvocationMetrics = {
       id: randomUUID(), experimentId: run.experimentId, runId: id, variantId: run.variant.id, repetition: run.repetition,
       kind, characterId: ['speech', 'receive'].includes(kind) ? session.characterId : null, operationKey, attempt: (previous?.attempt ?? 0) + 1, retryOf: previous?.id ?? null,
@@ -230,8 +243,9 @@ export class Engine extends EventEmitter {
       const age = (characterId: string) => speeches.length - (speeches.findLastIndex(u => u.speakerId === characterId));
       const candidates = chars.filter(c => c.id !== run.lastSpeakerId).sort((a, b) => age(b.id) - age(a.id));
       const allowed = age(candidates[0].id) >= chars.length * 2 ? [candidates[0]] : candidates;
-      const session = await this.helper(id, 'director', run.spec.director, '당신은 대화 진행자입니다. 허용된 ID 중 다음 화자 하나만 선택하세요. 공개 대화 외의 설정이나 대사를 만들지 마세요.');
-      const call = await this.invoke(id, 'director', session, `director:${speeches.length + 1}`, JSON.stringify({ task: 'direct', allowedSpeakerIds: allowed.map(c => c.id), history: this.store.list('utterances', id).slice(-50).map(publicMessage) }));
+      const call = await this.direct(id, 'director', `director:${speeches.length + 1}`, directorPrompt({
+        characters: chars, allowedSpeakerIds: allowed.map(c => c.id), history: this.store.list('utterances', id), speeches,
+      }));
       selected = JSON.parse(call.output).speakerId;
       if (!allowed.some(c => c.id === selected)) { this.store.patch('invocations', call.id, { status: 'failed', error: '허용되지 않은 화자 ID' }); throw new Error('진행자가 허용되지 않은 화자를 선택했습니다.'); }
     }
@@ -499,6 +513,7 @@ export class Engine extends EventEmitter {
   private simulationHost(id: string): SimulationHost {
     return { id, store: this.store, run: () => this.run(id), closing: () => this.closing,
       helper: (key, config, instructions) => this.helper(id, key, config, instructions),
+      direct: (key, operationKey, prompt) => this.direct(id, key, operationKey, prompt),
       invoke: (kind, session, key, input, metadata) => this.invoke(id, kind, session, key, input, metadata),
       append: u => this.append(id, u), flush: () => this.flush(id), changed: () => this.changed(id),
       completeDelivery: u => this.completeDelivery(id, u), inject: (text, audience) => this.appendEvent(id, text, audience),

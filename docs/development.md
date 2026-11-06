@@ -9,7 +9,8 @@ Node.js 24 이상을 사용합니다. 공통 설정은 schemaVersion 1, 앱 버�
 | src/adapters/ | Codex app-server, OpenAI Responses, Mock. 세션·호출·사용량·복구 인터페이스와 메모리 전용 개인 API 키 저장소 |
 | src/core/engine.ts | 실행 생성·스케줄·호출·전달·평가·제어 |
 | src/core/store.ts | SQLite 저장·트랜잭션·설정·원본 이벤트 |
-| src/core/prompts.ts | NPC·수신·진행자·평가 입력과 버전 |
+| src/core/prompts.ts | NPC·수신·평가 입력과 버전 |
+| src/core/director.ts | 진행자 관찰 범위·최근 입력 길이 제한·독립 정책 버전 |
 | src/core/progression.ts, quality.ts | 사전 규칙 상태·목표와 반복 품질 |
 | src/core/world.ts | 단일 공간 세계 엔진 상태·출력 검증 |
 | src/core/spatial-runner.ts, spatial-state.ts | 분산 가상 시간·선택·활동·복구 |
@@ -42,6 +43,8 @@ Node.js 24 이상을 사용합니다. 공통 설정은 schemaVersion 1, 앱 버�
 ## 모델 입력과 평가 경계
 
 NPC는 공통 세계·본인 프로필·실제로 수신한 관찰을 받습니다. 평가자는 전체 원본과 인지 범위를 사용합니다. 진행자·세계·상황 역할에는 비공개 프로필을 주지 않습니다. 엔진은 실제 발생한 비공개 채널 발언을 볼 수 있으나 그것을 다른 NPC에게 자동 공유하지 않습니다.
+
+진행자는 `Engine.direct`를 통해 호출 시도마다 새 세션을 생성합니다. 같은 helper 슬롯에는 최신 세션 포인터만 남기며, 이전 thread/turn과 계측은 호출 원장으로 보존합니다. 세션 생성 전에 operationKey로 완료·미확정 상태를 확인합니다. 재시도에서 이전 입력을 참조하는 축약 요청은 같은 thread에만 허용하며, 새 진행자 세션에는 제한된 원본 입력을 전달합니다. 입력 한도·관찰 개수·생략 여부와 `director/1` 정책 버전은 `metadata.directorContext`에 기록합니다. [입력 정책](running-experiments.md#ai-진행자의-입력-범위)의 120차례·최대 길이·API 응답 연결·복구 검증은 `tests/director-context.test.ts`에 있습니다.
 
 구조 검증은 모델의 자연어가 의미상 항상 설정을 준수한다는 보장이 아닙니다. 새 제약을 추가할 때는 출력 스키마·적용 검증·프롬프트·회귀 테스트를 함께 확인하세요. 평가가 NPC 응답을 교정하거나 평가 내용을 NPC에게 보내지 않도록 유지합니다.
 

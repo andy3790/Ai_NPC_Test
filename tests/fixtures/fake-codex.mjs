@@ -13,14 +13,16 @@ createInterface({ input: process.stdin }).on('line', line => {
   else if (m.method === 'thread/turns/list') send({ id: m.id, result: { data: turns.filter(t => t.threadId === p.threadId).map(t => ({ id: t.id, status: 'completed', items: [] })), nextCursor: null } });
   else if (m.method === 'thread/items/list') send({ id: m.id, result: { data: turns.filter(t => t.threadId === p.threadId && (!p.turnId || t.id === p.turnId)).flatMap(t => [
     { turnId: t.id, item: { type: 'userMessage', id: `input-${t.id}`, clientId: t.clientId, content: [] } },
-    { turnId: t.id, item: { type: 'agentMessage', id: `output-${t.id}`, text: '{"speech":"안녕하세요","action":"고개를 끄덕인다"}' } }
+    { turnId: t.id, item: { type: 'agentMessage', id: `output-${t.id}`, text: t.output } }
   ]), nextCursor: null } });
   else if (m.method === 'turn/start') {
     const turnId = `turn-${++count}`; send({ id: m.id, result: { turn: { id: turnId } } });
-    turns.push({ id: turnId, threadId: p.threadId, clientId: p.clientUserMessageId });
+    const input = JSON.parse(p.input[0].text);
+    const output = JSON.stringify(input.task === 'direct' ? { speakerId: input.allowedSpeakerIds[0], reason: '순서 선택' } : { speech: '안녕하세요', action: '고개를 끄덕인다' });
+    turns.push({ id: turnId, threadId: p.threadId, clientId: p.clientUserMessageId, output });
     send({ method: 'turn/started', params: { threadId: p.threadId, turn: { id: turnId } } });
-    send({ method: 'item/agentMessage/delta', params: { threadId: p.threadId, turnId, delta: '{"speech":"안녕하세요","action":"고개를 끄덕인다"}' } });
-    send({ method: 'item/completed', params: { threadId: p.threadId, turnId, item: { id: `item-${count}`, type: 'agentMessage', text: '{"speech":"안녕하세요","action":"고개를 끄덕인다"}' } } });
+    send({ method: 'item/agentMessage/delta', params: { threadId: p.threadId, turnId, delta: output } });
+    send({ method: 'item/completed', params: { threadId: p.threadId, turnId, item: { id: `item-${count}`, type: 'agentMessage', text: output } } });
     send({ method: 'turn/completed', params: { threadId: p.threadId, turn: { id: turnId, status: 'completed' } } });
     setTimeout(() => send({ method: 'thread/tokenUsage/updated', params: { threadId: p.threadId, turnId, tokenUsage: { total: { inputTokens: 100, cachedInputTokens: 20, cacheWriteInputTokens: 0, outputTokens: 20, reasoningOutputTokens: 4, totalTokens: 120 } } } }), 60);
   }

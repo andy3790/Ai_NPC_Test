@@ -5,6 +5,7 @@ import { CodexAdapter } from '../src/adapters/codex.js';
 import { Engine } from '../src/core/engine.js';
 import { Store } from '../src/core/store.js';
 import { exampleSpec } from '../src/shared/example.js';
+import { DIRECTOR_CONTEXT } from '../src/core/director.js';
 test('late Codex usage remains attributed to committed speech without overwriting its link', async () => {
   const previous = process.env.CODEX_BIN; process.env.CODEX_BIN = resolve('tests/fixtures/fake-codex.mjs');
   const adapter = new CodexAdapter(resolve('.cache/protocol-fixture')); const store = new Store(':memory:'); const engine = new Engine(store, adapter, resolve('.cache/protocol-fixture'));
@@ -19,5 +20,27 @@ test('late Codex usage remains attributed to committed speech without overwritin
     const known = await adapter.reconcile(call.threadId, call.turnId, call.id);
     const unknown = await adapter.reconcile(call.threadId, null, call.id);
     assert.equal(known?.output, call.output); assert.equal(unknown?.turnId, call.turnId); assert.equal(unknown?.output, call.output);
+  } finally { await engine.close(); store.close(); if (previous === undefined) delete process.env.CODEX_BIN; else process.env.CODEX_BIN = previous; }
+});
+
+test('Codex director decisions use new threads and retain late usage for every independent call', async () => {
+  const previous = process.env.CODEX_BIN; process.env.CODEX_BIN = resolve('tests/fixtures/fake-codex.mjs');
+  const root = resolve('.cache/protocol-director-fixture'), adapter = new CodexAdapter(root), store = new Store(':memory:');
+  const engine = new Engine(store, adapter, root);
+  try {
+    const spec = exampleSpec('fixture'); delete spec.scenario.environment;
+    spec.maxUtterances = 6; spec.variants = [{ ...spec.variants[0], turnPolicy: 'director' }]; spec.evaluation.enabled = false;
+    const { runs: [run] } = await engine.create(spec); await engine.idle();
+    await new Promise(r => setTimeout(r, 160)); const d = engine.detail(run.id);
+    assert.equal(d.run.status, 'completed', d.run.error ?? '');
+    const calls = d.invocations.filter(c => c.kind === 'director'); assert.equal(calls.length, 5);
+    assert.equal(new Set(calls.map(c => c.threadId)).size, 5);
+    assert.equal(new Set(d.invocations.filter(c => c.kind === 'speech').map(c => c.threadId)).size, 3);
+    for (const call of calls) {
+      assert.ok(call.input.length <= DIRECTOR_CONTEXT.maxInputCharacters);
+      assert.equal(call.usage.totalTokens, 120); assert.ok(call.durationMs! >= 0);
+      assert.equal(call.usageStatus, 'reported_cumulative_delta');
+    }
+    assert.equal(d.summary.byKind.director.tokens.totalTokens, 600);
   } finally { await engine.close(); store.close(); if (previous === undefined) delete process.env.CODEX_BIN; else process.env.CODEX_BIN = previous; }
 });

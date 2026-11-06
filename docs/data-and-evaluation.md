@@ -32,6 +32,8 @@
 
 실패·취소·재시도·불명확한 시도도 각각 남습니다. `operationKey`는 논리 작업, `attempt`와 `retryOf`는 시도 관계입니다. 성공한 발화만 대화에 배포하지만 실패 호출의 확인된 사용량도 총합에 포함합니다.
 
+진행자 호출의 `metadata.directorContext`에는 정책 `version`, `sessionMode: "fresh_per_attempt"`, 관찰 한도 `maxMessages`, 문자열 한도 `maxHistoryCharacters`·`maxInputCharacters`, 후보가 관찰할 수 있는 기록 수 `availableMessages`, 실제 제공한 수 `includedMessages`, 생략 여부 `truncated`, 실제 직렬화 길이 `historyCharacters`·`inputCharacters`를 저장합니다. 길이의 단위는 JavaScript 문자열의 UTF-16 코드 단위이며 토큰 수가 아닙니다. 실제 토큰은 계속 제공자의 usage로 집계합니다. 이 metadata는 호출 원본·JSONL·호출 CSV에 포함되며, 필드가 없는 과거 진행자 호출은 이전 정책입니다. NPC·평가·세계 엔진의 문맥 정책과는 구분해 분석하세요.
+
 환경·평가·진행자·사건·재시도 없는 **3명·6차례** 기준으로 모아 전달은 speech 6회, 매 발화 전달은 speech 6회+receive 12회입니다. 단일 공간 AI는 기본 선택마다 environment가 추가되고 공개 결과의 수신도 발생합니다. 분산 공간은 실제 수신자·공동 계획·시간 경계·상황 검토에 따라 달라지므로 N−1 공식으로 전체 호출 수를 예측하지 않습니다.
 
 ## 토큰과 계측 누락

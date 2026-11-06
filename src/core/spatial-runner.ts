@@ -7,6 +7,7 @@ import { publicMessage, speakerPrompt } from './prompts.js';
 import { applySpatialPlan, applySpatialResolution, commitSpatialChoice, dueActivities, dueProcesses, initialSpatialWorld, nextSpatialTime, selectableGroups, validateSpatialChoice } from './spatial-state.js';
 import { managerState, managerWorld, spatialPlannerInstructions, spatialResolverInstructions } from './spatial-prompts.js';
 import { decideSituation, generateSituation, nextSituationCheck, pendingProposal } from './situations.js';
+import { directorObservations, directorPrompt } from './director.js';
 
 const now = () => new Date().toISOString();
 const errorText = (e: unknown) => e instanceof Error ? e.message : String(e);
@@ -29,9 +30,11 @@ async function prepareCycle(h: SimulationHost, remaining: number) {
       const age = (id: string) => localHistory.length - localHistory.findLastIndex(u => u.speakerId === id);
       const ordered = [...group.ids].sort((a, b) => age(b) - age(a));
       const allowed = age(ordered[0]) >= run.spec.scenario.characters.length * 2 ? [ordered[0]] : ordered.filter(id => id !== localHistory.at(-1)?.speakerId);
-      const session = await h.helper(`spatial-director-${createHash('sha256').update(group.key).digest('hex').slice(0, 16)}`, run.spec.director, '당신은 공간별 차례 관리자입니다. 공개된 관찰 기록을 참고해 허용된 NPC 중 다음 선택자 하나만 반환하세요. NPC의 대사·행동을 대신 정하지 마세요.');
-      const call = await h.invoke('director', session, `spatial:director:${current.spatial!.nextCycle}:${group.key}`, JSON.stringify({ task: 'direct', allowedSpeakerIds: allowed,
-        location: group.key, history: all.slice(-50).map(u => publicMessage(u)), instruction: '오래 선택하지 못한 NPC를 배제하지 마세요. 혼자 행동하는 NPC도 선택할 수 있습니다.' }));
+      const call = await h.direct(`spatial-director-${createHash('sha256').update(group.key).digest('hex').slice(0, 16)}`,
+        `spatial:director:${current.spatial!.nextCycle}:${group.key}`, directorPrompt({
+          characters: run.spec.scenario.characters.filter(c => group.ids.includes(c.id)), allowedSpeakerIds: allowed,
+          location: group.key, history: directorObservations(all, group.ids), speeches: localHistory,
+        }));
       selected = JSON.parse(call.output).speakerId;
       if (!allowed.includes(selected)) { h.store.patch('invocations', call.id, { status: 'failed', error: '허용되지 않은 공간별 선택자' }); throw new Error('공간 진행자가 허용되지 않은 NPC를 선택했습니다.'); }
     }
