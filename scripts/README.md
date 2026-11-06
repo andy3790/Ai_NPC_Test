@@ -36,6 +36,7 @@ Codex 도구는 CLI 로그인, API 도구는 서버 환경 API 키가 필요합�
 |---|---|
 | `npm run smoke:live` | 두 NPC·6발화·두 전달 방식. `.cache/live-smoke-<시간>/` |
 | `npm run smoke:openai` | API 키 사용, 두 NPC·2발화·두 전달 방식·종료 평가, 성공 시 8회 호출. `.cache/openai-smoke-<시간>/` |
+| `npm run seowol:live -- --spec assets/seowol/experiments/return-deadline.json --live` | 서월 12발화, 새 세션·격리 DB·호출/비용 상한. `--live`를 빼면 호출하지 않는 설정 검증. [설정 및 한계](../assets/seowol/README.md) |
 | `node --import tsx scripts/progression-live.ts` | 세 NPC·두 전달 방식, 선언된 환경 행동·목표 진행. `reports/progression-<시간>/` |
 | `node --import tsx scripts/recovery-smoke.ts` | 중단·재접속 후 같은 NPC 세션 복구. `.cache/recovery-smoke-<시간>/` |
 
@@ -90,3 +91,11 @@ python scripts/verify-comparison.py reports/delivery-comparison
 현재 검사 구성은 [package.json](../package.json), CI의 OS·제한 시간은 [ci.yml](../.github/workflows/ci.yml)이 기준입니다. 화면 검사는 먼저 `npm run build`가 필요합니다. Windows는 기본 Edge, 그 외 환경은 Playwright Chromium을 사용하므로 필요하면 `npx playwright install chromium`을 실행하세요. `NPC_BROWSER_CHANNEL`을 읽는 검사에서 브라우저 채널을 변경할 수 있습니다. 실행 파일 경로 재정의는 모든 스크립트의 공통 옵션이 아닙니다.
 
 개발 구조·검증 선택은 [개발 문서](../docs/development.md), 실제 운영 명령은 [실험 운영](../docs/running-experiments.md)을 참고하세요.
+
+## NPC 반응 정책 비교
+
+`npm run dialogue:eval`은 호출 없이 고정 입력 계획을 검증합니다. `--live`일 때만 요청하며 `--baseline`, `--candidate`, `--cases`, `--split`, `--repetitions`, `--max-calls`, `--max-usd`로 비교를 고정합니다.
+
+`node --env-file-if-exists=.env --import tsx scripts/dialogue-soak.ts`는 여러 차례 대화를 비교합니다. `--specs`의 원래 환경 모드와 예정 사건을 유지하고 반복별로 내보냅니다. `--world-model`로 세계 모델을 따로 지정할 수 있습니다. 세계 호출까지 포함한 상한을 시작 전에 확인합니다.
+
+서월 실행 도구의 `--policy npc-dialogue/5`는 공통 지침만 선택하며 캐릭터 프로필은 원본 설정대로 유지합니다. 원문·버전·비용·실패 해석은 [프롬프트 변경과 검증](../docs/dialogue-prompts.md)을 참고하세요.

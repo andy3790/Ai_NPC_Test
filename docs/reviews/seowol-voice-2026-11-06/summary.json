@@ -1,0 +1,130 @@
+{
+  "totals": {
+    "turns": 90,
+    "spokenTurns": 77,
+    "calls": 257,
+    "usd": 0.35259537
+  },
+  "runs": [
+    {
+      "label": "A",
+      "id": "c7152c81-16ca-46ca-93da-24f56f4ce515",
+      "name": "서월 문체 실험 — 테이프 감은 앰프 / 이전 문체 지침 [성격실험 A]",
+      "status": "completed",
+      "error": null,
+      "promptVersion": "npc-lab/5",
+      "speeches": 18,
+      "calls": 53,
+      "cost": {
+        "usd": 0.07766906500000001,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failures": [],
+      "models": [
+        "gpt-6.1-sol",
+        "gpt-6-luna"
+      ],
+      "mismatches": [],
+      "spokenTurns": 16
+    },
+    {
+      "label": "B",
+      "id": "aaec235b-1797-44fc-8885-bd9a1291e4e4",
+      "name": "서월 문체 실험 — 테이프 감은 앰프 [성격실험 B]",
+      "status": "completed",
+      "error": null,
+      "promptVersion": "npc-lab/5",
+      "speeches": 18,
+      "calls": 53,
+      "cost": {
+        "usd": 0.0791607,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failures": [],
+      "models": [
+        "gpt-6.1-sol",
+        "gpt-6-luna"
+      ],
+      "mismatches": [],
+      "spokenTurns": 17
+    },
+    {
+      "label": "C",
+      "id": "9bba4198-f34f-4998-9283-b68c4ca6b019",
+      "name": "서월 문체 실험 — 연습 영상 틀어 놓은 저녁 [성격실험 C]",
+      "status": "completed",
+      "error": null,
+      "promptVersion": "npc-lab/5",
+      "speeches": 18,
+      "calls": 53,
+      "cost": {
+        "usd": 0.06367127500000001,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failures": [],
+      "models": [
+        "gpt-6.1-sol",
+        "gpt-6-luna"
+      ],
+      "mismatches": [],
+      "spokenTurns": 17
+    },
+    {
+      "label": "D",
+      "id": "7cb5128e-cc23-4bc5-b76f-0c38c6f53bc7",
+      "name": "서월 문체 실험 — 테이프 감은 앰프 [성격실험 D · 반응 지침 v4]",
+      "status": "completed",
+      "error": null,
+      "promptVersion": "npc-lab/5",
+      "speeches": 18,
+      "calls": 53,
+      "cost": {
+        "usd": 0.06844859499999999,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failures": [],
+      "models": [
+        "gpt-6.1-sol",
+        "gpt-6-luna"
+      ],
+      "mismatches": [],
+      "spokenTurns": 16
+    },
+    {
+      "label": "E",
+      "id": "6627dc3b-bd6f-4577-8a7a-9f2b0087ce80",
+      "name": "서월 문체 실험 — 연습 영상 틀어 놓은 저녁 [성격실험 E · 반응 지침 v4]",
+      "status": "completed",
+      "error": null,
+      "promptVersion": "npc-lab/5",
+      "speeches": 18,
+      "calls": 45,
+      "cost": {
+        "usd": 0.063645735,
+        "unpricedCalls": 0,
+        "assumedCalls": 0,
+        "pricingDate": "2026-11-06",
+        "pricingRevision": "33fd7a5a40495c1a"
+      },
+      "failures": [],
+      "models": [
+        "gpt-6.1-sol",
+        "gpt-6-luna"
+      ],
+      "mismatches": [],
+      "spokenTurns": 11
+    }
+  ]
+}

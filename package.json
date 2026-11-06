@@ -28,6 +28,8 @@
     "smoke:bulk-delete": "tsx scripts/bulk-delete-ui-smoke.ts",
     "smoke:openai": "node --env-file-if-exists=.env --import tsx scripts/openai-smoke.ts",
     "assets:build": "node assets/npc-canon/build.mjs",
+    "seowol:build": "node assets/seowol/build.mjs",
+    "seowol:live": "node --env-file-if-exists=.env --import tsx scripts/seowol-live.ts",
     "assets:validate": "tsx assets/npc-canon/validate.ts",
     "assets:smoke": "tsx assets/npc-canon/smoke.ts",
     "assets:gallery": "node assets/npc-canon/gallery-check.mjs",
