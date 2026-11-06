@@ -1,11 +1,12 @@
 import { randomUUID } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { z } from 'zod';
 import type { Adapter, AdapterEvent, TurnRequest, TurnResult } from './types.js';
 import type { ModelConfig } from '../shared/schema.js';
 import type { ApiCredential, ModelInfo, TokenUsage } from '../shared/types.js';
 import { OpenAIKeys } from './openai-keys.js';
+import { replaceFileSync } from './replace-file.js';
 import { baseInstructions } from '../core/prompts.js';
 import { normalizeUsage } from '../core/metrics.js';
 import { getModelCatalog, isModelEnabled } from '../shared/model-catalog.js';
@@ -61,7 +62,7 @@ export class OpenAIAdapter implements Adapter {
   private load<T>(kind: 'sessions' | 'calls', id: string): T { return JSON.parse(readFileSync(this.file(kind, id), 'utf8')); }
   private save(kind: 'sessions' | 'calls', id: string, value: unknown) {
     const file = this.file(kind, id), temporary = file + '.tmp';
-    writeFileSync(temporary, JSON.stringify(value), { mode: 0o600 }); renameSync(temporary, file);
+    writeFileSync(temporary, JSON.stringify(value), { mode: 0o600 }); replaceFileSync(temporary, file);
   }
   private clean(value: any, key?: string): any {
     return JSON.parse(JSON.stringify(value, (_key, v) => typeof v === 'string' ? this.keys.redact(v, key) : v));
