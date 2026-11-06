@@ -46,6 +46,8 @@ try {
   await page.locator('.world-state').getByText('입구의 문이 열려 있다.', { exact: false }).waitFor();
   await page.getByRole('button', { name: '호출·계측', exact: true }).click();
   await page.getByLabel('호출 종류 필터').selectOption('environment');
+  // API completion can precede the detail refresh delivered to the browser.
+  await page.locator('tr.clickable').nth(3).waitFor({ state: 'visible' });
   assert.equal(await page.locator('tr.clickable').count(), 4);
   await page.locator('tr.clickable').first().click();
   await page.getByRole('heading', { name: '입력', exact: true }).waitFor();
