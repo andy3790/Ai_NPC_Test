@@ -1,5 +1,9 @@
 # 변경 이력
 
+## 미출시 · 2026-11-08
+
+- 「없는 층, 닫히는 문」 장면 v2 (`seowol_drama_closing_door_v2`). v1 실제 대화에서 해경은 사진을 바로 두고 가자고 했고, 독자는 해경이 무엇을 두고 가는지 알기 어려웠다. 사진통의 ‘해경 네 살’이라는 글씨와 찢어지는 두 손 사이에 그 사정을 일부 드러냈다. 사진 속 손을 누구의 것으로 알아봤는지는 해경의 기억에 두었다. 8초에 눈금이 사라질 때에는 판 옆으로 손을 내밀 수 있는지도 달라진다. 판을 당긴 뒤에는 이미 지난 시간을 이어서 판정한다. 해경이 사진을 놓거나 건지는 선택, 다정이 자신의 회수를 결정하는 선택은 열려 있다. 장면 입력만 개정했으며 공통 대화 지침은 `npc-dialogue/5`다. [v1 장면 원본](https://github.com/andy3790/Ai_NPC_Test/blob/9349414af2f86b1c56d855ab36482a1194d7121f/assets/seowol/experiments/drama-closing-door.json) · [v1 실제 대화](docs/reviews/seowol-closing-door-models-2026-11-08/transcript.md) · [v2 장면](assets/seowol/drama/README.md#1-없는-층-닫히는-문)
+
 ## 미출시 · 2026-11-07
 
 - 새 OpenAI 실험과 서월 사건극 6편에 NPC Terra low, 세계 엔진 Luna medium, 진행자 Luna low를 적용했습니다. 인물 연기와 세계 판정의 비용을 독립적으로 조절하고, 사건극의 NPC 모델을 시나리오 편집 한 곳에서 바꿀 수 있게 했습니다. 대화 지침 `npc-dialogue/5`와 기존 검토에 사용한 설정은 당시 커밋에서 확인할 수 있습니다. [역할별 모델과 진행 비용](docs/openai-api.md#모델과-출력-한도) · [서월 검토 기준 설정](https://github.com/andy3790/Ai_NPC_Test/blob/bcba5e82269677600758f3e7b646a42c5aae4792/assets/seowol/experiments/drama-closing-door.json)

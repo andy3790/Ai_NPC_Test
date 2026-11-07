@@ -88,7 +88,7 @@ export async function buildDramaticScenes(root = ownRoot) {
     const spec = {
       schemaVersion: 1, name: `서월 사건극 — ${scene.title}`,
       scenario: {
-        id: `seowol_drama_${scene.slug.replaceAll('-', '_')}_v1`, name: scene.title,
+        id: `seowol_drama_${scene.slug.replaceAll('-', '_')}_v${scene.revision ?? 1}`, name: scene.title,
         world: commonWorld, situation: scene.opening, characters: cast,
         defaults: roleDefaults.npc,
         worldEngineInstructions: [
@@ -137,6 +137,7 @@ export async function buildDramaticScenes(root = ownRoot) {
 function guide(outputs) {
   const sections = outputs.map(({ scene, filename, spec }, i) => [
     `## ${i + 1}. ${scene.title}`, '', scene.pitch, '',
+    ...(scene.revision ? [`장면 v${scene.revision} · [변경 이력](../../../CHANGELOG.md)`, ''] : []),
     `**장르:** ${scene.genre}  `,
     `**참가자:** ${spec.scenario.characters.map(c => c.name).join('·')}  `,
     `**실행:** [${filename}](../experiments/${filename}) · ${scene.spatial ? '분산 공간' : '단일 현장'} · 최대 ${scene.turns}차례`, '',
@@ -174,7 +175,7 @@ function guide(outputs) {
     '- [scenes.mjs](scenes.mjs)는 장면·참가자별 정보·판정 조건의 원본이고 [cast.mjs](cast.mjs)는 새 인물과 추가 말투의 원본이다.',
     '- [build-drama.mjs](../build-drama.mjs)가 이 안내·[목록](manifest.json)·인물 11개·실험 6개를 만든다. 생성 JSON을 직접 바꾸면 재생성 때 덮어써진다.',
     '- 프로젝트 루트에서 `node assets/seowol/build-drama.mjs`로 새 팩만 재생성하거나 `npm run seowol:build`로 기존 서월 팩과 함께 생성한다.', '',
-    '6개 장면의 파일 호환성과 엔진 연결은 형식 검증과 모의 실행으로 확인했다. 「없는 층, 닫히는 문」은 실제 Sol·Luna로 수정 전 10차례와 보완 후 16차례를 비교했고, 보완본에서 24초의 문 폐쇄까지 관찰했다. [실행 기록과 대화 원문](../../../docs/reviews/seowol-closing-door-2026-11-07/report.md)', '',
+    '「없는 층, 닫히는 문」의 이전 장면(v1)에는 실제 API에서 24초의 문 폐쇄까지 관찰한 기록과, 모델 조합별로 16차례씩 비교한 기록이 있다. [문이 닫힌 실행의 원문](../../../docs/reviews/seowol-closing-door-2026-11-07/report.md) · [Sol과 Terra·Luna 대화 비교](../../../docs/reviews/seowol-closing-door-models-2026-11-08/report.md)', '',
   ].join('\n');
 }
 

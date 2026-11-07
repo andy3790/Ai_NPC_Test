@@ -5,6 +5,7 @@ import { experimentSchema, characterSchema } from '../src/shared/schema.js';
 import { persona, evaluationPrompt } from '../src/core/prompts.js';
 import { worldPrompt, initialWorldState, applyWorldOutput } from '../src/core/world.js';
 import { directorPrompt } from '../src/core/director.js';
+import { managerWorld } from '../src/core/spatial-prompts.js';
 import { apiRoleDefaults } from '../src/shared/role-models.js';
 import type { Utterance } from '../src/shared/types.js';
 import type { WorldOutput } from '../src/shared/world-schema.js';
@@ -27,6 +28,27 @@ test('all six dramatic presets inherit the selected NPC and keep world and speak
     assert.ok(spec.variants.every(v => !v.eventGeneration), file);
     assert.equal(spec.evaluation.enabled, false, file);
   }
+});
+
+test('closing-door v2 shares the photograph and narrowing gap while keeping recognition and deadlines in their roles', () => {
+  const spec = experimentSchema.parse(JSON.parse(read('experiments/drama-closing-door.json')));
+  const { scenario } = spec;
+  const manifest = JSON.parse(read('drama/manifest.json')) as { scenes: { file: string; id: string }[] };
+  assert.equal(scenario.id, 'seowol_drama_closing_door_v2');
+  assert.equal(manifest.scenes.find(s => s.file.endsWith('/drama-closing-door.json'))?.id, scenario.id);
+  const director = directorPrompt({ characters: scenario.characters, allowedSpeakerIds: scenario.characters.map(c => c.id),
+    history: [], speeches: [], initialScene: scenario.situation });
+  const world = managerWorld(spec);
+  const participants = scenario.characters.map(c => ({ id: c.id, input: persona(spec, c, spec.variants[0]) }));
+  for (const { id, input } of [...participants, { id: 'director', input: director.input }]) {
+    assert.ok(input.includes('해경 네 살'), id);
+    assert.ok(input.includes('손가락 두 개'), id);
+    assert.equal(input.includes('시장 앞'), id === 'yoon_haegyeong', id);
+    assert.doesNotMatch(input, /8초 눈금 소실|24초 문 폐쇄/);
+  }
+  assert.equal(world.situation, scenario.situation);
+  assert.match(world.worldEngineInstructions, /8초 눈금 소실과 24초 문 폐쇄/);
+  assert.doesNotMatch(JSON.stringify(world), /시장 앞/);
 });
 
 test('Seowol actors retain authored identities, abilities, limitations and private histories', () => {
