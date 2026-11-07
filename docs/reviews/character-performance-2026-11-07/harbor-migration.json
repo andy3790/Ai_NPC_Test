@@ -1,0 +1,361 @@
+{
+  "plan": {
+    "split": "migration",
+    "repetitions": 1,
+    "turns": 6,
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "maxCalls": 12,
+    "maxEstimatedUsd": 1,
+    "characterPerformanceVersion": "character-performance/2",
+    "fixtureSha256": "5af9fae484691661a56705a8ae8c6a8c94ea9ed663c2a5cc8b631e0fe0f8e153"
+  },
+  "outputs": [
+    {
+      "scene": "harbor-migration",
+      "repetition": 1,
+      "policy": "off",
+      "sessions": [
+        {
+          "actor": "yoon"
+        },
+        {
+          "actor": "miru"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "윤",
+          "speech": "저는 통밀빵으로 할게요.",
+          "action": "탁자 위의 통밀빵을 집어 든다."
+        },
+        {
+          "sequence": 2,
+          "actor": "미루",
+          "speech": "그럼 저는 잼빵 먹을게요.",
+          "action": "탁자 위의 잼빵을 집어 든다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "창밖에서 잠깐 음악이 들린다. 옆 휴게실 사람이 “좀 더 크게 틀까요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "윤",
+          "speech": "지금도 잘 들려요. 이 정도가 좋겠어요.",
+          "action": ""
+        },
+        {
+          "sequence": 5,
+          "actor": "미루",
+          "speech": "저도 지금 정도가 좋아요.",
+          "action": ""
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "빵을 가져온 사람이 “아까 빵 얘기요. 다음에도 사 올까요?” 하고 묻는다. 여전히 쉬는 시간이다.",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "윤",
+          "speech": "네, 다음에도 통밀빵 있으면 부탁해요. 잘 먹을게요.",
+          "action": "통밀빵을 한 입 베어 문다."
+        },
+        {
+          "sequence": 8,
+          "actor": "미루",
+          "speech": "저는 다음에도 잼빵 부탁해요. 고마워요.",
+          "action": "잼빵을 한 입 베어 문다."
+        }
+      ],
+      "calls": [
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "ff6de2c16f74df1f9805af6d40e22961ac905dcb1dac6c6287b437fe15f75e82",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"저는 통밀빵으로 할게요.\",\"action\":\"탁자 위의 통밀빵을 집어 든다.\"}",
+          "usage": {
+            "inputTokens": 2027,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2024,
+            "outputTokens": 41,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2068
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "62ac2fa3bb7478f53387ba9ba60eed8a7be4b52f30b02b4c3f70f0b41dbeed8d",
+          "recalled": false,
+          "inputSha256": "86a112b2724fcf4ff19d71ac39abd5456ad0e566da2dd89cfc4b5e4da5669e0c",
+          "output": "{\"speech\":\"그럼 저는 잼빵 먹을게요.\",\"action\":\"탁자 위의 잼빵을 집어 든다.\"}",
+          "usage": {
+            "inputTokens": 2162,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2159,
+            "outputTokens": 42,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2204
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "ff6de2c16f74df1f9805af6d40e22961ac905dcb1dac6c6287b437fe15f75e82",
+          "recalled": false,
+          "inputSha256": "37fd527f5e444c25c662375e0429cd23b1cf845dfd005b09b9b353cbdd9d5a3a",
+          "output": "{\"speech\":\"지금도 잘 들려요. 이 정도가 좋겠어요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2346,
+            "cachedInputTokens": 2024,
+            "cacheWriteInputTokens": 319,
+            "outputTokens": 31,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2377
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "62ac2fa3bb7478f53387ba9ba60eed8a7be4b52f30b02b4c3f70f0b41dbeed8d",
+          "recalled": false,
+          "inputSha256": "8e926afc653291940eea95adf8985e82fa786ee1f76073b968f4c5c89bcb123c",
+          "output": "{\"speech\":\"저도 지금 정도가 좋아요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2472,
+            "cachedInputTokens": 2159,
+            "cacheWriteInputTokens": 310,
+            "outputTokens": 24,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2496
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "ff6de2c16f74df1f9805af6d40e22961ac905dcb1dac6c6287b437fe15f75e82",
+          "recalled": false,
+          "inputSha256": "2113e568ad0030b9d2d05c31c6717333c3785b0a757618025eeef89cf8407e70",
+          "output": "{\"speech\":\"네, 다음에도 통밀빵 있으면 부탁해요. 잘 먹을게요.\",\"action\":\"통밀빵을 한 입 베어 문다.\"}",
+          "usage": {
+            "inputTokens": 2641,
+            "cachedInputTokens": 2343,
+            "cacheWriteInputTokens": 295,
+            "outputTokens": 47,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2688
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "62ac2fa3bb7478f53387ba9ba60eed8a7be4b52f30b02b4c3f70f0b41dbeed8d",
+          "recalled": false,
+          "inputSha256": "f7b38b9657b3a908257c21a463a19c6b89a44d81eab999392a585559705d2b1f",
+          "output": "{\"speech\":\"저는 다음에도 잼빵 부탁해요. 고마워요.\",\"action\":\"잼빵을 한 입 베어 문다.\"}",
+          "usage": {
+            "inputTokens": 2782,
+            "cachedInputTokens": 2469,
+            "cacheWriteInputTokens": 310,
+            "outputTokens": 44,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2826
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.016768
+    },
+    {
+      "scene": "harbor-migration",
+      "repetition": 1,
+      "policy": "character-performance/2",
+      "sessions": [
+        {
+          "actor": "yoon",
+          "choices": {
+            "attention": "내 취향이나 불편",
+            "phrasing": "대답을 먼저 건넨다"
+          },
+          "source": "profile"
+        },
+        {
+          "actor": "miru",
+          "choices": {
+            "attention": "눈앞의 작은 변화",
+            "phrasing": "대답을 먼저 건넨다"
+          },
+          "source": "profile"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "윤",
+          "speech": "저는 통밀빵으로 할게요.",
+          "action": "탁자 위의 통밀빵을 집어 든다."
+        },
+        {
+          "sequence": 2,
+          "actor": "미루",
+          "speech": "그럼 저는 잼빵 먹을게요.",
+          "action": "탁자 위의 잼빵을 집어 든다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "창밖에서 잠깐 음악이 들린다. 옆 휴게실 사람이 “좀 더 크게 틀까요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "윤",
+          "speech": "저는 지금 정도가 좋아요. 더 키우지는 말아 주세요.",
+          "action": ""
+        },
+        {
+          "sequence": 5,
+          "actor": "미루",
+          "speech": "저도 지금 정도가 좋아요. 이야기하기에도 괜찮고요.",
+          "action": ""
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "빵을 가져온 사람이 “아까 빵 얘기요. 다음에도 사 올까요?” 하고 묻는다. 여전히 쉬는 시간이다.",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "윤",
+          "speech": "네, 다음에도 통밀빵으로 부탁해요.",
+          "action": "통밀빵을 한 입 베어 문다."
+        },
+        {
+          "sequence": 8,
+          "actor": "미루",
+          "speech": "저는 다음에도 잼빵으로 부탁해요. 가져다주셔서 고마워요.",
+          "action": "잼빵을 한 입 베어 문다."
+        }
+      ],
+      "calls": [
+        {
+          "actor": "yoon",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "3c903ffe5d446e68437578d2abcfe3f933e941716736d195d11299231d707da6",
+          "recalled": false,
+          "inputSha256": "f2033b90c3a98100244f3c6ae69c3af328a449e36685a9365e193033f022a426",
+          "output": "{\"portrayal\":{\"attention\":\"내 취향이나 불편\",\"phrasing\":\"대답을 먼저 건넨다\"},\"speech\":\"저는 통밀빵으로 할게요.\",\"action\":\"탁자 위의 통밀빵을 집어 든다.\"}",
+          "usage": {
+            "inputTokens": 2594,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2591,
+            "outputTokens": 67,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2661
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "dcc05b2bcaf175699e902850837bcf90b6fb95faf50d5926fd00234fc3d1bea7",
+          "recalled": false,
+          "inputSha256": "ed8664870d49575269cad9e9a5315ed235a6ad36a84585d751005db29633282c",
+          "output": "{\"portrayal\":{\"attention\":\"눈앞의 작은 변화\",\"phrasing\":\"대답을 먼저 건넨다\"},\"speech\":\"그럼 저는 잼빵 먹을게요.\",\"action\":\"탁자 위의 잼빵을 집어 든다.\"}",
+          "usage": {
+            "inputTokens": 2705,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2702,
+            "outputTokens": 67,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2772
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "3c903ffe5d446e68437578d2abcfe3f933e941716736d195d11299231d707da6",
+          "recalled": false,
+          "inputSha256": "fdd19f0fda71022f313d03627d4f70582ce8f510ed3a3d8a62ef8829c9ac76a1",
+          "output": "{\"speech\":\"저는 지금 정도가 좋아요. 더 키우지는 말아 주세요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2587,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2584,
+            "outputTokens": 32,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2619
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "dcc05b2bcaf175699e902850837bcf90b6fb95faf50d5926fd00234fc3d1bea7",
+          "recalled": false,
+          "inputSha256": "7bc202eae6d5b49ccfe80399a0294b4999dea2399925e139c37dd8046d33a356",
+          "output": "{\"speech\":\"저도 지금 정도가 좋아요. 이야기하기에도 괜찮고요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2688,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2685,
+            "outputTokens": 33,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2721
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "3c903ffe5d446e68437578d2abcfe3f933e941716736d195d11299231d707da6",
+          "recalled": false,
+          "inputSha256": "d09dc3d65851a383d664580d27495a38dcd20e16ec0ef3944d9223e0d641227e",
+          "output": "{\"speech\":\"네, 다음에도 통밀빵으로 부탁해요.\",\"action\":\"통밀빵을 한 입 베어 문다.\"}",
+          "usage": {
+            "inputTokens": 2916,
+            "cachedInputTokens": 2584,
+            "cacheWriteInputTokens": 329,
+            "outputTokens": 40,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2956
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "dcc05b2bcaf175699e902850837bcf90b6fb95faf50d5926fd00234fc3d1bea7",
+          "recalled": false,
+          "inputSha256": "fddf498d491a98f6cac75aa083aa3c70acc10420effff113a0a4ebc99fdfceaa",
+          "output": "{\"speech\":\"저는 다음에도 잼빵으로 부탁해요. 가져다주셔서 고마워요.\",\"action\":\"잼빵을 한 입 베어 문다.\"}",
+          "usage": {
+            "inputTokens": 3023,
+            "cachedInputTokens": 2685,
+            "cacheWriteInputTokens": 335,
+            "outputTokens": 50,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 3073
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.0315179
+    }
+  ]
+}

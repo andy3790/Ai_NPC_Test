@@ -123,7 +123,7 @@ test('old runs retain stored personas and are not relabeled as the current promp
   delete spec.scenario.environment; spec.variants = [spec.variants[0]];
   try {
     const { runs } = await engine.create(spec, false), run = runs[0];
-    const variant = { ...run.variant }; delete variant.dialoguePromptVersion;
+    const variant = { ...run.variant }; delete variant.dialoguePromptVersion; delete variant.characterPerformanceVersion;
     store.patch('runs', run.id, { variant, promptVersion: 'npc-lab/5' });
     await engine.resume(run.id, true); await engine.idle();
     const before = structuredClone(engine.run(run.id).sessions);
@@ -131,6 +131,7 @@ test('old runs retain stored personas and are not relabeled as the current promp
     await engine.resume(run.id); await engine.idle();
     const d = engine.detail(run.id);
     assert.deepEqual(d.run.sessions, before);
+    assert.ok(Object.values(d.run.sessions).every(s => s.performance === undefined));
     assert.equal(d.run.status, 'completed');
     assert.ok(d.invocations.every(c => c.metadata.promptVersion === 'npc-lab/5' && c.metadata.dialoguePromptVersion === null));
     assert.equal(d.run.variant.dialoguePromptVersion, undefined);

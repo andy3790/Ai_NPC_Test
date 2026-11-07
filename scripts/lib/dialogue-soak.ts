@@ -16,6 +16,7 @@ export function prepareConversations(fixtures: unknown[], options: ConversationO
     spec.evaluation.enabled = false; spec.concurrentRuns = 1; spec.maxConcurrentCalls = 1; spec.timeoutMs = 90_000;
     spec.repetitions = options.repetitions; spec.maxUtterances = options.turns;
     const mode = environmentMode(spec, spec.variants[0]);
+    const characterPerformanceVersion = spec.variants[0].characterPerformanceVersion ?? 'off';
     if (!['off', 'ai'].includes(mode)) throw new Error('This probe supports off/ai environments only.');
     if ((options.worldBaseline || options.worldCandidate) && (mode !== 'ai' || !options.worldBaseline || !options.worldCandidate ||
         options.worldBaseline === options.worldCandidate || options.baseline !== options.candidate)) throw new Error('World comparisons require AI mode, distinct world policies and one fixed NPC policy.');
@@ -24,7 +25,7 @@ export function prepareConversations(fixtures: unknown[], options: ConversationO
       { dialoguePromptVersion: options.candidate, worldPromptVersion: options.worldCandidate }];
     if (i % 2) conditions.reverse();
     spec.variants = conditions.map((condition, index) => ({ id: `condition-${index}`, label: [condition.dialoguePromptVersion, condition.worldPromptVersion].filter(Boolean).join(' + '), ...condition,
-      environmentMode: mode, stopOnSilence: true, deliveryMode: 'batched_on_turn', memoryMode: 'initial_only', turnPolicy: 'round_robin', eventGeneration: false }));
+      environmentMode: mode, characterPerformanceVersion, stopOnSilence: true, deliveryMode: 'batched_on_turn', memoryMode: 'initial_only', turnPolicy: 'round_robin', eventGeneration: false }));
     return experimentSchema.parse(spec);
   });
   const expectedCalls = specs.reduce((n, s) => n + s.variants.length * s.maxUtterances * s.repetitions *

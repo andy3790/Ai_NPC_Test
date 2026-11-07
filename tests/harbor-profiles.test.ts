@@ -16,7 +16,7 @@ test('harbor profile revisions preserve the legacy cast and freeze authored chan
   assert.equal(sha256(JSON.stringify(harborProfilePolicies['harbor-profile/1'])), 'c1d8510e71515fea3395914e36b95673096570da1bb0bde433607cc76265aac6');
   assert.equal(sha256(JSON.stringify(harborProfilePolicies['harbor-profile/2'])), '837d048d27eb9f7dfc4a7826c5ca7e55a6ee94008c90bc1eb469cda98ba2de01');
   const revised = exampleSpec('mock-model', 'low', 'harbor-profile/2');
-  assert.deepEqual(exampleSpec('mock-model'), exampleSpec('mock-model', 'low', 'harbor-profile/4'));
+  assert.deepEqual(exampleSpec('mock-model'), exampleSpec('mock-model', 'low', 'harbor-profile/5'));
   assert.deepEqual(revised.scenario.environment, original.scenario.environment);
   assert.equal(revised.scenario.world, original.scenario.world);
   assert.equal(revised.scenario.situation, original.scenario.situation);
@@ -59,6 +59,16 @@ test('profile 4 preserves the frozen profile 3 except Miru motivation and delive
   assert.deepEqual(withoutCast(candidate), withoutCast(baseline));
 });
 
+test('profile 5 removes common directions while preserving individual facts and voice examples', () => {
+  assert.equal(sha256(JSON.stringify(harborProfilePolicies['harbor-profile/5'])), 'e33bcc9d987dddb3a37e23ad2b3cd2b143f1d5a54f5a97a06839043db31af2bf');
+  const before = exampleSpec('mock-model', 'low', 'harbor-profile/4').scenario.characters;
+  const after = exampleSpec('mock-model').scenario.characters;
+  const unchanged = ({ goals, speechStyle, behaviors, ...rest }: typeof after[number]) => rest;
+  assert.deepEqual(after.map(unchanged), before.map(unchanged));
+  assert.ok(after.every((c, i) => c.goals.length + c.speechStyle.length + c.behaviors.length <
+    before[i].goals.length + before[i].speechStyle.length + before[i].behaviors.length));
+});
+
 test('new API examples prefer verified dialogue models only when available and preserve saved config', async () => {
   const model = (id: string, effort = 'low', isDefault = false): ModelInfo => ({ id, name: id, efforts: [effort], defaultEffort: effort, isDefault });
   for (const [adapterName, available, npc, helper, effort] of [
@@ -77,7 +87,7 @@ test('new API examples prefer verified dialogue models only when available and p
       const spec = response.json();
       assert.deepEqual(spec.scenario.defaults, { model: npc, effort });
       assert.equal(spec.director.model, helper); assert.equal(spec.evaluation.model, helper);
-      assert.equal(spec.scenario.id, 'fog-harbor-profile4');
+      assert.equal(spec.scenario.id, 'fog-harbor-profile5');
       if (adapterName === 'openai') {
         assert.equal(spec.maxUtterances, 18); assert.equal(spec.maxConcurrentCalls, 1);
         assert.ok(spec.variants.every((v: any) => v.turnPolicy === 'director'));

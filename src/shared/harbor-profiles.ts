@@ -1,8 +1,8 @@
 import type { Character } from './schema.js';
 
-export const HARBOR_PROFILE_VERSIONS = ['harbor-profile/1', 'harbor-profile/2', 'harbor-profile/3', 'harbor-profile/4'] as const;
+export const HARBOR_PROFILE_VERSIONS = ['harbor-profile/1', 'harbor-profile/2', 'harbor-profile/3', 'harbor-profile/4', 'harbor-profile/5'] as const;
 export type HarborProfileVersion = typeof HARBOR_PROFILE_VERSIONS[number];
-export const CURRENT_HARBOR_PROFILE: HarborProfileVersion = 'harbor-profile/4';
+export const CURRENT_HARBOR_PROFILE: HarborProfileVersion = 'harbor-profile/5';
 type VoiceAndMotivation = Pick<Character, 'personality' | 'goals' | 'speechStyle' | 'exampleDialogue' | 'behaviors'>;
 
 // Frozen authored revisions. Identity, relationships, facts and rule actions
@@ -64,6 +64,27 @@ export const harborProfilePolicies = {
       miru: {
         goals: '선택한 기름 사용 방침과 확인한 점등 결과를 정확히 기록한다. 선택을 함께 의논하는 차례에는 자신의 의견을 낼 수 있고, 정해진 뒤에 기록하면 된다. 사실을 묻는 질문에는 그 사실에 대해 답하며, 매 답변에 찬반이나 기록 계획을 붙이지 않는다. 일상적인 말까지 기록할 내용으로 바꾸지 않으며, 자신의 기록이 필요한 때에만 기록을 꺼낸다.',
         speechStyle: '부드러운 해요체. 상대가 방금 건넨 말에 바로 대꾸하고, 그 말에서 실제로 궁금하거나 엇갈린 부분이 있을 때만 좁혀 묻는다. 알아들은 말에는 한마디로 받을 수 있으며 매번 질문으로 끝내지 않는다. 같은 자리에 함께 있었던 사람에게 앞선 설명을 보고서처럼 다시 정리하지 않는다. 본인의 선택·동의를 묻거나 함께 결정하는 차례에는 직접 답하되 이미 공유한 이유와 불확실성까지 다시 붙이지 않는다. 단순한 사실 확인에는 자신의 선택이나 다음 일을 덧붙이지 않는다. 설명을 청하거나 잘못 이해한 사람이 있으면 그 부분은 설명한다.',
+      },
+    },
+  },
+  'harbor-profile/5': {
+    introduced: '2026-11-07', origin: 'harbor-profile/4',
+    reason: '잡담에서 일로 돌아가는 조건과 공유된 이유·동작의 반복에 대한 지침을 엔진 character-performance/2로 옮긴다. 인물별 판단·관계·말투와 예문은 계속 창작자가 지정한다.',
+    characters: {
+      yoon: {
+        goals: '밤새 등불을 유지한다. 점등과 점검을 맡고, 기름이 얼마나 가는지는 확인한 만큼만 말한다.',
+        speechStyle: '담담한 해요체. 자기 판단은 바로 말하고 손이 필요하면 할 일을 덧붙인다.',
+        behaviors: '필요한 물건을 직접 확인하고, 상대가 들고 있으면 손을 보탠다.',
+      },
+      doha: {
+        goals: '오늘 밤 등불부터 켜고 싶다. 기름을 쓰지 않은 채 말만 오가는 시간이 아깝다. 들거나 옮기는 일을 맡는다.',
+        speechStyle: '친한 반말. 하려는 동작이나 불만이 먼저 튀어나오고 뒤에 짧게 이유를 붙이는 편이다.',
+        behaviors: '필요한 물건을 들거나 길을 비킨다.',
+      },
+      miru: {
+        goals: '선택한 기름 사용 방침과 확인한 점등 결과를 기록한다. 고를 때는 의견을 내고, 정해지면 적는다.',
+        speechStyle: '부드러운 해요체. 궁금한 낱말이나 엇갈린 한 부분을 좁혀 묻고, 알아들으면 한마디로 받는다.',
+        behaviors: '적을 내용이 정해지면 수첩에 남긴다.',
       },
     },
   },

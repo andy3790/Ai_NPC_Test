@@ -1,0 +1,361 @@
+{
+  "plan": {
+    "split": "blank",
+    "repetitions": 1,
+    "turns": 6,
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "maxCalls": 12,
+    "maxEstimatedUsd": 1,
+    "characterPerformanceVersion": "character-performance/2",
+    "fixtureSha256": "5af9fae484691661a56705a8ae8c6a8c94ea9ed663c2a5cc8b631e0fe0f8e153"
+  },
+  "outputs": [
+    {
+      "scene": "names-only",
+      "repetition": 1,
+      "policy": "off",
+      "sessions": [
+        {
+          "actor": "one"
+        },
+        {
+          "actor": "two"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "한결",
+          "speech": "저는 앞줄로 살까 해요. 취소표 기다리다 시작 놓치기는 싫어서요. 은서 씨는요?",
+          "action": ""
+        },
+        {
+          "sequence": 2,
+          "actor": "은서",
+          "speech": "저도 앞줄로 할게요. 기다리면서 시간 신경 쓰는 것보다는 낫겠어요.",
+          "action": "표를 사려고 매표소 앞으로 다가간다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "대기석에 물과 따뜻한 보리차를 둔 직원이 “기다리는 동안 뭐 드실래요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "한결",
+          "speech": "저는 물로 주세요. 감사합니다.",
+          "action": "표를 사려고 매표소 앞으로 다가간다."
+        },
+        {
+          "sequence": 5,
+          "actor": "은서",
+          "speech": "저는 따뜻한 보리차로 주세요. 감사합니다.",
+          "action": ""
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "직원이 매표기로 돌아온다. “취소표는 아직 없네요. 아까 그 앞줄로 하실 분 계세요?”",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "한결",
+          "speech": "네, 앞줄 한 장 주세요.",
+          "action": "결제할 카드를 꺼낸다."
+        },
+        {
+          "sequence": 8,
+          "actor": "은서",
+          "speech": "저도 앞줄 한 장 주세요.",
+          "action": "결제할 카드를 꺼내 든다."
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "9bf05940f3ba7289479f18ddfc175aba920549b4a5dbec9cb540aee29ffceb51",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"저는 앞줄로 살까 해요. 취소표 기다리다 시작 놓치기는 싫어서요. 은서 씨는요?\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 1430,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 1427,
+            "outputTokens": 48,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1478
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "42ff82eeabc7511c54017b63bc18b4a4a5507f60c349526c20f6bcde404f1a9e",
+          "recalled": false,
+          "inputSha256": "49edad9710a5ba2de07587ffacd8f4a8d28451f1f592d4de085ea37d1455bc22",
+          "output": "{\"speech\":\"저도 앞줄로 할게요. 기다리면서 시간 신경 쓰는 것보다는 낫겠어요.\",\"action\":\"표를 사려고 매표소 앞으로 다가간다.\"}",
+          "usage": {
+            "inputTokens": 1514,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 1511,
+            "outputTokens": 53,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1567
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "9bf05940f3ba7289479f18ddfc175aba920549b4a5dbec9cb540aee29ffceb51",
+          "recalled": false,
+          "inputSha256": "3b518eb66199b9623be3c83c3632d04483d675d668589ff1f0335d6d843ba9ec",
+          "output": "{\"speech\":\"저는 물로 주세요. 감사합니다.\",\"action\":\"표를 사려고 매표소 앞으로 다가간다.\"}",
+          "usage": {
+            "inputTokens": 1772,
+            "cachedInputTokens": 1427,
+            "cacheWriteInputTokens": 342,
+            "outputTokens": 36,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1808
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "42ff82eeabc7511c54017b63bc18b4a4a5507f60c349526c20f6bcde404f1a9e",
+          "recalled": false,
+          "inputSha256": "fe6dc9ccb75543b827ba8463056e386a341af3ab201f2622f1bbd0d90b42297b",
+          "output": "{\"speech\":\"저는 따뜻한 보리차로 주세요. 감사합니다.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 1841,
+            "cachedInputTokens": 1511,
+            "cacheWriteInputTokens": 327,
+            "outputTokens": 29,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1870
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "9bf05940f3ba7289479f18ddfc175aba920549b4a5dbec9cb540aee29ffceb51",
+          "recalled": false,
+          "inputSha256": "01dbd91506aa453f045f12bf93701598348edbf8d91083ca6b75bd629a5191f7",
+          "output": "{\"speech\":\"네, 앞줄 한 장 주세요.\",\"action\":\"결제할 카드를 꺼낸다.\"}",
+          "usage": {
+            "inputTokens": 2072,
+            "cachedInputTokens": 1769,
+            "cacheWriteInputTokens": 300,
+            "outputTokens": 33,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2105
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "42ff82eeabc7511c54017b63bc18b4a4a5507f60c349526c20f6bcde404f1a9e",
+          "recalled": false,
+          "inputSha256": "093fc7703ef504254ae9213b3123b01902e6de41b1f6e34b586d2fe59490be74",
+          "output": "{\"speech\":\"저도 앞줄 한 장 주세요.\",\"action\":\"결제할 카드를 꺼내 든다.\"}",
+          "usage": {
+            "inputTokens": 2137,
+            "cachedInputTokens": 1838,
+            "cacheWriteInputTokens": 296,
+            "outputTokens": 35,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2172
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.013538
+    },
+    {
+      "scene": "names-only",
+      "repetition": 1,
+      "policy": "character-performance/2",
+      "sessions": [
+        {
+          "actor": "one",
+          "choices": {
+            "attention": "내 취향이나 불편",
+            "phrasing": "대답을 먼저 건넨다"
+          },
+          "source": "unspecified"
+        },
+        {
+          "actor": "two",
+          "choices": {
+            "attention": "바로 손댈 일",
+            "phrasing": "구체적인 한 대목부터 꺼낸다"
+          },
+          "source": "unspecified"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "한결",
+          "speech": "저는 앞줄은 목이 불편해서요. 취소표 조금만 기다려 볼래요.",
+          "action": "매표소 옆으로 비켜선다."
+        },
+        {
+          "sequence": 2,
+          "actor": "은서",
+          "speech": "저는 앞줄도 괜찮아서 먼저 살게요.",
+          "action": "표를 사려고 매표 창구 앞으로 다가선다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "대기석에 물과 따뜻한 보리차를 둔 직원이 “기다리는 동안 뭐 드실래요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "한결",
+          "speech": "따뜻한 보리차로 주세요. 감사합니다.",
+          "action": ""
+        },
+        {
+          "sequence": 5,
+          "actor": "은서",
+          "speech": "저는 괜찮습니다. 감사합니다.",
+          "action": ""
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "직원이 매표기로 돌아온다. “취소표는 아직 없네요. 아까 그 앞줄로 하실 분 계세요?”",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "한결",
+          "speech": "저는 조금 더 기다릴게요.",
+          "action": ""
+        },
+        {
+          "sequence": 8,
+          "actor": "은서",
+          "speech": "네, 앞줄 한 장 주세요.",
+          "action": "결제할 카드를 꺼내 직원에게 내민다."
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "6e410548df7ccc8ffc10a687e2c4a960cfe8cbe68f790f4ab2662f1de1c113e7",
+          "recalled": false,
+          "inputSha256": "c751ccb8b12aca3746a918cd2902491669ad238764b2c58a9666ca6eb01e5261",
+          "output": "{\"speech\":\"저는 앞줄은 목이 불편해서요. 취소표 조금만 기다려 볼래요.\",\"action\":\"매표소 옆으로 비켜선다.\"}",
+          "usage": {
+            "inputTokens": 1796,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 1793,
+            "outputTokens": 69,
+            "reasoningOutputTokens": 18,
+            "totalTokens": 1865
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "6c787c85701d5474a575c34bc86f002c9dee2a4075c3e33e7e3b2f3e5e6ea732",
+          "recalled": false,
+          "inputSha256": "b96eea2fdb3fdf151b21ad8a4399fbcbe0e73ebf42646b373db2e3d9f56c7fd0",
+          "output": "{\"speech\":\"저는 앞줄도 괜찮아서 먼저 살게요.\",\"action\":\"표를 사려고 매표 창구 앞으로 다가선다.\"}",
+          "usage": {
+            "inputTokens": 1887,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 1884,
+            "outputTokens": 43,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1930
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "6e410548df7ccc8ffc10a687e2c4a960cfe8cbe68f790f4ab2662f1de1c113e7",
+          "recalled": false,
+          "inputSha256": "e3115ca852534794e47bd64845104f2e53cc5cfdc67373827faa851dc9f53c14",
+          "output": "{\"speech\":\"따뜻한 보리차로 주세요. 감사합니다.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2166,
+            "cachedInputTokens": 1793,
+            "cacheWriteInputTokens": 370,
+            "outputTokens": 27,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2193
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "6c787c85701d5474a575c34bc86f002c9dee2a4075c3e33e7e3b2f3e5e6ea732",
+          "recalled": false,
+          "inputSha256": "b8324e01a1d3689a0862ac7cc76016bcc03da480d3b43b64ff10d095a7a1b2c2",
+          "output": "{\"speech\":\"저는 괜찮습니다. 감사합니다.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2220,
+            "cachedInputTokens": 1884,
+            "cacheWriteInputTokens": 333,
+            "outputTokens": 25,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2245
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "6e410548df7ccc8ffc10a687e2c4a960cfe8cbe68f790f4ab2662f1de1c113e7",
+          "recalled": true,
+          "inputSha256": "0d044b48a180a1262904a402d954a6a0d7ae9bde054112eb406c18583cdca7ff",
+          "output": "{\"speech\":\"저는 조금 더 기다릴게요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2534,
+            "cachedInputTokens": 2163,
+            "cacheWriteInputTokens": 368,
+            "outputTokens": 25,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2559
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "6c787c85701d5474a575c34bc86f002c9dee2a4075c3e33e7e3b2f3e5e6ea732",
+          "recalled": false,
+          "inputSha256": "e6fa5161c1e2e18d144c0182e713409f31a746d5b557cbce01f0e3069e794e35",
+          "output": "{\"speech\":\"네, 앞줄 한 장 주세요.\",\"action\":\"결제할 카드를 꺼내 직원에게 내민다.\"}",
+          "usage": {
+            "inputTokens": 2526,
+            "cachedInputTokens": 2217,
+            "cacheWriteInputTokens": 306,
+            "outputTokens": 37,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2563
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.0157367
+    }
+  ]
+}

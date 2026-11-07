@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { DIALOGUE_PROMPT_VERSIONS } from './dialogue-policy.js';
+import { performanceVersions } from './character-performance.js';
 import { WORLD_PROMPT_VERSIONS } from './world-policy.js';
 import { worldOutputSchema } from './world-schema.js';
 import { audienceSchema, eventGeneratorSchema, eventProposalSchema, spatialPlanSchema, spatialResolutionSchema, spatialSchema, spatialSpeechSchema } from './spatial-schema.js';
@@ -21,10 +22,10 @@ export type EnvironmentSpec = z.infer<typeof environmentSchema>;
 export type State = EnvironmentSpec['initialState'];
 export const modelConfig = z.object({ model: z.string().min(1), effort: z.string().min(1) });
 export const characterSchema = z.object({
-  id, name: z.string().min(1).max(100), identity: text, personality: text,
+  id, name: z.string().min(1).max(100), identity: text.default(''), personality: text.default(''),
   values: text.default(''), goals: text.default(''), relationships: text.default(''),
   memories: text.default(''), knowledge: text.default(''), unknowns: text.default(''),
-  speechStyle: text, exampleDialogue: text.default(''), behaviors: text, taboos: text.default(''),
+  speechStyle: text.default(''), exampleDialogue: text.default(''), behaviors: text.default(''), taboos: text.default(''),
   model: z.string().optional(), effort: z.string().optional(),
 });
 export const scenarioSchema = z.object({
@@ -66,6 +67,7 @@ export const experimentSchema = z.object({
   variants: z.array(z.object({
     id, label: z.string().min(1), model: z.string().optional(), effort: z.string().optional(),
     dialoguePromptVersion: z.enum(DIALOGUE_PROMPT_VERSIONS).optional(),
+    characterPerformanceVersion: z.enum(performanceVersions).optional(),
     worldPromptVersion: z.enum(WORLD_PROMPT_VERSIONS).optional(),
     stopOnSilence: z.boolean().optional(),
     memoryMode: z.enum(['initial_only', 'reinject_on_speech']).default('initial_only'),

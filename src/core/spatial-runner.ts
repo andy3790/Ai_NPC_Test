@@ -53,9 +53,9 @@ async function decideCycle(h: SimulationHost) {
     const messages = all.filter(u => pending.some(r => r.utteranceId === u.id));
     const known = new Set([...all.filter(u => u.speakerId === npcId).map(u => u.id),
       ...h.store.list('receipts', h.id).filter(r => r.characterId === npcId && r.status === 'delivered').map(r => r.utteranceId), ...messages.map(u => u.id)]);
-    const call = await h.invoke('speech', session, `spatial:choice:${cycle.id}:${npcId}`,
+    const call = await h.speak(session, `spatial:choice:${cycle.id}:${npcId}`,
       speakerPrompt(messages, run.variant.memoryMode === 'reinject_on_speech' ? session.instructions : undefined, undefined, npcId, localContext(run.spec, current, npcId)),
-      { outputType: 'spatialSpeech', receiptIds: pending.map(r => r.id), virtualSeconds: current.virtualSeconds });
+      { outputType: 'spatialSpeech', receiptIds: pending.map(r => r.id), virtualSeconds: current.virtualSeconds }, all);
     try {
       const output = spatialSpeechSchema.parse(JSON.parse(call.output));
       const perception = validateSpatialChoice(run.spec, current, npcId, output);

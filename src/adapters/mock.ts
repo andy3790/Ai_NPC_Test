@@ -52,6 +52,9 @@ export class MockAdapter implements Adapter {
       const action = input.environment?.availableActions?.[0];
       output = { speech: action ? `${action.label} — 지금 시도하겠습니다.` : `남은 기름을 어떻게 나눌지 함께 생각해 봅시다. (${this.requests.filter(x => JSON.parse(x.input).task === 'speak').length})`, action: action ? action.label : '등대 쪽을 바라본다.', ...(input.environment ? { actionId: action?.id ?? null } : {}) };
     }
+    if (input.characterPerformance?.select && output && typeof output === 'object') {
+      output = { portrayal: { attention: '말에서 빠진 대목', phrasing: '구체적인 한 대목부터 꺼낸다' }, ...output };
+    }
     const text = JSON.stringify(output); emit({ method: 'item/agentMessage/delta', params: { threadId: r.threadId, turnId, delta: text } });
     const prev = this.totals.get(r.threadId); const last = { inputTokens: Math.ceil(r.input.length / 2), cachedInputTokens: 10, cacheWriteInputTokens: 0, outputTokens: Math.ceil(text.length / 2), reasoningOutputTokens: 5, totalTokens: Math.ceil(r.input.length / 2) + Math.ceil(text.length / 2) };
     const total = Object.fromEntries(tokenKeys.map(k => [k, (prev?.[k] ?? 0) + last[k]])) as unknown as TokenUsage;

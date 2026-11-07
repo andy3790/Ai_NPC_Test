@@ -1,5 +1,6 @@
 import type { ExperimentSpec, ModelConfig, Variant, State, EnvironmentSpec } from './schema.js';
 import type { WorldEvent, WorldState } from './world-schema.js';
+import type { StoredPerformance } from './character-performance.js';
 import type { Audience, EventGeneratorState, SpatialSpeech } from './spatial-schema.js';
 export interface ModelInfo { id: string; name: string; efforts: string[]; defaultEffort: string; isDefault?: boolean }
 // Only non-secret references are persisted. API key values live in server memory.
@@ -7,7 +8,7 @@ export type ApiCredential = { source: 'environment' } | { source: 'browser'; key
 export interface ApiKeyStatus { source: 'browser' | 'environment' | 'missing'; configured: boolean; environmentAvailable: boolean }
 export type CallKind = 'speech' | 'receive' | 'director' | 'evaluation' | 'environment' | 'event_generation';
 export type RunStatus = 'queued' | 'running' | 'paused' | 'completed' | 'stopped';
-export interface NpcSession { id: string; characterId: string; threadId: string; config: ModelConfig; instructions: string }
+export interface NpcSession { id: string; characterId: string; threadId: string; config: ModelConfig; instructions: string; performance?: StoredPerformance }
 export interface ActionResolution { actionId: string; sourceUtteranceId: string; speechIndex: number; actorId: string; before: State; after: State }
 export interface Utterance { id: string; runId: string; sequence: number; speechIndex: number | null; speakerId: string; speakerName: string; kind: 'speech' | 'event'; speech: string; action: string; createdAt: string; invocationId: string | null; deliveryCompletedAt: string | null; deliveryMs: number | null; actionId?: string | null; resolution?: ActionResolution;
   worldEvent?: WorldEvent & { sourceUtteranceId: string | null; virtualSeconds: number; audience?: Audience; proposalId?: string | null };

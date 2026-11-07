@@ -102,6 +102,9 @@ try {
   assert.deepEqual(await full(), expected);
 
   await dialog.getByRole('button', { name: '03 실험 조건' }).click();
+  const performance = dialog.getByLabel(`${expected.variants[0].label} 캐릭터 연기 유지`, { exact: true });
+  assert.equal(await performance.inputValue(), 'character-performance/2');
+  await performance.selectOption('off'); expected.variants[0].characterPerformanceVersion = 'off';
   const policy = dialog.getByLabel(`${expected.variants[0].label} 대화 반응 지침`, { exact: true });
   assert.equal(await policy.inputValue(), 'npc-dialogue/5');
   await policy.selectOption('npc-dialogue/1');
@@ -111,6 +114,7 @@ try {
   await dialog.getByRole('button', { name: '실험 조건 JSON 편집', exact: true }).click();
   const conditions = JSON.parse(await field('실험 조건').inputValue()); assert.equal(conditions.scenario, undefined);
   assert.equal(conditions.variants[0].dialoguePromptVersion, 'npc-dialogue/1');
+  assert.equal(conditions.variants[0].characterPerformanceVersion, 'off');
   assert.equal(conditions.variants[0].stopOnSilence, true);
   conditions.variants = [conditions.variants[0]]; conditions.variants[0].label = '부분 편집 조건';
   conditions.maxUtterances = 12; conditions.repetitions = 2; conditions.evaluation.interval = 4;
@@ -154,6 +158,12 @@ try {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: `${root}/screenshots/mobile.png`, fullPage: true });
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
+  await dialog.getByRole('button', { name: '02 캐릭터' }).click();
+  await dialog.getByRole('button', { name: '+ NPC 추가' }).click();
+  await dialog.getByRole('button', { name: '선택 캐릭터 JSON 편집' }).click();
+  const blank = JSON.parse(await field('선택 캐릭터').inputValue());
+  assert.equal(blank.name, '새 NPC');
+  for (const [key, value] of Object.entries(blank)) if (key !== 'id' && key !== 'name') assert.equal(value, '', key);
   assert.deepEqual(errors, []);
   console.log(`EDITOR_UI_OK: five scopes, environment draft guards, tab/dialog persistence, stale detection, isolation, validation, imports, full JSON, save, mobile, zero calls\n${root}`);
 } finally { await browser.close(); await server.close(); }

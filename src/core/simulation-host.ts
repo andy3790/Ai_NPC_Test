@@ -9,6 +9,7 @@ export interface SimulationHost {
   helper(key: string, config: ModelConfig, instructions: string): Promise<NpcSession>;
   direct(key: string, operationKey: string, prompt: ReturnType<typeof directorPrompt>): Promise<InvocationMetrics>;
   invoke(kind: CallKind, session: NpcSession, key: string, input: string, metadata?: Record<string, unknown>): Promise<InvocationMetrics>;
+  speak(session: NpcSession, key: string, input: string, metadata: Record<string, unknown>, history: Utterance[]): Promise<InvocationMetrics>;
   append(u: Utterance): void; flush(): Promise<void>; changed(): void;
   completeDelivery(u: Utterance): void;
   inject(text: string, audience?: Audience): void;

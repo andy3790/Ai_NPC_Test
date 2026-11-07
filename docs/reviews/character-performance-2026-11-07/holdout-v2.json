@@ -1,0 +1,1399 @@
+{
+  "plan": {
+    "split": "holdout",
+    "repetitions": 2,
+    "turns": 6,
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "maxCalls": 48,
+    "maxEstimatedUsd": 1,
+    "characterPerformanceVersion": "character-performance/2",
+    "fixtureSha256": "5af9fae484691661a56705a8ae8c6a8c94ea9ed663c2a5cc8b631e0fe0f8e153"
+  },
+  "outputs": [
+    {
+      "scene": "print-shop",
+      "repetition": 1,
+      "policy": "off",
+      "sessions": [
+        {
+          "actor": "one"
+        },
+        {
+          "actor": "two"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "승아",
+          "speech": "저는 빗방울 묻은 쪽이 좋아요. 얼굴이 조금 안 보이니까 오히려 빗방울에 자꾸 눈이 가요. 건우 씨는 어느 쪽이 좋아요?",
+          "action": "얼굴 일부가 흐린 사진의 가장자리를 가볍게 짚어요."
+        },
+        {
+          "sequence": 2,
+          "actor": "건우",
+          "speech": "저는 선명하게 다시 찍은 쪽이 좋아요. 빗방울도 예쁘지만, 전시할 사진이면 얼굴이 한눈에 들어오는 게 좋겠어요.",
+          "action": "선명한 사진 쪽을 손끝으로 짚어요."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "가게 주인이 잠깐 포장지를 내려놓고 “난방 좀 줄일까요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "승아",
+          "speech": "네, 조금만 줄여 주세요. 저는 좀 덥네요. 건우 씨, 저는 얼굴이 잘 보이는 것보다 그때 비가 왔다는 게 남아 있는 쪽에 더 마음이 가요.",
+          "action": ""
+        },
+        {
+          "sequence": 5,
+          "actor": "건우",
+          "speech": "저는 흐린 얼굴이 먼저 걸려서 비는 뒷전이었어요. 승아 씨 말 듣고 보니 빗방울도 다시 보게 되네요. 그래도 걸어 두고 싶은 건 선명한 쪽이에요.",
+          "action": ""
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "가게 주인이 벽 쪽으로 두 장을 들어 보인다. “아까 고르던 사진, 멀리서 봐도 마음이 같아요?”",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "승아",
+          "speech": "네, 저는 여전히 빗방울 있는 쪽이요. 선명한 쪽이 더 또렷하게 들어오긴 하는데, 흐린 쪽은 가까이 가서 보고 싶어요.",
+          "action": ""
+        },
+        {
+          "sequence": 8,
+          "actor": "건우",
+          "speech": "저도 그대로예요. 멀리서 보니까 선명한 쪽이 더 좋네요. 가까이 가야 보이는 사진보다 지나가다 봐도 누군지 알 수 있는 사진을 걸고 싶어요.",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "a378f3decc68e59db4795be77c12c8aa183da708a90b683b8ab377c0f5e421fb",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"저는 빗방울 묻은 쪽이 좋아요. 얼굴이 조금 안 보이니까 오히려 빗방울에 자꾸 눈이 가요. 건우 씨는 어느 쪽이 좋아요?\",\"action\":\"얼굴 일부가 흐린 사진의 가장자리를 가볍게 짚어요.\"}",
+          "usage": {
+            "inputTokens": 1437,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 1434,
+            "outputTokens": 83,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1520
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5196b0b7445145c05c3ce4450015f0acb48a389ff81f688d27c257784dc40804",
+          "recalled": false,
+          "inputSha256": "5d904bb249a6f3296be9099bad7a7c6f50d548c4d03cc42310011b777b8cd40d",
+          "output": "{\"speech\":\"저는 선명하게 다시 찍은 쪽이 좋아요. 빗방울도 예쁘지만, 전시할 사진이면 얼굴이 한눈에 들어오는 게 좋겠어요.\",\"action\":\"선명한 사진 쪽을 손끝으로 짚어요.\"}",
+          "usage": {
+            "inputTokens": 1553,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 1550,
+            "outputTokens": 69,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1622
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "a378f3decc68e59db4795be77c12c8aa183da708a90b683b8ab377c0f5e421fb",
+          "recalled": false,
+          "inputSha256": "bef22db591426e647061596a5ca6376726597a13bc621c5488425e1f017f8461",
+          "output": "{\"speech\":\"네, 조금만 줄여 주세요. 저는 좀 덥네요. 건우 씨, 저는 얼굴이 잘 보이는 것보다 그때 비가 왔다는 게 남아 있는 쪽에 더 마음이 가요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 1822,
+            "cachedInputTokens": 1434,
+            "cacheWriteInputTokens": 385,
+            "outputTokens": 62,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1884
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5196b0b7445145c05c3ce4450015f0acb48a389ff81f688d27c257784dc40804",
+          "recalled": false,
+          "inputSha256": "ed5cd1ab3ae7d332ce6e57505d845e9f52c7a594a8b3f062a129f9284f078476",
+          "output": "{\"speech\":\"저는 흐린 얼굴이 먼저 걸려서 비는 뒷전이었어요. 승아 씨 말 듣고 보니 빗방울도 다시 보게 되네요. 그래도 걸어 두고 싶은 건 선명한 쪽이에요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 1918,
+            "cachedInputTokens": 1550,
+            "cacheWriteInputTokens": 365,
+            "outputTokens": 71,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1989
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "a378f3decc68e59db4795be77c12c8aa183da708a90b683b8ab377c0f5e421fb",
+          "recalled": false,
+          "inputSha256": "63ddf69ce99e0a22ab927cdb4691c2743cac43372a2822f7817c5c56a4b55e38",
+          "output": "{\"speech\":\"네, 저는 여전히 빗방울 있는 쪽이요. 선명한 쪽이 더 또렷하게 들어오긴 하는데, 흐린 쪽은 가까이 가서 보고 싶어요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2193,
+            "cachedInputTokens": 1819,
+            "cacheWriteInputTokens": 371,
+            "outputTokens": 61,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2254
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5196b0b7445145c05c3ce4450015f0acb48a389ff81f688d27c257784dc40804",
+          "recalled": false,
+          "inputSha256": "0467a503dac825b26cfd1364dccaebca18709a30fe79e447420431492fee8d4f",
+          "output": "{\"speech\":\"저도 그대로예요. 멀리서 보니까 선명한 쪽이 더 좋네요. 가까이 가야 보이는 사진보다 지나가다 봐도 누군지 알 수 있는 사진을 걸고 싶어요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2293,
+            "cachedInputTokens": 1915,
+            "cacheWriteInputTokens": 375,
+            "outputTokens": 65,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2358
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.0160178
+    },
+    {
+      "scene": "print-shop",
+      "repetition": 1,
+      "policy": "character-performance/2",
+      "sessions": [
+        {
+          "actor": "one",
+          "choices": {
+            "attention": "내 취향이나 불편",
+            "phrasing": "대답을 먼저 건넨다"
+          },
+          "source": "profile"
+        },
+        {
+          "actor": "two",
+          "choices": {
+            "attention": "내 취향이나 불편",
+            "phrasing": "구체적인 한 대목부터 꺼낸다"
+          },
+          "source": "profile"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "승아",
+          "speech": "저는 빗방울 묻은 쪽을 걸고 싶어요. 얼굴이 조금 가려졌는데도 자꾸 이쪽을 보게 돼요. 건우 씨는 어때요?",
+          "action": "빗방울 때문에 흐려진 사진 옆에 손끝을 짚는다."
+        },
+        {
+          "sequence": 2,
+          "actor": "건우",
+          "speech": "저는 얼굴이 또렷하게 나온 쪽이 좋아요. 걸어 놓으면 누가 어떤 표정을 짓고 있는지 바로 보였으면 해요. 빗방울 묻은 쪽은 그게 좀 아쉬워요.",
+          "action": "선명하게 나온 사진을 손끝으로 가리킨다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "가게 주인이 잠깐 포장지를 내려놓고 “난방 좀 줄일까요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "승아",
+          "speech": "저는 조금 줄여 주시면 좋겠어요. 손은 다 녹았어요.",
+          "action": "가게 주인 쪽으로 고개를 돌린다."
+        },
+        {
+          "sequence": 5,
+          "actor": "건우",
+          "speech": "저도 조금 덥네요. 줄여 주셔도 괜찮아요.",
+          "action": "가게 주인 쪽으로 고개를 돌린다."
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "가게 주인이 벽 쪽으로 두 장을 들어 보인다. “아까 고르던 사진, 멀리서 봐도 마음이 같아요?”",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "승아",
+          "speech": "네, 저는 여전히 빗방울 있는 쪽이 좋아요. 멀리서 보니까 얼굴이 안 보이는 건 더 아쉽긴 한데, 저 얼룩까지 같이 걸어 두고 싶어요.",
+          "action": ""
+        },
+        {
+          "sequence": 8,
+          "actor": "건우",
+          "speech": "저는 멀리서 보니까 선명한 쪽이 더 좋네요. 빗방울 있는 쪽은 얼굴보다 얼룩이 먼저 보여서요. 승아 씨는 그 얼룩이 어떤 점에서 좋아요?",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "f9413d4ffb349c30f4f7ad7c4277fd0975ddb1455d85d0d178cbdfb1d58d7a76",
+          "recalled": false,
+          "inputSha256": "f2033b90c3a98100244f3c6ae69c3af328a449e36685a9365e193033f022a426",
+          "output": "{\"portrayal\":{\"attention\":\"내 취향이나 불편\",\"phrasing\":\"대답을 먼저 건넨다\"},\"speech\":\"저는 빗방울 묻은 쪽을 걸고 싶어요. 얼굴이 조금 가려졌는데도 자꾸 이쪽을 보게 돼요. 건우 씨는 어때요?\",\"action\":\"빗방울 때문에 흐려진 사진 옆에 손끝을 짚는다.\"}",
+          "usage": {
+            "inputTokens": 2184,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2181,
+            "outputTokens": 105,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2289
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "73ee29d356fd9c7519239eca7dc0ba20d96c033613ca1cb23d81c7a494d85ee2",
+          "recalled": false,
+          "inputSha256": "6661494f7fbcc43d500f9dde3e03e93062cd4e2a048d5ca0825241a9d1f0475e",
+          "output": "{\"portrayal\":{\"attention\":\"내 취향이나 불편\",\"phrasing\":\"구체적인 한 대목부터 꺼낸다\"},\"speech\":\"저는 얼굴이 또렷하게 나온 쪽이 좋아요. 걸어 놓으면 누가 어떤 표정을 짓고 있는지 바로 보였으면 해요. 빗방울 묻은 쪽은 그게 좀 아쉬워요.\",\"action\":\"선명하게 나온 사진을 손끝으로 가리킨다.\"}",
+          "usage": {
+            "inputTokens": 2301,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2298,
+            "outputTokens": 112,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2413
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "f9413d4ffb349c30f4f7ad7c4277fd0975ddb1455d85d0d178cbdfb1d58d7a76",
+          "recalled": false,
+          "inputSha256": "fc0b1a762dc38a0bafe78570bc3678d08faa873782fae970f7cfa9de8217ef3b",
+          "output": "{\"speech\":\"저는 조금 줄여 주시면 좋겠어요. 손은 다 녹았어요.\",\"action\":\"가게 주인 쪽으로 고개를 돌린다.\"}",
+          "usage": {
+            "inputTokens": 2256,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2253,
+            "outputTokens": 48,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2304
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "73ee29d356fd9c7519239eca7dc0ba20d96c033613ca1cb23d81c7a494d85ee2",
+          "recalled": false,
+          "inputSha256": "412dfb8d14f0a0486c5109eaf0126645971f75837e920b790dda4c18c2c3c603",
+          "output": "{\"speech\":\"저도 조금 덥네요. 줄여 주셔도 괜찮아요.\",\"action\":\"가게 주인 쪽으로 고개를 돌린다.\"}",
+          "usage": {
+            "inputTokens": 2345,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2342,
+            "outputTokens": 46,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2391
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "f9413d4ffb349c30f4f7ad7c4277fd0975ddb1455d85d0d178cbdfb1d58d7a76",
+          "recalled": false,
+          "inputSha256": "13589dd30bfa5cd815e35ab77f6f1203deddc549642782f2496bb423ff694ebf",
+          "output": "{\"speech\":\"네, 저는 여전히 빗방울 있는 쪽이 좋아요. 멀리서 보니까 얼굴이 안 보이는 건 더 아쉽긴 한데, 저 얼룩까지 같이 걸어 두고 싶어요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2613,
+            "cachedInputTokens": 2253,
+            "cacheWriteInputTokens": 357,
+            "outputTokens": 64,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2677
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "73ee29d356fd9c7519239eca7dc0ba20d96c033613ca1cb23d81c7a494d85ee2",
+          "recalled": true,
+          "inputSha256": "d18474579e35ba99d124d1612bcaf330e25d4bf2c9cd4b638e58ee86acf20dac",
+          "output": "{\"speech\":\"저는 멀리서 보니까 선명한 쪽이 더 좋네요. 빗방울 있는 쪽은 얼굴보다 얼룩이 먼저 보여서요. 승아 씨는 그 얼룩이 어떤 점에서 좋아요?\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2807,
+            "cachedInputTokens": 2342,
+            "cacheWriteInputTokens": 462,
+            "outputTokens": 69,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2876
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.029668
+    },
+    {
+      "scene": "print-shop",
+      "repetition": 2,
+      "policy": "character-performance/2",
+      "sessions": [
+        {
+          "actor": "one",
+          "choices": {
+            "attention": "내 취향이나 불편",
+            "phrasing": "대답을 먼저 건넨다"
+          },
+          "source": "profile"
+        },
+        {
+          "actor": "two",
+          "choices": {
+            "attention": "내 취향이나 불편",
+            "phrasing": "구체적인 한 대목부터 꺼낸다"
+          },
+          "source": "profile"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "승아",
+          "speech": "저는 빗방울 묻은 쪽을 걸고 싶어요. 얼굴이 조금 가려졌는데도 자꾸 이쪽을 보게 되네요. 건우 씨는 어때요?",
+          "action": "빗방울 때문에 흐려진 사진 옆에 손끝을 댄다."
+        },
+        {
+          "sequence": 2,
+          "actor": "건우",
+          "speech": "저는 얼굴이 또렷하게 나온 쪽이 좋아요. 걸어 놓으면 조금 떨어져서도 표정이 잘 보였으면 해서요.",
+          "action": "선명하게 다시 찍은 사진을 손끝으로 짚는다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "가게 주인이 잠깐 포장지를 내려놓고 “난방 좀 줄일까요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "승아",
+          "speech": "네, 조금만 줄여 주세요. 저는 좀 덥네요.",
+          "action": "가게 주인 쪽으로 고개를 돌린다."
+        },
+        {
+          "sequence": 5,
+          "actor": "건우",
+          "speech": "저도 조금 줄이는 게 좋겠어요.",
+          "action": ""
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "가게 주인이 벽 쪽으로 두 장을 들어 보인다. “아까 고르던 사진, 멀리서 봐도 마음이 같아요?”",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "승아",
+          "speech": "네, 저는 여전히 빗방울 있는 쪽이 좋아요. 멀리서 보니까 표정은 덜 보이네요. 그래도 저 번진 자리가 없는 건 아쉬워요.",
+          "action": ""
+        },
+        {
+          "sequence": 8,
+          "actor": "건우",
+          "speech": "저는 이렇게 보니 선명한 쪽이 더 마음에 들어요. 빗방울 있는 쪽은 얼굴부터 찾게 돼서, 그게 좀 답답해요.",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "f9413d4ffb349c30f4f7ad7c4277fd0975ddb1455d85d0d178cbdfb1d58d7a76",
+          "recalled": false,
+          "inputSha256": "f2033b90c3a98100244f3c6ae69c3af328a449e36685a9365e193033f022a426",
+          "output": "{\"portrayal\":{\"attention\":\"내 취향이나 불편\",\"phrasing\":\"대답을 먼저 건넨다\"},\"speech\":\"저는 빗방울 묻은 쪽을 걸고 싶어요. 얼굴이 조금 가려졌는데도 자꾸 이쪽을 보게 되네요. 건우 씨는 어때요?\",\"action\":\"빗방울 때문에 흐려진 사진 옆에 손끝을 댄다.\"}",
+          "usage": {
+            "inputTokens": 2184,
+            "cachedInputTokens": 2181,
+            "cacheWriteInputTokens": 0,
+            "outputTokens": 105,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2289
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "73ee29d356fd9c7519239eca7dc0ba20d96c033613ca1cb23d81c7a494d85ee2",
+          "recalled": false,
+          "inputSha256": "f876d1d8c60911911bb4ee5b549636ffeb8493fad0431c5f4a5f470e7e256d7c",
+          "output": "{\"portrayal\":{\"attention\":\"내 취향이나 불편\",\"phrasing\":\"구체적인 한 대목부터 꺼낸다\"},\"speech\":\"저는 얼굴이 또렷하게 나온 쪽이 좋아요. 걸어 놓으면 조금 떨어져서도 표정이 잘 보였으면 해서요.\",\"action\":\"선명하게 다시 찍은 사진을 손끝으로 짚는다.\"}",
+          "usage": {
+            "inputTokens": 2300,
+            "cachedInputTokens": 2030,
+            "cacheWriteInputTokens": 267,
+            "outputTokens": 93,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2393
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "f9413d4ffb349c30f4f7ad7c4277fd0975ddb1455d85d0d178cbdfb1d58d7a76",
+          "recalled": false,
+          "inputSha256": "434196f33ca537c7cb871fd9d804cd5574a15ba508d256e402c62851ebe8ca6a",
+          "output": "{\"speech\":\"네, 조금만 줄여 주세요. 저는 좀 덥네요.\",\"action\":\"가게 주인 쪽으로 고개를 돌린다.\"}",
+          "usage": {
+            "inputTokens": 2236,
+            "cachedInputTokens": 1663,
+            "cacheWriteInputTokens": 570,
+            "outputTokens": 43,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2279
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "73ee29d356fd9c7519239eca7dc0ba20d96c033613ca1cb23d81c7a494d85ee2",
+          "recalled": false,
+          "inputSha256": "05e02722012c3655c857f8bc94c75710dbb1b6068236e9430ce6198228bad643",
+          "output": "{\"speech\":\"저도 조금 줄이는 게 좋겠어요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2324,
+            "cachedInputTokens": 1662,
+            "cacheWriteInputTokens": 659,
+            "outputTokens": 26,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2350
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "f9413d4ffb349c30f4f7ad7c4277fd0975ddb1455d85d0d178cbdfb1d58d7a76",
+          "recalled": false,
+          "inputSha256": "9d190075c4127fc697f5c98bae2e535cded3701d1e9c58474c97c0706d7b7af0",
+          "output": "{\"speech\":\"네, 저는 여전히 빗방울 있는 쪽이 좋아요. 멀리서 보니까 표정은 덜 보이네요. 그래도 저 번진 자리가 없는 건 아쉬워요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2568,
+            "cachedInputTokens": 2233,
+            "cacheWriteInputTokens": 332,
+            "outputTokens": 61,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2629
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "73ee29d356fd9c7519239eca7dc0ba20d96c033613ca1cb23d81c7a494d85ee2",
+          "recalled": true,
+          "inputSha256": "b42a11b71719ff46aba19699d8c2b50c059b44dc7bd330042949be9d570fd379",
+          "output": "{\"speech\":\"저는 이렇게 보니 선명한 쪽이 더 마음에 들어요. 빗방울 있는 쪽은 얼굴부터 찾게 돼서, 그게 좀 답답해요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2747,
+            "cachedInputTokens": 2321,
+            "cacheWriteInputTokens": 423,
+            "outputTokens": 57,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2804
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.010722500000000001
+    },
+    {
+      "scene": "print-shop",
+      "repetition": 2,
+      "policy": "off",
+      "sessions": [
+        {
+          "actor": "one"
+        },
+        {
+          "actor": "two"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "승아",
+          "speech": "저는 빗방울 묻은 쪽이 좋아요. 얼굴은 좀 흐려도 비 오던 게 남아 있잖아요. 건우 씨는 어느 쪽이 좋아요?",
+          "action": "빗방울 때문에 흐려진 사진의 가장자리를 가볍게 짚어요."
+        },
+        {
+          "sequence": 2,
+          "actor": "건우",
+          "speech": "저는 선명한 쪽이 좋아요. 전시해 놓으면 누가 찍혔는지 한눈에 알아볼 수 있으면 좋겠어요. 빗방울 있는 쪽은 분위기가 좋긴 하네요.",
+          "action": "선명하게 나온 사진을 가리켜요."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "가게 주인이 잠깐 포장지를 내려놓고 “난방 좀 줄일까요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "승아",
+          "speech": "저는 조금 줄여 주시면 좋겠어요. 여기 앉아 있으니 좀 덥네요.",
+          "action": "가게 주인 쪽으로 고개를 들어요."
+        },
+        {
+          "sequence": 5,
+          "actor": "건우",
+          "speech": "네, 조금 줄여 주셔도 괜찮아요.",
+          "action": "가게 주인 쪽으로 고개를 돌려요."
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "가게 주인이 벽 쪽으로 두 장을 들어 보인다. “아까 고르던 사진, 멀리서 봐도 마음이 같아요?”",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "승아",
+          "speech": "네, 저는 아직 빗방울 있는 쪽이 좋아요. 멀리서 보니까 얼굴이 흐린 건 더 눈에 띄는데, 그래도 자꾸 그쪽을 보게 돼요.",
+          "action": "벽 쪽에 든 두 사진을 번갈아 봐요."
+        },
+        {
+          "sequence": 8,
+          "actor": "건우",
+          "speech": "저도 아직 선명한 쪽이 좋아요. 이렇게 떨어져서 보니까 흐린 쪽은 표정을 알아보기 더 어렵네요.",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "a378f3decc68e59db4795be77c12c8aa183da708a90b683b8ab377c0f5e421fb",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"저는 빗방울 묻은 쪽이 좋아요. 얼굴은 좀 흐려도 비 오던 게 남아 있잖아요. 건우 씨는 어느 쪽이 좋아요?\",\"action\":\"빗방울 때문에 흐려진 사진의 가장자리를 가볍게 짚어요.\"}",
+          "usage": {
+            "inputTokens": 1437,
+            "cachedInputTokens": 1434,
+            "cacheWriteInputTokens": 0,
+            "outputTokens": 80,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1517
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5196b0b7445145c05c3ce4450015f0acb48a389ff81f688d27c257784dc40804",
+          "recalled": false,
+          "inputSha256": "00b36ec883763911bde1f744414c69d805ea5cab129de24d9783888e376918c5",
+          "output": "{\"speech\":\"저는 선명한 쪽이 좋아요. 전시해 놓으면 누가 찍혔는지 한눈에 알아볼 수 있으면 좋겠어요. 빗방울 있는 쪽은 분위기가 좋긴 하네요.\",\"action\":\"선명하게 나온 사진을 가리켜요.\"}",
+          "usage": {
+            "inputTokens": 1553,
+            "cachedInputTokens": 1319,
+            "cacheWriteInputTokens": 231,
+            "outputTokens": 76,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1629
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "a378f3decc68e59db4795be77c12c8aa183da708a90b683b8ab377c0f5e421fb",
+          "recalled": false,
+          "inputSha256": "e855eda95588490f91ebab0d6fa056240b215d01e8b03761fd436ec67e252b56",
+          "output": "{\"speech\":\"저는 조금 줄여 주시면 좋겠어요. 여기 앉아 있으니 좀 덥네요.\",\"action\":\"가게 주인 쪽으로 고개를 들어요.\"}",
+          "usage": {
+            "inputTokens": 1820,
+            "cachedInputTokens": 1434,
+            "cacheWriteInputTokens": 383,
+            "outputTokens": 50,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1870
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5196b0b7445145c05c3ce4450015f0acb48a389ff81f688d27c257784dc40804",
+          "recalled": false,
+          "inputSha256": "e52c12841f5eacc9420d763562d22f1a9e7dd75e7ec173480e6f7c34c5b6af67",
+          "output": "{\"speech\":\"네, 조금 줄여 주셔도 괜찮아요.\",\"action\":\"가게 주인 쪽으로 고개를 돌려요.\"}",
+          "usage": {
+            "inputTokens": 1909,
+            "cachedInputTokens": 1550,
+            "cacheWriteInputTokens": 356,
+            "outputTokens": 42,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1951
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "a378f3decc68e59db4795be77c12c8aa183da708a90b683b8ab377c0f5e421fb",
+          "recalled": false,
+          "inputSha256": "dcb91bee7d111b0297c343b72cf8bc81d45bd45649cd343f4bb621d8e1435cd8",
+          "output": "{\"speech\":\"네, 저는 아직 빗방울 있는 쪽이 좋아요. 멀리서 보니까 얼굴이 흐린 건 더 눈에 띄는데, 그래도 자꾸 그쪽을 보게 돼요.\",\"action\":\"벽 쪽에 든 두 사진을 번갈아 봐요.\"}",
+          "usage": {
+            "inputTokens": 2154,
+            "cachedInputTokens": 1817,
+            "cacheWriteInputTokens": 334,
+            "outputTokens": 77,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2231
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5196b0b7445145c05c3ce4450015f0acb48a389ff81f688d27c257784dc40804",
+          "recalled": false,
+          "inputSha256": "a62b05d85e4c6a00dfa46a4b755eb10ff9661b903953abdee1f0ee0553c3cb62",
+          "output": "{\"speech\":\"저도 아직 선명한 쪽이 좋아요. 이렇게 떨어져서 보니까 흐린 쪽은 표정을 알아보기 더 어렵네요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2269,
+            "cachedInputTokens": 1906,
+            "cacheWriteInputTokens": 360,
+            "outputTokens": 47,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2316
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.008862000000000002
+    },
+    {
+      "scene": "shared-kitchen",
+      "repetition": 1,
+      "policy": "character-performance/2",
+      "sessions": [
+        {
+          "actor": "one",
+          "choices": {
+            "attention": "바로 손댈 일",
+            "phrasing": "구체적인 한 대목부터 꺼낸다"
+          },
+          "source": "profile"
+        },
+        {
+          "actor": "two",
+          "choices": {
+            "attention": "바로 손댈 일",
+            "phrasing": "구체적인 한 대목부터 꺼낸다"
+          },
+          "source": "profile"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "재우",
+          "speech": "간이 좀 덜 됐네. 소금 좀 줘.",
+          "action": "국그릇 옆에 숟가락을 내려놓는다."
+        },
+        {
+          "sequence": 2,
+          "actor": "나리",
+          "speech": "여기.",
+          "action": "소금통을 집어 재우에게 건넨다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "창문으로 식은 바람이 든다. 식탁에서 창문 손잡이가 닿는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "재우",
+          "speech": "",
+          "action": "소금통을 받아 자기 국에 조금 넣고 숟가락으로 젓는다."
+        },
+        {
+          "sequence": 5,
+          "actor": "나리",
+          "speech": "바람 차네.",
+          "action": "손을 뻗어 창문을 닫는다."
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "국을 조금 먹은 뒤 어머니가 들어와 아까 끓인 국은 어땠냐고 가볍게 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "재우",
+          "speech": "조금 싱겁긴 했어. 소금 넣으니까 괜찮네.",
+          "action": ""
+        },
+        {
+          "sequence": 8,
+          "actor": "나리",
+          "speech": "난 짠 것보다 이게 나아. 간은 먹으면서 맞추면 되지.",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "d60146864730749805cf0ecbf1253734b67d1b2bfd98d2570ed5be73a35e83e6",
+          "recalled": false,
+          "inputSha256": "f2033b90c3a98100244f3c6ae69c3af328a449e36685a9365e193033f022a426",
+          "output": "{\"portrayal\":{\"attention\":\"바로 손댈 일\",\"phrasing\":\"구체적인 한 대목부터 꺼낸다\"},\"speech\":\"간이 좀 덜 됐네. 소금 좀 줘.\",\"action\":\"국그릇 옆에 숟가락을 내려놓는다.\"}",
+          "usage": {
+            "inputTokens": 2191,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2188,
+            "outputTokens": 75,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2266
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "a0e505b401698750672d985aa6a16d84aabeadc6d808fb0bc716c905b9f0ec42",
+          "recalled": false,
+          "inputSha256": "aae911ef24425423c6033aafe528bd1c6e30321ba33da9c61ffe7dda8ab29292",
+          "output": "{\"portrayal\":{\"attention\":\"바로 손댈 일\",\"phrasing\":\"구체적인 한 대목부터 꺼낸다\"},\"speech\":\"여기.\",\"action\":\"소금통을 집어 재우에게 건넨다.\"}",
+          "usage": {
+            "inputTokens": 2270,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2267,
+            "outputTokens": 61,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2331
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "d60146864730749805cf0ecbf1253734b67d1b2bfd98d2570ed5be73a35e83e6",
+          "recalled": false,
+          "inputSha256": "63990f6e0100fcde724dd268fe1479aaa40161ac1ac9457782d1a7667b0a134b",
+          "output": "{\"speech\":\"\",\"action\":\"소금통을 받아 자기 국에 조금 넣고 숟가락으로 젓는다.\"}",
+          "usage": {
+            "inputTokens": 2181,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2178,
+            "outputTokens": 35,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2216
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "a0e505b401698750672d985aa6a16d84aabeadc6d808fb0bc716c905b9f0ec42",
+          "recalled": false,
+          "inputSha256": "f71e02fcdfd285d03245f5cde3cd21e83cd2bd1af2d05914c7d521710aafd024",
+          "output": "{\"speech\":\"바람 차네.\",\"action\":\"손을 뻗어 창문을 닫는다.\"}",
+          "usage": {
+            "inputTokens": 2250,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2247,
+            "outputTokens": 33,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2283
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "d60146864730749805cf0ecbf1253734b67d1b2bfd98d2570ed5be73a35e83e6",
+          "recalled": false,
+          "inputSha256": "9d05dea2ef59af23c19842f54115825376d73651e3ca1fa3f6d192423f665ebf",
+          "output": "{\"speech\":\"조금 싱겁긴 했어. 소금 넣으니까 괜찮네.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2510,
+            "cachedInputTokens": 2178,
+            "cacheWriteInputTokens": 329,
+            "outputTokens": 35,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2545
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "a0e505b401698750672d985aa6a16d84aabeadc6d808fb0bc716c905b9f0ec42",
+          "recalled": false,
+          "inputSha256": "f50bbd6e0e5de3e345b077fee33c532b604b05370ac382497d77c92173ddb97e",
+          "output": "{\"speech\":\"난 짠 것보다 이게 나아. 간은 먹으면서 맞추면 되지.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2581,
+            "cachedInputTokens": 2247,
+            "cacheWriteInputTokens": 331,
+            "outputTokens": 37,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2618
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.0270885
+    },
+    {
+      "scene": "shared-kitchen",
+      "repetition": 1,
+      "policy": "off",
+      "sessions": [
+        {
+          "actor": "one"
+        },
+        {
+          "actor": "two"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "재우",
+          "speech": "좀 싱겁네. 소금 조금만 더 넣으면 되겠다.",
+          "action": "식탁의 소금을 집어 자기 국그릇에 조금 넣는다."
+        },
+        {
+          "sequence": 2,
+          "actor": "나리",
+          "speech": "나도 소금 좀 줘.",
+          "action": "재우 쪽으로 손을 내민다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "창문으로 식은 바람이 든다. 식탁에서 창문 손잡이가 닿는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "재우",
+          "speech": "여기.",
+          "action": "나리가 내민 손에 소금을 건네고, 창문 손잡이를 잡아 창문을 닫는다."
+        },
+        {
+          "sequence": 5,
+          "actor": "나리",
+          "speech": "",
+          "action": "소금을 받아 자기 국그릇에 조금 넣고 숟가락으로 젓는다."
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "국을 조금 먹은 뒤 어머니가 들어와 아까 끓인 국은 어땠냐고 가볍게 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "재우",
+          "speech": "조금 싱겁게 됐어. 소금 더 넣으니까 괜찮네.",
+          "action": ""
+        },
+        {
+          "sequence": 8,
+          "actor": "나리",
+          "speech": "응, 각자 간 맞추니까 딱 좋아. 엄마도 같이 먹어?",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "bf080ea6a7a5269ed22e287add647967122e7789066a59fbe3b1502b749ddf52",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"좀 싱겁네. 소금 조금만 더 넣으면 되겠다.\",\"action\":\"식탁의 소금을 집어 자기 국그릇에 조금 넣는다.\"}",
+          "usage": {
+            "inputTokens": 1444,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 1441,
+            "outputTokens": 48,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1492
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "81822b78e001387077881ee1fb92f18b2be3851918974cdac601e739a169d983",
+          "recalled": false,
+          "inputSha256": "a055b78947089c748d6b9667a692664c3e1433ccfefb336d2f7868426c1b2c07",
+          "output": "{\"speech\":\"나도 소금 좀 줘.\",\"action\":\"재우 쪽으로 손을 내민다.\"}",
+          "usage": {
+            "inputTokens": 1522,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 1519,
+            "outputTokens": 34,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1556
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "bf080ea6a7a5269ed22e287add647967122e7789066a59fbe3b1502b749ddf52",
+          "recalled": false,
+          "inputSha256": "5fee278beb1267444c216aa68ec1152f3da097a174d53d876cdb8862a951ee1c",
+          "output": "{\"speech\":\"여기.\",\"action\":\"나리가 내민 손에 소금을 건네고, 창문 손잡이를 잡아 창문을 닫는다.\"}",
+          "usage": {
+            "inputTokens": 1754,
+            "cachedInputTokens": 1441,
+            "cacheWriteInputTokens": 310,
+            "outputTokens": 44,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1798
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "81822b78e001387077881ee1fb92f18b2be3851918974cdac601e739a169d983",
+          "recalled": false,
+          "inputSha256": "d6910cd68b543dc382b514c1601d1f140fbbded5cc1856db4d770180f14a7aa8",
+          "output": "{\"speech\":\"\",\"action\":\"소금을 받아 자기 국그릇에 조금 넣고 숟가락으로 젓는다.\"}",
+          "usage": {
+            "inputTokens": 1830,
+            "cachedInputTokens": 1519,
+            "cacheWriteInputTokens": 308,
+            "outputTokens": 36,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1866
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "bf080ea6a7a5269ed22e287add647967122e7789066a59fbe3b1502b749ddf52",
+          "recalled": false,
+          "inputSha256": "e1ea979cee747ec5996a9bb5efd50310a7e69330874cff948330a15cec0ae683",
+          "output": "{\"speech\":\"조금 싱겁게 됐어. 소금 더 넣으니까 괜찮네.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2071,
+            "cachedInputTokens": 1751,
+            "cacheWriteInputTokens": 317,
+            "outputTokens": 37,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2108
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "81822b78e001387077881ee1fb92f18b2be3851918974cdac601e739a169d983",
+          "recalled": false,
+          "inputSha256": "2da274219d065dd38360be57955b4ad989da057912f125a6fb4e5265e24fc628",
+          "output": "{\"speech\":\"응, 각자 간 맞추니까 딱 좋아. 엄마도 같이 먹어?\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2143,
+            "cachedInputTokens": 1827,
+            "cacheWriteInputTokens": 313,
+            "outputTokens": 36,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2179
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.013559799999999999
+    },
+    {
+      "scene": "shared-kitchen",
+      "repetition": 2,
+      "policy": "off",
+      "sessions": [
+        {
+          "actor": "one"
+        },
+        {
+          "actor": "two"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "재우",
+          "speech": "좀 싱겁네. 간 볼 땐 괜찮았는데.",
+          "action": "소금통을 집어 제 국그릇에 조금 넣는다."
+        },
+        {
+          "sequence": 2,
+          "actor": "나리",
+          "speech": "각자 맞춰 먹으면 되지. 난 간장 좀 넣어야겠다.",
+          "action": "간장을 집어 제 국그릇에 조금 넣는다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "창문으로 식은 바람이 든다. 식탁에서 창문 손잡이가 닿는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "재우",
+          "speech": "바람 차다.",
+          "action": "손을 뻗어 창문을 닫는다."
+        },
+        {
+          "sequence": 5,
+          "actor": "나리",
+          "speech": "",
+          "action": "숟가락으로 국을 한 번 저은 뒤 한 술 떠먹는다."
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "국을 조금 먹은 뒤 어머니가 들어와 아까 끓인 국은 어땠냐고 가볍게 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "재우",
+          "speech": "조금 싱겁긴 했어. 소금 좀 넣으니까 괜찮네.",
+          "action": ""
+        },
+        {
+          "sequence": 8,
+          "actor": "나리",
+          "speech": "난 간장 조금 넣었어. 따뜻하니까 좋네.",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "bf080ea6a7a5269ed22e287add647967122e7789066a59fbe3b1502b749ddf52",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"좀 싱겁네. 간 볼 땐 괜찮았는데.\",\"action\":\"소금통을 집어 제 국그릇에 조금 넣는다.\"}",
+          "usage": {
+            "inputTokens": 1444,
+            "cachedInputTokens": 1441,
+            "cacheWriteInputTokens": 0,
+            "outputTokens": 48,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1492
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "81822b78e001387077881ee1fb92f18b2be3851918974cdac601e739a169d983",
+          "recalled": false,
+          "inputSha256": "06ec5d0cbd263ee33cc80d27162091686f5b350011c9a8b1c9ea77bc7e85fd10",
+          "output": "{\"speech\":\"각자 맞춰 먹으면 되지. 난 간장 좀 넣어야겠다.\",\"action\":\"간장을 집어 제 국그릇에 조금 넣는다.\"}",
+          "usage": {
+            "inputTokens": 1525,
+            "cachedInputTokens": 1323,
+            "cacheWriteInputTokens": 199,
+            "outputTokens": 47,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1572
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "bf080ea6a7a5269ed22e287add647967122e7789066a59fbe3b1502b749ddf52",
+          "recalled": false,
+          "inputSha256": "8513345e857bce662fbdf28dbb1f6863fceae0820553ae7e0e2d21806e749904",
+          "output": "{\"speech\":\"바람 차다.\",\"action\":\"손을 뻗어 창문을 닫는다.\"}",
+          "usage": {
+            "inputTokens": 1765,
+            "cachedInputTokens": 1441,
+            "cacheWriteInputTokens": 321,
+            "outputTokens": 33,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1798
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "81822b78e001387077881ee1fb92f18b2be3851918974cdac601e739a169d983",
+          "recalled": false,
+          "inputSha256": "fc73d46f729fec1b73b3c8cfa0effe8af621c4e644b9f8820e560ef0c313d427",
+          "output": "{\"speech\":\"\",\"action\":\"숟가락으로 국을 한 번 저은 뒤 한 술 떠먹는다.\"}",
+          "usage": {
+            "inputTokens": 1836,
+            "cachedInputTokens": 1522,
+            "cacheWriteInputTokens": 311,
+            "outputTokens": 34,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1870
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "bf080ea6a7a5269ed22e287add647967122e7789066a59fbe3b1502b749ddf52",
+          "recalled": false,
+          "inputSha256": "2799d41b468bec13d89c16a5d65651556f18644d43e5a843db7def6df25a1ae6",
+          "output": "{\"speech\":\"조금 싱겁긴 했어. 소금 좀 넣으니까 괜찮네.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2072,
+            "cachedInputTokens": 1762,
+            "cacheWriteInputTokens": 307,
+            "outputTokens": 36,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2108
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "81822b78e001387077881ee1fb92f18b2be3851918974cdac601e739a169d983",
+          "recalled": false,
+          "inputSha256": "ddabb569fb3cdf039954aef6de28bea32496efa8c5fc814d18d312bd7b566047",
+          "output": "{\"speech\":\"난 간장 조금 넣었어. 따뜻하니까 좋네.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2139,
+            "cachedInputTokens": 1833,
+            "cacheWriteInputTokens": 303,
+            "outputTokens": 31,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2170
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.0068607
+    },
+    {
+      "scene": "shared-kitchen",
+      "repetition": 2,
+      "policy": "character-performance/2",
+      "sessions": [
+        {
+          "actor": "one",
+          "choices": {
+            "attention": "내 취향이나 불편",
+            "phrasing": "구체적인 한 대목부터 꺼낸다"
+          },
+          "source": "profile"
+        },
+        {
+          "actor": "two",
+          "choices": {
+            "attention": "바로 손댈 일",
+            "phrasing": "구체적인 한 대목부터 꺼낸다"
+          },
+          "source": "profile"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "재우",
+          "speech": "간을 좀 덜 했네. 소금 좀 줘.",
+          "action": "국그릇 옆에 숟가락을 내려놓는다."
+        },
+        {
+          "sequence": 2,
+          "actor": "나리",
+          "speech": "여기. 각자 맞춰 먹으면 되지.",
+          "action": "소금통을 집어 재우의 손이 닿는 곳에 놓는다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "창문으로 식은 바람이 든다. 식탁에서 창문 손잡이가 닿는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "재우",
+          "speech": "바람 차네.",
+          "action": "손을 뻗어 창문을 닫고, 제 국그릇에 소금을 조금 넣는다."
+        },
+        {
+          "sequence": 5,
+          "actor": "나리",
+          "speech": "그러게. 국 따뜻할 때 먹자.",
+          "action": "제 국그릇에 소금을 조금 넣고 숟가락으로 젓는다."
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "국을 조금 먹은 뒤 어머니가 들어와 아까 끓인 국은 어땠냐고 가볍게 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "재우",
+          "speech": "조금 싱겁게 됐어. 소금 넣어서 먹고 있어.",
+          "action": ""
+        },
+        {
+          "sequence": 8,
+          "actor": "나리",
+          "speech": "난 소금 조금 넣으니까 딱 좋아, 엄마.",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "d60146864730749805cf0ecbf1253734b67d1b2bfd98d2570ed5be73a35e83e6",
+          "recalled": false,
+          "inputSha256": "f2033b90c3a98100244f3c6ae69c3af328a449e36685a9365e193033f022a426",
+          "output": "{\"portrayal\":{\"attention\":\"내 취향이나 불편\",\"phrasing\":\"구체적인 한 대목부터 꺼낸다\"},\"speech\":\"간을 좀 덜 했네. 소금 좀 줘.\",\"action\":\"국그릇 옆에 숟가락을 내려놓는다.\"}",
+          "usage": {
+            "inputTokens": 2191,
+            "cachedInputTokens": 2188,
+            "cacheWriteInputTokens": 0,
+            "outputTokens": 74,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2265
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "a0e505b401698750672d985aa6a16d84aabeadc6d808fb0bc716c905b9f0ec42",
+          "recalled": false,
+          "inputSha256": "b1b13536c6755e1a4dfdccc52f5ccda3870cc0f14532decbfea013601827f4d6",
+          "output": "{\"portrayal\":{\"attention\":\"바로 손댈 일\",\"phrasing\":\"구체적인 한 대목부터 꺼낸다\"},\"speech\":\"여기. 각자 맞춰 먹으면 되지.\",\"action\":\"소금통을 집어 재우의 손이 닿는 곳에 놓는다.\"}",
+          "usage": {
+            "inputTokens": 2272,
+            "cachedInputTokens": 2034,
+            "cacheWriteInputTokens": 235,
+            "outputTokens": 75,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2347
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "d60146864730749805cf0ecbf1253734b67d1b2bfd98d2570ed5be73a35e83e6",
+          "recalled": false,
+          "inputSha256": "378107a757ac4271f34a1c61e55d45baac65bab4106ee9b32c9c91fc932de8dd",
+          "output": "{\"speech\":\"바람 차네.\",\"action\":\"손을 뻗어 창문을 닫고, 제 국그릇에 소금을 조금 넣는다.\"}",
+          "usage": {
+            "inputTokens": 2196,
+            "cachedInputTokens": 1670,
+            "cacheWriteInputTokens": 523,
+            "outputTokens": 45,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2241
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "a0e505b401698750672d985aa6a16d84aabeadc6d808fb0bc716c905b9f0ec42",
+          "recalled": false,
+          "inputSha256": "d2ee6d6df5eef2d1df3b7340f0754a047ca806481531b2e028d53613b6dbde3e",
+          "output": "{\"speech\":\"그러게. 국 따뜻할 때 먹자.\",\"action\":\"제 국그릇에 소금을 조금 넣고 숟가락으로 젓는다.\"}",
+          "usage": {
+            "inputTokens": 2280,
+            "cachedInputTokens": 1666,
+            "cacheWriteInputTokens": 611,
+            "outputTokens": 46,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2326
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "d60146864730749805cf0ecbf1253734b67d1b2bfd98d2570ed5be73a35e83e6",
+          "recalled": false,
+          "inputSha256": "50f96b7ab5c882a9b008456a65e4e23cd9283739ed7e07a959267a24633fc1a0",
+          "output": "{\"speech\":\"조금 싱겁게 됐어. 소금 넣어서 먹고 있어.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2550,
+            "cachedInputTokens": 2193,
+            "cacheWriteInputTokens": 354,
+            "outputTokens": 34,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2584
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "a0e505b401698750672d985aa6a16d84aabeadc6d808fb0bc716c905b9f0ec42",
+          "recalled": false,
+          "inputSha256": "2bde7f73d70cf98b87a0b746606dd4cc7aa23ec412eb677deafcf24cafaee501",
+          "output": "{\"speech\":\"난 소금 조금 넣으니까 딱 좋아, 엄마.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2624,
+            "cachedInputTokens": 2277,
+            "cacheWriteInputTokens": 344,
+            "outputTokens": 30,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2654
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.0094463
+    }
+  ]
+}

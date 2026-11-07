@@ -1,0 +1,1259 @@
+{
+  "plan": {
+    "split": "development",
+    "repetitions": 1,
+    "turns": 12,
+    "model": "gpt-6.1-sol",
+    "effort": "low",
+    "maxCalls": 48,
+    "maxEstimatedUsd": 1,
+    "characterPerformanceVersion": "character-performance/2",
+    "fixtureSha256": "5af9fae484691661a56705a8ae8c6a8c94ea9ed663c2a5cc8b631e0fe0f8e153"
+  },
+  "outputs": [
+    {
+      "scene": "screening",
+      "repetition": 1,
+      "policy": "off",
+      "sessions": [
+        {
+          "actor": "one"
+        },
+        {
+          "actor": "two"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "한결",
+          "speech": "앞줄은 목이 아플 것 같아서 저는 취소표 좀 기다려 볼래요.",
+          "action": "매표소 옆으로 비켜서요."
+        },
+        {
+          "sequence": 2,
+          "actor": "은서",
+          "speech": "저는 앞줄이라도 볼래요. 기다리다 시작 놓치기는 싫어요.",
+          "action": "매표소 앞으로 가서 앞줄 한 자리 구매를 요청해요."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "대기석에 물과 따뜻한 보리차를 둔 직원이 “기다리는 동안 뭐 드실래요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "한결",
+          "speech": "따뜻한 보리차로 주세요. 고마워요.",
+          "action": ""
+        },
+        {
+          "sequence": 5,
+          "actor": "은서",
+          "speech": "저는 물로 주세요. 고마워요.",
+          "action": ""
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "직원이 매표기로 돌아온다. “취소표는 아직 없네요. 아까 그 앞줄로 하실 분 계세요?”",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "한결",
+          "speech": "저는 조금 더 기다릴게요. 앞줄은 보기 불편해서요.",
+          "action": ""
+        },
+        {
+          "sequence": 8,
+          "actor": "은서",
+          "speech": "네, 저는 앞줄 한 자리 주세요.",
+          "action": "결제할 카드를 꺼내요."
+        },
+        {
+          "sequence": 9,
+          "actor": "한결",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 10,
+          "actor": "은서",
+          "speech": "",
+          "action": "직원에게 결제할 카드를 내밀어요."
+        },
+        {
+          "sequence": 11,
+          "actor": "한결",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 12,
+          "actor": "은서",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 13,
+          "actor": "한결",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 14,
+          "actor": "은서",
+          "speech": "",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "115c866747efd8e8d89e79910286b3d4ecf11ba95b9d90ba90fa3ce3fb2ad37d",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"앞줄은 목이 아플 것 같아서 저는 취소표 좀 기다려 볼래요.\",\"action\":\"매표소 옆으로 비켜서요.\"}",
+          "usage": {
+            "inputTokens": 1458,
+            "cachedInputTokens": 1455,
+            "cacheWriteInputTokens": 0,
+            "outputTokens": 47,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1505
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5aab5af9d72649565a901df8a5b535c831ab3aa5c19307ad7e2b11218781ddb8",
+          "recalled": false,
+          "inputSha256": "efe80184735f01f35271c92b2462f77ec59aac103612b9416292b9d67d479f26",
+          "output": "{\"speech\":\"저는 앞줄이라도 볼래요. 기다리다 시작 놓치기는 싫어요.\",\"action\":\"매표소 앞으로 가서 앞줄 한 자리 구매를 요청해요.\"}",
+          "usage": {
+            "inputTokens": 1542,
+            "cachedInputTokens": 1343,
+            "cacheWriteInputTokens": 196,
+            "outputTokens": 52,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1594
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "115c866747efd8e8d89e79910286b3d4ecf11ba95b9d90ba90fa3ce3fb2ad37d",
+          "recalled": false,
+          "inputSha256": "d9b1fad4a7e68e1284f3c782853cdebc0084cb713d055283d528eee41f05962c",
+          "output": "{\"speech\":\"따뜻한 보리차로 주세요. 고마워요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 1796,
+            "cachedInputTokens": 1455,
+            "cacheWriteInputTokens": 338,
+            "outputTokens": 30,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1826
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5aab5af9d72649565a901df8a5b535c831ab3aa5c19307ad7e2b11218781ddb8",
+          "recalled": false,
+          "inputSha256": "9e2f62ad0b5f64aaaf5f75472bfa4e56858b8c51f0fa15b850aa11294beafbea",
+          "output": "{\"speech\":\"저는 물로 주세요. 고마워요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 1863,
+            "cachedInputTokens": 1539,
+            "cacheWriteInputTokens": 321,
+            "outputTokens": 27,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1890
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "115c866747efd8e8d89e79910286b3d4ecf11ba95b9d90ba90fa3ce3fb2ad37d",
+          "recalled": false,
+          "inputSha256": "140896aa6096b9cd3d38a9d41b3556a8b63386d46d6646f9d3db46d6e723b186",
+          "output": "{\"speech\":\"저는 조금 더 기다릴게요. 앞줄은 보기 불편해서요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2088,
+            "cachedInputTokens": 1793,
+            "cacheWriteInputTokens": 292,
+            "outputTokens": 34,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2122
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5aab5af9d72649565a901df8a5b535c831ab3aa5c19307ad7e2b11218781ddb8",
+          "recalled": false,
+          "inputSha256": "3010cd34ed599c2dcbdcf8f9a1fa25ee34914bc0166649202d9c86a7af6386a2",
+          "output": "{\"speech\":\"네, 저는 앞줄 한 자리 주세요.\",\"action\":\"결제할 카드를 꺼내요.\"}",
+          "usage": {
+            "inputTokens": 2162,
+            "cachedInputTokens": 1860,
+            "cacheWriteInputTokens": 299,
+            "outputTokens": 34,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2196
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "115c866747efd8e8d89e79910286b3d4ecf11ba95b9d90ba90fa3ce3fb2ad37d",
+          "recalled": false,
+          "inputSha256": "ceac432d93386e1e973f9ecd891640e0000ee765078535bcaddb99e37405f483",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2307,
+            "cachedInputTokens": 2085,
+            "cacheWriteInputTokens": 219,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2323
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5aab5af9d72649565a901df8a5b535c831ab3aa5c19307ad7e2b11218781ddb8",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"\",\"action\":\"직원에게 결제할 카드를 내밀어요.\"}",
+          "usage": {
+            "inputTokens": 2310,
+            "cachedInputTokens": 2159,
+            "cacheWriteInputTokens": 148,
+            "outputTokens": 27,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2337
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "115c866747efd8e8d89e79910286b3d4ecf11ba95b9d90ba90fa3ce3fb2ad37d",
+          "recalled": false,
+          "inputSha256": "e46035f8b84d8938e639a045a0fa87a238330932df48c2e56c36f8ac9ff3131b",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2498,
+            "cachedInputTokens": 2304,
+            "cacheWriteInputTokens": 191,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2514
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5aab5af9d72649565a901df8a5b535c831ab3aa5c19307ad7e2b11218781ddb8",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2451,
+            "cachedInputTokens": 2307,
+            "cacheWriteInputTokens": 141,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2467
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "115c866747efd8e8d89e79910286b3d4ecf11ba95b9d90ba90fa3ce3fb2ad37d",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2628,
+            "cachedInputTokens": 2495,
+            "cacheWriteInputTokens": 130,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2644
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "5aab5af9d72649565a901df8a5b535c831ab3aa5c19307ad7e2b11218781ddb8",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2581,
+            "cachedInputTokens": 2448,
+            "cacheWriteInputTokens": 130,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2597
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.011718800000000001
+    },
+    {
+      "scene": "screening",
+      "repetition": 1,
+      "policy": "character-performance/2",
+      "sessions": [
+        {
+          "actor": "one",
+          "choices": {
+            "attention": "내 취향이나 불편",
+            "phrasing": "대답을 먼저 건넨다"
+          },
+          "source": "profile"
+        },
+        {
+          "actor": "two",
+          "choices": {
+            "attention": "바로 손댈 일",
+            "phrasing": "구체적인 한 대목부터 꺼낸다"
+          },
+          "source": "profile"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "한결",
+          "speech": "저는 뒷줄 취소표 좀 기다려 볼게요. 앞줄은 목이 불편해서요.",
+          "action": ""
+        },
+        {
+          "sequence": 2,
+          "actor": "은서",
+          "speech": "저는 앞줄로 살게요. 오늘은 꼭 보고 싶어서요.",
+          "action": "매표소 앞으로 다가가 앞줄 표 한 장을 요청한다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "대기석에 물과 따뜻한 보리차를 둔 직원이 “기다리는 동안 뭐 드실래요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "한결",
+          "speech": "따뜻한 보리차로 주세요. 감사합니다.",
+          "action": ""
+        },
+        {
+          "sequence": 5,
+          "actor": "은서",
+          "speech": "저는 물로 주세요. 감사합니다.",
+          "action": ""
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "직원이 매표기로 돌아온다. “취소표는 아직 없네요. 아까 그 앞줄로 하실 분 계세요?”",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "한결",
+          "speech": "저는 조금 더 기다릴게요.",
+          "action": ""
+        },
+        {
+          "sequence": 8,
+          "actor": "은서",
+          "speech": "네, 저는 앞줄 한 장 주세요.",
+          "action": "결제하려고 카드를 꺼내 직원에게 내민다."
+        },
+        {
+          "sequence": 9,
+          "actor": "한결",
+          "speech": "",
+          "action": "매표소 앞에서 비켜 대기석에 앉는다."
+        },
+        {
+          "sequence": 10,
+          "actor": "은서",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 11,
+          "actor": "한결",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 12,
+          "actor": "은서",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 13,
+          "actor": "한결",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 14,
+          "actor": "은서",
+          "speech": "",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "one",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "4073d69542ff7fc4c06ffbf5d7dc1030a680145714403b26eb9304f6b38b1828",
+          "recalled": false,
+          "inputSha256": "f2033b90c3a98100244f3c6ae69c3af328a449e36685a9365e193033f022a426",
+          "output": "{\"portrayal\":{\"attention\":\"내 취향이나 불편\",\"phrasing\":\"대답을 먼저 건넨다\"},\"speech\":\"저는 뒷줄 취소표 좀 기다려 볼게요. 앞줄은 목이 불편해서요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2205,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2202,
+            "outputTokens": 68,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2273
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "fa8c472b288a09afff6e04bd59fa7aa9c495159e355c2b62b1b8783bf7f026f6",
+          "recalled": false,
+          "inputSha256": "7e07de8715ffaa87843cb5bef2fc32e686109d007816fb263c5c5a98f28fc180",
+          "output": "{\"portrayal\":{\"attention\":\"바로 손댈 일\",\"phrasing\":\"구체적인 한 대목부터 꺼낸다\"},\"speech\":\"저는 앞줄로 살게요. 오늘은 꼭 보고 싶어서요.\",\"action\":\"매표소 앞으로 다가가 앞줄 표 한 장을 요청한다.\"}",
+          "usage": {
+            "inputTokens": 2283,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2280,
+            "outputTokens": 77,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2360
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "4073d69542ff7fc4c06ffbf5d7dc1030a680145714403b26eb9304f6b38b1828",
+          "recalled": false,
+          "inputSha256": "9fa9629b3251d152c7cafc0369630499129258a5808b319db01cbe4691d7eb5c",
+          "output": "{\"speech\":\"따뜻한 보리차로 주세요. 감사합니다.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2212,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2209,
+            "outputTokens": 27,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2239
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "fa8c472b288a09afff6e04bd59fa7aa9c495159e355c2b62b1b8783bf7f026f6",
+          "recalled": false,
+          "inputSha256": "535b22d64d311f578b3f736618b761c7af7436ad4456c0b62c903b811b27cd4b",
+          "output": "{\"speech\":\"저는 물로 주세요. 감사합니다.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2282,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2279,
+            "outputTokens": 24,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2306
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "4073d69542ff7fc4c06ffbf5d7dc1030a680145714403b26eb9304f6b38b1828",
+          "recalled": true,
+          "inputSha256": "3ba44368c9daf3666a9f9404ffc46515977ebf2091970b5584842e7cf9a8f27d",
+          "output": "{\"speech\":\"저는 조금 더 기다릴게요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2578,
+            "cachedInputTokens": 2209,
+            "cacheWriteInputTokens": 366,
+            "outputTokens": 25,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2603
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "fa8c472b288a09afff6e04bd59fa7aa9c495159e355c2b62b1b8783bf7f026f6",
+          "recalled": false,
+          "inputSha256": "ffe65f2264490e2a6c5ab324c186e30a9bdcc2b300f602894942a0be11654493",
+          "output": "{\"speech\":\"네, 저는 앞줄 한 장 주세요.\",\"action\":\"결제하려고 카드를 꺼내 직원에게 내민다.\"}",
+          "usage": {
+            "inputTokens": 2589,
+            "cachedInputTokens": 2279,
+            "cacheWriteInputTokens": 307,
+            "outputTokens": 39,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2628
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "4073d69542ff7fc4c06ffbf5d7dc1030a680145714403b26eb9304f6b38b1828",
+          "recalled": false,
+          "inputSha256": "9ba617db7d3159b8b35ffc9e75aea5edd1c3717203720c4707afc52ffe11fac1",
+          "output": "{\"speech\":\"\",\"action\":\"매표소 앞에서 비켜 대기석에 앉는다.\"}",
+          "usage": {
+            "inputTokens": 2815,
+            "cachedInputTokens": 2575,
+            "cacheWriteInputTokens": 237,
+            "outputTokens": 30,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2845
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "fa8c472b288a09afff6e04bd59fa7aa9c495159e355c2b62b1b8783bf7f026f6",
+          "recalled": false,
+          "inputSha256": "73be450550cc753d35fa22ddb55b184f506ea89567d8ff2570a70b7708ac1985",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2833,
+            "cachedInputTokens": 2586,
+            "cacheWriteInputTokens": 244,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2849
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "4073d69542ff7fc4c06ffbf5d7dc1030a680145714403b26eb9304f6b38b1828",
+          "recalled": false,
+          "inputSha256": "c751ccb8b12aca3746a918cd2902491669ad238764b2c58a9666ca6eb01e5261",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2982,
+            "cachedInputTokens": 2812,
+            "cacheWriteInputTokens": 167,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2998
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "fa8c472b288a09afff6e04bd59fa7aa9c495159e355c2b62b1b8783bf7f026f6",
+          "recalled": false,
+          "inputSha256": "577a7e6f4d0e63543adbe91d4b5185c6f60454886b2b53f2975cdffd37d26892",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2989,
+            "cachedInputTokens": 2830,
+            "cacheWriteInputTokens": 156,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 3005
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "one",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "4073d69542ff7fc4c06ffbf5d7dc1030a680145714403b26eb9304f6b38b1828",
+          "recalled": false,
+          "inputSha256": "c751ccb8b12aca3746a918cd2902491669ad238764b2c58a9666ca6eb01e5261",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 3135,
+            "cachedInputTokens": 2979,
+            "cacheWriteInputTokens": 153,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 3151
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "two",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "fa8c472b288a09afff6e04bd59fa7aa9c495159e355c2b62b1b8783bf7f026f6",
+          "recalled": false,
+          "inputSha256": "577a7e6f4d0e63543adbe91d4b5185c6f60454886b2b53f2975cdffd37d26892",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 3145,
+            "cachedInputTokens": 2986,
+            "cacheWriteInputTokens": 156,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 3161
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.0327876
+    },
+    {
+      "scene": "harbor-short",
+      "repetition": 1,
+      "policy": "character-performance/2",
+      "sessions": [
+        {
+          "actor": "yoon",
+          "choices": {
+            "attention": "내 취향이나 불편",
+            "phrasing": "대답을 먼저 건넨다"
+          },
+          "source": "profile"
+        },
+        {
+          "actor": "miru",
+          "choices": {
+            "attention": "내 취향이나 불편",
+            "phrasing": "구체적인 한 대목부터 꺼낸다"
+          },
+          "source": "profile"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "윤",
+          "speech": "저는 통밀빵으로 할게요. 지금은 달지 않은 게 당겨요.",
+          "action": "통밀빵을 집어 자기 앞으로 가져온다."
+        },
+        {
+          "sequence": 2,
+          "actor": "미루",
+          "speech": "저는 잼빵이 당겼는데, 잘됐네요.",
+          "action": "잼빵을 집어 한 입 베어 문다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "창밖에서 잠깐 음악이 들린다. 옆 휴게실 사람이 “좀 더 크게 틀까요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "윤",
+          "speech": "지금 크기가 좋아요. 더 키우지는 말아 주세요.",
+          "action": "소리가 들린 쪽으로 고개를 돌린다."
+        },
+        {
+          "sequence": 5,
+          "actor": "미루",
+          "speech": "저도 지금 정도가 좋아요. 빵 먹으면서 듣기 좋네요.",
+          "action": ""
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "빵을 가져온 사람이 “아까 빵 얘기요. 다음에도 사 올까요?” 하고 묻는다. 여전히 쉬는 시간이다.",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "윤",
+          "speech": "네, 저는 다음에도 통밀빵이면 좋겠어요. 잘 먹을게요.",
+          "action": "통밀빵을 한 입 베어 문다."
+        },
+        {
+          "sequence": 8,
+          "actor": "미루",
+          "speech": "저는 다음에도 잼빵 부탁드려요. 맛있네요. 사다 주셔서 고마워요.",
+          "action": ""
+        },
+        {
+          "sequence": 9,
+          "actor": "윤",
+          "speech": "",
+          "action": "통밀빵을 마저 먹는다."
+        },
+        {
+          "sequence": 10,
+          "actor": "미루",
+          "speech": "",
+          "action": "남은 잼빵을 마저 먹는다."
+        },
+        {
+          "sequence": 11,
+          "actor": "윤",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 12,
+          "actor": "미루",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 13,
+          "actor": "윤",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 14,
+          "actor": "미루",
+          "speech": "",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "yoon",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "7aef8a4208f1769882756320dc322da2175a827ce858e6805f93e41d35422bed",
+          "recalled": false,
+          "inputSha256": "f2033b90c3a98100244f3c6ae69c3af328a449e36685a9365e193033f022a426",
+          "output": "{\"portrayal\":{\"attention\":\"내 취향이나 불편\",\"phrasing\":\"대답을 먼저 건넨다\"},\"speech\":\"저는 통밀빵으로 할게요. 지금은 달지 않은 게 당겨요.\",\"action\":\"통밀빵을 집어 자기 앞으로 가져온다.\"}",
+          "usage": {
+            "inputTokens": 2220,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2217,
+            "outputTokens": 75,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2295
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "95be9a580b4ba4ac148e723fdc02e0dee777110a159c5f72ff1e47b779fc1351",
+          "instructions": "13108a00abf185d5fcededf0fae0a3c82b5cf78ab33d70acd88e2764112f7c8e",
+          "recalled": false,
+          "inputSha256": "93d8a489882e5585a5020e0ab9dd86279de8afaef4d395daaa561e1ed8f7e1e7",
+          "output": "{\"portrayal\":{\"attention\":\"내 취향이나 불편\",\"phrasing\":\"구체적인 한 대목부터 꺼낸다\"},\"speech\":\"저는 잼빵이 당겼는데, 잘됐네요.\",\"action\":\"잼빵을 집어 한 입 베어 문다.\"}",
+          "usage": {
+            "inputTokens": 2318,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2315,
+            "outputTokens": 73,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2391
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "7aef8a4208f1769882756320dc322da2175a827ce858e6805f93e41d35422bed",
+          "recalled": false,
+          "inputSha256": "d387a641f68496de1478a6cb00b7ad191f3f5ae894661e3ede3e3bd1ab5fe4a9",
+          "output": "{\"speech\":\"지금 크기가 좋아요. 더 키우지는 말아 주세요.\",\"action\":\"소리가 들린 쪽으로 고개를 돌린다.\"}",
+          "usage": {
+            "inputTokens": 2230,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2227,
+            "outputTokens": 44,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2274
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "13108a00abf185d5fcededf0fae0a3c82b5cf78ab33d70acd88e2764112f7c8e",
+          "recalled": false,
+          "inputSha256": "5df6cc36421fda4fa981f60095e747cccdd6929fc2ffa1eca6c3d7bf6bfb9815",
+          "output": "{\"speech\":\"저도 지금 정도가 좋아요. 빵 먹으면서 듣기 좋네요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2332,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 2329,
+            "outputTokens": 34,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2366
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "7aef8a4208f1769882756320dc322da2175a827ce858e6805f93e41d35422bed",
+          "recalled": false,
+          "inputSha256": "95679173b6001879debf42a4ea21778b16985b29fa3d437aec3b47137d808170",
+          "output": "{\"speech\":\"네, 저는 다음에도 통밀빵이면 좋겠어요. 잘 먹을게요.\",\"action\":\"통밀빵을 한 입 베어 문다.\"}",
+          "usage": {
+            "inputTokens": 2568,
+            "cachedInputTokens": 2227,
+            "cacheWriteInputTokens": 338,
+            "outputTokens": 47,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2615
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "13108a00abf185d5fcededf0fae0a3c82b5cf78ab33d70acd88e2764112f7c8e",
+          "recalled": false,
+          "inputSha256": "8719cf34f297b710041a0db4d9a318e5336dac3656d15db34bbbbc24e2d352a2",
+          "output": "{\"speech\":\"저는 다음에도 잼빵 부탁드려요. 맛있네요. 사다 주셔서 고마워요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2675,
+            "cachedInputTokens": 2329,
+            "cacheWriteInputTokens": 343,
+            "outputTokens": 43,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2718
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "7aef8a4208f1769882756320dc322da2175a827ce858e6805f93e41d35422bed",
+          "recalled": false,
+          "inputSha256": "2ceab1cd85848fc04493b1087f358a0ac5f1551253e49313a93f66c3943eb143",
+          "output": "{\"speech\":\"\",\"action\":\"통밀빵을 마저 먹는다.\"}",
+          "usage": {
+            "inputTokens": 2831,
+            "cachedInputTokens": 2565,
+            "cacheWriteInputTokens": 263,
+            "outputTokens": 25,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2856
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "13108a00abf185d5fcededf0fae0a3c82b5cf78ab33d70acd88e2764112f7c8e",
+          "recalled": false,
+          "inputSha256": "c4cf893eb8ba892c7820967b29c43968116ce759548a0d63ed4912ea0fa32510",
+          "output": "{\"speech\":\"\",\"action\":\"남은 잼빵을 마저 먹는다.\"}",
+          "usage": {
+            "inputTokens": 2918,
+            "cachedInputTokens": 2672,
+            "cacheWriteInputTokens": 243,
+            "outputTokens": 27,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2945
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "7aef8a4208f1769882756320dc322da2175a827ce858e6805f93e41d35422bed",
+          "recalled": false,
+          "inputSha256": "6c36423cd79b4ab4ffd5570e1c3ab1547b92d216091652c40980e812bd12d499",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 3054,
+            "cachedInputTokens": 2828,
+            "cacheWriteInputTokens": 223,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 3070
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "13108a00abf185d5fcededf0fae0a3c82b5cf78ab33d70acd88e2764112f7c8e",
+          "recalled": false,
+          "inputSha256": "037e23e11f1e628313148ab1f9ae4a7c409d4f6e91b150c49f9507d07ab47ff4",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 3085,
+            "cachedInputTokens": 2915,
+            "cacheWriteInputTokens": 167,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 3101
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "7aef8a4208f1769882756320dc322da2175a827ce858e6805f93e41d35422bed",
+          "recalled": false,
+          "inputSha256": "c751ccb8b12aca3746a918cd2902491669ad238764b2c58a9666ca6eb01e5261",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 3207,
+            "cachedInputTokens": 3051,
+            "cacheWriteInputTokens": 153,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 3223
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "13108a00abf185d5fcededf0fae0a3c82b5cf78ab33d70acd88e2764112f7c8e",
+          "recalled": false,
+          "inputSha256": "037e23e11f1e628313148ab1f9ae4a7c409d4f6e91b150c49f9507d07ab47ff4",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 3241,
+            "cachedInputTokens": 3082,
+            "cacheWriteInputTokens": 156,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 3257
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.03399390000000001
+    },
+    {
+      "scene": "harbor-short",
+      "repetition": 1,
+      "policy": "off",
+      "sessions": [
+        {
+          "actor": "yoon"
+        },
+        {
+          "actor": "miru"
+        }
+      ],
+      "turns": [
+        {
+          "sequence": 1,
+          "actor": "윤",
+          "speech": "저는 통밀빵으로 할게요. 밤 근무 전에 든든하게 먹고 싶어요.",
+          "action": "탁자 위의 통밀빵을 집어 든다."
+        },
+        {
+          "sequence": 2,
+          "actor": "미루",
+          "speech": "그럼 저는 잼빵 먹을게요. 근무 전에 단 게 좀 당기네요.",
+          "action": "탁자 위의 잼빵을 집어 든다."
+        },
+        {
+          "sequence": 3,
+          "actor": "상황",
+          "speech": "창밖에서 잠깐 음악이 들린다. 옆 휴게실 사람이 “좀 더 크게 틀까요?” 하고 묻는다.",
+          "action": ""
+        },
+        {
+          "sequence": 4,
+          "actor": "윤",
+          "speech": "지금 정도면 잘 들려요. 더 키우지는 말아 주세요.",
+          "action": "창 쪽으로 고개를 돌린다."
+        },
+        {
+          "sequence": 5,
+          "actor": "미루",
+          "speech": "",
+          "action": "잼빵을 한 입 베어 문다."
+        },
+        {
+          "sequence": 6,
+          "actor": "상황",
+          "speech": "빵을 가져온 사람이 “아까 빵 얘기요. 다음에도 사 올까요?” 하고 묻는다. 여전히 쉬는 시간이다.",
+          "action": ""
+        },
+        {
+          "sequence": 7,
+          "actor": "윤",
+          "speech": "네, 제 건 통밀빵으로 부탁드려요. 빵값은 제가 드릴게요.",
+          "action": "통밀빵을 한 입 베어 문다."
+        },
+        {
+          "sequence": 8,
+          "actor": "미루",
+          "speech": "제 것도 부탁드려요. 다음에도 잼빵으로요. 제 빵값은 제가 드릴게요.",
+          "action": ""
+        },
+        {
+          "sequence": 9,
+          "actor": "윤",
+          "speech": "",
+          "action": "입안의 빵을 천천히 씹어 삼킨다."
+        },
+        {
+          "sequence": 10,
+          "actor": "미루",
+          "speech": "",
+          "action": "잼빵을 한 입 더 베어 문다."
+        },
+        {
+          "sequence": 11,
+          "actor": "윤",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 12,
+          "actor": "미루",
+          "speech": "",
+          "action": ""
+        },
+        {
+          "sequence": 13,
+          "actor": "윤",
+          "speech": "",
+          "action": "통밀빵을 한 입 더 베어 문다."
+        },
+        {
+          "sequence": 14,
+          "actor": "미루",
+          "speech": "",
+          "action": ""
+        }
+      ],
+      "calls": [
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "b15963cb84d79ba77cedd7d24eb856458471572de409456cf4cf82ac68440686",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"저는 통밀빵으로 할게요. 밤 근무 전에 든든하게 먹고 싶어요.\",\"action\":\"탁자 위의 통밀빵을 집어 든다.\"}",
+          "usage": {
+            "inputTokens": 1473,
+            "cachedInputTokens": 1470,
+            "cacheWriteInputTokens": 0,
+            "outputTokens": 54,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1527
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "7089dc665f7cfee977f103c75ad6b9dcb19e1fce98e575a5806b6a7034570122",
+          "recalled": false,
+          "inputSha256": "2fb61fa3870ea4f9c38c7eaa7b054317c4275c7ee4299173d2c4a2319f2e8f19",
+          "output": "{\"speech\":\"그럼 저는 잼빵 먹을게요. 근무 전에 단 게 좀 당기네요.\",\"action\":\"탁자 위의 잼빵을 집어 든다.\"}",
+          "usage": {
+            "inputTokens": 1572,
+            "cachedInputTokens": 1364,
+            "cacheWriteInputTokens": 205,
+            "outputTokens": 52,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1624
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "b15963cb84d79ba77cedd7d24eb856458471572de409456cf4cf82ac68440686",
+          "recalled": false,
+          "inputSha256": "232a55127c5e496a2f64ddb589f137aee47eb02498e99b45c7c8425b497c336f",
+          "output": "{\"speech\":\"지금 정도면 잘 들려요. 더 키우지는 말아 주세요.\",\"action\":\"창 쪽으로 고개를 돌린다.\"}",
+          "usage": {
+            "inputTokens": 1814,
+            "cachedInputTokens": 1470,
+            "cacheWriteInputTokens": 341,
+            "outputTokens": 43,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1857
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "7089dc665f7cfee977f103c75ad6b9dcb19e1fce98e575a5806b6a7034570122",
+          "recalled": false,
+          "inputSha256": "fa969b5f24892171d090aff188dc29db4ace9b034b54cbcaccfad52d4c09340b",
+          "output": "{\"speech\":\"\",\"action\":\"잼빵을 한 입 베어 문다.\"}",
+          "usage": {
+            "inputTokens": 1904,
+            "cachedInputTokens": 1569,
+            "cacheWriteInputTokens": 332,
+            "outputTokens": 27,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 1931
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "b15963cb84d79ba77cedd7d24eb856458471572de409456cf4cf82ac68440686",
+          "recalled": false,
+          "inputSha256": "20a429f0f878545a84e7eaa3f4480f77d063e190fbcf48fc454851548a944d7d",
+          "output": "{\"speech\":\"네, 제 건 통밀빵으로 부탁드려요. 빵값은 제가 드릴게요.\",\"action\":\"통밀빵을 한 입 베어 문다.\"}",
+          "usage": {
+            "inputTokens": 2121,
+            "cachedInputTokens": 1811,
+            "cacheWriteInputTokens": 307,
+            "outputTokens": 51,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2172
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "7089dc665f7cfee977f103c75ad6b9dcb19e1fce98e575a5806b6a7034570122",
+          "recalled": false,
+          "inputSha256": "90cd8134148471046c98b08b2e648a7c6fd9550afb53186697452dfde21d21cc",
+          "output": "{\"speech\":\"제 것도 부탁드려요. 다음에도 잼빵으로요. 제 빵값은 제가 드릴게요.\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2223,
+            "cachedInputTokens": 1901,
+            "cacheWriteInputTokens": 319,
+            "outputTokens": 43,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2266
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "b15963cb84d79ba77cedd7d24eb856458471572de409456cf4cf82ac68440686",
+          "recalled": false,
+          "inputSha256": "2c626be4831c762bae7e6c18acbc94689981378ccc945400e56f0b99cbd01e43",
+          "output": "{\"speech\":\"\",\"action\":\"입안의 빵을 천천히 씹어 삼킨다.\"}",
+          "usage": {
+            "inputTokens": 2366,
+            "cachedInputTokens": 2118,
+            "cacheWriteInputTokens": 245,
+            "outputTokens": 31,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2397
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "7089dc665f7cfee977f103c75ad6b9dcb19e1fce98e575a5806b6a7034570122",
+          "recalled": false,
+          "inputSha256": "06df6c7468379f38d3c07f33861a6929d03e257d41c5b0d1dd22240c08de1ec3",
+          "output": "{\"speech\":\"\",\"action\":\"잼빵을 한 입 더 베어 문다.\"}",
+          "usage": {
+            "inputTokens": 2448,
+            "cachedInputTokens": 2220,
+            "cacheWriteInputTokens": 225,
+            "outputTokens": 28,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2476
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "b15963cb84d79ba77cedd7d24eb856458471572de409456cf4cf82ac68440686",
+          "recalled": false,
+          "inputSha256": "d9efcf5d8a0b2e489af00d548f85f5b9d26a8ad4574546dcbf07423ee0339adb",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2577,
+            "cachedInputTokens": 2363,
+            "cacheWriteInputTokens": 211,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2593
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "7089dc665f7cfee977f103c75ad6b9dcb19e1fce98e575a5806b6a7034570122",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2590,
+            "cachedInputTokens": 2445,
+            "cacheWriteInputTokens": 142,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2606
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "yoon",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "b15963cb84d79ba77cedd7d24eb856458471572de409456cf4cf82ac68440686",
+          "recalled": false,
+          "inputSha256": "563f0d1f8349a0a600e88bba96a969e26b9790a3b0a0aed98596b18ffb1b94aa",
+          "output": "{\"speech\":\"\",\"action\":\"통밀빵을 한 입 더 베어 문다.\"}",
+          "usage": {
+            "inputTokens": 2707,
+            "cachedInputTokens": 2574,
+            "cacheWriteInputTokens": 130,
+            "outputTokens": 28,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2735
+          },
+          "model": "gpt-6.1-sol"
+        },
+        {
+          "actor": "miru",
+          "schema": "e3b1d6837cc2cae1e72141079f94a39a3917677bba55cc90dfb7c2c1d1e53c85",
+          "instructions": "7089dc665f7cfee977f103c75ad6b9dcb19e1fce98e575a5806b6a7034570122",
+          "recalled": false,
+          "inputSha256": "175fefa08c64e93ef05364cf08ff36cf06e2a8633cf0a9d386d03d118dac1900",
+          "output": "{\"speech\":\"\",\"action\":\"\"}",
+          "usage": {
+            "inputTokens": 2783,
+            "cachedInputTokens": 2587,
+            "cacheWriteInputTokens": 193,
+            "outputTokens": 16,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 2799
+          },
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "estimatedUsd": 0.0131362
+    }
+  ]
+}

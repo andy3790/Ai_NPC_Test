@@ -5,6 +5,8 @@ import { join } from 'node:path';
 import type { Adapter } from '../adapters/types.js';
 import { Store } from './store.js';
 import { SessionCleanup } from './session-cleanup.js';
+import { CHARACTER_PERFORMANCE } from '../shared/character-performance.js';
+import { committedPerformance, performTurn, withPortrayal } from './character-performance.js';
 import { emptyUsage, UsageTracker } from './metrics.js';
 import { evaluationPrompt, persona, PROMPT_VERSION, publicMessage, receiverBatchPrompt, receiverPrompt, speakerPrompt } from './prompts.js';
 import { receiveBarriers, RECEIVE_DELIVERY_VERSION } from './receive-delivery.js';
@@ -75,6 +77,7 @@ export class Engine extends EventEmitter {
     for (const sourceVariant of spec.variants) for (let repetition = 1; repetition <= spec.repetitions; repetition++) {
       // Pin the resolved policy before any session is created, including paused runs.
       const variant = { ...sourceVariant, dialoguePromptVersion: sourceVariant.dialoguePromptVersion ?? CURRENT_DIALOGUE_PROMPT,
+        characterPerformanceVersion: sourceVariant.characterPerformanceVersion ?? CHARACTER_PERFORMANCE,
         ...(environmentMode(spec, sourceVariant) === 'ai' ? { worldPromptVersion: sourceVariant.worldPromptVersion ?? WORLD_PROMPT_VERSION } : {}) };
       const snapshotHash = createHash('sha256').update(JSON.stringify({ spec, variant, repetition, promptVersion: PROMPT_VERSION })).digest('hex');
       const run: Run = { id: randomUUID(), experimentId, name: `${spec.name} · ${variant.label} · #${repetition}`, variant, repetition, spec, snapshotHash,
@@ -161,6 +164,17 @@ export class Engine extends EventEmitter {
     const session = await this.helper(id, key, this.run(id).spec.director, prompt.instructions, true);
     try { return await this.invoke(id, 'director', session, operationKey, prompt.input, prompt.metadata, prompt.outputSchema); }
     finally { await this.sessionCleanup.run(id, session.threadId); }
+  }
+  private speak(id: string, session: NpcSession, key: string, input: string, metadata: Record<string, unknown>, history: Utterance[]) {
+    const run = this.run(id);
+    const version = run.variant.characterPerformanceVersion;
+    if (!version || version === 'off') return this.invoke(id, 'speech', session, key, input, metadata);
+    const slot = run.spec.scenario.characters.findIndex(c => c.id === session.characterId);
+    const turn = performTurn(version, run.spec.scenario.characters[slot], slot, session, history);
+    const baseSchema = metadata.outputType === 'spatialSpeech' ? outputSchemas.spatialSpeech :
+      environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas.speech;
+    return this.invoke(id, 'speech', session, key, JSON.stringify({ ...JSON.parse(input), characterPerformance: turn.context }),
+      { ...metadata, ...turn.metadata }, turn.select ? withPortrayal(baseSchema) : undefined);
   }
   private async invoke(id: string, kind: CallKind, session: NpcSession, operationKey: string, input: string, metadata: Record<string, unknown> = {}, requestedOutputSchema?: object) {
     const previous = this.priorInvocation(id, operationKey);
@@ -271,12 +285,25 @@ export class Engine extends EventEmitter {
     }
   }
   private append(id: string, u: Utterance) {
+    const run = this.run(id);
+    const version = run.variant.characterPerformanceVersion;
+    if (u.kind === 'speech' && u.invocationId && version && version !== 'off') {
+      const session = run.sessions[u.speakerId];
+      if (!session.performance) {
+        const call = this.store.get('invocations', u.invocationId)!;
+        const slot = run.spec.scenario.characters.findIndex(c => c.id === u.speakerId);
+        const performance = committedPerformance(version, run.spec.scenario.characters[slot], slot, call);
+        // Both runners append inside the transaction that commits the public
+        // choice. A rejected or rolled-back choice cannot shape later turns.
+        this.store.patch('runs', id, { sessions: { ...run.sessions, [u.speakerId]: { ...session, performance } } });
+      }
+    }
     if (!u.perception && isSilentTurn(u)) {
       this.store.put('utterances', { ...u, deliveryCompletedAt: now(), deliveryMs: 0 });
       return;
     }
     this.store.put('utterances', u);
-    for (const c of this.run(id).spec.scenario.characters) if (c.id !== u.speakerId && receives(u, c.id)) {
+    for (const c of run.spec.scenario.characters) if (c.id !== u.speakerId && receives(u, c.id)) {
       const receipt: DeliveryReceipt = { id: `${u.id}:${c.id}`, runId: id, utteranceId: u.id, characterId: c.id, status: 'pending', invocationId: null, deliveredAt: null };
       this.store.put('receipts', receipt);
     }
@@ -357,7 +384,7 @@ export class Engine extends EventEmitter {
         const speakerId = await this.speaker(id, speeches); const session = this.run(id).sessions[speakerId];
         const receipts = this.pending(id, speakerId); all = this.store.list('utterances', id);
         const messages = all.filter(u => receipts.some(r => r.utteranceId === u.id));
-        const call = await this.invoke(id, 'speech', session, `speech:${speeches.length + 1}`, speakerPrompt(messages, run.variant.memoryMode === 'reinject_on_speech' ? session.instructions : undefined, rules ? progressionPrompt(run.spec, all, speakerId) : undefined), { receiptIds: receipts.map(r => r.id) });
+        const call = await this.speak(id, session, `speech:${speeches.length + 1}`, speakerPrompt(messages, run.variant.memoryMode === 'reinject_on_speech' ? session.instructions : undefined, rules ? progressionPrompt(run.spec, all, speakerId) : undefined), { receiptIds: receipts.map(r => r.id) }, all);
         const output = speechSchema.parse(JSON.parse(call.output)); const character = run.spec.scenario.characters.find(c => c.id === speakerId)!;
         let resolved: ReturnType<typeof resolveAction>;
         try { resolved = rules ? resolveAction(run.spec, all, speakerId, output.actionId) : null; }
@@ -570,6 +597,7 @@ export class Engine extends EventEmitter {
       helper: (key, config, instructions) => this.helper(id, key, config, instructions),
       direct: (key, operationKey, prompt) => this.direct(id, key, operationKey, prompt),
       invoke: (kind, session, key, input, metadata) => this.invoke(id, kind, session, key, input, metadata),
+      speak: (session, key, input, metadata, history) => this.speak(id, session, key, input, metadata, history),
       append: u => this.append(id, u), flush: () => this.flush(id), changed: () => this.changed(id),
       completeDelivery: u => this.completeDelivery(id, u), inject: (text, audience) => this.appendEvent(id, text, audience),
       evaluate: final => this.evaluatePending(id, final) };
