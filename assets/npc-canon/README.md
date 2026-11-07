@@ -31,7 +31,7 @@ npm run cli -- run --config assets/npc-canon/experiments/tidemark-a.json --pause
 
 마지막 명령은 검토할 수 있도록 일시정지 상태의 실험을 만듭니다. 바로 실행하려면 `--paused`를 빼거나, 반환된 묶음 ID를 `npm run cli -- resume <묶음ID>`에 사용합니다. 실행된 실험에는 모델 사용량이 발생합니다.
 
-팩 파일 기본 모델·강도는 `gpt-6.1-sol` / `low`입니다. 서버에서 새로 만드는 일반 예제의 모델 선택과는 별개입니다. 계정에서 실제 사용 가능한 조합인지 확인한 값은 아닙니다. `models` 결과에 맞춰 원본을 보존하는 준비 도구로 바꿀 수 있습니다. 아래 `<...>`를 실제 값으로 바꿉니다.
+팩 파일 기본 모델·강도는 `gpt-6-luna` / `low`입니다. 서버에서 새로 만드는 일반 예제의 모델 선택과는 별개입니다. 계정에서 실제 사용 가능한 조합인지 확인한 값은 아닙니다. `models` 결과에 맞춰 원본을 보존하는 준비 도구로 바꿀 수 있습니다. 아래 `<...>`를 실제 값으로 바꿉니다.
 
 ```powershell
 node assets/npc-canon/prepare.mjs --in assets/npc-canon/experiments/glass-a.json --out .cache/glass-local.json --model <models에서_확인한_ID> --effort <허용_강도>

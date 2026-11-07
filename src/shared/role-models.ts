@@ -3,14 +3,16 @@ import type { ModelConfig } from './schema.js';
 import type { ModelInfo } from './types.js';
 
 export const apiRoleDefaults = defaults;
+export const simulationEffort = (value: string) => ['none','minimal','low','medium','high'].includes(value);
+export function preferredEffort(model?: ModelInfo, requested?: string) {
+  return [requested,model?.defaultEffort,'low',...(model?.efforts ?? [])].find(e => e && simulationEffort(e) && model?.efforts.includes(e)) ?? 'low';
+}
 
-export function availableRoleModels(models: ModelInfo[], fallback: ModelConfig) {
-  const accountDefault = models.find(m => m.isDefault) ?? models.find(m => m.id === fallback.model) ?? models[0];
+export function availableRoleModels(models: ModelInfo[]) {
   function select(preferred: ModelConfig): ModelConfig {
-    const available = models.find(m => m.id === preferred.model) ?? accountDefault;
-    if (!available) return fallback;
-    const effort = available.efforts.includes(preferred.effort) ? preferred.effort : available.defaultEffort;
-    return { model: available.id, effort };
+    const available = models.find(m => m.id === preferred.model);
+    if (!available) return { ...preferred };
+    return { model: available.id, effort: preferredEffort(available,preferred.effort) };
   }
   return { npc: select(defaults.npc), worldEngine: select(defaults.worldEngine), director: select(defaults.director) };
 }

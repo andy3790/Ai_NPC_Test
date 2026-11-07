@@ -1,3 +1,4 @@
+import { simulationEffort } from '../shared/role-models.js';
 import { randomUUID } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
@@ -99,7 +100,7 @@ export class OpenAIAdapter implements Adapter {
   async createSession(config: ModelConfig, instructions: string, _cwd: string, credential?: ApiCredential) {
     this.keys.resolve(credential);
     const profile = this.profiles.find(p => p.id === config.model);
-    if (!profile?.efforts.includes(config.effort)) throw new Error('지원되지 않는 API 모델·추론 조합');
+    if (!simulationEffort(config.effort) || !profile?.efforts.includes(config.effort)) throw new Error('지원되지 않는 API 모델·추론 조합');
     const id = randomUUID(); this.save('sessions', id, { id, config, instructions, previousResponseId: null, maxOutputTokens: this.maxOutputTokens, reasoning: profile.reasoning, credential: credential ?? { source: 'environment' } } satisfies Session); return id;
   }
   async resumeSession(id: string) { this.keys.resolve(this.load<Session>('sessions', id).credential); }
@@ -129,12 +130,13 @@ export class OpenAIAdapter implements Adapter {
     const key = this.keys.resolve(session.credential);
     if (session.config.model !== r.config.model || session.config.effort !== r.config.effort) throw new Error('실행 중 API 세션의 모델·추론 강도를 변경할 수 없습니다.');
     const profile = this.profiles.find(p => p.id === r.config.model);
-    if (!profile?.efforts.includes(r.config.effort)) throw new Error('지원되지 않는 API 모델·추론 조합');
+    if (!simulationEffort(r.config.effort) || !profile?.efforts.includes(r.config.effort)) throw new Error('지원되지 않는 API 모델·추론 조합');
     if (existsSync(this.file('calls', r.clientMessageId))) throw new Error('기록된 API 호출을 다시 전송하지 않습니다. 먼저 완료 상태를 대조하세요.');
     const controller = new AbortController(); this.active.set(r.threadId, controller);
     const combined = AbortSignal.any([controller.signal, AbortSignal.timeout(r.timeoutMs), ...(signal ? [signal] : [])]);
+    const independent = !!r.worldContext || !!r.independent;
     const attempt: Attempt = { threadId: r.threadId, clientMessageId: r.clientMessageId,
-      previousResponseId: r.worldContext ? null : session.previousResponseId, responseId: null, ...(r.worldContext && { standalone: true }) };
+      previousResponseId: independent ? null : session.previousResponseId, responseId: null, ...(independent && { standalone: true }) };
     let sent = false, delta = '';
     try {
       if (combined.aborted) return { turnId: '', output: '', status: 'cancelled', inputRetained: false, error: '요청 전 취소' };

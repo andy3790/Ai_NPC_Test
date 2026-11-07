@@ -18,19 +18,19 @@
   },
   "compatibility": {
     "schemaPath": "src/shared/schema.ts",
-    "schemaSha256": "08808bbce54e8bb84008fcafb7ac562d5aa814fabac5c423b85eb2ddbefc56f2",
+    "schemaSha256": "ff2bac80da599eb3dd062ad6ffedd313a40792b696df67374068c5b79dbcdac4",
     "promptPath": "src/core/prompts.ts",
-    "promptSha256": "0cf3f182ec90b877a568330af9daa239a8519f2d683fe0aa8a718a41a4751e38",
+    "promptSha256": "135036b60bcdaa33179c0f9a216db9bbd52e7cd0bc41e45299557d2ef4e95f14",
     "promptDependencies": {
       "src/core/dialogue-policies.ts": "1d3140ac86ac75f3af080bc2d8fd8da46ff074d004593d3bcb620bd65cecf335",
       "src/shared/dialogue-policy.ts": "1593262cd1325b117d689f79b33b1dea57647298a44cf50e4a7a9bde37b3612d",
       "src/core/world-policies.ts": "35bc21412b75a3a818e9630eb0b4e332a9f83d0baf885d1df48fe7603a1bcea0",
       "src/shared/world-policy.ts": "545bf73af3af57026182ea7395116557f7b2ae0405c890f1ea8af2754649c149",
-      "src/shared/world-schema.ts": "302dbf2b8e656a4f9c7a143bad2b54c76fd8b49161cb99f1f37ba7d0748142bc",
+      "src/shared/world-schema.ts": "b450bcd23f8e1e4cf36870c0731b503fb24f4ab9742da30b53b8981ed3eccbfd",
       "src/core/director.ts": "c6d9e1deb5fcb0cc41e547dac8188b8868bea4c7c7b3afd5fc7dbd01a123b456"
     },
     "imageInputSupported": false,
-    "defaultModel": "gpt-6.1-sol",
+    "defaultModel": "gpt-6-luna",
     "defaultEffort": "low",
     "modelAvailabilityVerified": false
   },

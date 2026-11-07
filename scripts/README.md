@@ -1,5 +1,16 @@
 # 검증·분석 도구
 
+### 여러 장면의 API 비용과 대화 비교
+
+아래 명령은 루트에서 실행한다. `--live`를 빼면 설정만 출력한다. 같은 `--group`의 모든 실행은 SQLite 예산 장부를 공유해 다음 요청의 비용을 먼저 확보하고, 응답의 사용량으로 정산한다. 각 실행은 별도 `--label`을 쓴다. 중단된 실행은 같은 설정에 `--resume`을 붙여 이어 간다.
+
+```powershell
+node --env-file-if-exists=.env --import tsx scripts/scene-review.ts --group review-one --usd 1 --label door-luna --spec assets/seowol/experiments/drama-closing-door.json --turns 16 --live
+node --import tsx scripts/scene-review-report.ts review-one .cache/review-one-summary
+```
+
+`--npc gpt-6.1-terra`는 NPC만 바꾼다. `--sparse`는 말투·예문·습관·금기를 비우며, `--minimal`은 첫 신원·목표 문장과 공통 장면만 남긴다. `--until-limit`은 후반 반복을 검사할 때 일상 대화의 침묵 종료를 끈다. 결과 JSONL에는 관찰 가능한 대사·동작·사건과 수신 범위가, 사용량 JSON에는 모델·버전·역할별 지연·재시도 비용이 들어간다. 원본 SQLite는 로컬 실험 기록에서 다시 열 수 있다. [서월·카페·분산 관제소 비교](../docs/reviews/luna-scenes-2026-11-08/report.md)
+
 `npm run smoke:options`는 상황 발생을 켰다가 끈 뒤 빈 사건 범위로 저장하기, 설정 보존, 독립 평가 상세의 펼침·접힘, 체크박스의 정렬·크기·행 클릭·키보드·모바일 동작을 모의 서버에서 검사합니다. AI 진행자 설정도 조건 선택에 따른 표시·숨김, 배치, 입력값 보존을 확인합니다. 모델 호출은 하지 않습니다.
 
 모델 목록·추론·단가만 바꿀 때는 [모델 설정 관리](../docs/model-catalog.md)를 따릅니다. 전체 회귀 검사 대신 서버 시작 시 자동 형식 검사를 사용하며, 선택적으로 `npm run models:check`로 같은 검사를 미리 실행할 수 있습니다. `npm run smoke:models`는 모델 선택 UI를 개발할 때 사용하는 검사로, 실제 모델 호출 없이 서버에서 갱신된 단가·새 모델·제외 모델·모바일 표시를 확인합니다.
@@ -42,13 +53,13 @@ Codex 도구는 CLI 로그인, API 도구는 서버 환경 API 키가 필요합�
 
 ## 헤스티아 120발화 재현
 
-먼저 실제 서버를 실행합니다. 기본값은 Codex CLI, 여섯 NPC, Terra medium, 모아 전달, 초기 설정 유지, 한 묶음·120발화·10발화마다 평가입니다. 원본 대화 전용·순번제 조건을 완료하면 NPC별 공개 차례는 20회입니다. AI 반응 우선·분산 환경용 실행 도구는 아닙니다. 사용할 수 있는 모델인지는 서버의 `models`로 확인하세요.
+먼저 실제 서버를 실행합니다. 기본값은 Codex CLI, 여섯 NPC, Luna medium, 모아 전달, 초기 설정 유지, 한 묶음·120발화·10발화마다 평가입니다. 원본 대화 전용·순번제 조건을 완료하면 NPC별 공개 차례는 20회입니다. 사용할 수 있는 모델인지는 서버의 `models`로 확인하세요.
 
 ```powershell
 npm run cli -- serve
 # 다른 터미널에서:
-node --import tsx scripts/run-canon-120.ts reports/hestia-terra-medium-120
-node --import tsx scripts/summarize-canon-120.ts reports/hestia-terra-medium-120
+node --import tsx scripts/run-canon-120.ts reports/hestia-luna-medium-120
+node --import tsx scripts/summarize-canon-120.ts reports/hestia-luna-medium-120
 ```
 
 API 키로 Terra low를 사용하려면 API 서버를 시작한 뒤 별도 폴더와 실행 경로를 지정합니다.
@@ -57,11 +68,11 @@ API 키로 Terra low를 사용하려면 API 서버를 시작한 뒤 별도 폴�
 npm run start:openai
 # 다른 터미널에서:
 $env:NPC_LAB_URL = 'http://127.0.0.1:4318/api'
-node --import tsx scripts/run-canon-120.ts reports/hestia-api-terra-low-120 --effort low --adapter openai
+node --import tsx scripts/run-canon-120.ts reports/hestia-api-terra-low-120 --model gpt-6.1-terra --effort low --adapter openai
 node --import tsx scripts/summarize-canon-120.ts reports/hestia-api-terra-low-120
 ```
 
-`--adapter`와 실제 서버의 경로가 다르면 실행을 거부합니다. `--model`로 모델 ID를 선택할 수 있으며 기본값은 `gpt-6.1-terra`입니다. 예를 들어 위 명령에 `--model gpt-6-luna`를 추가하면 Luna 조건으로 실행합니다. `--effort` 기본값은 `medium`이며 검증 단계에서 계정의 지원 강도인지 확인합니다. 공개 발화와 평가에 같은 모델·강도를 적용합니다.
+`--adapter`와 실제 서버의 경로가 다르면 실행을 거부합니다. `--model` 기본값은 `gpt-6-luna`, `--effort` 기본값은 `medium`입니다. 검증 단계에서 계정의 지원 강도인지 확인합니다. 공개 발화와 평가에 같은 모델·강도를 적용합니다.
 
 실행 도구는 지정 폴더에 manifest를 기록합니다. 같은 폴더로 재실행하면 기록된 실험을 조회·내보내며, 새 실험을 만들려면 새 폴더를 지정합니다. 생성 요청의 완료 여부가 불명확하면 자동으로 중복 생성하지 않습니다. 실험이 일시정지되면 서버에서 상태를 확인해 재개하고 같은 폴더로 도구를 다시 실행하세요. 이 보조 도구의 `NPC_LAB_URL`은 `/api`를 포함한 주소이며 기본값은 `http://127.0.0.1:4317/api`입니다. 일반 CLI의 `--url`에는 `/api`를 붙이지 않습니다.
 

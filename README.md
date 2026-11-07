@@ -58,7 +58,7 @@ AI 환경에는 빈도·강도·금지 범위를 지정한 **상황 발생 엔�
 
 [진행자 v4](docs/reviews/director-context-2026-11-07/report.md)는 공개 시작 장면을 참고해 질문 상대를 고릅니다. 고지서 주인을 모르고 동행을 반복 선택하던 문제를 고쳤으며, 비공개 인물 설정과 다른 장소의 장면은 전달하지 않습니다.
 
-새 OpenAI 예제는 NPC에 Terra low, AI 세계 엔진에 Luna medium, 진행자에 Luna low를 사용합니다. 기본 등대 예제는 최대 18차례이며 평가자는 Luna low입니다. [역할별 모델 선택](docs/openai-api.md#모델과-출력-한도)
+새 OpenAI 예제는 NPC에 Luna low, AI 세계 엔진에 Luna medium, 진행자에 Luna low를 사용합니다. 기본 등대 예제는 최대 18차례이며 평가자는 Luna low입니다. [역할별 모델 선택](docs/openai-api.md#모델과-출력-한도)
 
 인물 프로필 v2에서 반복 요약과 정형화된 몸짓이 줄었습니다. 한국어 유지 후보 v10은 연속 대화 검토 뒤 실험 버전으로 보존했습니다. [기본 예제 안정화 기록](docs/reviews/harbor-stability-2026-11-07/report.md)
 

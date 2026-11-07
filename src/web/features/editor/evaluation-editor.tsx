@@ -1,3 +1,4 @@
+import { simulationEffort } from '../../../shared/role-models.js';
 import { useId } from 'react';
 import type { ExperimentSpec } from '../../../shared/schema.js';
 import type { ModelInfo } from '../../../shared/types.js';
@@ -8,7 +9,7 @@ export function EvaluationEditor({ spec, update, models }: {
   spec: ExperimentSpec; update: (fn: (s: ExperimentSpec) => void) => void; models: ModelInfo[];
 }) {
   const config = spec.evaluation, detailsId = useId();
-  const efforts = (models.find(m => m.id === config.model)?.efforts ?? ['low', 'medium', 'high']).filter(e => e !== 'ultra');
+  const efforts = (models.find(m => m.id === config.model)?.efforts ?? ['low', 'medium', 'high']).filter(simulationEffort);
   return <section className="evaluation-editor form-stack">
     <h3>독립 평가</h3>
     <OptionToggle label="주기 평가와 종료 평가 사용" title="주기 평가와 종료 평가 사용"

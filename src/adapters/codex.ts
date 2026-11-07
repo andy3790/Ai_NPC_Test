@@ -1,3 +1,4 @@
+import { simulationEffort } from '../shared/role-models.js';
 import { spawn, spawnSync, type ChildProcessWithoutNullStreams } from 'node:child_process';
 import { existsSync, mkdirSync } from 'node:fs';
 import { isAbsolute, join, relative, resolve } from 'node:path';
@@ -151,6 +152,7 @@ export class CodexAdapter implements Adapter {
     return result.filter(model => isModelEnabled(model.id));
   }
   async createSession(config: ModelConfig, instructions: string, cwd: string) {
+    if (!simulationEffort(config.effort)) throw new Error('독립 NPC 실험에서는 high 이하의 추론 강도를 사용하세요.');
     await this.start(); mkdirSync(cwd, { recursive: true });
     const result = await this.rpc('thread/start', { model: config.model, cwd, approvalPolicy: 'never', sandbox: 'read-only',
       baseInstructions, developerInstructions: instructions, config: this.overrides, environments: [],

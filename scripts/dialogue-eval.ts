@@ -18,7 +18,7 @@ const { values } = parseArgs({ options: {
   'candidate-cases': { type: 'string' },
   adapter: { type: 'string', default: 'openai' },
   baseline: { type: 'string', default: 'npc-dialogue/1' }, candidate: { type: 'string', default: CURRENT_DIALOGUE_PROMPT },
-  split: { type: 'string', default: 'development' }, model: { type: 'string', default: 'gpt-6.1-sol' },
+  split: { type: 'string', default: 'development' }, model: { type: 'string', default: 'gpt-6-luna' },
   effort: { type: 'string', default: 'low' }, repetitions: { type: 'string', default: '3' },
   'candidate-model': { type: 'string' }, 'candidate-effort': { type: 'string' },
   'max-usd': { type: 'string', default: '2' }, 'max-calls': { type: 'string', default: '100' },

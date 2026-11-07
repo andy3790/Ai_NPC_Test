@@ -5,7 +5,8 @@ const id = z.string().regex(/^[a-zA-Z0-9_-]+$/).min(1).max(100);
 const text = z.string().max(100_000);
 export const spatialSchema = z.object({
   locations: z.array(z.object({ id, name: z.string().min(1).max(100), description: text, initialSituation: text.default('') })).min(2).max(100),
-  connections: z.array(z.object({ id, from: id, to: id, bidirectional: z.boolean().default(true), description: text.default('') })).max(500).default([]),
+  connections: z.array(z.object({ id, from: id, to: id, bidirectional: z.boolean().default(true), description: text.default(''),
+    sightAndSound: z.boolean().optional(), closesAtSeconds: z.number().finite().positive().optional() })).max(500).default([]),
   initialPositions: z.array(z.object({ npcId: id, locationId: id })).min(2).max(30),
   channels: z.array(z.object({ id, name: z.string().min(1).max(100), memberNpcIds: z.array(id).min(2).max(30), description: text.default('') })).max(100).default([]),
 });
@@ -14,7 +15,9 @@ export const communicationSchema = z.object({ mode: z.enum(['local', 'whisper', 
 export const spatialSpeechSchema = z.object({
   speech: z.string(), action: z.string(), communication: communicationSchema,
   moveToLocationId: id.nullable(), activityChoice: z.enum(['start', 'continue', 'cancel']),
-}).refine(v => !!(v.speech.trim() || v.action.trim() || v.activityChoice === 'cancel'), '발언·행동 또는 진행 중 행동의 중단 선택이 필요합니다.');
+}).refine(v => !!(v.speech.trim() || v.action.trim() || v.activityChoice === 'cancel') ||
+  (v.communication.mode === 'none' && !v.communication.targetNpcIds.length && v.communication.channelId === null),
+  '말과 동작 서술이 없을 때는 none을 선택하고 수신자를 비우세요.');
 export type SpatialSpeech = z.infer<typeof spatialSpeechSchema>;
 export const spatialPlanSchema = z.object({ plans: z.array(z.object({
   utteranceId: id, speechSeconds: z.number().finite().nonnegative(), actionSeconds: z.number().finite().nonnegative(),
@@ -73,4 +76,6 @@ export interface SpatialState {
   lastSelectedNpcIds: string[]; pendingResolution: { id: number; atSeconds: number; proposalId: string | null } | null;
   nextResolution: number;
   lastResolvedSequence?: number;
+  lastWorldCheckAt?: number;
+  settleUntilSeconds?: number;
 }

@@ -8,7 +8,7 @@ import type { RunDetail } from '../src/shared/types.js';
 
 const base = process.env.NPC_LAB_URL ?? 'http://127.0.0.1:4317/api';
 const source = resolve('assets/npc-canon/experiments/orison-ensemble.json');
-const { values, positionals } = parseArgs({ allowPositionals: true, options: { model: { type: 'string', default: 'gpt-6.1-terra' }, effort: { type: 'string', default: 'medium' }, adapter: { type: 'string', default: 'codex' } } });
+const { values, positionals } = parseArgs({ allowPositionals: true, options: { model: { type: 'string', default: 'gpt-6-luna' }, effort: { type: 'string', default: 'medium' }, adapter: { type: 'string', default: 'codex' } } });
 if (positionals.length !== 1) throw new Error('사용법: node --import tsx scripts/run-canon-120.ts reports/<실험-폴더> [--model gpt-6-luna] [--effort low] [--adapter openai]');
 const config = { model: values.model, effort: values.effort };
 const modelTag = ({ 'gpt-6.1-terra': 'terra', 'gpt-6-luna': 'luna' } as Record<string, string>)[config.model] ?? config.model.replace(/[^a-zA-Z0-9_-]/g, '-');

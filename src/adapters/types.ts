@@ -2,7 +2,7 @@ import type { ModelConfig } from '../shared/schema.js';
 import type { ApiCredential, ModelInfo, TokenUsage } from '../shared/types.js';
 export interface AdapterEvent { method: string; params: any }
 export interface TurnRequest { threadId: string; config: ModelConfig; input: string; outputSchema: object; clientMessageId: string; timeoutMs: number;
-  worldContext?: { scene: object; tick: object } }
+  independent?: boolean; worldContext?: { scene: object; tick: object } }
 export interface TurnResult { turnId: string; output: string; status: 'completed' | 'failed' | 'cancelled' | 'uncertain'; error?: string; inputRetained?: boolean; usage?: TokenUsage; rawUsage?: unknown; actualModel?: string }
 export interface Adapter {
   name: string; version: string;

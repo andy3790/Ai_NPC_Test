@@ -1,10 +1,11 @@
+import { preferredEffort } from '../../../shared/role-models.js';
 import type { ModelInfo } from '../../../shared/types.js';
 import { getModelPricing, PRICING_DATE, PRICING_SOURCE } from '../../../shared/model-catalog.js';
 
 const money = (value: number) => '$' + value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 6 });
 export function modelDefaultEffort(models: ModelInfo[], id: string) {
   const model = models.find(m => m.id === id);
-  return model?.defaultEffort !== 'ultra' && model?.efforts.includes(model.defaultEffort) ? model.defaultEffort : model?.efforts.find(e => e !== 'ultra') ?? 'low';
+  return preferredEffort(model);
 }
 export function modelPriceLabel(model: string) {
   if (model === 'mock-model') return '모의 모델 · 과금 없음';

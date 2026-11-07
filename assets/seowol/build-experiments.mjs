@@ -11,7 +11,7 @@ export async function buildVoiceExperiments(root, template, worldNotes) {
   spec.name = '서월 문체 실험 — 테이프 감은 앰프';
   spec.scenario.id = 'seowol_amplifier_v1';
   spec.scenario.name = '테이프 감은 앰프';
-  spec.scenario.defaults = { model: 'gpt-6.1-sol', effort: 'low' };
+  spec.scenario.defaults = { model: 'gpt-6-luna', effort: 'low' };
   spec.scenario.world += '\n이번 실험의 추가 장소는 회류로의 작은 수리점 세칸전파다. 삼중문 협동조합에 일반 부품과 기초 차폐 장비 정비를 납품한다. 작업장의 설비 차폐는 정상이며 현재 초자연 재난은 없다. 새 인물·가게는 문체 검토용 제안으로, 기존 인물의 과거나 세계의 법칙을 바꾸지 않는다.';
   spec.scenario.situation = [
     '2026년 늦가을 저녁, 영업을 끝낸 세칸전파. 임소진은 작업대에서 막 도시락 뚜껑을 열었고 고복만은 옆 접이식 의자에 앉아 있다. 백도하가 빌렸던 소형 앰프를 들고 들어와 작업대 빈 곳에 놓았다. 세 사람은 서로 잘 아는 사이며 모두 이면사회의 존재를 안다. 오늘의 모임은 회의나 공동 의뢰가 아니다.',
@@ -28,14 +28,14 @@ export async function buildVoiceExperiments(root, template, worldNotes) {
   spec.scenario.worldEngineInstructions = physicalNotes + '\n\n' + worldNotes;
   spec.maxUtterances = 18; spec.repetitions = 1;
   spec.concurrentRuns = 1; spec.maxConcurrentCalls = 1;
-  spec.variants = [{ id: 'interaction', label: '내용 반응 / Sol low', model: 'gpt-6.1-sol', effort: 'low',
+  spec.variants = [{ id: 'interaction', label: '내용 반응 / Luna low', model: 'gpt-6-luna', effort: 'low',
     memoryMode: 'initial_only', deliveryMode: 'batched_on_turn', turnPolicy: 'director', environmentMode: 'ai', eventGeneration: false }];
   spec.scheduledEvents = [];
   const assignCast = (guidance) => cast.characters.map(c => ({ ...c, speechStyle: guidance + '\n\n' + c.speechStyle }));
   spec.scenario.characters = assignCast(interaction.guidance);
   const baseline = structuredClone(spec);
   baseline.name += ' / 이전 문체 지침';
-  baseline.variants[0].id = 'previous_voice'; baseline.variants[0].label = '이전 말투 지침 / Sol low';
+  baseline.variants[0].id = 'previous_voice'; baseline.variants[0].label = '이전 말투 지침 / Luna low';
   baseline.scenario.characters = assignCast(previousVoice.guidance);
   const quiet = structuredClone(spec);
   quiet.name = '서월 문체 실험 — 연습 영상 틀어 놓은 저녁';

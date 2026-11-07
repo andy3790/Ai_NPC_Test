@@ -54,7 +54,12 @@ export function RunSettings({ detail }: { detail: RunDetail }) {
     </dl></section>
     <section><h3>예정된 상황 투입</h3>{spec.scheduledEvents.length ? spec.scheduledEvents.map((event, index) => <p key={index} className="snapshot-text"><strong>{event.afterUtterance}발화 후</strong> · {event.text}</p>) : <p>없음</p>}</section>
     <section><h3>환경·행동·목표 규칙</h3>{scenario.environment ? <><p>{scenario.environment.enabled ? '사용' : '꺼짐'} · 목표 달성 시 {scenario.environment.stopOnGoals ? '종료' : '계속'}</p><pre>{JSON.stringify(scenario.environment, null, 2)}</pre></> : <p>미설정</p>}</section>
-    {scenario.spatial && <section><h3>장소·연결 통로·시작 위치·통신 채널</h3><pre>{JSON.stringify(scenario.spatial, null, 2)}</pre></section>}
+    {scenario.spatial && <section><h3>장소·연결 통로·시작 위치·통신 채널</h3>
+      {scenario.spatial.locations.map(l => <p key={l.id} className="snapshot-text"><strong>{l.name}</strong> · {scenario.spatial!.initialPositions.filter(p => p.locationId === l.id).map(p => scenario.characters.find(c => c.id === p.npcId)?.name).join('·') || '시작 인원 없음'}<br/>{l.initialSituation || l.description}</p>)}
+      {scenario.spatial.connections.map(r => <p key={r.id} className="snapshot-text">{scenario.spatial!.locations.find(l => l.id === r.from)?.name} {r.bidirectional ? '↔' : '→'} {scenario.spatial!.locations.find(l => l.id === r.to)?.name} · {r.description}{r.sightAndSound && ' · 양쪽 시청각 공유'}{r.closesAtSeconds !== undefined && ` · ${r.closesAtSeconds}초에 폐쇄`}</p>)}
+      <p>원격 통신 · {scenario.spatial.channels.map(c => c.name).join('·') || '없음'}</p>
+      <details><summary>저장된 공간 JSON</summary><pre>{JSON.stringify(scenario.spatial, null, 2)}</pre></details></section>}
+    {!!scenario.clockEvents?.length && <section><h3>시각에 따른 현장 관찰</h3>{scenario.clockEvents.map(e => <p key={e.id} className="snapshot-text"><strong>{e.atSeconds}초</strong> · {e.text} · {e.locationIds?.map(id => scenario.spatial?.locations.find(l => l.id === id)?.name).join('·') ?? '전체'}</p>)}</section>}
     {spec.eventGenerator && <section><h3>상황 발생 설정</h3><pre>{JSON.stringify(spec.eventGenerator, null, 2)}</pre></section>}
     <details className="snapshot-json"><summary>전체 설정 JSON 보기</summary><pre>{JSON.stringify(runSnapshot(run), null, 2)}</pre></details>
   </div>;

@@ -28,8 +28,8 @@ export function spatialExample(model?: string, effort = apiRoleDefaults.npc.effo
     variants: [
       { id: 'spatial-quiet', label: '분산 공간 · 상황 발생 끔', environmentMode: 'ai_spatial', deliveryMode: 'batched_on_turn', eventGeneration: false },
       { id: 'spatial-events', label: '분산 공간 · 상황 발생 켬', environmentMode: 'ai_spatial', deliveryMode: 'batched_on_turn', eventGeneration: true },
-    ], worldEngine: roles.worldEngine, director: roles.director, evaluation: { ...config, enabled: true, interval: 10 }, maxUtterances: 60,
-    eventGenerator: { ...config, intervalSeconds: 30, minGapSeconds: 60, maxChecks: 20, maxProposals: 5, maxSeverity: 'medium',
+    ], worldEngine: roles.worldEngine, director: roles.director, evaluation: { ...roles.director, enabled: true, interval: 10 }, maxUtterances: 60,
+    eventGenerator: { ...roles.director, intervalSeconds: 30, minGapSeconds: 60, maxChecks: 20, maxProposals: 5, maxSeverity: 'medium',
       allowedEvents: '기존 설비의 작은 고장, 컵의 물이 흘러내리는 사고, 기존 무전기의 잡음. 관찰 가능한 징후를 통해 대응할 계기를 만든다.',
       forbiddenEvents: '사망·중상·기지 파괴·새 인물 등장·새 시설·강제 감정이나 동료의 자발적 싸움.' },
   });

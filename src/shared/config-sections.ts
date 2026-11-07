@@ -11,6 +11,7 @@ const worldSchema = z.strictObject({
   defaults: scenarioSchema.shape.defaults, environment: scenarioSchema.shape.environment,
   worldEngineInstructions: scenarioSchema.shape.worldEngineInstructions,
   spatial: scenarioSchema.shape.spatial,
+  clockEvents: scenarioSchema.shape.clockEvents,
 });
 const conditionsSchema = z.strictObject({
   variants: experimentSchema.shape.variants, repetitions: experimentSchema.shape.repetitions,

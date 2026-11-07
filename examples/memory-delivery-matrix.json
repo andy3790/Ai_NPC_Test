@@ -57,7 +57,7 @@
       }
     ],
     "defaults": {
-      "model": "gpt-6.1-terra",
+      "model": "gpt-6-luna",
       "effort": "low"
     },
     "environment": {
@@ -393,7 +393,7 @@
   "evaluation": {
     "enabled": true,
     "interval": 10,
-    "model": "gpt-6.1-sol",
+    "model": "gpt-6-luna",
     "effort": "low",
     "contextCharacters": 100000
   },

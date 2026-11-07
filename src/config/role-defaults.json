@@ -1,5 +1,5 @@
 {
-  "npc": { "model": "gpt-6.1-terra", "effort": "low" },
+  "npc": { "model": "gpt-6-luna", "effort": "low" },
   "worldEngine": { "model": "gpt-6-luna", "effort": "medium" },
   "director": { "model": "gpt-6-luna", "effort": "low" }
 }

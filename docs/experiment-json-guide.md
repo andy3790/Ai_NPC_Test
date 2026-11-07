@@ -369,7 +369,7 @@ rules 이외의 환경 방식이거나 환경 규칙을 생략하거나 `enabled
 
 ## 완전한 예제에서 시작하기
 
-[authoring-starter.json](../examples/authoring-starter.json)은 은·하늘·율 3명이 책을 확인·인계·기록하는 예제입니다. 모델은 Terra low, 전달 방식은 2조건, 반복은 1회, 묶음당 6발화, 3발화마다 평가입니다. 모든 목표를 달성해도 한도까지 관찰하도록 `stopOnGoals: false`로 두었습니다. 세계관과 규칙은 이 예제용으로 작성한 것이며 헤스티아 설정을 바꾼 파일이 아닙니다.
+[authoring-starter.json](../examples/authoring-starter.json)은 은·하늘·율 3명이 책을 확인·인계·기록하는 예제입니다. 모델은 Luna low, 전달 방식은 2조건, 반복은 1회, 묶음당 6발화, 3발화마다 평가입니다. 모든 목표를 달성해도 한도까지 관찰하도록 `stopOnGoals: false`로 두었습니다. 세계관과 규칙은 이 예제용으로 작성한 것이며 헤스티아 설정을 바꾼 파일이 아닙니다.
 
 ```powershell
 Copy-Item examples/authoring-starter.json examples/my-experiment.json
@@ -535,3 +535,10 @@ npm run cli -- --url http://127.0.0.1:4318 resume <묶음-ID>
 | 바꾼 필드가 적용되지 않음 | 지원하지 않는 키, 상위 우선순위의 NPC 재정의, 이미 생성된 스냅샷을 확인 |
 
 기준이 바뀌면 [schema.ts](../src/shared/schema.ts), [프롬프트 구성](../src/core/prompts.ts), [환경 판정](../src/core/progression.ts)이 실제 동작의 기준입니다. 변환 프롬프트도 그 규격과 함께 갱신하세요.
+
+
+### 분산 공간과 장면 시계
+
+`scenario.spatial.locations`의 `initialSituation`은 그 장소에서 시작하는 사람에게 전달된다. 각 NPC의 시작 위치는 `initialPositions`에 한 번씩 적는다. 통로의 `sightAndSound: true`는 열려 있는 동안 양 끝에서 일반 발언과 겉동작을 보고 듣게 한다. 귓속말은 같은 위치에서만 들리고 무전은 채널 구성원에게만 전달된다. `closesAtSeconds`에 도달하면 해당 통로를 통한 이동과 일반 대화가 끊긴다. 통과 중이던 사람은 마지막으로 확인된 출발 쪽에 남는다.
+
+`scenario.clockEvents`는 AI 세계 시계에서 한 번 발생하는 관찰 목록이다. 각 항목에 고유 `id`, 시작 후 초 단위 `atSeconds`, 실제로 보거나 듣는 `text`를 적는다. 분산 공간에서는 `locationIds`로 전달 장소를 한정할 수 있다. 누군가 고치거나 취소하면 피할 수 있는 사고는 세계 판정과 진행 사건으로 처리한다. 두 기능은 세계관 JSON과 편집기의 시나리오 탭에 있다. [실제 장면별 설정](../assets/seowol/drama/README.md)

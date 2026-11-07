@@ -10,7 +10,7 @@ import { getModelPricing, PRICING_REVISION } from '../src/shared/model-catalog.j
 import { dialogueCasesSchema, sha256 } from './lib/dialogue-eval.js';
 import { loadVoiceProfile, withVoiceProfile } from './lib/voice-profiles.js';
 
-const { values } = parseArgs({ options: { source: { type: 'string' }, live: { type: 'boolean', default: false },
+const { values } = parseArgs({ options: { model: { type: 'string', default: 'gpt-6-luna' }, source: { type: 'string' }, live: { type: 'boolean', default: false },
   profile: { type: 'string', default: 'seowol-profile/3' }, 'max-calls': { type: 'string', default: '20' },
   'max-usd': { type: 'string', default: '1' } } });
 if (!values.source) throw Error('--source is required');
@@ -31,7 +31,7 @@ const sourceProfile = sourceProfiles.find(p => p.version === profile.version);
 if (!sourceProfile || JSON.stringify(sourceProfile.hashes) !== JSON.stringify(profile.hashes)) throw Error('Source profile changed after draft generation');
 const plan = { version: policy.version, policySha256: sha256(rawPolicy), source: values.source,
   sourceSamplesSha256: sha256(rawSamples), casesSha256: sha256(rawCases), profile: profile.version, profileHashes: profile.hashes,
-  model: 'gpt-6.1-sol', effort: 'low', expectedCalls: samples.length, maxCalls, maxUsd, pricingRevision: PRICING_REVISION,
+  model: values.model!, effort: 'low', expectedCalls: samples.length, maxCalls, maxUsd, pricingRevision: PRICING_REVISION,
   scope: 'New independent outputs with the same public observations and own profile. Baseline comes from a completed earlier run; order is not counterbalanced.' };
 // Compile and validate every case before starting a paid call.
 const requests = samples.map(s => {

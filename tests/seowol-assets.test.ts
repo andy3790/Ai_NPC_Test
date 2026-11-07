@@ -30,11 +30,11 @@ test('all six dramatic presets inherit the selected NPC and keep world and speak
   }
 });
 
-test('closing-door v2 shares the photograph and narrowing gap while keeping recognition and deadlines in their roles', () => {
+test('closing-door v3 shares the photograph and narrowing gap while keeping recognition and deadlines in their roles', () => {
   const spec = experimentSchema.parse(JSON.parse(read('experiments/drama-closing-door.json')));
   const { scenario } = spec;
   const manifest = JSON.parse(read('drama/manifest.json')) as { scenes: { file: string; id: string }[] };
-  assert.equal(scenario.id, 'seowol_drama_closing_door_v2');
+  assert.equal(scenario.id, 'seowol_drama_closing_door_v3');
   assert.equal(manifest.scenes.find(s => s.file.endsWith('/drama-closing-door.json'))?.id, scenario.id);
   const director = directorPrompt({ characters: scenario.characters, allowedSpeakerIds: scenario.characters.map(c => c.id),
     history: [], speeches: [], initialScene: scenario.situation });

@@ -99,6 +99,7 @@ export async function buildDramaticScenes(root = ownRoot) {
           '이번 장면에만 적용되는 원인·단서·시간·결과:', ...scene.engineRules.map((rule, i) => `${i + 1}. ${rule}`),
         ].filter(Boolean).join('\n\n'),
         ...(scene.spatial ? { spatial: scene.spatial } : {}),
+        clockEvents: scene.clockEvents,
       },
       variants: [{ id: 'drama', label: scene.spatial ? '분산 공간' : '단일 현장',
         dialoguePromptVersion: 'npc-dialogue/5',
@@ -120,12 +121,13 @@ export async function buildDramaticScenes(root = ownRoot) {
   for (const id of extraProfiles) await writeJson(join(root, 'drama', 'characters', `${id}.json`), characters[id]);
   for (const { spec, filename } of outputs) await writeJson(join(root, 'experiments', filename), spec);
   const manifest = {
-    version: 1, scope: '독립 에피소드용 추가안. 기존 정사와 별도 세션의 결과를 덮어쓰지 않는다.',
+    version: 2, scope: '독립 에피소드용 추가안. 기존 정사와 별도 세션의 결과를 덮어쓰지 않는다.',
     canonCharacterIds: [...existingIds, ...Object.keys(canonVoices)], newCharacterIds: newCast.map(c => c.id),
     scenes: outputs.map(({ scene, spec, filename }) => ({
       id: spec.scenario.id, title: scene.title, file: `../experiments/${filename}`,
       genre: scene.genre, mode: spec.variants[0].environmentMode, maxUtterances: spec.maxUtterances,
       characters: spec.scenario.characters.map(c => ({ id: c.id, name: c.name })), canon: scene.canon, additions: scene.additions,
+      revision: scene.revision, spatial: scene.spatial ?? null, clockEvents: scene.clockEvents,
     })),
   };
   await writeJson(join(root, 'drama', 'manifest.json'), manifest);
@@ -142,10 +144,20 @@ function guide(outputs) {
     `**참가자:** ${spec.scenario.characters.map(c => c.name).join('·')}  `,
     `**실행:** [${filename}](../experiments/${filename}) · ${scene.spatial ? '분산 공간' : '단일 현장'} · 최대 ${scene.turns}차례`, '',
     '### 시작 장면', '', scene.opening, '',
+    '### 현장 배치와 전달', '',
+    ...(scene.spatial ? [
+      ...scene.spatial.locations.map(l => {
+        const names = scene.spatial.initialPositions.filter(p => p.locationId === l.id).map(p => spec.scenario.characters.find(c => c.id === p.npcId).name);
+        return `- **${l.name}** (${names.join('·') || '시작 인원 없음'}) — ${l.initialSituation}`;
+      }), '',
+      ...scene.spatial.connections.map(r => `- ${scene.spatial.locations.find(l => l.id === r.from).name} ${r.bidirectional ? '↔' : '→'} ${scene.spatial.locations.find(l => l.id === r.to).name} · ${r.description}`), '',
+      scene.spatial.channels.length ? scene.spatial.channels.map(c => c.name + ' · ' + c.description).join('\n') : '원격 통신 장비가 없다. 떨어진 뒤에는 상대 장소의 말을 들을 수 없다.', '',
+    ] : [scene.localRange, '']),
     '### 충돌하는 선택', '', scene.pressure, '', ...scene.choices.map(c => `- ${c}`), '',
     `**가능한 마무리:** ${scene.endings}`, '',
     `**원작 연결:** ${scene.canon}`, '', `**추가 범위:** ${scene.additions}`, '',
     '<details>', '<summary>작가용 고정 진상·단서·판정 조건 — 스포일러</summary>', '',
+    ...scene.clockEvents.map(e => `- 가상 ${e.atSeconds}초 · ${e.text}`), '',
     ...scene.engineRules.map((rule, n) => `${n + 1}. ${rule}\n`), '</details>', '',
   ].join('\n')).join('\n');
   return [
@@ -157,9 +169,9 @@ function guide(outputs) {
     '**첫 실행은 「없는 층, 닫히는 문」**을 권한다. 위험·거리·목표가 한눈에 보이고 원작의 기억 기반 현상을 바로 경험할 수 있다. 힘겨루기는 「중립은 문 앞에서 끝난다」, 공간별 협업은 「01:17에 남는 사람」이 중심이다.', '',
     '## 불러오기와 실행량', '',
     '앱의 **새 실험 → JSON 편집 → 전체 설정 → 파일 가져오기**에서 표의 JSON 하나를 선택해 적용한 뒤 검증·생성한다. 인물 JSON이나 manifest를 전체 실험으로 가져오지 않는다. 외부 서버나 API를 새로 만드는 작업 없이 기존 서버에서 실행한다. 아직 서버를 시작하지 않았다면 [프로젝트 시작 안내](../../../README.md#시작하기)를 따른다.', '',
-    '각 파일은 비교 조건 1개·반복 1회다. 다섯 장면은 최대 48차례, 무연역은 60차례이며 이는 인물 전체의 말·행동 차례 합계다. NPC는 Terra low, 세계 판정은 Luna medium, 진행자는 Luna low를 사용한다. NPC 모델은 시나리오 기본 설정에서 바꿀 수 있다. 독립 평가와 자동 상황 발생은 꺼져 있다. 분산 공간은 시간 계획·결과 판정 호출이 추가되므로 같은 차례 수의 단일 공간보다 호출량이 커질 수 있다.', '',
+    '각 파일은 비교 조건 1개·반복 1회다. 다섯 장면은 최대 48차례, 무연역은 60차례이며 이는 인물 전체의 말·행동 차례 합계다. NPC는 Luna low, 세계 판정은 Luna medium, 진행자는 Luna low를 사용한다. NPC 모델은 시나리오 기본 설정에서 바꿀 수 있다. 독립 평가와 자동 상황 발생은 꺼져 있다. 분산 공간은 시간 계획·결과 판정 호출이 추가되므로 같은 차례 수의 단일 공간보다 호출량이 커질 수 있다.', '',
     '먼저 12~16차례로 줄이면 도입부 확인에 적합하다. 시한은 발화 수가 아닌 가상 초이므로 짧은 실행에서는 구조·공개 시한에 도달하지 않을 수 있다. 결말을 보고 싶다면 원래 한도를 사용한다. 이 모드의 실행 종료는 발화 한도 또는 사용자의 정지이며, 사건 해결만으로 자동 종료하지 않는다. 만족스러운 마무리가 나오면 정지하거나 남은 대화를 관찰할 수 있다.', '',
-    '닫히는 문·무연역·겹문 대치는 **ai_spatial**, 나머지는 **ai**다. 분산 장면은 위치·통로·현장 관찰을 유지해야 하므로 환경 모드만 임의로 바꾸지 않는다. 고정 사건의 원인과 진행은 worldEngineInstructions에 있으며 자동 상황 발생과 발화 번호별 예정 사건은 사용하지 않는다. 원본 생활 장면의 폭력·납치 금지 설정도 상속하지 않는다.', '',
+    '닫히는 문·무연역·겹문 대치는 **ai_spatial**, 나머지는 **ai**다. 분산 장면은 위치·통로·현장 관찰을 유지해야 하므로 환경 모드만 임의로 바꾸지 않는다. 정해진 시각의 관찰은 clockEvents에, 선택으로 피할 수 있는 결과와 그 근거는 worldEngineInstructions에 있다. 원본 생활 장면의 폭력·납치 금지 설정도 상속하지 않는다.', '',
     '## 프로젝트에서 작동하는 방식', '',
     'NPC는 공통 배경·자기 프로필·자기가 받은 관찰로 말과 행동을 선택한다. 진행자는 다음 화자를 고르며 이야기를 대신 집필하지 않는다. 세계 엔진이 실제 결과와 가상 시간을 판정하고, 분산 모드에서는 장소·이동·무전의 수신 범위를 관리한다. 판정 전용 진상과 다른 사람의 비공개 프로필을 NPC에게 넘기지 않는다. SQLite에는 설정 스냅샷·호출·대화·세계 상태가 보존되므로 이미 만든 실험은 파일을 바꿔도 갱신되지 않는다.', '',
     '이번 팩은 시작부터 열린 문, 움직이는 화물, 붙잡힌 손목, 예약 게시물, 침수 같은 구체적인 변화를 둔다. 확인할 단서는 두 경로 이상이고, 정상적인 구조·정지·수리·협상은 실제 효과가 있다. 위기를 해결하면 같은 위기를 반복해 장면을 늘리지 않는다. 살릴 수 있는 사람을 반드시 희생시키거나 원작의 장기 미스터리를 해답으로 소비하지 않는다.', '',
@@ -176,6 +188,7 @@ function guide(outputs) {
     '- [build-drama.mjs](../build-drama.mjs)가 이 안내·[목록](manifest.json)·인물 11개·실험 6개를 만든다. 생성 JSON을 직접 바꾸면 재생성 때 덮어써진다.',
     '- 프로젝트 루트에서 `node assets/seowol/build-drama.mjs`로 새 팩만 재생성하거나 `npm run seowol:build`로 기존 서월 팩과 함께 생성한다.', '',
     '「없는 층, 닫히는 문」의 이전 장면(v1)에는 실제 API에서 24초의 문 폐쇄까지 관찰한 기록과, 모델 조합별로 16차례씩 비교한 기록이 있다. [문이 닫힌 실행의 원문](../../../docs/reviews/seowol-closing-door-2026-11-07/report.md) · [Sol과 Terra·Luna 대화 비교](../../../docs/reviews/seowol-closing-door-models-2026-11-08/report.md)', '',
+    '이번 개정에서는 여섯 장면 모두 실제 Luna API로 실행했다. 8초·24초의 현장 관찰, 사진의 행방, 수정된 게시물의 공개 이후와 장기 대화의 반복은 [개정 장면 실측](../../../docs/reviews/luna-scenes-2026-11-08/report.md)에서 대조할 수 있다.', '',
   ].join('\n');
 }
 

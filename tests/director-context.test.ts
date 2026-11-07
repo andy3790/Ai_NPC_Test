@@ -123,9 +123,9 @@ test('120-turn run uses bounded fresh director sessions while NPC sessions and f
   } finally { await engine.close(); store.close(); }
 });
 
-test('a forced waiting speaker is the only schema choice and invalid provider output is still rejected', async () => {
+test('a forced waiting speaker takes the turn without a director request', async () => {
   const { engine, store, adapter, spec } = setup(); spec.maxUtterances = 9;
-  const turn = adapter.turn.bind(adapter); let forced = false;
+  const turn = adapter.turn.bind(adapter);
   adapter.turn = async (...args) => {
     const request = args[0], p = JSON.parse(request.input), result = await turn(...args);
     if (p.task === 'direct') {
@@ -133,19 +133,16 @@ test('a forced waiting speaker is the only schema choice and invalid provider ou
       assert.deepEqual(schema.properties.speakerId.enum, p.allowedSpeakerIds);
       // Keep the first pair talking until the real scheduler offers the third.
       const pair = p.allowedSpeakerIds.find((id: string) => id === 'yoon' || id === 'doha');
-      if (!pair) {
-        forced = true; assert.deepEqual(p.allowedSpeakerIds, ['miru']);
-        result.output = JSON.stringify({ speakerId: 'yoon', reason: 'Invalid provider ignores the enum' });
-      } else result.output = JSON.stringify({ speakerId: pair, reason: 'Reply to the pair' });
+      assert.ok(pair, 'a sole eligible actor should be selected by the scheduler');
+      result.output = JSON.stringify({ speakerId: pair, reason: 'Reply to the pair' });
     }
     return result;
   };
   try {
     const { runs: [run] } = await engine.create(spec); await engine.idle(); const d = engine.detail(run.id);
-    assert.ok(forced); assert.equal(d.run.status, 'paused'); assert.match(d.run.error!, /허용되지 않은 화자/);
-    assert.equal(d.utterances.filter(u => u.kind === 'speech').length, 5);
-    const failed = d.invocations.at(-1)!; assert.equal(failed.status, 'failed');
-    assert.equal(failed.metadata.outputSchemaSha256, createHash('sha256').update(JSON.stringify(directorOutputSchema(['miru']))).digest('hex'));
+    assert.equal(d.run.status,'completed');
+    assert.equal(d.utterances.filter(u => u.kind === 'speech')[5].speakerId,'miru');
+    assert.ok(d.invocations.filter(c => c.kind === 'director').every(c => JSON.parse(c.input).allowedSpeakerIds.length > 1));
     assert.equal(createHash('sha256').update(legacyDirectorInstructions).digest('hex'), '5cbf1f16ab0e054b6f2f09f157136cd308ed26c04ccd2b876d99cec2707c1b92');
   } finally { await engine.close(); store.close(); }
 });
@@ -189,7 +186,7 @@ for (const spatial of [false, true]) test(`${spatial ? 'spatial' : 'single-room'
   } finally { await engine.close(); store.close(); }
 });
 
-for (const spatial of [false, true]) test(`OpenAI ${spatial ? 'spatial' : 'single-room'} directors never chain previous responses; NPC chains and metrics are retained`, async () => {
+for (const spatial of [false, true]) test(`OpenAI ${spatial ? 'spatial' : 'single-room'} directors never chain previous responses; NPC context uses confirmed observations and metrics are retained`, async () => {
   await mkdir('.cache', { recursive: true }); const root = await mkdtemp(resolve('.cache/director-api-'));
   const api = openaiFixture(), store = new Store(':memory:'), adapter = new OpenAIAdapter(root, { apiKey: api.key, fetch: api.fetch });
   const engine = new Engine(store, adapter, root);
@@ -214,7 +211,9 @@ for (const spatial of [false, true]) test(`OpenAI ${spatial ? 'spatial' : 'singl
       assert.equal(c.metadata.outputSchemaSha256, createHash('sha256').update(JSON.stringify(directorOutputSchema(allowed))).digest('hex'));
       assert.equal(c.usage.totalTokens, 120); assert.ok(c.durationMs! >= 0); assert.ok(c.firstOutputMs! >= 0);
     }
-    assert.ok(api.requests.some(b => requestInput(b).task === 'speak' && b.previous_response_id !== null));
+    const npc = api.requests.filter(b => requestInput(b).task === 'speak');
+    assert.ok(npc.length && npc.every(b => b.previous_response_id === null));
+    assert.ok(npc.some(b => requestInput(b).earlierObservations?.length));
     assert.equal(d.summary.byKind.director.tokens.totalTokens, calls.length * 120);
   } finally { await engine.close(); store.close(); }
 });

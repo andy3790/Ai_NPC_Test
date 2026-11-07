@@ -6,7 +6,7 @@
     "name": "서고의 반납대",
     "world": "세 사람이 서고의 반납대에 있다. 반납할 책은 한 권이며 하늘이 들고 있다. 은은 책의 겉면을 확인할 수 있고, 하늘은 확인 후 책을 반납대에 내려놓을 수 있으며, 율은 그 뒤 인계를 기록할 수 있다. 이 예제에서 겉면 확인의 결과는 눈에 보이는 젖은 자국이 없다는 것이다. 책의 내용과 과거 대출 이력은 주어지지 않았다. 새로운 인물·장소·역사·능력을 사실로 만들지 않는다. 행동의 성공은 사전에 정의한 환경 결과로 확정한다.",
     "situation": "은, 하늘, 율이 반납대 앞에 모였다. 책의 겉면 확인, 인계, 기록을 마치면서 각자의 태도와 말투를 유지한다. 아직 세 행동 모두 실행되지 않았다.",
-    "defaults": { "model": "gpt-6.1-terra", "effort": "low" },
+    "defaults": { "model": "gpt-6-luna", "effort": "low" },
     "characters": [
       {
         "id": "eun", "name": "은", "identity": "책의 겉면 확인을 맡은 사서",
@@ -81,15 +81,15 @@
     }
   },
   "variants": [
-    { "id": "batch", "label": "Terra low 모아 전달", "memoryMode": "initial_only", "deliveryMode": "batched_on_turn", "turnPolicy": "round_robin" },
-    { "id": "each", "label": "Terra low 매 발화 전달", "memoryMode": "initial_only", "deliveryMode": "per_utterance", "turnPolicy": "round_robin" }
+    { "id": "batch", "label": "Luna low 모아 전달", "memoryMode": "initial_only", "deliveryMode": "batched_on_turn", "turnPolicy": "round_robin" },
+    { "id": "each", "label": "Luna low 매 발화 전달", "memoryMode": "initial_only", "deliveryMode": "per_utterance", "turnPolicy": "round_robin" }
   ],
   "repetitions": 1,
   "maxUtterances": 6,
   "concurrentRuns": 2,
   "maxConcurrentCalls": 2,
   "timeoutMs": 300000,
-  "evaluation": { "enabled": true, "interval": 3, "model": "gpt-6.1-terra", "effort": "low", "contextCharacters": 100000, "repetitionWindow": 12, "repetitionThreshold": 0.72, "repetitionMinChars": 20 },
+  "evaluation": { "enabled": true, "interval": 3, "model": "gpt-6-luna", "effort": "low", "contextCharacters": 100000, "repetitionWindow": 12, "repetitionThreshold": 0.72, "repetitionMinChars": 20 },
   "director": { "model": "gpt-6-luna", "effort": "low" },
   "scheduledEvents": []
 }

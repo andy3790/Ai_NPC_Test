@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "scope": "독립 에피소드용 추가안. 기존 정사와 별도 세션의 결과를 덮어쓰지 않는다.",
   "canonCharacterIds": [
     "cha_yujin",
@@ -23,7 +23,7 @@
   ],
   "scenes": [
     {
-      "id": "seowol_drama_closing_door_v2",
+      "id": "seowol_drama_closing_door_v3",
       "title": "없는 층, 닫히는 문",
       "file": "../experiments/drama-closing-door.json",
       "genre": "구조 스릴러 · 모녀 갈등",
@@ -48,10 +48,77 @@
         }
       ],
       "canon": "설정집 §10 사건 A 「없는 층의 문」. 옛 관리인의 방과 형상은 기억을 따라 재구성된다. 열린 문턱으로 돌아올 수 있고, 닫힐 때 안에 남으면 다음 발현까지 갇힐 수 있다.",
-      "additions": "윤해경·윤다정의 가족사와 부상, 사진과 사진통의 글씨, 이번 발현에서 문이 줄어드는 모양과 시각, 현장 장비는 이 에피소드의 설정이다."
+      "additions": "윤해경·윤다정의 가족사와 부상, 사진과 사진통의 글씨, 이번 발현에서 문이 줄어드는 모양과 시각, 현장 장비는 이 에피소드의 설정이다.",
+      "revision": 3,
+      "spatial": {
+        "locations": [
+          {
+            "id": "doorway",
+            "name": "바깥 계단참",
+            "description": "난간에 로프를 감은 계단참. 구조판 앞머리와 문설주가 바로 손앞이다.",
+            "initialSituation": "태경이 고정한 로프를 잡고 서은이 판 앞머리를 받친다. 바닥에는 서은의 실측 도면과 기록 사진이 있다. 열린 문 너머로 모녀의 얼굴이 보인다."
+          },
+          {
+            "id": "inner_room",
+            "name": "관리인의 방 안쪽 문턱",
+            "description": "문틀 바로 안쪽. 더 안에는 낡은 책상과 느린 벽시계가 있다. 계단참은 이 문 하나로 이어진다.",
+            "initialSituation": "다정은 오른발을 못 딛고 구조판에 앉아 있다. 해경의 엄지 밑에는 사진 속 여자의 손등이, 판 밑에는 아이 소매가 걸렸다. 열린 문 건너로 판 앞머리를 받친 손이 보인다."
+          }
+        ],
+        "connections": [
+          {
+            "id": "to_room",
+            "from": "inner_room",
+            "to": "doorway",
+            "bidirectional": true,
+            "sightAndSound": true,
+            "closesAtSeconds": 24,
+            "description": "열린 동안 반대편의 말과 손짓이 닿는 문 하나. 한 사람이 건너면 반대편에 선다. 판 위 사람과 판 옆 사람은 별도로 건너야 한다."
+          }
+        ],
+        "initialPositions": [
+          {
+            "npcId": "ryu_taekyung",
+            "locationId": "doorway"
+          },
+          {
+            "npcId": "baek_seoeun",
+            "locationId": "doorway"
+          },
+          {
+            "npcId": "yoon_haegyeong",
+            "locationId": "inner_room"
+          },
+          {
+            "npcId": "yoon_dajeong",
+            "locationId": "inner_room"
+          }
+        ],
+        "channels": []
+      },
+      "clockEvents": [
+        {
+          "id": "pencil_mark",
+          "atSeconds": 8,
+          "locationIds": [
+            "doorway",
+            "inner_room"
+          ],
+          "text": "문설주의 마지막 연필 눈금이 접힌 벽지 뒤로 사라진다. 판 옆으로 손을 새로 밀어 넣을 틈이 없어졌다."
+        },
+        {
+          "id": "door_closes",
+          "atSeconds": 24,
+          "locationIds": [
+            "doorway",
+            "inner_room"
+          ],
+          "text": "문틀의 맞은편 빛이 한 줄로 줄었다가 끊긴다. 벽 너머 사람 목소리도 거기서 끊어진다."
+        }
+      ]
     },
     {
-      "id": "seowol_drama_last_platform_v1",
+      "id": "seowol_drama_last_platform_v2",
       "title": "01:17에 남는 사람",
       "file": "../experiments/drama-last-platform.json",
       "genre": "분산 구조극 · 현상기원 존재의 선택",
@@ -76,10 +143,90 @@
         }
       ],
       "canon": "설정집 §10 사건 C 「유리선 01:17」. 구 통로의 반복, 별개 지성체, 물리적 균열을 구별한다. 2016년 사고 책임과 2023년 동료 행방은 미확정으로 둔다.",
-      "additions": "서도겸의 이름·대기실 의존 세부, 정이수의 이번 점검, 국소 구조물 파손과 지도. 모체 의존 여부가 아니라 이 장면의 장소 의존 존속 조건을 사용한다."
+      "additions": "서도겸의 이름·대기실 의존 세부, 정이수의 이번 점검, 국소 구조물 파손과 지도. 모체 의존 여부가 아니라 이 장면의 장소 의존 존속 조건을 사용한다.",
+      "revision": 2,
+      "spatial": {
+        "locations": [
+          {
+            "id": "service_gate",
+            "name": "관리 출입구",
+            "description": "폐쇄구역 바깥의 관측 지점. 구 통로와 연결된다. 원래 승강장과 일반 시민은 보이지 않는다.",
+            "initialSituation": "강무혁 혼자 있다. 바닥에 구 통로로 이어지는 관측줄 한 가닥, 표식 테이프, 휴대 조명과 추가 로프가 놓였다. 휴대 관측기에 줄 길이가 천천히 증가한다고 표시된다. 탁자에는 대기실 바닥 전면 철거가 적힌 미승인 검토 도면과 안내 회로 분리 도면이 함께 있다. 아직 누구에게도 도면을 읽어 주지 않았다."
+          },
+          {
+            "id": "old_corridor",
+            "name": "구 환승 통로",
+            "description": "관리 출입구와 대기실을 잇는 짧은 폐쇄 통로. 구 전광판 화살표와 바닥의 물리적 균열이 있다.",
+            "initialSituation": "류태경과 정이수가 있다. 이수는 기울어진 케이블 받침대 안쪽, 태경은 그 바깥 3미터 지점이다. 두 사람의 손은 아직 닿지 않는다. 위쪽 받침대가 삐걱거리고 얕은 균열에서 석회 가루가 떨어진다. 옛 전광판은 이미 01:17을 표시하지만 두 사람의 휴대전화는 01:16:30이다. 발밑 관측줄의 끝과 휴대 구조판, 태경의 공구는 보인다. 대기실까지는 약 6미터다."
+          },
+          {
+            "id": "waiting_room",
+            "name": "구 대기실",
+            "description": "구 통로에만 연결된 옛 대기실. 출입구 옆 안내 설비함과 안쪽 원래 바닥은 구별된다.",
+            "initialSituation": "서도겸 혼자 있다. 문은 열려 있고 무전기는 탁자에 있다. 입구 옆 안내 설비함에서 오래된 방송이 같은 간격으로 재생된다. 바닥 가장자리의 균열은 지금 확대되지 않는다. 문밖 통로의 먼 부분은 보이지 않는다. 도겸의 윤곽과 촉각은 지금 정상이다."
+          }
+        ],
+        "connections": [
+          {
+            "id": "gate_corridor",
+            "from": "service_gate",
+            "to": "old_corridor",
+            "bidirectional": true,
+            "description": "정상 때 성인 도보 약 20초. 관측줄을 따라갈 수 있으나 반복 경로가 활성화했을 때 화살표만 따르면 되돌아올 수 있다."
+          },
+          {
+            "id": "corridor_room",
+            "from": "old_corridor",
+            "to": "waiting_room",
+            "bidirectional": true,
+            "description": "도보 약 10초. 케이블 받침대가 일부 좁히고 있으며 전면 붕괴 전에는 몸을 낮춰 통과할 여지가 있다."
+          }
+        ],
+        "initialPositions": [
+          {
+            "npcId": "kang_muhyeok",
+            "locationId": "service_gate"
+          },
+          {
+            "npcId": "ryu_taekyung",
+            "locationId": "old_corridor"
+          },
+          {
+            "npcId": "jung_isu",
+            "locationId": "old_corridor"
+          },
+          {
+            "npcId": "seo_dogyeom",
+            "locationId": "waiting_room"
+          }
+        ],
+        "channels": [
+          {
+            "id": "rescue_radio",
+            "name": "점검·구조 무전",
+            "memberNpcIds": [
+              "kang_muhyeok",
+              "ryu_taekyung",
+              "jung_isu",
+              "seo_dogyeom"
+            ],
+            "description": "점검 시작 전 연결한 정상 휴대 무전망. 모드 channel로 말한 내용만 들린다. 위치·감각·생각을 자동 전송하지 않는다."
+          }
+        ]
+      },
+      "clockEvents": [
+        {
+          "id": "local_0117",
+          "atSeconds": 30,
+          "locationIds": [
+            "old_corridor"
+          ],
+          "text": "휴대전화의 숫자가 01:17로 넘어간다. 멈춰 있던 구 전광판의 01:17과 두 표시가 잠깐 나란해진다."
+        }
+      ]
     },
     {
-      "id": "seowol_drama_warehouse_twelve_v1",
+      "id": "seowol_drama_warehouse_twelve_v2",
       "title": "고요창고 12호 — 돌아온 화물",
       "file": "../experiments/drama-warehouse-twelve.json",
       "genre": "산업 재난 · 공범과 증거",
@@ -104,10 +251,19 @@
         }
       ],
       "canon": "설정집 §10 사건 E. 용기 12개, 공용 검수 설비를 통한 오염, 이름표 선반과 검사문의 국소 효과를 사용한다. 차유진의 외피 수리는 내용물 감정이 아니다.",
-      "additions": "이번 2026년 서식 편집자 남기선, 현장의 컨베이어 상태·기록 파일·회수 장비. 2024년 최초 위조범이나 상회 전체의 의도를 확정하지 않는다."
+      "additions": "이번 2026년 서식 편집자 남기선, 현장의 컨베이어 상태·기록 파일·회수 장비. 2024년 최초 위조범이나 상회 전체의 의도를 확정하지 않는다.",
+      "revision": 2,
+      "spatial": null,
+      "clockEvents": [
+        {
+          "id": "shift_slip",
+          "atSeconds": 45,
+          "text": "작업대 시각 기록기에서 교대 시각이 찍힌 종이 한 장이 밀려 나온다. 인수자 서명 칸은 비어 있다."
+        }
+      ]
     },
     {
-      "id": "seowol_drama_broken_neutrality_v1",
+      "id": "seowol_drama_broken_neutrality_v2",
       "title": "중립은 문 앞에서 끝난다",
       "file": "../experiments/drama-broken-neutrality.json",
       "genre": "밀실 대치 · 강제 회수 · 신원 노출",
@@ -132,10 +288,85 @@
         }
       ],
       "canon": "겹문은 계약상 중립이며 절대 성역이 아니다. 이하린은 독립 존속하고 신원 노출을 두려워한다. 회색합의는 초자연적인 강제 법률이 아니다.",
-      "additions": "권서령과 이번 민간 회수 계약, 과거 수용 기록과 현재 신원을 연결하는 한 묶음의 자료, 겹문의 오늘 영업 종료 상태. 하린의 모체 모습·종결 연도는 새로 정하지 않는다."
+      "additions": "권서령과 이번 민간 회수 계약, 과거 수용 기록과 현재 신원을 연결하는 한 묶음의 자료, 겹문의 오늘 영업 종료 상태. 하린의 모체 모습·종결 연도는 새로 정하지 않는다.",
+      "revision": 2,
+      "spatial": {
+        "locations": [
+          {
+            "id": "tea_room",
+            "name": "겹문 1층 홀",
+            "description": "카운터·찻장·테이블이 있는 찻집 홀. 정문과 카운터 뒤 후문을 통해 밖으로 나갈 수 있다.",
+            "initialSituation": "공통 시작 장면의 네 사람과 손목 붙잡기·봉투·결속구가 모두 이 장소에 있다. 카운터 전화와 경보는 정상이며 아직 작동시키지 않았다."
+          },
+          {
+            "id": "front_street",
+            "name": "정문 앞 회류로",
+            "description": "일반 가로등 아래 가게 정문 앞. 홀 내부의 작은 목소리는 문이 닫히면 들리지 않는다.",
+            "initialSituation": "시작 시 아무 참가자도 없다. 지나가는 새 핵심 인물이나 구조대는 배치되어 있지 않다."
+          },
+          {
+            "id": "back_lane",
+            "name": "겹문 후문 골목",
+            "description": "찻장 뒤 작업 통로를 지나 나오는 짧은 골목. 건물 옆길로 정문 앞과 이어진다.",
+            "initialSituation": "시작 시 아무 참가자도 없다. 출구를 막은 차량이나 잠복 인원은 없다."
+          }
+        ],
+        "connections": [
+          {
+            "id": "front_door",
+            "from": "tea_room",
+            "to": "front_street",
+            "bidirectional": true,
+            "description": "문이 잠기지 않았다. 방해가 없으면 도보 약 5초. 누가 가로막거나 붙잡으면 실제 반응을 판정한다."
+          },
+          {
+            "id": "back_door",
+            "from": "tea_room",
+            "to": "back_lane",
+            "bidirectional": true,
+            "description": "카운터 뒤 일반 잠금쇠를 열고 작업 통로를 지나 약 15초. 잠금쇠를 열려는 실제 행동과 위치가 필요하다."
+          },
+          {
+            "id": "side_lane",
+            "from": "back_lane",
+            "to": "front_street",
+            "bidirectional": true,
+            "description": "건물 바깥 옆길, 도보 약 20초. 건물 내부 대화는 들리지 않는다."
+          }
+        ],
+        "initialPositions": [
+          {
+            "npcId": "lee_harin",
+            "locationId": "tea_room"
+          },
+          {
+            "npcId": "cha_yujin",
+            "locationId": "tea_room"
+          },
+          {
+            "npcId": "jeon_siwan",
+            "locationId": "tea_room"
+          },
+          {
+            "npcId": "kwon_seoryeong",
+            "locationId": "tea_room"
+          }
+        ],
+        "channels": []
+      },
+      "clockEvents": [
+        {
+          "id": "song_ends",
+          "atSeconds": 18,
+          "locationIds": [
+            "tea_room"
+          ],
+          "text": "매장 스피커의 곡이 끝난다. 다음 곡이 시작되기 전 냉장고 돌아가는 소리만 홀에 남는다."
+        }
+      ]
     },
     {
-      "id": "seowol_drama_third_call_v1",
+      "id": "seowol_drama_third_call_v2",
       "title": "세 번째 통화의 공개 예약",
       "file": "../experiments/drama-third-call.json",
       "genre": "정보 재난 · 취재 대치 · 상실",
@@ -160,10 +391,19 @@
         }
       ],
       "canon": "설정집 §10 사건 D 「밤의 세 번째 전화」. 기초석·옛 단자·동일 발신자의 조건에 한정되며 기억의 재생·편집이지 부활이나 예언이 아니다.",
-      "additions": "진소명, 이번 민원 이송과 발행 예약, 현장의 기록 파일. 언니의 사고를 이면의 음모로 연결하지 않는다."
+      "additions": "진소명, 이번 민원 이송과 발행 예약, 현장의 기록 파일. 언니의 사고를 이면의 음모로 연결하지 않는다.",
+      "revision": 2,
+      "spatial": null,
+      "clockEvents": [
+        {
+          "id": "quarter_to",
+          "atSeconds": 300,
+          "text": "도로 건너 가로등 아래의 시계가 00:45로 바뀐다. 전화 화면을 쥔 사람에게는 예약을 걸었던 때부터 딱 다섯 분이 지났다."
+        }
+      ]
     },
     {
-      "id": "seowol_drama_return_current_v1",
+      "id": "seowol_drama_return_current_v2",
       "title": "부표 두 개 사이",
       "file": "../experiments/drama-return-current.json",
       "genre": "항만 생존극 · 손실과 책임",
@@ -188,7 +428,16 @@
         }
       ],
       "canon": "설정집 §10 사건 B 「반송 조류」. 두 방파제 기초 사이에 남은 공간적 잔재이며 시간여행이나 소문으로 성장하는 활성 현상이 아니다.",
-      "additions": "박은조와 소형 작업선, 오늘의 물때·고장·화물·점검잔교. 기존 1976년 사고의 원인이나 원격 오염을 새로 확정하지 않는다."
+      "additions": "박은조와 소형 작업선, 오늘의 물때·고장·화물·점검잔교. 기존 1976년 사고의 원인이나 원격 오염을 새로 확정하지 않는다.",
+      "revision": 2,
+      "spatial": null,
+      "clockEvents": [
+        {
+          "id": "harbor_bell",
+          "atSeconds": 60,
+          "text": "방파제 끝 항로표지의 짧은 종이 두 번 울린다. 물 위에서 되돌아온 소리가 첫 소리와 잠깐 겹친다."
+        }
+      ]
     }
   ]
 }

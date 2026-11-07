@@ -12,7 +12,7 @@ import { loadVoiceProfile, withVoiceProfile } from './lib/voice-profiles.js';
 const { values } = parseArgs({ options: { live: { type: 'boolean', default: false },
   cases: { type: 'string', default: 'evals/dialogue/voice-transfer.json' }, split: { type: 'string', default: 'all' },
   baseline: { type: 'string', default: 'seowol-profile/1' }, candidate: { type: 'string', default: 'seowol-profile/2' },
-  model: { type: 'string', default: 'gpt-6.1-sol' }, effort: { type: 'string', default: 'low' },
+  model: { type: 'string', default: 'gpt-6-luna' }, effort: { type: 'string', default: 'low' },
   repetitions: { type: 'string', default: '2' }, 'max-calls': { type: 'string', default: '48' }, 'max-usd': { type: 'string', default: '1' },
 } });
 const repetitions = Number(values.repetitions), maxCalls = Number(values['max-calls']), maxUsd = Number(values['max-usd']);

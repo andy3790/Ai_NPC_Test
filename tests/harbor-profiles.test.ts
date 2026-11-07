@@ -75,11 +75,11 @@ test('new examples select available models and reasoning per role and preserve s
   const config = (model: string, effort = 'low') => ({ model, effort });
   const terra = 'gpt-6.1-terra', luna = 'gpt-6-luna', sol = 'gpt-6.1-sol';
   for (const [adapterName, available, npc, director, world] of [
-    ['openai', [model(sol, ['high'], true), model(luna, ['low', 'medium']), model(terra)], config(terra), config(luna), config(luna, 'medium')],
+    ['openai', [model(sol, ['high'], true), model(luna, ['low', 'medium']), model(terra)], config(luna), config(luna), config(luna, 'medium')],
     ['openai', [model(luna, ['low'], true), model(sol)], config(luna), config(luna), config(luna)],
     ['openai', [model(luna, ['none'], true)], config(luna, 'none'), config(luna, 'none'), config(luna, 'none')],
-    ['openai', [model(sol, ['medium'], true)], config(sol, 'medium'), config(sol, 'medium'), config(sol, 'medium')],
-    ['codex', [model('mock-model', ['low'], true), model(luna), model(terra)], config('mock-model'), config('mock-model'), undefined],
+    ['openai', [model(sol, ['medium'], true)], config(luna), config(luna), config(luna, 'medium')],
+    ['codex', [model('mock-model', ['low'], true), model(luna), model(terra)], config(luna), config(luna), config(luna)],
   ] as const) {
     const store = new Store(':memory:'), adapter = new MockAdapter();
     adapter.name = adapterName; adapter.models = async () => [...available];
@@ -104,7 +104,7 @@ test('new examples select available models and reasoning per role and preserve s
 
 test('new presets use independent role defaults and explicit adapter overrides still work', () => {
   for (const spec of [exampleSpec(), spatialExample()]) {
-    assert.deepEqual(spec.scenario.defaults, { model: 'gpt-6.1-terra', effort: 'low' });
+    assert.deepEqual(spec.scenario.defaults, { model: 'gpt-6-luna', effort: 'low' });
     assert.deepEqual(spec.worldEngine, { model: 'gpt-6-luna', effort: 'medium' });
     assert.deepEqual(spec.director, { model: 'gpt-6-luna', effort: 'low' });
   }

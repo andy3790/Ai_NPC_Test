@@ -69,7 +69,8 @@
       "effort": "low",
       "memoryMode": "initial_only",
       "deliveryMode": "batched_on_turn",
-      "turnPolicy": "round_robin"
+      "turnPolicy": "round_robin",
+      "stopOnSilence": true
     }
   ],
   "repetitions": 1,

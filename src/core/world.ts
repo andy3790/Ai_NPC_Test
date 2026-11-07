@@ -94,7 +94,8 @@ export function applyWorldOutput(state: WorldState, raw: unknown, source: Uttera
     if (fact.scope === 'npc_physical') {
       if (!fact.npcId) fail('NPC 물리 상태의 대상이 필요합니다.');
       known(fact.npcId!);
-      if (!output.events.some(e => e.npcId === fact.npcId && ['physical_effect', 'actor_result'].includes(e.type))) fail('NPC 물리 상태는 해당 공개 결과와 함께 기록해야 합니다.');
+      if (!output.events.some(e => e.npcId === fact.npcId && ['physical_effect', 'actor_result'].includes(e.type)))
+        fail(`NPC 물리 상태는 해당 공개 결과와 함께 기록해야 합니다. ${fact.npcId}의 ${fact.id}에 근거가 없습니다. 이번 화자가 물건을 내밀어도 상대방이 받았다는 선택은 상대방 차례에 확인하세요.`);
     } else if (fact.npcId !== null) fail('환경 상태에 NPC를 지정할 수 없습니다.');
     next.facts = [...next.facts.filter(f => f.id !== fact.id), fact];
   }

@@ -70,14 +70,14 @@ function experiment(id, name, cast, situation, engineNotes) {
   const spec = structuredClone(original);
   spec.name = '서월 — ' + name;
   spec.scenario = { id, name, world: publicWorld, situation, characters: cast,
-    defaults: { model: 'gpt-6.1-terra', effort: 'low' },
+    defaults: { model: 'gpt-6-luna', effort: 'low' },
     worldEngineInstructions: '세계 정사 기준(전지적 판정 참고이며 NPC에게 통째로 공개하지 않는다):\n' +
       original.scenario.world + '\n\n판정 전용 능력 조건(의도·기억을 추정하지 않고 선택된 행동의 가능 범위만 판정):\n' +
       cast.map(c => { const facts = card(c.name); return `${c.name}: ${facts['이능과 한계']}\n차폐 조건: ${facts['인지 차폐']}`; }).join('\n') +
       '\n\n이번 장면 판정:\n' + engineNotes + '\n\n' + worldOutputNotes };
-  spec.variants = [{ id: 'seowol', label: 'Terra low / 서월 / 세계 판정', model: 'gpt-6.1-terra', effort: 'low',
+  spec.variants = [{ id: 'seowol', label: 'Luna low / 서월 / 세계 판정', model: 'gpt-6-luna', effort: 'low',
     memoryMode: 'initial_only', deliveryMode: 'batched_on_turn', turnPolicy: 'director', environmentMode: 'ai', eventGeneration: false }];
-  spec.maxUtterances = 30; spec.repetitions = 1; spec.evaluation.enabled = false;
+  spec.maxUtterances = 30; spec.repetitions = 1; spec.evaluation.enabled = false; spec.evaluation.model = 'gpt-6-luna'; spec.evaluation.effort = 'low';
   spec.director = { model: 'gpt-6-luna', effort: 'low' };
   spec.worldEngine = { model: 'gpt-6-luna', effort: 'medium' };
   delete spec.eventGenerator; spec.scheduledEvents = [];

@@ -10,7 +10,7 @@ import { CHARACTER_PERFORMANCE } from '../src/shared/character-performance.js';
 import { exampleSpec } from '../src/shared/example.js';
 import { interruptTest, stopTestRuns } from './lib/test-sessions.js';
 
-const { values } = parseArgs({ options: { live: { type: 'boolean' }, split: { type: 'string', default: 'development' },
+const { values } = parseArgs({ options: { model: { type: 'string', default: 'gpt-6-luna' }, live: { type: 'boolean' }, split: { type: 'string', default: 'development' },
   repetitions: { type: 'string', default: '1' }, turns: { type: 'string', default: '6' },
   candidate: { type: 'string', default: CHARACTER_PERFORMANCE } } });
 const repetitions = Number(values.repetitions);
@@ -21,11 +21,11 @@ const fixturesFile = resolve('evals/dialogue/character-performance.json');
 const fixtures = JSON.parse(readFileSync(fixturesFile, 'utf8')) as {
   id: string; split: string; world: string; situation: string; characters: object[]; events: { afterUtterance: number; text: string }[]; review: string;
 }[];
-const harbor = (revision: 'harbor-profile/4' | 'harbor-profile/5') => exampleSpec('gpt-6.1-sol', 'low', revision).scenario.characters.filter(c => c.id !== 'doha');
+const harbor = (revision: 'harbor-profile/4' | 'harbor-profile/5') => exampleSpec(values.model!, 'low', revision).scenario.characters.filter(c => c.id !== 'doha');
 let cases = fixtures.filter(c => c.split === values.split);
 if (values.split === 'rich' || values.split === 'migration') cases = [{ ...fixtures[1], id: 'harbor-' + values.split, characters: harbor('harbor-profile/4') }];
 if (values.split === 'blank') cases = [{ ...fixtures[0], id: 'names-only', characters: [{ id: 'one', name: '한결' }, { id: 'two', name: '은서' }] }];
-const config = { model: 'gpt-6.1-sol', effort: 'low' };
+const config = { model: values.model!, effort: 'low' };
 const maxCalls = cases.length * repetitions * 2 * turns;
 const plan = { split: values.split, repetitions, turns, ...config, maxCalls, maxEstimatedUsd: 1, characterPerformanceVersion: values.candidate,
   fixtureSha256: createHash('sha256').update(readFileSync(fixturesFile)).digest('hex') };

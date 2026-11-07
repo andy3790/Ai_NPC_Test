@@ -35,9 +35,16 @@ export const scenarioSchema = z.object({
   environment: environmentSchema.optional(),
   worldEngineInstructions: text.optional(),
   spatial: spatialSchema.optional(),
+  clockEvents: z.array(z.object({ id, atSeconds: z.number().finite().nonnegative(), text: text.trim().min(1),
+    locationIds: z.array(id).max(100).optional() })).max(100).optional(),
 }).superRefine((v, c) => {
   if (new Set(v.characters.map(x => x.id)).size !== v.characters.length)
     c.addIssue({ code: 'custom', message: '캐릭터 ID는 중복될 수 없습니다.' });
+  if (new Set(v.clockEvents?.map(e => e.id)).size !== (v.clockEvents?.length ?? 0))
+    c.addIssue({ code: 'custom', path:['clockEvents'], message:'시각 사건 ID는 중복될 수 없습니다.' });
+  for (const event of v.clockEvents ?? []) if (event.locationIds && (!event.locationIds.length ||
+    new Set(event.locationIds).size !== event.locationIds.length || event.locationIds.some(id => !v.spatial?.locations.some(l => l.id === id))))
+    c.addIssue({ code:'custom', path:['clockEvents'], message:'시각 사건의 현장 수신 장소를 확인하세요.' });
   if (v.spatial) {
     const s = v.spatial;
     const fail = (message: string) => c.addIssue({ code: 'custom', path: ['spatial'], message });
@@ -100,6 +107,9 @@ export const experimentSchema = z.object({
     c.addIssue({ code: 'custom', path: ['worldEngine'], message: 'AI 세계 엔진의 모델과 추론 강도를 지정하세요.' });
   if (v.variants.some(x => x.environmentMode === 'ai_spatial') && !v.scenario.spatial)
     c.addIssue({ code: 'custom', path: ['scenario', 'spatial'], message: '분산 공간의 장소·통로·NPC 시작 위치를 지정하세요.' });
+  if (v.scenario.clockEvents?.length && v.variants.some(x => !['ai','ai_spatial'].includes(x.environmentMode ?? '') ||
+    (x.environmentMode !== 'ai_spatial' && v.scenario.clockEvents!.some(e => e.locationIds))))
+    c.addIssue({ code:'custom', path:['scenario','clockEvents'], message:'시각 사건에는 세계 시계가, 장소별 사건에는 분산 공간이 필요합니다.' });
   if (v.variants.some(x => x.eventGeneration) && !v.eventGenerator)
     c.addIssue({ code: 'custom', path: ['eventGenerator'], message: '상황 발생 엔진의 모델·빈도·허용 범위를 지정하세요.' });
   if (v.variants.some(x => x.eventGeneration) && v.eventGenerator && !v.eventGenerator.allowedEvents.trim())

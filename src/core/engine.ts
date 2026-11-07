@@ -1,10 +1,12 @@
 import { buildRunSummary, matchesProvider, toRunListItem, withRunTiming } from './summary.js';
+import { simulationEffort } from '../shared/role-models.js';
 import { EventEmitter } from 'node:events';
 import { createHash, randomUUID } from 'node:crypto';
 import { join } from 'node:path';
 import type { Adapter } from '../adapters/types.js';
 import { Store } from './store.js';
 import { SessionCleanup } from './session-cleanup.js';
+import { ACTOR_CONTEXT_VERSION, actorRecall, checkDialogue, establishedConversation, priorDisclosures } from './actor-context.js';
 import { WORLD_CONTEXT_VERSION, worldRequestContext } from './world-context.js';
 import { CHARACTER_PERFORMANCE } from '../shared/character-performance.js';
 import { committedPerformance, performTurn, withPortrayal } from './character-performance.js';
@@ -20,8 +22,11 @@ import { audienceNpcIds } from './perception.js';
 import type { Audience } from '../shared/spatial-schema.js';
 import type { SimulationHost } from './simulation-host.js';
 import { runSpatial } from './spatial-runner.js';
+import { clockObservations } from './scene-clock.js';
+import { groundedEvents, spatialChoiceContract, spatialContract, SPATIAL_CHOICE_VERSION, SPATIAL_CONTRACT_VERSION, WORLD_CONTRACT_VERSION } from './spatial-contract.js';
+import { z } from 'zod';
 import { advanceSingleRoomSituations } from './single-room-situations.js';
-import { worldOutputSchema } from '../shared/world-schema.js';
+import { worldFactSchema, worldOutputSchema } from '../shared/world-schema.js';
 import { applyWorldOutput, initialWorldState, priorityWorldSpeaker, worldPrompt, worldResponseContract } from './world.js';
 import { worldPromptVersion, worldPolicies } from './world-policies.js';
 import type { ApiCredential, CallKind, DeliveryReceipt, InvocationMetrics, NpcSession, Run, RunDetail, RunListItem, RunRecords, RunSummary, Utterance } from '../shared/types.js';
@@ -64,7 +69,7 @@ export class Engine extends EventEmitter {
     const check = (config: ModelConfig) => {
       const model = models.find(m => m.id === config.model);
       if (!model || !model.efforts.includes(config.effort)) throw new Error(`사용할 수 없는 모델·추론 조합: ${config.model} / ${config.effort}`);
-      if (config.effort === 'ultra') throw new Error('ultra는 자동 위임을 활성화하므로 독립 NPC 세션 실험에서는 사용할 수 없습니다. max 이하를 선택하세요.');
+      if (!simulationEffort(config.effort)) throw new Error(`독립 NPC 실험의 추론 강도는 high 이하입니다: ${config.effort}`);
     };
     for (const v of parsed.variants) for (const c of parsed.scenario.characters) check({ model: c.model ?? v.model ?? parsed.scenario.defaults.model, effort: c.effort ?? v.effort ?? parsed.scenario.defaults.effort });
     if (parsed.evaluation.enabled) check(parsed.evaluation);
@@ -80,7 +85,8 @@ export class Engine extends EventEmitter {
       const variant = { ...sourceVariant, dialoguePromptVersion: sourceVariant.dialoguePromptVersion ?? CURRENT_DIALOGUE_PROMPT,
         characterPerformanceVersion: sourceVariant.characterPerformanceVersion ?? CHARACTER_PERFORMANCE,
         ...(environmentMode(spec, sourceVariant) === 'ai' ? { worldPromptVersion: sourceVariant.worldPromptVersion ?? WORLD_PROMPT_VERSION } : {}) };
-      const context = this.adapter.name === 'openai' && isAiEnvironment(spec, variant) ? { worldContextVersion: WORLD_CONTEXT_VERSION } : {};
+      const context = this.adapter.name === 'openai' ? { npcContextVersion: ACTOR_CONTEXT_VERSION,
+        ...(isAiEnvironment(spec, variant) && { worldContextVersion: WORLD_CONTEXT_VERSION }) } : {};
       const snapshotHash = createHash('sha256').update(JSON.stringify({ spec, variant, repetition, promptVersion: PROMPT_VERSION, ...context })).digest('hex');
       const run: Run = { id: randomUUID(), experimentId, name: `${spec.name} · ${variant.label} · #${repetition}`, variant, repetition, spec, snapshotHash,
         status: start ? 'queued' : 'paused', error: null, createdAt: now(), startedAt: null, completedAt: null, activeMs: 0, pausedMs: 0, pausedAt: start ? null : now(), timingComplete: true,
@@ -114,9 +120,26 @@ export class Engine extends EventEmitter {
       if (active.filter(r => r.experimentId === run.experimentId).length >= run.spec.concurrentRuns || active.length >= 16) continue;
       const pausedMs = run.pausedMs + (run.pausedAt ? Date.now() - Date.parse(run.pausedAt) : 0);
       this.store.patch('runs', run.id, { status: 'running', startedAt: run.startedAt ?? now(), pausedAt: null, pausedMs, error: null });
-      this.startWorker(run.id, () => this.work(run.id).catch(e => {
+      this.startWorker(run.id, () => this.workWithRepairs(run.id).catch(e => {
         if (this.run(run.id).status !== 'stopped') this.store.patch('runs', run.id, { status: 'paused', pausedAt: now(), error: err(e) });
       }));
+    }
+  }
+  private async workWithRepairs(id: string) {
+    for (;;) {
+      const before = this.store.db.prepare('SELECT MAX(rowid) AS n FROM invocations WHERE run_id=?').get(id);
+      try { await this.work(id); return; }
+      catch (error) {
+        const run = this.run(id);
+        if (!run.npcContextVersion || run.status !== 'running' || this.closing || run.pauseRequested) throw error;
+        // A local schema/state rejection of a billed, terminal answer is safe to
+        // replay. Ambiguous transport, auth, interrupted and unbilled calls pause.
+        const rows = this.store.db.prepare("SELECT data FROM invocations WHERE run_id=? AND rowid>? AND json_extract(data,'$.status')!='completed' ORDER BY rowid").all(id, Number(before?.n ?? 0));
+        const bad = rows.map(r => JSON.parse(String(r.data)) as InvocationMetrics);
+        if (!bad.length || bad.some(c => c.status !== 'failed' || !c.turnId || c.attempt >= 3 ||
+          (!c.output && !c.error?.includes('max_output_tokens')))) throw error;
+        this.store.event(id, null, 'run/repairing_output', { operationKeys: bad.map(c => c.operationKey) });
+      }
     }
   }
   private async sessions(id: string) {
@@ -154,7 +177,7 @@ export class Engine extends EventEmitter {
     this.store.patch('runs', id, { helperSessions: { ...this.run(id).helperSessions, [key]: session } }); return session;
   }
   private priorInvocation(id: string, operationKey: string) {
-    const previous = this.store.list('invocations', id).filter(c => c.operationKey === operationKey).at(-1);
+    const previous = this.store.attempts(id, operationKey).at(-1);
     if (previous && ['uncertain', 'running'].includes(previous.status)) throw new Error(`미확정 호출 ${previous.id}: 자동 재전송하지 않습니다. 재개하여 상태를 확인하세요.`);
     return previous;
   }
@@ -170,13 +193,30 @@ export class Engine extends EventEmitter {
   private speak(id: string, session: NpcSession, key: string, input: string, metadata: Record<string, unknown>, history: Utterance[]) {
     const run = this.run(id);
     const version = run.variant.characterPerformanceVersion;
-    if (!version || version === 'off') return this.invoke(id, 'speech', session, key, input, metadata);
-    const slot = run.spec.scenario.characters.findIndex(c => c.id === session.characterId);
-    const turn = performTurn(version, run.spec.scenario.characters[slot], slot, session, history);
-    const baseSchema = metadata.outputType === 'spatialSpeech' ? outputSchemas.spatialSpeech :
-      environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas.speech;
+    const characters = run.spec.scenario.characters;
+    const slot = characters.findIndex(c => c.id === session.characterId);
+    const spatial = metadata.outputType === 'spatialSpeech' && run.npcContextVersion
+      ? spatialChoiceContract(JSON.parse(input).localContext, session.characterId) : undefined;
+    if (spatial) metadata = { ...metadata, spatialChoiceVersion: SPATIAL_CHOICE_VERSION };
+    if (run.npcContextVersion) {
+      const prompt = JSON.parse(input);
+      prompt.earlierObservations = actorRecall(history, session.characterId, new Set((prompt.messages ?? []).map((u: {id:string}) => u.id)));
+      const established = ['npc-context/3', ACTOR_CONTEXT_VERSION].includes(run.npcContextVersion) ? establishedConversation(history,session.characterId) : [];
+      if (established.length) prompt.alreadyHeard = established;
+      prompt.continuity = 'earlierObservations는 이미 오간 말과 확정된 결과다. 현재 일어나는 일은 messages와 현재 위치에서 확인한다. 상대가 이미 들은 자기소개나 결정을 다시 설명할 필요가 없다.';
+      if (established.length) prompt.continuity += ' alreadyHeard의 말을 처음 듣는 반응은 시간상 맞지 않는다. 지난 합의는 이번에 실제로 달라진 점이 있을 때 다시 다룬다.';
+      if (run.npcContextVersion === ACTOR_CONTEXT_VERSION) {
+        const shared = priorDisclosures(history,characters[slot],characters);
+        if (shared.length) prompt.alreadyTold = shared;
+      }
+      input = JSON.stringify(prompt);
+    }
+    if (!version || version === 'off') return this.invoke(id, 'speech', session, key, input, metadata, spatial, history);
+    const turn = performTurn(version, characters[slot], slot, session, history);
+    const baseSchema = spatial ?? (metadata.outputType === 'spatialSpeech' ? outputSchemas.spatialSpeech :
+      environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas.speech);
     return this.invoke(id, 'speech', session, key, JSON.stringify({ ...JSON.parse(input), characterPerformance: turn.context }),
-      { ...metadata, ...turn.metadata }, turn.select ? withPortrayal(baseSchema) : undefined);
+      { ...metadata, ...turn.metadata }, turn.select ? withPortrayal(baseSchema) : spatial, history);
   }
   private async invoke(id: string, kind: CallKind, session: NpcSession, operationKey: string, input: string, metadata: Record<string, unknown> = {}, requestedOutputSchema?: object, history?: Utterance[]) {
     const previous = this.priorInvocation(id, operationKey);
@@ -184,15 +224,22 @@ export class Engine extends EventEmitter {
     const run = this.run(id);
     const worldContext = kind === 'environment' && run.worldContextVersion === WORLD_CONTEXT_VERSION
       ? worldRequestContext(input, run.worldState, history ?? this.store.list('utterances', id), previous?.error) : undefined;
+    const independent = !!run.npcContextVersion && (kind === 'speech' || kind === 'receive');
     if (worldContext) {
       input = JSON.stringify({ ...worldContext.scene, ...worldContext.tick });
       metadata = { ...metadata, worldContextVersion: run.worldContextVersion };
+    } else if (independent && previous?.turnId && previous.output && previous.error && !previous.error.includes('max_output_tokens')) {
+      input = JSON.stringify({ ...JSON.parse(input), previousFailure: previous.error.slice(0, 1500) });
     } else if (previous?.turnId && previous.threadId === session.threadId && previous.metadata.inputRetained !== false) {
       // The persistent session already contains the failed attempt and its full input.
       input = JSON.stringify({ task: JSON.parse(input).task, previousFailure: previous.error?.slice(0, 5000), instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 해당 호출의 결과는 아직 공개·적용되지 않았습니다. previousFailure는 이전 결과가 거부된 이유입니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
     }
     const format = metadata.outputType as keyof typeof outputSchemas | undefined;
-    const outputSchema = requestedOutputSchema ?? (format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind]);
+    const spatialFormat = run.npcContextVersion && run.npcContextVersion !== 'npc-context/1' && run.worldState?.spatial && (format === 'spatialPlan' || format === 'spatialResolution')
+      ? spatialContract(String(metadata.phase),run.spec,run.worldState,metadata.sourceUtteranceIds as string[],history ?? []) : undefined;
+    if (spatialFormat || kind === 'environment' && !format && run.npcContextVersion && run.npcContextVersion !== 'npc-context/1')
+      metadata = { ...metadata, worldContractVersion:spatialFormat ? SPATIAL_CONTRACT_VERSION : WORLD_CONTRACT_VERSION };
+    const outputSchema = requestedOutputSchema ?? spatialFormat ?? (format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind]);
     const call: InvocationMetrics = {
       id: randomUUID(), experimentId: run.experimentId, runId: id, variantId: run.variant.id, repetition: run.repetition,
       kind, characterId: ['speech', 'receive'].includes(kind) ? session.characterId : null, operationKey, attempt: (previous?.attempt ?? 0) + 1, retryOf: previous?.id ?? null,
@@ -203,6 +250,7 @@ export class Engine extends EventEmitter {
       status: 'queued', usage: emptyUsage(), usageStatus: 'not_started', input, output: '', error: null,
       metadata: { ...metadata, adapter: run.adapter, appVersion: run.appVersion, cliVersion: run.cliVersion,
         promptVersion: run.promptVersion ?? null, runtimePromptVersion: PROMPT_VERSION,
+        ...((kind === 'speech' || kind === 'receive') && run.npcContextVersion && { npcContextVersion: run.npcContextVersion }),
         dialoguePromptVersion: run.variant.dialoguePromptVersion ?? null,
         worldPromptVersion: kind === 'environment' ? worldPromptVersion(session.instructions) : null,
         outputSchemaSha256: createHash('sha256').update(JSON.stringify(outputSchema)).digest('hex'),
@@ -219,7 +267,7 @@ export class Engine extends EventEmitter {
       const controller = new AbortController(); const set = this.aborts.get(id) ?? new Set(); set.add(controller); this.aborts.set(id, set);
       let result;
       try {
-        result = await this.adapter.turn({ threadId: session.threadId, config: session.config, input, worldContext, outputSchema, clientMessageId: call.id, timeoutMs: run.spec.timeoutMs }, event => {
+        result = await this.adapter.turn({ threadId: session.threadId, config: session.config, input, worldContext, independent, outputSchema, clientMessageId: call.id, timeoutMs: run.spec.timeoutMs }, event => {
           // Late usage events must preserve fields committed after the turn completed.
           Object.assign(call, this.store.get('invocations', call.id));
           this.store.event(id, call.id, event.method, event.params);
@@ -241,6 +289,8 @@ export class Engine extends EventEmitter {
         try {
           const parsed = JSON.parse(call.output);
           responseValidator(kind, metadata.outputType).parse(parsed);
+          if (kind === 'speech' && run.npcContextVersion && run.npcContextVersion !== 'npc-context/1')
+            checkDialogue(parsed.speech,parsed.action,history ?? [],session.characterId,session.instructions+' '+input);
         } catch (e) { call.status = 'failed'; call.error = `출력 형식 오류: ${err(e)}`; }
       }
       this.store.put('invocations', call);
@@ -326,12 +376,18 @@ export class Engine extends EventEmitter {
       const age = (characterId: string) => speeches.length - (speeches.findLastIndex(u => u.speakerId === characterId));
       const candidates = chars.filter(c => c.id !== run.lastSpeakerId).sort((a, b) => age(b.id) - age(a.id));
       const allowed = age(candidates[0].id) >= chars.length * 2 ? [candidates[0]] : candidates;
-      const call = await this.direct(id, 'director', `director:${speeches.length + 1}`, directorPrompt({
-        characters: chars, allowedSpeakerIds: allowed.map(c => c.id), history: this.store.list('utterances', id), speeches,
-        initialScene: run.spec.scenario.situation,
-      }));
-      selected = JSON.parse(call.output).speakerId;
-      if (!allowed.some(c => c.id === selected)) { this.store.patch('invocations', call.id, { status: 'failed', error: '허용되지 않은 화자 ID' }); throw new Error('진행자가 허용되지 않은 화자를 선택했습니다.'); }
+      if (allowed.length === 1) selected = allowed[0].id;
+      else {
+        const call = await this.direct(id, 'director', `director:${speeches.length + 1}`, directorPrompt({
+          characters: chars, allowedSpeakerIds: allowed.map(c => c.id), history: this.store.list('utterances', id), speeches,
+          initialScene: run.spec.scenario.situation,
+        }));
+        selected = JSON.parse(call.output).speakerId;
+        if (!allowed.some(c => c.id === selected)) {
+          this.store.patch('invocations', call.id, { status: 'failed', error: '허용되지 않은 화자 ID' });
+          throw new Error('진행자가 허용되지 않은 화자를 선택했습니다.');
+        }
+      }
     }
     this.store.patch('runs', id, { nextSpeakerId: selected }); return selected;
   }
@@ -344,12 +400,24 @@ export class Engine extends EventEmitter {
     if (!source) return;
     const session = await this.helper(id, 'world-engine', run.spec.worldEngine!, worldPolicies[run.variant.worldPromptVersion ?? LEGACY_WORLD_PROMPT].instructions);
     const contract = worldResponseContract(worldPromptVersion(session.instructions), source);
-    const call = await this.invoke(id, 'environment', session, `environment:${source.id}`, worldPrompt(run.spec, state, history, source), { sourceUtteranceId: source.id }, contract.outputSchema, history);
+    const key = `environment:${source.id}`;
+    const last = this.store.attempts(id,key).at(-1);
+    const ungroundedRecipient = last?.status === 'failed' && last.error?.includes('NPC 물리 상태는 해당 공개 결과');
+    const facts = ungroundedRecipient ? z.array(z.union([
+      worldFactSchema.extend({scope:z.literal('environment'),npcId:z.null()}),
+      worldFactSchema.extend({scope:z.literal('npc_physical'),npcId:z.literal(source.speakerId)}),
+    ])).max(100) : undefined;
+    const outputSchema = run.npcContextVersion && run.npcContextVersion !== 'npc-context/1'
+      ? z.toJSONSchema(contract.validator.extend({events:groundedEvents(false,[source],run.spec.scenario.characters.map(c => c.id)),...(facts && {facts})}))
+      : contract.outputSchema;
+    const call = await this.invoke(id, 'environment', session, key, worldPrompt(run.spec, state, history, source),
+      { sourceUtteranceId: source.id, ...(facts && {repairContract:'grounded-recipient/1'}) }, outputSchema, history);
     let result: ReturnType<typeof applyWorldOutput>;
     try { result = applyWorldOutput(state, contract.validator.parse(JSON.parse(call.output)), source, run.spec.scenario.characters.map(c => c.id)); }
     catch (e) { this.store.patch('invocations', call.id, { status: 'failed', error: err(e) }); throw e; }
     this.store.transaction(() => {
       let sequence = this.store.list('utterances', id).length;
+      for (const u of clockObservations(run.spec,result.state,id,sequence)) { this.append(id,u); sequence++; }
       for (const event of result.output.events) this.append(id, {
         id: randomUUID(), runId: id, sequence: ++sequence, speechIndex: null, speakerId: '__environment__', speakerName: '세계 엔진',
         kind: 'event', speech: event.text, action: '', createdAt: now(), invocationId: call.id, deliveryCompletedAt: null, deliveryMs: null,
@@ -371,6 +439,12 @@ export class Engine extends EventEmitter {
         await runSpatial(this.simulationHost(id));
         return;
       }
+      const initial = this.run(id);
+      if (initial.spec.scenario.clockEvents?.some(e => e.atSeconds === 0) && !initial.worldState) this.store.transaction(() => {
+        const state = initialWorldState();
+        for (const u of clockObservations(initial.spec,state,id,this.store.list('utterances',id).length)) this.append(id,u);
+        this.store.patch('runs',id,{worldState:state});
+      });
       while (!this.closing && this.run(id).status === 'running') {
         await this.flush(id);
         await this.advanceWorld(id);
@@ -405,7 +479,7 @@ export class Engine extends EventEmitter {
             this.append(id, { id: randomUUID(), runId: id, sequence: u.sequence + 1, speechIndex: null, speakerId: '__environment__', speakerName: '환경 결과', kind: 'event', speech: resolved.action.result, action: '', resolution, createdAt: now(), invocationId: null, deliveryCompletedAt: null, deliveryMs: null });
             this.store.event(id, call.id, 'environment/resolved', resolution);
           }
-          for (const attempt of this.store.list('invocations', id).filter(c => c.operationKey === call.operationKey)) this.store.patch('invocations', attempt.id, { utteranceId: u.id });
+          for (const attempt of this.store.attempts(id, call.operationKey)) this.store.patch('invocations', attempt.id, { utteranceId: u.id });
           for (const r of receipts) this.store.patch('receipts', r.id, { status: 'delivered', invocationId: call.id, deliveredAt: now() });
           for (const old of messages) this.completeDelivery(id, old);
           const current = this.run(id);

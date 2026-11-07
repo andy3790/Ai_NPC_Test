@@ -25,7 +25,7 @@ export async function generateSituation(h: SimulationHost) {
   const state = generatorState(h), config = run.spec.eventGenerator!;
   const session = await h.helper('situation-generator', config, situationInstructions);
   const call = await h.invoke('event_generation', session, `situation:${state.checks + 1}`, JSON.stringify({ task: 'event_generation', ...managerWorld(run.spec),
-    current: managerState(run.worldState ?? initialWorldState(), h.store.list('utterances', h.id)),
+    current: managerState(run.worldState ?? initialWorldState(), h.store.list('utterances', h.id),run.spec),
     allowedEvents: config.allowedEvents, forbiddenEvents: config.forbiddenEvents, maxSeverity: config.maxSeverity,
     recentProposals: state.proposals.slice(-10), instruction: '지금 새로운 계기가 적절할 때만 한 건 제안하세요.' }));
   let proposal: SituationProposal | undefined;

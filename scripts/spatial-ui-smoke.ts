@@ -68,6 +68,20 @@ try {
   await page.setViewportSize({ width: 390, height: 844 });
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
   await page.screenshot({ path: '.cache/screenshots/spatial-mobile.png', fullPage: true });
+  await page.setViewportSize({width:1440,height:1000});
+  await page.getByRole('button',{name:'새 실험',exact:true}).click();
+  const dialog = page.getByRole('dialog',{name:'실험 구성'});
+  await dialog.getByRole('button',{name:'JSON 편집',exact:true}).click();
+  await dialog.locator('input[type=file]').setInputFiles('assets/seowol/experiments/drama-closing-door.json');
+  await page.waitForFunction(() => (document.querySelector('.section-json textarea') as HTMLTextAreaElement)?.value.includes('seowol_drama_closing_door_v3'));
+  await dialog.getByRole('button',{name:'JSON을 설정에 적용',exact:true}).click();
+  await dialog.getByRole('button',{name:'01 시나리오'}).click();
+  assert.equal(await dialog.getByLabel('윤해경 시작 위치',{exact:true}).inputValue(),'inner_room');
+  assert.equal(await dialog.getByLabel('류태경 시작 위치',{exact:true}).inputValue(),'doorway');
+  assert.equal(await dialog.getByLabel('닫히는 시각 (가상 초)',{exact:true}).inputValue(),'24');
+  assert.ok(await dialog.getByLabel('열려 있을 때 양 끝의 말과 행동 전달').isChecked());
+  assert.match(await dialog.getByLabel('시각 사건 1 관찰 내용',{exact:true}).inputValue(),/연필 눈금/);
+  assert.match(await dialog.getByLabel('시각 사건 2 관찰 내용',{exact:true}).inputValue(),/끊긴다/);
   assert.deepEqual(errors, []);
   console.log('PASS spatial example editor, positions, two delivery modes, private observation, world state, generator, metrics, snapshot, exports and mobile');
 } catch (error) { await mkdir('.cache/screenshots', { recursive: true }); await page.screenshot({ path: '.cache/screenshots/spatial-error.png', fullPage: true }); throw error; } finally { await browser.close(); await server.close(); }

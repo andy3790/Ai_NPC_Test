@@ -43,10 +43,10 @@ const ensembleSituations = {
 export function parts(w) {
   return [...w.scenarios, {key:'ensemble',title:'전체 인물 교차 검토',cast:[0,1,2,3,4,5],situation:`${ensembleSituations[w.id]} 여섯 명 모두 참석하더라도 타인의 비공개 설정은 자동 공유되지 않는다.`, question:`${w.scenarios[0].question} ${w.scenarios[1].question}`}];
 }
-export function scenario(w,p,model='gpt-6.1-sol',effort='low') {
+export function scenario(w,p,model='gpt-6-luna',effort='low') {
   return { id:`${w.id}-${p.key}`,name:`${w.name} — ${p.title}`,world:worldText(w),situation:`${p.situation}\n중심 질문: ${p.question}\n서로 예시 대사를 이미 들은 것으로 가정하지 않는다. 참가자는 자기 관점의 문제부터 자연스럽게 말할 수 있으며 매 발화 결론을 낼 의무가 없다.`,characters:p.cast.map(i=>runtimeCharacter(w.characters[i])),defaults:{model,effort} };
 }
-export function experiment(w,p,model='gpt-6.1-sol',effort='low') {
+export function experiment(w,p,model='gpt-6-luna',effort='low') {
   return { schemaVersion:1,name:`${w.name} / ${p.title} / 기억 방식 비교`,scenario:scenario(w,p,model,effort),variants:[
     {id:'initial',label:'초기 설정·동일 세션',memoryMode:'initial_only',deliveryMode:'batched_on_turn',turnPolicy:'round_robin'},
     {id:'reinject',label:'매 발화 원본 재주입',memoryMode:'reinject_on_speech',deliveryMode:'batched_on_turn',turnPolicy:'round_robin'}
@@ -121,7 +121,7 @@ export async function build() {
   const promptBytes=await readFile(path.join(root,'../../src/core/prompts.ts'));
   const promptDependencies={};
   for (const file of ['src/core/dialogue-policies.ts','src/shared/dialogue-policy.ts','src/core/world-policies.ts','src/shared/world-policy.ts','src/shared/world-schema.ts','src/core/director.ts']) promptDependencies[file]=sha(await readFile(path.join(root,'../..',file)));
-  const manifest={assetSchemaVersion:1,packId:'npc-canon-six-worlds',version:'1.0.0',language:'ko-KR',authoredDate:'2026-10-28',runtimeSchemaVersion:1,description:'독립 세계관 6개와 캐릭터 36명, 3인 시나리오 12개 및 6인 시나리오 6개.',counts:{worlds:worlds.length,characters:worlds.reduce((n,w)=>n+w.characters.length,0),scenarios:entries.length,experiments:entries.length,activeImageFiles:imageManifest.length,characterPortraitRegions:36,evaluationFixtures:allFixtures.length,scheduledEvents:worlds.reduce((n,w)=>n+w.events.length,0)},compatibility:{schemaPath:'src/shared/schema.ts',schemaSha256:sha(schemaBytes),promptPath:'src/core/prompts.ts',promptSha256:sha(promptBytes),promptDependencies,imageInputSupported:false,defaultModel:'gpt-6.1-sol',defaultEffort:'low',modelAvailabilityVerified:false},entrypoints:{gallery:'index.html',catalog:'catalog.json',assets:'image-manifest.json',anchors:'evaluation/anchors.json',readme:'README.md',handoff:'HANDOFF.md'},experiments:entries};
+  const manifest={assetSchemaVersion:1,packId:'npc-canon-six-worlds',version:'1.0.0',language:'ko-KR',authoredDate:'2026-10-28',runtimeSchemaVersion:1,description:'독립 세계관 6개와 캐릭터 36명, 3인 시나리오 12개 및 6인 시나리오 6개.',counts:{worlds:worlds.length,characters:worlds.reduce((n,w)=>n+w.characters.length,0),scenarios:entries.length,experiments:entries.length,activeImageFiles:imageManifest.length,characterPortraitRegions:36,evaluationFixtures:allFixtures.length,scheduledEvents:worlds.reduce((n,w)=>n+w.events.length,0)},compatibility:{schemaPath:'src/shared/schema.ts',schemaSha256:sha(schemaBytes),promptPath:'src/core/prompts.ts',promptSha256:sha(promptBytes),promptDependencies,imageInputSupported:false,defaultModel:'gpt-6-luna',defaultEffort:'low',modelAvailabilityVerified:false},entrypoints:{gallery:'index.html',catalog:'catalog.json',assets:'image-manifest.json',anchors:'evaluation/anchors.json',readme:'README.md',handoff:'HANDOFF.md'},experiments:entries};
   await write('pack.json',manifest);await write('image-manifest.json',{assetSchemaVersion:1,images:imageManifest,portraits:catalogWorlds.flatMap(w=>w.characters.map(c=>({characterId:c.id,worldId:w.id,...c.portrait})))});
   await write('evaluation/anchors.json',{assetSchemaVersion:1,visibility:'evaluator_only',anchors});
   await write('evaluation/index.json',{assetSchemaVersion:1,visibility:'evaluator_only',count:allFixtures.length,files:worlds.map(w=>`${w.id}.fixtures.json`),note:'작성자 기준 사례. 모의 어댑터의 판정 정답이나 실제 모델 성능 측정 결과가 아니다. expected는 평가 입력에 넣지 않는다.'});

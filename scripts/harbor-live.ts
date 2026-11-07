@@ -10,7 +10,7 @@ import { exampleSpec } from '../src/shared/example.js';
 import { HARBOR_PROFILE_VERSIONS, harborProfilePolicies, type HarborProfileVersion } from '../src/shared/harbor-profiles.js';
 import { experimentSchema } from '../src/shared/schema.js';
 import { DIALOGUE_PROMPT_VERSIONS, type DialoguePromptVersion } from '../src/shared/dialogue-policy.js';
-const { values } = parseArgs({ options: { live: { type: 'boolean', default: false }, model: { type: 'string', default: 'gpt-6.1-sol' },
+const { values } = parseArgs({ options: { live: { type: 'boolean', default: false }, model: { type: 'string', default: 'gpt-6-luna' },
   policy: { type: 'string', default: 'npc-dialogue/5' },
   scene: { type: 'string', default: 'lighthouse' },
   'baseline-profile': { type: 'string', default: 'harbor-profile/1' }, 'candidate-profile': { type: 'string', default: 'harbor-profile/2' },

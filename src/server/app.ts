@@ -81,13 +81,15 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
     const fallback = models.find(m => m.isDefault) ?? models[0];
     if (!fallback) throw new Error('새 예제에 사용할 수 있는 모델이 없습니다.');
     const config = { model: fallback.id, effort: fallback.efforts.includes('low') ? 'low' : fallback.defaultEffort };
-    const roles = engine.adapter.name === 'openai' ? availableRoleModels(models, config) : undefined;
+    const roles = ['openai','codex'].includes(engine.adapter.name) ? availableRoleModels(models) : undefined;
     const npc = roles?.npc ?? config;
     const spec = exampleSpec(npc.model, npc.effort);
     if (roles) {
       spec.worldEngine = roles.worldEngine;
       spec.director = roles.director;
       Object.assign(spec.evaluation, roles.director);
+    }
+    if (engine.adapter.name === 'openai') {
       spec.variants.forEach(variant => { variant.turnPolicy = 'director'; });
       spec.maxUtterances = 18; spec.evaluation.interval = 6; spec.concurrentRuns = 1; spec.maxConcurrentCalls = 1;
     }

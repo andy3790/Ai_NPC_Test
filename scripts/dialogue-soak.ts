@@ -17,7 +17,7 @@ import { baseInstructions, PROMPT_VERSION } from '../src/core/prompts.js';
 
 const { values } = parseArgs({ options: {
   live: { type: 'boolean', default: false }, adapter: { type: 'string', default: 'openai' },
-  model: { type: 'string', default: 'gpt-6.1-sol' }, effort: { type: 'string', default: 'low' },
+  model: { type: 'string', default: 'gpt-6-luna' }, effort: { type: 'string', default: 'low' },
   specs: { type: 'string', default: 'evals/dialogue/conversations.json' },
   baseline: { type: 'string', default: 'npc-dialogue/1' }, candidate: { type: 'string', default: CURRENT_DIALOGUE_PROMPT },
   turns: { type: 'string', default: '18' }, repetitions: { type: 'string', default: '1' },

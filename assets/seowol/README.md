@@ -14,7 +14,7 @@
 | [experiments/return-deadline-sol.json](experiments/return-deadline-sol.json) | 동일 | 위 장면에서 NPC 모델만 Sol low로 바꾼 비교용 설정 |
 | [experiments/maintenance-talk.json](experiments/maintenance-talk.json) | 차유진·이하린·나연우 | 기존 고지서 장면을 유지한 비교용 설정. 인물 프롬프트 효과를 장면 변경 효과와 나눠 확인 |
 
-기본값은 NPC Terra low(Sol 파일은 Sol low), 진행자 Luna low, 세계 엔진 Luna medium, 30발화다. 독립 평가와 자동 상황 발생은 꺼져 있다. 추가 사건을 무작위로 넣지 않아도 현재 행동과 이해관계에서 변화가 생기는지 본다. 짧은 검토에는 발화 수를 12로 줄인다. [실제 실행 결과와 검증 범위](../../docs/seowol-dialogue-review.md)를 함께 참고한다.
+기본값은 NPC Luna low(Sol 파일은 Sol low), 진행자 Luna low, 세계 엔진 Luna medium, 30발화다. 독립 평가와 자동 상황 발생은 꺼져 있다. 추가 사건을 무작위로 넣지 않아도 현재 행동과 이해관계에서 변화가 생기는지 본다. 짧은 검토에는 발화 수를 12로 줄인다. [실제 실행 결과와 검증 범위](../../docs/seowol-dialogue-review.md)를 함께 참고한다.
 
 ## 성격과 내용 구성 비교
 

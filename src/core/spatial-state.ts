@@ -3,7 +3,7 @@ import { spatialPlanSchema, spatialResolutionSchema, type SpatialSpeech, type Sp
 import type { WorldState } from '../shared/world-schema.js';
 import type { Utterance } from '../shared/types.js';
 import { initialWorldState } from './world.js';
-import { audienceNpcIds, positionKey, speechPerception } from './perception.js';
+import { audienceNpcIds, contactPossible, inSightAndSound, positionKey, speechPerception } from './perception.js';
 
 export function initialSpatialWorld(spec: ExperimentSpec): WorldState {
   return { ...initialWorldState(), spatial: { positions: spec.scenario.characters.map(c => ({ ...spec.scenario.spatial!.initialPositions.find(p => p.npcId === c.id)!, transit: null })),
@@ -16,29 +16,56 @@ export function reactionCandidates(state: WorldState) {
 export function selectableGroups(spec: ExperimentSpec, state: WorldState, history: Utterance[]) {
   const groups = new Map<string, string[]>(); const urgent = reactionCandidates(state);
   const positions = state.spatial!.positions;
+  // Shared doorways form a single speaking group even in a chain of rooms.
+  // What a listener actually perceives remains a direct line of sight/sound.
+  const groupFor = new Map<string,string>();
+  for (const start of positions) {
+    if (groupFor.has(start.npcId)) continue;
+    const key = positionKey(start), members = [start]; groupFor.set(start.npcId,key);
+    for (const member of members) for (const other of positions) {
+      if (groupFor.has(other.npcId) || !inSightAndSound(spec,state.virtualSeconds,member,other)) continue;
+      groupFor.set(other.npcId,key); members.push(other);
+    }
+  }
   for (const pos of positions) {
-    const key = positionKey(pos); const sameSpace = positions.filter(p => positionKey(p) === key).map(p => p.npcId);
+    const same = positions.filter(p => inSightAndSound(spec,state.virtualSeconds,p,pos));
+    const key = groupFor.get(pos.npcId)!; const sameSpace = same.map(p => p.npcId);
     const speaking = state.spatial!.activities.some(a => sameSpace.includes(a.npcId) && a.speakingUntilSeconds > state.virtualSeconds);
     const busy = pending(state).some(a => a.npcId === pos.npcId);
-    if (!urgent.includes(pos.npcId) && (busy || speaking)) continue;
+    if (speaking || (busy && !urgent.includes(pos.npcId))) continue;
     const list = groups.get(key) ?? []; list.push(pos.npcId); groups.set(key, list);
   }
   const last = (id: string) => history.findLastIndex(u => u.kind === 'speech' && u.speakerId === id);
   return [...groups.entries()].map(([key, ids]) => ({ key, ids: ids.some(id => urgent.includes(id)) ? ids.filter(id => urgent.includes(id)).sort((a, b) => urgent.indexOf(a) - urgent.indexOf(b)) : ids.sort((a, b) => last(a) - last(b)), urgent: ids.some(id => urgent.includes(id)) }))
     .sort((a, b) => Number(b.urgent) - Number(a.urgent) || last(a.ids[0]) - last(b.ids[0]));
 }
-export function connectionFor(spec: ExperimentSpec, pos: SpatialPosition, destination: string) {
+export function connectionFor(spec: ExperimentSpec, pos: SpatialPosition, destination: string, at = 0) {
   const map = spec.scenario.spatial!;
-  if (pos.transit) return [pos.transit.from, pos.transit.to].includes(destination) ? map.connections.find(c => c.id === pos.transit!.connectionId) : undefined;
-  return map.connections.find(c => c.from === pos.locationId && c.to === destination || c.bidirectional && c.to === pos.locationId && c.from === destination);
+  const routes = map.connections.filter(c => at < (c.closesAtSeconds ?? Infinity));
+  if (pos.transit) return [pos.transit.from, pos.transit.to].includes(destination) ? routes.find(c => c.id === pos.transit!.connectionId) : undefined;
+  return routes.find(c => c.from === pos.locationId && c.to === destination || c.bidirectional && c.to === pos.locationId && c.from === destination);
+}
+export function closePassages(spec: ExperimentSpec, state: WorldState) {
+  if (!spec.scenario.spatial!.connections.some(r => state.virtualSeconds >= (r.closesAtSeconds ?? Infinity))) return;
+  for (const p of state.spatial!.positions) {
+    const t = p.transit;
+    if (!t || !spec.scenario.spatial!.connections.some(r => r.id === t.connectionId && state.virtualSeconds >= (r.closesAtSeconds ?? Infinity))) continue;
+    for (const a of state.spatial!.activities) if (a.npcId === p.npcId && a.status === 'pending') {
+      a.status = 'failed'; a.reason = '도착 전 통로 폐쇄'; a.finishedAtSeconds = state.virtualSeconds; a.waitingNpcIds = [];
+    }
+    p.locationId = t.from; p.transit = null;
+    for (const f of state.facts) if (f.scope === 'npc_physical' && f.npcId === p.npcId) f.locationId = p.locationId;
+  }
+  for (const a of state.spatial!.activities) if (a.status === 'pending' && a.waitingNpcIds.length)
+    a.waitingNpcIds = a.waitingNpcIds.filter(id => contactPossible(spec,state,a.npcId,id));
 }
 export function validateSpatialChoice(spec: ExperimentSpec, state: WorldState, npcId: string, output: SpatialSpeech) {
   const main = pending(state).find(a => a.npcId === npcId && a.kind === 'action');
   if (main ? output.activityChoice === 'start' : output.activityChoice !== 'start') throw new Error(main ? '진행 중인 행동의 계속·중단을 선택하세요.' : '진행 중인 행동이 없으므로 start를 선택하세요.');
   if (output.moveToLocationId) {
-    if (output.activityChoice === 'continue' || !output.action.trim()) throw new Error('이동 변경은 기존 행동 중단 후 새 행동으로 요청하세요.');
+    if (output.activityChoice === 'continue') throw new Error('이동 변경은 기존 행동 중단 후 새 행동으로 요청하세요.');
     const pos = state.spatial!.positions.find(p => p.npcId === npcId)!;
-    if (!connectionFor(spec, pos, output.moveToLocationId)) throw new Error('현재 위치와 연결되지 않은 목적지입니다.');
+    if (!connectionFor(spec, pos, output.moveToLocationId, state.virtualSeconds)) throw new Error('현재 위치와 열린 통로로 연결되지 않은 목적지입니다.');
   }
   return speechPerception(spec, state, npcId, output);
 }
@@ -72,7 +99,7 @@ export function applySpatialPlan(spec: ExperimentSpec, state: WorldState, choice
       finishedAtSeconds: null, locationId: pos.locationId, moveToLocationId: output.moveToLocationId,
       waitingNpcIds: [...plan.reactionNpcIds], offeredNpcIds: [] });
     if (plan.movementStarts) {
-      const route = connectionFor(spec, pos, output.moveToLocationId!); if (!route) throw new Error('이동을 시작할 통로가 없습니다.');
+      const route = connectionFor(spec, pos, output.moveToLocationId!, next.virtualSeconds); if (!route) throw new Error('이동을 시작할 통로가 없습니다.');
       pos.transit = { from: pos.transit?.from ?? pos.locationId!, to: pos.transit?.to ?? output.moveToLocationId!, connectionId: route.id, activityId: u.id };
       pos.locationId = null;
     }
@@ -109,6 +136,8 @@ export function applySpatialResolution(spec: ExperimentSpec, state: WorldState, 
     const a = s.activities.find(a => a.id === update.id && a.status === 'pending');
     if (!a || out.completedActivities.some(c => c.id === update.id)) fail('진행 중 행동만 갱신할 수 있습니다.');
     knownNpcs(update.requestNpcIds);
+    if (update.requestNpcIds.some(id => !contactPossible(spec,state,a!.npcId,id)))
+      fail('닫힌 공간 사이에는 이 행동의 반응을 요청할 경로가 없습니다. 현재 장소에서 가능한 결과를 처리하세요.');
     if (update.requestNpcIds.some(id => a!.offeredNpcIds.includes(id))) fail('동일 행동에서 이미 제공한 반응 기회');
     a!.waitingNpcIds = [...new Set([...a!.waitingNpcIds, ...update.requestNpcIds])];
     if (update.readyAtSeconds < time || update.readyAtSeconds === time && !a!.waitingNpcIds.length) fail('계속될 행동은 미래 시각이나 반응 조건이 필요합니다.');
@@ -158,7 +187,7 @@ export function applySpatialResolution(spec: ExperimentSpec, state: WorldState, 
       const a = s.activities.find(a => a.id === m.activityId && a.npcId === m.npcId);
       if (!a || a.moveToLocationId !== m.toLocationId || a.status !== 'completed' || !out.completedActivities.some(c => c.id === a.id) || pos!.transit?.activityId !== a.id) fail('NPC가 요청하고 실제로 완료한 이동이 아닙니다.');
     } else {
-      if (m.activityId !== null || blocked.has(m.npcId) || !connectionFor(spec, pos!, m.toLocationId) || !out.events.some(e => e.type === 'physical_effect' && e.npcId === m.npcId)) fail('비자발적 이동에는 연결된 장소·반응 기회·물리 결과가 필요합니다.');
+      if (m.activityId !== null || blocked.has(m.npcId) || !connectionFor(spec, pos!, m.toLocationId,time) || !out.events.some(e => e.type === 'physical_effect' && e.npcId === m.npcId)) fail('비자발적 이동에는 연결된 장소·반응 기회·물리 결과가 필요합니다.');
       for (const a of s.activities) if (a.npcId === m.npcId && a.status === 'pending' && a.kind === 'action') Object.assign(a, { status: 'failed', finishedAtSeconds: time, reason: '비자발적 위치 변경으로 기존 장소의 행동이 불가능해짐' });
     }
     pos!.locationId = m.toLocationId; pos!.transit = null;

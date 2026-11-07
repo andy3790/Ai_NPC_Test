@@ -98,7 +98,7 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`${mode}:
     if (mode === 'per_utterance') assert.ok(d.receipts.every(r => r.status === 'delivered'));
     const files = exportFiles(d, store.events(run.id)), raw = files['records.jsonl'].trim().split('\n').map(x => JSON.parse(x));
     assert.equal(raw.filter(r => r.type === 'invocation').reduce((n, c) => n + (c.usage.totalTokens ?? 0), 0), d.summary.tokens.totalTokens);
-    assert.ok(files['utterances.csv'].includes('knownUtteranceIds')); assert.ok(files['invocation-links.csv'].includes('"true"'));
+    assert.ok(files['utterances.csv'].includes('knownUtteranceIds')); for (const call of d.invocations.filter(c => Array.isArray(c.metadata.sourceUtteranceIds))) for (const id of call.metadata.sourceUtteranceIds as string[]) assert.ok(files['invocation-links.csv'].includes(id));
     assert.equal(Object.values(d.summary.byKind).reduce((n, x) => n + x.calls, 0), d.invocations.length);
     const first = d.utterances.filter(u => u.kind === 'speech').slice(0, 2); assert.deepEqual(first.map(u => u.perception!.virtualSeconds), [0, 0]);
   } finally { await engine.close(); store.close(); }

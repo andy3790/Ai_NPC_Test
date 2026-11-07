@@ -57,7 +57,7 @@
       }
     ],
     "defaults": {
-      "model": "gpt-6.1-sol",
+      "model": "gpt-6-luna",
       "effort": "low"
     }
   },
@@ -85,7 +85,7 @@
   "evaluation": {
     "enabled": true,
     "interval": 10,
-    "model": "gpt-6.1-sol",
+    "model": "gpt-6-luna",
     "effort": "low",
     "contextCharacters": 300000,
     "repetitionWindow": 12,
@@ -93,7 +93,7 @@
     "repetitionMinChars": 20
   },
   "director": {
-    "model": "gpt-6.1-sol",
+    "model": "gpt-6-luna",
     "effort": "low"
   },
   "scheduledEvents": [

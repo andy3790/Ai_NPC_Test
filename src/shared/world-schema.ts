@@ -36,4 +36,5 @@ export interface WorldState {
   virtualSeconds: number; facts: WorldFact[]; processes: WorldProcess[];
   processedSpeechId: string | null; processedSequence: number; processedSpeechCount: number;
   spatial?: SpatialState;
+  firedClockEvents?: string[];
 }

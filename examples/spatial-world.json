@@ -73,7 +73,7 @@
       }
     ],
     "defaults": {
-      "model": "gpt-6.1-terra",
+      "model": "gpt-6-luna",
       "effort": "low"
     },
     "worldEngineInstructions": "오래 걸리는 작업 사이에 다른 장소의 대화와 행동이 진행될 수 있다. 사소한 몸짓은 반복 중계하지 않는다.",
@@ -175,7 +175,7 @@
   "evaluation": {
     "enabled": true,
     "interval": 10,
-    "model": "gpt-6.1-terra",
+    "model": "gpt-6-luna",
     "effort": "low",
     "contextCharacters": 100000,
     "repetitionWindow": 12,
@@ -191,7 +191,7 @@
     "effort": "medium"
   },
   "eventGenerator": {
-    "model": "gpt-6.1-terra",
+    "model": "gpt-6-luna",
     "effort": "low",
     "intervalSeconds": 30,
     "minGapSeconds": 60,

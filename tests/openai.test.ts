@@ -44,11 +44,11 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI $
     const strict = (schema: any) => { if (schema.type === 'object') { assert.equal(schema.additionalProperties, false); assert.deepEqual([...schema.required].sort(), Object.keys(schema.properties).sort()); } for (const value of Object.values(schema)) if (value && typeof value === 'object') { if (Array.isArray(value)) value.forEach(v => typeof v === 'object' && strict(v)); else strict(value); } };
     for (const body of api.requests) {
       const call = d.invocations.find(c => c.id === body.metadata.npc_lab_call_id)!;
-      assert.equal(body.previous_response_id, call.kind === 'environment' ? null : last.get(call.threadId) ?? null); last.set(call.threadId, call.turnId!);
+      assert.equal(body.previous_response_id, ['environment','speech','receive'].includes(call.kind) ? null : last.get(call.threadId) ?? null); last.set(call.threadId, call.turnId!);
       strict(body.text.format.schema); assert.deepEqual(body.tools, []); assert.equal(body.tool_choice, 'none');
       if (['environment', 'event_generation', 'director'].includes(call.kind)) assert.ok(!JSON.stringify(body.input).includes('PRIVATE_API_') && !body.instructions.includes('PRIVATE_API_'));
     }
-    const files = exportFiles(d, store.events(run.id)); assert.ok(files['invocation-links.csv'].includes('"true"')); assert.ok(!JSON.stringify(files).includes(api.key));
+    const files = exportFiles(d, store.events(run.id)); assert.ok(files['invocation-links.csv'].includes('utteranceId')); assert.ok(!JSON.stringify(files).includes(api.key));
     assert.equal(d.invocations.filter(c => c.kind === 'receive').length, mode === 'per_utterance' ? d.receipts.length : 0);
   } finally { await engine.close(); store.close(); }
 });
@@ -70,7 +70,8 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI $
     const last = new Map<string, string>();
     for (const body of api.requests) {
       const session = body.metadata.npc_lab_session_id;
-      assert.equal(body.previous_response_id, last.get(session) ?? null);
+      const kind = d.invocations.find(c => c.id === body.metadata.npc_lab_call_id)!.kind;
+      assert.equal(body.previous_response_id, ['speech','receive'].includes(kind) ? null : last.get(session) ?? null);
       const response = [...api.responses.values()].find(r => r.id === d.invocations.find(c => c.id === body.metadata.npc_lab_call_id)?.turnId)!;
       last.set(session, response.id);
       assert.deepEqual(body.reasoning, { effort: 'low' }); assert.deepEqual(body.tools, []); assert.equal(body.tool_choice, 'none');
@@ -146,8 +147,7 @@ test('a rejected world snapshot retries the full committed state and a dropped r
   const { runs: [run] } = await engine.create(spec);
   await engine.idle();
   assert.equal(engine.run(run.id).status, 'paused');
-  assert.match(engine.run(run.id).error!, /존재하지 않는 상태/);
-  await engine.resume(run.id); await engine.idle();
+  assert.match(engine.detail(run.id).invocations.find(c => c.kind === 'environment')!.error!, /존재하지 않는 상태/);
   assert.equal(engine.detail(run.id).invocations.at(-1)?.status, 'uncertain');
   await engine.close();
   const restored = new Engine(store, new OpenAIAdapter(root, { apiKey: api.key, fetch: api.fetch }), root);
@@ -186,8 +186,8 @@ test('OpenAI incomplete output is measured but not published; retry keeps the or
   const { api, store, engine, spec } = await setup(); spec.maxUtterances = 1; spec.evaluation.enabled = false;
   try {
     api.fail('incomplete'); const { runs } = await engine.create(spec); await engine.idle(); const id = runs[0].id;
-    const first = engine.detail(id); assert.equal(first.run.status, 'paused'); assert.equal(first.utterances.length, 0); assert.equal(first.summary.tokens.totalTokens, 120);
-    await engine.resume(id); await engine.idle(); const d = engine.detail(id);
+    const d = engine.detail(id); assert.equal(d.utterances.length, 1); assert.equal(d.invocations[0].status, 'failed');
+    assert.equal(d.invocations[1].retryOf,d.invocations[0].id);
     assert.equal(d.run.status, 'completed'); assert.equal(d.summary.tokens.totalTokens, 240);
     assert.equal(api.requests[1].previous_response_id, null); assert.equal(api.requests[1].input, api.requests[0].input);
   } finally { await engine.close(); store.close(); }

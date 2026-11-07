@@ -1,3 +1,4 @@
+import { simulationEffort } from '../../../shared/role-models.js';
 import { environmentMode, isAiEnvironment, type ExperimentSpec, type ModelConfig, type Variant } from '../../../shared/schema.js';
 import type { ModelInfo } from '../../../shared/types.js';
 import { ModelSelect, modelDefaultEffort } from './model-select.js';
@@ -6,7 +7,7 @@ import { environmentModes } from '../../shared/formatters.js';
 export function WorldEngineEditor({ spec, update, models, defaultConfig }: { spec: ExperimentSpec; update: (fn: (s: ExperimentSpec) => void) => void; models: ModelInfo[]; defaultConfig: ModelConfig }) {
   const config = spec.worldEngine ?? defaultConfig;
   const enabled = spec.variants.some(v => isAiEnvironment(spec, v));
-  const efforts = (model: string) => (models.find(m => m.id === model)?.efforts ?? ['low', 'medium', 'high']).filter(e => e !== 'ultra');
+  const efforts = (model: string) => (models.find(m => m.id === model)?.efforts ?? ['low', 'medium', 'high']).filter(simulationEffort);
   return <section className="world-engine-editor form-stack">
     <h3>세계 엔진</h3>
     <p className="form-hint">AI 세계 엔진은 각 NPC 발언 뒤에 행동 결과·가상 시간·지연 사건을 처리합니다. NPC의 자발적 행동과 내면은 결정하지 않습니다. 조건마다 다른 모드를 선택해 비교할 수 있습니다.</p>

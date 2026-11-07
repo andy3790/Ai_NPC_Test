@@ -16,7 +16,8 @@ export class Store {
     for (const table of ['runs', 'utterances', 'receipts', 'invocations', 'findings', 'evaluations']) {
       this.db.exec(`CREATE TABLE IF NOT EXISTS ${table} (id TEXT PRIMARY KEY, run_id TEXT NOT NULL, data TEXT NOT NULL); CREATE INDEX IF NOT EXISTS ${table}_run ON ${table}(run_id);`);
     }
-    this.db.exec(`CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY AUTOINCREMENT, run_id TEXT NOT NULL, invocation_id TEXT, received_at TEXT NOT NULL, method TEXT NOT NULL, params TEXT NOT NULL);
+    this.db.exec(`CREATE INDEX IF NOT EXISTS invocations_operation ON invocations(run_id,json_extract(data,'$.operationKey'));
+      CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY AUTOINCREMENT, run_id TEXT NOT NULL, invocation_id TEXT, received_at TEXT NOT NULL, method TEXT NOT NULL, params TEXT NOT NULL);
       CREATE INDEX IF NOT EXISTS events_run ON events(run_id);
       CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL); PRAGMA user_version=1;`);
   }
@@ -27,6 +28,10 @@ export class Store {
     return value;
   }
   revision(runId: string) { return this.revisions.get(runId) ?? 0; }
+  attempts(runId: string, key: string): InvocationMetrics[] {
+    return this.db.prepare("SELECT data FROM invocations WHERE run_id=? AND json_extract(data,'$.operationKey')=? ORDER BY rowid")
+      .all(runId, key).map(row => JSON.parse(String(row.data)));
+  }
   private changed(runId: string) {
     this.revisions.set(runId, ++this.revisionSequence);
     this.transactionRuns?.add(runId);

@@ -67,6 +67,7 @@ export interface Run {
   revisions: number; adapter: string; appVersion: string; cliVersion: string;
   promptVersion?: string;
   worldContextVersion?: 'world-context/2';
+  npcContextVersion?: 'npc-context/1' | 'npc-context/2' | 'npc-context/3' | 'npc-context/4';
   sessionCleanup?: Record<string, { status: 'deleted' | 'missing' | 'pending'; at: string; error?: string }>;
   apiCredential?: ApiCredential;
   worldState?: WorldState;

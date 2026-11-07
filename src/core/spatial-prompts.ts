@@ -22,8 +22,12 @@ export function managerWorld(spec: ExperimentSpec) {
   return { world: spec.scenario.world, situation: spec.scenario.situation, worldEngineInstructions: spec.scenario.worldEngineInstructions ?? '',
     spatial: spec.scenario.spatial ?? null, npcs: spec.scenario.characters.map(c => ({ id: c.id, name: c.name })) };
 }
-export function managerState(state: WorldState, history: Utterance[]) {
+export function managerState(state: WorldState, history: Utterance[], spec?: ExperimentSpec) {
   const activities = state.spatial?.activities.filter(a => a.status === 'pending') ?? [];
   return { virtualSeconds: state.virtualSeconds, facts: state.facts, processes: state.processes.filter(p => p.status === 'pending'),
+    ...(spec?.scenario.spatial && {
+      closedRoutes:spec.scenario.spatial.connections.filter(r => state.virtualSeconds >= (r.closesAtSeconds ?? Infinity)).map(r => ({from:r.from,to:r.to})),
+      elapsedSceneEvents:spec.scenario.clockEvents?.filter(e => state.firedClockEvents?.includes(e.id)).map(e => ({time:e.atSeconds,text:e.text})),
+    }),
     positions: state.spatial?.positions, activities: activities.map(a => ({ ...a, choice: history.find(u => u.id === a.sourceUtteranceId) })) };
 }

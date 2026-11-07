@@ -11,7 +11,7 @@ import { caseInput, dialogueCasesSchema, sha256 } from './lib/dialogue-eval.js';
 
 // A bounded experiment, not the production Engine. Compare the same /7 persona
 // with and without one fictional role-focus field before integrating a schema.
-const { values } = parseArgs({ options: { live: { type: 'boolean', default: false },
+const { values } = parseArgs({ options: { model: { type: 'string', default: 'gpt-6-luna' }, live: { type: 'boolean', default: false },
   cases: { type: 'string', default: 'evals/dialogue/voice-contrast.json' }, split: { type: 'string', default: 'development' },
   repetitions: { type: 'string', default: '2' }, 'max-calls': { type: 'string', default: '32' }, 'max-usd': { type: 'string', default: '1' } } });
 const repetitions = Number(values.repetitions), maxCalls = Number(values['max-calls']), maxUsd = Number(values['max-usd']);
@@ -25,7 +25,7 @@ if (focus.parent !== 'npc-dialogue/7' || !focus.instructions || !focus.fieldDesc
 const focused = z.object({ reactionFocus: z.string().trim().min(1).max(160).describe(focus.fieldDescription),
   speech: speechSchema.shape.speech, action: speechSchema.shape.action });
 const plan = { suite: suite.version, casesSha256: sha256(raw), focusVersion: focus.version, focusSha256: sha256(rawFocus),
-  model: 'gpt-6.1-sol', effort: 'low', split: values.split, repetitions, expectedCalls: cases.length * repetitions * 2, maxCalls, maxUsd,
+  model: values.model!, effort: 'low', split: values.split, repetitions, expectedCalls: cases.length * repetitions * 2, maxCalls, maxUsd,
   pricingRevision: PRICING_REVISION, schemaVersion: 'reaction-focus-output/1', scope: 'Fixed input prototype; no production Engine or private-state delivery claims.' };
 if (!cases.length || plan.expectedCalls > maxCalls) throw Error('Plan exceeds call limit.');
 if (!values.live) console.log(JSON.stringify({ live: false, ...plan }, null, 2));
