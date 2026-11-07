@@ -6,6 +6,7 @@ import { aggregate } from '../src/core/metrics.js';
 import { repetitionMetrics } from '../src/core/quality.js';
 import { reviewBudgetFile } from './review-budget.js';
 import type { InvocationMetrics, Run, Utterance } from '../src/shared/types.js';
+import { PRICING_DATE, PRICING_REVISION } from '../src/shared/model-catalog.js';
 
 const [group, output] = process.argv.slice(2);
 if (!group || !/^[\w-]+$/.test(group) || !output) throw Error('Provide a review group and an output directory.');
@@ -40,7 +41,7 @@ for (const dir of (await readdir(root,{withFileTypes:true})).filter(d => d.isDir
     const kinds = [...new Set(calls.map(c => c.kind))];
     const sampleSize = Math.min(8,Math.floor(speech.length/2));
     const repairs = db.prepare("SELECT COUNT(*) AS count FROM events WHERE method='run/repairing_output'").get();
-    runs.push({label,scenario:r.spec.scenario.name,sceneRevision:r.spec.scenario.id,status:r.status,limit:r.spec.maxUtterances,
+    runs.push({label,scenario:r.spec.scenario.name,sceneRevision:r.spec.scenario.id,status:r.status,completionReason:r.completionReason ?? null,limit:r.spec.maxUtterances,
       choices:choices.length,spoken:choices.filter(t => t.speech.trim()).length,actionOnly:choices.filter(t => !t.speech.trim() && t.action.trim()).length,
       silentWaits:choices.filter(t => !t.speech.trim() && !t.action.trim() && !t.actionId && !t.spatialIntent?.moveToLocationId && t.spatialIntent?.activityChoice!=='cancel').length,
       voices:parties,events:u.length-choices.length,virtualSeconds:r.worldState?.virtualSeconds ?? null,
@@ -66,5 +67,5 @@ for (const dir of (await readdir(root,{withFileTypes:true})).filter(d => d.isDir
 const budget = new DatabaseSync(reviewBudgetFile(root),{readOnly:true});
 const ledger=budget.prepare('SELECT COUNT(*) AS requests, COUNT(response) AS settled, SUM(charge) AS conservativeUsd FROM requests').get();
 budget.close();
-await writeFile(join(output,'usage.json'),JSON.stringify({ledger,runs},null,2)+'\n');
+await writeFile(join(output,'usage.json'),JSON.stringify({pricingDate:PRICING_DATE,pricingRevision:PRICING_REVISION,ledger,runs},null,2)+'\n');
 await writeFile(join(output,'transcript.jsonl'),transcript.join('\n')+'\n');

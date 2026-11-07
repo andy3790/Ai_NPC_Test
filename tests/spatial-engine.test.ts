@@ -126,6 +126,7 @@ test('long actions overlap across rooms and movement does not teleport or reveal
     assert.equal(d.run.worldState!.spatial!.positions.find(p => p.npcId === 'yoon')!.locationId, 'workshop');
     const yoon = d.invocations.filter(c => c.characterId === 'yoon'); assert.ok(yoon.every(c => !c.input.includes('DESTINATION_PAST')));
     const moved = d.utterances.find(u => u.worldEvent?.type === 'actor_result' && u.worldEvent.npcId === 'yoon')!;
+    assert.equal(moved.speech, '윤이 작업실에 도착했다.');
     assert.equal(moved.perception!.virtualSeconds, 12); assert.deepEqual(moved.perception!.speechRecipientIds.sort(), ['serin', 'yoon']);
     for (const c of d.invocations.filter(c => c.kind === 'speech' && c.characterId === 'yoon' && Number(c.metadata.virtualSeconds) > 0)) assert.ok(Number(c.metadata.virtualSeconds) >= 12);
   } finally { await engine.close(); store.close(); }

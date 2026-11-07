@@ -14,6 +14,12 @@ const now = () => new Date().toISOString();
 const errorText = (e: unknown) => e instanceof Error ? e.message : String(e);
 const state = (h: SimulationHost) => h.run().worldState!;
 const history = (h: SimulationHost) => h.store.list('utterances', h.id);
+function arrivalText(name: string, place: string) {
+  const last = name.trimEnd().slice(-1);
+  if (!/^[가-힣]$/u.test(last)) return `${place} 도착 · ${name}`;
+  const particle = (last.charCodeAt(0) - 0xac00) % 28 ? '이' : '가';
+  return `${name}${particle} ${place}에 도착했다.`;
+}
 function saveState(h: SimulationHost, next: ReturnType<typeof state>, method: string, invocationId: string | null = null) {
   h.store.patch('runs', h.id, { worldState: next });
   h.store.event(h.id, invocationId, method, { state: next });
@@ -158,7 +164,7 @@ async function resolveWorld(h: SimulationHost) {
       const source = all.find(u => u.id === activity?.sourceUtteranceId);
       const audience = { scope: 'locations' as const, locationIds: [location.id], npcIds: [] };
       h.append({ id: randomUUID(), runId: h.id, sequence: ++sequence, speechIndex: null, speakerId: '__environment__', speakerName: '이동 결과', kind: 'event',
-        speech: `${character.name}이(가) ${location.name}에 도착했다.`, action: '', createdAt: now(), invocationId: call.id, deliveryCompletedAt: null, deliveryMs: null,
+        speech: arrivalText(character.name, location.name), action: '', createdAt: now(), invocationId: call.id, deliveryCompletedAt: null, deliveryMs: null,
         worldEvent: { type: movement.kind === 'requested' ? 'actor_result' : 'physical_effect', text: `${character.name}의 위치: ${location.name}`, npcId: character.id,
           evidence: source?.action || null, processId: null, sourceUtteranceId: source?.id ?? null, virtualSeconds: current.virtualSeconds, audience },
         perception: { locationId: location.id, virtualSeconds: current.virtualSeconds, speechRecipientIds: audienceNpcIds(run.spec, result.state, audience), actionRecipientIds: [], audience } });
