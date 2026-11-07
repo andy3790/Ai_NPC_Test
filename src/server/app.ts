@@ -8,6 +8,7 @@ import { Engine } from '../core/engine.js';
 import { PROMPT_VERSION } from '../core/prompts.js';
 import { CHARACTER_PERFORMANCE } from '../shared/character-performance.js';
 import { exampleSpec } from '../shared/example.js';
+import { availableRoleModels } from '../shared/role-models.js';
 import { experimentSchema } from '../shared/schema.js';
 import { exportFiles, zipFiles } from '../core/export.js';
 import { groupedMetrics } from '../core/metrics.js';
@@ -76,15 +77,17 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
     reply.header('Cache-Control', 'no-store'); return getModelCatalog();
   });
   app.get('/api/example', async req => {
-    const models = await engine.adapter.models(credential(req)); const fallback = models.find(x => x.isDefault) ?? models[0];
-    // Prefer the dialogue model verified with this example. Catalogue order is
-    // not a dialogue-quality ranking. Respect actual account availability.
-    const m = (engine.adapter.name === 'openai' ? models.find(x => x.id === 'gpt-6.1-sol') : undefined) ?? fallback;
-    const spec = exampleSpec(m.id, m.efforts.includes('low') ? 'low' : m.defaultEffort);
-    if (engine.adapter.name === 'openai') {
-      const helper = models.find(x => x.id === 'gpt-6-luna') ?? fallback;
-      spec.director = { model: helper.id, effort: helper.efforts.includes('low') ? 'low' : helper.defaultEffort };
-      Object.assign(spec.evaluation, spec.director);
+    const models = await engine.adapter.models(credential(req));
+    const fallback = models.find(m => m.isDefault) ?? models[0];
+    if (!fallback) throw new Error('새 예제에 사용할 수 있는 모델이 없습니다.');
+    const config = { model: fallback.id, effort: fallback.efforts.includes('low') ? 'low' : fallback.defaultEffort };
+    const roles = engine.adapter.name === 'openai' ? availableRoleModels(models, config) : undefined;
+    const npc = roles?.npc ?? config;
+    const spec = exampleSpec(npc.model, npc.effort);
+    if (roles) {
+      spec.worldEngine = roles.worldEngine;
+      spec.director = roles.director;
+      Object.assign(spec.evaluation, roles.director);
       spec.variants.forEach(variant => { variant.turnPolicy = 'director'; });
       spec.maxUtterances = 18; spec.evaluation.interval = 6; spec.concurrentRuns = 1; spec.maxConcurrentCalls = 1;
     }

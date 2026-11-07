@@ -90,6 +90,6 @@
   "maxConcurrentCalls": 2,
   "timeoutMs": 300000,
   "evaluation": { "enabled": true, "interval": 3, "model": "gpt-6.1-terra", "effort": "low", "contextCharacters": 100000, "repetitionWindow": 12, "repetitionThreshold": 0.72, "repetitionMinChars": 20 },
-  "director": { "model": "gpt-6.1-terra", "effort": "low" },
+  "director": { "model": "gpt-6-luna", "effort": "low" },
   "scheduledEvents": []
 }

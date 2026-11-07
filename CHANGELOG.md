@@ -2,6 +2,8 @@
 
 ## 미출시 · 2026-11-07
 
+- 새 OpenAI 실험과 서월 사건극 6편에 NPC Terra low, 세계 엔진 Luna medium, 진행자 Luna low를 적용했습니다. 인물 연기와 세계 판정의 비용을 독립적으로 조절하고, 사건극의 NPC 모델을 시나리오 편집 한 곳에서 바꿀 수 있게 했습니다. 대화 지침 `npc-dialogue/5`와 기존 검토에 사용한 설정은 당시 커밋에서 확인할 수 있습니다. [역할별 모델과 진행 비용](docs/openai-api.md#모델과-출력-한도) · [서월 검토 기준 설정](https://github.com/andy3790/Ai_NPC_Test/blob/bcba5e82269677600758f3e7b646a42c5aae4792/assets/seowol/experiments/drama-closing-door.json)
+
 - `world-context/2`는 새 API 세계 판정마다 현재 상태와 행동 근거를 전달하고 같은 장면 지침은 캐시로 재사용합니다. ‘닫히는 문’ 16차례에서 전체 입력이 79.78%, 추정 비용이 67.52% 줄었습니다. [버전 변경 이유와 실제 대화 비교](docs/reviews/seowol-world-context-2026-11-07/report.md)
 
 - 등대·수신 검토 33개 실행의 공급자 응답 ID를 실행별 호출 번호로 교체했습니다. 대사와 프롬프트 버전, 이전 응답을 잇는 349개 참조를 보존하고 커밋 훅과 CI에 응답 ID 검사를 추가했습니다. [공개 절차](docs/publishing.md)

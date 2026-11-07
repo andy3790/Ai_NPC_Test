@@ -5,6 +5,7 @@ import { experimentSchema, characterSchema } from '../src/shared/schema.js';
 import { persona, evaluationPrompt } from '../src/core/prompts.js';
 import { worldPrompt, initialWorldState, applyWorldOutput } from '../src/core/world.js';
 import { directorPrompt } from '../src/core/director.js';
+import { apiRoleDefaults } from '../src/shared/role-models.js';
 import type { Utterance } from '../src/shared/types.js';
 import type { WorldOutput } from '../src/shared/world-schema.js';
 
@@ -13,6 +14,20 @@ const read = (file: string) => readFileSync(new URL(file, root), 'utf8');
 const delivery = experimentSchema.parse(JSON.parse(read('experiments/return-deadline.json')));
 const quiet = experimentSchema.parse(JSON.parse(read('experiments/maintenance-talk.json')));
 const canon = read('02_이면기록_서월_캐릭터챗_운영팩_v1.1.md');
+
+test('all six dramatic presets inherit the selected NPC and keep world and speaker selection independent', () => {
+  const { scenes } = JSON.parse(read('drama/manifest.json')) as { scenes: { file: string }[] };
+  assert.equal(scenes.length, 6);
+  for (const { file } of scenes) {
+    const spec = experimentSchema.parse(JSON.parse(read('drama/' + file)));
+    assert.deepEqual(spec.scenario.defaults, apiRoleDefaults.npc, file);
+    assert.deepEqual(spec.worldEngine, apiRoleDefaults.worldEngine, file);
+    assert.deepEqual(spec.director, apiRoleDefaults.director, file);
+    assert.ok([...spec.variants, ...spec.scenario.characters].every(v => v.model === undefined && v.effort === undefined), file);
+    assert.ok(spec.variants.every(v => !v.eventGeneration), file);
+    assert.equal(spec.evaluation.enabled, false, file);
+  }
+});
 
 test('Seowol actors retain authored identities, abilities, limitations and private histories', () => {
   for (const id of ['cha_yujin', 'jang_serim', 'ryu_taekyung', 'lee_harin', 'na_yeonwoo']) {

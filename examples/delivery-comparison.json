@@ -57,7 +57,7 @@
       }
     ],
     "defaults": {
-      "model": "gpt-6.1-sol",
+      "model": "gpt-6.1-terra",
       "effort": "low"
     },
     "environment": {
@@ -384,7 +384,7 @@
     "contextCharacters": 100000
   },
   "director": {
-    "model": "gpt-6.1-sol",
+    "model": "gpt-6-luna",
     "effort": "low"
   },
   "scheduledEvents": []

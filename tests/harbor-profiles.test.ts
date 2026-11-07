@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { exampleSpec } from '../src/shared/example.js';
+import { spatialExample } from '../src/shared/spatial-example.js';
 import { harborCharacter, harborProfilePolicies } from '../src/shared/harbor-profiles.js';
 import { dialogueCasesSchema, sha256, validateProfilePair, caseInput } from '../scripts/lib/dialogue-eval.js';
 import { Engine } from '../src/core/engine.js';
@@ -69,13 +70,16 @@ test('profile 5 removes common directions while preserving individual facts and 
     before[i].goals.length + before[i].speechStyle.length + before[i].behaviors.length));
 });
 
-test('new API examples prefer verified dialogue models only when available and preserve saved config', async () => {
-  const model = (id: string, effort = 'low', isDefault = false): ModelInfo => ({ id, name: id, efforts: [effort], defaultEffort: effort, isDefault });
-  for (const [adapterName, available, npc, helper, effort] of [
-    ['openai', [model('gpt-6-luna', 'low', true), model('gpt-6.1-sol')], 'gpt-6.1-sol', 'gpt-6-luna', 'low'],
-    ['openai', [model('gpt-6-luna', 'none', true)], 'gpt-6-luna', 'gpt-6-luna', 'none'],
-    ['openai', [model('gpt-6.1-sol', 'medium', true)], 'gpt-6.1-sol', 'gpt-6.1-sol', 'medium'],
-    ['codex', [model('mock-model', 'low', true), model('gpt-6.1-sol')], 'mock-model', 'mock-model', 'low'],
+test('new examples select available models and reasoning per role and preserve saved config', async () => {
+  const model = (id: string, efforts = ['low'], isDefault = false): ModelInfo => ({ id, name: id, efforts, defaultEffort: efforts[0], isDefault });
+  const config = (model: string, effort = 'low') => ({ model, effort });
+  const terra = 'gpt-6.1-terra', luna = 'gpt-6-luna', sol = 'gpt-6.1-sol';
+  for (const [adapterName, available, npc, director, world] of [
+    ['openai', [model(sol, ['high'], true), model(luna, ['low', 'medium']), model(terra)], config(terra), config(luna), config(luna, 'medium')],
+    ['openai', [model(luna, ['low'], true), model(sol)], config(luna), config(luna), config(luna)],
+    ['openai', [model(luna, ['none'], true)], config(luna, 'none'), config(luna, 'none'), config(luna, 'none')],
+    ['openai', [model(sol, ['medium'], true)], config(sol, 'medium'), config(sol, 'medium'), config(sol, 'medium')],
+    ['codex', [model('mock-model', ['low'], true), model(luna), model(terra)], config('mock-model'), config('mock-model'), undefined],
   ] as const) {
     const store = new Store(':memory:'), adapter = new MockAdapter();
     adapter.name = adapterName; adapter.models = async () => [...available];
@@ -85,8 +89,9 @@ test('new API examples prefer verified dialogue models only when available and p
       const response = await app.inject({ method: 'GET', url: '/api/example', headers: { host: 'localhost:4317' } });
       assert.equal(response.statusCode, 200);
       const spec = response.json();
-      assert.deepEqual(spec.scenario.defaults, { model: npc, effort });
-      assert.equal(spec.director.model, helper); assert.equal(spec.evaluation.model, helper);
+      assert.deepEqual(spec.scenario.defaults, npc);
+      assert.deepEqual(spec.director, director); assert.deepEqual(spec.worldEngine, world);
+      assert.deepEqual(config(spec.evaluation.model, spec.evaluation.effort), director);
       assert.equal(spec.scenario.id, 'fog-harbor-profile5');
       if (adapterName === 'openai') {
         assert.equal(spec.maxUtterances, 18); assert.equal(spec.maxConcurrentCalls, 1);
@@ -95,6 +100,22 @@ test('new API examples prefer verified dialogue models only when available and p
       assert.deepEqual(store.setting('lastSpec'), saved); assert.equal(engine.list().length, 0);
     } finally { await app.close(); await engine.close(); store.close(); }
   }
+});
+
+test('new presets use independent role defaults and explicit adapter overrides still work', () => {
+  for (const spec of [exampleSpec(), spatialExample()]) {
+    assert.deepEqual(spec.scenario.defaults, { model: 'gpt-6.1-terra', effort: 'low' });
+    assert.deepEqual(spec.worldEngine, { model: 'gpt-6-luna', effort: 'medium' });
+    assert.deepEqual(spec.director, { model: 'gpt-6-luna', effort: 'low' });
+  }
+  const mock = spatialExample('mock-model', 'high');
+  assert.deepEqual(mock.worldEngine, { model: 'mock-model', effort: 'high' });
+  assert.deepEqual(mock.director, mock.worldEngine);
+  const roles = { worldEngine: { model: 'available-world', effort: 'medium' }, director: { model: 'available-director', effort: 'low' } };
+  const edited = spatialExample('selected-npc', 'high', roles);
+  assert.deepEqual(edited.scenario.defaults, { model: 'selected-npc', effort: 'high' });
+  assert.deepEqual(edited.worldEngine, roles.worldEngine);
+  assert.deepEqual(edited.director, roles.director);
 });
 
 test('paired profile fixtures keep observations and other actors fixed and reject confounded comparisons', () => {

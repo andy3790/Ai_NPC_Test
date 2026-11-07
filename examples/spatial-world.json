@@ -183,12 +183,12 @@
     "repetitionMinChars": 20
   },
   "director": {
-    "model": "gpt-6.1-terra",
+    "model": "gpt-6-luna",
     "effort": "low"
   },
   "worldEngine": {
-    "model": "gpt-6.1-terra",
-    "effort": "low"
+    "model": "gpt-6-luna",
+    "effort": "medium"
   },
   "eventGenerator": {
     "model": "gpt-6.1-terra",

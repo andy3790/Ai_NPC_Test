@@ -1,10 +1,10 @@
-import { environmentMode, isAiEnvironment, type ExperimentSpec, type Variant } from '../../../shared/schema.js';
+import { environmentMode, isAiEnvironment, type ExperimentSpec, type ModelConfig, type Variant } from '../../../shared/schema.js';
 import type { ModelInfo } from '../../../shared/types.js';
 import { ModelSelect, modelDefaultEffort } from './model-select.js';
 import { environmentModes } from '../../shared/formatters.js';
 
-export function WorldEngineEditor({ spec, update, models }: { spec: ExperimentSpec; update: (fn: (s: ExperimentSpec) => void) => void; models: ModelInfo[] }) {
-  const config = spec.worldEngine ?? spec.scenario.defaults;
+export function WorldEngineEditor({ spec, update, models, defaultConfig }: { spec: ExperimentSpec; update: (fn: (s: ExperimentSpec) => void) => void; models: ModelInfo[]; defaultConfig: ModelConfig }) {
+  const config = spec.worldEngine ?? defaultConfig;
   const enabled = spec.variants.some(v => isAiEnvironment(spec, v));
   const efforts = (model: string) => (models.find(m => m.id === model)?.efforts ?? ['low', 'medium', 'high']).filter(e => e !== 'ultra');
   return <section className="world-engine-editor form-stack">
@@ -13,7 +13,7 @@ export function WorldEngineEditor({ spec, update, models }: { spec: ExperimentSp
     <div className="form-grid">{spec.variants.map((v, i) => <label key={v.id}>{v.label} · 환경 방식
       <select aria-label={`${v.label} 환경 방식`} value={environmentMode(spec, v)} onChange={e => update(s => {
         s.variants[i].environmentMode = e.target.value as Variant['environmentMode'];
-        if (['ai', 'ai_spatial'].includes(e.target.value)) s.worldEngine ??= { ...s.scenario.defaults };
+        if (['ai', 'ai_spatial'].includes(e.target.value)) s.worldEngine ??= { ...defaultConfig };
         else s.variants[i].eventGeneration = false;
       })}>{Object.entries(environmentModes).map(([key, label]) => <option key={key} value={key} disabled={key === 'rules' && !spec.scenario.environment?.enabled}>{label}</option>)}</select>
     </label>)}</div>

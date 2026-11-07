@@ -100,6 +100,6 @@ export function App() {
       setNotice(`선택한 묶음 ${result.results.length}개 중 ${deleted.size}개를 삭제했습니다.${blocked ? ` 삭제 제외 ${blocked}개.` : ''}${failed ? ` 삭제 실패 ${failed}개.` : ''}`);
       void action(health?.historyEnabled ? refreshHistory : () => Promise.resolve());
     }}/>}
-    <div hidden={!editor}>{spec && <Editor message={error || notice} spec={spec} setSpec={setSpec} models={models} close={() => setEditor(false)} busy={busy} save={() => void action(() => api.saveConfig(spec), { notice: '설정을 저장했습니다.' })} launch={(start: boolean) => void action(async () => { const result = await api.createExperiment(spec, start); setSelected(result.runs[0].id); setCompareIds(result.runs.slice(0, 4).map(r => r.id)); setEditor(false); setView('lab'); })} validate={() => void action(() => api.validate(spec), { notice: '설정과 모델·추론 조합이 유효합니다.' })}/>}</div>
+    <div hidden={!editor}>{spec && <Editor openai={health?.adapter === 'openai'} message={error || notice} spec={spec} setSpec={setSpec} models={models} close={() => setEditor(false)} busy={busy} save={() => void action(() => api.saveConfig(spec), { notice: '설정을 저장했습니다.' })} launch={(start: boolean) => void action(async () => { const result = await api.createExperiment(spec, start); setSelected(result.runs[0].id); setCompareIds(result.runs.slice(0, 4).map(r => r.id)); setEditor(false); setView('lab'); })} validate={() => void action(() => api.validate(spec), { notice: '설정과 모델·추론 조합이 유효합니다.' })}/>}</div>
   </div>;
 }
