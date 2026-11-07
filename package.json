@@ -41,6 +41,7 @@
     "assets:smoke": "tsx assets/npc-canon/smoke.ts",
     "assets:gallery": "node assets/npc-canon/gallery-check.mjs",
     "check:publish": "tsx scripts/check-publish.ts",
+    "check:staged": "node scripts/check-publish.ts --staged",
     "verify": "npm run typecheck && npm test && npm run build && npm run assets:validate && npm run assets:smoke && npm run check:publish",
     "verify:ui": "npm run smoke:ui && npm run smoke:editor && npm run smoke:options && npm run smoke:models && npm run smoke:history && npm run smoke:findings && npm run smoke:management && npm run smoke:bulk-delete && npm run smoke:world && npm run smoke:spatial && npm run smoke:keys && npm run assets:gallery",
     "smoke:world": "tsx scripts/world-ui-smoke.ts",

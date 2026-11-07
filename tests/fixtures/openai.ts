@@ -25,7 +25,7 @@ export function openaiFixture() {
     if (failure === 'rate') return Response.json({ error: { code: 'insufficient_quota', message: `fixture echo ${requestKey}` } }, { status: 429 });
     if (failure === 'bad_json') return new Response(`data: {malformed ${requestKey}\n\n`);
     if (failure === 'server') return new Response('server error', { status: 503 });
-    const input = JSON.parse(body.input), id = `resp_fixture_${++counter}`;
+    const input = JSON.parse(body.input), id = `mock-response-${++counter}`;
     let output: any = input.task === 'environment' ? { elapsedSeconds: 2, facts: [], forgetFactIds: [], processes: [], finishProcesses: [], events: [] } : input.task === 'receive' ? { received: true } : input.task === 'evaluate' ? { findings: [], summary: '검사 완료' } : input.task === 'direct' ? { speakerId: input.allowedSpeakerIds[0], reason: '순서 선택' } : { speech: '안녕하세요. 다음 선택을 이야기해요.', action: '고개를 끄덕인다.' };
     if (input.task === 'speak' && input.localContext) output = { ...output, communication: { mode: 'local', targetNpcIds: [], channelId: null }, moveToLocationId: null, activityChoice: input.localContext.ongoingActivity ? 'continue' : 'start' };
     if (input.task === 'spatial_plan') output = { plans: input.choices.map((u: any) => ({ utteranceId: u.id, speechSeconds: 1, actionSeconds: 2, reactionNpcIds: [], movementStarts: false })) };

@@ -28,7 +28,9 @@ CI는 Windows·Linux의 Node 24에서 verify를, Linux에서 UI·카탈로그 �
 
 `.gitignore`는 실행 데이터 data/, 결과 reports/, exports/, outputs/, .cache/, node_modules/, dist/, DB·압축 파일·로그인·환경 파일을 제외합니다. 제외된 로컬 결과는 삭제하지 않습니다. 공개 데이터셋이 필요하면 원문·비공개 설정·개인 경로·계정 관련 정보를 검토한 사본을 별도로 만드세요.
 
-프롬프트 전후 비교에는 프로젝트가 만든 공개용 인물과 장면의 발화·행동, 조건과 버전, 사용량 집계·해시를 기록할 수 있습니다. 캐릭터 유지 비교 5개 JSON에는 호출별 생성 출력과 사용량도 들어 있습니다. 실제 사용자가 입력한 대화와 비공개 설정, API 키, 인증 헤더, 공급자 응답·세션 ID, 로컬 경로를 포함한 운영 기록은 로컬에 둡니다. 이전 검토 자료 중에는 호출 식별자를 포함한 것도 있으므로 새 공개 사본은 필요한 필드를 골라 작성합니다. [캐릭터 비교 자료](reviews/character-performance-2026-11-07/report.md)
+프롬프트 전후 비교에는 프로젝트가 만든 공개용 인물과 장면의 발화·행동, 조건과 버전, 사용량 집계·해시를 기록할 수 있습니다. 캐릭터 유지 비교 5개 JSON에는 호출별 생성 출력과 사용량도 들어 있습니다. 실제 사용자가 입력한 대화와 비공개 설정, API 키, 인증 헤더, 공급자 응답·세션 ID, 로컬 경로를 포함한 운영 기록은 로컬에 둡니다. [캐릭터 비교 자료](reviews/character-performance-2026-11-07/report.md)
+
+등대 인물·안정성·수신 처리 검토의 33개 실행에서는 `calls.jsonl`의 `turnId`를 호출 순서에 따라 `review-turn-1`부터 매겼습니다. `api-requests.jsonl`의 `body.previous_response_id`는 같은 실행 안의 호출 번호를 가리키며 선행 응답이 없던 요청의 `null`도 보존합니다. 전후 비교에는 기존 대화 원문과 프롬프트 버전을 그대로 사용합니다. 각 검토의 `manifest.json`은 공개 사본의 SHA-256과 바이트 수를 담습니다. [등대 인물 검토](reviews/harbor-refinement-2026-11-07/report.md) · [안정성 검토](reviews/harbor-stability-2026-11-07/report.md) · [수신 처리 검토](reviews/receipt-delivery-2026-11-07/report.md)
 
 `npm run check:publish`는 이미 추적된 파일도 검사하고 `.cache/publication-manifest.json`에 파일·SHA256을 남깁니다. 과거 커밋의 비밀, 압축 내부, 이미지 메타데이터는 검사하지 않습니다. 자세한 경계는 [SECURITY.md](../SECURITY.md)에 있습니다.
 
@@ -41,6 +43,14 @@ git status --short
 git remote -v
 git diff --stat
 ```
+
+새로 복제한 저장소에서 기본 Git 훅을 사용한다면 아래 명령을 한 번 실행하세요. 이미 별도 훅을 쓰는 경우에는 기존 pre-commit에서 `node scripts/check-publish.ts --staged`를 실행하고 실패 시 커밋을 중단하도록 연결하세요.
+
+```powershell
+git config --local core.hooksPath .githooks
+```
+
+이 훅과 `npm run check:staged`는 Git 인덱스의 파일명과 내용을 검사합니다. 스테이징된 사본에서 공급자 응답 ID가 발견되면 값을 가린 파일명을 표시하고 커밋을 중단합니다. GitHub CI도 푸시·PR 대상 스냅샷에 같은 검사를 실행합니다.
 
 아직 저장소가 없는 새 복사본만 `git init -b main`으로 초기화합니다. 실제로 포함할 파일을 검토한 후 스테이징하고 공개 검사를 실행합니다.
 

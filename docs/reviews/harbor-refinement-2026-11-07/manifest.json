@@ -288,13 +288,13 @@
     },
     {
       "path": "v3-break/profile2-run1/api-requests.jsonl",
-      "sha256": "2b4e6c5ccb05c55b8afc3776bee3ad56a65259b5b78aea5eb2eadd52fdc02ea6",
-      "bytes": 167232
+      "sha256": "087d84a7e00d45964c3800632dbfcea59b840eba3d872b8b58625b7f693db568",
+      "bytes": 166858
     },
     {
       "path": "v3-break/profile2-run1/calls.jsonl",
-      "sha256": "10413ac7c66c470be7b25722dc7b6163a161a976fddd7ec6b145a50f3cb1c12d",
-      "bytes": 77547
+      "sha256": "c3b32059890f5e9000d0d32a0bb01d8fe9de36de62c88885859c990b61b6356c",
+      "bytes": 76595
     },
     {
       "path": "v3-break/profile2-run1/instructions.json",
@@ -313,13 +313,13 @@
     },
     {
       "path": "v3-break/profile2-run2/api-requests.jsonl",
-      "sha256": "afbc34c2a376a37c0023345b9055d0776708db4caa149639121844c25ef7b772",
-      "bytes": 167368
+      "sha256": "df8e2abfe7b353f4ff0a24aa71fc39d772c513825fdf8db650718ed714434773",
+      "bytes": 166994
     },
     {
       "path": "v3-break/profile2-run2/calls.jsonl",
-      "sha256": "9210f0ccd64675cd5186563d10734540d13a06fd0695baa45b5be0282839c5e7",
-      "bytes": 77969
+      "sha256": "b26633554248d8728d9a839a0714f348038879cb5f642f152bf33e897061a1c0",
+      "bytes": 77017
     },
     {
       "path": "v3-break/profile2-run2/instructions.json",
@@ -338,13 +338,13 @@
     },
     {
       "path": "v3-break/profile3-run1/api-requests.jsonl",
-      "sha256": "60dd8535f858ca210ac969443396add3f20f20f33428bcdd6bf75277ff941950",
-      "bytes": 169551
+      "sha256": "e7ae1afbf17234eac1a792a65a718d1c4e6582f4cc31eac32b3307ec4ef6eb78",
+      "bytes": 169177
     },
     {
       "path": "v3-break/profile3-run1/calls.jsonl",
-      "sha256": "fd98d3d1ed6273de12d13b62b0527f78202f316567bdf1d992de313a023c025d",
-      "bytes": 77985
+      "sha256": "cad5539f9b6d2063888305a6be3e987bd4e4b1b9de7a9490a72216a14eaa4f27",
+      "bytes": 77033
     },
     {
       "path": "v3-break/profile3-run1/instructions.json",
@@ -363,13 +363,13 @@
     },
     {
       "path": "v3-break/profile3-run2/api-requests.jsonl",
-      "sha256": "c78dff0461fb7934407c224166a719ae5222fa7df2ff177d6ccb2229f75ebbe0",
-      "bytes": 169623
+      "sha256": "09408da272ad2e4d3235ec78a4257f9ae564bb3d5abf5d460ce0b2a7526476b2",
+      "bytes": 169249
     },
     {
       "path": "v3-break/profile3-run2/calls.jsonl",
-      "sha256": "7af2b1dd773cf7afc11530c965c5b5d377963708dae42e7c4c2050d65c5d2cc3",
-      "bytes": 77866
+      "sha256": "5377cdf20793f2850cdcc8f46da944c213fee95d8b03d2aa087bea7f8b3f6156",
+      "bytes": 76914
     },
     {
       "path": "v3-break/profile3-run2/instructions.json",
@@ -493,13 +493,13 @@
     },
     {
       "path": "v3-lighthouse/profile2-run1/api-requests.jsonl",
-      "sha256": "e1de53b4cba545225f1b2f6bc8dcde510e54f18da0e942b6e576edb294522dc3",
-      "bytes": 210426
+      "sha256": "4a4113e767150f5be3f5a0838013a2137b06573d34e2ac0159ad633a391bf167",
+      "bytes": 210175
     },
     {
       "path": "v3-lighthouse/profile2-run1/calls.jsonl",
-      "sha256": "f9456a3598c396fb1cbece89f1319dd2c53815e4124200772a93c70bd071b056",
-      "bytes": 95995
+      "sha256": "4bcdc437b495298a92e9884aafaee9b02be0a41f7634173fdd31621f6a888421",
+      "bytes": 95289
     },
     {
       "path": "v3-lighthouse/profile2-run1/instructions.json",
@@ -518,13 +518,13 @@
     },
     {
       "path": "v3-lighthouse/profile2-run2/api-requests.jsonl",
-      "sha256": "5cc3a91c2d4fb25fa6460f61ca5a91b73f388afc39a01f7999538ae6332fbd40",
-      "bytes": 210824
+      "sha256": "3568390cb60e72724c4535eb16415b08aef4826f88d19fff1026f340e1d3386f",
+      "bytes": 210573
     },
     {
       "path": "v3-lighthouse/profile2-run2/calls.jsonl",
-      "sha256": "55e7b9e4dcacbe23f574bc1ee31d0ebdbae886bb3e86403d42990729e3bde589",
-      "bytes": 96677
+      "sha256": "1b7b878f29dfcb2254e4adea2e5595f197b7c0d3f4adcd6ca8073945e9b36ca9",
+      "bytes": 95971
     },
     {
       "path": "v3-lighthouse/profile2-run2/instructions.json",
@@ -543,13 +543,13 @@
     },
     {
       "path": "v3-lighthouse/profile3-run1/api-requests.jsonl",
-      "sha256": "b2f090e4d1229a6200b833320df0c282459a3262298e8f0c5c8fc5ae97e69fbe",
-      "bytes": 212132
+      "sha256": "9e1ad9f3dcf34ba53a591d4b80d42e607eb01899ce469789ebe93f6852a7bfd0",
+      "bytes": 211881
     },
     {
       "path": "v3-lighthouse/profile3-run1/calls.jsonl",
-      "sha256": "5bc5d2430b97901da10fde9c4d504b8bdfb3a66f5716d53fa3e7d7c5f933c95c",
-      "bytes": 96274
+      "sha256": "02425348723b78b41afba108281c5fb54d785d22c64a600e15d183c356e99f4a",
+      "bytes": 95568
     },
     {
       "path": "v3-lighthouse/profile3-run1/instructions.json",
@@ -568,13 +568,13 @@
     },
     {
       "path": "v3-lighthouse/profile3-run2/api-requests.jsonl",
-      "sha256": "93ed981d97104dcc3bb7ec5ac41bda42d03cc75a6d72e7517999dc948dc0154c",
-      "bytes": 235191
+      "sha256": "b3b3dc643ff7cbb5affa1fc7623e89a89043803ece457e476bb6048c1f57da9d",
+      "bytes": 234899
     },
     {
       "path": "v3-lighthouse/profile3-run2/calls.jsonl",
-      "sha256": "35374793f3b919b1062703430994c2025ce6af8c57cd44a3b00369df22085681",
-      "bytes": 105820
+      "sha256": "0338b575d1a3bb865f887f5d44bf908610cf07b7478653d6e65dbf4e52c67852",
+      "bytes": 105032
     },
     {
       "path": "v3-lighthouse/profile3-run2/instructions.json",
@@ -658,13 +658,13 @@
     },
     {
       "path": "v4-break/profile2-run1/api-requests.jsonl",
-      "sha256": "68c382f42124812d22ffa297e5cf68600ae57b8277316dada833d9763de06aa1",
-      "bytes": 167884
+      "sha256": "7b19fa3ab460fdeee86e4184ec7f87d0e7d928bf0e2e5447a47446275b912a2d",
+      "bytes": 167510
     },
     {
       "path": "v4-break/profile2-run1/calls.jsonl",
-      "sha256": "3a7c03d00255c6ffa0df8691748ad4530ad16064a8a40951e3742613cac07496",
-      "bytes": 78499
+      "sha256": "6361f4aa91bbcd9d2d6156be172b0240ed11a992a15d59b7b72cb2cec8a475c2",
+      "bytes": 77547
     },
     {
       "path": "v4-break/profile2-run1/instructions.json",
@@ -683,13 +683,13 @@
     },
     {
       "path": "v4-break/profile2-run2/api-requests.jsonl",
-      "sha256": "6175526552f482938ed3d5644174c5a839f1f07baede4172f49eeb9e7025b53d",
-      "bytes": 168693
+      "sha256": "85aa54930fa8dd8333b3ea496af29e5f6593e111d97e322f1e3fa36d41ec9528",
+      "bytes": 168319
     },
     {
       "path": "v4-break/profile2-run2/calls.jsonl",
-      "sha256": "e3918a34f45d716a1f20b5f32562cbc50164baf9b08659b5e2793248a4dbcd37",
-      "bytes": 79370
+      "sha256": "7efb86770ec9d54a00b690aded755c0710139491e9918f75256d70170ac6c814",
+      "bytes": 78418
     },
     {
       "path": "v4-break/profile2-run2/instructions.json",
@@ -708,13 +708,13 @@
     },
     {
       "path": "v4-break/profile4-run1/api-requests.jsonl",
-      "sha256": "4a3066b1be526768d7065e068b646b9b7194c2643d1edbce135a4a58eaa4c0ef",
-      "bytes": 168232
+      "sha256": "36ec9b4dcdd68cf505a0176850bb7c658ccafd188aa37a4fea8d06ad52b4d4c3",
+      "bytes": 167858
     },
     {
       "path": "v4-break/profile4-run1/calls.jsonl",
-      "sha256": "df3f96ac5e4d9a7fc177b0e1962ec3566bfbf7e22c8bb8bdc6d10eb3586a9afb",
-      "bytes": 75742
+      "sha256": "16018c45d043445227b7cedb5ed4bb7214570a56dd93d53d3e01e9a06d021df7",
+      "bytes": 74790
     },
     {
       "path": "v4-break/profile4-run1/instructions.json",
@@ -733,13 +733,13 @@
     },
     {
       "path": "v4-break/profile4-run2/api-requests.jsonl",
-      "sha256": "69d25ad678a5475c81908bb09c5ed087c25bd533ecea0e73de8df0ffd81574ea",
-      "bytes": 168792
+      "sha256": "abc0b53c045f7ac6719f48ec0632fee89571a272f8bbe59e70b097155d493d55",
+      "bytes": 168418
     },
     {
       "path": "v4-break/profile4-run2/calls.jsonl",
-      "sha256": "4b64af29be7d697cd0edebb7627834ece7c5f536104635ee69f05a61d724fa85",
-      "bytes": 76186
+      "sha256": "dc6b99265cefd24761ad4302486665f6152ee129f4f5efcb18f96a0ed9b03c3f",
+      "bytes": 75234
     },
     {
       "path": "v4-break/profile4-run2/instructions.json",
@@ -823,13 +823,13 @@
     },
     {
       "path": "v4-lighthouse/profile2-run1/api-requests.jsonl",
-      "sha256": "5d5545989ec049d3f0b1f3d8100770798ab8001212b6fe280abbb6c96cdf9087",
-      "bytes": 209087
+      "sha256": "2c5d6484b3c1b0b61fbc76bcedef7f6a2f4b76a3e5c1737072e1f5d325c850c3",
+      "bytes": 208837
     },
     {
       "path": "v4-lighthouse/profile2-run1/calls.jsonl",
-      "sha256": "8cd3c0b7cf6bf0f123c67450d295b3b0941f5b15277f60495a8ea4e6a55f5fa6",
-      "bytes": 94714
+      "sha256": "60dfa2eeeab356df7b7eed3b5abb2f92947856e516fbac218b7fc07cf9d2765f",
+      "bytes": 94008
     },
     {
       "path": "v4-lighthouse/profile2-run1/instructions.json",
@@ -848,13 +848,13 @@
     },
     {
       "path": "v4-lighthouse/profile2-run2/api-requests.jsonl",
-      "sha256": "6aeab07996e38cf93475538fa67258f61db4d5d90a40926c1eece0c675178c84",
-      "bytes": 210603
+      "sha256": "987f53ffca6b9e282d4cbd42ec2361da824ad9c90b0d44d60c51195e11896719",
+      "bytes": 210352
     },
     {
       "path": "v4-lighthouse/profile2-run2/calls.jsonl",
-      "sha256": "4ee59cccd4adf63c050d0d9f0bd83c24472daf98dd0b9a1ba005155f23312a91",
-      "bytes": 96525
+      "sha256": "a0ab61d9b711722aac6d8bc89daca84af571da269a6e0786ad0fb749fbdedf50",
+      "bytes": 95819
     },
     {
       "path": "v4-lighthouse/profile2-run2/instructions.json",
@@ -873,13 +873,13 @@
     },
     {
       "path": "v4-lighthouse/profile4-run1/api-requests.jsonl",
-      "sha256": "0224cfc0a6aac79c27231c82f1a68e9e09cc416b6c90c973d8716746bd40fb21",
-      "bytes": 210330
+      "sha256": "f71f87c6f0fb97fa13ce787fa00b7007da5e0e2149b37d3dd75de04a9bb7e571",
+      "bytes": 210080
     },
     {
       "path": "v4-lighthouse/profile4-run1/calls.jsonl",
-      "sha256": "67949781dc695cc17206990d059484122ef072ae3fd9168187d362e6c441221a",
-      "bytes": 93363
+      "sha256": "25b77e29ada5538932dc8c4886904265410033b8fa66c55ebff3459a3ebd26bd",
+      "bytes": 92657
     },
     {
       "path": "v4-lighthouse/profile4-run1/instructions.json",
@@ -898,13 +898,13 @@
     },
     {
       "path": "v4-lighthouse/profile4-run2/api-requests.jsonl",
-      "sha256": "8a194a56059a132a865e2452b9eb98256384b7f37b1c321c4f3637a3a0bbe765",
-      "bytes": 211931
+      "sha256": "b852ce720ac6386d2100309cd2f6fd70d13bd1b467deaa2f3f716d503c3bcd35",
+      "bytes": 211680
     },
     {
       "path": "v4-lighthouse/profile4-run2/calls.jsonl",
-      "sha256": "e0dced6d78a82caf6733a78b2e7c400ff881910ce4fa0f63ea29daf0459eb04c",
-      "bytes": 95554
+      "sha256": "d631b6cf47474428ccd73a54d71975555a4682cf6f38d903e0353d6022f7a7d1",
+      "bytes": 94848
     },
     {
       "path": "v4-lighthouse/profile4-run2/instructions.json",

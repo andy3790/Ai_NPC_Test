@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
@@ -9,6 +9,9 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const privateDirectory = /(^|\/)(node_modules|dist|data|reports|exports|outputs|\.cache|\.codex|\.qa-runtime|test-results|playwright-report)(\/|$)/i;
 const privateFile = /(^|\/)(auth|credentials)\.json$|\.(?:db|sqlite3?)(?:-.*)?$|\.(?:zip|pem|key|log)$/i;
 const imageFile = /\.(?:png|jpe?g|gif|webp|ico)$/i;
+// Keep this expression compatible with both JavaScript and git grep -E.
+const providerResponseId = /resp_[A-Za-z0-9_-]+/i;
+const publicPath = (path: string) => path.replace(new RegExp(providerResponseId.source, 'gi'), '[response-id]');
 const checks: Array<[string, RegExp]> = [
   ['possible_openai_key', /\bsk-(?:proj-)?[A-Za-z0-9_-]{24,}/],
   ['possible_github_token', /\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{30,})/],
@@ -26,11 +29,27 @@ export function inspectPublicationFile(path: string, content: Buffer): string[] 
   if (privateDirectory.test(path) || privateFile.test(path) ||
     (env.startsWith('.env') && !['.env.example', '.env.sample'].includes(env))) reasons.push('local_or_generated_file');
   if (content.length > 10 * 1024 * 1024) reasons.push('file_over_10_MiB_review_required');
-  if (!imageFile.test(path)) {
-    const text = content.toString('utf8');
+  const image = imageFile.test(path);
+  const text = content.toString(image ? 'latin1' : 'utf8');
+  if (providerResponseId.test(path) || providerResponseId.test(text)) reasons.push('provider_response_id');
+  if (!image) {
     for (const [code, pattern] of checks) if (pattern.test(text)) reasons.push(code);
   }
   return reasons;
+}
+
+function checkStagedResponseIds() {
+  const options = { cwd: root, encoding: 'utf8' as const, maxBuffer: 16 * 1024 * 1024 };
+  // Read Git's proposed snapshot. A partially staged file can differ from the working copy.
+  const matches = spawnSync('git', [
+    'grep', '--cached', '--full-name', '--no-textconv', '--no-color', '-a', '-i', '-l', '-z', '-E', '-e', providerResponseId.source, '--',
+  ], options);
+  if (matches.error || (matches.status !== 0 && matches.status !== 1)) throw new Error('Cannot inspect staged file contents.');
+  const names = execFileSync('git', ['ls-files', '--cached', '--full-name', '-z'], options).split('\0');
+  const paths = new Set([...matches.stdout.split('\0').filter(Boolean), ...names.filter(name => providerResponseId.test(name))]);
+  for (const path of paths) console.error('provider_response_id', JSON.stringify(publicPath(path)));
+  if (paths.size) process.exitCode = 1;
+  else console.log('Staged response ID check passed.');
 }
 
 export async function checkPublication() {
@@ -55,8 +74,9 @@ export async function checkPublication() {
       if (!existsSync(absolute) || !(await stat(absolute)).isFile()) continue;
       const content = await readFile(absolute);
       const reasons = inspectPublicationFile(file, content);
-      if (reasons.length) issues.push({ path: file, reasons });
-      entries.push({ path: file, bytes: content.length, sha256: createHash('sha256').update(content).digest('hex') });
+      const path = publicPath(file);
+      if (reasons.length) issues.push({ path, reasons });
+      entries.push({ path, bytes: content.length, sha256: createHash('sha256').update(content).digest('hex') });
     }
     const report = {
       checkedAt: new Date().toISOString(), status: issues.length ? 'failed' : 'passed',
@@ -77,5 +97,11 @@ export async function checkPublication() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  checkPublication().catch(error => { console.error(error instanceof Error ? error.message : String(error)); process.exitCode = 1; });
+  try {
+    if (process.argv.includes('--staged')) checkStagedResponseIds();
+    else await checkPublication();
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exitCode = 1;
+  }
 }
