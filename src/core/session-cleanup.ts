@@ -3,7 +3,7 @@ import type { Adapter } from '../adapters/types.js';
 import type { InvocationMetrics, Run } from '../shared/types.js';
 import { Store } from './store.js';
 
-export const SESSION_CLEANUP_VERSION = 'codex-session-cleanup/1';
+export const SESSION_CLEANUP_VERSION = 'codex-session-cleanup/2';
 
 // A terminal run cannot resume. A director call is independently disposable:
 // its next attempt always starts a fresh thread, unlike NPC/world/judge calls.
@@ -28,6 +28,13 @@ export function disposableSessions(run: Run, calls: InvocationMetrics[]): string
 export class SessionCleanup {
   private pending = new Map<string, Promise<void>>();
   constructor(private store: Store, private adapter: Adapter, private dataDir: string) {}
+  async beforeReplacement(id: string, threadId: string) {
+    if (this.adapter.name !== 'codex' || !this.adapter.deleteSession) return;
+    await this.run(id, threadId);
+    const state = this.store.get('runs', id)?.sessionCleanup?.[threadId];
+    if (state?.status === 'deleted' || state?.status === 'missing') return;
+    throw new Error('이전 Codex 진행자 세션의 정리가 끝나면 재개할 수 있습니다. ' + (state?.error ?? '호출 상태 확인 필요'));
+  }
   async run(id: string, onlyThreadId?: string) {
     if (!this.adapter.deleteSession || this.adapter.name !== 'codex') return;
     const run = this.store.get('runs', id);

@@ -4,6 +4,7 @@ import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { CodexAdapter } from '../src/adapters/codex.js';
 import { disposableSessions, SESSION_CLEANUP_VERSION } from '../src/core/session-cleanup.js';
+import { testOwnerKey } from './lib/test-sessions.js';
 import type { InvocationMetrics, Run } from '../src/shared/types.js';
 
 // Migration of existing test sessions. Read experiment DBs only; never construct
@@ -13,14 +14,20 @@ const workspace = realpathSync(resolve('.'));
 const inside = (path: string) => { const rel = relative(workspace, path); return !!rel && rel !== '..' && !rel.startsWith('..\\') && !rel.startsWith('../') && !isAbsolute(rel); };
 const sources = new Set<string>();
 const evalDirectories = new Set<string>();
+const uuid = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
+function processMayBeRunning(pid: number) {
+  if (!Number.isSafeInteger(pid) || pid <= 0) return true;
+  try { process.kill(pid, 0); return true; } catch (e: any) { return e.code !== 'ESRCH'; }
+}
 const walk = (dir: string, depth = 0) => {
   if (depth > 9 || !existsSync(dir) || !inside(realpathSync(dir))) return;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    if (entry.isSymbolicLink() || ['node_modules', '.git', 'sessions', 'runtime'].includes(entry.name) || /^(history-test-|history-ui-)/.test(entry.name)) continue;
+    if (entry.isSymbolicLink() || ['node_modules', '.git', 'sessions', 'runtime'].includes(entry.name)) continue;
+    if (/^(history-test-|history-ui-)/.test(entry.name) && !/^history-test-codex-cleanup-\d+$/.test(entry.name)) continue;
     const path = join(dir, entry.name);
     if (entry.isDirectory()) walk(path, depth + 1);
     else if (entry.name === 'npc-lab.sqlite' || entry.name === 'npc-history.sqlite') sources.add(path);
-    else if (entry.name === 'plan.json') evalDirectories.add(dir);
+    else if (entry.name === 'plan.json' || entry.name === 'sessions.jsonl') evalDirectories.add(dir);
   }
 };
 for (const name of ['data', 'reports', '.cache']) walk(join(workspace, name));
@@ -28,14 +35,14 @@ const candidates = new Map<string, { roots: Set<string>; runIds: Set<string> }>(
 const protectedIds = new Set<string>(), skippedSources: { path: string; reason: string }[] = [];
 let codexRuns = 0;
 const ingest = (run: Run, calls: InvocationMetrics[], dataDir: string, busy = false) => {
-  if (run.adapter !== 'codex' || !/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(run.id)) return;
+  if (run.adapter !== 'codex' || !uuid.test(run.id)) return;
   codexRuns++;
   const owned = new Set([...Object.values(run.sessions), ...Object.values(run.helperSessions)].map(s => s.threadId));
   calls.forEach(c => owned.add(c.threadId));
   // Ignore synthetic fixture IDs and never infer ownership from cwd alone.
   const eligible = new Set(disposableSessions({ ...run, sessionCleanup: undefined }, calls));
   for (const id of owned) {
-    if (!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(id)) continue;
+    if (!uuid.test(id)) continue;
     if (busy || !eligible.has(id)) { protectedIds.add(id); continue; }
     const entry = candidates.get(id) ?? { roots: new Set<string>(), runIds: new Set<string>() };
     entry.roots.add(join(dataDir, 'sessions', run.id)); entry.runIds.add(run.id); candidates.set(id, entry);
@@ -54,39 +61,44 @@ for (const source of sources) {
         if (!sources.has(origin)) ingest(detail.run, detail.invocations, dirname(origin));
       }
     } else {
-      let busy = false; const lock = join(dirname(source), 'server.lock');
-      if (existsSync(lock)) {
-        const pid = Number(readFileSync(lock, 'utf8'));
-        if (pid > 0) try { process.kill(pid, 0); busy = true; } catch (e: any) { if (e.code !== 'ESRCH') busy = true; }
-      }
+      const directory = dirname(source), lock = join(directory, 'server.lock');
+      const busy = existsSync(lock) && processMayBeRunning(Number(readFileSync(lock, 'utf8')));
       for (const row of db.prepare('SELECT data FROM runs').all()) {
         const run = JSON.parse(String(row.data));
         if (run.adapter !== 'codex') continue;
         const calls = db.prepare('SELECT data FROM invocations WHERE run_id=? ORDER BY rowid').all(run.id).map(r => JSON.parse(String(r.data)));
-        ingest(run, calls, dirname(source), busy);
+        const ownerRow = db.prepare('SELECT value FROM settings WHERE key=?').get(testOwnerKey(run.id));
+        const owner = ownerRow ? JSON.parse(String(ownerRow.value)) : undefined;
+        const ownedTest = typeof owner?.root === 'string' && isAbsolute(owner.root) && relative(directory, owner.root) === '' && Number.isSafeInteger(owner.pid) && owner.pid > 0;
+        const liveTest = ownedTest && processMayBeRunning(owner.pid);
+        // A killed one-shot test cannot resume. Do not change the source DB.
+        ingest(ownedTest && !liveTest ? { ...run, status: 'stopped' } : run, calls, directory, busy || liveTest);
       }
     }
     db.exec('COMMIT;');
   } catch (error) { skippedSources.push({ path: relative(workspace, source), reason: String(error) }); }
   finally { db.close(); }
 }
-for (const directory of evalDirectories) {
-  const plan = JSON.parse(readFileSync(join(directory, 'plan.json'), 'utf8'));
-  if (plan.adapter !== 'codex') continue;
+function collectSamples(directory: string) {
+  const planFile = join(directory, 'plan.json');
+  const plan = existsSync(planFile) ? JSON.parse(readFileSync(planFile, 'utf8')) : undefined;
+  if (plan && plan.adapter !== 'codex') return;
   const ids = new Set<string>();
   const journal = join(directory, 'sessions.jsonl'), events = join(directory, 'events.jsonl');
   let journalActive = false, hasJournal = false;
   if (existsSync(journal)) for (const line of readFileSync(journal, 'utf8').split(/\r?\n/).filter(Boolean)) {
-    const record = JSON.parse(line); hasJournal = true;
-    if (typeof record.threadId === 'string') ids.add(record.threadId);
-    if (Number.isSafeInteger(record.pid) && record.pid > 0) try { process.kill(record.pid, 0); journalActive = true; }
-    catch (e: any) { if (e.code !== 'ESRCH') journalActive = true; }
+    const record = JSON.parse(line);
+    if (!['codex-session-cleanup/1', SESSION_CLEANUP_VERSION].includes(record.version) || !uuid.test(record.threadId) ||
+        typeof record.cwd !== 'string' || relative(directory, resolve(record.cwd)) !== '') continue;
+    hasJournal = true; ids.add(record.threadId);
+    if (processMayBeRunning(record.pid)) journalActive = true;
   }
-  for (const line of (existsSync(events) ? readFileSync(events, 'utf8') : '').split(/\r?\n/).filter(Boolean)) {
+  if (!plan && !hasJournal) return;
+  for (const line of (plan && existsSync(events) ? readFileSync(events, 'utf8') : '').split(/\r?\n/).filter(Boolean)) {
     const record = JSON.parse(line);
     for (const event of record.events ?? []) {
       const id = event.params?.threadId ?? event.params?.thread?.id;
-      if (typeof id === 'string' && /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(id)) ids.add(id);
+      if (typeof id === 'string' && uuid.test(id)) ids.add(id);
     }
   }
   const manifest = join(directory, 'manifest.json');
@@ -96,6 +108,10 @@ for (const directory of evalDirectories) {
     const entry = candidates.get(id) ?? { roots: new Set<string>(), runIds: new Set<string>() };
     entry.roots.add(directory); entry.runIds.add(relative(workspace, directory)); candidates.set(id, entry);
   }
+}
+for (const directory of evalDirectories) {
+  try { collectSamples(directory); }
+  catch (error) { skippedSources.push({ path: relative(workspace, directory), reason: String(error) }); }
 }
 for (const id of protectedIds) candidates.delete(id);
 const outputDir = resolve('.cache/codex-session-cleanup'); mkdirSync(outputDir, { recursive: true });

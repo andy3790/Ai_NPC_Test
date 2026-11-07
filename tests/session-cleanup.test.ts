@@ -74,6 +74,7 @@ test('uncertain director is retained for reconciliation until explicit stop', as
 
 test('failed deletion remains retryable across engine restart without changing completed result', async () => {
   const { store, adapter, engine, spec } = setup(); adapter.failDeletion = true;
+  spec.variants[0].turnPolicy = 'round_robin';
   try {
     const { runs: [run] } = await engine.create(spec); await engine.idle();
     assert.equal(engine.run(run.id).status, 'completed');
@@ -84,6 +85,22 @@ test('failed deletion remains retryable across engine restart without changing c
     assert.ok(Object.values(restarted.run(run.id).sessionCleanup!).every(c => c.status === 'deleted'));
     assert.ok(store.events(run.id).some(e => e.method === 'session/cleanup' && (e.params as any).error));
     await restarted.close();
+  } finally { await engine.close(); store.close(); }
+});
+
+test('a persistent deletion failure pauses the next fresh director before creating a replacement', async () => {
+  const { store, adapter, engine, spec } = setup(); adapter.failDeletion = true;
+  try {
+    const { runs: [run] } = await engine.create(spec); await engine.idle();
+    const stalled = engine.run(run.id), originalId = stalled.helperSessions.director.threadId;
+    assert.equal(stalled.status, 'paused'); assert.match(stalled.error!, /이전 Codex/);
+    assert.equal(stalled.sessionCleanup?.[originalId]?.status, 'pending');
+    assert.equal(store.list('invocations', run.id).filter(c => c.kind === 'director').length, 1);
+    await engine.resume(run.id); await engine.idle();
+    assert.equal(engine.run(run.id).helperSessions.director.threadId, originalId);
+    adapter.failDeletion = false; await engine.resume(run.id); await engine.idle();
+    assert.equal(engine.run(run.id).status, 'completed'); assert.equal(adapter.deleted.filter(id => id === originalId).length, 1);
+    assert.ok(store.list('invocations', run.id).filter(c => c.kind === 'director').length > 1);
   } finally { await engine.close(); store.close(); }
 });
 

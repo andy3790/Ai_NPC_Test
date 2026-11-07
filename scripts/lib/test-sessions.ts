@@ -1,5 +1,5 @@
 import { appendFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import type { Adapter } from '../../src/adapters/types.js';
 import type { ModelConfig } from '../../src/shared/schema.js';
 import type { Engine } from '../../src/core/engine.js';
@@ -20,6 +20,8 @@ export class TestSessions {
       at: new Date().toISOString(), pid: process.pid, ...(error ? { error } : {}) }) + '\n');
   }
   async create(config: ModelConfig, instructions: string) {
+    this.signal.throwIfAborted();
+    for (const previous of this.owned) await this.release(previous);
     this.signal.throwIfAborted();
     const id = await this.adapter.createSession(config, instructions, this.root);
     if (this.adapter.deleteSession) { this.owned.add(id); this.record(id, 'created'); }
@@ -48,9 +50,23 @@ export async function stopTestRuns(engine: Engine) {
   for (const run of engine.store.list('runs')) if (!['completed', 'stopped'].includes(run.status)) await engine.stop(run.id);
   await engine.idle();
 }
+export const testOwnerKey = (runId: string) => 'codexTestOwner/' + runId;
 export function interruptTest(getEngine: () => Engine) {
+  // Only claim runs created by this standalone invocation. The change event
+  // fires synchronously after insert and before the first session is opened.
+  const initial = getEngine();
+  const seen = new Set(initial.store.list('runs').map(r => r.id));
+  const recordOwner = ({ runId }: { runId: string }) => {
+    if (seen.has(runId)) return;
+    initial.store.setting(testOwnerKey(runId), { pid: process.pid, root: resolve(initial.dataDir) });
+    seen.add(runId);
+  };
+  if (initial.adapter.name === 'codex') initial.on('change', recordOwner);
   let pending: Promise<void> | undefined;
   const interrupt = () => { process.exitCode = 130; pending ??= stopTestRuns(getEngine()).catch(e => console.error(String(e))); };
   process.once('SIGINT', interrupt); process.once('SIGTERM', interrupt);
-  return async () => { process.off('SIGINT', interrupt); process.off('SIGTERM', interrupt); await pending; };
+  return async () => {
+    initial.off('change', recordOwner);
+    process.off('SIGINT', interrupt); process.off('SIGTERM', interrupt); await pending;
+  };
 }

@@ -146,7 +146,7 @@ export class Engine extends EventEmitter {
     const old = helpers[key];
     const deleted = old && ['deleted', 'missing'].includes(this.run(id).sessionCleanup?.[old.threadId]?.status ?? '');
     if (!fresh && old && !deleted) return this.restoreSession(id, 'helperSessions', key, old);
-    if (fresh && old) await this.sessionCleanup.run(id, old.threadId);
+    if (fresh && old) await this.sessionCleanup.beforeReplacement(id, old.threadId);
     const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, key), this.run(id).apiCredential);
     const session = { id: randomUUID(), characterId: key, threadId, config, instructions };
     this.store.patch('runs', id, { helperSessions: { ...this.run(id).helperSessions, [key]: session } }); return session;
