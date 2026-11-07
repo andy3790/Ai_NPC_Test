@@ -52,11 +52,14 @@ for (const dir of (await readdir(root,{withFileTypes:true})).filter(d => d.isDir
       dialogue:r.variant.dialoguePromptVersion,performance:r.variant.characterPerformanceVersion,world:r.variant.worldPromptVersion ?? null,
       worldContracts:[...new Set(calls.filter(c => c.kind==='environment').map(c => c.metadata.worldContractVersion ?? 'static'))],
       spatialChoices:[...new Set(speech.flatMap(c => c.metadata.spatialChoiceVersion ? [c.metadata.spatialChoiceVersion] : []))],
+      languageChecks:[...new Set(speech.flatMap(c => c.metadata.languageCheckVersion ? [c.metadata.languageCheckVersion] :
+        r.npcContextVersion && r.npcContextVersion!=='npc-context/1' ? ['npc-language/1'] : []))],
+      constrainedLanguageRepairs:speech.filter(c => c.metadata.languageRepair === true).length,
       models:[...new Set(calls.map(c => c.model+'/'+c.effort))],actualModels:[...new Set(calls.map(c => c.actualModel).filter(Boolean))],
       automaticRepairCycles:Number(repairs?.count ?? 0),specSha256:createHash('sha256').update(JSON.stringify(r.spec)).digest('hex'),
       ...metrics(calls),activeMs:Math.round(r.activeMs),roles:Object.fromEntries(kinds.map(k => [k,metrics(calls.filter(c => c.kind===k))])),
       inputWindow:{calls:sampleSize,firstSpeechInputs:speech.slice(0,sampleSize).map(c => c.usage.inputTokens),lastSpeechInputs:speech.slice(-sampleSize).map(c => c.usage.inputTokens)},
-      repetitions:repeatCounts,kanaLines:choices.filter(c => /[\u3041-\u3096\u30a1-\u30fa]{2,}/u.test(c.speech+c.action)).length,
+      repetitions:repeatCounts,kanaLines:choices.filter(c => /[\u3041-\u3096\u30a1-\u30fa]/u.test(c.speech+' '+c.action)).length,
       errorKinds:calls.filter(c => c.status==='failed').map(c => ({kind:c.kind,attempt:c.attempt,phase:c.metadata.phase ?? null})),
     });
     for (const t of u) transcript.push(JSON.stringify({run:label,sequence:t.sequence,turn:t.speechIndex,at:t.perception?.virtualSeconds ?? t.worldEvent?.virtualSeconds ?? null,

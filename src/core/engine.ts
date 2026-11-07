@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import type { Adapter } from '../adapters/types.js';
 import { Store } from './store.js';
 import { SessionCleanup } from './session-cleanup.js';
-import { ACTOR_CONTEXT_VERSION, actorRecall, checkDialogue, establishedConversation, priorDisclosures } from './actor-context.js';
+import { ACTOR_CONTEXT_VERSION, actorRecall, checkDialogue, establishedConversation, LANGUAGE_CHECK_VERSION, languageRepairSchema, priorDisclosures } from './actor-context.js';
 import { WORLD_CONTEXT_VERSION, worldRequestContext } from './world-context.js';
 import { CHARACTER_PERFORMANCE } from '../shared/character-performance.js';
 import { committedPerformance, performTurn, withPortrayal } from './character-performance.js';
@@ -239,7 +239,11 @@ export class Engine extends EventEmitter {
       ? spatialContract(String(metadata.phase),run.spec,run.worldState,metadata.sourceUtteranceIds as string[],history ?? []) : undefined;
     if (spatialFormat || kind === 'environment' && !format && run.npcContextVersion && run.npcContextVersion !== 'npc-context/1')
       metadata = { ...metadata, worldContractVersion:spatialFormat ? SPATIAL_CONTRACT_VERSION : WORLD_CONTRACT_VERSION };
-    const outputSchema = requestedOutputSchema ?? spatialFormat ?? (format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind]);
+    const baseSchema = requestedOutputSchema ?? spatialFormat ?? (format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind]);
+    const languageRepair = independent && kind === 'speech' && previous?.error
+      ? languageRepairSchema(baseSchema,session.instructions+' '+input,previous.error) : undefined;
+    const outputSchema = languageRepair ?? baseSchema;
+    if (languageRepair) metadata = { ...metadata, languageRepair: true };
     const call: InvocationMetrics = {
       id: randomUUID(), experimentId: run.experimentId, runId: id, variantId: run.variant.id, repetition: run.repetition,
       kind, characterId: ['speech', 'receive'].includes(kind) ? session.characterId : null, operationKey, attempt: (previous?.attempt ?? 0) + 1, retryOf: previous?.id ?? null,
@@ -251,6 +255,7 @@ export class Engine extends EventEmitter {
       metadata: { ...metadata, adapter: run.adapter, appVersion: run.appVersion, cliVersion: run.cliVersion,
         promptVersion: run.promptVersion ?? null, runtimePromptVersion: PROMPT_VERSION,
         ...((kind === 'speech' || kind === 'receive') && run.npcContextVersion && { npcContextVersion: run.npcContextVersion }),
+        ...(kind === 'speech' && run.npcContextVersion && run.npcContextVersion !== 'npc-context/1' && {languageCheckVersion:LANGUAGE_CHECK_VERSION}),
         dialoguePromptVersion: run.variant.dialoguePromptVersion ?? null,
         worldPromptVersion: kind === 'environment' ? worldPromptVersion(session.instructions) : null,
         outputSchemaSha256: createHash('sha256').update(JSON.stringify(outputSchema)).digest('hex'),

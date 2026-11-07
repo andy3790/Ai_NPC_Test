@@ -3,6 +3,8 @@ import type { Character } from '../shared/schema.js';
 import { receives, visibleUtterance } from './perception.js';
 
 export const ACTOR_CONTEXT_VERSION = 'npc-context/4' as const;
+export const LANGUAGE_CHECK_VERSION = 'npc-language/3' as const;
+const languageMismatch = '장면과 인물에게 없는 가나 단어가 섞였습니다. 관찰한 뜻을 한국어로 자연스럽게 다시 표현하세요.';
 const normalized = (s: string) => s.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
 function grams(s: string) {
   const text = normalized(s);
@@ -51,10 +53,27 @@ export function priorDisclosures(history: Utterance[], character: Character, par
     heardBy:participants.filter(c => c.id !== character.id && (u.perception?.speechRecipientIds.includes(c.id) ?? true)).map(c => c.name),
   }));
 }
+export function languageRepairSchema(schema: object, languageContext: string, previousError?: string | null) {
+  if (!previousError?.includes(languageMismatch) || !/[가-힣]/u.test(languageContext) ||
+      /[\u3041-\u3096\u30a1-\u30fa]/u.test(languageContext)) return;
+  const properties = (schema as { properties?: Record<string,object> }).properties;
+  if (!properties?.speech || !properties.action) return;
+  const pattern = '^[^ぁ-ゖァ-ヺ]*$';
+  return { ...schema, properties: { ...properties,
+    speech: { ...properties.speech, pattern }, action: { ...properties.action, pattern } } };
+}
 export function checkDialogue(speech: string, action: string, history: Utterance[], actor: string, languageContext: string) {
-  const foreign = (speech+' '+action).match(/[\u3041-\u3096\u30a1-\u30fa]{2,}/gu) ?? [];
+  const output = speech+' '+action;
+  const foreign = [...output.matchAll(/[\u3041-\u3096\u30a1-\u30fa]+/gu)].flatMap(match => {
+    if (match[0].length>1) return [match[0]];
+    // A single kana attached to a Korean word was missed by the multi-letter
+    // check. Match the whole mixed form so an unrelated particle in history cannot authorize it.
+    const before=output.slice(0,match.index).match(/[가-힣]+$/u)?.[0] ?? '';
+    const after=output.slice(match.index+1).match(/^[가-힣]+/u)?.[0] ?? '';
+    return before || after ? [before+match[0]+after] : [];
+  });
   if (/[가-힣]/u.test(languageContext) && foreign.some(word => !languageContext.includes(word)))
-    throw Error('장면과 인물에게 없는 가나 단어가 섞였습니다. 관찰한 뜻을 한국어로 자연스럽게 다시 표현하세요.');
+    throw Error(languageMismatch);
   const line = grams(speech);
   if (line.size < 15) return;
   const previous = history.filter(u => u.speakerId === actor && u.kind === 'speech').slice(-10);

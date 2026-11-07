@@ -7,7 +7,7 @@ import { spatialSpeechSchema } from '../src/shared/spatial-schema.js';
 import { initialSpatialWorld, closePassages, validateSpatialChoice, selectableGroups, connectionFor } from '../src/core/spatial-state.js';
 import { clockObservations, nextClockBoundary } from '../src/core/scene-clock.js';
 import { contactPossible, localContext, speechPerception } from '../src/core/perception.js';
-import { actorRecall, checkDialogue, establishedConversation, priorDisclosures } from '../src/core/actor-context.js';
+import { actorRecall, checkDialogue, establishedConversation, languageRepairSchema, priorDisclosures } from '../src/core/actor-context.js';
 import { groundedEvents, spatialChoiceContract } from '../src/core/spatial-contract.js';
 import type { Utterance } from '../src/shared/types.js';
 
@@ -50,6 +50,28 @@ test('bounded actor context retains only seen portions and does not duplicate fr
   assert.ok(spatialSpeechSchema.safeParse({...speech,speech:'',communication:{mode:'none',targetNpcIds:[],channelId:null}}).success);
   assert.throws(() => checkDialogue('지금 マッテ 주세요.','',history,'a','한국어 대화'));
   assert.doesNotThrow(() => checkDialogue('책 제목이 マッテ였어요.','',history,'a','책 제목 マッテ'));
+  for (const word of ['눈に','セ린이','상태で']) {
+    assert.throws(() => checkDialogue(word,'',history,'a','한국어로 말하는 장면'),/가나/);
+    assert.doesNotThrow(() => checkDialogue(word,'',history,'a','원문 표기가 '+word));
+  }
+  assert.doesNotThrow(() => checkDialogue('조사 ‘に’를 말하는 거야?','',history,'a','한국어 문법 이야기'));
+});
+
+test('language repair constrains the two text fields only after a Korean scene rejects an ungrounded language switch', () => {
+  const schema = { properties: { speech: { type:'string' }, action: { type:'string' }, communication: { type:'object' } } };
+  const context = '한국어 대화';
+  let failure = '';
+  try { checkDialogue('まだ確認待ち','',[],'a',context); } catch (error) { failure = String(error); }
+  assert.match(failure,/가나/);
+  const repair = languageRepairSchema(schema,context,failure)!;
+  const pattern = new RegExp(repair.properties.speech.pattern,'u');
+  assert.ok(pattern.test('기준값을 기다리고 있어요.') && pattern.test(''));
+  assert.equal(pattern.test('まだ 확인 중'),false);
+  assert.equal(repair.properties.action.pattern,repair.properties.speech.pattern);
+  assert.deepEqual({ ...repair.properties, speech:schema.properties.speech, action:schema.properties.action },schema.properties);
+  assert.equal(languageRepairSchema(schema,context),undefined);
+  assert.equal(languageRepairSchema(schema,'책 제목에 マッテ가 적혔다.',failure),undefined);
+  assert.equal(languageRepairSchema(schema,'English only',failure),undefined);
 });
 
 test('an actor result binds the due speaker, exact evidence and source independently of setting', () => {
