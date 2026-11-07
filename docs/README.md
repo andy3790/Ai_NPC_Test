@@ -4,6 +4,7 @@
 
 서월 세계관의 실행 프로필과 장면·실제 API 검토 방법은 [서월 실행 팩](../assets/seowol/README.md)을 참고하세요.
 구조·대치·정보 공개·항만 탈출을 다루는 [서월 사건극 6선](../assets/seowol/drama/README.md)은 바로 가져올 수 있는 별도 실험 JSON과 장면별 원작 연결·판정 조건을 제공합니다.
+「없는 층, 닫히는 문」에서 새 기본 모델과 기존 Sol의 16차례 대사, 세계 판정, API 비용을 비교했습니다. [원문과 모델 비교](reviews/seowol-closing-door-models-2026-11-08/report.md)
 반말·신경질·하오체를 쓰는 새 인물의 실제 대화와 문체 수정 비교는 [성격별 문체 실험](seowol-voice-experiments.md)에 있습니다.
 
 ## 읽는 순서

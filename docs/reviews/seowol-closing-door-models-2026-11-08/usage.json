@@ -1,0 +1,382 @@
+{
+  "scenario": "없는 층, 닫히는 문",
+  "configCommit": "a94c4c1103f53ade2b1c790429dafdf8def3a5f3",
+  "baselineSourceSha256": "5824116d49cacb269695879a004fbcf583f4ece83eca0b6703f38f1425f99bc2",
+  "candidateSourceSha256": "5527256a13c407da0145db632ce4b58464617ef410311cf63b3e5e5f34e7d1f0",
+  "common": {
+    "promptVersion": "npc-lab/11",
+    "worldContextVersion": "world-context/2",
+    "characterPerformanceVersion": "off",
+    "dialoguePromptVersion": "npc-dialogue/5",
+    "maxOutputTokens": 2048,
+    "maxUtterances": 16,
+    "maxConcurrentCalls": 2,
+    "environmentMode": "ai_spatial",
+    "memoryMode": "initial_only",
+    "deliveryMode": "batched_on_turn",
+    "evaluator": false,
+    "eventGenerator": false,
+    "identicalRolePrompts": [
+      "director",
+      "npc/baek_seoeun",
+      "npc/ryu_taekyung",
+      "npc/yoon_dajeong",
+      "npc/yoon_haegyeong",
+      "plan",
+      "resolve"
+    ],
+    "worldFixedInputSha256": {
+      "plan": "82c95ae28e7605566c7eee4250fe358b494eb6f012cd15adc705caac8a741b3b",
+      "resolve": "82c95ae28e7605566c7eee4250fe358b494eb6f012cd15adc705caac8a741b3b"
+    }
+  },
+  "pricingDate": "2026-11-06",
+  "pricingRevision": "33fd7a5a40495c1a",
+  "baseline": {
+    "npc": {
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    "world": {
+      "model": "gpt-6.1-sol",
+      "effort": "low"
+    },
+    "director": {
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    "acceptedChoices": 16,
+    "spoken": 11,
+    "actionOnly": 5,
+    "byActor": {
+      "류태경": {
+        "choices": 5,
+        "spoken": 5,
+        "actionOnly": 0
+      },
+      "백서은": {
+        "choices": 4,
+        "spoken": 2,
+        "actionOnly": 2
+      },
+      "윤해경": {
+        "choices": 4,
+        "spoken": 2,
+        "actionOnly": 2
+      },
+      "윤다정": {
+        "choices": 3,
+        "spoken": 2,
+        "actionOnly": 1
+      }
+    },
+    "virtualSeconds": 15.6,
+    "terminalStatus": "completed",
+    "publicObservations": 5,
+    "apiTerminations": {
+      "completed": 50
+    },
+    "verification": {
+      "worldRequests": 28,
+      "acceptedPlansReplayed": 16,
+      "acceptedResultsReplayed": 11
+    },
+    "usage": {
+      "all": {
+        "responses": 50,
+        "rejectedResponses": 3,
+        "inputTokens": 462288,
+        "cachedInputTokens": 346572,
+        "cacheWriteInputTokens": 54058,
+        "outputTokens": 6710,
+        "reasoningOutputTokens": 746,
+        "maxInputPerResponse": 16891,
+        "estimatedUsd": 0.346174825
+      },
+      "world": {
+        "responses": 28,
+        "rejectedResponses": 1,
+        "inputTokens": 343056,
+        "cachedInputTokens": 263076,
+        "cacheWriteInputTokens": 20836,
+        "outputTokens": 4773,
+        "reasoningOutputTokens": 346,
+        "maxInputPerResponse": 16891,
+        "estimatedUsd": 0.2444156
+      },
+      "planner": {
+        "responses": 16,
+        "rejectedResponses": 0,
+        "inputTokens": 166281,
+        "cachedInputTokens": 127050,
+        "cacheWriteInputTokens": 8470,
+        "outputTokens": 1251,
+        "reasoningOutputTokens": 132,
+        "maxInputPerResponse": 11827,
+        "estimatedUsd": 0.107912
+      },
+      "resolver": {
+        "responses": 12,
+        "rejectedResponses": 1,
+        "inputTokens": 176775,
+        "cachedInputTokens": 136026,
+        "cacheWriteInputTokens": 12366,
+        "outputTokens": 3522,
+        "reasoningOutputTokens": 214,
+        "maxInputPerResponse": 16891,
+        "estimatedUsd": 0.1365036
+      },
+      "npc": {
+        "responses": 18,
+        "rejectedResponses": 2,
+        "inputTokens": 115399,
+        "cachedInputTokens": 83496,
+        "cacheWriteInputTokens": 31849,
+        "outputTokens": 1294,
+        "reasoningOutputTokens": 0,
+        "maxInputPerResponse": 9023,
+        "estimatedUsd": 0.1010201
+      },
+      "director": {
+        "responses": 4,
+        "rejectedResponses": 0,
+        "inputTokens": 3833,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 1373,
+        "outputTokens": 643,
+        "reasoningOutputTokens": 400,
+        "maxInputPerResponse": 1376,
+        "estimatedUsd": 0.000739125
+      }
+    },
+    "rejectedUsage": {
+      "responses": 3,
+      "rejectedResponses": 3,
+      "inputTokens": 28155,
+      "cachedInputTokens": 24229,
+      "cacheWriteInputTokens": 1697,
+      "outputTokens": 807,
+      "reasoningOutputTokens": 44,
+      "maxInputPerResponse": 14589,
+      "estimatedUsd": 0.0191934
+    },
+    "rejectionReasons": {
+      "emptyNpcChoice": 2,
+      "physicalStateWithoutOutcome": 1
+    },
+    "scheduledWorldEvents": [
+      {
+        "dueSeconds": 8,
+        "status": "completed",
+        "finishedSeconds": 8
+      },
+      {
+        "dueSeconds": 24,
+        "status": "pending",
+        "finishedSeconds": null
+      }
+    ],
+    "activityExtensions": [],
+    "finalWorldFacts": [
+      "문 가장자리의 마지막 연필 눈금이 사라졌고 문틀 안팎의 시야와 소리는 아직 이어져 있다.",
+      "해경의 몸은 문틀 바깥 계단참에 있으며 찌그러진 사진통은 몸에 붙여 들고 있다.",
+      "구조판은 문틀 바깥 계단참에 나와 있다. 젖은 사진은 갈라져 일부 조각이 안쪽 문지방에 붙어 있고 나머지는 구조판 밑에 남아 있다.",
+      "다정은 문틀 바깥 계단참의 구조판 위에 앉아 있다. 다친 오른발에는 체중이 실리지 않았다."
+    ]
+  },
+  "candidate": {
+    "npc": {
+      "model": "gpt-6.1-terra",
+      "effort": "low"
+    },
+    "world": {
+      "model": "gpt-6-luna",
+      "effort": "medium"
+    },
+    "director": {
+      "model": "gpt-6-luna",
+      "effort": "low"
+    },
+    "acceptedChoices": 16,
+    "spoken": 14,
+    "actionOnly": 2,
+    "byActor": {
+      "류태경": {
+        "choices": 3,
+        "spoken": 3,
+        "actionOnly": 0
+      },
+      "백서은": {
+        "choices": 1,
+        "spoken": 0,
+        "actionOnly": 1
+      },
+      "윤해경": {
+        "choices": 4,
+        "spoken": 3,
+        "actionOnly": 1
+      },
+      "윤다정": {
+        "choices": 8,
+        "spoken": 8,
+        "actionOnly": 0
+      }
+    },
+    "virtualSeconds": 9.6,
+    "terminalStatus": "completed",
+    "publicObservations": 4,
+    "apiTerminations": {
+      "completed": 53,
+      "incomplete": 3
+    },
+    "verification": {
+      "worldRequests": 36,
+      "acceptedPlansReplayed": 16,
+      "acceptedResultsReplayed": 14
+    },
+    "usage": {
+      "all": {
+        "responses": 56,
+        "rejectedResponses": 7,
+        "inputTokens": 552722,
+        "cachedInputTokens": 439416,
+        "cacheWriteInputTokens": 51239,
+        "outputTokens": 24286,
+        "reasoningOutputTokens": 18895,
+        "maxInputPerResponse": 14946,
+        "estimatedUsd": 0.06895599
+      },
+      "world": {
+        "responses": 36,
+        "rejectedResponses": 6,
+        "inputTokens": 444242,
+        "cachedInputTokens": 362004,
+        "cacheWriteInputTokens": 20836,
+        "outputTokens": 22868,
+        "reasoningOutputTokens": 18608,
+        "maxInputPerResponse": 14946,
+        "estimatedUsd": 0.02379874
+      },
+      "planner": {
+        "responses": 16,
+        "rejectedResponses": 0,
+        "inputTokens": 156268,
+        "cachedInputTokens": 127050,
+        "cacheWriteInputTokens": 8470,
+        "outputTokens": 4074,
+        "reasoningOutputTokens": 2954,
+        "maxInputPerResponse": 10390,
+        "estimatedUsd": 0.00644105
+      },
+      "resolver": {
+        "responses": 20,
+        "rejectedResponses": 6,
+        "inputTokens": 287974,
+        "cachedInputTokens": 234954,
+        "cacheWriteInputTokens": 12366,
+        "outputTokens": 18794,
+        "reasoningOutputTokens": 15654,
+        "maxInputPerResponse": 14946,
+        "estimatedUsd": 0.01735769
+      },
+      "npc": {
+        "responses": 17,
+        "rejectedResponses": 1,
+        "inputTokens": 105674,
+        "cachedInputTokens": 77412,
+        "cacheWriteInputTokens": 28211,
+        "outputTokens": 1095,
+        "reasoningOutputTokens": 144,
+        "maxInputPerResponse": 9084,
+        "estimatedUsd": 0.04466035
+      },
+      "director": {
+        "responses": 3,
+        "rejectedResponses": 0,
+        "inputTokens": 2806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 2192,
+        "outputTokens": 323,
+        "reasoningOutputTokens": 143,
+        "maxInputPerResponse": 1131,
+        "estimatedUsd": 0.0004969
+      }
+    },
+    "rejectedUsage": {
+      "responses": 7,
+      "rejectedResponses": 7,
+      "inputTokens": 93394,
+      "cachedInputTokens": 66506,
+      "cacheWriteInputTokens": 13091,
+      "outputTokens": 10234,
+      "reasoningOutputTokens": 9306,
+      "maxInputPerResponse": 14946,
+      "estimatedUsd": 0.0099925
+    },
+    "rejectionReasons": {
+      "outputLimit": 3,
+      "reactionWithoutObservableEvent": 3,
+      "emptyNpcChoice": 1
+    },
+    "scheduledWorldEvents": [
+      {
+        "dueSeconds": 8,
+        "status": "completed",
+        "finishedSeconds": 8
+      },
+      {
+        "dueSeconds": 24,
+        "status": "pending",
+        "finishedSeconds": null
+      }
+    ],
+    "activityExtensions": [
+      {
+        "choice": 3,
+        "speaker": "류태경",
+        "atSeconds": 5,
+        "previousReadySeconds": 5,
+        "nextReadySeconds": 8.5,
+        "reason": "구조판이 움직이기 시작했지만 문턱 통과는 아직 끝나지 않았다."
+      },
+      {
+        "choice": 5,
+        "speaker": "백서은",
+        "atSeconds": 5,
+        "previousReadySeconds": 5,
+        "nextReadySeconds": 8.5,
+        "reason": "구조판을 함께 끌어내는 동작이 계속되고 있다."
+      },
+      {
+        "choice": 3,
+        "speaker": "류태경",
+        "atSeconds": 8.5,
+        "previousReadySeconds": 8.5,
+        "nextReadySeconds": 13.5,
+        "reason": "당기는 힘이 이어지지만 판과 사람은 아직 문틀을 완전히 넘지 않았다."
+      },
+      {
+        "choice": 5,
+        "speaker": "백서은",
+        "atSeconds": 8.5,
+        "previousReadySeconds": 8.5,
+        "nextReadySeconds": 13.5,
+        "reason": "판을 받쳐 함께 끌어내는 동작이 계속되고 있다."
+      },
+      {
+        "choice": 8,
+        "speaker": "윤해경",
+        "atSeconds": 8.5,
+        "previousReadySeconds": 8.5,
+        "nextReadySeconds": 13.5,
+        "reason": "다정의 어깨를 붙든 채 판과 함께 문턱 쪽으로 이동 중이다."
+      }
+    ],
+    "finalWorldFacts": [
+      "문 안쪽의 마지막 연필 눈금이 사라졌다.",
+      "구조판이 문턱 쪽으로 더 미끄러졌지만 판과 사람은 아직 문틀을 완전히 넘지 않았다.",
+      "판 밑에 물린 사진이 더 찢어져 젖은 문지방에 걸려 있다."
+    ]
+  },
+  "baselineUsageAtCandidateRatesUsd": 0.064785335
+}
