@@ -18,16 +18,16 @@
   },
   "compatibility": {
     "schemaPath": "src/shared/schema.ts",
-    "schemaSha256": "3c2f01c726b9e25a01c5bc330d0d664a2471f5cddafc3340c75e68e558076e3c",
+    "schemaSha256": "08808bbce54e8bb84008fcafb7ac562d5aa814fabac5c423b85eb2ddbefc56f2",
     "promptPath": "src/core/prompts.ts",
-    "promptSha256": "7d3dc1ac8f00371c1efba5d95dd17d874f0a083d30fe3bfa8224fa921365ff1a",
+    "promptSha256": "0cf3f182ec90b877a568330af9daa239a8519f2d683fe0aa8a718a41a4751e38",
     "promptDependencies": {
-      "src/core/dialogue-policies.ts": "1c72f7f3371530a03742d6881e991df2a5d782c4befe9510cc4bbeff2d178272",
-      "src/shared/dialogue-policy.ts": "257fbd8eff441317a1aad69d718c0d66ae8efa1aa3d4a511eb5f5d4237c104f5",
+      "src/core/dialogue-policies.ts": "1d3140ac86ac75f3af080bc2d8fd8da46ff074d004593d3bcb620bd65cecf335",
+      "src/shared/dialogue-policy.ts": "1593262cd1325b117d689f79b33b1dea57647298a44cf50e4a7a9bde37b3612d",
       "src/core/world-policies.ts": "35bc21412b75a3a818e9630eb0b4e332a9f83d0baf885d1df48fe7603a1bcea0",
       "src/shared/world-policy.ts": "545bf73af3af57026182ea7395116557f7b2ae0405c890f1ea8af2754649c149",
       "src/shared/world-schema.ts": "302dbf2b8e656a4f9c7a143bad2b54c76fd8b49161cb99f1f37ba7d0748142bc",
-      "src/core/director.ts": "7ace5694c18c1af4ae2084c21e809cad3b457848aff3d858a5409e7f1335d99a"
+      "src/core/director.ts": "c6d9e1deb5fcb0cc41e547dac8188b8868bea4c7c7b3afd5fc7dbd01a123b456"
     },
     "imageInputSupported": false,
     "defaultModel": "gpt-6.1-sol",
