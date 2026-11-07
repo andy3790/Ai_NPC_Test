@@ -75,6 +75,8 @@ OPENAI_MAX_OUTPUT_TOKENS=4096
 ## 세션·계측·복구
 
 - NPC마다 별도 로컬 세션과 `previous_response_id` 연결을 유지합니다. 다른 묶음의 응답 ID를 사용하지 않습니다. 수신 확인도 같은 NPC 응답 연결에 포함하며 공개 대화에는 넣지 않습니다.
+- 새 API 실험의 AI 세계 판정은 실행 생성 시 `world-context/2`로 고정합니다. 시간 계획과 결과 판정마다 고정 장면과 차례별 상태를 두 개의 사용자 입력 블록으로 전달합니다. 지원 모델은 첫 블록 끝에 명시적 캐시 경계를 둡니다. 두 블록은 캐시가 비어 있어도 독립적으로 읽을 수 있습니다. 버전 필드가 없는 기존 실험은 저장된 응답 연결로 재개합니다. [실측 비교와 선택한 입력 범위](reviews/seowol-world-context-2026-11-07/report.md) · [OpenAI 프롬프트 캐시](https://developers.openai.com/api/docs/guides/prompt-caching)
+- 세계 판정의 결과가 검증에서 거부되면 같은 상태와 거부 이유를 함께 전달합니다. 통신이 끊겨 결과가 불확실하면 로컬 호출 기록과 제공자가 저장한 응답을 대조해 완료 여부를 복구합니다. 실행 설정의 **세계 엔진 입력 버전** 및 내보낸 `config.json`의 `worldContextVersion`에서 실행 당시 방식을 확인할 수 있습니다.
 - AI 진행자는 호출 시도마다 별도 세션을 생성하고 `previous_response_id: null`로 요청합니다. 최근 관찰과 화자별 대기 순서만 전달하며, 이전 진행자 요청·응답을 연결하지 않습니다. [입력 한도와 복구 정책](running-experiments.md#ai-진행자의-입력-범위)은 단일 공간과 분산 공간에 동일하게 적용합니다.
 - 앱은 동일한 역할·캐릭터 `instructions`를 매 요청에 명시합니다. 이전 응답 연결의 지시문이 자동으로 이어진다고 가정하지 않습니다. `reinject_on_speech`는 기존과 같이 공개 발화 요청의 `input.originalCharacterAndWorld`에 추가 상기 입력을 넣으며, 수신 확인에는 추가 상기를 넣지 않습니다.
 - API의 `usage`를 호출 단위로 직접 기록하고 `usageStatus=reported_response`로 구분합니다. 누적 카운터로 환산하지 않습니다. 캐시 입력·캐시 쓰기·추론 출력은 제공된 경우만 기록하고 전체 토큰에 다시 더하지 않습니다. 누락 항목은 `null`입니다.

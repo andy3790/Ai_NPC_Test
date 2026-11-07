@@ -14,7 +14,7 @@ import { exportFiles } from '../src/core/export.js';
 import { emptyUsage, UsageTracker } from '../src/core/metrics.js';
 import { createApp } from '../src/server/app.js';
 import type { AdapterEvent } from '../src/adapters/types.js';
-import { openaiFixture } from './fixtures/openai.js';
+import { openaiFixture, requestInput } from './fixtures/openai.js';
 
 const model = 'gpt-6-luna', config = { model, effort: 'low' };
 const fixture = openaiFixture;
@@ -44,9 +44,9 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI $
     const strict = (schema: any) => { if (schema.type === 'object') { assert.equal(schema.additionalProperties, false); assert.deepEqual([...schema.required].sort(), Object.keys(schema.properties).sort()); } for (const value of Object.values(schema)) if (value && typeof value === 'object') { if (Array.isArray(value)) value.forEach(v => typeof v === 'object' && strict(v)); else strict(value); } };
     for (const body of api.requests) {
       const call = d.invocations.find(c => c.id === body.metadata.npc_lab_call_id)!;
-      assert.equal(body.previous_response_id, last.get(call.threadId) ?? null); last.set(call.threadId, call.turnId!);
+      assert.equal(body.previous_response_id, call.kind === 'environment' ? null : last.get(call.threadId) ?? null); last.set(call.threadId, call.turnId!);
       strict(body.text.format.schema); assert.deepEqual(body.tools, []); assert.equal(body.tool_choice, 'none');
-      if (['environment', 'event_generation', 'director'].includes(call.kind)) assert.ok(!body.input.includes('PRIVATE_API_') && !body.instructions.includes('PRIVATE_API_'));
+      if (['environment', 'event_generation', 'director'].includes(call.kind)) assert.ok(!JSON.stringify(body.input).includes('PRIVATE_API_') && !body.instructions.includes('PRIVATE_API_'));
     }
     const files = exportFiles(d, store.events(run.id)); assert.ok(files['invocation-links.csv'].includes('"true"')); assert.ok(!JSON.stringify(files).includes(api.key));
     assert.equal(d.invocations.filter(c => c.kind === 'receive').length, mode === 'per_utterance' ? d.receipts.length : 0);
@@ -89,7 +89,7 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI $
   } finally { await engine.close(); store.close(); }
 });
 
-for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI ${mode}: world engine uses private response chain, strict schema, usage, latency and cost`, async () => {
+for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI ${mode}: world engine reuses a stable scene prefix with independent state snapshots`, async () => {
   const { api, store, engine, spec } = await setup(mode);
   spec.variants[0].environmentMode = 'ai'; spec.worldEngine = { model, effort: 'medium' };
   spec.maxUtterances = 2; spec.evaluation.enabled = false;
@@ -97,16 +97,19 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI $
   try {
     const { runs: [run] } = await engine.create(spec); await engine.idle(); const d = engine.detail(run.id);
     assert.equal(d.run.status, 'completed', d.run.error ?? ''); assert.equal(d.run.worldState?.virtualSeconds, 4);
-    const requests = api.requests.filter(body => JSON.parse(body.input).task === 'environment');
+    const requests = api.requests.filter(body => requestInput(body).task === 'environment');
     assert.equal(requests.length, 2); assert.equal(requests[0].previous_response_id, null);
     const calls = d.invocations.filter(c => c.kind === 'environment');
-    assert.equal(requests[1].previous_response_id, calls[0].turnId);
+    assert.equal(requests[1].previous_response_id, null);
+    assert.deepEqual(requests[1].input[0].content[0], requests[0].input[0].content[0]);
+    assert.deepEqual(requests[1].input[0].content[0].prompt_cache_breakpoint, { mode: 'explicit' });
+    assert.ok(calls.every(c => c.metadata.inputRetained === false && c.metadata.worldContextVersion === 'world-context/2'));
     for (const body of requests) {
       assert.equal(body.text.format.strict, true); assert.equal(body.text.format.schema.additionalProperties, false);
       assert.ok(body.text.format.schema.required.includes('elapsedSeconds')); assert.ok(body.text.format.schema.required.includes('events'));
       assert.deepEqual(body.tools, []); assert.equal(body.reasoning.effort, 'medium');
-      assert.ok(!body.instructions.includes('PRIVATE_API_')); assert.ok(!body.input.includes('PRIVATE_API_'));
-      assert.deepEqual(Object.keys(JSON.parse(body.input).npcs[0]), ['id', 'name']);
+      assert.ok(!body.instructions.includes('PRIVATE_API_')); assert.ok(!JSON.stringify(body.input).includes('PRIVATE_API_'));
+      assert.deepEqual(Object.keys(requestInput(body).npcs[0]), ['id', 'name']);
     }
     assert.equal(d.summary.byKind.environment.tokens.totalTokens, 240);
     assert.ok(d.summary.byKind.environment.cost.usd! > 0);
@@ -114,6 +117,7 @@ for (const mode of ['batched_on_turn', 'per_utterance'] as const) test(`OpenAI $
     assert.equal(d.summary.byKind.receive.calls, mode === 'per_utterance' ? 4 : 0);
     assert.equal(d.utterances.length, 2); assert.equal(d.summary.tokens.totalTokens, api.requests.length * 120);
     const files = exportFiles(d, store.events(run.id)); assert.equal(JSON.parse(files['world-state.json']).virtualSeconds, 4);
+    assert.equal(JSON.parse(files['config.json']).worldContextVersion, 'world-context/2');
   } finally { await engine.close(); store.close(); }
 });
 
@@ -126,6 +130,55 @@ test('OpenAI quota errors preserve original input for manual retry and redact th
     await engine.resume(id); await engine.idle(); d = engine.detail(id);
     assert.equal(d.run.status, 'completed'); assert.deepEqual(JSON.parse(api.requests[1].input), JSON.parse(api.requests[0].input));
     assert.equal(d.invocations[1].retryOf, d.invocations[0].id);
+  } finally { await engine.close(); store.close(); }
+});
+
+test('a rejected world snapshot retries the full committed state and a dropped retry reconciles without replaying speech', async () => {
+  const { root, api, store, engine, adapter, spec } = await setup();
+  spec.variants[0].environmentMode = 'ai'; spec.worldEngine = config;
+  spec.maxUtterances = 1; spec.evaluation.enabled = false;
+  const turn = adapter.turn.bind(adapter);
+  let worldAttempts = 0;
+  adapter.turn = async (r, emit, signal) => {
+    if (r.worldContext) api.fail(++worldAttempts === 1 ? 'invalid_world' : 'drop');
+    return turn(r, emit, signal);
+  };
+  const { runs: [run] } = await engine.create(spec);
+  await engine.idle();
+  assert.equal(engine.run(run.id).status, 'paused');
+  assert.match(engine.run(run.id).error!, /존재하지 않는 상태/);
+  await engine.resume(run.id); await engine.idle();
+  assert.equal(engine.detail(run.id).invocations.at(-1)?.status, 'uncertain');
+  await engine.close();
+  const restored = new Engine(store, new OpenAIAdapter(root, { apiKey: api.key, fetch: api.fetch }), root);
+  try {
+    await restored.resume(run.id); await restored.idle();
+    assert.equal(restored.run(run.id).status, 'completed');
+    assert.equal(restored.run(run.id).worldState?.virtualSeconds, 2);
+    assert.equal(restored.detail(run.id).summary.speechCount, 1);
+    const attempts = api.requests.filter(body => requestInput(body).task === 'environment');
+    assert.equal(attempts.length, 2); assert.equal(api.retrieved.length, 1);
+    const { previousFailure, ...retried } = requestInput(attempts[1]);
+    assert.match(previousFailure, /존재하지 않는 상태/);
+    assert.deepEqual(retried, requestInput(attempts[0]));
+    assert.ok(attempts.every(body => body.previous_response_id === null));
+    const last = restored.detail(run.id).invocations.at(-1)!;
+    assert.equal(last.metadata.inputRetained, false); assert.equal(last.metadata.reconciled, true);
+  } finally { await restored.close(); store.close(); }
+});
+
+test('a saved world run without a context version resumes with its original response chain', async () => {
+  const { api, store, engine, spec } = await setup();
+  spec.variants[0].environmentMode = 'ai'; spec.worldEngine = config;
+  spec.maxUtterances = 2; spec.evaluation.enabled = false;
+  try {
+    const { runs: [run] } = await engine.create(spec, false);
+    store.patch('runs', run.id, { worldContextVersion: undefined });
+    await engine.resume(run.id); await engine.idle();
+    const world = api.requests.filter(body => requestInput(body).task === 'environment');
+    assert.equal(world.length, 2);
+    assert.equal(typeof world[1].input, 'string');
+    assert.equal(world[1].previous_response_id, engine.detail(run.id).invocations.find(c => c.kind === 'environment')!.turnId);
   } finally { await engine.close(); store.close(); }
 });
 
@@ -172,6 +225,14 @@ test('OpenAI reports absent usage as null, omits reasoning for non-reasoning mod
     assert.equal(events.filter(e => e.method === 'response/usage').length, 0);
     const cancelled = await adapter.turn({ ...request, clientMessageId: randomUUID() }, () => {}, AbortSignal.abort());
     assert.equal(cancelled.status, 'cancelled'); assert.equal(api.requests.length, 1);
+    const ruling = await adapter.turn({ ...request, clientMessageId: randomUUID(), outputSchema: outputSchemas.environment,
+      worldContext: { scene: { world: 'fixture' }, tick: { task: 'environment' } } }, () => {});
+    assert.equal(ruling.status, 'completed'); assert.equal(ruling.inputRetained, false);
+    const snapshot = api.requests[1];
+    assert.equal(snapshot.previous_response_id, null); assert.equal(snapshot.prompt_cache_options, undefined);
+    assert.equal(snapshot.input[0].content.length, 2); assert.equal(snapshot.input[0].content[0].prompt_cache_breakpoint, undefined);
+    await adapter.turn({ ...request, clientMessageId: randomUUID() }, () => {});
+    assert.equal(api.requests[2].previous_response_id, result.turnId);
     const tracker = new UsageTracker(null); assert.equal(tracker.result().usage.totalTokens, null);
     tracker.report(responseUsage({ input_tokens: 8, output_tokens: 2, total_tokens: 10 })); tracker.report(responseUsage({ input_tokens: 8, output_tokens: 2, total_tokens: 10 }));
     assert.equal(tracker.result().usage.totalTokens, 10); assert.equal(tracker.result().usage.cachedInputTokens, null);

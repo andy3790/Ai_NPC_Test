@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import type { Adapter } from '../adapters/types.js';
 import { Store } from './store.js';
 import { SessionCleanup } from './session-cleanup.js';
+import { WORLD_CONTEXT_VERSION, worldRequestContext } from './world-context.js';
 import { CHARACTER_PERFORMANCE } from '../shared/character-performance.js';
 import { committedPerformance, performTurn, withPortrayal } from './character-performance.js';
 import { emptyUsage, UsageTracker } from './metrics.js';
@@ -79,12 +80,13 @@ export class Engine extends EventEmitter {
       const variant = { ...sourceVariant, dialoguePromptVersion: sourceVariant.dialoguePromptVersion ?? CURRENT_DIALOGUE_PROMPT,
         characterPerformanceVersion: sourceVariant.characterPerformanceVersion ?? CHARACTER_PERFORMANCE,
         ...(environmentMode(spec, sourceVariant) === 'ai' ? { worldPromptVersion: sourceVariant.worldPromptVersion ?? WORLD_PROMPT_VERSION } : {}) };
-      const snapshotHash = createHash('sha256').update(JSON.stringify({ spec, variant, repetition, promptVersion: PROMPT_VERSION })).digest('hex');
+      const context = this.adapter.name === 'openai' && isAiEnvironment(spec, variant) ? { worldContextVersion: WORLD_CONTEXT_VERSION } : {};
+      const snapshotHash = createHash('sha256').update(JSON.stringify({ spec, variant, repetition, promptVersion: PROMPT_VERSION, ...context })).digest('hex');
       const run: Run = { id: randomUUID(), experimentId, name: `${spec.name} · ${variant.label} · #${repetition}`, variant, repetition, spec, snapshotHash,
         status: start ? 'queued' : 'paused', error: null, createdAt: now(), startedAt: null, completedAt: null, activeMs: 0, pausedMs: 0, pausedAt: start ? null : now(), timingComplete: true,
         sessions: {}, helperSessions: {}, lastSpeakerId: null, nextSpeakerId: null, evaluatedThrough: 0, appliedEvents: [], stepRemaining: null, pauseRequested: false,
         revisions: 0, adapter: this.adapter.name, appVersion: APP_VERSION, cliVersion: this.adapter.version, promptVersion: PROMPT_VERSION,
-        ...(this.adapter.name === 'openai' ? { apiCredential: credential ?? { source: 'environment' as const } } : {}) };
+        ...context, ...(this.adapter.name === 'openai' ? { apiCredential: credential ?? { source: 'environment' as const } } : {}) };
       this.store.put('runs', run); runs.push(run); this.changed(run.id);
     }
     this.store.setting('lastSpec', spec); this.pump(); return { experimentId, runs };
@@ -176,13 +178,19 @@ export class Engine extends EventEmitter {
     return this.invoke(id, 'speech', session, key, JSON.stringify({ ...JSON.parse(input), characterPerformance: turn.context }),
       { ...metadata, ...turn.metadata }, turn.select ? withPortrayal(baseSchema) : undefined);
   }
-  private async invoke(id: string, kind: CallKind, session: NpcSession, operationKey: string, input: string, metadata: Record<string, unknown> = {}, requestedOutputSchema?: object) {
+  private async invoke(id: string, kind: CallKind, session: NpcSession, operationKey: string, input: string, metadata: Record<string, unknown> = {}, requestedOutputSchema?: object, history?: Utterance[]) {
     const previous = this.priorInvocation(id, operationKey);
     if (previous?.status === 'completed') return previous;
-    // A failed accepted turn already appended its input. A retry asks to complete that input,
-    // without appending the dialogue payload a second time to the same persistent session.
-    if (previous?.turnId && previous.threadId === session.threadId && previous.metadata.inputRetained !== false) input = JSON.stringify({ task: JSON.parse(input).task, previousFailure: previous.error?.slice(0, 5000), instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 해당 호출의 결과는 아직 공개·적용되지 않았습니다. previousFailure는 이전 결과가 거부된 이유입니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
     const run = this.run(id);
+    const worldContext = kind === 'environment' && run.worldContextVersion === WORLD_CONTEXT_VERSION
+      ? worldRequestContext(input, run.worldState, history ?? this.store.list('utterances', id), previous?.error) : undefined;
+    if (worldContext) {
+      input = JSON.stringify({ ...worldContext.scene, ...worldContext.tick });
+      metadata = { ...metadata, worldContextVersion: run.worldContextVersion };
+    } else if (previous?.turnId && previous.threadId === session.threadId && previous.metadata.inputRetained !== false) {
+      // The persistent session already contains the failed attempt and its full input.
+      input = JSON.stringify({ task: JSON.parse(input).task, previousFailure: previous.error?.slice(0, 5000), instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 해당 호출의 결과는 아직 공개·적용되지 않았습니다. previousFailure는 이전 결과가 거부된 이유입니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
+    }
     const format = metadata.outputType as keyof typeof outputSchemas | undefined;
     const outputSchema = requestedOutputSchema ?? (format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind]);
     const call: InvocationMetrics = {
@@ -211,7 +219,7 @@ export class Engine extends EventEmitter {
       const controller = new AbortController(); const set = this.aborts.get(id) ?? new Set(); set.add(controller); this.aborts.set(id, set);
       let result;
       try {
-        result = await this.adapter.turn({ threadId: session.threadId, config: session.config, input, outputSchema, clientMessageId: call.id, timeoutMs: run.spec.timeoutMs }, event => {
+        result = await this.adapter.turn({ threadId: session.threadId, config: session.config, input, worldContext, outputSchema, clientMessageId: call.id, timeoutMs: run.spec.timeoutMs }, event => {
           // Late usage events must preserve fields committed after the turn completed.
           Object.assign(call, this.store.get('invocations', call.id));
           this.store.event(id, call.id, event.method, event.params);
@@ -336,7 +344,7 @@ export class Engine extends EventEmitter {
     if (!source) return;
     const session = await this.helper(id, 'world-engine', run.spec.worldEngine!, worldPolicies[run.variant.worldPromptVersion ?? LEGACY_WORLD_PROMPT].instructions);
     const contract = worldResponseContract(worldPromptVersion(session.instructions), source);
-    const call = await this.invoke(id, 'environment', session, `environment:${source.id}`, worldPrompt(run.spec, state, history, source), { sourceUtteranceId: source.id }, contract.outputSchema);
+    const call = await this.invoke(id, 'environment', session, `environment:${source.id}`, worldPrompt(run.spec, state, history, source), { sourceUtteranceId: source.id }, contract.outputSchema, history);
     let result: ReturnType<typeof applyWorldOutput>;
     try { result = applyWorldOutput(state, contract.validator.parse(JSON.parse(call.output)), source, run.spec.scenario.characters.map(c => c.id)); }
     catch (e) { this.store.patch('invocations', call.id, { status: 'failed', error: err(e) }); throw e; }
@@ -596,7 +604,7 @@ export class Engine extends EventEmitter {
     return { id, store: this.store, run: () => this.run(id), closing: () => this.closing,
       helper: (key, config, instructions) => this.helper(id, key, config, instructions),
       direct: (key, operationKey, prompt) => this.direct(id, key, operationKey, prompt),
-      invoke: (kind, session, key, input, metadata) => this.invoke(id, kind, session, key, input, metadata),
+      invoke: (kind, session, key, input, metadata, history) => this.invoke(id, kind, session, key, input, metadata, undefined, history),
       speak: (session, key, input, metadata, history) => this.speak(id, session, key, input, metadata, history),
       append: u => this.append(id, u), flush: () => this.flush(id), changed: () => this.changed(id),
       completeDelivery: u => this.completeDelivery(id, u), inject: (text, audience) => this.appendEvent(id, text, audience),

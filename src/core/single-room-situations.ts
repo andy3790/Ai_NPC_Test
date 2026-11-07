@@ -13,9 +13,10 @@ export async function advanceSingleRoomSituations(h: SimulationHost) {
   const run = h.run(), state = run.worldState ?? initialWorldState();
   const session = await h.helper('world-situation-review', run.spec.worldEngine!, worldInstructions + `
 지금은 상황 생성기의 제안을 검토합니다. proposal은 아직 사실이 아닙니다. 세계 설정·허용 범위·금지 사항에 맞으면 proposalDecision.accepted=true로 채택하고 관찰·진행 사건을 반영하세요. 아니면 이유와 함께 거절하고 나머지 변경 배열을 모두 비우세요. elapsedSeconds는 반드시 0입니다. 기존 NPC의 자발적 행동 결과(actor_result)는 만들 수 없습니다. NPC의 반응이 필요한 물리 결과는 공개 징후와 반응 대기 사건으로 먼저 등록하세요.`);
+  const history = h.store.list('utterances', h.id);
   const call = await h.invoke('environment', session, `situation:resolve:${proposal.id}`, JSON.stringify({ task: 'situation_resolve',
-    ...managerWorld(run.spec), current: managerState(state, h.store.list('utterances', h.id)), proposal, policy: run.spec.eventGenerator }),
-    { outputType: 'situationResolution', phase: 'situation', proposalId: proposal.id, virtualSeconds: state.virtualSeconds });
+    ...managerWorld(run.spec), current: managerState(state, history), proposal, policy: run.spec.eventGenerator }),
+    { outputType: 'situationResolution', phase: 'situation', proposalId: proposal.id, virtualSeconds: state.virtualSeconds }, history);
   let result: ReturnType<typeof applyWorldOutput>, decision: { accepted: boolean; reason: string };
   try {
     const output = situationResolutionSchema.parse(JSON.parse(call.output)); decision = output.proposalDecision;

@@ -2,6 +2,10 @@ import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 const model = 'gpt-6-luna';
 
+export function requestInput(body: any) {
+  return typeof body.input === 'string' ? JSON.parse(body.input) :
+    Object.assign({}, ...body.input[0].content.map((block: { text: string }) => JSON.parse(block.text)));
+}
 // Local transport only: validates credentials and response chains without network or billing.
 export function openaiFixture() {
   const key = 'fixture-only-' + randomUUID();
@@ -25,9 +29,10 @@ export function openaiFixture() {
     if (failure === 'rate') return Response.json({ error: { code: 'insufficient_quota', message: `fixture echo ${requestKey}` } }, { status: 429 });
     if (failure === 'bad_json') return new Response(`data: {malformed ${requestKey}\n\n`);
     if (failure === 'server') return new Response('server error', { status: 503 });
-    const input = JSON.parse(body.input), id = `mock-response-${++counter}`;
+    const input = requestInput(body), id = `mock-response-${++counter}`;
     let output: any = input.task === 'environment' ? { elapsedSeconds: 2, facts: [], forgetFactIds: [], processes: [], finishProcesses: [], events: [] } : input.task === 'receive' ? { received: true } : input.task === 'evaluate' ? { findings: [], summary: '검사 완료' } : input.task === 'direct' ? { speakerId: input.allowedSpeakerIds[0], reason: '순서 선택' } : { speech: '안녕하세요. 다음 선택을 이야기해요.', action: '고개를 끄덕인다.' };
     if (input.task === 'speak' && input.localContext) output = { ...output, communication: { mode: 'local', targetNpcIds: [], channelId: null }, moveToLocationId: null, activityChoice: input.localContext.ongoingActivity ? 'continue' : 'start' };
+    if (input.task === 'environment' && failure === 'invalid_world') output.forgetFactIds = ['uncommitted_fact'];
     if (input.task === 'spatial_plan') output = { plans: input.choices.map((u: any) => ({ utteranceId: u.id, speechSeconds: 1, actionSeconds: 2, reactionNpcIds: [], movementStarts: false })) };
     if (input.task === 'event_generation') output = { proposal: { title: '경고음', description: '휴게실에서 짧은 경고음이 들린다.', locationIds: ['lounge'], severity: 'low' } };
     if (input.task === 'spatial_resolve') output = { completedActivities: input.dueActivityIds.map((id: string) => ({ id, outcome: 'completed', reason: '완료' })), activityUpdates: [], movements: [], facts: [], forgetFactIds: [], processes: [], finishProcesses: [],

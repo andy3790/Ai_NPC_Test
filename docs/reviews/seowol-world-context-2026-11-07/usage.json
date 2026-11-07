@@ -1,0 +1,235 @@
+{
+  "scenario": "닫히는 문",
+  "sourceFile": "drama-closing-door.json",
+  "sourceSha256": "5824116d49cacb269695879a004fbcf583f4ece83eca0b6703f38f1425f99bc2",
+  "pricingDate": "2026-11-06",
+  "pricingRevision": "33fd7a5a40495c1a",
+  "maxOutputTokens": 2048,
+  "effort": "low",
+  "sharedRoleHashes": {
+    "director": {
+      "apiInstructionsSha256": "1b15bf932293b289912e704bc468e0389b1b8dcc21f7e7eee4552de3217f7c38",
+      "responseModels": [
+        "gpt-6-luna"
+      ]
+    },
+    "npc/ryu_taekyung": {
+      "apiInstructionsSha256": "95b3fe0406f4b6d2f2c44f1b6e90c45422041b641121d8d518dea942b820789c",
+      "apiOutputSchemaSha256": "7faf0cda2a07a48b37ad0e893d86f123249c40f6492863feb822350557bca61d",
+      "responseModels": [
+        "gpt-6.1-sol"
+      ]
+    },
+    "plan": {
+      "apiInstructionsSha256": "2681cd29f9458dbd07c0b5d0602d34647be0a644bd60db0937105166d07b67f4",
+      "apiOutputSchemaSha256": "78b5dbed59e89732b23ffb8b6246643b6359a74210b4f057830d5793ef89d59d",
+      "responseModels": [
+        "gpt-6.1-sol"
+      ]
+    },
+    "npc/baek_seoeun": {
+      "apiInstructionsSha256": "a87b4c7e111f4c92caf99b8384f900244edc48f80d8b443d289cb45a893e2899",
+      "apiOutputSchemaSha256": "7faf0cda2a07a48b37ad0e893d86f123249c40f6492863feb822350557bca61d",
+      "responseModels": [
+        "gpt-6.1-sol"
+      ]
+    },
+    "resolve": {
+      "apiInstructionsSha256": "6161820b112b03468b2c6009499a349f71c2c6477bdf637be4394f554855c659",
+      "apiOutputSchemaSha256": "d6791178db6ab41b787baa909d8f107d41e1c8f39b898129b59a00a3f7205576",
+      "responseModels": [
+        "gpt-6.1-sol"
+      ]
+    },
+    "npc/yoon_haegyeong": {
+      "apiInstructionsSha256": "72fdf8e3007dab02b84d6a535b4cec196c441d329d8a11e2a95f79b0321cc507",
+      "apiOutputSchemaSha256": "7faf0cda2a07a48b37ad0e893d86f123249c40f6492863feb822350557bca61d",
+      "responseModels": [
+        "gpt-6.1-sol"
+      ]
+    },
+    "npc/yoon_dajeong": {
+      "apiInstructionsSha256": "889be1fb5531a0bc738bcd446d1f54cefe098340cfe5eff993893b642dbc126c",
+      "apiOutputSchemaSha256": "7faf0cda2a07a48b37ad0e893d86f123249c40f6492863feb822350557bca61d",
+      "responseModels": [
+        "gpt-6.1-sol"
+      ]
+    }
+  },
+  "runs": {
+    "before": {
+      "runtimePrompt": "npc-lab/10",
+      "dialoguePrompt": "npc-dialogue/5",
+      "worldContext": "legacy (unversioned)",
+      "characterPerformance": "legacy (absent)",
+      "decisionLimit": 48,
+      "acceptedChoices": 16,
+      "spokenChoices": 11,
+      "actionOnlyChoices": 5,
+      "individualSpeakers": 4,
+      "virtualSeconds": 24,
+      "localCallsBlockedBeforeDispatch": 1,
+      "worldRequestsWithPreviousResponse": 25,
+      "usage": {
+        "all": {
+          "responses": 48,
+          "rejectedResponses": 1,
+          "inputTokens": 2286650,
+          "cachedInputTokens": 1958340,
+          "cacheWriteInputTokens": 324720,
+          "outputTokens": 6838,
+          "reasoningOutputTokens": 545,
+          "maxInputPerResponse": 161636,
+          "estimatedUsd": 1.0658831
+        },
+        "world": {
+          "responses": 27,
+          "rejectedResponses": 1,
+          "inputTokens": 2175369,
+          "cachedInputTokens": 1885330,
+          "cacheWriteInputTokens": 289958,
+          "outputTokens": 4747,
+          "reasoningOutputTokens": 31,
+          "maxInputPerResponse": 161636,
+          "estimatedUsd": 0.96106
+        },
+        "planner": {
+          "responses": 15,
+          "rejectedResponses": 0,
+          "inputTokens": 1235892,
+          "cachedInputTokens": 1074214,
+          "cacheWriteInputTokens": 161633,
+          "outputTokens": 1020,
+          "reasoningOutputTokens": 0,
+          "maxInputPerResponse": 161636,
+          "estimatedUsd": 0.5217939
+        },
+        "resolver": {
+          "responses": 12,
+          "rejectedResponses": 1,
+          "inputTokens": 939477,
+          "cachedInputTokens": 811116,
+          "cacheWriteInputTokens": 128325,
+          "outputTokens": 3727,
+          "reasoningOutputTokens": 31,
+          "maxInputPerResponse": 132768,
+          "estimatedUsd": 0.4392661
+        },
+        "npc": {
+          "responses": 16,
+          "rejectedResponses": 0,
+          "inputTokens": 106488,
+          "cachedInputTokens": 73010,
+          "cacheWriteInputTokens": 33430,
+          "outputTokens": 1294,
+          "reasoningOutputTokens": 40,
+          "maxInputPerResponse": 9196,
+          "estimatedUsd": 0.103912
+        },
+        "director": {
+          "responses": 5,
+          "rejectedResponses": 0,
+          "inputTokens": 4793,
+          "cachedInputTokens": 0,
+          "cacheWriteInputTokens": 1332,
+          "outputTokens": 797,
+          "reasoningOutputTokens": 474,
+          "maxInputPerResponse": 1335,
+          "estimatedUsd": 0.0009111
+        }
+      },
+      "verified": {
+        "replayedAcceptedPlans": 15,
+        "replayedAcceptedResolutions": 11,
+        "replayedClosureAt24WithDeadlineAndEvidence": true
+      }
+    },
+    "after": {
+      "runtimePrompt": "npc-lab/11",
+      "dialoguePrompt": "npc-dialogue/5",
+      "worldContext": "world-context/2",
+      "characterPerformance": "off",
+      "decisionLimit": 16,
+      "acceptedChoices": 16,
+      "spokenChoices": 11,
+      "actionOnlyChoices": 5,
+      "individualSpeakers": 4,
+      "virtualSeconds": 15.6,
+      "localCallsBlockedBeforeDispatch": 0,
+      "worldRequestsWithPreviousResponse": 0,
+      "usage": {
+        "all": {
+          "responses": 50,
+          "rejectedResponses": 3,
+          "inputTokens": 462288,
+          "cachedInputTokens": 346572,
+          "cacheWriteInputTokens": 54058,
+          "outputTokens": 6710,
+          "reasoningOutputTokens": 746,
+          "maxInputPerResponse": 16891,
+          "estimatedUsd": 0.346174825
+        },
+        "world": {
+          "responses": 28,
+          "rejectedResponses": 1,
+          "inputTokens": 343056,
+          "cachedInputTokens": 263076,
+          "cacheWriteInputTokens": 20836,
+          "outputTokens": 4773,
+          "reasoningOutputTokens": 346,
+          "maxInputPerResponse": 16891,
+          "estimatedUsd": 0.2444156
+        },
+        "planner": {
+          "responses": 16,
+          "rejectedResponses": 0,
+          "inputTokens": 166281,
+          "cachedInputTokens": 127050,
+          "cacheWriteInputTokens": 8470,
+          "outputTokens": 1251,
+          "reasoningOutputTokens": 132,
+          "maxInputPerResponse": 11827,
+          "estimatedUsd": 0.107912
+        },
+        "resolver": {
+          "responses": 12,
+          "rejectedResponses": 1,
+          "inputTokens": 176775,
+          "cachedInputTokens": 136026,
+          "cacheWriteInputTokens": 12366,
+          "outputTokens": 3522,
+          "reasoningOutputTokens": 214,
+          "maxInputPerResponse": 16891,
+          "estimatedUsd": 0.1365036
+        },
+        "npc": {
+          "responses": 18,
+          "rejectedResponses": 2,
+          "inputTokens": 115399,
+          "cachedInputTokens": 83496,
+          "cacheWriteInputTokens": 31849,
+          "outputTokens": 1294,
+          "reasoningOutputTokens": 0,
+          "maxInputPerResponse": 9023,
+          "estimatedUsd": 0.1010201
+        },
+        "director": {
+          "responses": 4,
+          "rejectedResponses": 0,
+          "inputTokens": 3833,
+          "cachedInputTokens": 0,
+          "cacheWriteInputTokens": 1373,
+          "outputTokens": 643,
+          "reasoningOutputTokens": 400,
+          "maxInputPerResponse": 1376,
+          "estimatedUsd": 0.000739125
+        }
+      },
+      "verified": {
+        "replayedAcceptedPlans": 16,
+        "replayedAcceptedResolutions": 11,
+        "identicalReconstructedWorldRequestBodies": 28
+      }
+    }
+  }
+}

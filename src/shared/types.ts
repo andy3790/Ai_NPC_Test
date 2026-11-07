@@ -66,6 +66,7 @@ export interface Run {
   evaluatedThrough: number; appliedEvents: number[]; stepRemaining: number | null; pauseRequested: boolean;
   revisions: number; adapter: string; appVersion: string; cliVersion: string;
   promptVersion?: string;
+  worldContextVersion?: 'world-context/2';
   sessionCleanup?: Record<string, { status: 'deleted' | 'missing' | 'pending'; at: string; error?: string }>;
   apiCredential?: ApiCredential;
   worldState?: WorldState;

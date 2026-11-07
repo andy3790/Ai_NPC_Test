@@ -11,7 +11,7 @@ import { OpenAIAdapter } from '../src/adapters/openai.js';
 import { exampleSpec } from '../src/shared/example.js';
 import { spatialExample } from '../src/shared/spatial-example.js';
 import type { Utterance } from '../src/shared/types.js';
-import { openaiFixture } from './fixtures/openai.js';
+import { openaiFixture, requestInput } from './fixtures/openai.js';
 
 function record(sequence: number, overrides: Partial<Utterance> = {}): Utterance {
   return { id: `message-${sequence}`, runId: 'test', sequence, speechIndex: sequence, kind: 'speech',
@@ -214,7 +214,7 @@ for (const spatial of [false, true]) test(`OpenAI ${spatial ? 'spatial' : 'singl
       assert.equal(c.metadata.outputSchemaSha256, createHash('sha256').update(JSON.stringify(directorOutputSchema(allowed))).digest('hex'));
       assert.equal(c.usage.totalTokens, 120); assert.ok(c.durationMs! >= 0); assert.ok(c.firstOutputMs! >= 0);
     }
-    assert.ok(api.requests.some(b => JSON.parse(b.input).task === 'speak' && b.previous_response_id !== null));
+    assert.ok(api.requests.some(b => requestInput(b).task === 'speak' && b.previous_response_id !== null));
     assert.equal(d.summary.byKind.director.tokens.totalTokens, calls.length * 120);
   } finally { await engine.close(); store.close(); }
 });

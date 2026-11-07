@@ -22,6 +22,7 @@ export function RunSettings({ detail }: { detail: RunDetail }) {
       <dt>프롬프트 버전</dt><dd>{run.promptVersion ?? (versions.length ? versions.join(', ') : '이전 기록에 버전 정보 없음')}</dd>
       <dt>대화 반응 지침</dt><dd>{variant.dialoguePromptVersion ?? '이전 기록 · 저장된 인물 지침 유지'}</dd>
       {environmentMode(spec, variant) === 'ai' && <><dt>세계 결과 지침</dt><dd>{variant.worldPromptVersion ?? '이전 기록 · 저장된 세계 지침 유지'}</dd></>}
+      {run.adapter === 'openai' && isAiEnvironment(spec, variant) && <><dt>세계 엔진 입력 버전</dt><dd>{run.worldContextVersion ?? '기존 방식 · 이전 세계 응답 연결'}</dd></>}
       <dt>설정 해시 (SHA-256)</dt><dd><code>{run.snapshotHash}</code></dd>
     </dl>
     <section><h3>세계관</h3><p className="snapshot-text">{scenario.world}</p><h4>시작 상황</h4><p className="snapshot-text">{scenario.situation}</p></section>

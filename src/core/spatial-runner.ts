@@ -91,7 +91,7 @@ async function planCycle(h: SimulationHost) {
   const choices = cycle.utteranceIds.map(id => all.find(u => u.id === id)!);
   const session = await h.helper('spatial-time-planner', run.spec.worldEngine!, spatialPlannerInstructions);
   const call = await h.invoke('environment', session, `spatial:plan:${cycle.id}`, JSON.stringify({ task: 'spatial_plan', ...managerWorld(run.spec),
-    current: managerState(current, all), choices }), { outputType: 'spatialPlan', phase: 'plan', sourceUtteranceIds: choices.map(u => u.id), virtualSeconds: current.virtualSeconds });
+    current: managerState(current, all), choices }), { outputType: 'spatialPlan', phase: 'plan', sourceUtteranceIds: choices.map(u => u.id), virtualSeconds: current.virtualSeconds }, all);
   let next: typeof current;
   try { next = applySpatialPlan(run.spec, current, choices, JSON.parse(call.output)); }
   catch (e) { h.store.patch('invocations', call.id, { status: 'failed', error: errorText(e) }); throw e; }
@@ -113,7 +113,7 @@ async function resolveWorld(h: SimulationHost) {
     currentTime: current.virtualSeconds, current: managerState(current, all), dueActivityIds: due.map(a => a.id),
     changes: all.filter(u => u.sequence > (current.spatial!.lastResolvedSequence ?? 0)).map(u => publicMessage(u)),
     proposal: proposal ?? null, situationPolicy: run.spec.eventGenerator ?? null }),
-    { outputType: 'spatialResolution', phase: 'resolve', sourceUtteranceIds: due.map(a => a.sourceUtteranceId), proposalId: proposal?.id ?? null, virtualSeconds: current.virtualSeconds });
+    { outputType: 'spatialResolution', phase: 'resolve', sourceUtteranceIds: due.map(a => a.sourceUtteranceId), proposalId: proposal?.id ?? null, virtualSeconds: current.virtualSeconds }, all);
   let result: ReturnType<typeof applySpatialResolution>;
   try { result = applySpatialResolution(run.spec, current, all, JSON.parse(call.output), proposal); }
   catch (e) { h.store.patch('invocations', call.id, { status: 'failed', error: errorText(e) }); throw e; }

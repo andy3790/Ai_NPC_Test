@@ -15,7 +15,7 @@ import '../core/load-model-catalog.js';
 const profileSchema = z.object({ id: z.string().min(1), name: z.string().optional(), efforts: z.array(z.enum(['none', 'minimal', 'low', 'medium', 'high', 'xhigh', 'max'])).min(1), defaultEffort: z.string(), reasoning: z.boolean().default(true) });
 type Profile = { id: string; name?: string; efforts: string[]; defaultEffort: string; reasoning: boolean };
 interface Session { id: string; config: ModelConfig; instructions: string; previousResponseId: string | null; maxOutputTokens: number; reasoning: boolean; credential?: ApiCredential }
-interface Attempt { threadId: string; clientMessageId: string; previousResponseId: string | null; responseId: string | null; result?: TurnResult }
+interface Attempt { threadId: string; clientMessageId: string; previousResponseId: string | null; responseId: string | null; standalone?: boolean; result?: TurnResult }
 interface Options { apiKey?: string; fetch?: typeof globalThis.fetch; profiles?: Profile[]; maxOutputTokens?: number }
 
 export function responseUsage(raw: any): TokenUsage {
@@ -110,12 +110,12 @@ export class OpenAIAdapter implements Adapter {
       .flatMap((item: any) => item.content ?? []).filter((part: any) => part.type === 'output_text').map((part: any) => part.text).join('');
     const completed = response.status === 'completed';
     const result: TurnResult = { turnId: response.id, output, status: completed ? 'completed' : response.status === 'cancelled' ? 'cancelled' : 'failed',
-      inputRetained: completed, actualModel: response.model, ...(response.usage ? { usage: responseUsage(response.usage), rawUsage: response.usage } : {}),
+      inputRetained: completed && !attempt.standalone, actualModel: response.model, ...(response.usage ? { usage: responseUsage(response.usage), rawUsage: response.usage } : {}),
       ...(!completed ? { error: JSON.stringify(response.error ?? response.incomplete_details ?? { status: response.status }) } : {}),
     };
     // Only successful Responses form the next context link. Incomplete/failed
     // responses are measured, but a retry must retain the original input.
-    if (completed) {
+    if (completed && !attempt.standalone) {
       const session = this.load<Session>('sessions', attempt.threadId);
       if (![attempt.previousResponseId, response.id].includes(session.previousResponseId)) throw new Error('API 세션의 응답 연결이 변경되었습니다.');
       session.previousResponseId = response.id; this.save('sessions', session.id, session);
@@ -133,16 +133,24 @@ export class OpenAIAdapter implements Adapter {
     if (existsSync(this.file('calls', r.clientMessageId))) throw new Error('기록된 API 호출을 다시 전송하지 않습니다. 먼저 완료 상태를 대조하세요.');
     const controller = new AbortController(); this.active.set(r.threadId, controller);
     const combined = AbortSignal.any([controller.signal, AbortSignal.timeout(r.timeoutMs), ...(signal ? [signal] : [])]);
-    const attempt: Attempt = { threadId: r.threadId, clientMessageId: r.clientMessageId, previousResponseId: session.previousResponseId, responseId: null };
+    const attempt: Attempt = { threadId: r.threadId, clientMessageId: r.clientMessageId,
+      previousResponseId: r.worldContext ? null : session.previousResponseId, responseId: null, ...(r.worldContext && { standalone: true }) };
     let sent = false, delta = '';
     try {
       if (combined.aborted) return { turnId: '', output: '', status: 'cancelled', inputRetained: false, error: '요청 전 취소' };
       this.save('calls', r.clientMessageId, attempt);
+      // Older or custom models can consume the two user data blocks without explicit cache controls.
+      const explicitCache = !!r.worldContext && /^gpt-(?:6(?:[.-]|$)|5\.6(?:-|$))/.test(r.config.model);
+      const input = r.worldContext ? [{ role: 'user', content: [
+        { type: 'input_text', text: JSON.stringify(r.worldContext.scene), ...(explicitCache && { prompt_cache_breakpoint: { mode: 'explicit' } }) },
+        { type: 'input_text', text: JSON.stringify(r.worldContext.tick) },
+      ] }] : r.input;
       const body = { model: r.config.model, ...(session.reasoning ? { reasoning: { effort: r.config.effort } } : {}),
         // Instructions are not inherited by previous_response_id. Resending this
         // field preserves the session persona; speech-only reminders stay in input.
-        instructions: baseInstructions + '\n' + session.instructions, input: r.input,
-        previous_response_id: session.previousResponseId, store: true, stream: true, tools: [], tool_choice: 'none',
+        instructions: baseInstructions + '\n' + session.instructions, input,
+        ...(explicitCache && { prompt_cache_options: { mode: 'explicit' } }),
+        previous_response_id: attempt.previousResponseId, store: true, stream: true, tools: [], tool_choice: 'none',
         truncation: 'disabled', max_output_tokens: session.maxOutputTokens,
         metadata: { npc_lab_call_id: r.clientMessageId, npc_lab_session_id: r.threadId },
         text: { format: { type: 'json_schema', name: 'npc_lab_output', strict: true, schema: responseSchema(r.outputSchema) } },
