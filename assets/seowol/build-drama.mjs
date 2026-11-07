@@ -151,6 +151,7 @@ function guide(outputs) {
         return `- **${l.name}** (${names.join('·') || '시작 인원 없음'}) — ${l.initialSituation}`;
       }), '',
       ...scene.spatial.connections.map(r => `- ${scene.spatial.locations.find(l => l.id === r.from).name} ${r.bidirectional ? '↔' : '→'} ${scene.spatial.locations.find(l => l.id === r.to).name} · ${r.description}`), '',
+      ...(scene.spatial.travelLimits ?? []).map(l => `- ${spec.scenario.characters.find(c => c.id === l.npcId).name}의 이동 경계 · ${l.reason}`),
       scene.spatial.channels.length ? scene.spatial.channels.map(c => c.name + ' · ' + c.description).join('\n') : '원격 통신 장비가 없다. 떨어진 뒤에는 상대 장소의 말을 들을 수 없다.', '',
     ] : [scene.localRange, '']),
     '### 충돌하는 선택', '', scene.pressure, '', ...scene.choices.map(c => `- ${c}`), '',

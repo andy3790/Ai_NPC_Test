@@ -55,6 +55,9 @@ export const scenarioSchema = z.object({
     for (const route of s.connections) if (!place(route.from) || !place(route.to) || route.from === route.to) fail(`잘못된 연결 통로: ${route.id}`);
     if (s.initialPositions.length !== v.characters.length || s.initialPositions.some(x => !npc(x.npcId) || !place(x.locationId))) fail('모든 NPC의 시작 장소를 한 번씩 지정하세요.');
     for (const channel of s.channels) if (new Set(channel.memberNpcIds).size !== channel.memberNpcIds.length || channel.memberNpcIds.some(x => !npc(x))) fail(`잘못된 통신 채널 참가자: ${channel.id}`);
+    const limits = s.travelLimits ?? [];
+    if (limits.some(l => !npc(l.npcId) || !place(l.locationId)) || new Set(limits.map(l => l.npcId + ':' + l.locationId)).size !== limits.length)
+      fail('이동 제약에는 실제 NPC와 목적지 조합을 한 번씩 지정하세요.');
   }
   const env = v.environment;
   if (!env) return;

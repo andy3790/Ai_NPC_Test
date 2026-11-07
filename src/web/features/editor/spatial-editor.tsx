@@ -14,13 +14,14 @@ export function SpatialEditor({ spec, update }: Props) {
           m.locations[i].id = id;
           for (const r of m.connections) { if (r.from === old) r.from = id; if (r.to === old) r.to = id; }
           for (const p of m.initialPositions) if (p.locationId === old) p.locationId = id;
+          for (const limit of m.travelLimits ?? []) if (limit.locationId === old) limit.locationId = id;
           for (const cue of s.scenario.clockEvents ?? []) if (cue.locationIds) cue.locationIds = cue.locationIds.map(place => place === old ? id : place);
           for (const cue of s.scheduledEvents) if (cue.audience?.scope === 'locations') cue.audience.locationIds = cue.audience.locationIds.map(place => place === old ? id : place);
         })}/></label>
         <label>장소 이름<input aria-label={`장소 ${i + 1} 이름`} value={l.name} onChange={e => edit(m => { m.locations[i].name = e.target.value; })}/></label>
         <label>장소 설명<textarea aria-label={`장소 ${i + 1} 설명`} value={l.description} onChange={e => edit(m => { m.locations[i].description = e.target.value; })}/></label>
         <label>현장 시작 상황<textarea aria-label={`장소 ${i + 1} 시작 상황`} value={l.initialSituation} onChange={e => edit(m => { m.locations[i].initialSituation = e.target.value; })}/></label>
-      </div><button onClick={() => edit(m => { m.locations.splice(i, 1); m.connections = m.connections.filter(r => r.from !== l.id && r.to !== l.id); m.initialPositions = m.initialPositions.filter(p => p.locationId !== l.id); })}>장소 삭제</button></article>)}
+      </div><button onClick={() => edit(m => { m.locations.splice(i, 1); m.connections = m.connections.filter(r => r.from !== l.id && r.to !== l.id); m.initialPositions = m.initialPositions.filter(p => p.locationId !== l.id); if (m.travelLimits) m.travelLimits=m.travelLimits.filter(limit => limit.locationId!==l.id); })}>장소 삭제</button></article>)}
       <button onClick={() => edit(m => { let n = 1; while (m.locations.some(l => l.id === `place-${n}`)) n++; m.locations.push({ id: `place-${n}`, name: '', description: '', initialSituation: '' }); })}>+ 장소 추가</button>
       <h4>연결 통로</h4>{map.connections.map((r, i) => <article className="spatial-edit-row" key={i}><div className="form-grid">
         <label>통로 ID<input aria-label={`통로 ${i + 1} ID`} value={r.id} onChange={e => edit(m => { m.connections[i].id = e.target.value; })}/></label>
@@ -32,6 +33,13 @@ export function SpatialEditor({ spec, update }: Props) {
       <label className="checkbox"><input type="checkbox" checked={!!r.sightAndSound} onChange={e => edit(m => { m.connections[i].sightAndSound = e.target.checked; })}/>열려 있을 때 양 끝의 말과 행동 전달</label><button onClick={() => edit(m => { m.connections.splice(i, 1); })}>통로 삭제</button></article>)}
       <button onClick={() => edit(m => { let n = 1; while (m.connections.some(r => r.id === `route-${n}`)) n++; m.connections.push({ id: `route-${n}`, from: '', to: '', description: '', bidirectional: true }); })}>+ 통로 추가</button>
       <h4>NPC 시작 위치</h4><div className="form-grid">{spec.scenario.characters.map(c => <label key={c.id}>{c.name}{places(map.initialPositions.find(p => p.npcId === c.id)?.locationId ?? '', id => edit(m => { m.initialPositions = m.initialPositions.filter(p => p.npcId !== c.id && spec.scenario.characters.some(c => c.id === p.npcId)); if (id) m.initialPositions.push({ npcId: c.id, locationId: id }); }), `${c.name} 시작 위치`)}</label>)}</div>
+      <h4>스스로 갈 수 없는 장소</h4>
+      {map.travelLimits?.map((limit,i) => <article className="spatial-edit-row" key={i}><div className="form-grid">
+        <label>인물<select value={limit.npcId} onChange={e => edit(m => { m.travelLimits![i].npcId=e.target.value; })}>{spec.scenario.characters.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
+        <label>목적지{places(limit.locationId,id => edit(m => { m.travelLimits![i].locationId=id; }),`이동 제약 ${i+1} 목적지`)}</label>
+        <label>접근할 때 본인에게 보이는 제약<textarea value={limit.reason} onChange={e => edit(m => { m.travelLimits![i].reason=e.target.value; })}/></label>
+      </div><button onClick={() => edit(m => { m.travelLimits!.splice(i,1); })}>이동 제약 삭제</button></article>)}
+      <button onClick={() => edit(m => { (m.travelLimits ??= []).push({npcId:spec.scenario.characters[0]?.id ?? '',locationId:'',reason:''}); })}>+ 인물 이동 제약</button>
       <h4>원격 통신 채널</h4>{map.channels.map((c, i) => <article className="spatial-edit-row" key={i}><div className="form-grid">
         <label>채널 ID<input value={c.id} onChange={e => edit(m => { m.channels[i].id = e.target.value; })}/></label>
         <label>채널 이름<input value={c.name} onChange={e => edit(m => { m.channels[i].name = e.target.value; })}/></label>

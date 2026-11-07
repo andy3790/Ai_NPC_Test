@@ -9,6 +9,7 @@ export const spatialSchema = z.object({
     sightAndSound: z.boolean().optional(), closesAtSeconds: z.number().finite().positive().optional() })).max(500).default([]),
   initialPositions: z.array(z.object({ npcId: id, locationId: id })).min(2).max(30),
   channels: z.array(z.object({ id, name: z.string().min(1).max(100), memberNpcIds: z.array(id).min(2).max(30), description: text.default('') })).max(100).default([]),
+  travelLimits: z.array(z.object({npcId:id, locationId:id, reason:text.trim().min(1)})).max(300).optional(),
 });
 export type SpatialSpec = z.infer<typeof spatialSchema>;
 export const communicationSchema = z.object({ mode: z.enum(['local', 'whisper', 'channel', 'none']), targetNpcIds: z.array(id).max(30), channelId: id.nullable() });

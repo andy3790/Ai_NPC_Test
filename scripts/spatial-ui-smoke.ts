@@ -82,6 +82,13 @@ try {
   assert.ok(await dialog.getByLabel('열려 있을 때 양 끝의 말과 행동 전달').isChecked());
   assert.match(await dialog.getByLabel('시각 사건 1 관찰 내용',{exact:true}).inputValue(),/연필 눈금/);
   assert.match(await dialog.getByLabel('시각 사건 2 관찰 내용',{exact:true}).inputValue(),/끊긴다/);
+  await dialog.getByRole('button',{name:'JSON 편집',exact:true}).click();
+  await dialog.locator('input[type=file]').setInputFiles('assets/seowol/experiments/drama-last-platform.json');
+  await page.waitForFunction(() => (document.querySelector('.section-json textarea') as HTMLTextAreaElement)?.value.includes('seowol_drama_last_platform_v3'));
+  await dialog.getByRole('button',{name:'JSON을 설정에 적용',exact:true}).click();
+  await dialog.getByRole('button',{name:'01 시나리오'}).click();
+  assert.equal(await dialog.getByLabel('이동 제약 1 목적지',{exact:true}).inputValue(),'service_gate');
+  assert.match(await dialog.getByRole('textbox',{name:/접근할 때 본인에게 보이는 제약/}).inputValue(),/손끝의 촉각/);
   assert.deepEqual(errors, []);
   console.log('PASS spatial example editor, positions, two delivery modes, private observation, world state, generator, metrics, snapshot, exports and mobile');
 } catch (error) { await mkdir('.cache/screenshots', { recursive: true }); await page.screenshot({ path: '.cache/screenshots/spatial-error.png', fullPage: true }); throw error; } finally { await browser.close(); await server.close(); }

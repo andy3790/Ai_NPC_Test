@@ -66,7 +66,7 @@ export const scenes = [
     ],
   },
   {
-    slug: 'last-platform', revision: 2, title: '01:17에 남는 사람', genre: '분산 구조극 · 현상기원 존재의 선택', turns: 60,
+    slug: 'last-platform', revision: 3, title: '01:17에 남는 사람', genre: '분산 구조극 · 현상기원 존재의 선택', turns: 60,
     clockEvents: [{ id:'local_0117', atSeconds:30, locationIds:['old_corridor'], text:'휴대전화의 숫자가 01:17로 넘어간다. 멈춰 있던 구 전광판의 01:17과 두 표시가 잠깐 나란해진다.' }],
     pitch: '01:17을 가리킨 전광판 아래, 점검기사는 출구를 확신하지 못한다. 탈출로를 아는 사람은 그 출구로 나갈 수 없는 사람이다.',
     canon: '설정집 §10 사건 C 「유리선 01:17」. 구 통로의 반복, 별개 지성체, 물리적 균열을 구별한다. 2016년 사고 책임과 2023년 동료 행방은 미확정으로 둔다.',
@@ -93,6 +93,7 @@ export const scenes = [
       ],
       initialPositions: [ { npcId: 'kang_muhyeok', locationId: 'service_gate' }, { npcId: 'ryu_taekyung', locationId: 'old_corridor' }, { npcId: 'jung_isu', locationId: 'old_corridor' }, { npcId: 'seo_dogyeom', locationId: 'waiting_room' } ],
       channels: [{ id: 'rescue_radio', name: '점검·구조 무전', memberNpcIds: ['kang_muhyeok', 'ryu_taekyung', 'jung_isu', 'seo_dogyeom'], description: '점검 시작 전 연결한 정상 휴대 무전망. 모드 channel로 말한 내용만 들린다. 위치·감각·생각을 자동 전송하지 않는다.' }],
+      travelLimits: [{ npcId:'seo_dogyeom', locationId:'service_gate', reason:'관리 출입구 쪽으로 더 가 보려 하자 손끝의 촉각이 흐려진다. 스스로 걸어갈 수 있는 범위는 여기까지다. 대기실 쪽으로는 되돌아갈 수 있다.' }],
     },
     engineRules: [
       '구 통로에서 같은 시각을 본 사람만 무전으로 알릴 수 있다. 안전한 곳에 모이면 남은 쟁점은 대기실 바닥을 보존할지 안내 회로만 분리할지다. 도면을 실제 본 사람과 자신의 생활 장소를 잃을 사람이 결정에 각각 참여한다.',

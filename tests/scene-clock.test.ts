@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { z } from 'zod';
 import { experimentSchema } from '../src/shared/schema.js';
 import { spatialSpeechSchema } from '../src/shared/spatial-schema.js';
-import { initialSpatialWorld, closePassages, validateSpatialChoice, selectableGroups } from '../src/core/spatial-state.js';
+import { initialSpatialWorld, closePassages, validateSpatialChoice, selectableGroups, connectionFor } from '../src/core/spatial-state.js';
 import { clockObservations, nextClockBoundary } from '../src/core/scene-clock.js';
 import { contactPossible, localContext, speechPerception } from '../src/core/perception.js';
 import { actorRecall, checkDialogue, establishedConversation, priorDisclosures } from '../src/core/actor-context.js';
@@ -94,4 +94,22 @@ test('the actual actor schema offers only reachable routes, available contacts a
   const continuing={...speech,activityChoice:'continue'};
   assert.ok(active.safeParse(continuing).success);
   assert.ok(!active.safeParse({...continuing,communication:{mode:'local',channelId:null,targetNpcIds:[outside]}}).success);
+});
+
+test('an actor-specific boundary constrains walking and reveals its reason only to the affected actor on approach', () => {
+  const station=experimentSchema.parse(JSON.parse(readFileSync('assets/seowol/experiments/drama-last-platform.json','utf8')));
+  const state=initialSpatialWorld(station), actor='seo_dogyeom', dest='service_gate';
+  const position=state.spatial!.positions.find(p => p.npcId===actor)!;
+  assert.equal(localContext(station,state,actor).personalTravelLimits,undefined);
+  position.locationId='old_corridor';
+  const view=localContext(station,state,actor);
+  assert.ok(view.personalTravelLimits?.some(l => l.destination===dest));
+  assert.ok(!view.routes.some(r => r.toLocationId===dest));
+  assert.ok(view.routes.some(r => r.toLocationId==='waiting_room'));
+  assert.equal(connectionFor(station,position,dest),undefined);
+  assert.ok(connectionFor(station,position,dest,0,true));
+  const other=state.spatial!.positions.find(p => p.npcId==='ryu_taekyung')!;
+  other.locationId=position.locationId;
+  assert.ok(!JSON.stringify(localContext(station,state,other.npcId)).includes(view.personalTravelLimits![0].observation));
+  assert.ok(connectionFor(station,other,dest));
 });

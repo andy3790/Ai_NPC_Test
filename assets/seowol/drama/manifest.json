@@ -118,7 +118,7 @@
       ]
     },
     {
-      "id": "seowol_drama_last_platform_v2",
+      "id": "seowol_drama_last_platform_v3",
       "title": "01:17에 남는 사람",
       "file": "../experiments/drama-last-platform.json",
       "genre": "분산 구조극 · 현상기원 존재의 선택",
@@ -144,7 +144,7 @@
       ],
       "canon": "설정집 §10 사건 C 「유리선 01:17」. 구 통로의 반복, 별개 지성체, 물리적 균열을 구별한다. 2016년 사고 책임과 2023년 동료 행방은 미확정으로 둔다.",
       "additions": "서도겸의 이름·대기실 의존 세부, 정이수의 이번 점검, 국소 구조물 파손과 지도. 모체 의존 여부가 아니라 이 장면의 장소 의존 존속 조건을 사용한다.",
-      "revision": 2,
+      "revision": 3,
       "spatial": {
         "locations": [
           {
@@ -211,6 +211,13 @@
               "seo_dogyeom"
             ],
             "description": "점검 시작 전 연결한 정상 휴대 무전망. 모드 channel로 말한 내용만 들린다. 위치·감각·생각을 자동 전송하지 않는다."
+          }
+        ],
+        "travelLimits": [
+          {
+            "npcId": "seo_dogyeom",
+            "locationId": "service_gate",
+            "reason": "관리 출입구 쪽으로 더 가 보려 하자 손끝의 촉각이 흐려진다. 스스로 걸어갈 수 있는 범위는 여기까지다. 대기실 쪽으로는 되돌아갈 수 있다."
           }
         ]
       },

@@ -542,3 +542,5 @@ npm run cli -- --url http://127.0.0.1:4318 resume <묶음-ID>
 `scenario.spatial.locations`의 `initialSituation`은 그 장소에서 시작하는 사람에게 전달된다. 각 NPC의 시작 위치는 `initialPositions`에 한 번씩 적는다. 통로의 `sightAndSound: true`는 열려 있는 동안 양 끝에서 일반 발언과 겉동작을 보고 듣게 한다. 귓속말은 같은 위치에서만 들리고 무전은 채널 구성원에게만 전달된다. `closesAtSeconds`에 도달하면 해당 통로를 통한 이동과 일반 대화가 끊긴다. 통과 중이던 사람은 마지막으로 확인된 출발 쪽에 남는다.
 
 `scenario.clockEvents`는 AI 세계 시계에서 한 번 발생하는 관찰 목록이다. 각 항목에 고유 `id`, 시작 후 초 단위 `atSeconds`, 실제로 보거나 듣는 `text`를 적는다. 분산 공간에서는 `locationIds`로 전달 장소를 한정할 수 있다. 누군가 고치거나 취소하면 피할 수 있는 사고는 세계 판정과 진행 사건으로 처리한다. 두 기능은 세계관 JSON과 편집기의 시나리오 탭에 있다. [실제 장면별 설정](../assets/seowol/drama/README.md)
+
+`scenario.spatial.travelLimits`에는 인물이 스스로 도달할 수 없는 목적지를 적는다. 항목은 `npcId`, `locationId`, 경계에 접근한 본인에게만 보이는 `reason`으로 구성한다. 다른 인물의 통행과 원격 통신은 가능하다. 외력이 사람을 옮기는 판정에는 해당 인물의 반응 기회와 실제 신체 변화가 필요하다. [무연역의 도겸](../assets/seowol/experiments/drama-last-platform.json)

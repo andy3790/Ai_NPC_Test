@@ -4,6 +4,9 @@ import type { WorldState } from '../shared/world-schema.js';
 import type { Utterance } from '../shared/types.js';
 
 export const positionKey = (p: SpatialPosition) => p.locationId ?? `transit:${p.transit?.connectionId ?? p.npcId}`;
+export function travelLimit(spec: ExperimentSpec, actor: string, destination: string) {
+  return spec.scenario.spatial?.travelLimits?.find(l => l.npcId === actor && l.locationId === destination);
+}
 export function inSightAndSound(spec: ExperimentSpec, time: number, a: SpatialPosition, b: SpatialPosition) {
   if (positionKey(a) === positionKey(b)) return true;
   return spec.scenario.spatial!.connections.some(route => route.sightAndSound && time < (route.closesAtSeconds ?? Infinity) &&
@@ -84,11 +87,13 @@ export function localContext(spec: ExperimentSpec, state: WorldState, npcId: str
   const routes = pos.locationId ? space.connections.filter(r => state.virtualSeconds < (r.closesAtSeconds ?? Infinity) && (r.from === pos.locationId || r.bidirectional && r.to === pos.locationId)).map(r => ({
     connectionId: r.id, toLocationId: r.from === pos.locationId ? r.to : r.from, description: r.description,
   })) : pos.transit ? [pos.transit.from, pos.transit.to].map(id => ({ connectionId: pos.transit!.connectionId, toLocationId: id, description: '현재 통로의 끝' })) : [];
+  const personalTravelLimits = (space.travelLimits ?? []).filter(l => l.npcId === npcId && routes.some(r => r.toLocationId === l.locationId));
   return { virtualSeconds: state.virtualSeconds, location: pos.locationId ? space.locations.find(p => p.id === pos.locationId) && {
     id: pos.locationId, name: space.locations.find(p => p.id === pos.locationId)!.name, description: space.locations.find(p => p.id === pos.locationId)!.description,
   } : null, transit: pos.transit ? { from: pos.transit.from, to: pos.transit.to, connectionId: pos.transit.connectionId, moving: !!ownActivity?.moveToLocationId } : null,
     nearbyNpcs: s.positions.filter(p => p.npcId !== npcId && inSightAndSound(spec,state.virtualSeconds,p,pos)).map(p => ({ id: p.npcId, name: spec.scenario.characters.find(c => c.id === p.npcId)!.name, locationId:p.locationId })),
-    routes: routes.map(r => ({ ...r, name: space.locations.find(l => l.id === r.toLocationId)!.name })),
+    routes: routes.filter(r => !travelLimit(spec,npcId,r.toLocationId)).map(r => ({ ...r, name: space.locations.find(l => l.id === r.toLocationId)!.name })),
+    ...(personalTravelLimits.length && { personalTravelLimits:personalTravelLimits.map(l => ({destination:l.locationId,observation:l.reason})) }),
     channels: space.channels.filter(c => c.memberNpcIds.includes(npcId)),
     closedPassages: space.connections.filter(r => state.virtualSeconds >= (r.closesAtSeconds ?? Infinity) &&
       (r.from === pos.locationId || r.to === pos.locationId)).map(r => ({id:r.id,closed:true})),

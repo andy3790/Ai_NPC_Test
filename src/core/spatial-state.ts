@@ -3,7 +3,7 @@ import { spatialPlanSchema, spatialResolutionSchema, type SpatialSpeech, type Sp
 import type { WorldState } from '../shared/world-schema.js';
 import type { Utterance } from '../shared/types.js';
 import { initialWorldState } from './world.js';
-import { audienceNpcIds, contactPossible, inSightAndSound, positionKey, speechPerception } from './perception.js';
+import { audienceNpcIds, contactPossible, inSightAndSound, positionKey, speechPerception, travelLimit } from './perception.js';
 
 export function initialSpatialWorld(spec: ExperimentSpec): WorldState {
   return { ...initialWorldState(), spatial: { positions: spec.scenario.characters.map(c => ({ ...spec.scenario.spatial!.initialPositions.find(p => p.npcId === c.id)!, transit: null })),
@@ -39,8 +39,9 @@ export function selectableGroups(spec: ExperimentSpec, state: WorldState, histor
   return [...groups.entries()].map(([key, ids]) => ({ key, ids: ids.some(id => urgent.includes(id)) ? ids.filter(id => urgent.includes(id)).sort((a, b) => urgent.indexOf(a) - urgent.indexOf(b)) : ids.sort((a, b) => last(a) - last(b)), urgent: ids.some(id => urgent.includes(id)) }))
     .sort((a, b) => Number(b.urgent) - Number(a.urgent) || last(a.ids[0]) - last(b.ids[0]));
 }
-export function connectionFor(spec: ExperimentSpec, pos: SpatialPosition, destination: string, at = 0) {
+export function connectionFor(spec: ExperimentSpec, pos: SpatialPosition, destination: string, at = 0, forced = false) {
   const map = spec.scenario.spatial!;
+  if (!forced && travelLimit(spec,pos.npcId,destination)) return undefined;
   const routes = map.connections.filter(c => at < (c.closesAtSeconds ?? Infinity));
   if (pos.transit) return [pos.transit.from, pos.transit.to].includes(destination) ? routes.find(c => c.id === pos.transit!.connectionId) : undefined;
   return routes.find(c => c.from === pos.locationId && c.to === destination || c.bidirectional && c.to === pos.locationId && c.from === destination);
@@ -187,7 +188,7 @@ export function applySpatialResolution(spec: ExperimentSpec, state: WorldState, 
       const a = s.activities.find(a => a.id === m.activityId && a.npcId === m.npcId);
       if (!a || a.moveToLocationId !== m.toLocationId || a.status !== 'completed' || !out.completedActivities.some(c => c.id === a.id) || pos!.transit?.activityId !== a.id) fail('NPC가 요청하고 실제로 완료한 이동이 아닙니다.');
     } else {
-      if (m.activityId !== null || blocked.has(m.npcId) || !connectionFor(spec, pos!, m.toLocationId,time) || !out.events.some(e => e.type === 'physical_effect' && e.npcId === m.npcId)) fail('비자발적 이동에는 연결된 장소·반응 기회·물리 결과가 필요합니다.');
+      if (m.activityId !== null || blocked.has(m.npcId) || !connectionFor(spec, pos!, m.toLocationId,time,true) || !out.events.some(e => e.type === 'physical_effect' && e.npcId === m.npcId)) fail('비자발적 이동에는 연결된 장소·반응 기회·물리 결과가 필요합니다.');
       for (const a of s.activities) if (a.npcId === m.npcId && a.status === 'pending' && a.kind === 'action') Object.assign(a, { status: 'failed', finishedAtSeconds: time, reason: '비자발적 위치 변경으로 기존 장소의 행동이 불가능해짐' });
     }
     pos!.locationId = m.toLocationId; pos!.transit = null;

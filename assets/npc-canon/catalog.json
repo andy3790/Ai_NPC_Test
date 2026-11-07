@@ -21,7 +21,7 @@
     },
     "compatibility": {
       "schemaPath": "src/shared/schema.ts",
-      "schemaSha256": "ff2bac80da599eb3dd062ad6ffedd313a40792b696df67374068c5b79dbcdac4",
+      "schemaSha256": "fe3af6ab9d51df7684edda2f1906bbe86d948eb2e422402ac46e02d43365538d",
       "promptPath": "src/core/prompts.ts",
       "promptSha256": "135036b60bcdaa33179c0f9a216db9bbd52e7cd0bc41e45299557d2ef4e95f14",
       "promptDependencies": {
