@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "scope": "독립 에피소드용 추가안. 기존 정사와 별도 세션의 결과를 덮어쓰지 않는다.",
+  "canonCharacterIds": [
+    "cha_yujin",
+    "jang_serim",
+    "ryu_taekyung",
+    "lee_harin",
+    "na_yeonwoo",
+    "kang_muhyeok",
+    "baek_seoeun",
+    "jeon_siwan"
+  ],
+  "newCharacterIds": [
+    "yoon_haegyeong",
+    "yoon_dajeong",
+    "seo_dogyeom",
+    "jung_isu",
+    "nam_giseon",
+    "kwon_seoryeong",
+    "jin_somyeong",
+    "park_eunjo"
+  ],
+  "scenes": [
+    {
+      "id": "seowol_drama_closing_door_v1",
+      "title": "없는 층, 닫히는 문",
+      "file": "../experiments/drama-closing-door.json",
+      "genre": "구조 스릴러 · 모녀 갈등",
+      "mode": "ai_spatial",
+      "maxUtterances": 48,
+      "characters": [
+        {
+          "id": "ryu_taekyung",
+          "name": "류태경"
+        },
+        {
+          "id": "baek_seoeun",
+          "name": "백서은"
+        },
+        {
+          "id": "yoon_haegyeong",
+          "name": "윤해경"
+        },
+        {
+          "id": "yoon_dajeong",
+          "name": "윤다정"
+        }
+      ],
+      "canon": "설정집 §10 사건 A 「없는 층의 문」. 관리인 형상은 기억에 따른 재구성이며 부활이 아니다. 창작한 모녀·부상·이번 발현의 지속시간만 에피소드 추가다.",
+      "additions": "윤해경·윤다정, 이번 구조 시각과 문이 닫히는 경과, 사진통, 현장 장비. 2021년 사건의 결정적 원인이나 백서은의 책임 범위는 확정하지 않는다."
+    },
+    {
+      "id": "seowol_drama_last_platform_v1",
+      "title": "01:17에 남는 사람",
+      "file": "../experiments/drama-last-platform.json",
+      "genre": "분산 구조극 · 현상기원 존재의 선택",
+      "mode": "ai_spatial",
+      "maxUtterances": 60,
+      "characters": [
+        {
+          "id": "kang_muhyeok",
+          "name": "강무혁"
+        },
+        {
+          "id": "ryu_taekyung",
+          "name": "류태경"
+        },
+        {
+          "id": "jung_isu",
+          "name": "정이수"
+        },
+        {
+          "id": "seo_dogyeom",
+          "name": "서도겸"
+        }
+      ],
+      "canon": "설정집 §10 사건 C 「유리선 01:17」. 구 통로의 반복, 별개 지성체, 물리적 균열을 구별한다. 2016년 사고 책임과 2023년 동료 행방은 미확정으로 둔다.",
+      "additions": "서도겸의 이름·대기실 의존 세부, 정이수의 이번 점검, 국소 구조물 파손과 지도. 모체 의존 여부가 아니라 이 장면의 장소 의존 존속 조건을 사용한다."
+    },
+    {
+      "id": "seowol_drama_warehouse_twelve_v1",
+      "title": "고요창고 12호 — 돌아온 화물",
+      "file": "../experiments/drama-warehouse-twelve.json",
+      "genre": "산업 재난 · 공범과 증거",
+      "mode": "ai",
+      "maxUtterances": 48,
+      "characters": [
+        {
+          "id": "jang_serim",
+          "name": "장세림"
+        },
+        {
+          "id": "cha_yujin",
+          "name": "차유진"
+        },
+        {
+          "id": "na_yeonwoo",
+          "name": "나연우"
+        },
+        {
+          "id": "nam_giseon",
+          "name": "남기선"
+        }
+      ],
+      "canon": "설정집 §10 사건 E. 용기 12개, 공용 검수 설비를 통한 오염, 이름표 선반과 검사문의 국소 효과를 사용한다. 차유진의 외피 수리는 내용물 감정이 아니다.",
+      "additions": "이번 2026년 서식 편집자 남기선, 현장의 컨베이어 상태·기록 파일·회수 장비. 2024년 최초 위조범이나 상회 전체의 의도를 확정하지 않는다."
+    },
+    {
+      "id": "seowol_drama_broken_neutrality_v1",
+      "title": "중립은 문 앞에서 끝난다",
+      "file": "../experiments/drama-broken-neutrality.json",
+      "genre": "밀실 대치 · 강제 회수 · 신원 노출",
+      "mode": "ai_spatial",
+      "maxUtterances": 48,
+      "characters": [
+        {
+          "id": "lee_harin",
+          "name": "이하린"
+        },
+        {
+          "id": "cha_yujin",
+          "name": "차유진"
+        },
+        {
+          "id": "jeon_siwan",
+          "name": "전시완"
+        },
+        {
+          "id": "kwon_seoryeong",
+          "name": "권서령"
+        }
+      ],
+      "canon": "겹문은 계약상 중립이며 절대 성역이 아니다. 이하린은 독립 존속하고 신원 노출을 두려워한다. 회색합의는 초자연적인 강제 법률이 아니다.",
+      "additions": "권서령과 이번 민간 회수 계약, 과거 수용 기록과 현재 신원을 연결하는 한 묶음의 자료, 겹문의 오늘 영업 종료 상태. 하린의 모체 모습·종결 연도는 새로 정하지 않는다."
+    },
+    {
+      "id": "seowol_drama_third_call_v1",
+      "title": "세 번째 통화의 공개 예약",
+      "file": "../experiments/drama-third-call.json",
+      "genre": "정보 재난 · 취재 대치 · 상실",
+      "mode": "ai",
+      "maxUtterances": 48,
+      "characters": [
+        {
+          "id": "jin_somyeong",
+          "name": "진소명"
+        },
+        {
+          "id": "baek_seoeun",
+          "name": "백서은"
+        },
+        {
+          "id": "kang_muhyeok",
+          "name": "강무혁"
+        },
+        {
+          "id": "jeon_siwan",
+          "name": "전시완"
+        }
+      ],
+      "canon": "설정집 §10 사건 D 「밤의 세 번째 전화」. 기초석·옛 단자·동일 발신자의 조건에 한정되며 기억의 재생·편집이지 부활이나 예언이 아니다.",
+      "additions": "진소명, 이번 민원 이송과 발행 예약, 현장의 기록 파일. 언니의 사고를 이면의 음모로 연결하지 않는다."
+    },
+    {
+      "id": "seowol_drama_return_current_v1",
+      "title": "부표 두 개 사이",
+      "file": "../experiments/drama-return-current.json",
+      "genre": "항만 생존극 · 손실과 책임",
+      "mode": "ai",
+      "maxUtterances": 48,
+      "characters": [
+        {
+          "id": "jang_serim",
+          "name": "장세림"
+        },
+        {
+          "id": "ryu_taekyung",
+          "name": "류태경"
+        },
+        {
+          "id": "jung_isu",
+          "name": "정이수"
+        },
+        {
+          "id": "park_eunjo",
+          "name": "박은조"
+        }
+      ],
+      "canon": "설정집 §10 사건 B 「반송 조류」. 두 방파제 기초 사이에 남은 공간적 잔재이며 시간여행이나 소문으로 성장하는 활성 현상이 아니다.",
+      "additions": "박은조와 소형 작업선, 오늘의 물때·고장·화물·점검잔교. 기존 1976년 사고의 원인이나 원격 오염을 새로 확정하지 않는다."
+    }
+  ]
+}

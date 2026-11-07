@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildVoiceExperiments } from './build-experiments.mjs';
+import { buildDramaticScenes } from './build-drama.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const source = await readFile(join(root, '02_이면기록_서월_캐릭터챗_운영팩_v1.1.md'), 'utf8');
@@ -132,3 +133,4 @@ for (const [file, spec] of [['return-deadline.json', delivery], ['return-deadlin
 }
 console.log('SEOWOL_BUILD_OK: 5 characters, 3 experiments; original canon files preserved.');
 await buildVoiceExperiments(root, delivery, worldOutputNotes);
+await buildDramaticScenes(root);
