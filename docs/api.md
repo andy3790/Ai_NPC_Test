@@ -28,7 +28,7 @@ OpenAI API 서버에서만 제공합니다. 키가 없어도 health·config·his
 
 | 메서드·경로 | 요청 / 응답 |
 |---|---|
-| `GET /health` | `{ok, adapter, version, historyEnabled}` |
+| `GET /health` | `ok, adapter, version, historyEnabled, promptVersion, defaultCharacterPerformanceVersion`. 마지막 두 필드는 실행 중인 서버의 버전과 새 실험의 기본 연기 정책 |
 | `GET /models` | 현재 어댑터의 모델 목록. `id, name, efforts, defaultEffort, isDefault` |
 | `GET /model-catalog` | 서버가 읽은 모델·추론·단가 JSON. API 키 없이 조회 가능. `enabled: false`인 과거 모델 가격도 포함 |
 | `GET /example` | 서버 모델을 적용한 ExperimentSpec. API 서버는 일반 예제를 6차례·평가 간격 6·동시 묶음/호출 1로 조정 |
@@ -115,7 +115,7 @@ OpenAI API 서버에서만 제공합니다. 키가 없어도 health·config·his
 
 ## SSE와 상태
 
-`GET /events`는 이름 없는 SSE `data` 메시지를 보냅니다. 연결 시 `{"type":"connected"}`, 일반 변경은 `{runId,at}`, 삭제는 `{type:"deleted",runId,at}`, 키 선택 변경은 `{type:"credentials-changed",runId:"",at}`입니다. 키 알림에는 키·소유자 정보를 싣지 않습니다. 각 브라우저는 자기 쿠키로 `/openai/key`와 모델 목록을 다시 조회합니다. 15초마다 heartbeat 주석을 보냅니다.
+`GET /events`는 이름 없는 SSE `data` 메시지를 보냅니다. 연결 시 `{"type":"connected"}`, 일반 변경은 `{runId,at}`, 삭제는 `{type:"deleted",runId,at}`, 보관 목록 갱신은 `{type:"history-refreshed",runId:"",at}`, 키 선택 변경은 `{type:"credentials-changed",runId:"",at}`입니다. 키 알림에는 키·소유자 정보를 싣지 않습니다. 각 브라우저는 자기 쿠키로 `/openai/key`와 모델 목록을 다시 조회합니다. 15초마다 heartbeat 주석을 보내며, 연결된 화면들이 외부 기록 검색을 공유합니다.
 
 알림을 받으면 목록과 해당 상세·비교 대상을 다시 조회하세요. 빈 runId는 기록 재검색 등 전체 갱신입니다. 영구 재생 스트림이나 모델 토큰 스트림이 아니며 Last-Event-ID 기반 복구도 없습니다. 원본 이벤트는 SQLite·JSONL에 별도로 저장합니다.
 

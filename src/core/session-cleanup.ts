@@ -4,6 +4,8 @@ import type { InvocationMetrics, Run } from '../shared/types.js';
 import { Store } from './store.js';
 
 export const SESSION_CLEANUP_VERSION = 'codex-session-cleanup/2';
+// This historical directory name belongs to the real CLI smoke runner.
+export const isCodexCleanupSmokeDirectory = (name: string) => /^history-test-codex-cleanup-\d+$/.test(name);
 
 // A terminal run cannot resume. A director call is independently disposable:
 // its next attempt always starts a fresh thread, unlike NPC/world/judge calls.

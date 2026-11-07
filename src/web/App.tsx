@@ -70,7 +70,7 @@ export function App() {
           <span>{runs.length} / {allRuns.length}개 표시</span><button disabled={busy || !health?.historyEnabled} onClick={() => void action(refreshHistory, { notice: '저장 위치를 다시 검색했습니다.' })}>기록 다시 검색</button>
         </section>
         <RunFilters runs={allRuns} value={filters} onChange={setFilters}/>
-        {history?.enabled && <details className="history-sources"><summary>통합 보관소 · {history.archive}{history.errors.length > 0 && ` · 읽기 오류 ${history.errors.length}곳`}</summary><p>같은 실행 ID는 한 건으로 표시합니다. 다른 저장소의 기록은 보관본으로 조회하며, 원본 파일이 없어져도 통합 보관소에 남습니다. 새 저장 파일은 ‘기록 다시 검색’으로 불러옵니다.</p>{history.sources.map(s => <div key={s.path} className={s.status === 'error' ? 'red' : ''}><code>{s.path}</code><span>{s.status === 'error' ? s.error : `${s.runs}개 기록`}</span></div>)}</details>}
+        {history?.enabled && <details className="history-sources"><summary>통합 보관소 · {history.archive}{history.errors.length > 0 && ` · 읽기 오류 ${history.errors.length}곳`}</summary><p>같은 실행 ID는 한 건으로 표시합니다. 다른 저장소의 기록은 보관본으로 조회하며, 원본 파일이 없어져도 통합 보관소에 남습니다. 화면을 열어 두면 새 테스트 기록도 자동으로 표시됩니다. ‘기록 다시 검색’을 누르면 바로 확인합니다.</p>{history.sources.map(s => <div key={s.path} className={s.status === 'error' ? 'red' : ''}><code>{s.path}</code><span>{s.status === 'error' ? s.error : `${s.runs}개 기록`}</span></div>)}</details>}
         <RunStatistics runs={runs}/>
         {view === 'compare' ? <Compare runs={runs} selected={compareIds} toggle={toggleCompare} details={compared}/> : view === 'data' ? <ExportView runs={runs}/> : <>
           <div className="section-heading"><h2>대화 묶음 <span>{runs.length}</span></h2><span className="muted">조건별 독립 세션 · 실시간 기록</span></div>

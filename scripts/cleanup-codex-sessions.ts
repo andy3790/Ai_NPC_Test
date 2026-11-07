@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, realpathSync, writeFi
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { CodexAdapter } from '../src/adapters/codex.js';
-import { disposableSessions, SESSION_CLEANUP_VERSION } from '../src/core/session-cleanup.js';
+import { disposableSessions, isCodexCleanupSmokeDirectory, SESSION_CLEANUP_VERSION } from '../src/core/session-cleanup.js';
 import { testOwnerKey } from './lib/test-sessions.js';
 import type { InvocationMetrics, Run } from '../src/shared/types.js';
 
@@ -23,7 +23,7 @@ const walk = (dir: string, depth = 0) => {
   if (depth > 9 || !existsSync(dir) || !inside(realpathSync(dir))) return;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     if (entry.isSymbolicLink() || ['node_modules', '.git', 'sessions', 'runtime'].includes(entry.name)) continue;
-    if (/^(history-test-|history-ui-)/.test(entry.name) && !/^history-test-codex-cleanup-\d+$/.test(entry.name)) continue;
+    if (/^(history-test-|history-ui-)/.test(entry.name) && !isCodexCleanupSmokeDirectory(entry.name)) continue;
     const path = join(dir, entry.name);
     if (entry.isDirectory()) walk(path, depth + 1);
     else if (entry.name === 'npc-lab.sqlite' || entry.name === 'npc-history.sqlite') sources.add(path);

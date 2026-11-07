@@ -5,6 +5,8 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { z } from 'zod';
 import { Engine } from '../core/engine.js';
+import { PROMPT_VERSION } from '../core/prompts.js';
+import { CHARACTER_PERFORMANCE } from '../shared/character-performance.js';
 import { exampleSpec } from '../shared/example.js';
 import { experimentSchema } from '../shared/schema.js';
 import { exportFiles, zipFiles } from '../core/export.js';
@@ -48,7 +50,8 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
     const message = error instanceof Error ? error.message : String(error);
     return reply.code(400).send({ error: openai ? openai.keys.redact(message) : message });
   });
-  app.get('/api/health', async () => ({ ok: true, adapter: engine.adapter.name, version: APP_VERSION, historyEnabled: !!history }));
+  app.get('/api/health', async () => ({ ok: true, adapter: engine.adapter.name, version: APP_VERSION, historyEnabled: !!history,
+    promptVersion: PROMPT_VERSION, defaultCharacterPerformanceVersion: CHARACTER_PERFORMANCE }));
   app.get('/api/openai/key', async (req, reply) => {
     reply.header('Cache-Control', 'no-store');
     return keyAdapter().keys.status(browserOwner(req, reply));
@@ -66,7 +69,8 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
     adapter.keys.clearSelection(owner); keysChanged(); return adapter.keys.status(owner);
   });
   app.get('/api/history', async () => history ? { enabled: true, ...history.sources() } : { enabled: false, sources: [], runs: 0, errors: [] });
-  app.post('/api/history/refresh', async () => { if (!history) throw new Error('이 서버는 통합 기록 조회가 꺼져 있습니다.'); const result = history.refresh(); engine.emit('change', { runId: '', at: new Date().toISOString() }); return result; });
+  const historyChanged = () => engine.emit('change', { type: 'history-refreshed', runId: '', at: new Date().toISOString() });
+  app.post('/api/history/refresh', async () => { if (!history) throw new Error('이 서버는 통합 기록 조회가 꺼져 있습니다.'); const result = history.refresh(); historyChanged(); return result; });
   app.get('/api/models', async req => engine.adapter.models(credential(req)));
   app.get('/api/model-catalog', async (_req, reply) => {
     reply.header('Cache-Control', 'no-store'); return getModelCatalog();
@@ -137,14 +141,28 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
   app.get<{ Params: { id: string } }>('/api/runs/:id/export', async req => files(req.params.id));
   app.get<{ Params: { id: string } }>('/api/runs/:id/export.zip', async (req, reply) => reply.type('application/zip').header('Content-Disposition', `attachment; filename="npc-${req.params.id}.zip"`).send(zipFiles(files(req.params.id))));
   const streams = new Set<import('node:http').ServerResponse>();
+  let nextHistoryCheck = 0;
+  const refreshExternalHistory = () => {
+    if (!history || performance.now() < nextHistoryCheck) return;
+    nextHistoryCheck = performance.now() + 30_000;
+    try {
+      const report = history.refresh('external');
+      if (report.sources.some(source => source.status === 'loaded')) historyChanged();
+    } catch (error) { app.log.warn({ err: error }, 'External history refresh failed'); }
+  };
   app.get('/api/events', (req, reply) => {
     reply.hijack(); reply.raw.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive' });
     streams.add(reply.raw); reply.raw.write('data: {"type":"connected"}\n\n');
+    refreshExternalHistory();
     req.raw.on('close', () => streams.delete(reply.raw));
   });
   const listener = (event: unknown) => { for (const stream of streams) stream.write(`data: ${JSON.stringify(event)}\n\n`); };
   engine.on('change', listener);
-  const heartbeat = setInterval(() => { for (const stream of streams) stream.write(': heartbeat\n\n'); }, 15_000); heartbeat.unref();
+  const heartbeat = setInterval(() => {
+    if (!streams.size) return;
+    for (const stream of streams) stream.write(': heartbeat\n\n');
+    refreshExternalHistory();
+  }, 15_000); heartbeat.unref();
   app.addHook('preClose', async () => { for (const stream of streams) stream.end(); });
   app.addHook('onClose', async () => { engine.off('change', listener); clearInterval(heartbeat); for (const stream of streams) stream.end(); history?.close(); });
   const webDir = resolve('dist/web');

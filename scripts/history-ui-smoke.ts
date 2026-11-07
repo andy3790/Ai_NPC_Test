@@ -9,9 +9,10 @@ import { exampleSpec } from '../src/shared/example.js';
 
 mkdirSync('.cache', { recursive: true });
 const root = mkdtempSync(resolve('.cache/history-ui-'));
-const cli = await historyFixture(join(root, 'reports/cli/npc-lab.sqlite'), 'codex');
 await historyFixture(join(root, 'reports/api/npc-lab.sqlite'), 'openai', 'per_utterance');
 const server = await serve({ port: 0, mock: true, data: join(root, 'current'), historyWorkspace: root });
+// Written after server startup, using the real CLI runner's directory shape.
+const cli = await historyFixture(join(root, '.cache/history-test-codex-cleanup-12345/npc-lab.sqlite'), 'codex');
 const spec = exampleSpec('mock-model'); spec.maxUtterances = 1; spec.evaluation.enabled = false; spec.variants = [spec.variants[0]];
 await server.engine.create(spec); await server.engine.idle();
 const browser = await chromium.launch({ headless: true, channel: process.env.NPC_BROWSER_CHANNEL ?? (process.platform === 'win32' ? 'msedge' : undefined), executablePath: process.env.NPC_BROWSER_EXECUTABLE });
@@ -59,6 +60,11 @@ try {
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
   const apiDetail = await page.request.get(`${server.app.listeningOrigin}/api/runs/${cli.detail.run.id}`);
   assert.equal((await apiDetail.json()).summary.speechCount, 3);
+  // A separate evaluator finishes while this page remains open.
+  await historyFixture(join(root, '.cache/character-performance/late/npc-lab.sqlite'), 'openai');
+  await page.waitForFunction(() => document.querySelectorAll('.run-card').length === 4, undefined, { timeout: 60_000 });
+  await page.getByLabel('기록 검색', { exact: true }).fill('character-performance/late');
+  await page.waitForFunction(() => document.querySelectorAll('.run-card').length === 1);
   assert.deepEqual(errors, []);
   console.log(`HISTORY_UI_OK: filters, stored dialogues, read-only review, mixed-provider comparison, raw calls, search, refresh, ZIP, mobile\n${root}`);
 } finally { await browser.close(); await server.close(); }

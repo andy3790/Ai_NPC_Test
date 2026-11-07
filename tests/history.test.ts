@@ -8,11 +8,32 @@ import { MockAdapter } from '../src/adapters/mock.js';
 import { RunHistoryCatalog } from '../src/core/history.js';
 import { createApp } from '../src/server/app.js';
 import { exampleSpec } from '../src/shared/example.js';
+import { CHARACTER_PERFORMANCE } from '../src/shared/character-performance.js';
+import { PROMPT_VERSION } from '../src/core/prompts.js';
 import { aggregate } from '../src/core/metrics.js';
 import { historyFixture } from './history-fixture.js';
 
 function workspace() { mkdirSync('.cache', { recursive: true }); return mkdtempSync(resolve('.cache/history-test-')); }
 function save(path: string, data: string) { mkdirSync(resolve(path, '..'), { recursive: true }); writeFileSync(path, data); }
+
+test('external scans pick up late CLI and character comparisons without rescanning live or fixture runs', async () => {
+  const root = workspace(), current = join(root, 'data/openai/npc-lab.sqlite');
+  const store = new Store(current), engine = new Engine(store, new MockAdapter(), join(root, 'data/openai'));
+  const history = new RunHistoryCatalog(engine, { workspace: root });
+  try {
+    const cli = await historyFixture(join(root, '.cache/history-test-codex-cleanup-12345/npc-lab.sqlite'), 'codex');
+    const api = await historyFixture(join(root, '.cache/character-performance/trial/npc-lab.sqlite'), 'openai');
+    await historyFixture(join(root, '.cache/history-test-codex-cleanup-fixture/npc-lab.sqlite'), 'mock');
+    store.setting('current-only', true);
+    const first = history.refresh('external');
+    assert.deepEqual(first.errors, []);
+    assert.equal(first.sources.filter(s => s.status === 'loaded').length, 2);
+    assert.equal(first.sources.find(s => s.path === 'data/openai/npc-lab.sqlite')?.status, 'unchanged');
+    assert.deepEqual(new Set(history.list().map(r => r.id)), new Set([cli.detail.run.id, api.detail.run.id]));
+    assert.ok(history.detail(cli.detail.run.id).history?.readOnly);
+    assert.equal(history.refresh('external').sources.filter(s => s.status === 'loaded').length, 0);
+  } finally { history.close(); await engine.close(); store.close(); }
+});
 
 test('unified history: read-only database + exports, deduplication, providers, original data and raw metrics', async () => {
   const root = workspace(), foreign = join(root, 'reports/old/npc-lab.sqlite');
@@ -42,7 +63,9 @@ test('unified history: read-only database + exports, deduplication, providers, o
     assert.ok(catalog.sources().sources.some(s => s.status === 'loaded'));
     catalog.refresh(); assert.ok(catalog.sources().sources.some(s => s.status === 'unchanged'));
     const req = (url: string, method: 'GET' | 'POST' | 'PATCH' = 'GET', payload?: any) => app.inject({ url, method, ...(payload ? { payload } : {}) });
-    assert.equal((await req('/api/health')).json().historyEnabled, true);
+    const health = (await req('/api/health')).json();
+    assert.equal(health.historyEnabled, true); assert.equal(health.promptVersion, PROMPT_VERSION);
+    assert.equal(health.defaultCharacterPerformanceVersion, CHARACTER_PERFORMANCE);
     assert.equal((await req('/api/runs?provider=codex')).json().length, 2);
     assert.equal((await req('/api/runs?provider=openai')).json().length, 1);
     assert.equal((await req('/api/runs?provider=mock')).json().length, 0);

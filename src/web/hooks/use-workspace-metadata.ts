@@ -44,13 +44,15 @@ export function useWorkspaceMetadata(onError: (message: string) => void) {
   useEffect(() => {
     mounted.current = true;
     const refresh = () => { void refreshConnection().catch(error => { if (mounted.current) errorHandler.current(errorMessage(error)); }); };
+    const loadHistory = () => { void api.history().then(value => { if (mounted.current) setHistory(value); }).catch(error => { if (mounted.current) errorHandler.current(errorMessage(error)); }); };
     refresh();
-    void api.history().then(value => { if (mounted.current) setHistory(value); }).catch(error => { if (mounted.current) errorHandler.current(errorMessage(error)); });
+    loadHistory();
     const events = new EventSource('/api/events');
     let connected = false;
     events.onmessage = event => {
       try {
         const type = JSON.parse(event.data).type;
+        if (type === 'history-refreshed') loadHistory();
         if (type === 'credentials-changed' || (type === 'connected' && connected)) refresh();
         if (type === 'connected') connected = true;
       } catch { /* Ignore non-JSON heartbeats. */ }

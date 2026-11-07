@@ -21,7 +21,9 @@ $env:NPC_LAB_HISTORY_ROOTS = '["D:/npc-runs","D:/npc-exports"]'
 npm run start:openai
 ```
 
-설정은 서버 시작 시 읽습니다. **기록 새로고침** 또는 `POST /api/history/refresh`로 외부 원본의 변경을 다시 가져옵니다. `GET /api/history`에서 검색 루트·원본별 loaded/unchanged/error·오류 사유를 볼 수 있습니다.
+설정은 서버 시작 시 읽습니다. 실험실 화면이 연결되면 서버가 외부 저장 위치를 확인하고, 연결된 동안 수십 초 간격으로 새 기록을 목록에 반영합니다. **기록 다시 검색** 또는 `POST /api/history/refresh`로 즉시 갱신할 수 있습니다. `GET /api/history`에서 원본별 상태와 오류 사유를 볼 수 있습니다.
+
+**기록 검색**에 `character-performance`를 입력하면 캐릭터 전후 비교를, `history-test-codex-cleanup-`을 입력하면 실제 Codex CLI 정리 테스트의 대화 묶음을 볼 수 있습니다. 공급자 세션을 삭제한 뒤에도 실험 DB에 저장한 대사와 호출 기록은 조회할 수 있습니다.
 
 검색은 루트에서 깊이 5까지 `.sqlite`, `.sqlite3`, `.db`, `detail.json`, `records.jsonl`을 찾습니다. 심볼릭 링크와 runtime·sessions·history·node_modules·일부 임시 테스트 폴더 등은 제외합니다. CSV·Markdown·ZIP만으로는 자동 복원하지 않으므로 ZIP은 풀어 `records.jsonl`이 있는 폴더를 지정합니다. JSONL은 이 앱의 한 묶음 전체 내보내기 형식이어야 합니다.
 

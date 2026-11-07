@@ -3,6 +3,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, realpathSync, statSyn
 import { dirname, join, relative, resolve } from 'node:path';
 import { Engine } from './engine.js';
 import { buildRunDetail } from './detail.js';
+import { isCodexCleanupSmokeDirectory } from './session-cleanup.js';
 import { matchesProvider, toRunListItem } from './summary.js';
 import { exportFiles } from './export.js';
 import { aggregateCost, PRICING_REVISION } from './pricing.js';
@@ -18,7 +19,7 @@ const stamp = () => new Date().toISOString();
 // Engine, whose constructor intentionally performs active-run recovery.
 export class RunHistoryCatalog {
   private db: DatabaseSync;
-  private signatures = new Map<string, string>();
+  private signatures = new Map<string, { value: string; runs: number }>();
   private states: SourceState[] = [];
   private captureTimer?: ReturnType<typeof setTimeout>;
   private changedRuns = new Set<string>();
@@ -103,7 +104,8 @@ export class RunHistoryCatalog {
       const real = realpathSync(path); if (visited.has(real)) return; visited.add(real);
       if (statSync(path).isFile()) { if (/\.(sqlite3?|db)$|[\\/](detail\.json|records\.jsonl)$/.test(path)) files.add(resolve(path)); return; }
       for (const entry of readdirSync(path, { withFileTypes: true })) {
-        if (entry.isSymbolicLink() || ['node_modules', '.git', 'dist', 'history', 'github-ready-check', 'runtime', 'sessions', 'screenshots', 'releases', 'publication-prep'].includes(entry.name) || /^(openai-test-|openai-keys-|api-key-ui-|history-test-|history-ui-)/.test(entry.name)) continue;
+        if (entry.isSymbolicLink() || ['node_modules', '.git', 'dist', 'history', 'github-ready-check', 'runtime', 'sessions', 'screenshots', 'releases', 'publication-prep'].includes(entry.name)) continue;
+        if (/^(openai-test-|openai-keys-|api-key-ui-|history-test-|history-ui-)/.test(entry.name) && !isCodexCleanupSmokeDirectory(entry.name)) continue;
         if (entry.isDirectory() || /\.(sqlite3?|db)$/.test(entry.name) || ['detail.json', 'records.jsonl'].includes(entry.name)) walk(join(path, entry.name), depth + 1);
       }
       } catch (error) { errors.push({ path: this.label(path), status: 'error', runs: 0, error: error instanceof Error ? error.message : String(error) }); }
@@ -113,7 +115,13 @@ export class RunHistoryCatalog {
   }
   private priority(path: string) { return resolve(path) === resolve(this.engine.store.path) ? 400 : /\.(sqlite3?|db)$/.test(path) ? 300 : path.endsWith('detail.json') ? 200 : 100; }
   private signature(path: string) {
-    return [path, path + '-wal'].map(file => existsSync(file) ? `${statSync(file).size}:${statSync(file).mtimeMs}` : '-').join('|');
+    const file = statSync(path);
+    const main = `${file.size}:${file.mtimeMs}`;
+    if (!/\.(sqlite3?|db)$/.test(path)) return main;
+    // Opening a read-only SQLite connection can create an empty WAL. Only a
+    // WAL with data can change the snapshot read by the archive.
+    const wal = statSync(path + '-wal', { throwIfNoEntry: false });
+    return wal?.size ? `${main}|${wal.size}:${wal.mtimeMs}` : main;
   }
   private importDatabase(path: string) {
     const source = new DatabaseSync(path, { readOnly: true }); let count = 0;
@@ -148,18 +156,26 @@ export class RunHistoryCatalog {
     }
     this.save(buildRunDetail(data), events, this.label(path), this.priority(path)); return 1;
   }
-  refresh() {
+  refresh(scope: 'all' | 'external' = 'all') {
     const states: SourceState[] = [];
+    const current = resolve(this.engine.store.path);
     for (const path of this.discover(states)) {
       const label = this.label(path);
       try {
+        // The live engine owns this DB and already publishes its committed changes.
+        if (scope === 'external' && path === current) {
+          const previous = this.states.find(source => source.path === label);
+          if (previous) states.push(previous.status === 'error' ? previous : { ...previous, status: 'unchanged' });
+          continue;
+        }
         const signature = this.signature(path);
-        if (this.signatures.get(path) === signature) { states.push({ path: label, status: 'unchanged', runs: Number(this.db.prepare('SELECT COUNT(*) AS n FROM history_locations WHERE path=?').get(label)?.n ?? 0) }); continue; }
+        const previous = this.signatures.get(path);
+        if (previous?.value === signature) { states.push({ path: label, status: 'unchanged', runs: previous.runs }); continue; }
         this.db.exec('BEGIN IMMEDIATE');
         let count: number;
         try { count = /\.(sqlite3?|db)$/.test(path) ? this.importDatabase(path) : this.importExport(path); this.db.exec('COMMIT'); }
         catch (error) { this.db.exec('ROLLBACK'); throw error; }
-        this.signatures.set(path, signature); states.push({ path: label, status: 'loaded', runs: count });
+        this.signatures.set(path, { value: signature, runs: count }); states.push({ path: label, status: 'loaded', runs: count });
       } catch (error) { states.push({ path: label, status: 'error', runs: 0, error: error instanceof Error ? error.message : String(error) }); }
     }
     this.states = states; return this.sources();
