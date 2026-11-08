@@ -30,7 +30,7 @@
       "src/core/director.ts": "c6d9e1deb5fcb0cc41e547dac8188b8868bea4c7c7b3afd5fc7dbd01a123b456",
       "src/core/character-performance.ts": "d1b26cc0500d7c468a8ea062faa23ed81f7d3c332ba059fdf0e005862ed81290",
       "src/shared/character-performance.ts": "02d028a28f1bde5369d81dec789ffe343cf040f0a090724ecb620b3ebfda2176",
-      "src/core/conversation-memory.ts": "a6c977c668be093986dac119a3bedd155f0694e97777b6e2afabd24c6129600e"
+      "src/core/conversation-memory.ts": "8bf81a5dbeefa98f9d5ad80ed5a0eae0252917cd0080d45255538c14e918a451"
     },
     "imageInputSupported": false,
     "defaultModel": "gpt-6-luna",

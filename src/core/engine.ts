@@ -7,7 +7,7 @@ import type { Adapter } from '../adapters/types.js';
 import { Store } from './store.js';
 import { SessionCleanup } from './session-cleanup.js';
 import { ACTOR_CONTEXT_VERSION, actorRecall, checkDialogue, establishedConversation, LANGUAGE_CHECK_VERSION, languageRepairSchema, priorDisclosures } from './actor-context.js';
-import { CONVERSATION_MEMORY_VERSION, DIALOGUE_MEMORY_VERSION, checkProspectiveClaim, conversationMemory, rememberSource, withMemoryCheckpoint } from './conversation-memory.js';
+import { CONVERSATION_MEMORY_VERSION, DIALOGUE_MEMORY_VERSION, checkProspectiveClaim, checkQuietDisclosure, conversationMemory, recallsPlans, rememberSource, withMemoryCheckpoint } from './conversation-memory.js';
 import { WORLD_CONTEXT_VERSION, worldRequestContext } from './world-context.js';
 import { CHARACTER_PERFORMANCE } from '../shared/character-performance.js';
 import { committedPerformance, performTurn, withPortrayal, lacksVoice, parseSpeechOutput, SPARSE_VOICE_VERSION, sparseFollowUp, withSpeechUnits } from './character-performance.js';
@@ -212,12 +212,15 @@ export class Engine extends EventEmitter {
       if (established.length) prompt.alreadyHeard = established;
       prompt.continuity = 'earlierObservations는 이미 오간 말과 확정된 결과다. 현재 일어나는 일은 messages와 현재 위치에서 확인한다. 상대가 이미 들은 자기소개나 결정을 다시 설명할 필요가 없다.';
       if (established.length) prompt.continuity += ' alreadyHeard의 말을 처음 듣는 반응은 시간상 맞지 않는다. 지난 합의는 이번에 실제로 달라진 점이 있을 때 다시 다룬다.';
-      if (run.npcContextVersion === ACTOR_CONTEXT_VERSION) {
-        const shared = priorDisclosures(history,characters[slot],characters).filter(u => !memory?.omit.has(u.sequence));
-        if (shared.length) prompt.alreadyTold = shared;
-      }
+    }
+    const retainListeners=run.conversationMemoryVersion===DIALOGUE_MEMORY_VERSION;
+    if (run.npcContextVersion === ACTOR_CONTEXT_VERSION && (retainListeners || !memory?.quiet)) {
+      const shared=priorDisclosures(history,characters[slot],characters).filter(u=>retainListeners || !memory?.omit.has(u.sequence));
+      if (shared.length) prompt.alreadyTold=shared;
     }
     if (memory) {
+      if (retainListeners && memory.context.quiet && prompt.alreadyTold)
+        memory.context.quiet+=' alreadyTold에 적힌 사람에게는 그 소식이 이미 전해졌다.';
       if (Object.keys(memory.context).length) prompt.conversationMemory = memory.context;
       metadata = {...metadata,conversationMemoryVersion:run.conversationMemoryVersion, omittedRecall:memory.omit.size,
         ...(memory.offered.length && {memoryOffers:memory.offered})};
@@ -333,12 +336,15 @@ export class Engine extends EventEmitter {
     const parsed=call.kind==='speech' ? parseSpeechOutput(call) : JSON.parse(call.output);
     responseValidator(call.kind,call.metadata.outputType).parse(parsed);
     if (call.kind!=='speech' || !call.characterId) return;
-    if (run.conversationMemoryVersion===DIALOGUE_MEMORY_VERSION) {
-      const prospect=JSON.parse(originalInput).conversationMemory?.prospective;
+    if (recallsPlans(run.conversationMemoryVersion)) {
+      const prompt=JSON.parse(originalInput);
+      const prospect=prompt.conversationMemory?.prospective;
       if (prospect) {
         const character=run.spec.scenario.characters.find(c=>c.id===call.characterId)!;
         checkProspectiveClaim(parsed.speech,prospect,[character.identity,character.memories,character.knowledge].join(' '));
       }
+      if (run.conversationMemoryVersion===DIALOGUE_MEMORY_VERSION && prompt.conversationMemory?.quiet && prompt.alreadyTold)
+        checkQuietDisclosure(parsed.speech,prompt.alreadyTold,run.spec.scenario.characters.filter(c=>c.id!==call.characterId).map(c=>c.name));
     }
     if (run.npcContextVersion && run.npcContextVersion!=='npc-context/1')
       checkDialogue(parsed.speech,parsed.action,history ?? this.store.list('utterances',run.id),call.characterId,

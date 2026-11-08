@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { z } from 'zod';
-import { checkProspectiveClaim, conversationMemory, rememberSource, withMemoryCheckpoint } from '../src/core/conversation-memory.js';
+import { checkProspectiveClaim, checkQuietDisclosure, conversationMemory, rememberSource, withMemoryCheckpoint } from '../src/core/conversation-memory.js';
 import { committedPerformance, parseSpeechOutput, performTurn, sparseFollowUp, withPortrayal, withSpeechUnits } from '../src/core/character-performance.js';
 import { languageRepairSchema } from '../src/core/actor-context.js';
 import { characterSchema, outputSchemas } from '../src/shared/schema.js';
@@ -129,6 +129,48 @@ test('a hypothetical object stays prospective across deliveries, with room for a
   const passage={...line(4,'world','몇 주 후, 다시 모인다.'),kind:'event' as const};
   assert.equal(conversationMemory([...h,passage,line(5,'b',question.speech)],'a',[],new Set(['u5']),'conversation-memory/3').context.prospective,undefined);
   assert.equal(conversationMemory(h,'a',[],new Set(['u3']),'conversation-memory/2').context.prospective,undefined);
+});
+
+test('after a pause the same news is already known only to its actual listeners', () => {
+  const known=[{said:'응, 이번엔 물 찾을 정도는 아니네. 나 어제 도예 수업 신청했어. 다음 주부터 8주 동안이야.',heardBy:['은서','나래']}];
+  const listeners=['은서','나래'];
+  assert.throws(()=>checkQuietDisclosure('케이크 먹기 전에 하나 말해도 돼? 나 어제 도예 수업 신청했어.',known,listeners),/이미 들은 소식/);
+  assert.throws(()=>checkQuietDisclosure('아, 나 어제 도예 수업 신청했어. 다음 주부터 수요일 저녁이야.',known,listeners),/이미 들은 소식/);
+  for (const speech of ['나 어제 도예 수업 신청했어?', '아까 말했듯이 나 어제 도예 수업 신청했어.', '아, 나 오늘 다른 수업 신청했어.'])
+    assert.doesNotThrow(()=>checkQuietDisclosure(speech,known,listeners));
+  assert.doesNotThrow(()=>checkQuietDisclosure('나 어제 도예 수업 신청했어.',known,[...listeners,'새 손님']));
+});
+
+test('an independent quiet turn keeps the first disclosure and the people who heard it', async () => {
+  const store=new Store(':memory:'), adapter=new MockAdapter();
+  adapter.name='openai'; adapter.delayMs=0;
+  const spec=exampleSpec('mock-model');
+  delete spec.scenario.environment;
+  const news='어제 도예 수업을 신청했어요. 다음 주부터 수요일 저녁에 수업을 들어요.';
+  spec.scenario.characters=[characterSchema.parse({id:'a',name:'윤',goals:news}),characterSchema.parse({id:'b',name:'미루'})];
+  spec.scheduledEvents=[]; spec.maxUtterances=11; spec.evaluation.enabled=false;
+  spec.variants=[{...spec.variants[0],environmentMode:'off',turnPolicy:'round_robin',stopOnSilence:false}];
+  const utterances=[news,'그렇구나.','오늘 물잔은 어디에 두셨어요?','선반 위에 있어.','여기 연필도 하나 있어요.','그건 내 거야.',
+    '집에 가기 전에 버스 시간부터 볼게요.','창밖에 벌써 저녁빛이네.','','',''];
+  const turn=adapter.turn.bind(adapter);
+  adapter.turn=async (...args)=>{
+    const result=await turn(...args);
+    if (JSON.parse(args[0].input).task==='speak') {
+      const raw=JSON.parse(result.output), speech=utterances.shift()!;
+      result.output=JSON.stringify({...raw,speech:Array.isArray(raw.speech) ? speech ? [speech] : [] : speech,action:''});
+    }
+    return result;
+  };
+  const engine=new Engine(store,adapter,'.cache/history-test-quiet-listeners');
+  try {
+    const {runs:[run]}=await engine.create(spec);
+    await engine.idle();
+    assert.equal(engine.run(run.id).status,'completed');
+    const input=JSON.parse(store.attempts(run.id,'speech:11')[0].input);
+    assert.ok(input.conversationMemory.quiet);
+    assert.deepEqual(input.alreadyTold,[{sequence:1,said:news,heardBy:['미루']}]);
+    assert.deepEqual(input.messages,[]);
+  } finally {await engine.close();store.close();}
 });
 
 test('replaying a checkpoint commits the private selection once together with its public choice', async () => {

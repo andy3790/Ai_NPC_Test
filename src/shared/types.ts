@@ -68,7 +68,7 @@ export interface Run {
   promptVersion?: string;
   worldContextVersion?: 'world-context/2';
   npcContextVersion?: 'npc-context/1' | 'npc-context/2' | 'npc-context/3' | 'npc-context/4';
-  conversationMemoryVersion?: 'conversation-memory/1' | 'conversation-memory/2' | 'conversation-memory/3';
+  conversationMemoryVersion?: 'conversation-memory/1' | 'conversation-memory/2' | 'conversation-memory/3' | 'conversation-memory/4';
   sparseVoiceVersion?: 'sparse-voice/1' | 'sparse-voice/2';
   sessionCleanup?: Record<string, { status: 'deleted' | 'missing' | 'pending'; at: string; error?: string }>;
   apiCredential?: ApiCredential;

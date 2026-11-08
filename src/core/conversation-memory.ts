@@ -2,7 +2,9 @@ import { receives, visibleUtterance } from './perception.js';
 import type { Run, Utterance } from '../shared/types.js';
 
 export const CONVERSATION_MEMORY_VERSION = 'conversation-memory/2' as const;
-export const DIALOGUE_MEMORY_VERSION = 'conversation-memory/3' as const;
+export const DIALOGUE_MEMORY_VERSION = 'conversation-memory/4' as const;
+export const recallsPlans = (version: Run['conversationMemoryVersion']) =>
+  version==='conversation-memory/3' || version===DIALOGUE_MEMORY_VERSION;
 
 // Shared vocabulary identifies a possible loop. It cannot establish an outcome.
 const common = new Set('그거 그건 그럼 그러 그래 이거 이제 지금 아까 다시 계속 먼저 한번 조금 그냥 정말 좋겠 그렇 같아 같은 있어 없네 없어요 하는 하면 보고 싶은 같다 여기 같이 잠깐 확인 정리 말해 다음'.split(' '));
@@ -118,6 +120,21 @@ export function checkProspectiveClaim(speech: string, prospect: Citation | undef
     throw Error('아직 조건부로 이야기한 일을 직접 겪은 기억으로 바꿨습니다. 확인된 시점에서 다시 답하세요.');
 }
 
+interface Disclosure { said: string; heardBy: string[] }
+// A quiet broadcast has no new listener or intervening question. Match only a
+// whole, previously heard past-tense statement, leaving ordinary agreement,
+// changed circumstances and explicit callbacks free to pass.
+export function checkQuietDisclosure(speech: string, disclosures: Disclosure[], listeners: string[]) {
+  if (!listeners.length || /아까|말했|말씀드렸|얘기했|생각났|기억나|그때|바뀌|달라/u.test(speech)) return;
+  const statements=(text:string)=>(text.match(/[^.!?？…。]+[.!?？…。]?/gu) ?? []).filter(s=>!/[?？]$/u.test(s))
+    .map(s=>s.trim().replace(/^(?:(?:아|어|응|네|그리고|근데|참)[,，]\s*)+/u,''))
+    .filter(s=>s.length>=10 && s.split(/\s+/u).length>=3 && /[았었였했왔갔됐]/u.test(s))
+    .map(s=>s.normalize('NFC').replace(/[^\p{L}\p{N}]/gu,''));
+  const prior=new Set(disclosures.filter(d=>listeners.every(name=>d.heardBy.includes(name))).flatMap(d=>statements(d.said)));
+  if (prior.size && statements(speech).some(s=>prior.has(s)))
+    throw Error('같은 사람들이 이미 들은 소식을 변화나 질문 없이 다시 알렸습니다. 지난 대화 이후 달라진 일이 있는지 확인하세요.');
+}
+
 export function conversationMemory(history: Utterance[], actor: string, stored: number[], fresh: Set<string>,
     version: Run['conversationMemoryVersion'] = CONVERSATION_MEMORY_VERSION, goal = '', pendingActivity = false): ConversationMemory {
   const extended = version!=='conversation-memory/1';
@@ -154,7 +171,7 @@ export function conversationMemory(history: Utterance[], actor: string, stored: 
   const offers = [...options.values()].sort((a,b) => a.sequence-b.sequence);
   const goalEvidence = version === CONVERSATION_MEMORY_VERSION && ownTurns >= 3 && (checkpoint || [...terms(goal,true)].some(term => recentTerms.has(term)))
     ? lastGoalResult(visible,actor,goal) : undefined;
-  const prospect = version===DIALOGUE_MEMORY_VERSION ? prospectOnReturn(visible,actor,fresh,last?.sequence ?? 0) : undefined;
+  const prospect = recallsPlans(version) ? prospectOnReturn(visible,actor,fresh,last?.sequence ?? 0) : undefined;
   const context = {
     ...(prospect && {prospective:prospect,timeUse:'이때 본인이 실제로 한 말은 앞으로의 계획이나 가정이었다. 이후 그 일이 일어났다는 관찰이 있어야 지난 경험으로 이야기할 수 있다.'}),
     ...(goalEvidence && {lastGoalObservation:goalEvidence, resultUse:'자기 목표와 관련해 직접 한 행동과 이미 본 결과다. 바뀐 징후나 남은 일이 있을 때만 그 점을 다룬다.'}),
