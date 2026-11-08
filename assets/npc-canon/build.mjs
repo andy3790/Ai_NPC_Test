@@ -139,5 +139,5 @@ function worldMarkdown(w,characters,entries,image) {
 }
 export const promptSources = ['src/core/dialogue-policies.ts','src/shared/dialogue-policy.ts','src/core/world-policies.ts',
   'src/shared/world-policy.ts','src/shared/world-schema.ts','src/core/director.ts','src/core/character-performance.ts',
-  'src/shared/character-performance.ts','src/core/conversation-memory.ts','src/core/scene-observation.ts','src/core/social-reaction.ts','src/core/scene-flow.ts','src/shared/scene-time.ts'];
+  'src/shared/character-performance.ts','src/core/conversation-memory.ts','src/core/scene-observation.ts','src/core/social-reaction.ts','src/core/scene-flow.ts','src/core/witness-memory.ts','src/shared/scene-time.ts'];
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) await build();

@@ -27,6 +27,7 @@ import type { SimulationHost } from './simulation-host.js';
 import { runSpatial } from './spatial-runner.js';
 import { clockObservations, nextClockBoundary, nextIdleDeadline } from './scene-clock.js';
 import { applySceneDecision, sceneDecision, sceneTime, sceneTurn, SCENE_FLOW_VERSION, timeCut, usesSceneFlowV2, waitingActors, withSceneChoice } from './scene-flow.js';
+import { WitnessMemory, WITNESS_MEMORY_VERSION } from './witness-memory.js';
 import { causalProposalSchema, nextSituationCheck } from './situations.js';
 import { ARRIVAL_CONTRACT_VERSION, groundedEvents, spatialChoiceContract, spatialContract, SPATIAL_CHOICE_VERSION, SPATIAL_CONTRACT_VERSION, WORLD_CONTRACT_VERSION } from './spatial-contract.js';
 import { z } from 'zod';
@@ -52,6 +53,7 @@ class Slots {
   leave() { this.active--; this.drain(); }
 }
 export class Engine extends EventEmitter {
+  private witnesses=new Map<string,WitnessMemory>();
   private workers = new Map<string, Promise<void>>();
   private aborts = new Map<string, Set<AbortController>>();
   private slots = new Slots(); private closing = false;
@@ -92,7 +94,7 @@ export class Engine extends EventEmitter {
         characterPerformanceVersion: sourceVariant.characterPerformanceVersion ?? CHARACTER_PERFORMANCE,
         ...(environmentMode(spec, sourceVariant) === 'ai' ? { worldPromptVersion: sourceVariant.worldPromptVersion ?? WORLD_PROMPT_VERSION } : {}) };
       const context = {conversationMemoryVersion:environmentMode(spec,variant)==='off' ? DIALOGUE_MEMORY_VERSION : CONVERSATION_MEMORY_VERSION,
-        sceneObservationVersion:SCENE_OBSERVATION_VERSION, topicClosureVersion:TOPIC_CLOSURE_VERSION, sceneFlowVersion:SCENE_FLOW_VERSION,
+        sceneObservationVersion:SCENE_OBSERVATION_VERSION, topicClosureVersion:TOPIC_CLOSURE_VERSION, sceneFlowVersion:SCENE_FLOW_VERSION, witnessMemoryVersion:WITNESS_MEMORY_VERSION,
         ...(variant.characterPerformanceVersion===CHARACTER_PERFORMANCE && {socialReactionVersion:SOCIAL_REACTION_VERSION}),
         ...(variant.characterPerformanceVersion===CHARACTER_PERFORMANCE && spec.scenario.characters.some(lacksVoice) && {sparseVoiceVersion:SPARSE_VOICE_VERSION}),
         ...(this.adapter.name === 'openai' && { npcContextVersion: ACTOR_CONTEXT_VERSION,
@@ -117,7 +119,7 @@ export class Engine extends EventEmitter {
     // evaluations and event delivery participate in the same global limit.
     const worker = Promise.resolve().then(task).finally(async () => {
       try { await this.sessionCleanup.run(id); }
-      finally { this.workers.delete(id); this.refreshCallLimit(); this.changed(id); this.pump(); }
+      finally { this.workers.delete(id); this.witnesses.delete(id); this.refreshCallLimit(); this.changed(id); this.pump(); }
     });
     this.workers.set(id, worker); this.refreshCallLimit(); this.changed(id);
     return worker;
@@ -200,7 +202,7 @@ export class Engine extends EventEmitter {
     try { return await this.invoke(id, 'director', session, operationKey, prompt.input, prompt.metadata, prompt.outputSchema); }
     finally { await this.sessionCleanup.run(id, session.threadId); }
   }
-  private speak(id: string, session: NpcSession, key: string, input: string, metadata: Record<string, unknown>, history: Utterance[]) {
+  private async speak(id: string, session: NpcSession, key: string, input: string, metadata: Record<string, unknown>, history: Utterance[]) {
     const run = this.run(id);
     const version = run.variant.characterPerformanceVersion;
     const characters = run.spec.scenario.characters;
@@ -279,8 +281,30 @@ export class Engine extends EventEmitter {
       schema=withSceneChoice(schema,sources);
       metadata={...metadata,sceneFlowVersion:run.sceneFlowVersion,sceneSources:sources,sceneSeconds:sceneTime(run)};
     }
-    return this.invoke(id, 'speech', session, key, JSON.stringify(prompt), metadata,
+    const through=history.at(-1)?.sequence ?? 0;
+    const place=prompt.localContext?.location?.id ?? null;
+    let index=this.witnesses.get(id);
+    if (run.witnessMemoryVersion && !index) {
+      index=new WitnessMemory(characters,run.spec.scenario.spatial?.locations,run.witnessMemoryVersion);
+      this.witnesses.set(id,index);
+    }
+    const view=index?.observe(history).view(session.characterId,sceneTime(run));
+    if (index && view) {
+      const context=index.context(view,place);
+      if (context) prompt.witnessed=context;
+      metadata={...metadata,witnessMemoryVersion:run.witnessMemoryVersion,witnessThrough:through,witnessPlace:place,
+        heardQuestions:view.questions.length,verifiedChecks:view.checks.length};
+    }
+    const call=await this.invoke(id, 'speech', session, key, JSON.stringify(prompt), metadata,
       withMemoryCheckpoint(schema,memory?.offered ?? []), history);
+    if (!index || !view || !call.metadata.witnessMemoryVersion || call.metadata.witnessEdit) return call;
+    // A completed but uncommitted response belongs to its original pre-turn
+    // world, even if an observer received a new signal during recovery.
+    const cutoff=Number(call.metadata.witnessThrough);
+    const atDecision=cutoff===through ? view : new WitnessMemory(characters,run.spec.scenario.spatial?.locations,run.witnessMemoryVersion)
+      .observe(history.filter(u=>u.sequence<=cutoff)).view(session.characterId,Number(call.metadata.sceneSeconds));
+    const edit=index.edit(atDecision,session.characterId,call.metadata.witnessPlace as string|null,parseSpeechOutput(call));
+    return edit ? this.store.patch('invocations',call.id,{metadata:{...call.metadata,witnessEdit:edit}}) : call;
   }
   private async invoke(id: string, kind: CallKind, session: NpcSession, operationKey: string, input: string, metadata: Record<string, unknown> = {}, requestedOutputSchema?: object, history?: Utterance[]) {
     const previous = this.priorInvocation(id, operationKey);
@@ -446,7 +470,7 @@ export class Engine extends EventEmitter {
       if (run.sceneFlowVersion && Array.isArray(call.metadata.sceneSources)) {
         const time=Number(call.metadata.sceneSeconds);
         u.sceneSeconds=time;
-        const decision=sceneDecision(JSON.parse(call.output),call.metadata.sceneSources);
+        const decision=sceneDecision(parseSpeechOutput(call),call.metadata.sceneSources);
         const deadline=run.sceneFlowVersion==='scene-flow/3' && run.worldState && !decision.wait && !u.action && !u.speech
           ? nextIdleDeadline(run.spec,run.worldState) : Infinity;
         next=applySceneDecision(next,decision,u,time,isAiEnvironment(run.spec,run.variant),deadline);

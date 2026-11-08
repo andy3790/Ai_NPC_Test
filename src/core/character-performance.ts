@@ -4,6 +4,7 @@ import type { Character } from '../shared/schema.js';
 import type { InvocationMetrics, NpcSession, Utterance } from '../shared/types.js';
 import { receives, visibleUtterance } from './perception.js';
 import { spokenReaction } from './social-reaction.js';
+import type { WitnessEdit } from './witness-memory.js';
 
 export const performanceInstructions = `인물의 성격이 한두 단어라면 지금 서로 바라는 게 다를 때 무엇을 고르거나 양보할지를 그 단서로 정하세요. 조금 전 질문에 자기 답을 하고 일상 얘기는 그 얘기로 이어 가세요. 맡은 일은 실제로 상황이 그 일로 돌아왔을 때 챙기세요. 이미 들은 이유나 했던 동작을 같은 자리에서 매번 되풀이할 필요가 없습니다. 설명을 청하거나 사정이 달라지면 필요한 만큼 답하세요.
 characterPerformance는 본인에게만 주는 연기 참고입니다. 첫 선택에서 설정에 어울리는 관심의 방향과 말의 박자를 골라 portrayal에 담으세요. 이후에도 여러 반응이 가능할 때 참고하세요. 질문·부탁·관계와 본인이 정한 말투가 우선입니다. 매번 그 특징을 연기하거나 말로 소개하지 마세요. earlierWords가 있으면 그때 했던 말입니다. 그 답이 아직 맞는지 생각하고, 바꿀 때에도 지금 대화에 맞게 답하세요. 예전 문장을 그대로 읊을 필요는 없습니다.`;
@@ -62,7 +63,7 @@ export function withSpeechUnits(schema: {properties?:object; required?:string[]}
 
 // Keep the provider transcript intact. Only the public utterance joins the
 // spoken units, so delivery, evaluation and replays still receive plain speech.
-export function parseSpeechOutput(call: Pick<InvocationMetrics,'output'|'metadata'>) {
+function modelSpeechOutput(call: Pick<InvocationMetrics,'output'|'metadata'>) {
   const result=JSON.parse(call.output);
   if (call.metadata.socialBeat) return spokenReaction(result);
   if (call.metadata.sparseVoiceVersion!==SPARSE_VOICE_VERSION) return result;
@@ -71,6 +72,12 @@ export function parseSpeechOutput(call: Pick<InvocationMetrics,'output'|'metadat
       !result.speech.every((part:unknown)=>typeof part==='string' && part.trim()))
     throw Error('대사는 정해진 개수 이내의 완결된 발언 목록이어야 합니다. 침묵은 빈 목록으로 보냅니다.');
   return {...result,speech:result.speech.join(' ')};
+}
+
+export function parseSpeechOutput(call: Pick<InvocationMetrics,'output'|'metadata'>) {
+  const raw=modelSpeechOutput(call);
+  const edit=call.metadata.witnessEdit as WitnessEdit|undefined;
+  return edit ? {...raw,...edit.patch} : raw;
 }
 
 function terms(text: string) {

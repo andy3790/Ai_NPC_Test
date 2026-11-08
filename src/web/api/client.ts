@@ -2,7 +2,7 @@ import type { ExperimentSpec } from '../../shared/schema.js';
 import type { ModelCatalog } from '../../shared/model-catalog.js';
 import type { ApiKeyStatus, BulkRunDeletionPlan, BulkRunDeletionResult, EvaluationFinding, ModelInfo, Run, RunDeletionPlan, RunDetail, RunListItem } from '../../shared/types.js';
 
-export interface HealthResponse { ok: boolean; adapter: string; version: string; historyEnabled: boolean; promptVersion: string; defaultCharacterPerformanceVersion: string; defaultTopicClosureVersion: string; defaultSceneObservationVersion: string; defaultSocialReactionVersion: string; defaultSceneFlowVersion: string }
+export interface HealthResponse { ok: boolean; adapter: string; version: string; historyEnabled: boolean; promptVersion: string; defaultCharacterPerformanceVersion: string; defaultTopicClosureVersion: string; defaultSceneObservationVersion: string; defaultSocialReactionVersion: string; defaultSceneFlowVersion: string; defaultWitnessMemoryVersion: string }
 export interface HistorySource { path: string; status: 'loaded' | 'unchanged' | 'error'; runs: number; error?: string }
 export interface HistoryCatalog { archive?: string; sources: HistorySource[]; runs: number; errors: HistorySource[] }
 export interface HistoryResponse extends HistoryCatalog { enabled: boolean }

@@ -20,7 +20,7 @@
     "schemaPath": "src/shared/schema.ts",
     "schemaSha256": "a1b034f182e5c74c566ea6a061759a8ca595772dc687cd9c9268d5f16aa9f6a0",
     "promptPath": "src/core/prompts.ts",
-    "promptSha256": "78b06e0d161dc701d3d9cd6662cb248fb5d3f0baae8dbcd32827030d3bc7d2e5",
+    "promptSha256": "91967621521aa22d961348bfa82ff168a01050ed5a81433ec5cdd74f5f4591ce",
     "promptDependencies": {
       "src/core/dialogue-policies.ts": "1d3140ac86ac75f3af080bc2d8fd8da46ff074d004593d3bcb620bd65cecf335",
       "src/shared/dialogue-policy.ts": "1593262cd1325b117d689f79b33b1dea57647298a44cf50e4a7a9bde37b3612d",
@@ -28,12 +28,13 @@
       "src/shared/world-policy.ts": "545bf73af3af57026182ea7395116557f7b2ae0405c890f1ea8af2754649c149",
       "src/shared/world-schema.ts": "6c9cbaaedb43a48d721e8fcf92b88c12f0558cc1e4b9c32848438fcf0cf1a020",
       "src/core/director.ts": "c6d9e1deb5fcb0cc41e547dac8188b8868bea4c7c7b3afd5fc7dbd01a123b456",
-      "src/core/character-performance.ts": "683a45db9dc502d78adc901bc9dec05e2d28cf4a64379869ef2a24706d55ef06",
+      "src/core/character-performance.ts": "16b53bc31b29a6dca76966a89e7f8cfc8e79b65a9a2068622df4048c988d39b8",
       "src/shared/character-performance.ts": "02d028a28f1bde5369d81dec789ffe343cf040f0a090724ecb620b3ebfda2176",
       "src/core/conversation-memory.ts": "bd017ab094e12b70026526658acaf1a9a50982b8546b1cdb371dd34a95c91eed",
       "src/core/scene-observation.ts": "3b429758c39f24c6d36b06934c4ec14c8a133d1a93f1768220031540456690ba",
       "src/core/social-reaction.ts": "4dac4e87dac5a3062e3de68b44eb0cb1f3dfb295cfe192fa866cff29e098d4d6",
       "src/core/scene-flow.ts": "4ae31989c475f9f5dfd1082a1837b0bbf21212696f4ab1b553612bb0736ccd58",
+      "src/core/witness-memory.ts": "41508f692ad2f753fc07759254467373c1296ce33dfbece4f9e94a1dd43c0368",
       "src/shared/scene-time.ts": "619d07de17d10eb394b2aecacb401a3b9a75e928aedaec87f2cecac9bbf71328"
     },
     "imageInputSupported": false,

@@ -24,6 +24,7 @@ export function RunSettings({ detail }: { detail: RunDetail }) {
       {run.sceneObservationVersion && <><dt>현장 관찰 전달 버전</dt><dd>{run.sceneObservationVersion}</dd></>}
       {run.socialReactionVersion && <><dt>인물 간 반응 버전</dt><dd>{run.socialReactionVersion}</dd></>}
       {run.sceneFlowVersion && <><dt>장면 진행·시간 버전</dt><dd>{run.sceneFlowVersion}</dd></>}
+      {run.witnessMemoryVersion && <><dt>질문·점검 기억 버전</dt><dd>{run.witnessMemoryVersion}</dd></>}
       {run.sparseVoiceVersion && <><dt>간략한 인물의 말투 버전</dt><dd>{run.sparseVoiceVersion}</dd></>}
       <dt>프롬프트 버전</dt><dd>{run.promptVersion ?? (versions.length ? versions.join(', ') : '이전 기록에 버전 정보 없음')}</dd>
       <dt>대화 반응 지침</dt><dd>{variant.dialoguePromptVersion ?? '이전 기록 · 저장된 인물 지침 유지'}</dd>
