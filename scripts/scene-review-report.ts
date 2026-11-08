@@ -2,8 +2,12 @@ import { createHash } from 'node:crypto';
 import { mkdir, readdir, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
+import { isDeepStrictEqual } from 'node:util';
 import { aggregate } from '../src/core/metrics.js';
 import { repetitionMetrics } from '../src/core/quality.js';
+import { parseSpeechOutput } from '../src/core/character-performance.js';
+import { WitnessMemory, witnessVersionFor, type WitnessEdit } from '../src/core/witness-memory.js';
+import { environmentMode } from '../src/shared/schema.js';
 import { reviewBudgetFile } from './review-budget.js';
 import type { InvocationMetrics, Run, Utterance } from '../src/shared/types.js';
 import { PRICING_DATE, PRICING_REVISION } from '../src/shared/model-catalog.js';
@@ -43,6 +47,43 @@ function longRestOutcomes(choices:Utterance[], calls:InvocationMetrics[]) {
   }
   return {elapsed,interrupted,noNextTurn};
 }
+// Compare old and new runs against exactly the observations each choice could
+// use. Concurrent spatial choices all precede delivery of any in that batch.
+function auditWitnesses(run:Run,history:Utterance[],calls:Map<string,InvocationMetrics>) {
+  const classifier=witnessVersionFor(environmentMode(run.spec,run.variant)!=='off');
+  const index=new WitnessMemory(run.spec.scenario.characters,run.spec.scenario.spatial?.locations,classifier);
+  const batches=new Map<string,number>(),raw={questions:0,checks:0},published={questions:0,checks:0};
+  const matches=[];
+  let comparedInputs=0,changedInputs=0,changedEdits=0;
+  for (const u of history) {
+    if (u.kind!=='speech' || !u.invocationId) continue;
+    const call=calls.get(u.invocationId);if (!call) continue;
+    const batch=/^spatial:choice:\d+/.exec(call.operationKey)?.[0];
+    if (batch && !batches.has(batch)) batches.set(batch,u.sequence-1);
+    const through=Number(call.metadata.witnessThrough ?? (batch ? batches.get(batch) : u.sequence-1));
+    const view=index.observe(history.slice(0,through)).view(u.speakerId,u.perception?.virtualSeconds ?? u.sceneSeconds ?? 0);
+    const location=u.perception?.locationId ?? null;
+    if (run.witnessMemoryVersion===classifier) {
+      const saved=JSON.parse(call.input);
+      if (saved.task==='speak') {
+        comparedInputs++;
+        if (!isDeepStrictEqual(saved.witnessed,index.context(view,location))) changedInputs++;
+      }
+    }
+    const {witnessEdit,...originalMetadata}=call.metadata;
+    const proposed=parseSpeechOutput({output:call.output,metadata:originalMetadata});
+    const attempted=index.edit(view,u.speakerId,location,proposed);
+    if (run.witnessMemoryVersion===classifier && !isDeepStrictEqual(witnessEdit,attempted)) changedEdits++;
+    const effective=index.edit(view,u.speakerId,location,{...parseSpeechOutput(call),speech:u.speech,action:u.action});
+    for (const key of ['questions','checks'] as const) {
+      if (attempted?.[key].length) raw[key]++;
+      if (effective?.[key].length) published[key]++;
+    }
+    if (attempted || effective) matches.push({turn:u.speechIndex,speaker:u.speakerName,applied:!!witnessEdit,
+      questionSources:attempted?.questions ?? [],checkSources:attempted?.checks ?? []});
+  }
+  return {classifier,raw,published,matches,comparedInputs,changedInputs,changedEdits};
+}
 for (const dir of (await readdir(root,{withFileTypes:true})).filter(d => d.isDirectory() && d.name !== 'runtime').sort((a,b) => a.name.localeCompare(b.name))) {
   const label = dir.name, db = new DatabaseSync(join(root,label,'npc-lab.sqlite'),{readOnly:true});
   try {
@@ -75,7 +116,8 @@ for (const dir of (await readdir(root,{withFileTypes:true})).filter(d => d.isDir
     const parties = r.spec.scenario.characters.map(c => ({name:c.name,choices:choices.filter(t => t.speakerId===c.id).length,
       spoken:choices.filter(t => t.speakerId===c.id && t.speech.trim()).length}));
     const kinds = [...new Set(calls.map(c => c.kind))];
-    const flowDecisions=speech.filter(c=>c.status==='completed' && c.utteranceId && c.metadata.sceneFlowVersion).map(c=>JSON.parse(c.output));
+    const flowDecisions=speech.filter(c=>c.status==='completed' && c.utteranceId && c.metadata.sceneFlowVersion).map(parseSpeechOutput);
+    const byId=new Map(speech.map(c=>[c.id,c]));
     const cuts=u.flatMap(t=>t.timeCut ? [t.timeCut] : []);
     const sampleSize = Math.min(8,Math.floor(speech.length/2));
     const repairs = db.prepare("SELECT COUNT(*) AS count FROM events WHERE method='run/repairing_output'").get();
@@ -91,6 +133,10 @@ for (const dir of (await readdir(root,{withFileTypes:true})).filter(d => d.isDir
         cuts:cuts.length,skippedSeconds:cuts.reduce((sum,c)=>sum+c.to-c.from,0)}}),
       prompt:r.promptVersion,actorContext:r.npcContextVersion ?? 'provider-chain',worldContext:r.worldContextVersion ?? null,
       ...(r.sceneObservationVersion && {sceneObservation:r.sceneObservationVersion,topicClosure:r.topicClosureVersion}),
+      ...(r.witnessMemoryVersion && {witnessMemory:{version:r.witnessMemoryVersion,
+        promptsWithRecall:speech.filter(c=>c.utteranceId && JSON.parse(c.input).witnessed).length,
+        adjustedChoices:speech.filter(c=>c.utteranceId && c.metadata.witnessEdit).length}}),
+      ...(process.argv.includes('--witness-audit') && {witnessAudit:auditWitnesses(r,u,byId)}),
       ...(r.socialReactionVersion && {socialReaction:r.socialReactionVersion,
         socialChoicesOffered:speech.filter(c=>c.utteranceId && c.status==='completed' && c.metadata.socialReactionVersion).length,
         focusedReactions:speech.filter(c=>c.utteranceId && c.status==='completed' && c.metadata.socialBeat).length}),
@@ -114,10 +160,24 @@ for (const dir of (await readdir(root,{withFileTypes:true})).filter(d => d.isDir
       repetitions:repeatCounts,kanaLines:choices.filter(c => /[\u3041-\u3096\u30a1-\u30fa]/u.test(c.speech+' '+c.action)).length,
       errorKinds:calls.filter(c => c.status==='failed').map(c => ({kind:c.kind,attempt:c.attempt,phase:c.metadata.phase ?? null})),
     });
-    for (const t of u) transcript.push(JSON.stringify({run:label,sequence:t.sequence,turn:t.speechIndex,at:t.perception?.virtualSeconds ?? t.worldEvent?.virtualSeconds ?? t.sceneSeconds ?? null,
+    const sequences=new Map(u.map(t=>[t.id,t.sequence]));
+    for (const t of u) {
+      const call=t.invocationId && byId.get(t.invocationId);
+      const edit=call && call.metadata.witnessEdit as WitnessEdit|undefined;
+      const source=t.worldEvent?.sourceUtteranceId ?? t.resolution?.sourceUtteranceId;
+      let proposal;
+      if (call && edit) {
+        const {witnessEdit:_,...metadata}=call.metadata;
+        const draft=parseSpeechOutput({output:call.output,metadata});
+        proposal={speech:draft.speech,action:draft.action,moveTo:draft.moveToLocationId ?? null,
+          questionSources:edit.questions,checkSources:edit.checks};
+      }
+      transcript.push(JSON.stringify({run:label,sequence:t.sequence,turn:t.speechIndex,at:t.perception?.virtualSeconds ?? t.worldEvent?.virtualSeconds ?? t.sceneSeconds ?? null,
       speaker:t.speakerName,kind:t.kind,speech:t.speech,action:t.action,...(t.worldEvent && {event:t.worldEvent.type}),
-      ...(t.timeCut && {timeCut:t.timeCut}),
+      ...(source && {resultOf:sequences.get(source)}),...(t.spatialIntent && {moveTo:t.spatialIntent.moveToLocationId}),
+      ...(proposal && {proposed:proposal}),...(t.timeCut && {timeCut:t.timeCut}),
       ...(t.perception && {place:t.perception.locationId,heardBy:t.perception.speechRecipientIds,sawAction:t.perception.actionRecipientIds})}));
+    }
   } finally {db.close();}
 }
 const budget = new DatabaseSync(reviewBudgetFile(root),{readOnly:true});
