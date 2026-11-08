@@ -2,8 +2,9 @@ import type { Character } from '../shared/schema.js';
 import type { Utterance } from '../shared/types.js';
 import { receives, visibleUtterance } from './perception.js';
 
-export const WITNESS_MEMORY_VERSION='witness-memory/2' as const;
-type WitnessVersion='witness-memory/1'|typeof WITNESS_MEMORY_VERSION;
+export const WITNESS_MEMORY_VERSION='witness-memory/3' as const;
+type WitnessVersion='witness-memory/1'|'witness-memory/2'|typeof WITNESS_MEMORY_VERSION;
+export const witnessVersionFor=(hasWorldResults:boolean):WitnessVersion=>hasWorldResults ? WITNESS_MEMORY_VERSION : 'witness-memory/2';
 type Person=Pick<Character,'id'|'name'>;
 type Place={id:string;name:string};
 type Question={seq:number; text:string; to:string; kind:string; terms:string[]; beat:number; at:number; answer?:string};
@@ -64,6 +65,9 @@ const escapeName=(s:string)=>s.replace(/[.*+?^${}()|[\]\\]/gu,'\\$&');
 const actuallyChanged=(s:string)=>change.test(s) && !speculative.test(s) && !prospective.test(s);
 const faultObserved=/(?:쇳소리|긁히는 소리|마찰음|탄내|연기|불꽃|균열|누수).{0,12}(?:난다|났다|들린다|들렸다|보인다|보였다|생겼다|피어오|번진다)|(?:물이|기름이).{0,8}(?:샌다|샜다|새어 나온다)/u;
 const incidentalTrip=/(?:하러|보러|살피러)\s*(?:갈게|갈래|가겠|가볼)/u;
+const visitToInspect=/보러\s*(?:[가갈갔]|다녀)|보고\s*(?:올게|올래|오겠)|들여다(?:보|본)|둘러(?:보|본)/u;
+const inspectionMethod=/(?:손(?:끝)?으로|눈으로|육안으로|귀로|살짝|가볍게|지그시|눌러\s*(?:보고)?|있는지|없는지)(?=\s|$)/gu;
+const continuingFault=/(?:진동음?|소음|잡음|울림|통증|과열|누수|이상음).{0,12}(?:계속|여전|남아|남았|다시 난다)|(?:여전히|계속).{0,9}(?:진동|떨린다|흔들린다)/u;
 const instant=(u:Utterance)=>u.perception?.virtualSeconds ?? u.worldEvent?.virtualSeconds ?? u.sceneSeconds ?? 0;
 const objectWord=(w:string)=>!genericFacet.test(w) && /^(?:[가-힣]{2,6}|[a-z]{3,})$/iu.test(w) && !/습니다|된다|한다|됐다|으로|보이지|다만|현재|흔적/u.test(w);
 
@@ -112,8 +116,15 @@ export class WitnessMemory {
             {...q,seq:u.sequence,beat:state.beat,at:instant(u)}].slice(-6);
         }
         const place=u.perception?.locationId ?? null;
+        // The world can establish a new physical condition with unfamiliar
+        // wording. Only recipients of the event know to reopen the question.
+        if (this.version==='witness-memory/3' && seen.speech && u.worldEvent?.type==='physical_effect' && u.worldEvent.npcId) {
+          const affected=u.worldEvent.npcId,observed=words(seen.speech,this.skip);
+          state.questions=state.questions.filter(q=>q.kind!=='condition' || q.to!==affected ||
+            q.terms.length>0 && !q.terms.some(w=>observed.includes(w)));
+        }
         for (const evidence of [seen.speech,seen.action]) for (const line of parts(evidence)) {
-          const observedFault=this.version==='witness-memory/2' && faultObserved.test(line) && !speculative.test(line) && !prospective.test(line);
+          const observedFault=this.version!=='witness-memory/1' && (faultObserved.test(line) || this.version==='witness-memory/3' && continuingFault.test(line)) && !speculative.test(line) && !prospective.test(line);
           if (!actuallyChanged(line) && !observedFault) continue;
           const terms=words(line,this.skip),named=this.places.filter(p=>line.includes(p.name));
           const remote=evidence===seen.speech && u.spatialIntent?.communication.mode==='channel';
@@ -140,9 +151,11 @@ export class WitnessMemory {
   private confirm(state:Personal,actor:string,u:Utterance,text:string) {
     const sourceId=u.resolution?.sourceUtteranceId ?? (u.worldEvent?.type==='actor_result' ? u.worldEvent.sourceUtteranceId : null);
     if (!sourceId) return;
-    const directResult=this.version==='witness-memory/2';
+    const directResult=this.version!=='witness-memory/1';
     if (!(stable.test(text) || directResult && physicalResult.test(text))
-      || unresolved.test(text) || directResult && notResolved.test(text) || change.test(text) && !speculative.test(text)) return;
+      || unresolved.test(text) || directResult && notResolved.test(text)
+      || this.version==='witness-memory/3' && (continuingFault.test(text) || faultObserved.test(text))
+      || change.test(text) && !speculative.test(text)) return;
     const source=this.sources.get(sourceId);
     const sawAction=source && (source.actor===actor || !source.witnesses || source.witnesses.includes(actor));
     const attempt=sawAction ? source.action : '';
@@ -174,15 +187,25 @@ export class WitnessMemory {
   edit(view:ReturnType<WitnessMemory['view']>,actor:string,location:string|null,choice:Choice):WitnessEdit|undefined {
     const patch:Partial<Choice>={},questions=new Set<number>(),checks=new Set<number>();
     const checking=(line:string,spoken:boolean)=>{
-      const proposes=prospective.test(line) || this.version==='witness-memory/2' && incidentalTrip.test(line);
-      if (!inspect.test(line) || spoken && (!proposes || questionEnd.test(line)) || choice.actionId || ['continue','cancel'].includes(choice.activityChoice ?? '')) return;
+      const expanded=this.version==='witness-memory/3';
+      const verbAt=line.search(inspect);
+      const start=verbAt>=0 ? verbAt : expanded ? line.search(visitToInspect) : -1;
+      const proposes=prospective.test(line) || this.version!=='witness-memory/1' && incidentalTrip.test(line)
+        || expanded && /보고\s*(?:올게|올래|오겠)/u.test(line);
+      if (start<0 || spoken && (!proposes || questionEnd.test(line)) || choice.actionId || ['continue','cancel'].includes(choice.activityChoice ?? '')) return;
       const named=this.places.filter(p=>line.includes(p.name));
       const place=named.length===1?named[0].id:choice.moveToLocationId ?? location;
-      const start=line.search(inspect);
       // Keep compound choices intact when inspection is just one of their actions.
       if (/(?:하고|한 뒤|한 다음|하면서|해 보고|살펴보고|살피고|and then)\s+\S/iu.test(line.slice(start))) return;
-      const focus=words(line.slice(0,start).split(/[,，]/u).at(-1) ?? '',this.skip);
-      return view.checks.findLast(c=>c.place===place && focus.includes(c.subject) && focus.every(w=>c.terms.includes(w)));
+      const before=line.slice(0,start).split(/[,，]/u).at(-1) ?? '';
+      const focus=words(expanded ? before.replace(inspectionMethod,' ') : before,this.skip);
+      return view.checks.findLast(c=>{
+        if (c.place!==place || !focus.includes(c.subject)) return false;
+        // Touch and sight can probe the same fastening. A different component
+        // or property (such as bearing temperature) still needs a fresh check.
+        const fixed=expanded && /단단|고정|조여|체결|secure|fasten/iu.test(c.text);
+        return focus.every(w=>c.terms.includes(w) || fixed && /^(?:흔들림|유격|풀림)$/u.test(w));
+      });
     };
     for (const field of ['speech','action'] as const) {
       const kept:string[]=[];let changed=false;
@@ -204,8 +227,9 @@ export class WitnessMemory {
     if (checks.size && choice.moveToLocationId && view.checks.some(c=>checks.has(c.seq) && c.place===choice.moveToLocationId)) {
       const speech=patch.speech ?? choice.speech;
       const knownPlace=this.places.map(p=>escapeName(p.name)).join('|');
-      const travelOnly=knownPlace && new RegExp('^(?:자리에서\\s*일어나\\s*)?(?:'+knownPlace+')(?:로|으로|쪽을|을|를)\\s*(?:향한다|걸어간다|이동한다|돌아간다|나선다|나온다)[.]?$','u').test(remainingAction);
-      const linked=this.version==='witness-memory/2' ? (!remainingAction || travelOnly) && !/가서|가져|들르|갈게|옮길|전해|만나러/u.test(speech)
+      const stands=this.version==='witness-memory/3' ? '(?:자리|의자)' : '자리';
+      const travelOnly=knownPlace && new RegExp('^(?:'+stands+'에서\\s*일어나\\s*)?(?:'+knownPlace+')(?:로|으로|쪽을|을|를)\\s*(?:향한다|걸어간다|이동한다|돌아간다|나선다|나온다)[.]?$','u').test(remainingAction);
+      const linked=this.version!=='witness-memory/1' ? (!remainingAction || travelOnly) && !/가서|가져|들르|갈게|옮길|전해|만나러/u.test(speech)
         : (!remainingAction || /^[^,.!?]{0,35}(?:로|으로|쪽을)\s*(?:향한다|걸어간다|이동한다|돌아간다)[.]?$/u.test(remainingAction)) && !speech.includes('가서');
       if (linked) {
         patch.moveToLocationId=null;

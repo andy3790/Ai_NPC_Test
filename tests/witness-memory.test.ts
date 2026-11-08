@@ -50,6 +50,11 @@ test('the addressed person supplies the answer and only a witnessed change reope
   index.observe([...rows,privateSignal,observed]);
   assert.equal(index.view('c',5).questions.length,0);
   assert.deepEqual(index.observe(rows).view('c',3),memory().observe(rows).view('c',3));
+  const general=line(1,'a','민호, 괜찮아?',['b','c']);
+  const effect:Utterance={...event(2,'손끝 감각이 둔해진다.',['a']),
+    worldEvent:{type:'physical_effect',npcId:'b',text:'손끝 감각이 둔해진다.',evidence:null,processId:null,sourceUtteranceId:null,virtualSeconds:2}};
+  const changed=memory().observe([general,effect]);
+  assert.equal(changed.view('a',2).questions.length,0);assert.equal(changed.view('c',2).questions.length,1);
 });
 
 test('only a witnessed, conclusive result closes the checked component at its location',()=>{
@@ -76,6 +81,14 @@ test('only a witnessed, conclusive result closes the checked component at its lo
   assert.deepEqual(index.edit(index.view('a',10),'a','yard',leave)?.patch,{speech:'',action:'',moveToLocationId:null});
   assert.equal(index.edit(index.view('a',10),'a','yard',{...leave,speech:'물병도 가져올게. '+leave.speech})?.patch.moveToLocationId,undefined);
   assert.equal(index.edit(index.view('a',10),'a','yard',{...leave,action:'문을 잠그고 창고로 향한다.'})?.patch.action,undefined);
+  assert.deepEqual(index.edit(index.view('a',10),'a','yard',{
+    ...leave,speech:'난 잠깐 쉴래. 창고 송풍기 보러 갈게.',action:'의자에서 일어나 마당을 나선다.',
+  })?.patch,{speech:'난 잠깐 쉴래.',action:'',moveToLocationId:null});
+  const previous=new WitnessMemory(cast,places,'witness-memory/2').observe([attempt,outcome]);
+  assert.equal(previous.edit(previous.view('a',10),'a','yard',{...leave,speech:'창고 송풍기 보러 갈게.'}),undefined);
+  assert.equal(edit('a','송풍기 덮개를 손으로 살짝 눌러 흔들림이 있는지 확인한다.')?.patch.action,'');
+  assert.equal(index.edit(index.view('a',10),'a','yard',{...leave,speech:'창고 송풍기 옆 공구를 보러 갈게.'}),undefined);
+  assert.equal(index.edit(index.view('a',10),'a','shed',{speech:'송풍기 보러 갔어.',action:''}),undefined);
   const more=[event(3,'송풍기 덮개가 풀리면 알려 줘.',['a']),event(4,'다른 라디오 소리가 다시 커졌다.',['a']),
     event(5,'송풍기 덮개 나사가 다시 풀렸다.',['a'],'yard'),event(6,'송풍기 덮개 나사가 다시 풀렸다.',['d'])];
   index.observe([attempt,outcome,...more]);
@@ -87,6 +100,8 @@ test('only a witnessed, conclusive result closes the checked component at its lo
   assert.equal(memory().observe([attempt,pending]).view('a',3).checks.length,0);
   const noisy=memory().observe([attempt,outcome,event(3,'송풍기에서 쇳소리가 난다.',['a'])]);
   assert.equal(noisy.edit(noisy.view('a',4),'a','shed',check),undefined);
+  const persists=memory().observe([attempt,outcome,{...outcome,id:'later',sequence:3,speech:'덮개는 단단하지만 송풍기의 진동음은 계속 난다.'}]);
+  assert.equal(persists.edit(persists.view('a',4),'a','shed',check),undefined);
 });
 
 test('a witnessed repair result is sufficient, including for someone who never saw the private action',()=>{
@@ -126,6 +141,7 @@ for (const deliveryMode of ['per_utterance','batched_on_turn'] as const) {
       await engine.inject(run.id,'민호가 손목이 다시 아프다고 한다.');
       await engine.resume(run.id);await engine.idle();
       const d=engine.detail(run.id),second=d.utterances.find(u=>u.speechIndex===2)!;
+      assert.equal(d.run.witnessMemoryVersion,'witness-memory/2');
       assert.equal(d.run.status,'completed',String(d.run.error));assert.equal(choices,3);
       assert.equal(second.speech,'');assert.equal(d.receipts.filter(r=>r.utteranceId===second.id).length,0);
       const call=d.invocations.find(c=>c.id===second.invocationId)!;

@@ -78,7 +78,7 @@ export interface Run {
   sceneObservationVersion?: 'scene-observation/1';
   socialReactionVersion?: 'social-reaction/1' | 'social-reaction/2' | 'social-reaction/3';
   sceneFlowVersion?: 'scene-flow/1' | 'scene-flow/2' | 'scene-flow/3';
-  witnessMemoryVersion?: 'witness-memory/1'|'witness-memory/2';
+  witnessMemoryVersion?: 'witness-memory/1'|'witness-memory/2'|'witness-memory/3';
   sceneSeconds?: number;
   topicClosureVersion?: 'topic-closure/1' | 'topic-closure/2' | 'topic-closure/3' | 'topic-closure/4' | 'topic-closure/5' | 'topic-closure/6';
   sessionCleanup?: Record<string, { status: 'deleted' | 'missing' | 'pending'; at: string; error?: string }>;

@@ -27,7 +27,7 @@ import type { SimulationHost } from './simulation-host.js';
 import { runSpatial } from './spatial-runner.js';
 import { clockObservations, nextClockBoundary, nextIdleDeadline } from './scene-clock.js';
 import { applySceneDecision, sceneDecision, sceneTime, sceneTurn, SCENE_FLOW_VERSION, timeCut, usesSceneFlowV2, waitingActors, withSceneChoice } from './scene-flow.js';
-import { WitnessMemory, WITNESS_MEMORY_VERSION } from './witness-memory.js';
+import { WitnessMemory, witnessVersionFor } from './witness-memory.js';
 import { causalProposalSchema, nextSituationCheck } from './situations.js';
 import { ARRIVAL_CONTRACT_VERSION, groundedEvents, spatialChoiceContract, spatialContract, SPATIAL_CHOICE_VERSION, SPATIAL_CONTRACT_VERSION, WORLD_CONTRACT_VERSION } from './spatial-contract.js';
 import { z } from 'zod';
@@ -94,7 +94,8 @@ export class Engine extends EventEmitter {
         characterPerformanceVersion: sourceVariant.characterPerformanceVersion ?? CHARACTER_PERFORMANCE,
         ...(environmentMode(spec, sourceVariant) === 'ai' ? { worldPromptVersion: sourceVariant.worldPromptVersion ?? WORLD_PROMPT_VERSION } : {}) };
       const context = {conversationMemoryVersion:environmentMode(spec,variant)==='off' ? DIALOGUE_MEMORY_VERSION : CONVERSATION_MEMORY_VERSION,
-        sceneObservationVersion:SCENE_OBSERVATION_VERSION, topicClosureVersion:TOPIC_CLOSURE_VERSION, sceneFlowVersion:SCENE_FLOW_VERSION, witnessMemoryVersion:WITNESS_MEMORY_VERSION,
+        sceneObservationVersion:SCENE_OBSERVATION_VERSION, topicClosureVersion:TOPIC_CLOSURE_VERSION, sceneFlowVersion:SCENE_FLOW_VERSION,
+        witnessMemoryVersion:witnessVersionFor(environmentMode(spec,variant)!=='off'),
         ...(variant.characterPerformanceVersion===CHARACTER_PERFORMANCE && {socialReactionVersion:SOCIAL_REACTION_VERSION}),
         ...(variant.characterPerformanceVersion===CHARACTER_PERFORMANCE && spec.scenario.characters.some(lacksVoice) && {sparseVoiceVersion:SPARSE_VOICE_VERSION}),
         ...(this.adapter.name === 'openai' && { npcContextVersion: ACTOR_CONTEXT_VERSION,

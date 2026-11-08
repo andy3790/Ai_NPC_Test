@@ -37,7 +37,7 @@
         "src/core/scene-observation.ts": "3b429758c39f24c6d36b06934c4ec14c8a133d1a93f1768220031540456690ba",
         "src/core/social-reaction.ts": "4dac4e87dac5a3062e3de68b44eb0cb1f3dfb295cfe192fa866cff29e098d4d6",
         "src/core/scene-flow.ts": "4ae31989c475f9f5dfd1082a1837b0bbf21212696f4ab1b553612bb0736ccd58",
-        "src/core/witness-memory.ts": "41508f692ad2f753fc07759254467373c1296ce33dfbece4f9e94a1dd43c0368",
+        "src/core/witness-memory.ts": "531062e3e29a38cab9a831b48fbfb574ba8bf7d8512f3d965579348c2491cefb",
         "src/shared/scene-time.ts": "619d07de17d10eb394b2aecacb401a3b9a75e928aedaec87f2cecac9bbf71328"
       },
       "imageInputSupported": false,
