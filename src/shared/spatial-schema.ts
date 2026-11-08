@@ -57,7 +57,7 @@ export const eventGeneratorSchema = z.object({
 export const eventProposalSchema = z.object({ proposal: z.object({ title: z.string().min(1).max(200),
   description: z.string().min(1).max(5000), locationIds: z.array(id).max(100), severity: z.enum(['low', 'medium', 'high']),
 }).nullable() });
-export type SituationProposal = NonNullable<z.infer<typeof eventProposalSchema>['proposal']> & { id: string; invocationId: string; virtualSeconds: number; status: 'proposed' | 'accepted' | 'rejected'; reason: string | null };
+export type SituationProposal = NonNullable<z.infer<typeof eventProposalSchema>['proposal']> & { id: string; invocationId: string; virtualSeconds: number; status: 'proposed' | 'accepted' | 'rejected'; reason: string | null; causeSequence?: number };
 export interface EventGeneratorState { checks: number; nextCheckAtSeconds: number; lastAcceptedAtSeconds: number | null; proposals: SituationProposal[] }
 
 export interface SpatialActivity {

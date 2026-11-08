@@ -10,12 +10,15 @@ export type CallKind = 'speech' | 'receive' | 'director' | 'evaluation' | 'envir
 export type RunStatus = 'queued' | 'running' | 'paused' | 'completed' | 'stopped';
 export type SocialStance = '발끈함' | '시비를 검' | '대화를 끊음';
 export interface SocialMemory { peerId: string; stance: SocialStance; sequence: number }
-export interface NpcSession { id: string; characterId: string; threadId: string; config: ModelConfig; instructions: string; performance?: StoredPerformance; setAsideSequences?: number[]; socialMemory?: SocialMemory[] }
+export interface SceneIntent { sourceSequence: number; intention: string; chosenAt: number }
+export interface SceneWait { sequence: number; from: number; until: number }
+export interface NpcSession { id: string; characterId: string; threadId: string; config: ModelConfig; instructions: string; performance?: StoredPerformance; setAsideSequences?: number[]; socialMemory?: SocialMemory[]; sceneIntent?: SceneIntent; sceneWait?: SceneWait }
 export interface ActionResolution { actionId: string; sourceUtteranceId: string; speechIndex: number; actorId: string; before: State; after: State }
 export interface Utterance { id: string; runId: string; sequence: number; speechIndex: number | null; speakerId: string; speakerName: string; kind: 'speech' | 'event'; speech: string; action: string; createdAt: string; invocationId: string | null; deliveryCompletedAt: string | null; deliveryMs: number | null; actionId?: string | null; resolution?: ActionResolution;
   worldEvent?: WorldEvent & { sourceUtteranceId: string | null; virtualSeconds: number; audience?: Audience; proposalId?: string | null };
   perception?: { locationId: string | null; virtualSeconds: number; speechRecipientIds: string[]; actionRecipientIds: string[]; audience?: Audience };
   spatialIntent?: SpatialSpeech; knownUtteranceIds?: string[];
+  sceneSeconds?: number; timeCut?: { from: number; to: number };
 }
 export interface DeliveryReceipt { id: string; runId: string; utteranceId: string; characterId: string; status: 'pending' | 'processing' | 'delivered'; invocationId: string | null; deliveredAt: string | null }
 export interface TokenUsage { inputTokens: number | null; cachedInputTokens: number | null; cacheWriteInputTokens: number | null; outputTokens: number | null; reasoningOutputTokens: number | null; totalTokens: number | null }
@@ -74,6 +77,8 @@ export interface Run {
   sparseVoiceVersion?: 'sparse-voice/1' | 'sparse-voice/2';
   sceneObservationVersion?: 'scene-observation/1';
   socialReactionVersion?: 'social-reaction/1' | 'social-reaction/2' | 'social-reaction/3';
+  sceneFlowVersion?: 'scene-flow/1' | 'scene-flow/2' | 'scene-flow/3';
+  sceneSeconds?: number;
   topicClosureVersion?: 'topic-closure/1' | 'topic-closure/2' | 'topic-closure/3' | 'topic-closure/4' | 'topic-closure/5' | 'topic-closure/6';
   sessionCleanup?: Record<string, { status: 'deleted' | 'missing' | 'pending'; at: string; error?: string }>;
   apiCredential?: ApiCredential;

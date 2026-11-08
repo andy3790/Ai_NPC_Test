@@ -35,6 +35,8 @@ export class MockAdapter implements Adapter {
           audience: { scope: 'locations', locationIds: input.proposal.locationIds, npcIds: [] } }] : [],
         proposalDecision: input.proposal ? { accepted: true, reason: '모의 검토' } : null };
     }
+    else if (input.task === 'scene_deadline') output = {elapsedSeconds:0,facts:[],forgetFactIds:[],processes:[],events:[],
+      finishProcesses:input.due.processIds.map((id:string)=>({id,outcome:'completed',reason:'예정 시각에 도달했다.'}))};
     else if (input.task === 'environment') output = { elapsedSeconds: 3, facts: [], forgetFactIds: [], processes: [], finishProcesses: [], events: [] };
     else if (input.task === 'situation_resolve') output = { elapsedSeconds: 0, facts: [], forgetFactIds: [], processes: [], finishProcesses: [],
       events: [{ type: 'external_signal', text: input.proposal.description, npcId: null, evidence: null, processId: null }], proposalDecision: { accepted: true, reason: '모의 검토' } };
@@ -55,12 +57,14 @@ export class MockAdapter implements Adapter {
     if (input.characterPerformance?.select && output && typeof output === 'object') {
       output = { portrayal: { attention: '말에서 빠진 대목', phrasing: '구체적인 한 대목부터 꺼낸다' }, ...output };
     }
-    const schema=r.outputSchema as {properties?:{speech?:{type?:string};setAsideSequence?:object;socialChoice?:object;reaction?:object}};
+    const schema=r.outputSchema as {properties?:{speech?:{type?:string};setAsideSequence?:object;socialChoice?:object;reaction?:object;followThrough?:object;waitSeconds?:object}};
     if (schema.properties?.reaction && output && typeof output==='object' && 'speech' in output) {
       const {speech,action:_action,...rest}=output as {speech:string;action:string};
       output={...rest,reaction:{speech,action:''}};
     }
     if (schema.properties?.socialChoice && output && typeof output==='object') output={...output,socialChoice:null};
+    if (schema.properties?.waitSeconds && output && typeof output==='object') output={...output,waitSeconds:0};
+    if (schema.properties?.followThrough && output && typeof output==='object') output={...output,followThrough:null};
     if (schema.properties?.setAsideSequence && output && typeof output==='object') output={...output,setAsideSequence:null};
     if (schema.properties?.speech?.type==='array' && output && typeof output==='object' && 'speech' in output && typeof output.speech==='string') {
       output={...output,speech:output.speech ? [output.speech] : []};

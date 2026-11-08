@@ -8,6 +8,13 @@ export function nextClockBoundary(spec: ExperimentSpec, state: WorldState) {
   return Math.min(Infinity, ...(spec.scenario.clockEvents ?? []).filter(e => !state.firedClockEvents?.includes(e.id)).map(e => e.atSeconds),
     ...(spec.scenario.spatial?.connections ?? []).flatMap(c => c.closesAtSeconds !== undefined && c.closesAtSeconds > state.virtualSeconds ? [c.closesAtSeconds] : []));
 }
+// Repeated empty choices may span a long wait when the world already has
+// something scheduled. Selection and every earlier boundary are still checked.
+export function nextIdleDeadline(spec:ExperimentSpec,state:WorldState) {
+  return Math.min(nextClockBoundary(spec,state),...state.processes
+    .filter(p=>p.status==='pending' && !p.waitingNpcIds.length && p.readyAtSeconds>state.virtualSeconds)
+    .map(p=>p.readyAtSeconds));
+}
 // The caller atomically commits the new state, deliveries and public records.
 export function clockObservations(spec: ExperimentSpec, state: WorldState, runId: string, sequence: number): Utterance[] {
   const records: Utterance[] = [];

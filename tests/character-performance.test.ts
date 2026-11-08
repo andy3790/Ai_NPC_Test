@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { Engine } from '../src/core/engine.js';
 import { Store } from '../src/core/store.js';
+import { withSceneChoice } from '../src/core/scene-flow.js';
 import { MockAdapter } from '../src/adapters/mock.js';
 import { committedPerformance, earlierWords, performanceInstructions, performTurn, rhythmInstruction, withPortrayal } from '../src/core/character-performance.js';
 import { characterSchema, outputSchemas } from '../src/shared/schema.js';
@@ -74,7 +75,9 @@ test('a committed portrayal survives restart and stays confined to its actor in 
             assert.equal(c.metadata.performanceSourceInvocationId, state.invocationId);
             assert.equal(payload.characterPerformance.phrasing, state.choices!.phrasing);
           }
-          assert.equal(c.metadata.outputSchemaSha256, hash(state.invocationId === c.id ? withPortrayal(outputSchemas.speech) : outputSchemas.speech));
+          const portrayal=state.invocationId === c.id ? withPortrayal(outputSchemas.speech) : outputSchemas.speech;
+          const observed=(payload.sceneNow.changes ?? []).map((e:{sequence:number})=>e.sequence);
+          assert.equal(c.metadata.outputSchemaSha256, hash(withSceneChoice(portrayal,observed)));
         }
       }
       assert.doesNotMatch(JSON.stringify(d.utterances), /PRIVATE_TEST_MARKER|portrayal|phrasing/);
@@ -103,7 +106,7 @@ test('historical runs with no pinned engine version keep their original input an
   try {
     const { runs: [run] } = await engine.create(smallSpec(), false);
     const variant = { ...run.variant }; delete variant.characterPerformanceVersion;
-    store.patch('runs', run.id, { variant, promptVersion: 'npc-lab/10' });
+    store.patch('runs', run.id, { variant, promptVersion: 'npc-lab/10',sceneFlowVersion:undefined });
     await engine.resume(run.id); await engine.idle();
     const d = engine.detail(run.id);
     assert.ok(d.invocations.every(c => JSON.parse(c.input).characterPerformance === undefined && c.metadata.outputSchemaSha256 === hash(outputSchemas.speech)));
@@ -131,7 +134,7 @@ test('rule and spatial choices retain their contracts and do not expose private 
       const d = engine.detail(run.id); assert.equal(d.run.status, 'completed', d.run.error ?? '');
       const spatial = run.variant.environmentMode === 'ai_spatial';
       const first = d.invocations.find(c => c.kind === 'speech')!;
-      assert.equal(first.metadata.outputSchemaSha256, hash(withPortrayal(spatial ? outputSchemas.spatialSpeech : outputSchemas.progressSpeech)));
+      assert.equal(first.metadata.outputSchemaSha256, hash(withSceneChoice(withPortrayal(spatial ? outputSchemas.spatialSpeech : outputSchemas.progressSpeech),[])));
       for (const c of d.invocations.filter(c => c.kind !== 'speech')) assert.doesNotMatch(c.input, /characterPerformance|portrayal|phrasing/);
       assert.doesNotMatch(JSON.stringify(d.utterances), /portrayal|phrasing/);
     } finally { await engine.close(); store.close(); }

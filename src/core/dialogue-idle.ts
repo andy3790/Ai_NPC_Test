@@ -1,12 +1,13 @@
 import { environmentMode } from '../shared/schema.js';
 import type { Run, Utterance } from '../shared/types.js';
 import { receives } from './perception.js';
+import { waitingActors } from './scene-flow.js';
 
 export const isSilentTurn = (u: Utterance) => u.kind === 'speech' && !u.speech.trim() && !u.action.trim() && !u.actionId;
 
 // Only explicit, pure-dialogue runs may finish this way. Pending future events
 // and a newly observed event both require another chance to react.
-export function dialogueEnding(run: Run, history: Utterance[]): 'conversation_idle' | 'conversation_withdrawn' | undefined {
+export function dialogueEnding(run: Run, history: Utterance[], waiting?:ReadonlyMap<string,number>): 'conversation_idle' | 'conversation_withdrawn' | undefined {
   if (!run.variant.stopOnSilence || environmentMode(run.spec, run.variant) !== 'off' ||
       run.spec.scheduledEvents.some((_, index) => !run.appliedEvents.includes(index))) return;
   // One participant can leave a conversation on their own. The other gets
@@ -19,6 +20,7 @@ export function dialogueEnding(run: Run, history: Utterance[]): 'conversation_id
     if (choice && last.sequence>choice.sequence && !history.some(u=>u.sequence>choice.sequence && u.kind==='event' && cast.some(c=>receives(u,c.id))))
       return 'conversation_withdrawn';
   }
+  if (run.sceneFlowVersion && (waiting ?? waitingActors(run,history)).size) return;
   const silent = new Set<string>();
   for (let i = history.length - 1; i >= 0; i--) {
     const u = history[i];

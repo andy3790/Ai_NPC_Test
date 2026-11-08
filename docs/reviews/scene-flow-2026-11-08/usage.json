@@ -1,0 +1,899 @@
+{
+  "pricingDate": "2026-11-06",
+  "pricingRevision": "33fd7a5a40495c1a",
+  "ledger": {
+    "requests": 875,
+    "settled": 875,
+    "conservativeUsd": 0.660545045
+  },
+  "runs": [
+    {
+      "label": "station-after",
+      "scenario": "기지의 오후",
+      "sceneRevision": "station-afternoon",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 128,
+      "choices": 128,
+      "spoken": 99,
+      "actionOnly": 9,
+      "silentWaits": 16,
+      "voices": [
+        {
+          "name": "윤",
+          "choices": 33,
+          "spoken": 25
+        },
+        {
+          "name": "미루",
+          "choices": 32,
+          "spoken": 22
+        },
+        {
+          "name": "도하",
+          "choices": 30,
+          "spoken": 25
+        },
+        {
+          "name": "세린",
+          "choices": 33,
+          "spoken": 27
+        }
+      ],
+      "events": 67,
+      "virtualSeconds": 444.22727272727275,
+      "authoredEvents": [],
+      "facts": [
+        "물컵은 관제실 표면의 물이 고이지 않은 곳에 놓여 있다.",
+        "관제실 표면의 컵 주변에 번진 물은 닦여 제거되었다.",
+        "환풍기 날개 축의 유격이 사라졌다.",
+        "환풍기 전원이 켜져 있고 날개가 회전하고 있다.",
+        "휴지 한 장이 탁자 위에 가지런히 놓여 있다.",
+        "휴게실 창밖에 얇은 구름이 보이고 바다 쪽 시야가 흐릿하다."
+      ],
+      "processes": [
+        {
+          "description": "관제실 표면에서 컵의 물이 조금씩 더 번진다.",
+          "status": "cancelled"
+        }
+      ],
+      "positions": [
+        {
+          "npc": "yoon",
+          "place": "lounge",
+          "transit": null
+        },
+        {
+          "npc": "miru",
+          "place": "lounge",
+          "transit": null
+        },
+        {
+          "npc": "doha",
+          "place": "lounge",
+          "transit": null
+        },
+        {
+          "npc": "serin",
+          "place": "lounge",
+          "transit": null
+        }
+      ],
+      "proposals": [
+        {
+          "title": "관제실의 물컵",
+          "at": 30,
+          "status": "accepted"
+        },
+        {
+          "title": "무전기의 순간 잡음",
+          "at": 90,
+          "status": "accepted"
+        }
+      ],
+      "sceneFlow": {
+        "version": "scene-flow/1",
+        "choices": 128,
+        "longRests": {
+          "elapsed": 1,
+          "interrupted": 27,
+          "noNextTurn": 4
+        },
+        "adoptedIntentions": 48,
+        "explicitWaits": 64,
+        "cuts": 4,
+        "skippedSeconds": 113.22727272727275
+      },
+      "prompt": "npc-lab/15",
+      "actorContext": "npc-context/4",
+      "worldContext": "world-context/2",
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/3",
+      "socialChoicesOffered": 1,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/2",
+        "checkpoints": 31,
+        "selections": 22,
+        "compacted": 77,
+        "reintroduced": 60,
+        "quiet": 0,
+        "goalObservations": 67,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [
+        "spatial-contract/2"
+      ],
+      "spatialChoices": [
+        "spatial-choice/3"
+      ],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 2,
+      "models": [
+        "gpt-6-luna/low",
+        "gpt-6-luna/medium"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 3,
+      "specSha256": "f83a119b3313b0a2782028dac244b576f6a9d0d7fbc1943c36d88e9cd7fe74f6",
+      "requests": 298,
+      "failed": 3,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.23061013499999986,
+      "tokens": {
+        "inputTokens": 1695331,
+        "cachedInputTokens": 175851,
+        "cacheWriteInputTokens": 1276885,
+        "outputTokens": 89963,
+        "reasoningOutputTokens": 57435,
+        "totalTokens": 1785294
+      },
+      "medianMs": 3448.3826999999583,
+      "p95Ms": 7995.925300000003,
+      "firstOutputMedianMs": 2726,
+      "firstOutputP95Ms": 6514,
+      "matchedChoices": {
+        "through": 82,
+        "clockAtChoice": 169.64545454545453,
+        "npc": {
+          "requests": 83,
+          "failed": 1,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.05620915999999999,
+          "tokens": {
+            "inputTokens": 377367,
+            "cachedInputTokens": 8426,
+            "cacheWriteInputTokens": 368692,
+            "outputTokens": 20027,
+            "reasoningOutputTokens": 11616,
+            "totalTokens": 397394
+          },
+          "medianMs": 3384.485400000005,
+          "p95Ms": 4536.3273000000045,
+          "firstOutputMedianMs": 2503,
+          "firstOutputP95Ms": 3630
+        }
+      },
+      "activeMs": 1262596,
+      "roles": {
+        "speech": {
+          "requests": 131,
+          "failed": 3,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.08786308499999995,
+          "tokens": {
+            "inputTokens": 609072,
+            "cachedInputTokens": 30766,
+            "cacheWriteInputTokens": 577913,
+            "outputTokens": 30554,
+            "reasoningOutputTokens": 18320,
+            "totalTokens": 639626
+          },
+          "medianMs": 3350.356400000048,
+          "p95Ms": 4627.698800000013,
+          "firstOutputMedianMs": 2567,
+          "firstOutputP95Ms": 3853
+        },
+        "environment": {
+          "requests": 155,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.12019284999999992,
+          "tokens": {
+            "inputTokens": 776072,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 533906,
+            "outputTokens": 58476,
+            "reasoningOutputTokens": 38528,
+            "totalTokens": 834548
+          },
+          "medianMs": 3760.8790999999037,
+          "p95Ms": 9578.236199999927,
+          "firstOutputMedianMs": 2926,
+          "firstOutputP95Ms": 8083
+        },
+        "event_generation": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0225542,
+          "tokens": {
+            "inputTokens": 310187,
+            "cachedInputTokens": 145085,
+            "cacheWriteInputTokens": 165066,
+            "outputTokens": 933,
+            "reasoningOutputTokens": 587,
+            "totalTokens": 311120
+          },
+          "medianMs": 1568.0016999999061,
+          "p95Ms": 3861.341999999946,
+          "firstOutputMedianMs": 1244,
+          "firstOutputP95Ms": 3117
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          3520,
+          3633,
+          3518,
+          3702,
+          3810,
+          4026,
+          3742,
+          3903
+        ],
+        "lastSpeechInputs": [
+          5346,
+          5286,
+          5074,
+          4665,
+          5191,
+          4631,
+          4464,
+          5242
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 128,
+        "eligibleSpeeches": 53,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 1,
+      "errorKinds": [
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        },
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        },
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "label": "station-before",
+      "scenario": "기지의 오후",
+      "sceneRevision": "station-afternoon",
+      "status": "paused",
+      "completionReason": null,
+      "limit": 128,
+      "choices": 82,
+      "spoken": 59,
+      "actionOnly": 18,
+      "silentWaits": 4,
+      "voices": [
+        {
+          "name": "윤",
+          "choices": 22,
+          "spoken": 11
+        },
+        {
+          "name": "미루",
+          "choices": 21,
+          "spoken": 16
+        },
+        {
+          "name": "도하",
+          "choices": 20,
+          "spoken": 17
+        },
+        {
+          "name": "세린",
+          "choices": 19,
+          "spoken": 15
+        }
+      ],
+      "events": 51,
+      "virtualSeconds": 145.9090909090909,
+      "authoredEvents": [],
+      "facts": [
+        "탁자 가장자리의 휴지가 가지런히 정돈되어 있다.",
+        "환풍기 덮개 가장자리의 고정 나사가 단단히 조여져 있다.",
+        "환풍기 전원이 켜져 있고 회전 중이다.",
+        "환풍기 덮개가 제자리에 놓여 있다.",
+        "물컵의 물이 세 모금 줄어 있다.",
+        "통신 장비의 표시등에 경고가 표시되어 있지 않다.",
+        "탁자 위에 물컵이 없다."
+      ],
+      "processes": [
+        {
+          "description": "공용 업무 무전에 간헐적인 짧은 잡음이 발생한다.",
+          "status": "completed"
+        }
+      ],
+      "positions": [
+        {
+          "npc": "yoon",
+          "place": "lounge",
+          "transit": null
+        },
+        {
+          "npc": "miru",
+          "place": "lounge",
+          "transit": null
+        },
+        {
+          "npc": "doha",
+          "place": "lounge",
+          "transit": null
+        },
+        {
+          "npc": "serin",
+          "place": null,
+          "transit": "lounge-control"
+        }
+      ],
+      "proposals": [
+        {
+          "title": "환풍기 진동의 재발",
+          "at": 30,
+          "status": "accepted"
+        },
+        {
+          "title": "탁자 위로 번지는 물",
+          "at": 90,
+          "status": "rejected"
+        },
+        {
+          "title": "업무 무전의 짧은 잡음",
+          "at": 120,
+          "status": "accepted"
+        }
+      ],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": "world-context/2",
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/3",
+      "socialChoicesOffered": 6,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/2",
+        "checkpoints": 18,
+        "selections": 12,
+        "compacted": 35,
+        "reintroduced": 33,
+        "quiet": 2,
+        "goalObservations": 51,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [
+        "spatial-contract/2"
+      ],
+      "spatialChoices": [
+        "spatial-choice/3"
+      ],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 1,
+      "models": [
+        "gpt-6-luna/low",
+        "gpt-6-luna/medium"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 3,
+      "specSha256": "f83a119b3313b0a2782028dac244b576f6a9d0d7fbc1943c36d88e9cd7fe74f6",
+      "requests": 230,
+      "failed": 7,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.15237558000000007,
+      "tokens": {
+        "inputTokens": 1081953,
+        "cachedInputTokens": 117033,
+        "cacheWriteInputTokens": 734850,
+        "outputTokens": 72684,
+        "reasoningOutputTokens": 47916,
+        "totalTokens": 1154637
+      },
+      "medianMs": 3230.53330000001,
+      "p95Ms": 7601.853300000017,
+      "firstOutputMedianMs": 2615,
+      "firstOutputP95Ms": 6457,
+      "matchedChoices": {
+        "through": 82,
+        "clockAtChoice": 142.70909090909092,
+        "npc": {
+          "requests": 83,
+          "failed": 1,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.040517879999999985,
+          "tokens": {
+            "inputTokens": 335356,
+            "cachedInputTokens": 79173,
+            "cacheWriteInputTokens": 255934,
+            "outputTokens": 15419,
+            "reasoningOutputTokens": 8683,
+            "totalTokens": 350775
+          },
+          "medianMs": 2858.375900000001,
+          "p95Ms": 4348.598700000002,
+          "firstOutputMedianMs": 2220,
+          "firstOutputP95Ms": 3579
+        }
+      },
+      "activeMs": 887628,
+      "roles": {
+        "speech": {
+          "requests": 83,
+          "failed": 1,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.040517879999999985,
+          "tokens": {
+            "inputTokens": 335356,
+            "cachedInputTokens": 79173,
+            "cacheWriteInputTokens": 255934,
+            "outputTokens": 15419,
+            "reasoningOutputTokens": 8683,
+            "totalTokens": 350775
+          },
+          "medianMs": 2858.375900000001,
+          "p95Ms": 4348.598700000002,
+          "firstOutputMedianMs": 2220,
+          "firstOutputP95Ms": 3579
+        },
+        "environment": {
+          "requests": 144,
+          "failed": 6,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.11029487500000001,
+          "tokens": {
+            "inputTokens": 726085,
+            "cachedInputTokens": 27330,
+            "cacheWriteInputTokens": 468943,
+            "outputTokens": 56845,
+            "reasoningOutputTokens": 39100,
+            "totalTokens": 782930
+          },
+          "medianMs": 3673.688499999931,
+          "p95Ms": 9416.729500000016,
+          "firstOutputMedianMs": 2968,
+          "firstOutputP95Ms": 8269
+        },
+        "event_generation": {
+          "requests": 3,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0015628249999999999,
+          "tokens": {
+            "inputTokens": 20512,
+            "cachedInputTokens": 10530,
+            "cacheWriteInputTokens": 9973,
+            "outputTokens": 420,
+            "reasoningOutputTokens": 133,
+            "totalTokens": 20932
+          },
+          "medianMs": 2482.833800000022,
+          "p95Ms": 3255.75270000007,
+          "firstOutputMedianMs": 1655,
+          "firstOutputP95Ms": 2375
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          3348,
+          3461,
+          3346,
+          3194,
+          3655,
+          3344,
+          3181,
+          3398
+        ],
+        "lastSpeechInputs": [
+          4067,
+          4500,
+          4438,
+          4463,
+          3938,
+          4779,
+          4435,
+          4500
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 82,
+        "eligibleSpeeches": 34,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": [
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        },
+        {
+          "kind": "environment",
+          "attempt": 1,
+          "phase": "resolve"
+        },
+        {
+          "kind": "environment",
+          "attempt": 2,
+          "phase": "resolve"
+        },
+        {
+          "kind": "environment",
+          "attempt": 3,
+          "phase": "resolve"
+        },
+        {
+          "kind": "environment",
+          "attempt": 4,
+          "phase": "resolve"
+        },
+        {
+          "kind": "environment",
+          "attempt": 5,
+          "phase": "resolve"
+        },
+        {
+          "kind": "environment",
+          "attempt": 6,
+          "phase": "resolve"
+        }
+      ]
+    },
+    {
+      "label": "station-final",
+      "scenario": "기지의 오후",
+      "sceneRevision": "station-afternoon",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 128,
+      "choices": 128,
+      "spoken": 98,
+      "actionOnly": 20,
+      "silentWaits": 7,
+      "voices": [
+        {
+          "name": "윤",
+          "choices": 28,
+          "spoken": 18
+        },
+        {
+          "name": "미루",
+          "choices": 37,
+          "spoken": 27
+        },
+        {
+          "name": "도하",
+          "choices": 30,
+          "spoken": 22
+        },
+        {
+          "name": "세린",
+          "choices": 33,
+          "spoken": 31
+        }
+      ],
+      "events": 79,
+      "virtualSeconds": 685.181818181818,
+      "authoredEvents": [],
+      "facts": [
+        "통신 장비 표시등과 상태 화면에 이상이 없다.",
+        "환풍기 덮개 나사가 조여져 덮개가 고정되어 있다.",
+        "환풍기의 진동음이 줄어든 상태다.",
+        "탁자 가장자리의 물방울이 닦여 표면이 말끔하다.",
+        "탁자 위 휴지가 가지런히 정돈되어 있다.",
+        "물컵이 탁자 안쪽으로 더 들어가 가장자리에서 떨어져 있다.",
+        "물컵의 물이 두 모금만큼 줄어든 상태다."
+      ],
+      "processes": [
+        {
+          "description": "탁자 가장자리로 흘러내린 물방울이 바닥에 떨어진다.",
+          "status": "completed"
+        }
+      ],
+      "positions": [
+        {
+          "npc": "yoon",
+          "place": "lounge",
+          "transit": null
+        },
+        {
+          "npc": "miru",
+          "place": "control",
+          "transit": null
+        },
+        {
+          "npc": "doha",
+          "place": "lounge",
+          "transit": null
+        },
+        {
+          "npc": "serin",
+          "place": "lounge",
+          "transit": null
+        }
+      ],
+      "proposals": [
+        {
+          "title": "컵에서 번지는 물방울",
+          "at": 60,
+          "status": "accepted",
+          "causeSequence": 39
+        },
+        {
+          "title": "업무 채널의 짧은 잡음",
+          "at": 150,
+          "status": "accepted"
+        }
+      ],
+      "sceneFlow": {
+        "version": "scene-flow/2",
+        "choices": 128,
+        "longRests": {
+          "elapsed": 5,
+          "interrupted": 28,
+          "noNextTurn": 2
+        },
+        "adoptedIntentions": 57,
+        "explicitWaits": 55,
+        "cuts": 10,
+        "skippedSeconds": 285.4090909090909
+      },
+      "prompt": "npc-lab/16",
+      "actorContext": "npc-context/4",
+      "worldContext": "world-context/2",
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/3",
+      "socialChoicesOffered": 0,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/2",
+        "checkpoints": 31,
+        "selections": 22,
+        "compacted": 67,
+        "reintroduced": 61,
+        "quiet": 0,
+        "goalObservations": 77,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [
+        "spatial-contract/2",
+        "spatial-contract/3"
+      ],
+      "spatialChoices": [
+        "spatial-choice/3"
+      ],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 4,
+      "models": [
+        "gpt-6-luna/low",
+        "gpt-6-luna/medium"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 4,
+      "specSha256": "f83a119b3313b0a2782028dac244b576f6a9d0d7fbc1943c36d88e9cd7fe74f6",
+      "requests": 347,
+      "failed": 4,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.27755933000000016,
+      "tokens": {
+        "inputTokens": 2513083,
+        "cachedInputTokens": 654963,
+        "cacheWriteInputTokens": 1495768,
+        "outputTokens": 95607,
+        "reasoningOutputTokens": 59160,
+        "totalTokens": 2608690
+      },
+      "medianMs": 3421.215899999981,
+      "p95Ms": 6569.115699999966,
+      "firstOutputMedianMs": 2633,
+      "firstOutputP95Ms": 5517,
+      "matchedChoices": {
+        "through": 82,
+        "clockAtChoice": 196.21818181818185,
+        "npc": {
+          "requests": 85,
+          "failed": 3,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.05841227499999999,
+          "tokens": {
+            "inputTokens": 407676,
+            "cachedInputTokens": 28190,
+            "cacheWriteInputTokens": 379231,
+            "outputTokens": 21402,
+            "reasoningOutputTokens": 12586,
+            "totalTokens": 429078
+          },
+          "medianMs": 3488.838800000005,
+          "p95Ms": 5141.973600000027,
+          "firstOutputMedianMs": 2601,
+          "firstOutputP95Ms": 4170
+        }
+      },
+      "activeMs": 1324930,
+      "roles": {
+        "speech": {
+          "requests": 132,
+          "failed": 4,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.09057411,
+          "tokens": {
+            "inputTokens": 644211,
+            "cachedInputTokens": 50251,
+            "cacheWriteInputTokens": 593564,
+            "outputTokens": 31673,
+            "reasoningOutputTokens": 18499,
+            "totalTokens": 675884
+          },
+          "medianMs": 3414.000699999975,
+          "p95Ms": 5187.823000000033,
+          "firstOutputMedianMs": 2569,
+          "firstOutputP95Ms": 4380
+        },
+        "environment": {
+          "requests": 195,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.143568425,
+          "tokens": {
+            "inputTokens": 955899,
+            "cachedInputTokens": 0,
+            "cacheWriteInputTokens": 661141,
+            "outputTokens": 62900,
+            "reasoningOutputTokens": 40144,
+            "totalTokens": 1018799
+          },
+          "medianMs": 3682.1830000000773,
+          "p95Ms": 7323.54389999999,
+          "firstOutputMedianMs": 2786,
+          "firstOutputP95Ms": 6400
+        },
+        "event_generation": {
+          "requests": 20,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.043416794999999994,
+          "tokens": {
+            "inputTokens": 912973,
+            "cachedInputTokens": 604712,
+            "cacheWriteInputTokens": 241063,
+            "outputTokens": 1034,
+            "reasoningOutputTokens": 517,
+            "totalTokens": 914007
+          },
+          "medianMs": 1705.6128000000026,
+          "p95Ms": 2569.366700000013,
+          "firstOutputMedianMs": 1432,
+          "firstOutputP95Ms": 2145
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          3520,
+          3633,
+          3518,
+          3714,
+          3809,
+          3904,
+          3991,
+          3814
+        ],
+        "lastSpeechInputs": [
+          4723,
+          5357,
+          5394,
+          5056,
+          5385,
+          5354,
+          5190,
+          4623
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 128,
+        "eligibleSpeeches": 71,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": [
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        },
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        },
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        },
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        }
+      ]
+    }
+  ]
+}

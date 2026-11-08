@@ -2,13 +2,21 @@ import { WORLD_PROMPT_VERSION, worldPolicies } from './world-policies.js';
 export { WORLD_PROMPT_VERSION } from './world-policies.js';
 import type { ExperimentSpec } from '../shared/schema.js';
 import type { Utterance } from '../shared/types.js';
-import { worldOutputSchema, type WorldOutput, type WorldState } from '../shared/world-schema.js';
+import { worldEventSchema, worldFactSchema, worldOutputSchema, type WorldOutput, type WorldState } from '../shared/world-schema.js';
 import { z } from 'zod';
 import { isSilentTurn } from './dialogue-idle.js';
 
 export const initialWorldState = (): WorldState => ({ virtualSeconds: 0, facts: [], processes: [], processedSpeechId: null, processedSequence: 0, processedSpeechCount: 0 });
 
 export const worldInstructions = worldPolicies[WORLD_PROMPT_VERSION].instructions;
+
+// A deadline can change the environment or offer a reaction before anyone
+// speaks again. It cannot testify that an NPC acted during the skipped time.
+export const deadlineOutput = worldOutputSchema.extend({
+  elapsedSeconds: z.literal(0),
+  facts: z.array(worldFactSchema.extend({scope:z.literal('environment'),npcId:z.null()})).max(100),
+  events: z.array(worldEventSchema.extend({type:z.enum(['observation','external_signal']),npcId:z.null(),evidence:z.null()})).max(50),
+});
 
 // A quiet choice advances simulated time, independently of API latency.
 // Opt in by the actual session revision; archived/custom sessions retain their contract.

@@ -7,9 +7,10 @@ import { publicMessage, speakerPrompt } from './prompts.js';
 import { applySpatialPlan, applySpatialResolution, closePassages, commitSpatialChoice, dueActivities, dueProcesses, initialSpatialWorld, nextSpatialTime, selectableGroups, validateSpatialChoice } from './spatial-state.js';
 import { clockObservations, nextClockBoundary } from './scene-clock.js';
 import { managerState, managerWorld, spatialPlannerInstructions, spatialResolverInstructions } from './spatial-prompts.js';
-import { decideSituation, generateSituation, nextSituationCheck, pendingProposal } from './situations.js';
+import { decideSituation, generateSituation, nextSituationCheck, pendingProposal, proposalCause } from './situations.js';
 import { directorObservations, directorPrompt } from './director.js';
 import { parseSpeechOutput } from './character-performance.js';
+import { timeCut, usesSceneFlowV2, waitingActors } from './scene-flow.js';
 
 const now = () => new Date().toISOString();
 const errorText = (e: unknown) => e instanceof Error ? e.message : String(e);
@@ -26,9 +27,9 @@ function saveState(h: SimulationHost, next: ReturnType<typeof state>, method: st
   h.store.event(h.id, invocationId, method, { state: next });
 }
 
-async function prepareCycle(h: SimulationHost, remaining: number) {
-  const run = h.run(), current = state(h), all = history(h);
-  const groups = selectableGroups(run.spec, current, all).slice(0, remaining);
+async function prepareCycle(h: SimulationHost, remaining: number, all:Utterance[], waiting:ReadonlyMap<string,number>) {
+  const run = h.run(), current = state(h);
+  const groups = selectableGroups(run.spec, current, all,waiting).slice(0, remaining);
   if (!groups.length) return false;
   const npcIds: string[] = [];
   for (const group of groups) {
@@ -139,10 +140,15 @@ async function resolveWorld(h: SimulationHost) {
     h.store.transaction(() => saveState(h,next,'spatial/speech_finished')); h.changed(); return;
   }
   const session = await h.helper('spatial-world-resolver', run.spec.worldEngine!, spatialResolverInstructions);
+  const travel=usesSceneFlowV2(run.sceneFlowVersion) ? due.filter(a=>a.moveToLocationId).map(a=>({
+    activityId:a.id,npcId:a.npcId,destination:a.moveToLocationId,
+    departed:current.spatial!.positions.some(p=>p.npcId===a.npcId && p.transit?.activityId===a.id),
+  })) : [];
   const call = await h.invoke('environment', session, `spatial:resolve:${checkpoint.id}`, JSON.stringify({ task: 'spatial_resolve', ...managerWorld(run.spec),
     currentTime: current.virtualSeconds, current: managerState(current, all, run.spec), dueActivityIds: due.map(a => a.id),
+    ...(travel.length>0 && {travel,arrivalRule:'departed=false면 요청만 했고 출발하지 않았다. 제자리에서 가능한 행동만 판정한다.'}),
     changes: all.filter(u => u.sequence > (current.spatial!.lastResolvedSequence ?? 0)).map(u => publicMessage(u)),
-    proposal: proposal ?? null, situationPolicy: run.spec.eventGenerator ?? null }),
+    proposal: proposal ?? null, ...(usesSceneFlowV2(run.sceneFlowVersion) && proposalCause(proposal,all)), situationPolicy: run.spec.eventGenerator ?? null }),
     { outputType: 'spatialResolution', phase: 'resolve', sourceUtteranceIds: due.map(a => a.sourceUtteranceId), proposalId: proposal?.id ?? null, virtualSeconds: current.virtualSeconds }, all);
   let result: ReturnType<typeof applySpatialResolution>;
   try { result = applySpatialResolution(run.spec, current, all, JSON.parse(call.output), proposal); }
@@ -224,12 +230,17 @@ export async function runSpatial(h: SimulationHost) {
     if (count >= run.spec.maxUtterances) { h.store.patch('runs', h.id, { status: 'completed', completedAt: now(), completionReason: 'utterance_limit' }); break; }
     if (run.pauseRequested || run.stepRemaining === 0) { h.store.patch('runs', h.id, { status: 'paused', pausedAt: now(), pauseRequested: false }); break; }
     const remaining = Math.min(run.spec.maxUtterances - count, run.stepRemaining ?? Infinity);
-    if (await prepareCycle(h, remaining)) continue;
-    const next = nextSpatialTime(state(h), Math.min(nextSituationCheck(h),nextClockBoundary(run.spec,state(h))));
+    const all=history(h), waiting=waitingActors(run,all);
+    if (await prepareCycle(h, remaining,all,waiting)) continue;
+    const next = nextSpatialTime(state(h), Math.min(nextSituationCheck(h),nextClockBoundary(run.spec,state(h)),...waiting.values()));
     if (next === null) throw new Error('진행 가능한 NPC·가상 시간 경계가 없습니다. 상태와 반응 대기를 확인하세요.');
     const advanced = structuredClone(state(h)); advanced.virtualSeconds = next;
     closePassages(run.spec,advanced);
-    h.store.transaction(() => saveState(h, advanced, 'spatial/clock_advanced')); h.changed();
+    h.store.transaction(() => {
+      if (waiting.size && next-current.virtualSeconds>=15)
+        h.append(timeCut(run,current.virtualSeconds,next,all.length+1));
+      saveState(h, advanced, 'spatial/clock_advanced');
+    }); h.changed();
   }
   if (h.closing() && h.run().status === 'running') h.store.patch('runs', h.id, { status: 'paused', pausedAt: now() });
 }

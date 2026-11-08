@@ -25,12 +25,15 @@ import { audienceNpcIds } from './perception.js';
 import type { Audience } from '../shared/spatial-schema.js';
 import type { SimulationHost } from './simulation-host.js';
 import { runSpatial } from './spatial-runner.js';
-import { clockObservations } from './scene-clock.js';
-import { groundedEvents, spatialChoiceContract, spatialContract, SPATIAL_CHOICE_VERSION, SPATIAL_CONTRACT_VERSION, WORLD_CONTRACT_VERSION } from './spatial-contract.js';
+import { clockObservations, nextClockBoundary, nextIdleDeadline } from './scene-clock.js';
+import { applySceneDecision, sceneDecision, sceneTime, sceneTurn, SCENE_FLOW_VERSION, timeCut, usesSceneFlowV2, waitingActors, withSceneChoice } from './scene-flow.js';
+import { causalProposalSchema, nextSituationCheck } from './situations.js';
+import { ARRIVAL_CONTRACT_VERSION, groundedEvents, spatialChoiceContract, spatialContract, SPATIAL_CHOICE_VERSION, SPATIAL_CONTRACT_VERSION, WORLD_CONTRACT_VERSION } from './spatial-contract.js';
 import { z } from 'zod';
 import { advanceSingleRoomSituations } from './single-room-situations.js';
 import { worldFactSchema, worldOutputSchema } from '../shared/world-schema.js';
-import { applyWorldOutput, initialWorldState, priorityWorldSpeaker, worldPrompt, worldResponseContract } from './world.js';
+import { applyWorldOutput, deadlineOutput, initialWorldState, priorityWorldSpeaker, worldPrompt, worldResponseContract } from './world.js';
+import { managerState, managerWorld } from './spatial-prompts.js';
 import { worldPromptVersion, worldPolicies } from './world-policies.js';
 import type { ApiCredential, CallKind, DeliveryReceipt, InvocationMetrics, NpcSession, Run, RunDetail, RunListItem, RunRecords, RunSummary, Utterance } from '../shared/types.js';
 import { progression, progressionPrompt, resolveAction } from './progression.js';
@@ -89,7 +92,7 @@ export class Engine extends EventEmitter {
         characterPerformanceVersion: sourceVariant.characterPerformanceVersion ?? CHARACTER_PERFORMANCE,
         ...(environmentMode(spec, sourceVariant) === 'ai' ? { worldPromptVersion: sourceVariant.worldPromptVersion ?? WORLD_PROMPT_VERSION } : {}) };
       const context = {conversationMemoryVersion:environmentMode(spec,variant)==='off' ? DIALOGUE_MEMORY_VERSION : CONVERSATION_MEMORY_VERSION,
-        sceneObservationVersion:SCENE_OBSERVATION_VERSION, topicClosureVersion:TOPIC_CLOSURE_VERSION,
+        sceneObservationVersion:SCENE_OBSERVATION_VERSION, topicClosureVersion:TOPIC_CLOSURE_VERSION, sceneFlowVersion:SCENE_FLOW_VERSION,
         ...(variant.characterPerformanceVersion===CHARACTER_PERFORMANCE && {socialReactionVersion:SOCIAL_REACTION_VERSION}),
         ...(variant.characterPerformanceVersion===CHARACTER_PERFORMANCE && spec.scenario.characters.some(lacksVoice) && {sparseVoiceVersion:SPARSE_VOICE_VERSION}),
         ...(this.adapter.name === 'openai' && { npcContextVersion: ACTOR_CONTEXT_VERSION,
@@ -154,7 +157,7 @@ export class Engine extends EventEmitter {
       const run = this.run(id); if (Object.hasOwn(run.sessions, c.id)) { await this.restoreSession(id, 'sessions', c.id, run.sessions[c.id]); continue; }
       const config = { model: c.model ?? run.variant.model ?? run.spec.scenario.defaults.model, effort: c.effort ?? run.variant.effort ?? run.spec.scenario.defaults.effort };
       const instructions = persona(run.spec, c, { ...run.variant,
-        dialoguePromptVersion: run.variant.dialoguePromptVersion ?? LEGACY_DIALOGUE_PROMPT },!!run.sceneObservationVersion);
+        dialoguePromptVersion: run.variant.dialoguePromptVersion ?? LEGACY_DIALOGUE_PROMPT },!!run.sceneObservationVersion,!!run.sceneFlowVersion);
       const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, c.id), run.apiCredential);
       this.store.patch('runs', id, { sessions: { ...this.run(id).sessions, [c.id]: { id: randomUUID(), characterId: c.id, threadId, config, instructions } } });
     }
@@ -269,6 +272,13 @@ export class Engine extends EventEmitter {
         }
       }
     }
+    if (run.sceneFlowVersion) {
+      const flow=sceneTurn(run,session,history);
+      const sources=flow.sources.map(source=>source.sequence);
+      prompt.sceneNow=flow.context;
+      schema=withSceneChoice(schema,sources);
+      metadata={...metadata,sceneFlowVersion:run.sceneFlowVersion,sceneSources:sources,sceneSeconds:sceneTime(run)};
+    }
     return this.invoke(id, 'speech', session, key, JSON.stringify(prompt), metadata,
       withMemoryCheckpoint(schema,memory?.offered ?? []), history);
   }
@@ -290,11 +300,14 @@ export class Engine extends EventEmitter {
       input = JSON.stringify({ task: JSON.parse(input).task, previousFailure: previous.error?.slice(0, 5000), instruction: '바로 이전 요청은 실패하거나 형식이 잘못되었습니다. 해당 호출의 결과는 아직 공개·적용되지 않았습니다. previousFailure는 이전 결과가 거부된 이유입니다. 이미 전달된 이전 요청의 내용을 사용하여 그 요청만 다시 완료하세요. 새 공개 발언이나 세계 설정을 입력한 것이 아닙니다. 지정된 JSON 형식만 반환하세요.' });
     }
     const format = metadata.outputType as keyof typeof outputSchemas | undefined;
+    const checkArrivals=usesSceneFlowV2(run.sceneFlowVersion) && format==='spatialResolution';
     const spatialFormat = run.npcContextVersion && run.npcContextVersion !== 'npc-context/1' && run.worldState?.spatial && (format === 'spatialPlan' || format === 'spatialResolution')
-      ? spatialContract(String(metadata.phase),run.spec,run.worldState,metadata.sourceUtteranceIds as string[],history ?? []) : undefined;
+      ? spatialContract(String(metadata.phase),run.spec,run.worldState,metadata.sourceUtteranceIds as string[],history ?? [],checkArrivals) : undefined;
     if (spatialFormat || kind === 'environment' && !format && run.npcContextVersion && run.npcContextVersion !== 'npc-context/1')
-      metadata = { ...metadata, worldContractVersion:spatialFormat ? SPATIAL_CONTRACT_VERSION : WORLD_CONTRACT_VERSION };
-    const baseSchema = requestedOutputSchema ?? spatialFormat ?? (format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind]);
+      metadata = { ...metadata, worldContractVersion:checkArrivals ? ARRIVAL_CONTRACT_VERSION : spatialFormat ? SPATIAL_CONTRACT_VERSION : WORLD_CONTRACT_VERSION };
+    const proposalSchema=kind==='event_generation' && Array.isArray(metadata.causeSources) && metadata.causeSources.length
+      ? causalProposalSchema(metadata.causeSources) : undefined;
+    const baseSchema = requestedOutputSchema ?? spatialFormat ?? proposalSchema ?? (format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind]);
     const repairLanguage = metadata.socialBeat ? repairReactionLanguage : languageRepairSchema;
     const languageRepair = independent && kind === 'speech' && previous?.error
       ? repairLanguage(baseSchema,session.instructions+' '+input,previous.error) : undefined;
@@ -365,6 +378,7 @@ export class Engine extends EventEmitter {
     const parsed=call.kind==='speech' ? parseSpeechOutput(call) : JSON.parse(call.output);
     responseValidator(call.kind,call.metadata.outputType).parse(parsed);
     if (call.kind!=='speech' || !call.characterId) return;
+    if (Array.isArray(call.metadata.sceneSources)) sceneDecision(parsed,call.metadata.sceneSources);
     if (call.metadata.socialReactionVersion && Array.isArray(call.metadata.socialPeers)) readSocialChoice(parsed.socialChoice,call.metadata.socialPeers);
     if (recallsPlans(run.conversationMemoryVersion)) {
       const prompt=JSON.parse(originalInput);
@@ -425,10 +439,18 @@ export class Engine extends EventEmitter {
   private append(id: string, u: Utterance, accepted?: InvocationMetrics) {
     const run = this.run(id);
     const version = run.variant.characterPerformanceVersion;
-    if (u.kind === 'speech' && u.invocationId && ((version && version !== 'off') || run.conversationMemoryVersion)) {
+    if (u.kind === 'speech' && u.invocationId && ((version && version !== 'off') || run.conversationMemoryVersion || run.sceneFlowVersion)) {
       const session = run.sessions[u.speakerId];
       const call = accepted ?? this.store.get('invocations', u.invocationId)!;
       let next = session;
+      if (run.sceneFlowVersion && Array.isArray(call.metadata.sceneSources)) {
+        const time=Number(call.metadata.sceneSeconds);
+        u.sceneSeconds=time;
+        const decision=sceneDecision(JSON.parse(call.output),call.metadata.sceneSources);
+        const deadline=run.sceneFlowVersion==='scene-flow/3' && run.worldState && !decision.wait && !u.action && !u.speech
+          ? nextIdleDeadline(run.spec,run.worldState) : Infinity;
+        next=applySceneDecision(next,decision,u,time,isAiEnvironment(run.spec,run.variant),deadline);
+      }
       if (!session.performance && version && version !== 'off') {
         const slot = run.spec.scenario.characters.findIndex(c => c.id === u.speakerId);
         const performance = committedPerformance(version, run.spec.scenario.characters[slot], slot, call);
@@ -448,7 +470,9 @@ export class Engine extends EventEmitter {
       // Both runners commit the private memory and the public choice atomically.
       if (next !== session) this.store.patch('runs', id, {sessions:{...run.sessions,[u.speakerId]:next}});
     }
-    if (!u.perception && isSilentTurn(u)) {
+    // Elapsed time is already on the next scene clock. Its transcript marker
+    // carries no message to deliver and must not wake every sleeping actor.
+    if (u.timeCut || !u.perception && isSilentTurn(u)) {
       this.store.put('utterances', { ...u, deliveryCompletedAt: now(), deliveryMs: 0 });
       return;
     }
@@ -459,12 +483,14 @@ export class Engine extends EventEmitter {
     }
     if (u.perception && !this.store.list('receipts', id).some(r => r.utteranceId === u.id)) this.completeDelivery(id, u);
   }
-  private async speaker(id: string, speeches: Utterance[]) {
+  private async speaker(id: string, speeches: Utterance[], waits:ReadonlyMap<string,number>) {
     const run = this.run(id); if (run.nextSpeakerId) return run.nextSpeakerId;
-    const chars = run.spec.scenario.characters;
+    const cast=run.spec.scenario.characters;
+    const chars=cast.filter(c=>!waits.has(c.id));
     const urgent = environmentMode(run.spec, run.variant) === 'ai' ? priorityWorldSpeaker(run.worldState) : null;
-    let selected = urgent ?? chars[(run.roundRobinCursor ?? speeches.length) % chars.length].id;
-    if (!urgent && run.variant.turnPolicy === 'director' && speeches.length) {
+    const cursor=(run.roundRobinCursor ?? speeches.length)%cast.length;
+    let selected = urgent ?? [...cast.slice(cursor),...cast.slice(0,cursor)].find(c=>!waits.has(c.id))?.id ?? cast[cursor].id;
+    if (!urgent && run.variant.turnPolicy === 'director' && speeches.length && chars.length>1) {
       const age = (characterId: string) => speeches.length - (speeches.findLastIndex(u => u.speakerId === characterId));
       const candidates = chars.filter(c => c.id !== run.lastSpeakerId).sort((a, b) => age(b.id) - age(a.id));
       const allowed = age(candidates[0].id) >= chars.length * 2 ? [candidates[0]] : candidates;
@@ -488,11 +514,17 @@ export class Engine extends EventEmitter {
     if (environmentMode(run.spec, run.variant) !== 'ai') return;
     const history = this.store.list('utterances', id);
     const state = run.worldState ?? initialWorldState();
-    const source = history.find(u => u.kind === 'speech' && u.speechIndex! > state.processedSpeechCount);
+    const deadline = state.sceneDeadline;
+    const deadlineKey = deadline && 'scene:deadline:'+deadline.at+':'+createHash('sha256').update(JSON.stringify(deadline.processIds)).digest('hex').slice(0,16);
+    const source: Utterance | undefined = deadlineKey ? {
+      id:deadlineKey,runId:id,sequence:state.processedSequence,speechIndex:state.processedSpeechCount,
+      speakerId:'__clock__',speakerName:'장면 시간',kind:'event',speech:'',action:'',
+      createdAt:now(),invocationId:null,deliveryCompletedAt:null,deliveryMs:null,
+    } : history.find(u => u.kind === 'speech' && u.speechIndex! > state.processedSpeechCount);
     if (!source) return;
     const session = await this.helper(id, 'world-engine', run.spec.worldEngine!, worldPolicies[run.variant.worldPromptVersion ?? LEGACY_WORLD_PROMPT].instructions);
     const contract = worldResponseContract(worldPromptVersion(session.instructions), source);
-    const key = `environment:${source.id}`;
+    const key = deadlineKey ?? `environment:${source.id}`;
     const last = this.store.attempts(id,key).at(-1);
     const ungroundedRecipient = last?.status === 'failed' && last.error?.includes('NPC 물리 상태는 해당 공개 결과');
     const facts = ungroundedRecipient ? z.array(z.union([
@@ -502,10 +534,27 @@ export class Engine extends EventEmitter {
     const outputSchema = run.npcContextVersion && run.npcContextVersion !== 'npc-context/1'
       ? z.toJSONSchema(contract.validator.extend({events:groundedEvents(false,[source],run.spec.scenario.characters.map(c => c.id)),...(facts && {facts})}))
       : contract.outputSchema;
-    const call = await this.invoke(id, 'environment', session, key, worldPrompt(run.spec, state, history, source),
-      { sourceUtteranceId: source.id, ...(facts && {repairContract:'grounded-recipient/1'}) }, outputSchema, history);
+    const input = deadline ? JSON.stringify({task:'scene_deadline',...managerWorld(run.spec),current:managerState(state,history),due:deadline,
+      instruction:'아무도 새 행동을 선택하지 않았다. 지금 시각이 된 사건을 종료하거나, 미래 시각으로 연장하거나, 관찰 가능한 징후와 반응 기회를 남긴다.'})
+      : worldPrompt(run.spec, state, history, source);
+    const call = await this.invoke(id, 'environment', session, key, input,
+      { sourceUtteranceId: deadline ? null : source.id, ...(facts && {repairContract:'grounded-recipient/1'}) },
+      deadline ? z.toJSONSchema(deadlineOutput) : outputSchema, history);
     let result: ReturnType<typeof applyWorldOutput>;
-    try { result = applyWorldOutput(state, contract.validator.parse(JSON.parse(call.output)), source, run.spec.scenario.characters.map(c => c.id)); }
+    try {
+      const output=(deadline ? deadlineOutput : contract.validator).parse(JSON.parse(call.output));
+      result = applyWorldOutput(state, output, source, run.spec.scenario.characters.map(c => c.id));
+      if (deadline) {
+        if (result.state.processes.some(p=>p.status==='pending' && p.readyAtSeconds<=deadline.at && !p.waitingNpcIds.length))
+          throw Error('도래한 사건을 종료하거나 미래 시각·반응 조건으로 연장해야 합니다.');
+        if (output.processes.some(p=>p.requestNpcIds.length) && !output.events.length)
+          throw Error('반응을 요청하기 전에 관찰 가능한 징후가 필요합니다.');
+        if (state.facts.some(f=>f.scope==='npc_physical' && output.forgetFactIds.includes(f.id)))
+          throw Error('시간 경과만으로 인물 상태를 지울 수 없습니다.');
+        result.state.processedSpeechId=state.processedSpeechId;
+        delete result.state.sceneDeadline;
+      }
+    }
     catch (e) { this.store.patch('invocations', call.id, { status: 'failed', error: err(e) }); throw e; }
     this.store.transaction(() => {
       let sequence = this.store.list('utterances', id).length;
@@ -513,14 +562,38 @@ export class Engine extends EventEmitter {
       for (const event of result.output.events) this.append(id, {
         id: randomUUID(), runId: id, sequence: ++sequence, speechIndex: null, speakerId: '__environment__', speakerName: '세계 엔진',
         kind: 'event', speech: event.text, action: '', createdAt: now(), invocationId: call.id, deliveryCompletedAt: null, deliveryMs: null,
-        worldEvent: { ...event, sourceUtteranceId: source.id, virtualSeconds: result.state.virtualSeconds },
+        worldEvent: { ...event, sourceUtteranceId: deadline ? null : source.id, virtualSeconds: result.state.virtualSeconds },
       });
       // Only consume input through the triggering speech. Events injected after
       // it (e.g. during a failed-call pause) must still reach the next tick.
       this.store.patch('runs', id, { worldState: result.state });
-      this.store.event(id, call.id, 'world/committed', { sourceUtteranceId: source.id, state: result.state, events: result.output.events });
+      this.store.event(id, call.id, 'world/committed', { sourceUtteranceId: deadline ? null : source.id, ...(deadline && {deadline}), state: result.state, events: result.output.events });
     });
     this.changed(id);
+  }
+  private advanceQuietScene(run:Run, all:Utterance[], waits:ReadonlyMap<string,number>) {
+    if (!run.sceneFlowVersion || run.nextSpeakerId) return false;
+    const state=run.worldState;
+    if (waits.size!==run.spec.scenario.characters.length || priorityWorldSpeaker(state)) return false;
+    const now=sceneTime(run);
+    const pending=state?.processes.filter(p=>p.status==='pending' && !p.waitingNpcIds.length) ?? [];
+    const to=Math.max(now,Math.min(...waits.values(),...pending.map(p=>p.readyAtSeconds),state ? nextClockBoundary(run.spec,state) : Infinity,
+      nextSituationCheck(this.simulationHost(run.id))));
+    const due=pending.filter(p=>p.readyAtSeconds<=to).map(p=>p.id).sort();
+    if (to===now && !due.length) return false;
+    this.store.transaction(()=>{
+      let sequence=all.length;
+      if (to-now>=1) this.append(run.id,timeCut(run,now,to,++sequence));
+      if (state) {
+        const next={...state,virtualSeconds:to,firedClockEvents:[...(state.firedClockEvents ?? [])],
+          ...(due.length && {sceneDeadline:{at:to,processIds:due}})};
+        for (const e of clockObservations(run.spec,next,run.id,sequence)) this.append(run.id,e);
+        this.store.patch('runs',run.id,{worldState:next});
+      } else this.store.patch('runs',run.id,{sceneSeconds:to});
+      this.store.event(run.id,null,'scene/time_advanced',{from:now,to});
+    });
+    this.changed(run.id);
+    return true;
   }
   private async work(id: string) {
     const began = performance.now();
@@ -549,13 +622,16 @@ export class Engine extends EventEmitter {
         await this.flush(id);
         const rules = environmentMode(run.spec, run.variant) === 'rules';
         const goalsDone = !!(rules && run.spec.scenario.environment?.stopOnGoals && progression(run.spec, this.store.list('utterances', id))?.allGoalsAchieved);
-        const ending = dialogueEnding(this.run(id), this.store.list('utterances', id));
+        all=this.store.list('utterances', id);
+        const current=this.run(id), waits=waitingActors(current,all);
+        const ending = dialogueEnding(current,all,waits);
         await this.evaluatePending(id, speeches.length >= run.spec.maxUtterances || goalsDone || !!ending);
         run = this.run(id);
         if (run.status !== 'running') break;
         if (speeches.length >= run.spec.maxUtterances || goalsDone || ending) { this.store.patch('runs', id, { status: 'completed', completedAt: now(), completionReason: goalsDone ? 'goals_achieved' : ending ?? 'utterance_limit' }); break; }
         if (run.pauseRequested || run.stepRemaining === 0) { this.store.patch('runs', id, { status: 'paused', pausedAt: now(), pauseRequested: false }); break; }
-        const speakerId = await this.speaker(id, speeches); const session = this.run(id).sessions[speakerId];
+        if (this.advanceQuietScene(run,all,waits)) continue;
+        const speakerId = await this.speaker(id, speeches,waits); const session = this.run(id).sessions[speakerId];
         const receipts = this.pending(id, speakerId); all = this.store.list('utterances', id);
         const messages = all.filter(u => receipts.some(r => r.utteranceId === u.id));
         const call = await this.speak(id, session, `speech:${speeches.length + 1}`, speakerPrompt(messages, run.variant.memoryMode === 'reinject_on_speech' ? session.instructions : undefined, rules ? progressionPrompt(run.spec, all, speakerId) : undefined, run.sceneObservationVersion ? speakerId : undefined,undefined,!!run.sceneObservationVersion), { receiptIds: receipts.map(r => r.id) }, all);
@@ -577,8 +653,15 @@ export class Engine extends EventEmitter {
           const current = this.run(id);
           const cursor = current.roundRobinCursor ?? speeches.length;
           const regularSpeaker = run.spec.scenario.characters[cursor % run.spec.scenario.characters.length].id;
+          const basicTime=run.sceneFlowVersion && !isAiEnvironment(run.spec,run.variant);
+          const castSize=run.spec.scenario.characters.length;
+          const offset=(run.spec.scenario.characters.indexOf(character)-cursor%castSize+castSize)%castSize;
+          const turnSeconds=Math.max(1,Math.ceil(output.speech.replace(/\s/gu,'').length/5.5),output.action.trim() ? 3 : 0);
           this.store.patch('runs', id, { lastSpeakerId: speakerId, nextSpeakerId: null,
-            roundRobinCursor: cursor + (speakerId === regularSpeaker ? 1 : 0),
+            ...(basicTime && {sceneSeconds:sceneTime(run)+turnSeconds}),
+            roundRobinCursor: run.sceneFlowVersion && run.variant.turnPolicy==='round_robin' && !priorityWorldSpeaker(run.worldState)
+              ? cursor+offset+1
+              : cursor + (speakerId === regularSpeaker ? 1 : 0),
             stepRemaining: current.stepRemaining === null ? null : Math.max(0, current.stepRemaining - 1) });
         });
         this.changed(id);

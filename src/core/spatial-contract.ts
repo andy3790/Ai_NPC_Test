@@ -7,6 +7,7 @@ import type { ExperimentSpec } from '../shared/schema.js';
 import { contactPossible, type localContext } from './perception.js';
 export const WORLD_CONTRACT_VERSION = 'world-contract/1';
 export const SPATIAL_CONTRACT_VERSION = 'spatial-contract/2';
+export const ARRIVAL_CONTRACT_VERSION = 'spatial-contract/3';
 export const SPATIAL_CHOICE_VERSION = 'spatial-choice/3';
 
 export function spatialChoiceContract(view: ReturnType<typeof localContext>, actor: string) {
@@ -46,7 +47,7 @@ export function groundedEvents(spatial: boolean, eligible: Utterance[], actors: 
 
 // IDs that refer to existing records are finite choices, independent of the
 // language or genre of a scene. New facts and processes keep author-chosen IDs.
-export function spatialContract(phase: string, spec: ExperimentSpec, state: WorldState, choices: string[], history: Utterance[]) {
+export function spatialContract(phase: string, spec: ExperimentSpec, state: WorldState, choices: string[], history: Utterance[], checkArrivals=false) {
   if (phase === 'plan') {
     const items = choices.map(id => {
       const u = history.find(u => u.id === id)!;
@@ -73,10 +74,17 @@ export function spatialContract(phase: string, spec: ExperimentSpec, state: Worl
     activityId:inTransit.length ? z.enum(inTransit).nullable() : z.null(),
     kind:inTransit.length ? fields.movements.element.shape.kind : z.literal('forced'),
   });
+  const arrivals: z.ZodType[] = [fields.movements.element.extend({kind:z.literal('forced'),activityId:z.null()})];
+  if (checkArrivals) for (const position of state.spatial!.positions) {
+    const activity=pending.find(a=>a.id===position.transit?.activityId && a.npcId===position.npcId);
+    if (!activity?.moveToLocationId || activity.readyAtSeconds>state.virtualSeconds || activity.waitingNpcIds.length) continue;
+    arrivals.push(fields.movements.element.extend({kind:z.literal('requested'),activityId:z.literal(activity.id),
+      npcId:z.literal(activity.npcId),toLocationId:z.literal(activity.moveToLocationId)}));
+  }
   return z.toJSONSchema(spatialResolutionSchema.extend({
     events:groundedEvents(true,history.filter(u => choices.includes(u.id)),state.spatial!.positions.map(p => p.npcId)),
     completedActivities:ids.length ? z.array(completed).max(ids.length) : fields.completedActivities.max(0),
     activityUpdates:updates.length ? z.array(updates.length === 1 ? updates[0] : z.union(updates)).max(ids.length) : fields.activityUpdates.max(0),
-    movements:z.array(move).max(30),
+    movements:z.array(checkArrivals ? z.union(arrivals) : move).max(30),
   }));
 }

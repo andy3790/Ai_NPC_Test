@@ -3,6 +3,28 @@ import { eventProposalSchema, type EventGeneratorState, type SituationProposal }
 import type { SimulationHost } from './simulation-host.js';
 import { managerState, managerWorld } from './spatial-prompts.js';
 import { initialWorldState } from './world.js';
+import { z } from 'zod';
+import type { Utterance } from '../shared/types.js';
+
+export function proposalCause(proposal:SituationProposal | undefined, history:Utterance[]) {
+  if (!proposal?.causeSequence) return {};
+  const observation=history.find(u=>u.sequence===proposal.causeSequence && u.kind==='event');
+  return observation ? {proposalCause:{sequence:observation.sequence,observed:observation.speech.slice(0,280),
+    locationIds:observation.worldEvent?.audience?.locationIds ?? []},
+    causeCheck:'이 관찰에서 제안한 변화가 실제로 이어질 수 있는지 현재 장소·물건 상태와 함께 확인한다.'} : {};
+}
+
+// The public outcome can be a cause even after the original activity has
+// left the pending queue. Never give the proposer the source's private words.
+export function situationCauses(history:Utterance[], proposals:SituationProposal[]) {
+  const used=new Set(proposals.filter(p=>p.status==='accepted').map(p=>p.causeSequence));
+  return history.filter(u=>{
+    const e=u.worldEvent, audience=e?.audience;
+    return e?.type==='actor_result' && e.sourceUtteranceId && !used.has(u.sequence) && u.speech.trim() &&
+      (!audience || audience.scope==='all' || audience.scope==='locations') &&
+      (!u.perception || u.perception.speechRecipientIds.length>0);
+  }).slice(-5).map(u=>({sequence:u.sequence,observed:u.speech.slice(0,280),locationIds:u.worldEvent!.audience?.locationIds ?? []}));
+}
 
 export const situationInstructions = `당신은 세계관 안에서 사건의 계기를 제안하는 상황 발생 관리자입니다. 한국어 JSON만 반환하고 도구를 사용하지 마세요. NPC의 비공개 기억·성격·목표를 알지 못하며 추측하지 마세요. 주어진 세계·장소·현재 상태·허용 범위에 맞춰 외부 상황을 하나 제안하거나 proposal:null로 침묵하세요.
 매번 사건을 만들어야 하는 것은 아닙니다. 최근 제안과 반복되지 않게 하고 이미 진행 중인 사건을 불필요하게 겹치지 마세요. 사고·위협·갈등의 계기는 설정된 강도와 허용 범위 안에서 가능합니다. 그러나 NPC의 자발적 행동·대사·감정·판단을 정하지 마세요. NPC들이 무엇을 할지는 그들에게 맡기세요. 새로운 핵심 인물·장소·능력·역사는 추가 금지입니다. 제안은 세계 엔진이 별도로 검토하기 전까지 발생한 사실이 아닙니다.
@@ -24,19 +46,27 @@ export async function generateSituation(h: SimulationHost) {
   if (time < nextSituationCheck(h)) return;
   const state = generatorState(h), config = run.spec.eventGenerator!;
   const session = await h.helper('situation-generator', config, situationInstructions);
+  const history=h.store.list('utterances',h.id);
+  const causes=run.sceneFlowVersion ? situationCauses(history,state.proposals) : [];
   const call = await h.invoke('event_generation', session, `situation:${state.checks + 1}`, JSON.stringify({ task: 'event_generation', ...managerWorld(run.spec),
-    current: managerState(run.worldState ?? initialWorldState(), h.store.list('utterances', h.id),run.spec),
+    current: managerState(run.worldState ?? initialWorldState(), history,run.spec),
+    ...(causes.length>0 && {consequencesOf:causes,followUp:'인물이 실제로 바꾼 결과 때문에 같은 현장에 새로 생길 여파가 있으면 그 결과의 순번을 causeSequence에 고른다. 끝난 일을 원상복구하거나 똑같은 고장을 반복하지 않는다. 관계없는 새 계기나 아무 일도 없으면 null.'}),
     allowedEvents: config.allowedEvents, forbiddenEvents: config.forbiddenEvents, maxSeverity: config.maxSeverity,
-    recentProposals: state.proposals.slice(-10), instruction: '지금 새로운 계기가 적절할 때만 한 건 제안하세요.' }));
+    recentProposals: state.proposals.slice(-10), instruction: '지금 새로운 계기가 적절할 때만 한 건 제안하세요.' }),
+    causes.length ? {causeSources:causes.map(c=>c.sequence)} : {});
   let proposal: SituationProposal | undefined;
   try {
-    const output = eventProposalSchema.parse(JSON.parse(call.output));
+    const raw=JSON.parse(call.output), output = eventProposalSchema.parse(raw);
+    const cause=raw.causeSequence==null ? undefined : causes.find(c=>c.sequence===raw.causeSequence);
+    if (raw.causeSequence!=null && (!cause || !output.proposal || cause.locationIds.length &&
+        output.proposal.locationIds.some(id=>!cause.locationIds.includes(id)))) throw Error('현장에서 이미 확인된 결과만 이 상황의 원인으로 연결할 수 있습니다.');
     if (output.proposal) {
       const p = output.proposal, places = run.variant.environmentMode === 'ai_spatial' ? run.spec.scenario.spatial!.locations.map(l => l.id) : [];
       const severity = { low: 1, medium: 2, high: 3 };
       if (severity[p.severity] > severity[config.maxSeverity]) throw new Error('허용 강도를 넘는 상황 제안입니다.');
       if (new Set(p.locationIds).size !== p.locationIds.length || p.locationIds.some(id => !places.includes(id)) || run.variant.environmentMode === 'ai_spatial' && !p.locationIds.length) throw new Error('상황 발생 장소를 실제 선언된 장소로 지정하세요.');
-      proposal = { ...p, id: randomUUID(), invocationId: call.id, virtualSeconds: time, status: 'proposed', reason: null };
+      proposal = { ...p, id: randomUUID(), invocationId: call.id, virtualSeconds: time, status: 'proposed', reason: null,
+        ...(cause && {causeSequence:cause.sequence}) };
     }
   } catch (error) { h.store.patch('invocations', call.id, { status: 'failed', error: error instanceof Error ? error.message : String(error) }); throw error; }
   if (h.run().status !== 'running') return;
@@ -45,6 +75,9 @@ export async function generateSituation(h: SimulationHost) {
     h.store.patch('runs', h.id, { eventGeneratorState: next });
     h.store.event(h.id, call.id, 'situation/proposed', { proposal: proposal ?? null, virtualSeconds: time });
   }); h.changed();
+}
+export function causalProposalSchema(sources:number[]) {
+  return z.toJSONSchema(eventProposalSchema.extend({causeSequence:z.union(sources.map(s=>z.literal(s))).nullable()}));
 }
 export function decideSituation(h: SimulationHost, proposal: SituationProposal, accepted: boolean, reason: string) {
   const state = generatorState(h);

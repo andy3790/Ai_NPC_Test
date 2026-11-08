@@ -13,7 +13,7 @@ const pending = (s: WorldState) => s.spatial!.activities.filter(a => a.status ==
 export function reactionCandidates(state: WorldState) {
   return [...new Set([...pending(state).flatMap(a => a.waitingNpcIds), ...state.processes.filter(p => p.status === 'pending').flatMap(p => p.waitingNpcIds)])];
 }
-export function selectableGroups(spec: ExperimentSpec, state: WorldState, history: Utterance[]) {
+export function selectableGroups(spec: ExperimentSpec, state: WorldState, history: Utterance[], waiting?:ReadonlyMap<string,number>) {
   const groups = new Map<string, string[]>(); const urgent = reactionCandidates(state);
   const positions = state.spatial!.positions;
   // Shared doorways form a single speaking group even in a chain of rooms.
@@ -32,7 +32,7 @@ export function selectableGroups(spec: ExperimentSpec, state: WorldState, histor
     const key = groupFor.get(pos.npcId)!; const sameSpace = same.map(p => p.npcId);
     const speaking = state.spatial!.activities.some(a => sameSpace.includes(a.npcId) && a.speakingUntilSeconds > state.virtualSeconds);
     const busy = pending(state).some(a => a.npcId === pos.npcId);
-    if (speaking || (busy && !urgent.includes(pos.npcId))) continue;
+    if (speaking || ((busy || waiting?.has(pos.npcId)) && !urgent.includes(pos.npcId))) continue;
     const list = groups.get(key) ?? []; list.push(pos.npcId); groups.set(key, list);
   }
   const last = (id: string) => history.findLastIndex(u => u.kind === 'speech' && u.speakerId === id);

@@ -16,6 +16,7 @@ export function runSnapshot(run: Run) {
     snapshotHash: run.snapshotHash, appVersion: run.appVersion, cliVersion: run.cliVersion,
     promptVersion: run.promptVersion ?? null,
     ...(run.socialReactionVersion && {socialReactionVersion:run.socialReactionVersion}),
+    ...(run.sceneFlowVersion && {sceneFlowVersion:run.sceneFlowVersion}),
     dialoguePromptVersion: run.variant.dialoguePromptVersion ?? null,
     worldPromptVersion: run.variant.worldPromptVersion ?? null,
     worldContextVersion: run.worldContextVersion ?? null,

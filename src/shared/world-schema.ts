@@ -37,4 +37,5 @@ export interface WorldState {
   processedSpeechId: string | null; processedSequence: number; processedSpeechCount: number;
   spatial?: SpatialState;
   firedClockEvents?: string[];
+  sceneDeadline?: { at: number; processIds: string[] };
 }
