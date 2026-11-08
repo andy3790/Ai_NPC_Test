@@ -64,10 +64,12 @@ test('language repair constrains the two text fields only after a Korean scene r
   try { checkDialogue('まだ確認待ち','',[],'a',context); } catch (error) { failure = String(error); }
   assert.match(failure,/가나/);
   const repair = languageRepairSchema(schema,context,failure)!;
-  const pattern = new RegExp(repair.properties.speech.pattern,'u');
+  const {speech}=repair.properties;
+  assert.ok('pattern' in speech && typeof speech.pattern==='string');
+  const pattern = new RegExp(speech.pattern,'u');
   assert.ok(pattern.test('기준값을 기다리고 있어요.') && pattern.test(''));
   assert.equal(pattern.test('まだ 확인 중'),false);
-  assert.equal(repair.properties.action.pattern,repair.properties.speech.pattern);
+  assert.equal(repair.properties.action.pattern,speech.pattern);
   assert.deepEqual({ ...repair.properties, speech:schema.properties.speech, action:schema.properties.action },schema.properties);
   assert.equal(languageRepairSchema(schema,context),undefined);
   assert.equal(languageRepairSchema(schema,'책 제목에 マッテ가 적혔다.',failure),undefined);

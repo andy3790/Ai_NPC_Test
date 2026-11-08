@@ -35,6 +35,13 @@ for (const dir of (await readdir(root,{withFileTypes:true})).filter(d => d.isDir
     const u = records<Utterance>('utterances'), calls = records<InvocationMetrics>('invocations');
     const choices=u.filter(t => t.kind === 'speech'), facts=r.worldState?.facts ?? [], processes=r.worldState?.processes ?? [];
     const speech=calls.filter(c => c.kind === 'speech'), repetition=repetitionMetrics(r.spec,u);
+    const memories = r.conversationMemoryVersion ? speech.filter(c => c.status==='completed' && c.utteranceId).map(c => {
+      const memory=JSON.parse(c.input).conversationMemory;
+      const offers=c.metadata.memoryOffers;
+      return {checkpoint:Array.isArray(offers), selected:Array.isArray(offers) && offers.includes(JSON.parse(c.output).setAsideSequence),
+        compacted:Number(c.metadata.omittedRecall)>0, retrieved:!!memory?.setAside?.length, quiet:!!memory?.quiet,
+        goal:!!memory?.lastGoalObservation, prospective:!!memory?.prospective};
+    }) : [];
     const { matches:_privateLinks,...repeatCounts }=repetition;
     const parties = r.spec.scenario.characters.map(c => ({name:c.name,choices:choices.filter(t => t.speakerId===c.id).length,
       spoken:choices.filter(t => t.speakerId===c.id && t.speech.trim()).length}));
@@ -49,7 +56,14 @@ for (const dir of (await readdir(root,{withFileTypes:true})).filter(d => d.isDir
       positions:r.worldState?.spatial?.positions.map(p => ({npc:p.npcId,place:p.locationId,transit:p.transit?.connectionId ?? null})),
       proposals:r.eventGeneratorState?.proposals.map(p => ({title:p.title,at:p.virtualSeconds,status:p.status})),
       prompt:r.promptVersion,actorContext:r.npcContextVersion ?? 'provider-chain',worldContext:r.worldContextVersion ?? null,
+      ...(r.conversationMemoryVersion && {conversationMemory:{version:r.conversationMemoryVersion,
+        checkpoints:memories.filter(m=>m.checkpoint).length, selections:memories.filter(m=>m.selected).length,
+        compacted:memories.filter(m=>m.compacted).length, reintroduced:memories.filter(m=>m.retrieved).length,
+        quiet:memories.filter(m=>m.quiet).length, goalObservations:memories.filter(m=>m.goal).length,
+        prospective:memories.filter(m=>m.prospective).length}}),
       dialogue:r.variant.dialoguePromptVersion,performance:r.variant.characterPerformanceVersion,world:r.variant.worldPromptVersion ?? null,
+      ...(r.sparseVoiceVersion && {sparseVoice:{version:r.sparseVoiceVersion,
+        followUps:speech.filter(c => c.status==='completed' && c.utteranceId && c.metadata.sparseVoiceVersion).length}}),
       worldContracts:[...new Set(calls.filter(c => c.kind==='environment').map(c => c.metadata.worldContractVersion ?? 'static'))],
       spatialChoices:[...new Set(speech.flatMap(c => c.metadata.spatialChoiceVersion ? [c.metadata.spatialChoiceVersion] : []))],
       languageChecks:[...new Set(speech.flatMap(c => c.metadata.languageCheckVersion ? [c.metadata.languageCheckVersion] :

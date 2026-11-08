@@ -4,16 +4,16 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { experimentSchema, scenarioSchema, characterSchema, categories, evaluationSchema } from '../../src/shared/schema.js';
 import { persona, evaluationPrompt } from '../../src/core/prompts.js';
-import { worlds, fields, root, anchor, parts, experiment, runtimeCharacter } from './build.mjs';
+import { worlds, fields, root, anchor, parts, experiment, runtimeCharacter, promptSources, sourceHash } from './build.mjs';
 
 const read = async (p:string)=>JSON.parse(await readFile(path.join(root,p),'utf8'));
 const pack=await read('pack.json');
-const schemaHash=createHash('sha256').update(await readFile(path.join(root,'../../src/shared/schema.ts'))).digest('hex');
+const schemaHash=await sourceHash('src/shared/schema.ts');
 assert.equal(pack.compatibility.schemaSha256,schemaHash,'현재 스키마가 변경되었습니다. build.mjs로 다시 생성하세요.');
-const promptHash=createHash('sha256').update(await readFile(path.join(root,'../../src/core/prompts.ts'))).digest('hex');
+const promptHash=await sourceHash('src/core/prompts.ts');
 assert.equal(pack.compatibility.promptSha256,promptHash,'현재 프롬프트가 변경되었습니다. build.mjs로 다시 생성하세요.');
-for (const file of ['src/core/dialogue-policies.ts','src/shared/dialogue-policy.ts','src/core/world-policies.ts','src/shared/world-policy.ts','src/shared/world-schema.ts','src/core/director.ts']) {
-  const hash=createHash('sha256').update(await readFile(path.join(root,'../..',file))).digest('hex');
+for (const file of promptSources) {
+  const hash=await sourceHash(file);
   assert.equal(pack.compatibility.promptDependencies?.[file],hash,'대화 정책이 변경되었습니다. build.mjs로 다시 생성하세요.');
 }
 assert.equal(worlds.length,6);assert.equal(pack.counts.characters,36);assert.equal(pack.experiments.length,18);

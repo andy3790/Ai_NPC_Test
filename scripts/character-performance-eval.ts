@@ -16,7 +16,7 @@ const { values } = parseArgs({ options: { model: { type: 'string', default: 'gpt
 const repetitions = Number(values.repetitions);
 const turns = Number(values.turns);
 if (!['development', 'holdout', 'rich', 'migration', 'blank'].includes(values.split!) || ![1, 2, 3].includes(repetitions) ||
-    ![6, 12].includes(turns) || !['character-performance/1', CHARACTER_PERFORMANCE].includes(values.candidate!)) throw Error('Invalid experiment options');
+    ![6, 12].includes(turns) || !['character-performance/1','character-performance/2', CHARACTER_PERFORMANCE].includes(values.candidate!)) throw Error('Invalid experiment options');
 const fixturesFile = resolve('evals/dialogue/character-performance.json');
 const fixtures = JSON.parse(readFileSync(fixturesFile, 'utf8')) as {
   id: string; split: string; world: string; situation: string; characters: object[]; events: { afterUtterance: number; text: string }[]; review: string;

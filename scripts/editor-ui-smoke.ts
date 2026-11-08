@@ -103,7 +103,7 @@ try {
 
   await dialog.getByRole('button', { name: '03 실험 조건' }).click();
   const performance = dialog.getByLabel(`${expected.variants[0].label} 캐릭터 연기 유지`, { exact: true });
-  assert.equal(await performance.inputValue(), 'character-performance/2');
+  assert.equal(await performance.inputValue(), 'character-performance/3');
   await performance.selectOption('off'); expected.variants[0].characterPerformanceVersion = 'off';
   const policy = dialog.getByLabel(`${expected.variants[0].label} 대화 반응 지침`, { exact: true });
   assert.equal(await policy.inputValue(), 'npc-dialogue/5');

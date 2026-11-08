@@ -94,6 +94,10 @@ export function makeFixtures(w) {
 
 async function write(relative,value) { const file=path.join(root,relative);await mkdir(path.dirname(file),{recursive:true});await writeFile(file,typeof value==='string'?value:JSON.stringify(value,null,2)+'\n','utf8'); }
 const sha = value=>createHash('sha256').update(value).digest('hex');
+export async function sourceHash(file) {
+  const text = await readFile(path.join(root,'../..',file),'utf8');
+  return sha(text.replace(/\r\n/g,'\n'));
+}
 async function imageEntry(w,kind) {
   let rel=`images/${w.id}-${kind}.png`;
   if(w.id==='glass'&&kind==='world') { try {await readFile(path.join(root,'images/glass-world-v2.png'));rel='images/glass-world-v2.png';} catch{} }
@@ -117,11 +121,11 @@ export async function build() {
     catalogWorlds.push({...worldDoc,characters,scenarios:entries.filter(e=>e.worldId===w.id),events:w.events});
     await write(`docs/${w.id}.md`,worldMarkdown(w,characters,entries.filter(e=>e.worldId===w.id),images[0]));
   }
-  const schemaBytes=await readFile(path.join(root,'../../src/shared/schema.ts'));
-  const promptBytes=await readFile(path.join(root,'../../src/core/prompts.ts'));
+  const schemaHash=await sourceHash('src/shared/schema.ts');
+  const promptHash=await sourceHash('src/core/prompts.ts');
   const promptDependencies={};
-  for (const file of ['src/core/dialogue-policies.ts','src/shared/dialogue-policy.ts','src/core/world-policies.ts','src/shared/world-policy.ts','src/shared/world-schema.ts','src/core/director.ts']) promptDependencies[file]=sha(await readFile(path.join(root,'../..',file)));
-  const manifest={assetSchemaVersion:1,packId:'npc-canon-six-worlds',version:'1.0.0',language:'ko-KR',authoredDate:'2026-10-28',runtimeSchemaVersion:1,description:'독립 세계관 6개와 캐릭터 36명, 3인 시나리오 12개 및 6인 시나리오 6개.',counts:{worlds:worlds.length,characters:worlds.reduce((n,w)=>n+w.characters.length,0),scenarios:entries.length,experiments:entries.length,activeImageFiles:imageManifest.length,characterPortraitRegions:36,evaluationFixtures:allFixtures.length,scheduledEvents:worlds.reduce((n,w)=>n+w.events.length,0)},compatibility:{schemaPath:'src/shared/schema.ts',schemaSha256:sha(schemaBytes),promptPath:'src/core/prompts.ts',promptSha256:sha(promptBytes),promptDependencies,imageInputSupported:false,defaultModel:'gpt-6-luna',defaultEffort:'low',modelAvailabilityVerified:false},entrypoints:{gallery:'index.html',catalog:'catalog.json',assets:'image-manifest.json',anchors:'evaluation/anchors.json',readme:'README.md',handoff:'HANDOFF.md'},experiments:entries};
+  for (const file of promptSources) promptDependencies[file]=await sourceHash(file);
+  const manifest={assetSchemaVersion:1,packId:'npc-canon-six-worlds',version:'1.0.0',language:'ko-KR',authoredDate:'2026-10-28',runtimeSchemaVersion:1,description:'독립 세계관 6개와 캐릭터 36명, 3인 시나리오 12개 및 6인 시나리오 6개.',counts:{worlds:worlds.length,characters:worlds.reduce((n,w)=>n+w.characters.length,0),scenarios:entries.length,experiments:entries.length,activeImageFiles:imageManifest.length,characterPortraitRegions:36,evaluationFixtures:allFixtures.length,scheduledEvents:worlds.reduce((n,w)=>n+w.events.length,0)},compatibility:{schemaPath:'src/shared/schema.ts',schemaSha256:schemaHash,promptPath:'src/core/prompts.ts',promptSha256:promptHash,promptDependencies,imageInputSupported:false,defaultModel:'gpt-6-luna',defaultEffort:'low',modelAvailabilityVerified:false},entrypoints:{gallery:'index.html',catalog:'catalog.json',assets:'image-manifest.json',anchors:'evaluation/anchors.json',readme:'README.md',handoff:'HANDOFF.md'},experiments:entries};
   await write('pack.json',manifest);await write('image-manifest.json',{assetSchemaVersion:1,images:imageManifest,portraits:catalogWorlds.flatMap(w=>w.characters.map(c=>({characterId:c.id,worldId:w.id,...c.portrait})))});
   await write('evaluation/anchors.json',{assetSchemaVersion:1,visibility:'evaluator_only',anchors});
   await write('evaluation/index.json',{assetSchemaVersion:1,visibility:'evaluator_only',count:allFixtures.length,files:worlds.map(w=>`${w.id}.fixtures.json`),note:'작성자 기준 사례. 모의 어댑터의 판정 정답이나 실제 모델 성능 측정 결과가 아니다. expected는 평가 입력에 넣지 않는다.'});
@@ -133,4 +137,7 @@ export async function build() {
 function worldMarkdown(w,characters,entries,image) {
   return `# ${w.name}\n\n> 팩 1.0.0 정본 자료 · build.mjs 생성 문서. 원본 실험은 off(대화 전용)입니다. [사용 안내](../README.md)와 [앱 환경 설정](../../../docs/world-engine.md)을 참고하세요. 앱 기능 확장만으로 아래 정본이 변경되지는 않습니다.\n\n${w.genre}\n\n${w.logline}\n\n![${w.name} 배경](../${image.path})\n\n## 공개 정본\n\n${w.facts.map(f=>`- **${f.id}** ${f.text}`).join('\n')}\n\n## 미확인 항목\n\n${w.unknowns.map(x=>`- ${x}`).join('\n')}\n\n## 실험 선택\n\n${entries.map(e=>`- [${e.name} (${e.characterCount}인)](../${e.experimentPath})`).join('\n')}\n\n## 캐릭터\n\n![초상 시트: 왼쪽 위부터 행 우선](../images/${w.id}-cast.png)\n\n**아래는 작성자·평가자용 비공개 설정을 포함합니다. 인물 순서는 위 이미지의 왼쪽 위부터 행 우선입니다.**\n\n${characters.map((c,i)=>`### ${i+1}. ${c.name} (${c.id})\n\n${c.role} · ${c.id==='orb-l4'?`운영 ${c.age}년`:`${c.age}세`}\n\n외형: ${c.appearance}\n\n${fields.map(f=>`**${fieldLabels[f]} — ${anchor(c,f)}**\n\n${c[f]}\n`).join('\n')}\n[실행용 캐릭터 JSON](../${c.runtimePath})`).join('\n\n')}\n\n## 진행자 예약 사건 — NPC에게 미리 제공하지 않음\n\n${w.events.map(e=>`- **${e.afterUtterance}발화 뒤**: ${e.text}`).join('\n')}\n`;
 }
+export const promptSources = ['src/core/dialogue-policies.ts','src/shared/dialogue-policy.ts','src/core/world-policies.ts',
+  'src/shared/world-policy.ts','src/shared/world-schema.ts','src/core/director.ts','src/core/character-performance.ts',
+  'src/shared/character-performance.ts','src/core/conversation-memory.ts'];
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) await build();

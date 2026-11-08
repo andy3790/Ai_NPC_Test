@@ -9,6 +9,7 @@ import { clockObservations, nextClockBoundary } from './scene-clock.js';
 import { managerState, managerWorld, spatialPlannerInstructions, spatialResolverInstructions } from './spatial-prompts.js';
 import { decideSituation, generateSituation, nextSituationCheck, pendingProposal } from './situations.js';
 import { directorObservations, directorPrompt } from './director.js';
+import { parseSpeechOutput } from './character-performance.js';
 
 const now = () => new Date().toISOString();
 const errorText = (e: unknown) => e instanceof Error ? e.message : String(e);
@@ -70,7 +71,7 @@ async function decideCycle(h: SimulationHost) {
       speakerPrompt(messages, run.variant.memoryMode === 'reinject_on_speech' ? session.instructions : undefined, undefined, npcId, localContext(run.spec, current, npcId)),
       { outputType: 'spatialSpeech', spatialChoiceVersion:'spatial-choice/2', receiptIds: pending.map(r => r.id), virtualSeconds: current.virtualSeconds }, all);
     try {
-      const output = spatialSpeechSchema.parse(JSON.parse(call.output));
+      const output = spatialSpeechSchema.parse(parseSpeechOutput(call));
       const perception = validateSpatialChoice(run.spec, current, npcId, output);
       return { npcId, call, output, perception, pending, messages, known: [...known] };
     } catch (e) { h.store.patch('invocations', call.id, { status: 'failed', error: errorText(e) }); throw e; }
@@ -86,7 +87,7 @@ async function decideCycle(h: SimulationHost) {
         speakerName: run.spec.scenario.characters.find(c => c.id === d.npcId)!.name, kind: 'speech', speech: d.output.speech, action: d.output.action,
         createdAt: now(), invocationId: d.call.id, deliveryCompletedAt: null, deliveryMs: null,
         perception: d.perception, spatialIntent: d.output, knownUtteranceIds: d.known };
-      h.append(u); ids.push(u.id); next = commitSpatialChoice(next, u);
+      h.append(u,d.call); ids.push(u.id); next = commitSpatialChoice(next, u);
       for (const c of h.store.attempts(h.id, d.call.operationKey)) h.store.patch('invocations', c.id, { utteranceId: u.id });
       for (const r of d.pending) h.store.patch('receipts', r.id, { status: 'delivered', invocationId: d.call.id, deliveredAt: now() });
       for (const message of d.messages) h.completeDelivery(message);

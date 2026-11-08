@@ -59,8 +59,10 @@ export function languageRepairSchema(schema: object, languageContext: string, pr
   const properties = (schema as { properties?: Record<string,object> }).properties;
   if (!properties?.speech || !properties.action) return;
   const pattern = '^[^ぁ-ゖァ-ヺ]*$';
+  const speech = properties.speech as {type?:'string'|'array';items?:{type?:'string'}};
   return { ...schema, properties: { ...properties,
-    speech: { ...properties.speech, pattern }, action: { ...properties.action, pattern } } };
+    speech: speech.type==='array' ? {...speech,items:{...speech.items,pattern}} : {...speech,pattern},
+    action: { ...properties.action, pattern } } };
 }
 export function checkDialogue(speech: string, action: string, history: Utterance[], actor: string, languageContext: string) {
   const output = speech+' '+action;

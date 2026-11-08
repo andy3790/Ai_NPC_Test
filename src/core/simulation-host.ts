@@ -10,7 +10,7 @@ export interface SimulationHost {
   direct(key: string, operationKey: string, prompt: ReturnType<typeof directorPrompt>): Promise<InvocationMetrics>;
   invoke(kind: CallKind, session: NpcSession, key: string, input: string, metadata?: Record<string, unknown>, history?: Utterance[]): Promise<InvocationMetrics>;
   speak(session: NpcSession, key: string, input: string, metadata: Record<string, unknown>, history: Utterance[]): Promise<InvocationMetrics>;
-  append(u: Utterance): void; flush(): Promise<void>; changed(): void;
+  append(u: Utterance, accepted?: InvocationMetrics): void; flush(): Promise<void>; changed(): void;
   completeDelivery(u: Utterance): void;
   inject(text: string, audience?: Audience): void;
   evaluate(final: boolean): Promise<void>;

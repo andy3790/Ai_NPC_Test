@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-export const CHARACTER_PERFORMANCE = 'character-performance/2' as const;
-export const performanceVersions = ['off', 'character-performance/1', CHARACTER_PERFORMANCE] as const;
+export const CHARACTER_PERFORMANCE = 'character-performance/3' as const;
+export const performanceVersions = ['off', 'character-performance/1', 'character-performance/2', CHARACTER_PERFORMANCE] as const;
 export type PerformanceVersion = Exclude<typeof performanceVersions[number], 'off'>;
 // Only ways of performing a line are writable. No generated biography, facts,
 // relationships, honorifics or free-text instructions enter persistent state.

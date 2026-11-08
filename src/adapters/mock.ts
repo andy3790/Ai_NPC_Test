@@ -55,6 +55,11 @@ export class MockAdapter implements Adapter {
     if (input.characterPerformance?.select && output && typeof output === 'object') {
       output = { portrayal: { attention: '말에서 빠진 대목', phrasing: '구체적인 한 대목부터 꺼낸다' }, ...output };
     }
+    const schema=r.outputSchema as {properties?:{speech?:{type?:string};setAsideSequence?:object}};
+    if (schema.properties?.setAsideSequence && output && typeof output==='object') output={...output,setAsideSequence:null};
+    if (schema.properties?.speech?.type==='array' && output && typeof output==='object' && 'speech' in output && typeof output.speech==='string') {
+      output={...output,speech:output.speech ? [output.speech] : []};
+    }
     const text = JSON.stringify(output); emit({ method: 'item/agentMessage/delta', params: { threadId: r.threadId, turnId, delta: text } });
     const prev = this.totals.get(r.threadId); const last = { inputTokens: Math.ceil(r.input.length / 2), cachedInputTokens: 10, cacheWriteInputTokens: 0, outputTokens: Math.ceil(text.length / 2), reasoningOutputTokens: 5, totalTokens: Math.ceil(r.input.length / 2) + Math.ceil(text.length / 2) };
     const total = Object.fromEntries(tokenKeys.map(k => [k, (prev?.[k] ?? 0) + last[k]])) as unknown as TokenUsage;

@@ -51,7 +51,7 @@ ${JSON.stringify(spec.scenario.environment)}
     [['말하는 방식', c.speechStyle], ['말투 예시', c.exampleDialogue]].filter(([, value]) => value?.trim())
       .map(([label, value]) => `${label}: ${value}`).join('\n\n') : '';
   const version = variant?.characterPerformanceVersion;
-  const performance = version && version !== 'off' ? '\n\n' + performanceInstructions + (version === 'character-performance/2' ? '\n' + rhythmInstruction : '') : '';
+  const performance = version && version !== 'off' ? '\n\n' + performanceInstructions + (version !== 'character-performance/1' ? '\n' + rhythmInstruction : '') : '';
   return instructions + (profileAtEnd ? '\n\n이번 역할의 인물 기준:\n' + profile : '') + voice + performance;
 }
 export function publicMessage(original: Utterance, observer?: string | number) {
