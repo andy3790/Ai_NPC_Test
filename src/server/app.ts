@@ -8,6 +8,7 @@ import { Engine } from '../core/engine.js';
 import { PROMPT_VERSION } from '../core/prompts.js';
 import { TOPIC_CLOSURE_VERSION } from '../core/conversation-memory.js';
 import { SCENE_OBSERVATION_VERSION } from '../core/scene-observation.js';
+import { SOCIAL_REACTION_VERSION } from '../core/social-reaction.js';
 import { CHARACTER_PERFORMANCE } from '../shared/character-performance.js';
 import { exampleSpec } from '../shared/example.js';
 import { availableRoleModels } from '../shared/role-models.js';
@@ -55,7 +56,8 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
   });
   app.get('/api/health', async () => ({ ok: true, adapter: engine.adapter.name, version: APP_VERSION, historyEnabled: !!history,
     promptVersion: PROMPT_VERSION, defaultCharacterPerformanceVersion: CHARACTER_PERFORMANCE,
-    defaultTopicClosureVersion: TOPIC_CLOSURE_VERSION, defaultSceneObservationVersion: SCENE_OBSERVATION_VERSION }));
+    defaultTopicClosureVersion: TOPIC_CLOSURE_VERSION, defaultSceneObservationVersion: SCENE_OBSERVATION_VERSION,
+    defaultSocialReactionVersion:SOCIAL_REACTION_VERSION }));
   app.get('/api/openai/key', async (req, reply) => {
     reply.header('Cache-Control', 'no-store');
     return keyAdapter().keys.status(browserOwner(req, reply));

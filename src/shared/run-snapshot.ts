@@ -15,6 +15,7 @@ export function runSnapshot(run: Run) {
     repetition: run.repetition, adapter: run.adapter, createdAt: run.createdAt,
     snapshotHash: run.snapshotHash, appVersion: run.appVersion, cliVersion: run.cliVersion,
     promptVersion: run.promptVersion ?? null,
+    ...(run.socialReactionVersion && {socialReactionVersion:run.socialReactionVersion}),
     dialoguePromptVersion: run.variant.dialoguePromptVersion ?? null,
     worldPromptVersion: run.variant.worldPromptVersion ?? null,
     worldContextVersion: run.worldContextVersion ?? null,

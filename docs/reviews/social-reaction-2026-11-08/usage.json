@@ -1,0 +1,3623 @@
+{
+  "pricingDate": "2026-11-06",
+  "pricingRevision": "33fd7a5a40495c1a",
+  "ledger": {
+    "requests": 325,
+    "settled": 325,
+    "conservativeUsd": 0.066025565
+  },
+  "runs": [
+    {
+      "label": "calm-beat-a",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/2",
+      "socialChoicesOffered": 8,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 0,
+        "compacted": 0,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "ff04d9da70c8613aac8c9b78fc5fd924cbf21384247853804bdab776143f98ec",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00208628,
+      "tokens": {
+        "inputTokens": 33126,
+        "cachedInputTokens": 22618,
+        "cacheWriteInputTokens": 10472,
+        "outputTokens": 1095,
+        "reasoningOutputTokens": 482,
+        "totalTokens": 34221
+      },
+      "medianMs": 1515.0498000000007,
+      "p95Ms": 2824.7854000000007,
+      "firstOutputMedianMs": 923,
+      "firstOutputP95Ms": 2496,
+      "activeMs": 22998,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00208628,
+          "tokens": {
+            "inputTokens": 33126,
+            "cachedInputTokens": 22618,
+            "cacheWriteInputTokens": 10472,
+            "outputTokens": 1095,
+            "reasoningOutputTokens": 482,
+            "totalTokens": 34221
+          },
+          "medianMs": 1515.0498000000007,
+          "p95Ms": 2824.7854000000007,
+          "firstOutputMedianMs": 923,
+          "firstOutputP95Ms": 2496
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2932,
+          3013,
+          2660,
+          2719,
+          2280,
+          2899
+        ],
+        "lastSpeechInputs": [
+          2505,
+          3031,
+          2433,
+          2965,
+          2519,
+          3170
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "calm-beat-b",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 10,
+      "actionOnly": 2,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 4
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/2",
+      "socialChoicesOffered": 7,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 4,
+        "reintroduced": 4,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "ff04d9da70c8613aac8c9b78fc5fd924cbf21384247853804bdab776143f98ec",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00175712,
+      "tokens": {
+        "inputTokens": 32525,
+        "cachedInputTokens": 24427,
+        "cacheWriteInputTokens": 8062,
+        "outputTokens": 1003,
+        "reasoningOutputTokens": 463,
+        "totalTokens": 33528
+      },
+      "medianMs": 1336.018399999999,
+      "p95Ms": 3541.7129000000023,
+      "firstOutputMedianMs": 865,
+      "firstOutputP95Ms": 3170,
+      "activeMs": 21770,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00175712,
+          "tokens": {
+            "inputTokens": 32525,
+            "cachedInputTokens": 24427,
+            "cacheWriteInputTokens": 8062,
+            "outputTokens": 1003,
+            "reasoningOutputTokens": 463,
+            "totalTokens": 33528
+          },
+          "medianMs": 1336.018399999999,
+          "p95Ms": 3541.7129000000023,
+          "firstOutputMedianMs": 865,
+          "firstOutputP95Ms": 3170
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2928,
+          3007,
+          2146,
+          2675,
+          2239,
+          2766
+        ],
+        "lastSpeechInputs": [
+          2575,
+          3087,
+          2475,
+          2986,
+          2587,
+          3054
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "calm-before-a",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 7,
+      "actionOnly": 5,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 3
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 4
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 1,
+        "reintroduced": 1,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "ff04d9da70c8613aac8c9b78fc5fd924cbf21384247853804bdab776143f98ec",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0023680150000000002,
+      "tokens": {
+        "inputTokens": 28703,
+        "cachedInputTokens": 15104,
+        "cacheWriteInputTokens": 13563,
+        "outputTokens": 1036,
+        "reasoningOutputTokens": 531,
+        "totalTokens": 29739
+      },
+      "medianMs": 1555.4701999999997,
+      "p95Ms": 3133.708200000001,
+      "firstOutputMedianMs": 1175,
+      "firstOutputP95Ms": 2614,
+      "activeMs": 22339,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0023680150000000002,
+          "tokens": {
+            "inputTokens": 28703,
+            "cachedInputTokens": 15104,
+            "cacheWriteInputTokens": 13563,
+            "outputTokens": 1036,
+            "reasoningOutputTokens": 531,
+            "totalTokens": 29739
+          },
+          "medianMs": 1555.4701999999997,
+          "p95Ms": 3133.708200000001,
+          "firstOutputMedianMs": 1175,
+          "firstOutputP95Ms": 2614
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2446,
+          2503,
+          2158,
+          2181,
+          2250,
+          2267
+        ],
+        "lastSpeechInputs": [
+          2575,
+          2578,
+          2386,
+          2463,
+          2446,
+          2450
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "calm-before-b",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 0,
+        "compacted": 0,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "ff04d9da70c8613aac8c9b78fc5fd924cbf21384247853804bdab776143f98ec",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0022299449999999997,
+      "tokens": {
+        "inputTokens": 29103,
+        "cachedInputTokens": 18022,
+        "cacheWriteInputTokens": 11045,
+        "outputTokens": 1331,
+        "reasoningOutputTokens": 784,
+        "totalTokens": 30434
+      },
+      "medianMs": 1312.8485999999994,
+      "p95Ms": 5744.549500000001,
+      "firstOutputMedianMs": 932,
+      "firstOutputP95Ms": 5275,
+      "activeMs": 26774,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0022299449999999997,
+          "tokens": {
+            "inputTokens": 29103,
+            "cachedInputTokens": 18022,
+            "cacheWriteInputTokens": 11045,
+            "outputTokens": 1331,
+            "reasoningOutputTokens": 784,
+            "totalTokens": 30434
+          },
+          "medianMs": 1312.8485999999994,
+          "p95Ms": 5744.549500000001,
+          "firstOutputMedianMs": 932,
+          "firstOutputP95Ms": 5275
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2449,
+          2510,
+          2166,
+          2193,
+          2273,
+          2290
+        ],
+        "lastSpeechInputs": [
+          2634,
+          2629,
+          2436,
+          2455,
+          2550,
+          2518
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "calm-person-a",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 11,
+      "actionOnly": 1,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 5
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/3",
+      "socialChoicesOffered": 6,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 0,
+        "compacted": 0,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "ff04d9da70c8613aac8c9b78fc5fd924cbf21384247853804bdab776143f98ec",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0016729000000000004,
+      "tokens": {
+        "inputTokens": 31822,
+        "cachedInputTokens": 24130,
+        "cacheWriteInputTokens": 7656,
+        "outputTokens": 942,
+        "reasoningOutputTokens": 371,
+        "totalTokens": 32764
+      },
+      "medianMs": 1338.7727999999988,
+      "p95Ms": 2964.4926000000014,
+      "firstOutputMedianMs": 823,
+      "firstOutputP95Ms": 2559,
+      "activeMs": 20166,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0016729000000000004,
+          "tokens": {
+            "inputTokens": 31822,
+            "cachedInputTokens": 24130,
+            "cacheWriteInputTokens": 7656,
+            "outputTokens": 942,
+            "reasoningOutputTokens": 371,
+            "totalTokens": 32764
+          },
+          "medianMs": 1338.7727999999988,
+          "p95Ms": 2964.4926000000014,
+          "firstOutputMedianMs": 823,
+          "firstOutputP95Ms": 2559
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2932,
+          3013,
+          2153,
+          2682,
+          2253,
+          2779
+        ],
+        "lastSpeechInputs": [
+          2576,
+          2579,
+          2404,
+          2938,
+          2493,
+          3020
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "calm-person-b",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 8,
+      "actionOnly": 3,
+      "silentWaits": 1,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 5
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 3
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/3",
+      "socialChoicesOffered": 6,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 1,
+        "compacted": 2,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "ff04d9da70c8613aac8c9b78fc5fd924cbf21384247853804bdab776143f98ec",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.002059015,
+      "tokens": {
+        "inputTokens": 31508,
+        "cachedInputTokens": 20179,
+        "cacheWriteInputTokens": 11293,
+        "outputTokens": 884,
+        "reasoningOutputTokens": 397,
+        "totalTokens": 32392
+      },
+      "medianMs": 1254.9714000000004,
+      "p95Ms": 2833.2936999999993,
+      "firstOutputMedianMs": 978,
+      "firstOutputP95Ms": 2366,
+      "activeMs": 20256,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.002059015,
+          "tokens": {
+            "inputTokens": 31508,
+            "cachedInputTokens": 20179,
+            "cacheWriteInputTokens": 11293,
+            "outputTokens": 884,
+            "reasoningOutputTokens": 397,
+            "totalTokens": 32392
+          },
+          "medianMs": 1254.9714000000004,
+          "p95Ms": 2833.2936999999993,
+          "firstOutputMedianMs": 978,
+          "firstOutputP95Ms": 2366
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2930,
+          3013,
+          2162,
+          2677,
+          2166,
+          2732
+        ],
+        "lastSpeechInputs": [
+          2539,
+          3058,
+          2354,
+          2953,
+          2416,
+          2508
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "calm-trial-a",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 8,
+      "actionOnly": 2,
+      "silentWaits": 2,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 4
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 4
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/1",
+      "socialChoicesOffered": 5,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 0,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "ff04d9da70c8613aac8c9b78fc5fd924cbf21384247853804bdab776143f98ec",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0026886949999999996,
+      "tokens": {
+        "inputTokens": 31525,
+        "cachedInputTokens": 14722,
+        "cacheWriteInputTokens": 16767,
+        "outputTokens": 884,
+        "reasoningOutputTokens": 365,
+        "totalTokens": 32409
+      },
+      "medianMs": 1528.9377000000004,
+      "p95Ms": 2444.3288000000002,
+      "firstOutputMedianMs": 1016,
+      "firstOutputP95Ms": 2156,
+      "activeMs": 20876,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0026886949999999996,
+          "tokens": {
+            "inputTokens": 31525,
+            "cachedInputTokens": 14722,
+            "cacheWriteInputTokens": 16767,
+            "outputTokens": 884,
+            "reasoningOutputTokens": 365,
+            "totalTokens": 32409
+          },
+          "medianMs": 1528.9377000000004,
+          "p95Ms": 2444.3288000000002,
+          "firstOutputMedianMs": 1016,
+          "firstOutputP95Ms": 2156
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2931,
+          3033,
+          2184,
+          2719,
+          2291,
+          2814
+        ],
+        "lastSpeechInputs": [
+          2615,
+          3127,
+          2432,
+          2449,
+          2486,
+          2444
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "calm-trial-b",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 9,
+      "actionOnly": 3,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 5
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 4
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/1",
+      "socialChoicesOffered": 6,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 2,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "ff04d9da70c8613aac8c9b78fc5fd924cbf21384247853804bdab776143f98ec",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.001623025,
+      "tokens": {
+        "inputTokens": 31987,
+        "cachedInputTokens": 24130,
+        "cacheWriteInputTokens": 7821,
+        "outputTokens": 801,
+        "reasoningOutputTokens": 273,
+        "totalTokens": 32788
+      },
+      "medianMs": 1295.7261999999992,
+      "p95Ms": 2552.434500000001,
+      "firstOutputMedianMs": 867,
+      "firstOutputP95Ms": 2168,
+      "activeMs": 19560,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.001623025,
+          "tokens": {
+            "inputTokens": 31987,
+            "cachedInputTokens": 24130,
+            "cacheWriteInputTokens": 7821,
+            "outputTokens": 801,
+            "reasoningOutputTokens": 273,
+            "totalTokens": 32788
+          },
+          "medianMs": 1295.7261999999992,
+          "p95Ms": 2552.434500000001,
+          "firstOutputMedianMs": 867,
+          "firstOutputP95Ms": 2168
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2932,
+          3016,
+          2159,
+          2684,
+          2251,
+          2788
+        ],
+        "lastSpeechInputs": [
+          2600,
+          3110,
+          2411,
+          3006,
+          2472,
+          2558
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cup-beat-a",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "conversation_withdrawn",
+      "limit": 12,
+      "choices": 11,
+      "spoken": 11,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "다빈",
+          "choices": 5,
+          "spoken": 5
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/2",
+      "socialChoicesOffered": 11,
+      "focusedReactions": 3,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 1,
+        "compacted": 1,
+        "reintroduced": 1,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a800444b7bfe108f8835838fcc0d72486d93b5dda1bf724e89c1a0bfe810c2fb",
+      "requests": 11,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0026313,
+      "tokens": {
+        "inputTokens": 32198,
+        "cachedInputTokens": 19275,
+        "cacheWriteInputTokens": 12890,
+        "outputTokens": 1648,
+        "reasoningOutputTokens": 1051,
+        "totalTokens": 33846
+      },
+      "medianMs": 2790.7904999999996,
+      "p95Ms": 3755.3366000000024,
+      "firstOutputMedianMs": 2259,
+      "firstOutputP95Ms": 3288,
+      "activeMs": 26483,
+      "roles": {
+        "speech": {
+          "requests": 11,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0026313,
+          "tokens": {
+            "inputTokens": 32198,
+            "cachedInputTokens": 19275,
+            "cacheWriteInputTokens": 12890,
+            "outputTokens": 1648,
+            "reasoningOutputTokens": 1051,
+            "totalTokens": 33846
+          },
+          "medianMs": 2790.7904999999996,
+          "p95Ms": 3755.3366000000024,
+          "firstOutputMedianMs": 2259,
+          "firstOutputP95Ms": 3288
+        }
+      },
+      "inputWindow": {
+        "calls": 5,
+        "firstSpeechInputs": [
+          3087,
+          2992,
+          2786,
+          2685,
+          2855
+        ],
+        "lastSpeechInputs": [
+          3062,
+          3143,
+          2875,
+          2983,
+          2963
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 11,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cup-beat-b",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "conversation_withdrawn",
+      "limit": 12,
+      "choices": 11,
+      "spoken": 11,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "다빈",
+          "choices": 5,
+          "spoken": 5
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/2",
+      "socialChoicesOffered": 11,
+      "focusedReactions": 2,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 0,
+        "compacted": 0,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 1
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a800444b7bfe108f8835838fcc0d72486d93b5dda1bf724e89c1a0bfe810c2fb",
+      "requests": 11,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.002139785,
+      "tokens": {
+        "inputTokens": 32548,
+        "cachedInputTokens": 23886,
+        "cacheWriteInputTokens": 8629,
+        "outputTokens": 1638,
+        "reasoningOutputTokens": 1025,
+        "totalTokens": 34186
+      },
+      "medianMs": 2965.9547999999995,
+      "p95Ms": 4353.934200000001,
+      "firstOutputMedianMs": 2554,
+      "firstOutputP95Ms": 3488,
+      "activeMs": 28954,
+      "roles": {
+        "speech": {
+          "requests": 11,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.002139785,
+          "tokens": {
+            "inputTokens": 32548,
+            "cachedInputTokens": 23886,
+            "cacheWriteInputTokens": 8629,
+            "outputTokens": 1638,
+            "reasoningOutputTokens": 1025,
+            "totalTokens": 34186
+          },
+          "medianMs": 2965.9547999999995,
+          "p95Ms": 4353.934200000001,
+          "firstOutputMedianMs": 2554,
+          "firstOutputP95Ms": 3488
+        }
+      },
+      "inputWindow": {
+        "calls": 5,
+        "firstSpeechInputs": [
+          3086,
+          2993,
+          2832,
+          2700,
+          2748
+        ],
+        "lastSpeechInputs": [
+          3128,
+          3254,
+          3009,
+          2976,
+          3024
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 11,
+        "eligibleSpeeches": 1,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cup-before-a",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 11,
+      "actionOnly": 1,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 5
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 5,
+        "reintroduced": 4,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a800444b7bfe108f8835838fcc0d72486d93b5dda1bf724e89c1a0bfe810c2fb",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.002442665,
+      "tokens": {
+        "inputTokens": 29009,
+        "cachedInputTokens": 18344,
+        "cacheWriteInputTokens": 10629,
+        "outputTokens": 1854,
+        "reasoningOutputTokens": 1280,
+        "totalTokens": 30863
+      },
+      "medianMs": 2654.8382999999994,
+      "p95Ms": 4238.257099999999,
+      "firstOutputMedianMs": 2336,
+      "firstOutputP95Ms": 3630,
+      "activeMs": 30735,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.002442665,
+          "tokens": {
+            "inputTokens": 29009,
+            "cachedInputTokens": 18344,
+            "cacheWriteInputTokens": 10629,
+            "outputTokens": 1854,
+            "reasoningOutputTokens": 1280,
+            "totalTokens": 30863
+          },
+          "medianMs": 2654.8382999999994,
+          "p95Ms": 4238.257099999999,
+          "firstOutputMedianMs": 2336,
+          "firstOutputP95Ms": 3630
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2448,
+          2514,
+          2176,
+          2205,
+          2271,
+          2308
+        ],
+        "lastSpeechInputs": [
+          2671,
+          2705,
+          2415,
+          2383,
+          2476,
+          2437
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cup-before-b",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 10,
+      "actionOnly": 2,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 5
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 5
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 4,
+        "reintroduced": 4,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 1
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a800444b7bfe108f8835838fcc0d72486d93b5dda1bf724e89c1a0bfe810c2fb",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.002077615,
+      "tokens": {
+        "inputTokens": 29634,
+        "cachedInputTokens": 18689,
+        "cacheWriteInputTokens": 10909,
+        "outputTokens": 1047,
+        "reasoningOutputTokens": 472,
+        "totalTokens": 30681
+      },
+      "medianMs": 1281.2075000000004,
+      "p95Ms": 4089.7155,
+      "firstOutputMedianMs": 845,
+      "firstOutputP95Ms": 3342,
+      "activeMs": 23043,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.002077615,
+          "tokens": {
+            "inputTokens": 29634,
+            "cachedInputTokens": 18689,
+            "cacheWriteInputTokens": 10909,
+            "outputTokens": 1047,
+            "reasoningOutputTokens": 472,
+            "totalTokens": 30681
+          },
+          "medianMs": 1281.2075000000004,
+          "p95Ms": 4089.7155,
+          "firstOutputMedianMs": 845,
+          "firstOutputP95Ms": 3342
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2445,
+          2512,
+          2175,
+          2196,
+          2266,
+          2395
+        ],
+        "lastSpeechInputs": [
+          2647,
+          2670,
+          2527,
+          2553,
+          2618,
+          2630
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 1,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cup-person-a",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "conversation_withdrawn",
+      "limit": 12,
+      "choices": 11,
+      "spoken": 11,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "다빈",
+          "choices": 5,
+          "spoken": 5
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/3",
+      "socialChoicesOffered": 11,
+      "focusedReactions": 8,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 0,
+        "compacted": 0,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a800444b7bfe108f8835838fcc0d72486d93b5dda1bf724e89c1a0bfe810c2fb",
+      "requests": 11,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.003089785,
+      "tokens": {
+        "inputTokens": 33208,
+        "cachedInputTokens": 17686,
+        "cacheWriteInputTokens": 15489,
+        "outputTokens": 1947,
+        "reasoningOutputTokens": 1246,
+        "totalTokens": 35155
+      },
+      "medianMs": 3259.2649999999994,
+      "p95Ms": 4486.251699999999,
+      "firstOutputMedianMs": 2699,
+      "firstOutputP95Ms": 3666,
+      "activeMs": 33216,
+      "roles": {
+        "speech": {
+          "requests": 11,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.003089785,
+          "tokens": {
+            "inputTokens": 33208,
+            "cachedInputTokens": 17686,
+            "cacheWriteInputTokens": 15489,
+            "outputTokens": 1947,
+            "reasoningOutputTokens": 1246,
+            "totalTokens": 35155
+          },
+          "medianMs": 3259.2649999999994,
+          "p95Ms": 4486.251699999999,
+          "firstOutputMedianMs": 2699,
+          "firstOutputP95Ms": 3666
+        }
+      },
+      "inputWindow": {
+        "calls": 5,
+        "firstSpeechInputs": [
+          3079,
+          3004,
+          2793,
+          2845,
+          2901
+        ],
+        "lastSpeechInputs": [
+          3260,
+          3315,
+          2923,
+          3130,
+          3018
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 11,
+        "eligibleSpeeches": 3,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cup-person-b",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/3",
+      "socialChoicesOffered": 12,
+      "focusedReactions": 1,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 1,
+        "compacted": 2,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 1,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 1,
+      "specSha256": "a800444b7bfe108f8835838fcc0d72486d93b5dda1bf724e89c1a0bfe810c2fb",
+      "requests": 13,
+      "failed": 1,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00227995,
+      "tokens": {
+        "inputTokens": 38436,
+        "cachedInputTokens": 28005,
+        "cacheWriteInputTokens": 10392,
+        "outputTokens": 1394,
+        "reasoningOutputTokens": 719,
+        "totalTokens": 39830
+      },
+      "medianMs": 1426.8379000000004,
+      "p95Ms": 2984.7958,
+      "firstOutputMedianMs": 886,
+      "firstOutputP95Ms": 4105,
+      "activeMs": 26788,
+      "roles": {
+        "speech": {
+          "requests": 13,
+          "failed": 1,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00227995,
+          "tokens": {
+            "inputTokens": 38436,
+            "cachedInputTokens": 28005,
+            "cacheWriteInputTokens": 10392,
+            "outputTokens": 1394,
+            "reasoningOutputTokens": 719,
+            "totalTokens": 39830
+          },
+          "medianMs": 1426.8379000000004,
+          "p95Ms": 2984.7958,
+          "firstOutputMedianMs": 886,
+          "firstOutputP95Ms": 4105
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          3079,
+          3008,
+          2653,
+          2697,
+          2754,
+          2795
+        ],
+        "lastSpeechInputs": [
+          3138,
+          3004,
+          2950,
+          3094,
+          3050,
+          3091
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 2,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": [
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "label": "cup-trial-a",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/1",
+      "socialChoicesOffered": 12,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 4,
+        "reintroduced": 4,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 2
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a800444b7bfe108f8835838fcc0d72486d93b5dda1bf724e89c1a0bfe810c2fb",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00226019,
+      "tokens": {
+        "inputTokens": 35382,
+        "cachedInputTokens": 25884,
+        "cacheWriteInputTokens": 9462,
+        "outputTokens": 1630,
+        "reasoningOutputTokens": 983,
+        "totalTokens": 37012
+      },
+      "medianMs": 2412.7193000000007,
+      "p95Ms": 4296.2487,
+      "firstOutputMedianMs": 1886,
+      "firstOutputP95Ms": 3270,
+      "activeMs": 28208,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00226019,
+          "tokens": {
+            "inputTokens": 35382,
+            "cachedInputTokens": 25884,
+            "cacheWriteInputTokens": 9462,
+            "outputTokens": 1630,
+            "reasoningOutputTokens": 983,
+            "totalTokens": 37012
+          },
+          "medianMs": 2412.7193000000007,
+          "p95Ms": 4296.2487,
+          "firstOutputMedianMs": 1886,
+          "firstOutputP95Ms": 3270
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2946,
+          3020,
+          2700,
+          2714,
+          2765,
+          2803
+        ],
+        "lastSpeechInputs": [
+          3042,
+          3011,
+          3003,
+          3022,
+          3167,
+          3189
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 1,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cup-trial-b",
+      "scenario": "합주 끝의 종이컵",
+      "sceneRevision": "rehearsal-paper-cup",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 11,
+      "actionOnly": 1,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "명우",
+          "choices": 6,
+          "spoken": 5
+        },
+        {
+          "name": "다빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 1,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/1",
+      "socialChoicesOffered": 11,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 1,
+        "compacted": 3,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 1,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 1,
+      "specSha256": "a800444b7bfe108f8835838fcc0d72486d93b5dda1bf724e89c1a0bfe810c2fb",
+      "requests": 13,
+      "failed": 1,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0030180500000000004,
+      "tokens": {
+        "inputTokens": 37424,
+        "cachedInputTokens": 20965,
+        "cacheWriteInputTokens": 16420,
+        "outputTokens": 1504,
+        "reasoningOutputTokens": 832,
+        "totalTokens": 38928
+      },
+      "medianMs": 2352.482100000001,
+      "p95Ms": 2852.9303,
+      "firstOutputMedianMs": 1732,
+      "firstOutputP95Ms": 2466,
+      "activeMs": 27154,
+      "roles": {
+        "speech": {
+          "requests": 13,
+          "failed": 1,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0030180500000000004,
+          "tokens": {
+            "inputTokens": 37424,
+            "cachedInputTokens": 20965,
+            "cacheWriteInputTokens": 16420,
+            "outputTokens": 1504,
+            "reasoningOutputTokens": 832,
+            "totalTokens": 38928
+          },
+          "medianMs": 2352.482100000001,
+          "p95Ms": 2852.9303,
+          "firstOutputMedianMs": 1732,
+          "firstOutputP95Ms": 2466
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2947,
+          3020,
+          2661,
+          2693,
+          2761,
+          2801
+        ],
+        "lastSpeechInputs": [
+          3115,
+          3140,
+          3001,
+          2436,
+          3005,
+          3002
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": [
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "label": "photo-beat-a",
+      "scenario": "사진기의 반환구",
+      "sceneRevision": "photo-booth-coin",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 11,
+      "actionOnly": 0,
+      "silentWaits": 1,
+      "voices": [
+        {
+          "name": "건우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "수빈",
+          "choices": 6,
+          "spoken": 5
+        }
+      ],
+      "events": 0,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/2",
+      "socialChoicesOffered": 12,
+      "focusedReactions": 2,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 1,
+        "compacted": 5,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 3
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "9700092cbbc299deabd392f61e756a426bb6b572b32361e31f199821e078b2cc",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.002169555,
+      "tokens": {
+        "inputTokens": 35512,
+        "cachedInputTokens": 24583,
+        "cacheWriteInputTokens": 10893,
+        "outputTokens": 1117,
+        "reasoningOutputTokens": 473,
+        "totalTokens": 36629
+      },
+      "medianMs": 1901.6034,
+      "p95Ms": 4558.991600000001,
+      "firstOutputMedianMs": 1190,
+      "firstOutputP95Ms": 3448,
+      "activeMs": 27623,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.002169555,
+          "tokens": {
+            "inputTokens": 35512,
+            "cachedInputTokens": 24583,
+            "cacheWriteInputTokens": 10893,
+            "outputTokens": 1117,
+            "reasoningOutputTokens": 473,
+            "totalTokens": 36629
+          },
+          "medianMs": 1901.6034,
+          "p95Ms": 4558.991600000001,
+          "firstOutputMedianMs": 1190,
+          "firstOutputP95Ms": 3448
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          3028,
+          2986,
+          2822,
+          2691,
+          2746,
+          2781
+        ],
+        "lastSpeechInputs": [
+          3151,
+          3214,
+          3004,
+          2969,
+          3112,
+          3008
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 2,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "photo-beat-b",
+      "scenario": "사진기의 반환구",
+      "sceneRevision": "photo-booth-coin",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "건우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "수빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 0,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/2",
+      "socialChoicesOffered": 12,
+      "focusedReactions": 4,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 4,
+        "reintroduced": 4,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 1,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 1,
+      "specSha256": "9700092cbbc299deabd392f61e756a426bb6b572b32361e31f199821e078b2cc",
+      "requests": 13,
+      "failed": 1,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0029468699999999994,
+      "tokens": {
+        "inputTokens": 38121,
+        "cachedInputTokens": 21572,
+        "cacheWriteInputTokens": 16510,
+        "outputTokens": 1327,
+        "reasoningOutputTokens": 655,
+        "totalTokens": 39448
+      },
+      "medianMs": 2387.893500000002,
+      "p95Ms": 5180.576200000001,
+      "firstOutputMedianMs": 1886,
+      "firstOutputP95Ms": 4813,
+      "activeMs": 31709,
+      "roles": {
+        "speech": {
+          "requests": 13,
+          "failed": 1,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0029468699999999994,
+          "tokens": {
+            "inputTokens": 38121,
+            "cachedInputTokens": 21572,
+            "cacheWriteInputTokens": 16510,
+            "outputTokens": 1327,
+            "reasoningOutputTokens": 655,
+            "totalTokens": 39448
+          },
+          "medianMs": 2387.893500000002,
+          "p95Ms": 5180.576200000001,
+          "firstOutputMedianMs": 1886,
+          "firstOutputP95Ms": 4813
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          3028,
+          2978,
+          2773,
+          2668,
+          2825,
+          2743
+        ],
+        "lastSpeechInputs": [
+          3053,
+          2931,
+          3024,
+          2943,
+          2984,
+          3007
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 2,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": [
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "label": "photo-before-a",
+      "scenario": "사진기의 반환구",
+      "sceneRevision": "photo-booth-coin",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "건우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "수빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 0,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 1,
+        "compacted": 2,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "9700092cbbc299deabd392f61e756a426bb6b572b32361e31f199821e078b2cc",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0028376350000000002,
+      "tokens": {
+        "inputTokens": 29302,
+        "cachedInputTokens": 12741,
+        "cacheWriteInputTokens": 16525,
+        "outputTokens": 1282,
+        "reasoningOutputTokens": 647,
+        "totalTokens": 30584
+      },
+      "medianMs": 1515.6036999999978,
+      "p95Ms": 4025.9326,
+      "firstOutputMedianMs": 930,
+      "firstOutputP95Ms": 3347,
+      "activeMs": 24712,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0028376350000000002,
+          "tokens": {
+            "inputTokens": 29302,
+            "cachedInputTokens": 12741,
+            "cacheWriteInputTokens": 16525,
+            "outputTokens": 1282,
+            "reasoningOutputTokens": 647,
+            "totalTokens": 30584
+          },
+          "medianMs": 1515.6036999999978,
+          "p95Ms": 4025.9326,
+          "firstOutputMedianMs": 930,
+          "firstOutputP95Ms": 3347
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2387,
+          2493,
+          2143,
+          2218,
+          2258,
+          2324
+        ],
+        "lastSpeechInputs": [
+          2582,
+          2648,
+          2520,
+          2508,
+          2617,
+          2604
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 3,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "photo-before-b",
+      "scenario": "사진기의 반환구",
+      "sceneRevision": "photo-booth-coin",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "건우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "수빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 0,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 5,
+        "reintroduced": 4,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 1,
+      "specSha256": "9700092cbbc299deabd392f61e756a426bb6b572b32361e31f199821e078b2cc",
+      "requests": 13,
+      "failed": 1,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0023263200000000006,
+      "tokens": {
+        "inputTokens": 32600,
+        "cachedInputTokens": 20967,
+        "cacheWriteInputTokens": 11594,
+        "outputTokens": 1327,
+        "reasoningOutputTokens": 563,
+        "totalTokens": 33927
+      },
+      "medianMs": 1412.1149000000005,
+      "p95Ms": 4360.3248,
+      "firstOutputMedianMs": 784,
+      "firstOutputP95Ms": 3551,
+      "activeMs": 24490,
+      "roles": {
+        "speech": {
+          "requests": 13,
+          "failed": 1,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0023263200000000006,
+          "tokens": {
+            "inputTokens": 32600,
+            "cachedInputTokens": 20967,
+            "cacheWriteInputTokens": 11594,
+            "outputTokens": 1327,
+            "reasoningOutputTokens": 563,
+            "totalTokens": 33927
+          },
+          "medianMs": 1412.1149000000005,
+          "p95Ms": 4360.3248,
+          "firstOutputMedianMs": 784,
+          "firstOutputP95Ms": 3551
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2387,
+          2492,
+          2152,
+          2231,
+          2271,
+          2345
+        ],
+        "lastSpeechInputs": [
+          2724,
+          2766,
+          2444,
+          2624,
+          2731,
+          2783
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 6,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 1,
+      "errorKinds": [
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "label": "photo-person-a",
+      "scenario": "사진기의 반환구",
+      "sceneRevision": "photo-booth-coin",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "건우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "수빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 0,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/3",
+      "socialChoicesOffered": 12,
+      "focusedReactions": 3,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 4,
+        "reintroduced": 4,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "9700092cbbc299deabd392f61e756a426bb6b572b32361e31f199821e078b2cc",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00213946,
+      "tokens": {
+        "inputTokens": 35318,
+        "cachedInputTokens": 26786,
+        "cacheWriteInputTokens": 8496,
+        "outputTokens": 1612,
+        "reasoningOutputTokens": 978,
+        "totalTokens": 36930
+      },
+      "medianMs": 2667.5579,
+      "p95Ms": 3523.6960000000017,
+      "firstOutputMedianMs": 2323,
+      "firstOutputP95Ms": 3162,
+      "activeMs": 30806,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00213946,
+          "tokens": {
+            "inputTokens": 35318,
+            "cachedInputTokens": 26786,
+            "cacheWriteInputTokens": 8496,
+            "outputTokens": 1612,
+            "reasoningOutputTokens": 978,
+            "totalTokens": 36930
+          },
+          "medianMs": 2667.5579,
+          "p95Ms": 3523.6960000000017,
+          "firstOutputMedianMs": 2323,
+          "firstOutputP95Ms": 3162
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          3042,
+          2972,
+          2839,
+          2680,
+          2850,
+          2740
+        ],
+        "lastSpeechInputs": [
+          3015,
+          3045,
+          2959,
+          3005,
+          3064,
+          3107
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 1,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "photo-person-b",
+      "scenario": "사진기의 반환구",
+      "sceneRevision": "photo-booth-coin",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "건우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "수빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 0,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/3",
+      "socialChoicesOffered": 12,
+      "focusedReactions": 6,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 1,
+        "compacted": 5,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 2
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "9700092cbbc299deabd392f61e756a426bb6b572b32361e31f199821e078b2cc",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.002005585,
+      "tokens": {
+        "inputTokens": 35915,
+        "cachedInputTokens": 26386,
+        "cacheWriteInputTokens": 9493,
+        "outputTokens": 1103,
+        "reasoningOutputTokens": 475,
+        "totalTokens": 37018
+      },
+      "medianMs": 1625.0148000000008,
+      "p95Ms": 3658.494199999999,
+      "firstOutputMedianMs": 937,
+      "firstOutputP95Ms": 3105,
+      "activeMs": 24820,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.002005585,
+          "tokens": {
+            "inputTokens": 35915,
+            "cachedInputTokens": 26386,
+            "cacheWriteInputTokens": 9493,
+            "outputTokens": 1103,
+            "reasoningOutputTokens": 475,
+            "totalTokens": 37018
+          },
+          "medianMs": 1625.0148000000008,
+          "p95Ms": 3658.494199999999,
+          "firstOutputMedianMs": 937,
+          "firstOutputP95Ms": 3105
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          3042,
+          2983,
+          2824,
+          2773,
+          2922,
+          2786
+        ],
+        "lastSpeechInputs": [
+          3243,
+          3203,
+          3066,
+          2930,
+          3140,
+          3003
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 2,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "photo-trial-a",
+      "scenario": "사진기의 반환구",
+      "sceneRevision": "photo-booth-coin",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "건우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "수빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 0,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/1",
+      "socialChoicesOffered": 12,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 5,
+        "reintroduced": 4,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "9700092cbbc299deabd392f61e756a426bb6b572b32361e31f199821e078b2cc",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0035393200000000003,
+      "tokens": {
+        "inputTokens": 34932,
+        "cachedInputTokens": 12672,
+        "cacheWriteInputTokens": 22224,
+        "outputTokens": 1262,
+        "reasoningOutputTokens": 592,
+        "totalTokens": 36194
+      },
+      "medianMs": 1747.2433,
+      "p95Ms": 3349.2248999999993,
+      "firstOutputMedianMs": 1048,
+      "firstOutputP95Ms": 2963,
+      "activeMs": 25181,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0035393200000000003,
+          "tokens": {
+            "inputTokens": 34932,
+            "cachedInputTokens": 12672,
+            "cacheWriteInputTokens": 22224,
+            "outputTokens": 1262,
+            "reasoningOutputTokens": 592,
+            "totalTokens": 36194
+          },
+          "medianMs": 1747.2433,
+          "p95Ms": 3349.2248999999993,
+          "firstOutputMedianMs": 1048,
+          "firstOutputP95Ms": 2963
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2894,
+          2991,
+          2729,
+          2707,
+          2755,
+          2795
+        ],
+        "lastSpeechInputs": [
+          3088,
+          3183,
+          2920,
+          2909,
+          2962,
+          2999
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 3,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "photo-trial-b",
+      "scenario": "사진기의 반환구",
+      "sceneRevision": "photo-booth-coin",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "건우",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "수빈",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 0,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/1",
+      "socialChoicesOffered": 12,
+      "focusedReactions": 0,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 3,
+        "reintroduced": 3,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 1
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "9700092cbbc299deabd392f61e756a426bb6b572b32361e31f199821e078b2cc",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.002239805,
+      "tokens": {
+        "inputTokens": 35929,
+        "cachedInputTokens": 24408,
+        "cacheWriteInputTokens": 11485,
+        "outputTokens": 1113,
+        "reasoningOutputTokens": 358,
+        "totalTokens": 37042
+      },
+      "medianMs": 1845.3174,
+      "p95Ms": 5318.3225,
+      "firstOutputMedianMs": 1048,
+      "firstOutputP95Ms": 2753,
+      "activeMs": 27976,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.002239805,
+          "tokens": {
+            "inputTokens": 35929,
+            "cachedInputTokens": 24408,
+            "cacheWriteInputTokens": 11485,
+            "outputTokens": 1113,
+            "reasoningOutputTokens": 358,
+            "totalTokens": 37042
+          },
+          "medianMs": 1845.3174,
+          "p95Ms": 5318.3225,
+          "firstOutputMedianMs": 1048,
+          "firstOutputP95Ms": 2753
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2894,
+          2996,
+          2690,
+          2739,
+          2794,
+          2916
+        ],
+        "lastSpeechInputs": [
+          3141,
+          3176,
+          3070,
+          3171,
+          3108,
+          3234
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 4,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "tag-before-a",
+      "scenario": "뒤집힌 이름표",
+      "sceneRevision": "backstage-name-tag",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "준태",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "세린",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 0,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 1,
+        "compacted": 3,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 2
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "11565ff7ff24876cd1ef467ed64a6a7034f16c29e0f4e1a6946fa54549958f43",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00230522,
+      "tokens": {
+        "inputTokens": 30902,
+        "cachedInputTokens": 19362,
+        "cacheWriteInputTokens": 11504,
+        "outputTokens": 1340,
+        "reasoningOutputTokens": 658,
+        "totalTokens": 32242
+      },
+      "medianMs": 1710.3573000000015,
+      "p95Ms": 4259.6703,
+      "firstOutputMedianMs": 1068,
+      "firstOutputP95Ms": 3572,
+      "activeMs": 25870,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00230522,
+          "tokens": {
+            "inputTokens": 30902,
+            "cachedInputTokens": 19362,
+            "cacheWriteInputTokens": 11504,
+            "outputTokens": 1340,
+            "reasoningOutputTokens": 658,
+            "totalTokens": 32242
+          },
+          "medianMs": 1710.3573000000015,
+          "p95Ms": 4259.6703,
+          "firstOutputMedianMs": 1068,
+          "firstOutputP95Ms": 3572
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2461,
+          2573,
+          2237,
+          2317,
+          2365,
+          2433
+        ],
+        "lastSpeechInputs": [
+          2770,
+          2830,
+          2569,
+          2841,
+          2660,
+          2846
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 8,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "tag-before-b",
+      "scenario": "뒤집힌 이름표",
+      "sceneRevision": "backstage-name-tag",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "준태",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "세린",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 0,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 1,
+        "compacted": 4,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "11565ff7ff24876cd1ef467ed64a6a7034f16c29e0f4e1a6946fa54549958f43",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00255304,
+      "tokens": {
+        "inputTokens": 30202,
+        "cachedInputTokens": 15694,
+        "cacheWriteInputTokens": 14472,
+        "outputTokens": 1167,
+        "reasoningOutputTokens": 425,
+        "totalTokens": 31369
+      },
+      "medianMs": 1415.4433000000008,
+      "p95Ms": 4406.6413999999995,
+      "firstOutputMedianMs": 717,
+      "firstOutputP95Ms": 3660,
+      "activeMs": 22880,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00255304,
+          "tokens": {
+            "inputTokens": 30202,
+            "cachedInputTokens": 15694,
+            "cacheWriteInputTokens": 14472,
+            "outputTokens": 1167,
+            "reasoningOutputTokens": 425,
+            "totalTokens": 31369
+          },
+          "medianMs": 1415.4433000000008,
+          "p95Ms": 4406.6413999999995,
+          "firstOutputMedianMs": 717,
+          "firstOutputP95Ms": 3660
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2461,
+          2569,
+          2231,
+          2319,
+          2341,
+          2413
+        ],
+        "lastSpeechInputs": [
+          2725,
+          2805,
+          2542,
+          2530,
+          2600,
+          2666
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 5,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "tag-person-b",
+      "scenario": "뒤집힌 이름표",
+      "sceneRevision": "backstage-name-tag",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 12,
+      "choices": 12,
+      "spoken": 12,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "준태",
+          "choices": 6,
+          "spoken": 6
+        },
+        {
+          "name": "세린",
+          "choices": 6,
+          "spoken": 6
+        }
+      ],
+      "events": 0,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/14",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "socialReaction": "social-reaction/3",
+      "socialChoicesOffered": 12,
+      "focusedReactions": 6,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 1,
+        "compacted": 5,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "11565ff7ff24876cd1ef467ed64a6a7034f16c29e0f4e1a6946fa54549958f43",
+      "requests": 12,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0045384200000000005,
+      "tokens": {
+        "inputTokens": 37400,
+        "cachedInputTokens": 8832,
+        "cacheWriteInputTokens": 28532,
+        "outputTokens": 1760,
+        "reasoningOutputTokens": 929,
+        "totalTokens": 39160
+      },
+      "medianMs": 2479.5967,
+      "p95Ms": 3669.3606999999997,
+      "firstOutputMedianMs": 1808,
+      "firstOutputP95Ms": 2907,
+      "activeMs": 29340,
+      "roles": {
+        "speech": {
+          "requests": 12,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0045384200000000005,
+          "tokens": {
+            "inputTokens": 37400,
+            "cachedInputTokens": 8832,
+            "cacheWriteInputTokens": 28532,
+            "outputTokens": 1760,
+            "reasoningOutputTokens": 929,
+            "totalTokens": 39160
+          },
+          "medianMs": 2479.5967,
+          "p95Ms": 3669.3606999999997,
+          "firstOutputMedianMs": 1808,
+          "firstOutputP95Ms": 2907
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          3134,
+          3068,
+          2915,
+          2946,
+          2992,
+          3034
+        ],
+        "lastSpeechInputs": [
+          3404,
+          3433,
+          3021,
+          3074,
+          3108,
+          3271
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 12,
+        "eligibleSpeeches": 6,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    }
+  ]
+}

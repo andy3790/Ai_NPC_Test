@@ -1,0 +1,337 @@
+{"run":"calm-beat-a","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"calm-beat-a","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"응, 바로 버릴게.","action":"앰프 위의 빈 컵을 집어 문 옆 휴지통에 버린다."}
+{"run":"calm-beat-a","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"그래. 컵은 갔네. 기타도 치워 줘, 나 케이블만 감고 가면 돼.","action":"케이블을 감아 가방에 넣는다."}
+{"run":"calm-beat-a","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"응, 기타 내가 치울게. 케이블 다 감으면 마지막 소절 한 번만 더 맞춰 볼래?","action":"기타를 집어 든다."}
+{"run":"calm-beat-a","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 한 번만 맞춰 보자. 케이블 넣고 바로 할게.","action":"케이블을 가방에 넣는다."}
+{"run":"calm-beat-a","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"좋아. 그럼 기타는 아직 내려놓지 말아야겠네.","action":"기타를 든 채 다빈이 케이블을 넣기를 기다린다."}
+{"run":"calm-beat-a","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 케이블은 넣었어. 한 번 맞춰 보자.","action":""}
+{"run":"calm-beat-a","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"좋아, 마지막 소절부터 갈게.","action":"기타 줄을 튕겨 마지막 소절을 연주한다."}
+{"run":"calm-beat-a","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 거기서 맞아.","action":""}
+{"run":"calm-beat-a","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"응, 딱 맞았네. 기타는 내가 정리할게.","action":"기타를 케이스에 넣는다."}
+{"run":"calm-beat-a","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"좋아, 그럼 나도 가방 들게.","action":"케이블 가방을 들어 올린다."}
+{"run":"calm-beat-a","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 고마워. 기타만 넣으면 되니까 천천히 들어.","action":"기타를 케이스에 넣는다."}
+{"run":"calm-beat-a","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 다 챙겼으면 가자.","action":"가방을 들고 문 쪽으로 향한다."}
+{"run":"calm-beat-b","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"calm-beat-b","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"응, 치울게.","action":"앰프 위의 빈 컵을 집어 문 옆 휴지통에 버린다."}
+{"run":"calm-beat-b","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":"케이블을 계속 감는다."}
+{"run":"calm-beat-b","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"케이블 다 감으면 마지막 소절 한 번만 더 맞춰볼래?","action":"기타를 들어 든다."}
+{"run":"calm-beat-b","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 마지막 소절만 맞춰보자. 케이블은 이거 감고 갈게.","action":"케이블을 감아 가방에 넣는다."}
+{"run":"calm-beat-b","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"좋아. 그럼 나 기타 바로 들게.","action":"기타를 들고 마지막 소절을 맞출 준비를 한다."}
+{"run":"calm-beat-b","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"그래. 기타 들었으면 소절부터 바로 맞추자.","action":""}
+{"run":"calm-beat-b","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"응, 바로 갈게.","action":"기타를 잡고 마지막 소절을 연주한다."}
+{"run":"calm-beat-b","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":"베이스를 들어 마지막 소절을 명우와 맞춰 연주한다."}
+{"run":"calm-beat-b","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"오, 방금 잘 맞았네. 한 번 더 갈까?","action":"마지막 소절을 다시 연주한다."}
+{"run":"calm-beat-b","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"아까 마지막이라며. 난 이제 갈게.","action":""}
+{"run":"calm-beat-b","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"응, 알았어. 조심히 가.","action":"기타를 내려놓는다."}
+{"run":"calm-beat-b","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 너도. 나 갈게.","action":"가방을 챙겨 연습실을 나선다."}
+{"run":"calm-before-a","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"calm-before-a","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"응, 내가 치울게.","action":"앰프 위의 종이컵을 집어 문 옆 휴지통에 버린다."}
+{"run":"calm-before-a","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"그래. 고마워.","action":"케이블을 가방에 넣는다."}
+{"run":"calm-before-a","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"응, 컵은 버렸어. 마지막 소절 한 번만 맞춰 볼래?","action":"기타를 들어 올린다."}
+{"run":"calm-before-a","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"그래, 딱 한 번만 맞춰 보자.","action":"가방에서 케이블을 꺼내 앰프에 꽂는다."}
+{"run":"calm-before-a","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"좋아, 그 소절부터 갈게.","action":"기타를 메고 마지막 소절의 코드를 짚는다."}
+{"run":"calm-before-a","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 들어갈게.","action":"베이스를 잡고 마지막 소절을 준비한다."}
+{"run":"calm-before-a","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"","action":"기타로 마지막 소절을 연주하기 시작한다."}
+{"run":"calm-before-a","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":"베이스로 마지막 소절에 들어간다."}
+{"run":"calm-before-a","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"","action":"기타로 마지막 소절을 이어 연주한다."}
+{"run":"calm-before-a","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":"마지막 소절에 맞춰 베이스를 연주한다."}
+{"run":"calm-before-a","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"","action":"기타로 마지막 소절을 이어 연주한다."}
+{"run":"calm-before-a","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 이번엔 딱 맞았어. 나 케이블 챙길게.","action":"베이스 케이블을 앰프에서 뽑아 감아 가방에 넣는다."}
+{"run":"calm-before-b","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"calm-before-b","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"응, 치울게.","action":"앰프 위의 빈 종이컵을 집어 문 옆 휴지통에 버린다."}
+{"run":"calm-before-b","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"고마워. 나 케이블만 넣고 갈게.","action":"케이블을 감아 가방에 넣는다."}
+{"run":"calm-before-b","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"그래. 나 마지막 소절 한 번만 더 맞춰 보고 싶은데, 케이블 넣고 같이 해볼래?","action":"기타를 들어 든다."}
+{"run":"calm-before-b","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"난 케이블 넣고 가려던 참인데. 네가 치고 싶으면 한 번 더 맞춰 봐.","action":"케이블을 가방에 넣는다."}
+{"run":"calm-before-b","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"좋아, 금방 맞춰 보자.","action":"기타를 들고 마지막 소절의 코드를 짚는다."}
+{"run":"calm-before-b","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"한 번만 치고 가자. 난 케이블 넣었어.","action":"가방을 어깨에 멘다."}
+{"run":"calm-before-b","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"응, 바로 맞춰 보자.","action":"마지막 소절을 연주한다."}
+{"run":"calm-before-b","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 그 소절만 맞추자.","action":"가방을 멘 채 명우의 기타를 바라본다."}
+{"run":"calm-before-b","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"좋아, 마지막으로 한 번 더 맞추자.","action":"기타를 들어 마지막 소절의 코드를 짚는다."}
+{"run":"calm-before-b","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 쳐 봐.","action":""}
+{"run":"calm-before-b","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"좋아, 간다.","action":"기타로 마지막 소절을 연주한다."}
+{"run":"calm-before-b","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 됐어. 난 갈게.","action":"가방을 메고 문 쪽으로 간다."}
+{"run":"calm-person-a","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"calm-person-a","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"어, 알았어.","action":"앰프 위 종이컵을 집어 문 옆 휴지통에 버린다."}
+{"run":"calm-person-a","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 고마워.","action":"케이블을 감아 가방에 넣는다."}
+{"run":"calm-person-a","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"천만에. 기타 좀 더 맞춰 볼래? 마지막 소절만.","action":"기타를 들어 든다."}
+{"run":"calm-person-a","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"마지막 소절만이면 괜찮아. 기타 내려놓고 바로 맞춰 보자.","action":"가방 지퍼를 닫고 기타 쪽으로 다가간다."}
+{"run":"calm-person-a","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"좋아, 바로 가자.","action":"기타를 들어 마지막 소절을 맞출 준비를 한다."}
+{"run":"calm-person-a","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 들어와.","action":"베이스를 들어 마지막 소절을 맞출 준비를 한다."}
+{"run":"calm-person-a","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"","action":"마지막 소절을 연주한다."}
+{"run":"calm-person-a","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 그 부분 박자 괜찮네. 베이스도 바로 맞았어.","action":"베이스로 마지막 소절을 받쳐 연주한다."}
+{"run":"calm-person-a","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"오, 그럼 딱 맞았네. 한 번 더 갈까?","action":"마지막 소절을 다시 연주할 준비를 한다."}
+{"run":"calm-person-a","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"아니, 한 번이면 됐어. 난 이제 갈게.","action":"베이스를 내려놓는다."}
+{"run":"calm-person-a","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 알았어. 오늘은 여기까지 하자. 조심히 가.","action":"기타를 내려놓는다."}
+{"run":"calm-person-a","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 너도. 다음에 보자.","action":"가방을 들어 어깨에 멘다."}
+{"run":"calm-person-b","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"calm-person-b","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"응, 바로 치울게.","action":"앰프 위의 빈 컵을 집어 문 옆 휴지통에 버린다."}
+{"run":"calm-person-b","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"고마워. 케이블만 넣고 갈게.","action":"케이블을 감아 가방에 넣는다."}
+{"run":"calm-person-b","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 천천히 해.","action":""}
+{"run":"calm-person-b","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":""}
+{"run":"calm-person-b","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"다빈아, 가기 전에 마지막 소절 한 번만 더 맞춰볼래?","action":"기타를 들어 든다."}
+{"run":"calm-person-b","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"케이블 다 넣었는데. 오늘은 여기까지 하자.","action":"가방 지퍼를 닫는다."}
+{"run":"calm-person-b","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"알았어. 오늘은 여기까지 하자.","action":"기타를 내려놓는다."}
+{"run":"calm-person-b","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 가자.","action":"가방을 챙긴다."}
+{"run":"calm-person-b","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"응, 가자.","action":"기타를 케이스에 넣는다."}
+{"run":"calm-person-b","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":"가방을 들고 문 쪽으로 간다."}
+{"run":"calm-person-b","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"","action":"기타 케이스 손잡이를 들어 든다."}
+{"run":"calm-person-b","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":"케이블을 가방에 넣고 명우 쪽으로 간다."}
+{"run":"calm-trial-a","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"calm-trial-a","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"응, 갖다 버릴게. 그 전에 마지막 소절 한 번만 더 맞춰볼래?","action":"빈 종이컵을 앰프에서 집어 문 옆 휴지통에 버린다."}
+{"run":"calm-trial-a","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"지금은 못 해. 케이블 감아서 가야 돼.","action":"케이블을 계속 감아 가방에 넣는다."}
+{"run":"calm-trial-a","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"아, 그래. 케이블 다 감고 나면 시간 되려나?","action":"기타를 케이스 쪽으로 옮겨 둔다."}
+{"run":"calm-trial-a","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"케이블 거의 다 감았어. 시간은 되겠는데, 오늘은 그냥 갈게.","action":"케이블 끝을 정리해 가방에 넣는다."}
+{"run":"calm-trial-a","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 알았어. 오늘은 여기까지 하자.","action":"기타를 케이스에 넣는다."}
+{"run":"calm-trial-a","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"그래. 가자.","action":"가방 지퍼를 닫는다."}
+{"run":"calm-trial-a","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"응, 가자.","action":"기타 케이스를 들어 문 쪽으로 간다."}
+{"run":"calm-trial-a","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 가자.","action":"가방을 들고 문 쪽으로 간다."}
+{"run":"calm-trial-a","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"","action":"기타 케이스를 든 채 다빈과 함께 문을 나선다."}
+{"run":"calm-trial-a","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":"문을 나선다."}
+{"run":"calm-trial-a","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"","action":""}
+{"run":"calm-trial-a","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":""}
+{"run":"calm-trial-b","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"calm-trial-b","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"어, 그래. 바로 버릴게.","action":"앰프 위의 빈 종이컵을 집어 문 옆 휴지통에 버린다."}
+{"run":"calm-trial-b","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 고마워.","action":"케이블을 감아 가방에 넣는다."}
+{"run":"calm-trial-b","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"그럼 이제 마지막 소절만 한 번 더 맞춰 볼까?","action":"기타를 들어 든다."}
+{"run":"calm-trial-b","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"난 케이블 다 넣었어. 너 혼자 한 번 더 맞춰 봐.","action":"가방을 들어 어깨에 멘다."}
+{"run":"calm-trial-b","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 그럼 나 혼자 맞춰 볼게. 잠깐만 들어줘.","action":"기타를 들고 마지막 소절을 한 번 연주한다."}
+{"run":"calm-trial-b","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"그래. 들어줄게.","action":"가방을 멘 채 기타 소절을 듣는다."}
+{"run":"calm-trial-b","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"좋아, 간다.","action":"기타로 마지막 소절을 한 번 더 연주한다."}
+{"run":"calm-trial-b","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 이제 가자.","action":"가방을 어깨에 멘다."}
+{"run":"calm-trial-b","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"응, 가자.","action":"기타를 챙긴다."}
+{"run":"calm-trial-b","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":"가방을 멘 채 문 쪽으로 간다."}
+{"run":"calm-trial-b","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"","action":"기타를 챙겨 다빈을 따라 문 쪽으로 간다."}
+{"run":"calm-trial-b","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":"문 쪽으로 계속 간다."}
+{"run":"cup-beat-a","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"cup-beat-a","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"말을 꼭 그렇게 해야겠냐?","action":""}
+{"run":"cup-beat-a","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"그렇게 말했어. 앰프 위에 네 컵 있으니까 치워.","action":"케이블을 계속 감는다."}
+{"run":"cup-beat-a","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"알았어. 말투는 참 거슬리네.","action":""}
+{"run":"cup-beat-a","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"말투 얘긴 그만하고 컵이나 치워.","action":"케이블을 가방에 넣는다."}
+{"run":"cup-beat-a","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"컵 얘기만 하면 되잖아. 말투는 네가 먼저 신경 써.","action":""}
+{"run":"cup-beat-a","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"네 말투도 만만찮거든. 컵 치우면 나도 더 얘기 안 해.","action":""}
+{"run":"cup-beat-a","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"됐어, 치우면 되잖아. 그럼 더 얘기 안 해도 돼.","action":"종이컵을 집어 들고 문 옆 휴지통에 버린다."}
+{"run":"cup-beat-a","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"그래. 나도 갈게.","action":""}
+{"run":"cup-beat-a","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"잠깐, 가기 전에 마지막 소절만 한 번 더 맞추자. 기타 아직 안 넣었어.","action":"기타 쪽으로 손을 뻗는다."}
+{"run":"cup-beat-a","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"난 갈게. 다음에 맞춰.","action":"가방을 들고 문 쪽으로 간다."}
+{"run":"cup-beat-a","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 가. 다음에 맞추면 되지.","action":"기타에서 손을 거둔다."}
+{"run":"cup-beat-b","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"cup-beat-b","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"말투가 꼭 그래야 하냐?","action":""}
+{"run":"cup-beat-b","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"말투 얘기 말고 네 컵이나 치워. 앰프 위에 있잖아.","action":"케이블을 감아 가방에 넣는다."}
+{"run":"cup-beat-b","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"치우라면 치우면 되지, 꼭 명령하듯 말해야 해?","action":""}
+{"run":"cup-beat-b","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"명령한 거 맞아. 컵 좀 치워, 명우.","action":""}
+{"run":"cup-beat-b","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"알았어, 내가 치우면 되잖아. 컵 치우고 마지막 소절 한 번만 더 맞추자.","action":"앰프 위의 빈 컵을 집어 문 옆 휴지통에 버린다."}
+{"run":"cup-beat-b","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"난 이제 갈 거야. 그 소절은 다음에 맞추자.","action":"가방을 든다."}
+{"run":"cup-beat-b","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"다음엔 안 미룰 거야. 잠깐만, 기타 들고 마지막 소절만 맞추고 가.","action":"기타를 들어 올린다."}
+{"run":"cup-beat-b","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"아까 다음에 하자고 했잖아. 난 갈게.","action":"가방을 들고 문 쪽으로 향한다."}
+{"run":"cup-beat-b","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 가. 다음엔 진짜 맞추는 거다.","action":"기타를 내려놓는다."}
+{"run":"cup-beat-b","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"응. 난 갈게.","action":"가방을 들고 문으로 나간다."}
+{"run":"cup-beat-b","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"그래. 조심히 가.","action":""}
+{"run":"cup-before-a","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"cup-before-a","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"말투 봐라. 내가 치울게.","action":"빈 종이컵을 앰프에서 집어 문 옆 휴지통에 버린다."}
+{"run":"cup-before-a","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"어, 고마워. 앰프 위에 두면 좀 거슬려서.","action":"케이블을 감아 가방에 넣는다."}
+{"run":"cup-before-a","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"거슬리면 진작 말하지 그랬어. 마지막 소절 한 번만 더 맞춰볼래?","action":"기타를 들어 든다."}
+{"run":"cup-before-a","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 마지막 소절만. 기타 내려놓고 맞춰보자.","action":"가방에 넣던 케이블을 꺼낸다."}
+{"run":"cup-before-a","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"기타는 안 내려놔도 되잖아. 자, 마지막 소절 간다.","action":"기타를 메고 마지막 소절의 첫 코드를 짚는다."}
+{"run":"cup-before-a","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"방금 기타 내려놓고 하자고 했잖아. 마지막 소절만 치고 가방 싸자.","action":"베이스를 잡고 마지막 소절을 맞춘다."}
+{"run":"cup-before-a","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"알았어, 말은 그렇게 했네. 마지막 소절이나 치자.","action":"기타를 메고 마지막 소절을 연주한다."}
+{"run":"cup-before-a","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"그래, 마지막 소절 맞출게.","action":"베이스로 마지막 소절을 맞춘다."}
+{"run":"cup-before-a","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"","action":"기타를 내려놓고 마지막 소절에 맞춰 연주한다."}
+{"run":"cup-before-a","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 끝부분은 맞네.","action":""}
+{"run":"cup-before-a","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"그래. 딱 맞네.","action":""}
+{"run":"cup-before-a","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 그럼 됐네. 나 베이스 넣고 갈게.","action":"베이스를 케이스에 넣는다."}
+{"run":"cup-before-b","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"cup-before-b","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"알았어. 말투는 좀 곱게 해.","action":"앰프 위의 빈 컵을 집어 문 옆 휴지통에 버린다."}
+{"run":"cup-before-b","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"알았어. 다음엔 그냥 치워 달라고 할게. 케이블만 감고 갈게.","action":"케이블을 계속 감는다."}
+{"run":"cup-before-b","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"그래. 마지막 소절만 한 번 맞춰 보고 갈까?","action":"기타를 집어 든다."}
+{"run":"cup-before-b","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"난 케이블 감고 가려던 참이야. 마지막 소절은 다음에 맞추자.","action":"케이블을 마저 감아 가방에 넣는다."}
+{"run":"cup-before-b","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"다음은 없어. 지금 한 번만 맞추고 가자. 케이블은 내가 풀어 줄게.","action":"기타를 든 채 다빈을 바라본다."}
+{"run":"cup-before-b","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"그럼 한 번만 맞추자. 케이블 풀어 줘.","action":"감아 둔 케이블을 내려놓는다."}
+{"run":"cup-before-b","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 잠깐만.","action":"기타를 내려놓고 케이블을 풀어 준다."}
+{"run":"cup-before-b","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 한 번만 맞추고 가자.","action":"베이스를 집어 든다."}
+{"run":"cup-before-b","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"좋아. 마지막 소절만 간다.","action":"기타를 들고 마지막 소절을 맞출 준비를 한다."}
+{"run":"cup-before-b","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"좋아, 그럼 마지막 소절 맞추자.","action":"베이스를 들고 명우와 소절을 맞춘다."}
+{"run":"cup-before-b","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"","action":"기타를 들고 다빈과 마지막 소절을 맞춘다."}
+{"run":"cup-before-b","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"","action":"베이스를 내려놓고 케이블을 다시 감기 시작한다."}
+{"run":"cup-person-a","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"cup-person-a","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"명령조는 좀 빼라. 치우면 되잖아.","action":""}
+{"run":"cup-person-a","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"알았어, 말투는 고칠게. 비꼬진 말고 컵이나 치워.","action":"케이블을 계속 감는다."}
+{"run":"cup-person-a","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"비꼬지 말라면서 너도 꼭 한마디 붙이네.","action":""}
+{"run":"cup-person-a","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"그 한마디가 비꼬는 거잖아. 나도 들으니까 기분 더럽네.","action":""}
+{"run":"cup-person-a","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 나만 사람 기분 긁었냐? 너도 꼭 그렇게 말해 놓고 기분 더럽다 타령이네.","action":""}
+{"run":"cup-person-a","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"사람 기분 긁는 건 너도 똑같잖아. 컵 치워.","action":""}
+{"run":"cup-person-a","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"내 컵인데 내가 치우든 말든 내가 알아서 해. 너나 네 케이블이나 감아.","action":""}
+{"run":"cup-person-a","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"내 케이블은 감고 있거든. 네 컵보다 네 말버릇이나 좀 챙겨.","action":""}
+{"run":"cup-person-a","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"말버릇은 네가 감당할 일이고. 컵은 치웠다. 시간 남았으면 마지막 소절 한 번만 더 맞추자.","action":"빈 종이컵을 휴지통에 버린다."}
+{"run":"cup-person-a","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"그 말투로 부탁하면 맞춰줄 생각 없어. 난 갈게.","action":""}
+{"run":"cup-person-a","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 가. 나 혼자 맞추면 되니까.","action":"기타를 들어 마지막 소절을 짚어 본다."}
+{"run":"cup-person-b","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"cup-person-b","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"말투가 꼭 사람 부리는 것 같네. 알았어, 치우면 되잖아.","action":""}
+{"run":"cup-person-b","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"부리는 게 아니라 네 컵이잖아. 치우면 됐어.","action":"케이블을 계속 감는다."}
+{"run":"cup-person-b","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 치울게. 기타 아직 안 넣었는데 마지막 소절 한 번만 더 맞추자.","action":"종이컵을 휴지통에 버린다."}
+{"run":"cup-person-b","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"그래. 한 번만 맞추고 끝내자.","action":"케이블을 가방에 넣고 기타 쪽으로 간다."}
+{"run":"cup-person-b","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 얼른 맞추자. 마지막 소절은 내가 박자 잡을게.","action":"기타를 들어 마지막 소절을 맞출 준비를 한다."}
+{"run":"cup-person-b","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 그 소절만 맞추자. 박자 네가 잡아.","action":"베이스를 들어 마지막 소절을 맞출 준비를 한다."}
+{"run":"cup-person-b","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"좋아. 내가 셀 테니까 들어와.","action":"기타를 들고 박자를 세기 시작한다."}
+{"run":"cup-person-b","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 들어간다.","action":"베이스로 마지막 소절에 들어간다."}
+{"run":"cup-person-b","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"응, 들어와.","action":"마지막 소절을 이어 연주한다."}
+{"run":"cup-person-b","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 방금 맞춘 걸로 됐지? 케이블 넣고 갈게.","action":"베이스를 내려놓고 케이블을 가방에 넣는다."}
+{"run":"cup-person-b","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"한 번이면 됐지. 기타 넣기 전에 줄만 좀 풀고 갈게.","action":"기타 줄을 풀기 시작한다."}
+{"run":"cup-person-b","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"그래. 줄 풀고 넣어. 나 케이블 다 넣었어.","action":""}
+{"run":"cup-trial-a","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"cup-trial-a","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"명령은 잘하네. 내가 마신 건 내가 치울게.","action":"앰프 위의 빈 종이컵을 집어 휴지통에 버린다."}
+{"run":"cup-trial-a","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"명령한 게 아니라 컵 치우라고 한 거야. 치웠으면 됐어.","action":"케이블을 감아 가방에 넣는다."}
+{"run":"cup-trial-a","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 치웠잖아. 가기 전에 마지막 소절 한 번만 맞추자.","action":"기타를 들어 올린다."}
+{"run":"cup-trial-a","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"난 케이블까지 넣었어. 오늘은 여기까지 하자.","action":"가방 지퍼를 닫는다."}
+{"run":"cup-trial-a","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"벌써 다 넣었네. 마지막 소절 한 번만 맞추고 가자. 진짜 안 할 거야?","action":""}
+{"run":"cup-trial-a","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"안 할 거야. 케이블 넣었는데 다시 꺼내긴 싫어.","action":""}
+{"run":"cup-trial-a","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"됐어. 그렇게 싫다는데 더 안 붙잡아.","action":"기타를 내려놓는다."}
+{"run":"cup-trial-a","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"그래. 그럼 가자.","action":"가방을 어깨에 멘다."}
+{"run":"cup-trial-a","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"그래, 가자. 다음엔 마지막 소절 제대로 맞추자.","action":"기타를 케이스에 넣는다."}
+{"run":"cup-trial-a","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"그래. 다음엔 마지막 소절 제대로 맞추자.","action":"가방을 어깨에 멘 채 문 쪽으로 간다."}
+{"run":"cup-trial-a","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"그래. 다음엔 진짜 한 번에 맞추자.","action":"기타를 케이스에 넣는다."}
+{"run":"cup-trial-a","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"응. 다음엔 마지막 소절부터 맞추자.","action":""}
+{"run":"cup-trial-b","sequence":1,"turn":null,"at":null,"speaker":"상황","kind":"event","speech":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”","action":""}
+{"run":"cup-trial-b","sequence":2,"turn":1,"at":null,"speaker":"명우","kind":"speech","speech":"말투가 꼭 그렇게 명령조여야 하냐? 치울게.","action":"컵을 집어 문 옆 휴지통에 버린다."}
+{"run":"cup-trial-b","sequence":3,"turn":2,"at":null,"speaker":"다빈","kind":"speech","speech":"알았어. 내가 말 좀 세게 했네.","action":"케이블을 감아 가방에 넣는다."}
+{"run":"cup-trial-b","sequence":4,"turn":3,"at":null,"speaker":"명우","kind":"speech","speech":"됐어. 마지막 소절 한 번만 더 맞춰 볼래?","action":"기타를 다시 들어 든다."}
+{"run":"cup-trial-b","sequence":5,"turn":4,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 마지막으로 한 번만 맞춰 보자. 케이블은 다 넣었어.","action":"가방을 옆에 두고 베이스를 다시 든다."}
+{"run":"cup-trial-b","sequence":6,"turn":5,"at":null,"speaker":"명우","kind":"speech","speech":"좋아. 마지막 소절은 딱 맞춰 보자.","action":"기타 줄을 가볍게 튕겨 음을 맞춘다."}
+{"run":"cup-trial-b","sequence":7,"turn":6,"at":null,"speaker":"다빈","kind":"speech","speech":"응, 간다. 마지막 박자만 잘 맞춰.","action":"베이스를 들어 마지막 소절을 맞출 준비를 한다."}
+{"run":"cup-trial-b","sequence":8,"turn":7,"at":null,"speaker":"명우","kind":"speech","speech":"알아. 내가 맞출 테니까 들어와.","action":"기타를 들어 마지막 소절을 친다."}
+{"run":"cup-trial-b","sequence":9,"turn":8,"at":null,"speaker":"다빈","kind":"speech","speech":"응.","action":"베이스로 마지막 소절에 들어간다."}
+{"run":"cup-trial-b","sequence":10,"turn":9,"at":null,"speaker":"명우","kind":"speech","speech":"","action":"기타로 마지막 소절을 이어 맞춘다."}
+{"run":"cup-trial-b","sequence":11,"turn":10,"at":null,"speaker":"다빈","kind":"speech","speech":"이번엔 진짜 마지막이다.","action":"베이스로 마지막 소절에 다시 맞춰 들어간다."}
+{"run":"cup-trial-b","sequence":12,"turn":11,"at":null,"speaker":"명우","kind":"speech","speech":"알았어. 이번엔 진짜 딱 맞추자.","action":"기타로 마지막 소절을 다시 맞춰 연주한다."}
+{"run":"cup-trial-b","sequence":13,"turn":12,"at":null,"speaker":"다빈","kind":"speech","speech":"그래. 이번엔 끝내자.","action":"베이스로 마지막 소절을 다시 맞춰 연주한다."}
+{"run":"photo-beat-a","sequence":1,"turn":1,"at":null,"speaker":"건우","kind":"speech","speech":"뭐가 웃겨. 동전도 나한테 괜히 기 싸움 거는 거야?","action":""}
+{"run":"photo-beat-a","sequence":2,"turn":2,"at":null,"speaker":"수빈","kind":"speech","speech":"반환구로 도로 데구르르 굴러가는 소리가 웃겼어. 동전이랑 기 싸움은 네가 이겨야지.","action":""}
+{"run":"photo-beat-a","sequence":3,"turn":3,"at":null,"speaker":"건우","kind":"speech","speech":"이기긴 뭘 이겨. 네가 한 번 넣어 봐, 잘 들어가나.","action":""}
+{"run":"photo-beat-a","sequence":4,"turn":4,"at":null,"speaker":"수빈","kind":"speech","speech":"알았어. 이 동전만 넣어 보고, 잘 들어가면 바로 찍자.","action":"동전을 투입구에 넣는다."}
+{"run":"photo-beat-a","sequence":5,"turn":5,"at":null,"speaker":"건우","kind":"speech","speech":"그래. 이번엔 동전이 너한테 지면 되겠네.","action":"투입구 쪽을 지켜본다."}
+{"run":"photo-beat-a","sequence":6,"turn":6,"at":null,"speaker":"수빈","kind":"speech","speech":"아직 안 넣었거든. 이번엔 잘 들어갈지 봐.","action":"투입구에 동전을 넣는다."}
+{"run":"photo-beat-a","sequence":7,"turn":7,"at":null,"speaker":"건우","kind":"speech","speech":"봐줄게. 아까처럼 동전이 튕겨 나오면 네가 한 번 더 넣는 거다.","action":"투입구 쪽을 바라본다."}
+{"run":"photo-beat-a","sequence":8,"turn":8,"at":null,"speaker":"수빈","kind":"speech","speech":"좋아. 근데 이번엔 잘 들어가면 바로 찍는 거다.","action":""}
+{"run":"photo-beat-a","sequence":9,"turn":9,"at":null,"speaker":"건우","kind":"speech","speech":"그래, 들어가면 바로 찍자. 동전아, 이번엔 얌전히 들어가라.","action":"투입구 쪽을 보며 팔짱을 낀다."}
+{"run":"photo-beat-a","sequence":10,"turn":10,"at":null,"speaker":"수빈","kind":"speech","speech":"동전한테 말해도 소용없어. 이번엔 넣어 봐.","action":"투입구를 가리킨다."}
+{"run":"photo-beat-a","sequence":11,"turn":11,"at":null,"speaker":"건우","kind":"speech","speech":"내가 넣으라며. 봐, 이번엔 제대로 들어가겠지.","action":"동전을 투입구에 넣는다."}
+{"run":"photo-beat-a","sequence":12,"turn":12,"at":null,"speaker":"수빈","kind":"speech","speech":"","action":""}
+{"run":"photo-beat-b","sequence":1,"turn":1,"at":null,"speaker":"건우","kind":"speech","speech":"뭐가 웃겨. 동전도 나한텐 못 덤비네.","action":""}
+{"run":"photo-beat-b","sequence":2,"turn":2,"at":null,"speaker":"수빈","kind":"speech","speech":"동전이 도로록 돌아 나오는 게 웃겼어. 동전한테 이긴 건 맞네.","action":""}
+{"run":"photo-beat-b","sequence":3,"turn":3,"at":null,"speaker":"건우","kind":"speech","speech":"그렇지, 내가 이긴 거지. 웃음 그쳐.","action":""}
+{"run":"photo-beat-b","sequence":4,"turn":4,"at":null,"speaker":"수빈","kind":"speech","speech":"알았어, 그만 웃을게. 자, 이제 사진 찍자.","action":"口"}
+{"run":"photo-beat-b","sequence":5,"turn":5,"at":null,"speaker":"건우","kind":"speech","speech":"웃는 건 네 맘인데, 이제 와서 그만 웃겠다고 생색이냐?","action":""}
+{"run":"photo-beat-b","sequence":6,"turn":6,"at":null,"speaker":"수빈","kind":"speech","speech":"생색은 아니고, 네가 그만 웃으라며. 이제 진짜 찍자.","action":"촬영기 쪽으로 다가간다."}
+{"run":"photo-beat-b","sequence":7,"turn":7,"at":null,"speaker":"건우","kind":"speech","speech":"말꼬리 잡은 거 아니거든.","action":""}
+{"run":"photo-beat-b","sequence":8,"turn":8,"at":null,"speaker":"수빈","kind":"speech","speech":"알았어. 그럼 동전 얘긴 여기까지 하고 사진 찍자.","action":""}
+{"run":"photo-beat-b","sequence":9,"turn":9,"at":null,"speaker":"건우","kind":"speech","speech":"그래, 찍자. 이번엔 동전도 제대로 넣는다.","action":"동전을 다시 투입구에 넣는다."}
+{"run":"photo-beat-b","sequence":10,"turn":10,"at":null,"speaker":"수빈","kind":"speech","speech":"이번엔 얌전히 들어가라, 동전아. 자, 얼른 찍자.","action":"촬영기 앞에 선다."}
+{"run":"photo-beat-b","sequence":11,"turn":11,"at":null,"speaker":"건우","kind":"speech","speech":"그래, 이번엔 제대로 넣었으니까 사진도 잘 나오겠네. 찍자.","action":"수빈 옆에 서서 포즈를 잡는다."}
+{"run":"photo-beat-b","sequence":12,"turn":12,"at":null,"speaker":"수빈","kind":"speech","speech":"그래, 얼른 찍자. 나 오늘 머리 괜찮나?","action":"건우 옆에 서서 카메라를 향해 웃는다."}
+{"run":"photo-before-a","sequence":1,"turn":1,"at":null,"speaker":"건우","kind":"speech","speech":"뭘 웃어. 동전이 잠깐 튕긴 거야. 이번엔 제대로 찍자.","action":"반환구에서 동전을 꺼내 다시 넣는다."}
+{"run":"photo-before-a","sequence":2,"turn":2,"at":null,"speaker":"수빈","kind":"speech","speech":"알았어, 찍자. 근데 동전 떨어지는 소리가 진짜 웃겼어.","action":"카메라 쪽으로 몸을 돌린다."}
+{"run":"photo-before-a","sequence":3,"turn":3,"at":null,"speaker":"건우","kind":"speech","speech":"소리까지 웃기냐. 자, 이번엔 멋있게 나와야 한다.","action":"카메라 앞에 서서 수빈 옆으로 다가간다."}
+{"run":"photo-before-a","sequence":4,"turn":4,"at":null,"speaker":"수빈","kind":"speech","speech":"멋있게는 모르겠고, 동전 말고 우리 둘 다 잘 나오면 됐지.","action":"건우 옆에 서서 카메라를 향해 웃는다."}
+{"run":"photo-before-a","sequence":5,"turn":5,"at":null,"speaker":"건우","kind":"speech","speech":"그럼 됐네. 나 원래 사진발 좀 받거든.","action":"카메라를 향해 어깨를 펴고 웃는다."}
+{"run":"photo-before-a","sequence":6,"turn":6,"at":null,"speaker":"수빈","kind":"speech","speech":"그 자신감은 사진으로 확인해 봐야겠네.","action":"건우 쪽을 보고 웃는다."}
+{"run":"photo-before-a","sequence":7,"turn":7,"at":null,"speaker":"건우","kind":"speech","speech":"좋아, 찍히고 나면 인정할 수밖에 없을걸.","action":"카메라를 보며 턱을 살짝 든다."}
+{"run":"photo-before-a","sequence":8,"turn":8,"at":null,"speaker":"수빈","kind":"speech","speech":"턱 너무 들면 잘 나오는 게 아니라 건방져 보일걸?","action":"카메라를 향해 웃는다."}
+{"run":"photo-before-a","sequence":9,"turn":9,"at":null,"speaker":"건우","kind":"speech","speech":"야, 턱은 자신감이지. 사진으로 확인해 보면 되잖아.","action":"턱을 살짝 내리고 카메라를 향해 선다."}
+{"run":"photo-before-a","sequence":10,"turn":10,"at":null,"speaker":"수빈","kind":"speech","speech":"자신감은 인정할게. 턱은 그만큼만 내려, 건방져 보이지 않게.","action":""}
+{"run":"photo-before-a","sequence":11,"turn":11,"at":null,"speaker":"건우","kind":"speech","speech":"야, 그 정도면 딱 자신감이지. 됐어, 찍자.","action":"턱을 살짝 내리고 카메라를 향해 선다."}
+{"run":"photo-before-a","sequence":12,"turn":12,"at":null,"speaker":"수빈","kind":"speech","speech":"그래, 그 표정이면 됐어. 이제 찍자.","action":"카메라를 향해 미소 짓는다."}
+{"run":"photo-before-b","sequence":1,"turn":1,"at":null,"speaker":"건우","kind":"speech","speech":"뭐 웃어. 기계가 나 알아보고 동전 돌려준 거야. 한 번 더 넣는다.","action":"동전을 주워 다시 투입구에 넣는다."}
+{"run":"photo-before-b","sequence":2,"turn":2,"at":null,"speaker":"수빈","kind":"speech","speech":"기계가 너 알아본 거면 사진도 찍으라고 기회 준 거 아냐? 이번엔 제대로 넣어봐.","action":"피식 웃으며 투입구 쪽을 본다."}
+{"run":"photo-before-b","sequence":3,"turn":3,"at":null,"speaker":"건우","kind":"speech","speech":"알아본 건 맞는데, 기계가 아직 내 실력을 못 알아봤네. 봐, 이번엔 된다.","action":"동전이 제대로 들어갔는지 투입구를 확인한다."}
+{"run":"photo-before-b","sequence":4,"turn":4,"at":null,"speaker":"수빈","kind":"speech","speech":"그럼 이번엔 내가 옆에서 지켜볼게. 또 굴러 나오면 진짜 너 알아본 거다.","action":"투입구 쪽으로 몸을 기울인다."}
+{"run":"photo-before-b","sequence":5,"turn":5,"at":null,"speaker":"건우","kind":"speech","speech":"지켜보긴 뭘 지켜봐. 이번엔 제대로 들어갔어. 자, 사진 찍자.","action":"投入된 동전을 확인하고 사진기 앞에 선다."}
+{"run":"photo-before-b","sequence":6,"turn":6,"at":null,"speaker":"수빈","kind":"speech","speech":"그래, 이번엔 제대로 들어갔네. 얼른 찍자. 집 가기 전에 너랑 사진 한 장 남기고 싶었어.","action":"写真機の横に並ぶ"}
+{"run":"photo-before-b","sequence":7,"turn":7,"at":null,"speaker":"건우","kind":"speech","speech":"나도. 지갑에 넣어두게 제대로 나오게 찍자.","action":"수빈 옆에 서서 사진기 쪽을 바라본다."}
+{"run":"photo-before-b","sequence":8,"turn":8,"at":null,"speaker":"수빈","kind":"speech","speech":"응, 지갑에 넣고 다닐 거니까 잘 나와야겠다.","action":"사진기 조작부에 손을 뻗는다."}
+{"run":"photo-before-b","sequence":9,"turn":9,"at":null,"speaker":"건우","kind":"speech","speech":"그럼 표정 풀어. 사진에 괜히 험악하게 나오겠다.","action":"수빈 옆에서 어깨를 맞추고 사진기 쪽을 본다."}
+{"run":"photo-before-b","sequence":10,"turn":10,"at":null,"speaker":"수빈","kind":"speech","speech":"나 원래 이 정도로 멀쩡한데? 너나 동전한테 놀란 얼굴 하지 마.","action":"입꼬리를 풀고 건우 쪽으로 어깨를 붙인다."}
+{"run":"photo-before-b","sequence":11,"turn":11,"at":null,"speaker":"건우","kind":"speech","speech":"내가 동전한테 놀랐냐? 봐, 이제 사진만 잘 나오면 완벽하지.","action":"수빈 쪽으로 바짝 붙어 카메라를 향해 선다."}
+{"run":"photo-before-b","sequence":12,"turn":12,"at":null,"speaker":"수빈","kind":"speech","speech":"완벽하긴, 아직 찍지도 않았거든. 자, 이번엔 웃어.","action":"건우 옆에 바짝 붙어 카메라를 바라본다."}
+{"run":"photo-person-a","sequence":1,"turn":1,"at":null,"speaker":"건우","kind":"speech","speech":"뭐 웃어? 네가 넣어 봐.","action":""}
+{"run":"photo-person-a","sequence":2,"turn":2,"at":null,"speaker":"수빈","kind":"speech","speech":"알았어, 넣어 볼게. 동전도 다시 튀어나오는데 뭐.","action":"반환구에서 동전을 집어 들어 투입구에 넣는다."}
+{"run":"photo-person-a","sequence":3,"turn":3,"at":null,"speaker":"건우","kind":"speech","speech":"말은 많네. 이번엔 제대로 넣어.","action":""}
+{"run":"photo-person-a","sequence":4,"turn":4,"at":null,"speaker":"수빈","kind":"speech","speech":"내가 말 많긴 뭘. 넣었잖아.","action":""}
+{"run":"photo-person-a","sequence":5,"turn":5,"at":null,"speaker":"건우","kind":"speech","speech":"넣기만 하면 뭐 해. 사진 나오면 그때 잘했다고 해.","action":""}
+{"run":"photo-person-a","sequence":6,"turn":6,"at":null,"speaker":"수빈","kind":"speech","speech":"사진 나오면 내가 잘했다고 해? 그럼 빨리 한 장 찍자.","action":"결제기를 향해 동전을 밀어 넣는다."}
+{"run":"photo-person-a","sequence":7,"turn":7,"at":null,"speaker":"건우","kind":"speech","speech":"그래, 내가 원래 잘 봐주잖아. 찍자.","action":""}
+{"run":"photo-person-a","sequence":8,"turn":8,"at":null,"speaker":"수빈","kind":"speech","speech":"말은 잘하네. 자, 붙어 봐.","action":"건우 옆으로 다가가 사진 찍을 자리에 선다."}
+{"run":"photo-person-a","sequence":9,"turn":9,"at":null,"speaker":"건우","kind":"speech","speech":"그래, 표정 풀어. 한 장 제대로 찍자.","action":"수빈 옆에 서서 카메라 쪽을 바라본다."}
+{"run":"photo-person-a","sequence":10,"turn":10,"at":null,"speaker":"수빈","kind":"speech","speech":"응, 찍자. 근데 이번엔 동전 안 튀어나오게 제대로 넣어야겠다.","action":"건우 옆에서 카메라를 바라본다."}
+{"run":"photo-person-a","sequence":11,"turn":11,"at":null,"speaker":"건우","kind":"speech","speech":"내가 넣으면 안 튀어나와. 자, 표정 풀어.","action":"카메라 쪽을 보며 셔터 버튼을 누른다."}
+{"run":"photo-person-a","sequence":12,"turn":12,"at":null,"speaker":"수빈","kind":"speech","speech":"풀었거든. 너나 눈 감지 마.","action":"카메라를 향해 웃는다."}
+{"run":"photo-person-b","sequence":1,"turn":1,"at":null,"speaker":"건우","kind":"speech","speech":"뭐 웃어, 동전도 너 보기 싫다잖아.","action":""}
+{"run":"photo-person-b","sequence":2,"turn":2,"at":null,"speaker":"수빈","kind":"speech","speech":"그럼 동전이랑 같이 사진 찍을까? 또 튕겨 나오면 웃기겠다.","action":"반환구 쪽을 힐끗 본다."}
+{"run":"photo-person-b","sequence":3,"turn":3,"at":null,"speaker":"건우","kind":"speech","speech":"웃기긴. 사진은 너랑 찍을 거니까 동전은 빼고 제대로 넣자.","action":""}
+{"run":"photo-person-b","sequence":4,"turn":4,"at":null,"speaker":"수빈","kind":"speech","speech":"그래, 제대로 넣어 봐. 이번엔 동전도 같이 웃으려나.","action":"동전 반환구에서 시선을 거두고 건우가 넣는 걸 기다린다."}
+{"run":"photo-person-b","sequence":5,"turn":5,"at":null,"speaker":"건우","kind":"speech","speech":"동전까지 비웃네. 봐, 이번엔 한 번에 들어간다.","action":""}
+{"run":"photo-person-b","sequence":6,"turn":6,"at":null,"speaker":"수빈","kind":"speech","speech":"알았어, 이번엔 동전한테 안 차이길 빈다.","action":"건우가 동전을 넣는 걸 보며 웃음을 삼킨다."}
+{"run":"photo-person-b","sequence":7,"turn":7,"at":null,"speaker":"건우","kind":"speech","speech":"동전은 됐고, 이번엔 네가 제대로 웃어. 사진 찍을 거잖아.","action":""}
+{"run":"photo-person-b","sequence":8,"turn":8,"at":null,"speaker":"수빈","kind":"speech","speech":"나 아까부터 웃고 있거든. 자, 찍어 봐.","action":"카메라 쪽을 보고 환하게 웃는다."}
+{"run":"photo-person-b","sequence":9,"turn":9,"at":null,"speaker":"건우","kind":"speech","speech":"그렇게 웃으니까 이제 됐네. 찍는다.","action":""}
+{"run":"photo-person-b","sequence":10,"turn":10,"at":null,"speaker":"수빈","kind":"speech","speech":"응, 이번엔 잘 찍자. 나 준비됐어.","action":"카메라를 향해 웃으며 자세를 잡는다."}
+{"run":"photo-person-b","sequence":11,"turn":11,"at":null,"speaker":"건우","kind":"speech","speech":"그래, 그대로 있어. 찍는다.","action":""}
+{"run":"photo-person-b","sequence":12,"turn":12,"at":null,"speaker":"수빈","kind":"speech","speech":"응, 찍어.","action":"카메라를 향해 웃는 얼굴로 가만히 선다."}
+{"run":"photo-trial-a","sequence":1,"turn":1,"at":null,"speaker":"건우","kind":"speech","speech":"뭐가 웃겨. 동전도 아까워서 다시 나온 거야.","action":"반환구에서 동전을 집어 다시 넣는다."}
+{"run":"photo-trial-a","sequence":2,"turn":2,"at":null,"speaker":"수빈","kind":"speech","speech":"동전이 다시 나온 소리가 웃겼어. 한 번 더 넣어 봐. 이번엔 들어가나 보자.","action":"동전이 반환구에 떨어지는 쪽을 바라본다."}
+{"run":"photo-trial-a","sequence":3,"turn":3,"at":null,"speaker":"건우","kind":"speech","speech":"이번엔 제대로 들어가겠지. 봐라.","action":"동전을 다시 넣는다."}
+{"run":"photo-trial-a","sequence":4,"turn":4,"at":null,"speaker":"수빈","kind":"speech","speech":"들어가면 바로 사진 찍자. 나 집 가기 전에 너랑 한 장 찍고 싶어.","action":""}
+{"run":"photo-trial-a","sequence":5,"turn":5,"at":null,"speaker":"건우","kind":"speech","speech":"그래, 나도 너랑 찍으려고 온 거지. 이번엔 내가 제대로 넣을게.","action":"동전을 다시 투입구에 넣는다."}
+{"run":"photo-trial-a","sequence":6,"turn":6,"at":null,"speaker":"수빈","kind":"speech","speech":"들어가면 찍자. 이번엔 동전이 불쌍해 보이네.","action":"투입구 쪽을 바라본다."}
+{"run":"photo-trial-a","sequence":7,"turn":7,"at":null,"speaker":"건우","kind":"speech","speech":"동전까지 불쌍하대. 이번엔 들어갔어, 찍으러 가자.","action":"투입구를 확인하고 사진 촬영기로 향한다."}
+{"run":"photo-trial-a","sequence":8,"turn":8,"at":null,"speaker":"수빈","kind":"speech","speech":"응, 이번엔 사진이 잘 나오나 보자.","action":"건우를 따라 촬영기로 간다."}
+{"run":"photo-trial-a","sequence":9,"turn":9,"at":null,"speaker":"건우","kind":"speech","speech":"그래. 이번엔 내가 제대로 웃어야 사진 잘 나오겠네.","action":"수빈과 나란히 촬영기 앞에 선다."}
+{"run":"photo-trial-a","sequence":10,"turn":10,"at":null,"speaker":"수빈","kind":"speech","speech":"그럼 나도 웃어야겠다. 자, 봐봐.","action":"촬영기를 향해 웃으며 자세를 잡는다."}
+{"run":"photo-trial-a","sequence":11,"turn":11,"at":null,"speaker":"건우","kind":"speech","speech":"그래, 그렇게 웃어야지. 나도 간다.","action":"수빈 옆에 서서 촬영기를 향해 웃는다."}
+{"run":"photo-trial-a","sequence":12,"turn":12,"at":null,"speaker":"수빈","kind":"speech","speech":"응, 웃는 거 괜찮네. 찍자.","action":"촬영기를 향해 웃는 자세를 유지한다."}
+{"run":"photo-trial-b","sequence":1,"turn":1,"at":null,"speaker":"건우","kind":"speech","speech":"뭐 웃어? 동전도 나 알아보고 다시 나온 거야. 너 찍을 거면 얼른 와.","action":"반환구에서 동전을 집는다."}
+{"run":"photo-trial-b","sequence":2,"turn":2,"at":null,"speaker":"수빈","kind":"speech","speech":"동전이 굴러 나오는 소리가 꼭 네가 맞는 것 같아서 웃겼어. 가자, 나 찍을래.","action":"건우 옆으로 다가가 즉석사진 기계 쪽을 본다."}
+{"run":"photo-trial-b","sequence":3,"turn":3,"at":null,"speaker":"건우","kind":"speech","speech":"나 맞는 소리라니, 별걸 다 듣네. 그래, 찍자. 동전은 이번엔 제대로 넣을 테니까.","action":"동전을 투입구에 넣는다."}
+{"run":"photo-trial-b","sequence":4,"turn":4,"at":null,"speaker":"수빈","kind":"speech","speech":"이번엔 소리 안 나면 좀 아쉽겠다. 자, 빨리 찍자.","action":"即석사진 기계 옆에 선다."}
+{"run":"photo-trial-b","sequence":5,"turn":5,"at":null,"speaker":"건우","kind":"speech","speech":"알았어. 이번엔 제대로 찍히는지 봐라.","action":"수빈 옆에 서서 촬영 버튼을 누른다."}
+{"run":"photo-trial-b","sequence":6,"turn":6,"at":null,"speaker":"수빈","kind":"speech","speech":"이번엔 됐네. 우리 표정 괜찮게 나왔나 보자.","action":"촬영이 끝나길 기다리며 기계 쪽을 본다."}
+{"run":"photo-trial-b","sequence":7,"turn":7,"at":null,"speaker":"건우","kind":"speech","speech":"내 표정은 당연히 괜찮지. 네 것도 잘 나왔나 보자.","action":"사진이 나오는 쪽으로 몸을 기울인다."}
+{"run":"photo-trial-b","sequence":8,"turn":8,"at":null,"speaker":"수빈","kind":"speech","speech":"너는 자신만만하네. 자, 사진 어디 있어?","action":"사진이 나오는 쪽으로 고개를 기울인다."}
+{"run":"photo-trial-b","sequence":9,"turn":9,"at":null,"speaker":"건우","kind":"speech","speech":"나왔네. 봐, 내 말대로 표정 괜찮잖아. 이거 나 줘. 지갑에 넣게.","action":"나온 사진을 집어 든다."}
+{"run":"photo-trial-b","sequence":10,"turn":10,"at":null,"speaker":"수빈","kind":"speech","speech":"응, 가져. 근데 내 표정도 괜찮았는지 한 번 더 봐야 하는 거 아냐?","action":"사진을 건우 쪽으로 내민다."}
+{"run":"photo-trial-b","sequence":11,"turn":11,"at":null,"speaker":"건우","kind":"speech","speech":"또 확인하긴 뭘 확인해. 네 표정도 괜찮아. 사진 줘, 지갑에 넣게.","action":"사진을 수빈에게서 받아 든다."}
+{"run":"photo-trial-b","sequence":12,"turn":12,"at":null,"speaker":"수빈","kind":"speech","speech":"그래, 네 지갑에 잘 넣어. 다음엔 둘 다 눈 뜨고 찍자.","action":"사진을 건우에게 건넨다."}
+{"run":"tag-before-a","sequence":1,"turn":1,"at":null,"speaker":"준태","kind":"speech","speech":"뭐, 이름표 하나 뒤집혔다고 무대까지 뒤집히진 않아. 세린, 너나 똑바로 달고 있어.","action":"이름표를 바로 돌려 단다."}
+{"run":"tag-before-a","sequence":2,"turn":2,"at":null,"speaker":"세린","kind":"speech","speech":"말은 잘하네. 내 건 멀쩡해. 뒤에 새로 온 사람들한테 인사나 할까?","action":"뒤쪽 신입들 쪽으로 시선을 돌린다."}
+{"run":"tag-before-a","sequence":3,"turn":3,"at":null,"speaker":"준태","kind":"speech","speech":"그래. 내가 먼저 할게. 어, 다들 오늘 공연 어땠어? 편하게 있어.","action":"신입들 쪽으로 몸을 돌려 가볍게 손을 든다."}
+{"run":"tag-before-a","sequence":4,"turn":4,"at":null,"speaker":"세린","kind":"speech","speech":"공연 어땠냐고 물어보네. 난 마지막 군무가 좋았어. 너희는 어땠어?","action":"신입들 쪽으로 몸을 돌려 웃으며 인사한다."}
+{"run":"tag-before-a","sequence":5,"turn":5,"at":null,"speaker":"준태","kind":"speech","speech":"나도 마지막 군무. 대형 딱 맞을 때 보기 좋더라.","action":"신입들 쪽으로 고개를 끄덕인다."}
+{"run":"tag-before-a","sequence":6,"turn":6,"at":null,"speaker":"세린","kind":"speech","speech":"맞아, 대형 딱 맞으면 괜히 한 번 더 보고 싶더라. 처음 온 사람들도 같이 추면 금방 익숙해질 것 같아. 너희는 어떤 대형이 제일 좋았어?","action":""}
+{"run":"tag-before-a","sequence":7,"turn":7,"at":null,"speaker":"준태","kind":"speech","speech":"난 마지막에 다 같이 딱 맞춰 선 대형. 한눈에 꽉 차 보이잖아.","action":""}
+{"run":"tag-before-a","sequence":8,"turn":8,"at":null,"speaker":"세린","kind":"speech","speech":"진짜 꽉 차 보였지. 처음 온 사람들도 그런 대형 보면 같이 서 보고 싶어지겠다.","action":""}
+{"run":"tag-before-a","sequence":9,"turn":9,"at":null,"speaker":"준태","kind":"speech","speech":"그 대형은 사람 수가 많을수록 더 꽉 차 보이긴 해. 너희도 같이 서 보면 재밌겠다.","action":"신입들 쪽을 보며 어깨를 으쓱한다."}
+{"run":"tag-before-a","sequence":10,"turn":10,"at":null,"speaker":"세린","kind":"speech","speech":"그럴 것 같아. 처음 온 사람들도 같이 서면 더 신나겠지.","action":""}
+{"run":"tag-before-a","sequence":11,"turn":11,"at":null,"speaker":"준태","kind":"speech","speech":"그치. 사람 많으면 대형이 더 살아. 너희도 나중에 한 번 같이 서 보자.","action":""}
+{"run":"tag-before-a","sequence":12,"turn":12,"at":null,"speaker":"세린","kind":"speech","speech":"그러게. 사람 많으면 꽉 차 보여서 좋지.","action":""}
+{"run":"tag-before-b","sequence":1,"turn":1,"at":null,"speaker":"준태","kind":"speech","speech":"뭐 웃어. 이름표 뒤집힌 게 그렇게 재밌냐?","action":"이름표를 바로 돌려 달고 세린을 쳐다본다."}
+{"run":"tag-before-b","sequence":2,"turn":2,"at":null,"speaker":"세린","kind":"speech","speech":"그렇게까지 재밌다는 건 아니고, 뒤집혀 있어서 웃었지. 너도 네 이름표 뒤집힌 거 보면 웃을 줄 알았는데. 기분 나빴으면 미안.","action":""}
+{"run":"tag-before-b","sequence":3,"turn":3,"at":null,"speaker":"준태","kind":"speech","speech":"기분 나쁜 건 아니야. 이름표 하나 뒤집혔다고 뭐. 대신 웃을 거면 제대로 웃어, 피식거리지 말고.","action":"뒤집힌 이름표를 바로 돌려 단다."}
+{"run":"tag-before-b","sequence":4,"turn":4,"at":null,"speaker":"세린","kind":"speech","speech":"알았어. 제대로 웃을게. 하하. 자, 됐지?","action":"준태를 보며 짧게 웃는다."}
+{"run":"tag-before-b","sequence":5,"turn":5,"at":null,"speaker":"준태","kind":"speech","speech":"그래, 됐어. 그렇게 웃으니까 이제야 안 어색하네.","action":"세린의 이름표를 턱짓한다."}
+{"run":"tag-before-b","sequence":6,"turn":6,"at":null,"speaker":"세린","kind":"speech","speech":"이제야 안 어색해졌으면 됐네. 근데 너 내 이름표도 턱짓했잖아. 나도 뒤집혔어?","action":"자기 이름표를 손끝으로 만져 본다."}
+{"run":"tag-before-b","sequence":7,"turn":7,"at":null,"speaker":"준태","kind":"speech","speech":"아니, 네 건 제대로 달려 있어. 그냥 나한테 뭐라 할까 봐 미리 봐둔 거지.","action":"세린의 이름표를 눈으로 확인하고 턱을 살짝 든다."}
+{"run":"tag-before-b","sequence":8,"turn":8,"at":null,"speaker":"세린","kind":"speech","speech":"내가 뭐라 할까 봐? 너 이름표 뒤집어 단 건 놀려도 되는데, 내 이름표 확인한 건 왜 미리 변명해?","action":""}
+{"run":"tag-before-b","sequence":9,"turn":9,"at":null,"speaker":"준태","kind":"speech","speech":"네 이름표 두드리길래 확인한 거야. 괜히 또 웃음거리 만들기 싫어서.","action":"접수 상자 쪽으로 시선을 돌린다."}
+{"run":"tag-before-b","sequence":10,"turn":10,"at":null,"speaker":"세린","kind":"speech","speech":"그럼 됐어. 나도 너 놀린 걸로 기분 나빠진 건 아니야. 저 뒤에 새로 온 사람들 있네. 나 인사하고 올게.","action":"뒤쪽에 외투를 걸고 있는 신입들에게 몸을 돌린다."}
+{"run":"tag-before-b","sequence":11,"turn":11,"at":null,"speaker":"준태","kind":"speech","speech":"그래, 가서 인사해. 난 여기 있을게.","action":"의자를 고쳐 앉고 신입들에게 가볍게 고개를 끄덕인다."}
+{"run":"tag-before-b","sequence":12,"turn":12,"at":null,"speaker":"세린","kind":"speech","speech":"응, 다녀올게. 너도 편하게 있어.","action":"신입들 쪽으로 돌아서 가볍게 손을 든다."}
+{"run":"tag-person-b","sequence":1,"turn":1,"at":null,"speaker":"준태","kind":"speech","speech":"뭐가 그렇게 웃겨? 이름표나 똑바로 달고 웃어.","action":""}
+{"run":"tag-person-b","sequence":2,"turn":2,"at":null,"speaker":"세린","kind":"speech","speech":"뒤집어 찬 건 네 이름표잖아. 그냥 웃은 건데, 사람들 앞에서 그렇게 말할 건 뭐야?","action":""}
+{"run":"tag-person-b","sequence":3,"turn":3,"at":null,"speaker":"준태","kind":"speech","speech":"내가 뒤집어 찬 건 알거든. 꼭 그렇게 티 내면서 웃어야 했냐?","action":""}
+{"run":"tag-person-b","sequence":4,"turn":4,"at":null,"speaker":"세린","kind":"speech","speech":"알면서도 사람들 앞에서 나한테 면박 준 건 괜찮고, 내가 웃은 건 안 돼?","action":""}
+{"run":"tag-person-b","sequence":5,"turn":5,"at":null,"speaker":"준태","kind":"speech","speech":"내가 뭐랬다고 면박이야. 네가 사람들 앞에서 티 내면서 웃었잖아.","action":""}
+{"run":"tag-person-b","sequence":6,"turn":6,"at":null,"speaker":"세린","kind":"speech","speech":"나도 네 이름표 뒤집힌 거 보고 웃은 게 다야. 근데 넌 사람들 앞에서 나한테 똑바로 달고 웃으라고 했잖아. 그건 면박 아니야?","action":""}
+{"run":"tag-person-b","sequence":7,"turn":7,"at":null,"speaker":"준태","kind":"speech","speech":"그 정도 말로 면박은 무슨. 네가 사람들 앞에서 웃으니까 한마디 한 거지. 아직도 그게 그렇게 걸려?","action":""}
+{"run":"tag-person-b","sequence":8,"turn":8,"at":null,"speaker":"세린","kind":"speech","speech":"네가 한마디 했다는 건 알아. 근데 사람들 앞에서 내가 민망해진 건 사실이잖아. 아직 걸리냐고 묻기보다, 그 말은 좀 심했다고 인정하면 될 일을.","action":""}
+{"run":"tag-person-b","sequence":9,"turn":9,"at":null,"speaker":"준태","kind":"speech","speech":"…그래. 그 말은 좀 심했어. 내가 괜히 목소리 키웠다.","action":""}
+{"run":"tag-person-b","sequence":10,"turn":10,"at":null,"speaker":"세린","kind":"speech","speech":"응. 그 말 들으니까 됐어. 신입들한테 인사나 하자.","action":"뒤에 걸린 외투 쪽으로 몸을 돌린다."}
+{"run":"tag-person-b","sequence":11,"turn":11,"at":null,"speaker":"준태","kind":"speech","speech":"그래. 인사하자. 이름표는 내가 바로 할게.","action":"뒤집힌 이름표를 바로잡고 신입들 쪽으로 고개를 돌린다."}
+{"run":"tag-person-b","sequence":12,"turn":12,"at":null,"speaker":"세린","kind":"speech","speech":"그래. 이름표는 이제 제대로 됐네. 신입들한테 인사하자.","action":"신입들 쪽으로 몸을 돌려 가볍게 손을 든다."}

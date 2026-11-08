@@ -18,6 +18,7 @@ export function Transcript({ detail }: { detail: RunDetail }) {
     {spatial && <div className="observation-filters"><label>관찰 관점<select aria-label="관찰 관점" value={observer} onChange={e => setObserver(e.target.value)}><option value="">관리자 · 전체 기록</option>{detail.run.spec.scenario.characters.map(c => <option key={c.id} value={c.id}>{c.name}이 받은 기록</option>)}</select></label><label>발생 장소<select aria-label="발생 장소" value={location} onChange={e => setLocation(e.target.value)}><option value="">모든 장소</option>{map?.locations.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}</select></label><small>{observer ? '본인 선택과 수신 완료한 내용만 표시합니다. 아직 수신함에 남은 내용은 제외합니다.' : '귓속말·서로 다른 장소의 기록도 포함한 관리자 화면입니다.'}</small></div>}
     {!rows.length && <div className="blank">{detail.utterances.length ? '이 조건에서 확인할 기록이 없습니다.' : 'NPC 세션을 준비하고 있습니다.'}</div>}
     {detail.run.completionReason === 'conversation_idle' && <div className="narrator">모두 발언과 행동 없이 차례를 넘겨 대화를 마쳤습니다.</div>}
+    {detail.run.completionReason === 'conversation_withdrawn' && <div className="narrator">한 인물이 대화를 끊었고 상대의 마지막 반응까지 기록했습니다.</div>}
     {rows.map(u => {
       const call = detail.invocations.find(c => c.id === u.invocationId);
       const receivers = detail.invocations.filter(c => c.kind === 'receive' && c.sourceUtteranceId === u.id);

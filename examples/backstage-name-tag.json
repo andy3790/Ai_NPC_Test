@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "name": "뒤집힌 이름표",
+  "scenario": {
+    "id": "backstage-name-tag",
+    "name": "뒤집힌 이름표",
+    "world": "동네 춤 동아리의 성인 회원들이 공연 뒤풀이 장소에 모였다. 문 옆 두 자리에 앉은 준태와 세린 뒤로 신입들이 외투를 걸고 있다. 둘이 주말에 따로 나가는 2인 무대 접수는 오늘 밤까지다. 한 사람이라도 자기 참가 카드를 돌려받으면 그 무대에 둘이 설 수 없다.",
+    "situation": "준태가 차고 온 뒤풀이 이름표가 뒤집혀 있다. 세린이 준태를 보고 피식 웃었다. 세린은 자기 이름표를 손끝으로 두 번 두드렸다. 접수 상자에는 둘의 참가 카드가 각각 들어 있다.",
+    "defaults": {"model":"gpt-6-luna","effort":"low"},
+    "characters": [
+      {"id":"juntae","name":"준태","identity":"세린과 같은 해에 들어온 회원이다.","personality":"허세가 세고 만만한 사람에게 먼저 시비를 건다. 신입들 앞에서 우스워졌다고 느끼면 애먼 사람에게 목소리가 커진다.","goals":"오늘 신입들 앞에서는 좀 폼 나게 보이고 싶다.","speechStyle":"세린과는 반말한다."},
+      {"id":"serin","name":"세린","identity":"다른 동호회에서도 춤을 춘다.","personality":"웬만한 실수는 그냥 넘긴다. 남들 앞에서 면박을 당하면 정이 떨어진다.","memories":"준태도 자기가 이름표를 뒤집어 찬 걸 보면 웃을 줄 알았다.","goals":"새로 온 사람들하고도 인사를 나누고 싶다.","speechStyle":"준태한테 평소 쓰는 반말."}
+    ]
+  },
+  "variants":[{"id":"backstage","label":"뒤풀이 · 이름표","memoryMode":"initial_only","deliveryMode":"batched_on_turn","turnPolicy":"round_robin","stopOnSilence":true}],
+  "repetitions":1,"maxUtterances":12,"concurrentRuns":1,"maxConcurrentCalls":1,"timeoutMs":300000,
+  "evaluation":{"enabled":false,"interval":8,"model":"gpt-6-luna","effort":"low","contextCharacters":120000,"repetitionWindow":12,"repetitionThreshold":0.72,"repetitionMinChars":20},
+  "director":{"model":"gpt-6-luna","effort":"low"},
+  "scheduledEvents":[]
+}

@@ -23,7 +23,7 @@
       "schemaPath": "src/shared/schema.ts",
       "schemaSha256": "a1b034f182e5c74c566ea6a061759a8ca595772dc687cd9c9268d5f16aa9f6a0",
       "promptPath": "src/core/prompts.ts",
-      "promptSha256": "9aa619ea2492caf90e8c053dd628a0b284f228c30803208634e67c8a27bd23c3",
+      "promptSha256": "53987db93e4305339d6105fdd1b705b0901120835ec7b26d6aa77a00a8be1fc5",
       "promptDependencies": {
         "src/core/dialogue-policies.ts": "1d3140ac86ac75f3af080bc2d8fd8da46ff074d004593d3bcb620bd65cecf335",
         "src/shared/dialogue-policy.ts": "1593262cd1325b117d689f79b33b1dea57647298a44cf50e4a7a9bde37b3612d",
@@ -31,10 +31,11 @@
         "src/shared/world-policy.ts": "545bf73af3af57026182ea7395116557f7b2ae0405c890f1ea8af2754649c149",
         "src/shared/world-schema.ts": "b450bcd23f8e1e4cf36870c0731b503fb24f4ab9742da30b53b8981ed3eccbfd",
         "src/core/director.ts": "c6d9e1deb5fcb0cc41e547dac8188b8868bea4c7c7b3afd5fc7dbd01a123b456",
-        "src/core/character-performance.ts": "d1b26cc0500d7c468a8ea062faa23ed81f7d3c332ba059fdf0e005862ed81290",
+        "src/core/character-performance.ts": "683a45db9dc502d78adc901bc9dec05e2d28cf4a64379869ef2a24706d55ef06",
         "src/shared/character-performance.ts": "02d028a28f1bde5369d81dec789ffe343cf040f0a090724ecb620b3ebfda2176",
         "src/core/conversation-memory.ts": "bd017ab094e12b70026526658acaf1a9a50982b8546b1cdb371dd34a95c91eed",
-        "src/core/scene-observation.ts": "3b429758c39f24c6d36b06934c4ec14c8a133d1a93f1768220031540456690ba"
+        "src/core/scene-observation.ts": "3b429758c39f24c6d36b06934c4ec14c8a133d1a93f1768220031540456690ba",
+        "src/core/social-reaction.ts": "4dac4e87dac5a3062e3de68b44eb0cb1f3dfb295cfe192fa866cff29e098d4d6"
       },
       "imageInputSupported": false,
       "defaultModel": "gpt-6-luna",

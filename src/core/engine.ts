@@ -9,6 +9,7 @@ import { SessionCleanup } from './session-cleanup.js';
 import { ACTOR_CONTEXT_VERSION, actorRecall, checkDialogue, establishedConversation, LANGUAGE_CHECK_VERSION, languageRepairSchema, priorDisclosures } from './actor-context.js';
 import { CONVERSATION_MEMORY_VERSION, DIALOGUE_MEMORY_VERSION, TOPIC_CLOSURE_VERSION, checkProspectiveClaim, checkQuietDisclosure, compactDiscussion, conversationMemory, recallsPlans, rememberSource, usesSourceReferences, withMemoryCheckpoint } from './conversation-memory.js';
 import { authoredObservation, SCENE_OBSERVATION_VERSION } from './scene-observation.js';
+import { readSocialChoice, rememberSocialChoice, repairReactionLanguage, socialTurn, SOCIAL_REACTION_VERSION, withReactionBeat, withSocialChoice } from './social-reaction.js';
 import { WORLD_CONTEXT_VERSION, worldRequestContext } from './world-context.js';
 import { CHARACTER_PERFORMANCE } from '../shared/character-performance.js';
 import { committedPerformance, performTurn, withPortrayal, lacksVoice, parseSpeechOutput, SPARSE_VOICE_VERSION, sparseFollowUp, withSpeechUnits } from './character-performance.js';
@@ -17,7 +18,7 @@ import { evaluationPrompt, persona, PROMPT_VERSION, publicMessage, receiverBatch
 import { receiveBarriers, RECEIVE_DELIVERY_VERSION } from './receive-delivery.js';
 import { CURRENT_DIALOGUE_PROMPT, LEGACY_DIALOGUE_PROMPT } from '../shared/dialogue-policy.js';
 import { WORLD_PROMPT_VERSION, LEGACY_WORLD_PROMPT } from '../shared/world-policy.js';
-import { dialogueIsIdle, isSilentTurn } from './dialogue-idle.js';
+import { dialogueEnding, isSilentTurn } from './dialogue-idle.js';
 import { directorSchema, evaluationSchema, experimentSchema, outputSchemas, receiveSchema, speechSchema, environmentMode, isAiEnvironment, responseValidator, type ExperimentSpec, type ModelConfig } from '../shared/schema.js';
 import { receives } from './perception.js';
 import { audienceNpcIds } from './perception.js';
@@ -89,6 +90,7 @@ export class Engine extends EventEmitter {
         ...(environmentMode(spec, sourceVariant) === 'ai' ? { worldPromptVersion: sourceVariant.worldPromptVersion ?? WORLD_PROMPT_VERSION } : {}) };
       const context = {conversationMemoryVersion:environmentMode(spec,variant)==='off' ? DIALOGUE_MEMORY_VERSION : CONVERSATION_MEMORY_VERSION,
         sceneObservationVersion:SCENE_OBSERVATION_VERSION, topicClosureVersion:TOPIC_CLOSURE_VERSION,
+        ...(variant.characterPerformanceVersion===CHARACTER_PERFORMANCE && {socialReactionVersion:SOCIAL_REACTION_VERSION}),
         ...(variant.characterPerformanceVersion===CHARACTER_PERFORMANCE && spec.scenario.characters.some(lacksVoice) && {sparseVoiceVersion:SPARSE_VOICE_VERSION}),
         ...(this.adapter.name === 'openai' && { npcContextVersion: ACTOR_CONTEXT_VERSION,
         ...(isAiEnvironment(spec, variant) && { worldContextVersion: WORLD_CONTEXT_VERSION }) })};
@@ -249,6 +251,24 @@ export class Engine extends EventEmitter {
         metadata={...metadata,sparseVoiceVersion:SPARSE_VOICE_VERSION,speechUnits:followUp.units};
       }
     }
+    if (run.socialReactionVersion) {
+      const reaction=socialTurn(characters[slot],characters,history,session.socialMemory ?? [],prompt.localContext?.nearbyNpcs,
+        run.socialReactionVersion,run.spec.scenario.situation);
+      if (reaction) {
+        const target=reaction.peers.find(p=>p.id===reaction.beat?.peerId);
+        const peers=run.socialReactionVersion==='social-reaction/3' && target ? [target.id] : reaction.peers.map(p=>p.id);
+        prompt.socialReaction=reaction;
+        schema=withSocialChoice(schema,peers);
+        metadata={...metadata,socialReactionVersion:run.socialReactionVersion,socialPeers:peers};
+        if (target && environmentMode(run.spec,run.variant)==='off' && !metadata.speechUnits) {
+          schema=withReactionBeat(schema);
+          metadata.socialBeat=true;
+          prompt.instruction=run.socialReactionVersion==='social-reaction/2'
+            ? '지금은 socialReaction.beat에 대한 첫 반응 한 번이다. 본인의 대꾸 하나 또는 눈에 보이는 본인 행동 하나를 reaction에 고른다. 둘 다 하지 않아도 된다. 그 다음에 할 일은 다음 차례가 온 뒤의 일이다.'
+            : '지금 반응의 상대는 '+target.name+'이다. 본인이 고른 socialChoice를 실제 reaction에 옮긴다. 시비를 걸었다면 그 사람한테 던질 말이나 몸짓 하나에서 멈춘다. 대화를 끊었다면 그만두는 순간을 보여 준다. 받아넘기고 싶으면 평소처럼 고른다. 당장 든 감정을 본인답게 내고 상대의 다음 반응은 남겨 둔다.';
+        }
+      }
+    }
     return this.invoke(id, 'speech', session, key, JSON.stringify(prompt), metadata,
       withMemoryCheckpoint(schema,memory?.offered ?? []), history);
   }
@@ -275,8 +295,9 @@ export class Engine extends EventEmitter {
     if (spatialFormat || kind === 'environment' && !format && run.npcContextVersion && run.npcContextVersion !== 'npc-context/1')
       metadata = { ...metadata, worldContractVersion:spatialFormat ? SPATIAL_CONTRACT_VERSION : WORLD_CONTRACT_VERSION };
     const baseSchema = requestedOutputSchema ?? spatialFormat ?? (format ? outputSchemas[format] : kind === 'speech' && environmentMode(run.spec, run.variant) === 'rules' ? outputSchemas.progressSpeech : outputSchemas[kind]);
+    const repairLanguage = metadata.socialBeat ? repairReactionLanguage : languageRepairSchema;
     const languageRepair = independent && kind === 'speech' && previous?.error
-      ? languageRepairSchema(baseSchema,session.instructions+' '+input,previous.error) : undefined;
+      ? repairLanguage(baseSchema,session.instructions+' '+input,previous.error) : undefined;
     const outputSchema = languageRepair ?? baseSchema;
     if (languageRepair) metadata = { ...metadata, languageRepair: true };
     const call: InvocationMetrics = {
@@ -344,6 +365,7 @@ export class Engine extends EventEmitter {
     const parsed=call.kind==='speech' ? parseSpeechOutput(call) : JSON.parse(call.output);
     responseValidator(call.kind,call.metadata.outputType).parse(parsed);
     if (call.kind!=='speech' || !call.characterId) return;
+    if (call.metadata.socialReactionVersion && Array.isArray(call.metadata.socialPeers)) readSocialChoice(parsed.socialChoice,call.metadata.socialPeers);
     if (recallsPlans(run.conversationMemoryVersion)) {
       const prompt=JSON.parse(originalInput);
       const prospect=prompt.conversationMemory?.prospective;
@@ -416,6 +438,12 @@ export class Engine extends EventEmitter {
         const previous = session.setAsideSequences ?? [];
         const selected = rememberSource(previous,JSON.parse(call.output).setAsideSequence,call.metadata.memoryOffers);
         if (selected !== previous) next = {...next,setAsideSequences:selected};
+      }
+      if (run.socialReactionVersion && Array.isArray(call.metadata.socialPeers)) {
+        const prior=session.socialMemory ?? [];
+        const decision=readSocialChoice(JSON.parse(call.output).socialChoice,call.metadata.socialPeers);
+        const socialMemory=rememberSocialChoice(prior,decision,u.sequence,run.socialReactionVersion);
+        if (socialMemory!==prior) next={...next,socialMemory};
       }
       // Both runners commit the private memory and the public choice atomically.
       if (next !== session) this.store.patch('runs', id, {sessions:{...run.sessions,[u.speakerId]:next}});
@@ -521,11 +549,11 @@ export class Engine extends EventEmitter {
         await this.flush(id);
         const rules = environmentMode(run.spec, run.variant) === 'rules';
         const goalsDone = !!(rules && run.spec.scenario.environment?.stopOnGoals && progression(run.spec, this.store.list('utterances', id))?.allGoalsAchieved);
-        const dialogueDone = dialogueIsIdle(this.run(id), this.store.list('utterances', id));
-        await this.evaluatePending(id, speeches.length >= run.spec.maxUtterances || goalsDone || dialogueDone);
+        const ending = dialogueEnding(this.run(id), this.store.list('utterances', id));
+        await this.evaluatePending(id, speeches.length >= run.spec.maxUtterances || goalsDone || !!ending);
         run = this.run(id);
         if (run.status !== 'running') break;
-        if (speeches.length >= run.spec.maxUtterances || goalsDone || dialogueDone) { this.store.patch('runs', id, { status: 'completed', completedAt: now(), completionReason: goalsDone ? 'goals_achieved' : dialogueDone ? 'conversation_idle' : 'utterance_limit' }); break; }
+        if (speeches.length >= run.spec.maxUtterances || goalsDone || ending) { this.store.patch('runs', id, { status: 'completed', completedAt: now(), completionReason: goalsDone ? 'goals_achieved' : ending ?? 'utterance_limit' }); break; }
         if (run.pauseRequested || run.stepRemaining === 0) { this.store.patch('runs', id, { status: 'paused', pausedAt: now(), pauseRequested: false }); break; }
         const speakerId = await this.speaker(id, speeches); const session = this.run(id).sessions[speakerId];
         const receipts = this.pending(id, speakerId); all = this.store.list('utterances', id);

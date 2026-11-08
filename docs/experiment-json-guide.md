@@ -162,7 +162,7 @@ ExperimentSpec
 | `dialoguePromptVersion` | 선택 사항. `npc-dialogue/1`~`/10`. 현재 기본값은 `/5` |
 | `characterPerformanceVersion` | 선택 사항. 새 실행 기본값 `character-performance/2`, 초기 비교판 `character-performance/1`, 엔진 보조를 끄는 `off`. 버전 도입 전 저장된 실행은 기존 방식으로 재개 |
 | `worldPromptVersion` | 선택 사항. `npc-world/1`~`/6`. 단일 공간 `ai`에서만 사용. 생략하면 새 실행 생성 시 현재 기본값 `/6`을 고정 |
-| `stopOnSilence` | 선택 불리언. 기본 꺼짐. `off`에서 모두 조용하고 미적용 예정 사건이 없으면 종료 |
+| `stopOnSilence` | 선택 불리언. 기본 꺼짐. `off`에서 모두 조용해지면 종료. 현재 기본 연기를 쓰는 2인 장면에서는 한 사람이 대화를 끊으면 상대의 마지막 차례 뒤에도 종료. 미적용 예정 사건이 있으면 계속 진행 |
 | `environmentMode` | `off`, `rules`, `ai`, `ai_spatial`. 생략 시 활성 environment가 있으면 rules, 없으면 off |
 | `eventGeneration` | 선택 불리언. 생략은 꺼짐. true는 ai/ai_spatial과 eventGenerator 필요 |
 

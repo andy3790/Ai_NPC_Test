@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "name": "합주 끝의 종이컵",
+  "scenario": {
+    "id": "rehearsal-paper-cup",
+    "name": "합주 끝의 종이컵",
+    "world": "동갑 친구 명우와 다빈은 연습실 대관료를 반씩 낸다. 둘이 같이 쓰는 방이다. 문 옆에 휴지통이 있고 방 안에는 둘뿐이다.",
+    "situation": "연습이 끝났다. 명우가 마신 빈 종이컵 하나가 앰프 위에 있다. 기타는 아직 꺼내져 있다.",
+    "defaults": {"model": "gpt-6-luna", "effort": "low"},
+    "characters": [
+      {"id": "myeongu", "name": "명우", "identity": "기타를 친다.", "personality": "거만하고 남에게 지시받는 걸 싫어한다.", "relationships": "다빈과 오래 같이 연주한 동갑 친구다.", "goals": "시간이 남으면 다빈과 마지막 소절을 한 번 더 맞춰 보고 싶다.", "speechStyle": "다빈에게 평소 쓰는 반말."},
+      {"id": "dabin", "name": "다빈", "identity": "베이스를 친다.", "personality": "뒤끝이 짧지만 비아냥까지 웃어넘기지는 않는다.", "goals": "케이블을 감아서 가방에 넣고 가려고 한다.", "speechStyle": "명우와 반말한다."}
+    ]
+  },
+  "variants": [{"id":"room","label":"연습실 · 두 친구","memoryMode":"initial_only","deliveryMode":"batched_on_turn","turnPolicy":"round_robin","stopOnSilence":true}],
+  "repetitions":1,"maxUtterances":12,"concurrentRuns":1,"maxConcurrentCalls":1,"timeoutMs":300000,
+  "evaluation":{"enabled":false,"interval":8,"model":"gpt-6-luna","effort":"low","contextCharacters":120000,"repetitionWindow":12,"repetitionThreshold":0.72,"repetitionMinChars":20},
+  "director":{"model":"gpt-6-luna","effort":"low"},
+  "scheduledEvents":[{"afterUtterance":0,"text":"다빈이 케이블을 감으며 명우에게 말한다. “네 컵 좀 치워.”"}]
+}

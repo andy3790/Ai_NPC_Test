@@ -55,7 +55,12 @@ export class MockAdapter implements Adapter {
     if (input.characterPerformance?.select && output && typeof output === 'object') {
       output = { portrayal: { attention: '말에서 빠진 대목', phrasing: '구체적인 한 대목부터 꺼낸다' }, ...output };
     }
-    const schema=r.outputSchema as {properties?:{speech?:{type?:string};setAsideSequence?:object}};
+    const schema=r.outputSchema as {properties?:{speech?:{type?:string};setAsideSequence?:object;socialChoice?:object;reaction?:object}};
+    if (schema.properties?.reaction && output && typeof output==='object' && 'speech' in output) {
+      const {speech,action:_action,...rest}=output as {speech:string;action:string};
+      output={...rest,reaction:{speech,action:''}};
+    }
+    if (schema.properties?.socialChoice && output && typeof output==='object') output={...output,socialChoice:null};
     if (schema.properties?.setAsideSequence && output && typeof output==='object') output={...output,setAsideSequence:null};
     if (schema.properties?.speech?.type==='array' && output && typeof output==='object' && 'speech' in output && typeof output.speech==='string') {
       output={...output,speech:output.speech ? [output.speech] : []};

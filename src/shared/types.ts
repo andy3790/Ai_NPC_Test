@@ -8,7 +8,9 @@ export type ApiCredential = { source: 'environment' } | { source: 'browser'; key
 export interface ApiKeyStatus { source: 'browser' | 'environment' | 'missing'; configured: boolean; environmentAvailable: boolean }
 export type CallKind = 'speech' | 'receive' | 'director' | 'evaluation' | 'environment' | 'event_generation';
 export type RunStatus = 'queued' | 'running' | 'paused' | 'completed' | 'stopped';
-export interface NpcSession { id: string; characterId: string; threadId: string; config: ModelConfig; instructions: string; performance?: StoredPerformance; setAsideSequences?: number[] }
+export type SocialStance = '발끈함' | '시비를 검' | '대화를 끊음';
+export interface SocialMemory { peerId: string; stance: SocialStance; sequence: number }
+export interface NpcSession { id: string; characterId: string; threadId: string; config: ModelConfig; instructions: string; performance?: StoredPerformance; setAsideSequences?: number[]; socialMemory?: SocialMemory[] }
 export interface ActionResolution { actionId: string; sourceUtteranceId: string; speechIndex: number; actorId: string; before: State; after: State }
 export interface Utterance { id: string; runId: string; sequence: number; speechIndex: number | null; speakerId: string; speakerName: string; kind: 'speech' | 'event'; speech: string; action: string; createdAt: string; invocationId: string | null; deliveryCompletedAt: string | null; deliveryMs: number | null; actionId?: string | null; resolution?: ActionResolution;
   worldEvent?: WorldEvent & { sourceUtteranceId: string | null; virtualSeconds: number; audience?: Audience; proposalId?: string | null };
@@ -71,13 +73,14 @@ export interface Run {
   conversationMemoryVersion?: 'conversation-memory/1' | 'conversation-memory/2' | 'conversation-memory/3' | 'conversation-memory/4';
   sparseVoiceVersion?: 'sparse-voice/1' | 'sparse-voice/2';
   sceneObservationVersion?: 'scene-observation/1';
+  socialReactionVersion?: 'social-reaction/1' | 'social-reaction/2' | 'social-reaction/3';
   topicClosureVersion?: 'topic-closure/1' | 'topic-closure/2' | 'topic-closure/3' | 'topic-closure/4' | 'topic-closure/5' | 'topic-closure/6';
   sessionCleanup?: Record<string, { status: 'deleted' | 'missing' | 'pending'; at: string; error?: string }>;
   apiCredential?: ApiCredential;
   worldState?: WorldState;
   eventGeneratorState?: EventGeneratorState;
   roundRobinCursor?: number;
-  completionReason?: 'goals_achieved' | 'utterance_limit' | 'conversation_idle';
+  completionReason?: 'goals_achieved' | 'utterance_limit' | 'conversation_idle' | 'conversation_withdrawn';
 }
 export interface RawEvent { id: number; runId: string; invocationId: string | null; receivedAt: string; method: string; params: unknown }
 export interface RunHistory { readOnly: boolean; kind: 'current' | 'archive'; locations: string[]; archivedAt?: string }

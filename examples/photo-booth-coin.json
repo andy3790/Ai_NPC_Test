@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "name": "사진기의 반환구",
+  "scenario": {
+    "id": "photo-booth-coin",
+    "name": "사진기의 반환구",
+    "world": "성인인 건우와 수빈은 같은 동네에서 자란 친구다. 둘이 걷다가 즉석사진을 한 장 찍으러 들어왔다. 가게에는 둘뿐이고 아직 결제하지 않았다.",
+    "situation": "건우가 넣은 동전이 반환구에 도로 떨어진다. 옆에 서 있던 수빈이 피식 웃었다. 수빈은 아무 말도 하지 않았다.",
+    "defaults": {"model": "gpt-6-luna", "effort": "low"},
+    "characters": [
+      {"id":"geonu","name":"건우","identity":"가끔 동네 형들 심부름을 한다.","personality":"허세가 많고 만만해 보이는 사람에게 먼저 시비를 거는 편이다.","goals":"수빈과 사진을 한 장 찍어 지갑에 끼우고 싶었다.","speechStyle":"친구들한테는 툭툭 반말한다."},
+      {"id":"subin","name":"수빈","identity":"이 근처에서 옷 수선을 배운다.","personality":"웬만해선 웃고 만다. 정이 떨어지면 미련이 없다.","memories":"동전이 도로 굴러 나오는 소리가 우스워서 웃었다.","goals":"집에 가기 전에 건우와 사진을 찍을까 싶다.","speechStyle":"건우와 반말한다."}
+    ]
+  },
+  "variants":[{"id":"booth","label":"사진관 · 두 친구","memoryMode":"initial_only","deliveryMode":"batched_on_turn","turnPolicy":"round_robin","stopOnSilence":true}],
+  "repetitions":1,"maxUtterances":12,"concurrentRuns":1,"maxConcurrentCalls":1,"timeoutMs":300000,
+  "evaluation":{"enabled":false,"interval":8,"model":"gpt-6-luna","effort":"low","contextCharacters":120000,"repetitionWindow":12,"repetitionThreshold":0.72,"repetitionMinChars":20},
+  "director":{"model":"gpt-6-luna","effort":"low"},
+  "scheduledEvents":[]
+}
