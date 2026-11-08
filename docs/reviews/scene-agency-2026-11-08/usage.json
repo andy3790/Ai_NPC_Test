@@ -1,0 +1,5213 @@
+{
+  "pricingDate": "2026-11-06",
+  "pricingRevision": "33fd7a5a40495c1a",
+  "ledger": {
+    "requests": 1261,
+    "settled": 1261,
+    "conservativeUsd": 0.35013137499999997
+  },
+  "runs": [
+    {
+      "label": "after-a",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/1",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 3,
+        "compacted": 6,
+        "reintroduced": 6,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 1
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0031627299999999994,
+      "tokens": {
+        "inputTokens": 46123,
+        "cachedInputTokens": 30343,
+        "cacheWriteInputTokens": 15732,
+        "outputTokens": 1776,
+        "reasoningOutputTokens": 914,
+        "totalTokens": 47899
+      },
+      "medianMs": 1467.604000000003,
+      "p95Ms": 4184.198499999999,
+      "firstOutputMedianMs": 882,
+      "firstOutputP95Ms": 3775,
+      "activeMs": 31833,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0031627299999999994,
+          "tokens": {
+            "inputTokens": 46123,
+            "cachedInputTokens": 30343,
+            "cacheWriteInputTokens": 15732,
+            "outputTokens": 1776,
+            "reasoningOutputTokens": 914,
+            "totalTokens": 47899
+          },
+          "medianMs": 1467.604000000003,
+          "p95Ms": 4184.198499999999,
+          "firstOutputMedianMs": 882,
+          "firstOutputP95Ms": 3775
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2665,
+          2294,
+          2466,
+          2574,
+          2673,
+          3136,
+          3199
+        ],
+        "lastSpeechInputs": [
+          2851,
+          2945,
+          2933,
+          3092,
+          2960,
+          3201,
+          3209,
+          3386
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 7,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "after-b",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 15,
+      "actionOnly": 0,
+      "silentWaits": 1,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 7
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/1",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 3,
+        "compacted": 6,
+        "reintroduced": 6,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 1
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.004115235,
+      "tokens": {
+        "inputTokens": 44606,
+        "cachedInputTokens": 18181,
+        "cacheWriteInputTokens": 26377,
+        "outputTokens": 1263,
+        "reasoningOutputTokens": 505,
+        "totalTokens": 45869
+      },
+      "medianMs": 1404.541000000001,
+      "p95Ms": 4007.2199,
+      "firstOutputMedianMs": 881,
+      "firstOutputP95Ms": 3889,
+      "activeMs": 27702,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.004115235,
+          "tokens": {
+            "inputTokens": 44606,
+            "cachedInputTokens": 18181,
+            "cacheWriteInputTokens": 26377,
+            "outputTokens": 1263,
+            "reasoningOutputTokens": 505,
+            "totalTokens": 45869
+          },
+          "medianMs": 1404.541000000001,
+          "p95Ms": 4007.2199,
+          "firstOutputMedianMs": 881,
+          "firstOutputP95Ms": 3889
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2664,
+          2312,
+          2447,
+          2463,
+          2619,
+          2851,
+          2952
+        ],
+        "lastSpeechInputs": [
+          2767,
+          2854,
+          2818,
+          2917,
+          3067,
+          2933,
+          3233,
+          3170
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 3,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "before-a",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "limit": 16,
+      "choices": 13,
+      "spoken": 11,
+      "actionOnly": 0,
+      "silentWaits": 2,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 7,
+          "spoken": 6
+        },
+        {
+          "name": "해수",
+          "choices": 6,
+          "spoken": 5
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/12",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 5,
+        "reintroduced": 5,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 2
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 13,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0028035100000000004,
+      "tokens": {
+        "inputTokens": 34681,
+        "cachedInputTokens": 20136,
+        "cacheWriteInputTokens": 14506,
+        "outputTokens": 1570,
+        "reasoningOutputTokens": 948,
+        "totalTokens": 36251
+      },
+      "medianMs": 1614.8914000000004,
+      "p95Ms": 4220.9373,
+      "firstOutputMedianMs": 1102,
+      "firstOutputP95Ms": 3466,
+      "activeMs": 28714,
+      "roles": {
+        "speech": {
+          "requests": 13,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0028035100000000004,
+          "tokens": {
+            "inputTokens": 34681,
+            "cachedInputTokens": 20136,
+            "cacheWriteInputTokens": 14506,
+            "outputTokens": 1570,
+            "reasoningOutputTokens": 948,
+            "totalTokens": 36251
+          },
+          "medianMs": 1614.8914000000004,
+          "p95Ms": 4220.9373,
+          "firstOutputMedianMs": 1102,
+          "firstOutputP95Ms": 3466
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2484,
+          2618,
+          2265,
+          2429,
+          2449,
+          2504
+        ],
+        "lastSpeechInputs": [
+          3024,
+          2761,
+          2870,
+          2806,
+          2882,
+          2678
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 13,
+        "eligibleSpeeches": 4,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "before-b",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "limit": 16,
+      "choices": 15,
+      "spoken": 13,
+      "actionOnly": 0,
+      "silentWaits": 2,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 7
+        },
+        {
+          "name": "해수",
+          "choices": 7,
+          "spoken": 6
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/12",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 3,
+        "selections": 2,
+        "compacted": 5,
+        "reintroduced": 3,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 15,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.003952105,
+      "tokens": {
+        "inputTokens": 41059,
+        "cachedInputTokens": 21223,
+        "cacheWriteInputTokens": 19791,
+        "outputTokens": 2523,
+        "reasoningOutputTokens": 1752,
+        "totalTokens": 43582
+      },
+      "medianMs": 3182.5841999999993,
+      "p95Ms": 5500.963699999998,
+      "firstOutputMedianMs": 2654,
+      "firstOutputP95Ms": 4468,
+      "activeMs": 43075,
+      "roles": {
+        "speech": {
+          "requests": 15,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.003952105,
+          "tokens": {
+            "inputTokens": 41059,
+            "cachedInputTokens": 21223,
+            "cacheWriteInputTokens": 19791,
+            "outputTokens": 2523,
+            "reasoningOutputTokens": 1752,
+            "totalTokens": 43582
+          },
+          "medianMs": 3182.5841999999993,
+          "p95Ms": 5500.963699999998,
+          "firstOutputMedianMs": 2654,
+          "firstOutputP95Ms": 4468
+        }
+      },
+      "inputWindow": {
+        "calls": 7,
+        "firstSpeechInputs": [
+          2484,
+          2631,
+          2379,
+          2501,
+          2597,
+          2538,
+          2849
+        ],
+        "lastSpeechInputs": [
+          2781,
+          3033,
+          2821,
+          3053,
+          2753,
+          2799,
+          2855
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 15,
+        "eligibleSpeeches": 4,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "booth-adaptive-a",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 3,
+        "compacted": 2,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 1
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0027710899999999995,
+      "tokens": {
+        "inputTokens": 44086,
+        "cachedInputTokens": 32704,
+        "cacheWriteInputTokens": 11334,
+        "outputTokens": 2045,
+        "reasoningOutputTokens": 1255,
+        "totalTokens": 46131
+      },
+      "medianMs": 1495.162400000001,
+      "p95Ms": 5503.638999999996,
+      "firstOutputMedianMs": 887,
+      "firstOutputP95Ms": 5011,
+      "activeMs": 38810,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0027710899999999995,
+          "tokens": {
+            "inputTokens": 44086,
+            "cachedInputTokens": 32704,
+            "cacheWriteInputTokens": 11334,
+            "outputTokens": 2045,
+            "reasoningOutputTokens": 1255,
+            "totalTokens": 46131
+          },
+          "medianMs": 1495.162400000001,
+          "p95Ms": 5503.638999999996,
+          "firstOutputMedianMs": 887,
+          "firstOutputP95Ms": 5011
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2679,
+          2402,
+          2455,
+          2487,
+          2549,
+          2840,
+          2949
+        ],
+        "lastSpeechInputs": [
+          2713,
+          2873,
+          2822,
+          2913,
+          2831,
+          2804,
+          3057,
+          3173
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 2,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "booth-adaptive-b",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 3,
+        "compacted": 5,
+        "reintroduced": 5,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 1
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00270384,
+      "tokens": {
+        "inputTokens": 44768,
+        "cachedInputTokens": 32704,
+        "cacheWriteInputTokens": 12016,
+        "outputTokens": 1740,
+        "reasoningOutputTokens": 880,
+        "totalTokens": 46508
+      },
+      "medianMs": 1538.8257000000012,
+      "p95Ms": 4056.702799999999,
+      "firstOutputMedianMs": 975,
+      "firstOutputP95Ms": 3577,
+      "activeMs": 34209,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00270384,
+          "tokens": {
+            "inputTokens": 44768,
+            "cachedInputTokens": 32704,
+            "cacheWriteInputTokens": 12016,
+            "outputTokens": 1740,
+            "reasoningOutputTokens": 880,
+            "totalTokens": 46508
+          },
+          "medianMs": 1538.8257000000012,
+          "p95Ms": 4056.702799999999,
+          "firstOutputMedianMs": 975,
+          "firstOutputP95Ms": 3577
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2730,
+          2293,
+          2437,
+          2460,
+          2631,
+          2704,
+          2809
+        ],
+        "lastSpeechInputs": [
+          2855,
+          2893,
+          2947,
+          3129,
+          3053,
+          3019,
+          3103,
+          3166
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 8,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "booth-final-a",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 15,
+      "actionOnly": 0,
+      "silentWaits": 1,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 7
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/2",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 4,
+        "compacted": 3,
+        "reintroduced": 3,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0025879749999999997,
+      "tokens": {
+        "inputTokens": 42619,
+        "cachedInputTokens": 30680,
+        "cacheWriteInputTokens": 11891,
+        "outputTokens": 1580,
+        "reasoningOutputTokens": 912,
+        "totalTokens": 44199
+      },
+      "medianMs": 1257.4316,
+      "p95Ms": 3904.2805000000008,
+      "firstOutputMedianMs": 841,
+      "firstOutputP95Ms": 3633,
+      "activeMs": 31469,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0025879749999999997,
+          "tokens": {
+            "inputTokens": 42619,
+            "cachedInputTokens": 30680,
+            "cacheWriteInputTokens": 11891,
+            "outputTokens": 1580,
+            "reasoningOutputTokens": 912,
+            "totalTokens": 44199
+          },
+          "medianMs": 1257.4316,
+          "p95Ms": 3904.2805000000008,
+          "firstOutputMedianMs": 841,
+          "firstOutputP95Ms": 3633
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2778,
+          2297,
+          2436,
+          2448,
+          2495,
+          2720,
+          2732
+        ],
+        "lastSpeechInputs": [
+          2675,
+          2748,
+          2732,
+          2739,
+          2689,
+          2717,
+          2937,
+          2937
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 0,
+        "repeatedSpeeches": 0,
+        "rate": null
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "booth-final-b",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 15,
+      "actionOnly": 0,
+      "silentWaits": 1,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 7
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/2",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 3,
+        "compacted": 2,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00324517,
+      "tokens": {
+        "inputTokens": 44179,
+        "cachedInputTokens": 28687,
+        "cacheWriteInputTokens": 15444,
+        "outputTokens": 2046,
+        "reasoningOutputTokens": 1323,
+        "totalTokens": 46225
+      },
+      "medianMs": 2070.2258,
+      "p95Ms": 4372.4205,
+      "firstOutputMedianMs": 1394,
+      "firstOutputP95Ms": 3802,
+      "activeMs": 38051,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00324517,
+          "tokens": {
+            "inputTokens": 44179,
+            "cachedInputTokens": 28687,
+            "cacheWriteInputTokens": 15444,
+            "outputTokens": 2046,
+            "reasoningOutputTokens": 1323,
+            "totalTokens": 46225
+          },
+          "medianMs": 2070.2258,
+          "p95Ms": 4372.4205,
+          "firstOutputMedianMs": 1394,
+          "firstOutputP95Ms": 3802
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2761,
+          2278,
+          2421,
+          2423,
+          2457,
+          2705,
+          2814
+        ],
+        "lastSpeechInputs": [
+          2742,
+          2724,
+          2863,
+          2807,
+          2983,
+          3046,
+          3358,
+          3258
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 4,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "booth-personal-a",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/4",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 2,
+        "compacted": 5,
+        "reintroduced": 5,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 1,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 1,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 17,
+      "failed": 1,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0031033799999999993,
+      "tokens": {
+        "inputTokens": 46879,
+        "cachedInputTokens": 34728,
+        "cacheWriteInputTokens": 12100,
+        "outputTokens": 2477,
+        "reasoningOutputTokens": 1571,
+        "totalTokens": 49356
+      },
+      "medianMs": 1587.4848000000002,
+      "p95Ms": 4898.305399999999,
+      "firstOutputMedianMs": 1413,
+      "firstOutputP95Ms": 4292,
+      "activeMs": 43519,
+      "roles": {
+        "speech": {
+          "requests": 17,
+          "failed": 1,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0031033799999999993,
+          "tokens": {
+            "inputTokens": 46879,
+            "cachedInputTokens": 34728,
+            "cacheWriteInputTokens": 12100,
+            "outputTokens": 2477,
+            "reasoningOutputTokens": 1571,
+            "totalTokens": 49356
+          },
+          "medianMs": 1587.4848000000002,
+          "p95Ms": 4898.305399999999,
+          "firstOutputMedianMs": 1413,
+          "firstOutputP95Ms": 4292
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2735,
+          2304,
+          2454,
+          2486,
+          2576,
+          2711,
+          2799
+        ],
+        "lastSpeechInputs": [
+          2789,
+          2859,
+          2856,
+          2934,
+          2890,
+          2939,
+          3037,
+          3130
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 4,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": [
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "label": "booth-personal-b",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 14,
+      "actionOnly": 0,
+      "silentWaits": 2,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 7
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 7
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/4",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 3,
+        "selections": 3,
+        "compacted": 4,
+        "reintroduced": 4,
+        "quiet": 1,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0023628100000000003,
+      "tokens": {
+        "inputTokens": 41483,
+        "cachedInputTokens": 30651,
+        "cacheWriteInputTokens": 10784,
+        "outputTokens": 1407,
+        "reasoningOutputTokens": 818,
+        "totalTokens": 42890
+      },
+      "medianMs": 1421.4596000000001,
+      "p95Ms": 3784.7400000000002,
+      "firstOutputMedianMs": 983,
+      "firstOutputP95Ms": 3431,
+      "activeMs": 34232,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0023628100000000003,
+          "tokens": {
+            "inputTokens": 41483,
+            "cachedInputTokens": 30651,
+            "cacheWriteInputTokens": 10784,
+            "outputTokens": 1407,
+            "reasoningOutputTokens": 818,
+            "totalTokens": 42890
+          },
+          "medianMs": 1421.4596000000001,
+          "p95Ms": 3784.7400000000002,
+          "firstOutputMedianMs": 983,
+          "firstOutputP95Ms": 3431
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2733,
+          2287,
+          2425,
+          2421,
+          2404,
+          2146,
+          2634
+        ],
+        "lastSpeechInputs": [
+          2575,
+          2731,
+          2681,
+          2786,
+          2700,
+          2761,
+          2809,
+          2851
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 1,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "booth-positions-a",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/3",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 2,
+        "compacted": 2,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00257284,
+      "tokens": {
+        "inputTokens": 42832,
+        "cachedInputTokens": 32704,
+        "cacheWriteInputTokens": 10080,
+        "outputTokens": 1962,
+        "reasoningOutputTokens": 1261,
+        "totalTokens": 44794
+      },
+      "medianMs": 1581.428100000001,
+      "p95Ms": 4402.0118999999995,
+      "firstOutputMedianMs": 1011,
+      "firstOutputP95Ms": 3791,
+      "activeMs": 36294,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00257284,
+          "tokens": {
+            "inputTokens": 42832,
+            "cachedInputTokens": 32704,
+            "cacheWriteInputTokens": 10080,
+            "outputTokens": 1962,
+            "reasoningOutputTokens": 1261,
+            "totalTokens": 44794
+          },
+          "medianMs": 1581.428100000001,
+          "p95Ms": 4402.0118999999995,
+          "firstOutputMedianMs": 1011,
+          "firstOutputP95Ms": 3791
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2717,
+          2289,
+          2446,
+          2463,
+          2518,
+          2649,
+          2719
+        ],
+        "lastSpeechInputs": [
+          2699,
+          2806,
+          2734,
+          2832,
+          2755,
+          2811,
+          2937,
+          2918
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 3,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "booth-positions-b",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 15,
+      "actionOnly": 1,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 7
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/3",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 2,
+        "compacted": 7,
+        "reintroduced": 7,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0028420900000000002,
+      "tokens": {
+        "inputTokens": 43762,
+        "cachedInputTokens": 32704,
+        "cacheWriteInputTokens": 11010,
+        "outputTokens": 2268,
+        "reasoningOutputTokens": 1429,
+        "totalTokens": 46030
+      },
+      "medianMs": 2106.1718000000037,
+      "p95Ms": 5193.1366,
+      "firstOutputMedianMs": 1497,
+      "firstOutputP95Ms": 4399,
+      "activeMs": 40867,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0028420900000000002,
+          "tokens": {
+            "inputTokens": 43762,
+            "cachedInputTokens": 32704,
+            "cacheWriteInputTokens": 11010,
+            "outputTokens": 2268,
+            "reasoningOutputTokens": 1429,
+            "totalTokens": 46030
+          },
+          "medianMs": 2106.1718000000037,
+          "p95Ms": 5193.1366,
+          "firstOutputMedianMs": 1497,
+          "firstOutputP95Ms": 4399
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2728,
+          2307,
+          2441,
+          2473,
+          2545,
+          2683,
+          2770
+        ],
+        "lastSpeechInputs": [
+          2768,
+          2862,
+          2833,
+          2930,
+          2871,
+          2891,
+          2974,
+          3147
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 8,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "booth-release-a",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 15,
+      "actionOnly": 1,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 7
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/5",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 4,
+        "compacted": 5,
+        "reintroduced": 5,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 0
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0028289199999999995,
+      "tokens": {
+        "inputTokens": 42909,
+        "cachedInputTokens": 28687,
+        "cacheWriteInputTokens": 14174,
+        "outputTokens": 1531,
+        "reasoningOutputTokens": 846,
+        "totalTokens": 44440
+      },
+      "medianMs": 1358.4085000000014,
+      "p95Ms": 3525.0096000000003,
+      "firstOutputMedianMs": 995,
+      "firstOutputP95Ms": 2959,
+      "activeMs": 32704,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0028289199999999995,
+          "tokens": {
+            "inputTokens": 42909,
+            "cachedInputTokens": 28687,
+            "cacheWriteInputTokens": 14174,
+            "outputTokens": 1531,
+            "reasoningOutputTokens": 846,
+            "totalTokens": 44440
+          },
+          "medianMs": 1358.4085000000014,
+          "p95Ms": 3525.0096000000003,
+          "firstOutputMedianMs": 995,
+          "firstOutputP95Ms": 2959
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2718,
+          2283,
+          2429,
+          2439,
+          2487,
+          2605,
+          2684
+        ],
+        "lastSpeechInputs": [
+          2665,
+          2763,
+          2660,
+          2832,
+          2838,
+          2867,
+          2996,
+          3104
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 1,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "booth-release-b",
+      "scenario": "마지막 사운드체크",
+      "sceneRevision": "last-soundcheck",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "재인",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "해수",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/5",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 3,
+        "compacted": 2,
+        "reintroduced": 2,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 2
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "07dbb82ad290be158afd1a7d6e36e8eb81834451ad2c539517af468a86979b35",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0024647149999999997,
+      "tokens": {
+        "inputTokens": 43107,
+        "cachedInputTokens": 32704,
+        "cacheWriteInputTokens": 10355,
+        "outputTokens": 1677,
+        "reasoningOutputTokens": 948,
+        "totalTokens": 44784
+      },
+      "medianMs": 1534.8671999999988,
+      "p95Ms": 4818.331100000003,
+      "firstOutputMedianMs": 988,
+      "firstOutputP95Ms": 4655,
+      "activeMs": 33991,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0024647149999999997,
+          "tokens": {
+            "inputTokens": 43107,
+            "cachedInputTokens": 32704,
+            "cacheWriteInputTokens": 10355,
+            "outputTokens": 1677,
+            "reasoningOutputTokens": 948,
+            "totalTokens": 44784
+          },
+          "medianMs": 1534.8671999999988,
+          "p95Ms": 4818.331100000003,
+          "firstOutputMedianMs": 988,
+          "firstOutputP95Ms": 4655
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2539,
+          2765,
+          2361,
+          2464,
+          2465,
+          2564,
+          2732,
+          2711
+        ],
+        "lastSpeechInputs": [
+          2711,
+          2705,
+          2770,
+          2755,
+          2803,
+          2720,
+          3004,
+          3038
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 7,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cafe-adaptive-a",
+      "scenario": "마감 뒤, 다음 수요일",
+      "sceneRevision": "cafe-after-hours",
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "limit": 128,
+      "choices": 42,
+      "spoken": 36,
+      "actionOnly": 1,
+      "silentWaits": 5,
+      "voices": [
+        {
+          "name": "은서",
+          "choices": 14,
+          "spoken": 13
+        },
+        {
+          "name": "태오",
+          "choices": 14,
+          "spoken": 12
+        },
+        {
+          "name": "나래",
+          "choices": 14,
+          "spoken": 11
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 9,
+        "selections": 5,
+        "compacted": 25,
+        "reintroduced": 14,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 15
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "576a0ce2234c0cff87649f46534d71f8c77288c709fc7aa05162b0b46a15eea9",
+      "requests": 42,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.010566059999999999,
+      "tokens": {
+        "inputTokens": 151718,
+        "cachedInputTokens": 90596,
+        "cacheWriteInputTokens": 60996,
+        "outputTokens": 4046,
+        "reasoningOutputTokens": 1804,
+        "totalTokens": 155764
+      },
+      "medianMs": 1773.4604000000036,
+      "p95Ms": 3637.5419999999995,
+      "firstOutputMedianMs": 988,
+      "firstOutputP95Ms": 2999,
+      "activeMs": 90379,
+      "roles": {
+        "speech": {
+          "requests": 42,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.010566059999999999,
+          "tokens": {
+            "inputTokens": 151718,
+            "cachedInputTokens": 90596,
+            "cacheWriteInputTokens": 60996,
+            "outputTokens": 4046,
+            "reasoningOutputTokens": 1804,
+            "totalTokens": 155764
+          },
+          "medianMs": 1773.4604000000036,
+          "p95Ms": 3637.5419999999995,
+          "firstOutputMedianMs": 988,
+          "firstOutputP95Ms": 2999
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          3101,
+          3137,
+          3202,
+          2978,
+          3112,
+          3038,
+          3278,
+          3190
+        ],
+        "lastSpeechInputs": [
+          3699,
+          3498,
+          3657,
+          3623,
+          3306,
+          3424,
+          3444,
+          3166
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 42,
+        "eligibleSpeeches": 29,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cafe-adaptive-b",
+      "scenario": "마감 뒤, 다음 수요일",
+      "sceneRevision": "cafe-after-hours",
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "limit": 128,
+      "choices": 55,
+      "spoken": 48,
+      "actionOnly": 0,
+      "silentWaits": 7,
+      "voices": [
+        {
+          "name": "은서",
+          "choices": 19,
+          "spoken": 17
+        },
+        {
+          "name": "태오",
+          "choices": 18,
+          "spoken": 15
+        },
+        {
+          "name": "나래",
+          "choices": 18,
+          "spoken": 16
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 12,
+        "selections": 9,
+        "compacted": 34,
+        "reintroduced": 15,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 15
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "576a0ce2234c0cff87649f46534d71f8c77288c709fc7aa05162b0b46a15eea9",
+      "requests": 55,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.011987125000000001,
+      "tokens": {
+        "inputTokens": 195559,
+        "cachedInputTokens": 122775,
+        "cacheWriteInputTokens": 72619,
+        "outputTokens": 3331,
+        "reasoningOutputTokens": 745,
+        "totalTokens": 198890
+      },
+      "medianMs": 1388.8549999999996,
+      "p95Ms": 3034.5141000000003,
+      "firstOutputMedianMs": 853,
+      "firstOutputP95Ms": 2507,
+      "activeMs": 90953,
+      "roles": {
+        "speech": {
+          "requests": 55,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.011987125000000001,
+          "tokens": {
+            "inputTokens": 195559,
+            "cachedInputTokens": 122775,
+            "cacheWriteInputTokens": 72619,
+            "outputTokens": 3331,
+            "reasoningOutputTokens": 745,
+            "totalTokens": 198890
+          },
+          "medianMs": 1388.8549999999996,
+          "p95Ms": 3034.5141000000003,
+          "firstOutputMedianMs": 853,
+          "firstOutputP95Ms": 2507
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          3101,
+          3125,
+          3159,
+          2919,
+          2922,
+          2929,
+          3091,
+          3144
+        ],
+        "lastSpeechInputs": [
+          3823,
+          3652,
+          3638,
+          3409,
+          3511,
+          3567,
+          3338,
+          3317
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 55,
+        "eligibleSpeeches": 37,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cafe-legacy-repeat",
+      "scenario": "마감 뒤, 다음 수요일",
+      "sceneRevision": "cafe-after-hours",
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "limit": 128,
+      "choices": 45,
+      "spoken": 35,
+      "actionOnly": 3,
+      "silentWaits": 7,
+      "voices": [
+        {
+          "name": "은서",
+          "choices": 15,
+          "spoken": 13
+        },
+        {
+          "name": "태오",
+          "choices": 15,
+          "spoken": 11
+        },
+        {
+          "name": "나래",
+          "choices": 15,
+          "spoken": 11
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/12",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 9,
+        "selections": 5,
+        "compacted": 28,
+        "reintroduced": 17,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 16
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "576a0ce2234c0cff87649f46534d71f8c77288c709fc7aa05162b0b46a15eea9",
+      "requests": 45,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.013630749999999995,
+      "tokens": {
+        "inputTokens": 150941,
+        "cachedInputTokens": 72600,
+        "cacheWriteInputTokens": 78206,
+        "outputTokens": 6231,
+        "reasoningOutputTokens": 4098,
+        "totalTokens": 157172
+      },
+      "medianMs": 2505.7332000000024,
+      "p95Ms": 4509.254500000003,
+      "firstOutputMedianMs": 2117,
+      "firstOutputP95Ms": 4004,
+      "activeMs": 116875,
+      "roles": {
+        "speech": {
+          "requests": 45,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.013630749999999995,
+          "tokens": {
+            "inputTokens": 150941,
+            "cachedInputTokens": 72600,
+            "cacheWriteInputTokens": 78206,
+            "outputTokens": 6231,
+            "reasoningOutputTokens": 4098,
+            "totalTokens": 157172
+          },
+          "medianMs": 2505.7332000000024,
+          "p95Ms": 4509.254500000003,
+          "firstOutputMedianMs": 2117,
+          "firstOutputP95Ms": 4004
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          3046,
+          3085,
+          3142,
+          2887,
+          2883,
+          2907,
+          3080,
+          3199
+        ],
+        "lastSpeechInputs": [
+          3233,
+          3171,
+          3244,
+          3257,
+          3102,
+          3309,
+          3254,
+          3024
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 45,
+        "eligibleSpeeches": 25,
+        "repeatedSpeeches": 1,
+        "rate": 0.04
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cafe-personal",
+      "scenario": "마감 뒤, 다음 수요일",
+      "sceneRevision": "cafe-after-hours",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 128,
+      "choices": 128,
+      "spoken": 128,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "은서",
+          "choices": 43,
+          "spoken": 43
+        },
+        {
+          "name": "태오",
+          "choices": 43,
+          "spoken": 43
+        },
+        {
+          "name": "나래",
+          "choices": 42,
+          "spoken": 42
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/4",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 30,
+        "selections": 23,
+        "compacted": 82,
+        "reintroduced": 85,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 79
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 1,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 1,
+      "specSha256": "576a0ce2234c0cff87649f46534d71f8c77288c709fc7aa05162b0b46a15eea9",
+      "requests": 129,
+      "failed": 1,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.03943486499999999,
+      "tokens": {
+        "inputTokens": 508765,
+        "cachedInputTokens": 253979,
+        "cacheWriteInputTokens": 254399,
+        "outputTokens": 10113,
+        "reasoningOutputTokens": 2484,
+        "totalTokens": 518878
+      },
+      "medianMs": 1514.7713999999978,
+      "p95Ms": 3738.107799999998,
+      "firstOutputMedianMs": 838,
+      "firstOutputP95Ms": 3132,
+      "activeMs": 235580,
+      "roles": {
+        "speech": {
+          "requests": 129,
+          "failed": 1,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.03943486499999999,
+          "tokens": {
+            "inputTokens": 508765,
+            "cachedInputTokens": 253979,
+            "cacheWriteInputTokens": 254399,
+            "outputTokens": 10113,
+            "reasoningOutputTokens": 2484,
+            "totalTokens": 518878
+          },
+          "medianMs": 1514.7713999999978,
+          "p95Ms": 3738.107799999998,
+          "firstOutputMedianMs": 838,
+          "firstOutputP95Ms": 3132
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          3101,
+          3143,
+          3202,
+          2960,
+          3072,
+          3037,
+          3188,
+          3317
+        ],
+        "lastSpeechInputs": [
+          4152,
+          3537,
+          3940,
+          4170,
+          4082,
+          3966,
+          4164,
+          4022
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 128,
+        "eligibleSpeeches": 109,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": [
+        {
+          "kind": "speech",
+          "attempt": 1,
+          "phase": null
+        }
+      ]
+    },
+    {
+      "label": "cafe-regression",
+      "scenario": "마감 뒤, 다음 수요일",
+      "sceneRevision": "cafe-after-hours",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 128,
+      "choices": 128,
+      "spoken": 128,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "은서",
+          "choices": 43,
+          "spoken": 43
+        },
+        {
+          "name": "태오",
+          "choices": 43,
+          "spoken": 43
+        },
+        {
+          "name": "나래",
+          "choices": 42,
+          "spoken": 42
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/3",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 30,
+        "selections": 25,
+        "compacted": 88,
+        "reintroduced": 88,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 107
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "576a0ce2234c0cff87649f46534d71f8c77288c709fc7aa05162b0b46a15eea9",
+      "requests": 128,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.042743234999999984,
+      "tokens": {
+        "inputTokens": 510865,
+        "cachedInputTokens": 227746,
+        "cacheWriteInputTokens": 282735,
+        "outputTokens": 10171,
+        "reasoningOutputTokens": 2919,
+        "totalTokens": 521036
+      },
+      "medianMs": 1553.1790000000037,
+      "p95Ms": 4038.8433000000005,
+      "firstOutputMedianMs": 905,
+      "firstOutputP95Ms": 3421,
+      "activeMs": 254468,
+      "roles": {
+        "speech": {
+          "requests": 128,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.042743234999999984,
+          "tokens": {
+            "inputTokens": 510865,
+            "cachedInputTokens": 227746,
+            "cacheWriteInputTokens": 282735,
+            "outputTokens": 10171,
+            "reasoningOutputTokens": 2919,
+            "totalTokens": 521036
+          },
+          "medianMs": 1553.1790000000037,
+          "p95Ms": 4038.8433000000005,
+          "firstOutputMedianMs": 905,
+          "firstOutputP95Ms": 3421
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          3101,
+          3124,
+          3168,
+          2951,
+          2957,
+          2980,
+          3132,
+          3366
+        ],
+        "lastSpeechInputs": [
+          4047,
+          4199,
+          4010,
+          4105,
+          4243,
+          4023,
+          4007,
+          4245
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 128,
+        "eligibleSpeeches": 112,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cafe-release-a",
+      "scenario": "마감 뒤, 다음 수요일",
+      "sceneRevision": "cafe-after-hours",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 128,
+      "choices": 128,
+      "spoken": 121,
+      "actionOnly": 0,
+      "silentWaits": 7,
+      "voices": [
+        {
+          "name": "은서",
+          "choices": 43,
+          "spoken": 41
+        },
+        {
+          "name": "태오",
+          "choices": 43,
+          "spoken": 41
+        },
+        {
+          "name": "나래",
+          "choices": 42,
+          "spoken": 39
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/5",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 27,
+        "selections": 24,
+        "compacted": 102,
+        "reintroduced": 70,
+        "quiet": 16,
+        "goalObservations": 0,
+        "prospective": 63
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "576a0ce2234c0cff87649f46534d71f8c77288c709fc7aa05162b0b46a15eea9",
+      "requests": 128,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.03098484499999999,
+      "tokens": {
+        "inputTokens": 459991,
+        "cachedInputTokens": 278982,
+        "cacheWriteInputTokens": 180625,
+        "outputTokens": 11157,
+        "reasoningOutputTokens": 4281,
+        "totalTokens": 471148
+      },
+      "medianMs": 1495.7288999999873,
+      "p95Ms": 3692.8651,
+      "firstOutputMedianMs": 889,
+      "firstOutputP95Ms": 3164,
+      "activeMs": 241444,
+      "roles": {
+        "speech": {
+          "requests": 128,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.03098484499999999,
+          "tokens": {
+            "inputTokens": 459991,
+            "cachedInputTokens": 278982,
+            "cacheWriteInputTokens": 180625,
+            "outputTokens": 11157,
+            "reasoningOutputTokens": 4281,
+            "totalTokens": 471148
+          },
+          "medianMs": 1495.7288999999873,
+          "p95Ms": 3692.8651,
+          "firstOutputMedianMs": 889,
+          "firstOutputP95Ms": 3164
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          3101,
+          3129,
+          3187,
+          2960,
+          3046,
+          3070,
+          3115,
+          3353
+        ],
+        "lastSpeechInputs": [
+          2877,
+          3893,
+          3818,
+          2960,
+          2998,
+          2795,
+          3533,
+          3456
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 128,
+        "eligibleSpeeches": 111,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "cafe-release-b",
+      "scenario": "마감 뒤, 다음 수요일",
+      "sceneRevision": "cafe-after-hours",
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "limit": 128,
+      "choices": 84,
+      "spoken": 81,
+      "actionOnly": 0,
+      "silentWaits": 3,
+      "voices": [
+        {
+          "name": "은서",
+          "choices": 28,
+          "spoken": 27
+        },
+        {
+          "name": "태오",
+          "choices": 28,
+          "spoken": 27
+        },
+        {
+          "name": "나래",
+          "choices": 28,
+          "spoken": 27
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/5",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 17,
+        "selections": 16,
+        "compacted": 63,
+        "reintroduced": 40,
+        "quiet": 15,
+        "goalObservations": 0,
+        "prospective": 21
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "576a0ce2234c0cff87649f46534d71f8c77288c709fc7aa05162b0b46a15eea9",
+      "requests": 84,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.018391989999999997,
+      "tokens": {
+        "inputTokens": 290745,
+        "cachedInputTokens": 187229,
+        "cacheWriteInputTokens": 103264,
+        "outputTokens": 7173,
+        "reasoningOutputTokens": 2976,
+        "totalTokens": 297918
+      },
+      "medianMs": 1475.5465999999942,
+      "p95Ms": 3641.6435000000056,
+      "firstOutputMedianMs": 868,
+      "firstOutputP95Ms": 3151,
+      "activeMs": 155596,
+      "roles": {
+        "speech": {
+          "requests": 84,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.018391989999999997,
+          "tokens": {
+            "inputTokens": 290745,
+            "cachedInputTokens": 187229,
+            "cacheWriteInputTokens": 103264,
+            "outputTokens": 7173,
+            "reasoningOutputTokens": 2976,
+            "totalTokens": 297918
+          },
+          "medianMs": 1475.5465999999942,
+          "p95Ms": 3641.6435000000056,
+          "firstOutputMedianMs": 868,
+          "firstOutputP95Ms": 3151
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          3101,
+          3121,
+          3153,
+          2911,
+          2901,
+          2931,
+          3073,
+          3185
+        ],
+        "lastSpeechInputs": [
+          3605,
+          3379,
+          4005,
+          3908,
+          3754,
+          3693,
+          3614,
+          3370
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 84,
+        "eligibleSpeeches": 52,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-adaptive-a",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "보람",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 2,
+        "compacted": 7,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 6
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.003189735000000001,
+      "tokens": {
+        "inputTokens": 47433,
+        "cachedInputTokens": 33006,
+        "cacheWriteInputTokens": 14379,
+        "outputTokens": 2115,
+        "reasoningOutputTokens": 815,
+        "totalTokens": 49548
+      },
+      "medianMs": 1860.953300000001,
+      "p95Ms": 3837.6973,
+      "firstOutputMedianMs": 933,
+      "firstOutputP95Ms": 3444,
+      "activeMs": 37666,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.003189735000000001,
+          "tokens": {
+            "inputTokens": 47433,
+            "cachedInputTokens": 33006,
+            "cacheWriteInputTokens": 14379,
+            "outputTokens": 2115,
+            "reasoningOutputTokens": 815,
+            "totalTokens": 49548
+          },
+          "medianMs": 1860.953300000001,
+          "p95Ms": 3837.6973,
+          "firstOutputMedianMs": 933,
+          "firstOutputP95Ms": 3444
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2572,
+          2682,
+          2470,
+          2699,
+          2733,
+          2938,
+          3025,
+          3005
+        ],
+        "lastSpeechInputs": [
+          3292,
+          3441,
+          2971,
+          3129,
+          3009,
+          3142,
+          3188,
+          3137
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 14,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-adaptive-b",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "보람",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 1,
+        "compacted": 4,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 4
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.004165655,
+      "tokens": {
+        "inputTokens": 48983,
+        "cachedInputTokens": 28948,
+        "cacheWriteInputTokens": 19987,
+        "outputTokens": 2746,
+        "reasoningOutputTokens": 1441,
+        "totalTokens": 51729
+      },
+      "medianMs": 2461.094100000002,
+      "p95Ms": 6095.566599999998,
+      "firstOutputMedianMs": 1846,
+      "firstOutputP95Ms": 4914,
+      "activeMs": 44914,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.004165655,
+          "tokens": {
+            "inputTokens": 48983,
+            "cachedInputTokens": 28948,
+            "cacheWriteInputTokens": 19987,
+            "outputTokens": 2746,
+            "reasoningOutputTokens": 1441,
+            "totalTokens": 51729
+          },
+          "medianMs": 2461.094100000002,
+          "p95Ms": 6095.566599999998,
+          "firstOutputMedianMs": 1846,
+          "firstOutputP95Ms": 4914
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2572,
+          2702,
+          2522,
+          2657,
+          2721,
+          2656,
+          2972,
+          3041
+        ],
+        "lastSpeechInputs": [
+          3229,
+          3311,
+          2945,
+          3073,
+          3273,
+          3635,
+          3813,
+          3861
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 14,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-before-a",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "보람",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/12",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 0,
+        "compacted": 9,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 6
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.005119205,
+      "tokens": {
+        "inputTokens": 45773,
+        "cachedInputTokens": 15528,
+        "cacheWriteInputTokens": 30197,
+        "outputTokens": 2369,
+        "reasoningOutputTokens": 1226,
+        "totalTokens": 48142
+      },
+      "medianMs": 1764.4735,
+      "p95Ms": 8430.0772,
+      "firstOutputMedianMs": 993,
+      "firstOutputP95Ms": 7987,
+      "activeMs": 43880,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.005119205,
+          "tokens": {
+            "inputTokens": 45773,
+            "cachedInputTokens": 15528,
+            "cacheWriteInputTokens": 30197,
+            "outputTokens": 2369,
+            "reasoningOutputTokens": 1226,
+            "totalTokens": 48142
+          },
+          "medianMs": 1764.4735,
+          "p95Ms": 8430.0772,
+          "firstOutputMedianMs": 993,
+          "firstOutputP95Ms": 7987
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2517,
+          2611,
+          2387,
+          2633,
+          2695,
+          2828,
+          3078,
+          3010
+        ],
+        "lastSpeechInputs": [
+          2837,
+          2721,
+          2775,
+          2932,
+          3109,
+          2850,
+          3547,
+          3243
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 13,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-before-b",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "conversation_idle",
+      "limit": 16,
+      "choices": 13,
+      "spoken": 9,
+      "actionOnly": 2,
+      "silentWaits": 2,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 7,
+          "spoken": 5
+        },
+        {
+          "name": "보람",
+          "choices": 6,
+          "spoken": 4
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/12",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 2,
+        "selections": 2,
+        "compacted": 5,
+        "reintroduced": 4,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 5
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 13,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00252301,
+      "tokens": {
+        "inputTokens": 37132,
+        "cachedInputTokens": 24261,
+        "cacheWriteInputTokens": 12832,
+        "outputTokens": 1345,
+        "reasoningOutputTokens": 534,
+        "totalTokens": 38477
+      },
+      "medianMs": 1582.1578999999983,
+      "p95Ms": 4021.9928999999993,
+      "firstOutputMedianMs": 877,
+      "firstOutputP95Ms": 2961,
+      "activeMs": 24821,
+      "roles": {
+        "speech": {
+          "requests": 13,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00252301,
+          "tokens": {
+            "inputTokens": 37132,
+            "cachedInputTokens": 24261,
+            "cacheWriteInputTokens": 12832,
+            "outputTokens": 1345,
+            "reasoningOutputTokens": 534,
+            "totalTokens": 38477
+          },
+          "medianMs": 1582.1578999999983,
+          "p95Ms": 4021.9928999999993,
+          "firstOutputMedianMs": 877,
+          "firstOutputP95Ms": 2961
+        }
+      },
+      "inputWindow": {
+        "calls": 6,
+        "firstSpeechInputs": [
+          2517,
+          2639,
+          2466,
+          2661,
+          2729,
+          2868
+        ],
+        "lastSpeechInputs": [
+          2931,
+          2705,
+          3145,
+          3182,
+          3166,
+          2938
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 13,
+        "eligibleSpeeches": 4,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-final-a",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "보람",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/2",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 1,
+        "compacted": 0,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 10
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.005156049999999999,
+      "tokens": {
+        "inputTokens": 54485,
+        "cachedInputTokens": 22325,
+        "cacheWriteInputTokens": 32112,
+        "outputTokens": 1828,
+        "reasoningOutputTokens": 484,
+        "totalTokens": 56313
+      },
+      "medianMs": 1790.1218000000008,
+      "p95Ms": 4185.308300000001,
+      "firstOutputMedianMs": 966,
+      "firstOutputP95Ms": 3366,
+      "activeMs": 35334,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.005156049999999999,
+          "tokens": {
+            "inputTokens": 54485,
+            "cachedInputTokens": 22325,
+            "cacheWriteInputTokens": 32112,
+            "outputTokens": 1828,
+            "reasoningOutputTokens": 484,
+            "totalTokens": 56313
+          },
+          "medianMs": 1790.1218000000008,
+          "p95Ms": 4185.308300000001,
+          "firstOutputMedianMs": 966,
+          "firstOutputP95Ms": 3366
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2572,
+          2682,
+          2401,
+          2684,
+          2742,
+          2677,
+          3263,
+          3814
+        ],
+        "lastSpeechInputs": [
+          3648,
+          3596,
+          3632,
+          3853,
+          3985,
+          4055,
+          4338,
+          4543
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 14,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-final-b",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "보람",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/2",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 0,
+        "compacted": 0,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 6
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0053028350000000005,
+      "tokens": {
+        "inputTokens": 53480,
+        "cachedInputTokens": 22591,
+        "cacheWriteInputTokens": 30841,
+        "outputTokens": 2434,
+        "reasoningOutputTokens": 1131,
+        "totalTokens": 55914
+      },
+      "medianMs": 1772.5977999999996,
+      "p95Ms": 7679.259900000001,
+      "firstOutputMedianMs": 969,
+      "firstOutputP95Ms": 6899,
+      "activeMs": 49126,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0053028350000000005,
+          "tokens": {
+            "inputTokens": 53480,
+            "cachedInputTokens": 22591,
+            "cacheWriteInputTokens": 30841,
+            "outputTokens": 2434,
+            "reasoningOutputTokens": 1131,
+            "totalTokens": 55914
+          },
+          "medianMs": 1772.5977999999996,
+          "p95Ms": 7679.259900000001,
+          "firstOutputMedianMs": 969,
+          "firstOutputP95Ms": 6899
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2572,
+          2680,
+          2397,
+          2673,
+          2773,
+          2847,
+          3413,
+          3918
+        ],
+        "lastSpeechInputs": [
+          3584,
+          3523,
+          3615,
+          3500,
+          3807,
+          3740,
+          4238,
+          4200
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 13,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-personal-a",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "보람",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/4",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 1,
+        "compacted": 4,
+        "reintroduced": 4,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 2
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0035392350000000004,
+      "tokens": {
+        "inputTokens": 50909,
+        "cachedInputTokens": 33006,
+        "cacheWriteInputTokens": 17855,
+        "outputTokens": 1945,
+        "reasoningOutputTokens": 525,
+        "totalTokens": 52854
+      },
+      "medianMs": 1903.796000000002,
+      "p95Ms": 4158.7916,
+      "firstOutputMedianMs": 1013,
+      "firstOutputP95Ms": 2947,
+      "activeMs": 36521,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0035392350000000004,
+          "tokens": {
+            "inputTokens": 50909,
+            "cachedInputTokens": 33006,
+            "cacheWriteInputTokens": 17855,
+            "outputTokens": 1945,
+            "reasoningOutputTokens": 525,
+            "totalTokens": 52854
+          },
+          "medianMs": 1903.796000000002,
+          "p95Ms": 4158.7916,
+          "firstOutputMedianMs": 1013,
+          "firstOutputP95Ms": 2947
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2572,
+          2693,
+          2504,
+          2715,
+          2658,
+          2798,
+          3105,
+          3153
+        ],
+        "lastSpeechInputs": [
+          3311,
+          3308,
+          3384,
+          3600,
+          3717,
+          3753,
+          3837,
+          3801
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 14,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-personal-b",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "보람",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/4",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 0,
+        "compacted": 0,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 7
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.003936685,
+      "tokens": {
+        "inputTokens": 50849,
+        "cachedInputTokens": 30976,
+        "cacheWriteInputTokens": 19825,
+        "outputTokens": 2288,
+        "reasoningOutputTokens": 1025,
+        "totalTokens": 53137
+      },
+      "medianMs": 1746.086800000001,
+      "p95Ms": 4641.272599999999,
+      "firstOutputMedianMs": 963,
+      "firstOutputP95Ms": 3859,
+      "activeMs": 39256,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.003936685,
+          "tokens": {
+            "inputTokens": 50849,
+            "cachedInputTokens": 30976,
+            "cacheWriteInputTokens": 19825,
+            "outputTokens": 2288,
+            "reasoningOutputTokens": 1025,
+            "totalTokens": 53137
+          },
+          "medianMs": 1746.086800000001,
+          "p95Ms": 4641.272599999999,
+          "firstOutputMedianMs": 963,
+          "firstOutputP95Ms": 3859
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2572,
+          2681,
+          2589,
+          2667,
+          2623,
+          2893,
+          2875,
+          3220
+        ],
+        "lastSpeechInputs": [
+          3212,
+          3350,
+          3458,
+          3473,
+          3698,
+          3737,
+          3908,
+          3893
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 13,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-positions-a",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "보람",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/3",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 0,
+        "compacted": 0,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 5
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.003583685,
+      "tokens": {
+        "inputTokens": 50157,
+        "cachedInputTokens": 30976,
+        "cacheWriteInputTokens": 19133,
+        "outputTokens": 1755,
+        "reasoningOutputTokens": 519,
+        "totalTokens": 51912
+      },
+      "medianMs": 1677.2916999999998,
+      "p95Ms": 4115.0252,
+      "firstOutputMedianMs": 870,
+      "firstOutputP95Ms": 3434,
+      "activeMs": 33304,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.003583685,
+          "tokens": {
+            "inputTokens": 50157,
+            "cachedInputTokens": 30976,
+            "cacheWriteInputTokens": 19133,
+            "outputTokens": 1755,
+            "reasoningOutputTokens": 519,
+            "totalTokens": 51912
+          },
+          "medianMs": 1677.2916999999998,
+          "p95Ms": 4115.0252,
+          "firstOutputMedianMs": 870,
+          "firstOutputP95Ms": 3434
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2572,
+          2685,
+          2387,
+          2642,
+          2612,
+          2656,
+          2992,
+          3198
+        ],
+        "lastSpeechInputs": [
+          3350,
+          3227,
+          3414,
+          3544,
+          3759,
+          3507,
+          3681,
+          3931
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 14,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-positions-b",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "보람",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/3",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 0,
+        "compacted": 0,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 5
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.00382206,
+      "tokens": {
+        "inputTokens": 50820,
+        "cachedInputTokens": 30976,
+        "cacheWriteInputTokens": 19796,
+        "outputTokens": 2066,
+        "reasoningOutputTokens": 757,
+        "totalTokens": 52886
+      },
+      "medianMs": 1545.8469000000005,
+      "p95Ms": 4739.244100000001,
+      "firstOutputMedianMs": 826,
+      "firstOutputP95Ms": 3639,
+      "activeMs": 34202,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.00382206,
+          "tokens": {
+            "inputTokens": 50820,
+            "cachedInputTokens": 30976,
+            "cacheWriteInputTokens": 19796,
+            "outputTokens": 2066,
+            "reasoningOutputTokens": 757,
+            "totalTokens": 52886
+          },
+          "medianMs": 1545.8469000000005,
+          "p95Ms": 4739.244100000001,
+          "firstOutputMedianMs": 826,
+          "firstOutputP95Ms": 3639
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2572,
+          2685,
+          2486,
+          2691,
+          2632,
+          2829,
+          2895,
+          3209
+        ],
+        "lastSpeechInputs": [
+          3147,
+          3392,
+          3311,
+          3516,
+          3675,
+          3873,
+          4069,
+          3838
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 14,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-release-a",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "보람",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/5",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 0,
+        "compacted": 3,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 12
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0035807350000000003,
+      "tokens": {
+        "inputTokens": 50481,
+        "cachedInputTokens": 33006,
+        "cacheWriteInputTokens": 17427,
+        "outputTokens": 2135,
+        "reasoningOutputTokens": 799,
+        "totalTokens": 52616
+      },
+      "medianMs": 1857.0553,
+      "p95Ms": 5078.387200000001,
+      "firstOutputMedianMs": 1271,
+      "firstOutputP95Ms": 4375,
+      "activeMs": 40727,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0035807350000000003,
+          "tokens": {
+            "inputTokens": 50481,
+            "cachedInputTokens": 33006,
+            "cacheWriteInputTokens": 17427,
+            "outputTokens": 2135,
+            "reasoningOutputTokens": 799,
+            "totalTokens": 52616
+          },
+          "medianMs": 1857.0553,
+          "p95Ms": 5078.387200000001,
+          "firstOutputMedianMs": 1271,
+          "firstOutputP95Ms": 4375
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2572,
+          2706,
+          2540,
+          2702,
+          2772,
+          2926,
+          3115,
+          2978
+        ],
+        "lastSpeechInputs": [
+          3374,
+          3350,
+          2904,
+          3774,
+          3107,
+          3760,
+          3976,
+          3925
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 14,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "market-release-b",
+      "scenario": "천막 아래 한 칸",
+      "sceneRevision": "market-last-stall",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 16,
+      "choices": 16,
+      "spoken": 16,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "유선",
+          "choices": 8,
+          "spoken": 8
+        },
+        {
+          "name": "보람",
+          "choices": 8,
+          "spoken": 8
+        }
+      ],
+      "events": 2,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/5",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 4,
+        "selections": 0,
+        "compacted": 6,
+        "reintroduced": 0,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 4
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "a2fe75b964828643845c73ea39c60118ae28c584c12bfbf73e4e8a5a4e65377e",
+      "requests": 16,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.0030573600000000003,
+      "tokens": {
+        "inputTokens": 45978,
+        "cachedInputTokens": 33006,
+        "cacheWriteInputTokens": 12924,
+        "outputTokens": 2214,
+        "reasoningOutputTokens": 864,
+        "totalTokens": 48192
+      },
+      "medianMs": 1700.4297000000006,
+      "p95Ms": 5217.182999999997,
+      "firstOutputMedianMs": 843,
+      "firstOutputP95Ms": 4507,
+      "activeMs": 37916,
+      "roles": {
+        "speech": {
+          "requests": 16,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.0030573600000000003,
+          "tokens": {
+            "inputTokens": 45978,
+            "cachedInputTokens": 33006,
+            "cacheWriteInputTokens": 12924,
+            "outputTokens": 2214,
+            "reasoningOutputTokens": 864,
+            "totalTokens": 48192
+          },
+          "medianMs": 1700.4297000000006,
+          "p95Ms": 5217.182999999997,
+          "firstOutputMedianMs": 843,
+          "firstOutputP95Ms": 4507
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          2572,
+          2685,
+          2472,
+          2688,
+          2646,
+          2940,
+          2905,
+          3084
+        ],
+        "lastSpeechInputs": [
+          3236,
+          3201,
+          2574,
+          2584,
+          3506,
+          2890,
+          3043,
+          2952
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 16,
+        "eligibleSpeeches": 14,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "orchard-adaptive",
+      "scenario": "느티재 공동과수원 — 흠집을 쓰는 문장",
+      "sceneRevision": "orchard-a",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 48,
+      "choices": 48,
+      "spoken": 35,
+      "actionOnly": 0,
+      "silentWaits": 13,
+      "voices": [
+        {
+          "name": "서경자",
+          "choices": 16,
+          "spoken": 13
+        },
+        {
+          "name": "오민석",
+          "choices": 16,
+          "spoken": 12
+        },
+        {
+          "name": "김나래",
+          "choices": 16,
+          "spoken": 10
+        }
+      ],
+      "events": 3,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/6",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 12,
+        "selections": 11,
+        "compacted": 37,
+        "reintroduced": 29,
+        "quiet": 3,
+        "goalObservations": 0,
+        "prospective": 8
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "sparseVoice": {
+        "version": "sparse-voice/2",
+        "followUps": 28
+      },
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "8143e2ee3b6143da281bf33f4eecfd5af7ba91bbbc79eccae40c4f16675dd75d",
+      "requests": 48,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.01771235,
+      "tokens": {
+        "inputTokens": 253371,
+        "cachedInputTokens": 142895,
+        "cacheWriteInputTokens": 110332,
+        "outputTokens": 4955,
+        "reasoningOutputTokens": 1891,
+        "totalTokens": 258326
+      },
+      "medianMs": 1630.2888999999977,
+      "p95Ms": 4165.8668,
+      "firstOutputMedianMs": 899,
+      "firstOutputP95Ms": 3194,
+      "activeMs": 98736,
+      "roles": {
+        "speech": {
+          "requests": 48,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.01771235,
+          "tokens": {
+            "inputTokens": 253371,
+            "cachedInputTokens": 142895,
+            "cacheWriteInputTokens": 110332,
+            "outputTokens": 4955,
+            "reasoningOutputTokens": 1891,
+            "totalTokens": 258326
+          },
+          "medianMs": 1630.2888999999977,
+          "p95Ms": 4165.8668,
+          "firstOutputMedianMs": 899,
+          "firstOutputP95Ms": 3194
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          4294,
+          4417,
+          4575,
+          4445,
+          4732,
+          4695,
+          4784,
+          4867
+        ],
+        "lastSpeechInputs": [
+          5402,
+          5677,
+          5323,
+          5535,
+          5542,
+          5634,
+          5829,
+          5945
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 48,
+        "eligibleSpeeches": 29,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "orchard-final",
+      "scenario": "느티재 공동과수원 — 흠집을 쓰는 문장",
+      "sceneRevision": "orchard-a",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 48,
+      "choices": 48,
+      "spoken": 48,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "서경자",
+          "choices": 16,
+          "spoken": 16
+        },
+        {
+          "name": "오민석",
+          "choices": 16,
+          "spoken": 16
+        },
+        {
+          "name": "김나래",
+          "choices": 16,
+          "spoken": 16
+        }
+      ],
+      "events": 3,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/2",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 12,
+        "selections": 4,
+        "compacted": 20,
+        "reintroduced": 20,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 10
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "sparseVoice": {
+        "version": "sparse-voice/2",
+        "followUps": 15
+      },
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "8143e2ee3b6143da281bf33f4eecfd5af7ba91bbbc79eccae40c4f16675dd75d",
+      "requests": 48,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.026205165,
+      "tokens": {
+        "inputTokens": 287546,
+        "cachedInputTokens": 105739,
+        "cacheWriteInputTokens": 181663,
+        "outputTokens": 4851,
+        "reasoningOutputTokens": 919,
+        "totalTokens": 292397
+      },
+      "medianMs": 1725.3869999999952,
+      "p95Ms": 4224.345300000001,
+      "firstOutputMedianMs": 878,
+      "firstOutputP95Ms": 3182,
+      "activeMs": 99609,
+      "roles": {
+        "speech": {
+          "requests": 48,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.026205165,
+          "tokens": {
+            "inputTokens": 287546,
+            "cachedInputTokens": 105739,
+            "cacheWriteInputTokens": 181663,
+            "outputTokens": 4851,
+            "reasoningOutputTokens": 919,
+            "totalTokens": 292397
+          },
+          "medianMs": 1725.3869999999952,
+          "p95Ms": 4224.345300000001,
+          "firstOutputMedianMs": 878,
+          "firstOutputP95Ms": 3182
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          4294,
+          4443,
+          4595,
+          4470,
+          4705,
+          4677,
+          4773,
+          5293
+        ],
+        "lastSpeechInputs": [
+          6154,
+          6396,
+          6291,
+          6099,
+          6247,
+          6599,
+          6620,
+          6809
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 48,
+        "eligibleSpeeches": 44,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "orchard-personal",
+      "scenario": "느티재 공동과수원 — 흠집을 쓰는 문장",
+      "sceneRevision": "orchard-a",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 48,
+      "choices": 48,
+      "spoken": 46,
+      "actionOnly": 0,
+      "silentWaits": 2,
+      "voices": [
+        {
+          "name": "서경자",
+          "choices": 16,
+          "spoken": 16
+        },
+        {
+          "name": "오민석",
+          "choices": 16,
+          "spoken": 15
+        },
+        {
+          "name": "김나래",
+          "choices": 16,
+          "spoken": 15
+        }
+      ],
+      "events": 3,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/4",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 12,
+        "selections": 7,
+        "compacted": 36,
+        "reintroduced": 36,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 11
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "sparseVoice": {
+        "version": "sparse-voice/2",
+        "followUps": 27
+      },
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "8143e2ee3b6143da281bf33f4eecfd5af7ba91bbbc79eccae40c4f16675dd75d",
+      "requests": 48,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.01652751,
+      "tokens": {
+        "inputTokens": 257481,
+        "cachedInputTokens": 158861,
+        "cacheWriteInputTokens": 98476,
+        "outputTokens": 5230,
+        "reasoningOutputTokens": 1551,
+        "totalTokens": 262711
+      },
+      "medianMs": 1851.0190999999995,
+      "p95Ms": 5128.783199999998,
+      "firstOutputMedianMs": 1020,
+      "firstOutputP95Ms": 4480,
+      "activeMs": 112381,
+      "roles": {
+        "speech": {
+          "requests": 48,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.01652751,
+          "tokens": {
+            "inputTokens": 257481,
+            "cachedInputTokens": 158861,
+            "cacheWriteInputTokens": 98476,
+            "outputTokens": 5230,
+            "reasoningOutputTokens": 1551,
+            "totalTokens": 262711
+          },
+          "medianMs": 1851.0190999999995,
+          "p95Ms": 5128.783199999998,
+          "firstOutputMedianMs": 1020,
+          "firstOutputP95Ms": 4480
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          4294,
+          4430,
+          4571,
+          4552,
+          4650,
+          4623,
+          4814,
+          4936
+        ],
+        "lastSpeechInputs": [
+          5994,
+          5115,
+          6237,
+          5122,
+          5259,
+          6058,
+          6014,
+          6169
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 48,
+        "eligibleSpeeches": 43,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "orchard-positions",
+      "scenario": "느티재 공동과수원 — 흠집을 쓰는 문장",
+      "sceneRevision": "orchard-a",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 48,
+      "choices": 48,
+      "spoken": 47,
+      "actionOnly": 0,
+      "silentWaits": 1,
+      "voices": [
+        {
+          "name": "서경자",
+          "choices": 16,
+          "spoken": 16
+        },
+        {
+          "name": "오민석",
+          "choices": 16,
+          "spoken": 16
+        },
+        {
+          "name": "김나래",
+          "choices": 16,
+          "spoken": 15
+        }
+      ],
+      "events": 3,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/3",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 12,
+        "selections": 8,
+        "compacted": 36,
+        "reintroduced": 36,
+        "quiet": 0,
+        "goalObservations": 0,
+        "prospective": 7
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "sparseVoice": {
+        "version": "sparse-voice/2",
+        "followUps": 27
+      },
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "8143e2ee3b6143da281bf33f4eecfd5af7ba91bbbc79eccae40c4f16675dd75d",
+      "requests": 48,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.018152055,
+      "tokens": {
+        "inputTokens": 274990,
+        "cachedInputTokens": 158553,
+        "cacheWriteInputTokens": 116293,
+        "outputTokens": 4031,
+        "reasoningOutputTokens": 209,
+        "totalTokens": 279021
+      },
+      "medianMs": 1673.2024999999994,
+      "p95Ms": 2255.0305000000008,
+      "firstOutputMedianMs": 874,
+      "firstOutputP95Ms": 1235,
+      "activeMs": 85245,
+      "roles": {
+        "speech": {
+          "requests": 48,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.018152055,
+          "tokens": {
+            "inputTokens": 274990,
+            "cachedInputTokens": 158553,
+            "cacheWriteInputTokens": 116293,
+            "outputTokens": 4031,
+            "reasoningOutputTokens": 209,
+            "totalTokens": 279021
+          },
+          "medianMs": 1673.2024999999994,
+          "p95Ms": 2255.0305000000008,
+          "firstOutputMedianMs": 874,
+          "firstOutputP95Ms": 1235
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          4294,
+          4427,
+          4581,
+          4522,
+          4528,
+          4674,
+          4850,
+          4998
+        ],
+        "lastSpeechInputs": [
+          6028,
+          6261,
+          6221,
+          6011,
+          6284,
+          6264,
+          5997,
+          6302
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 48,
+        "eligibleSpeeches": 44,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    },
+    {
+      "label": "orchard-release",
+      "scenario": "느티재 공동과수원 — 흠집을 쓰는 문장",
+      "sceneRevision": "orchard-a",
+      "status": "completed",
+      "completionReason": "utterance_limit",
+      "limit": 48,
+      "choices": 48,
+      "spoken": 48,
+      "actionOnly": 0,
+      "silentWaits": 0,
+      "voices": [
+        {
+          "name": "서경자",
+          "choices": 16,
+          "spoken": 16
+        },
+        {
+          "name": "오민석",
+          "choices": 16,
+          "spoken": 16
+        },
+        {
+          "name": "김나래",
+          "choices": 16,
+          "spoken": 16
+        }
+      ],
+      "events": 3,
+      "virtualSeconds": null,
+      "authoredEvents": [],
+      "facts": [],
+      "processes": [],
+      "prompt": "npc-lab/13",
+      "actorContext": "npc-context/4",
+      "worldContext": null,
+      "sceneObservation": "scene-observation/1",
+      "topicClosure": "topic-closure/5",
+      "conversationMemory": {
+        "version": "conversation-memory/4",
+        "checkpoints": 12,
+        "selections": 2,
+        "compacted": 28,
+        "reintroduced": 14,
+        "quiet": 2,
+        "goalObservations": 0,
+        "prospective": 15
+      },
+      "dialogue": "npc-dialogue/5",
+      "performance": "character-performance/3",
+      "world": null,
+      "sparseVoice": {
+        "version": "sparse-voice/2",
+        "followUps": 10
+      },
+      "worldContracts": [],
+      "spatialChoices": [],
+      "languageChecks": [
+        "npc-language/3"
+      ],
+      "constrainedLanguageRepairs": 0,
+      "models": [
+        "gpt-6-luna/low"
+      ],
+      "actualModels": [
+        "gpt-6-luna"
+      ],
+      "automaticRepairCycles": 0,
+      "specSha256": "8143e2ee3b6143da281bf33f4eecfd5af7ba91bbbc79eccae40c4f16675dd75d",
+      "requests": 48,
+      "failed": 0,
+      "missingUsage": 0,
+      "unpriced": 0,
+      "usd": 0.015302765,
+      "tokens": {
+        "inputTokens": 262898,
+        "cachedInputTokens": 176199,
+        "cacheWriteInputTokens": 86555,
+        "outputTokens": 5414,
+        "reasoningOutputTokens": 1140,
+        "totalTokens": 268312
+      },
+      "medianMs": 1789.5157,
+      "p95Ms": 4082.9760000000024,
+      "firstOutputMedianMs": 907,
+      "firstOutputP95Ms": 3228,
+      "activeMs": 101882,
+      "roles": {
+        "speech": {
+          "requests": 48,
+          "failed": 0,
+          "missingUsage": 0,
+          "unpriced": 0,
+          "usd": 0.015302765,
+          "tokens": {
+            "inputTokens": 262898,
+            "cachedInputTokens": 176199,
+            "cacheWriteInputTokens": 86555,
+            "outputTokens": 5414,
+            "reasoningOutputTokens": 1140,
+            "totalTokens": 268312
+          },
+          "medianMs": 1789.5157,
+          "p95Ms": 4082.9760000000024,
+          "firstOutputMedianMs": 907,
+          "firstOutputP95Ms": 3228
+        }
+      },
+      "inputWindow": {
+        "calls": 8,
+        "firstSpeechInputs": [
+          4294,
+          4446,
+          4598,
+          4710,
+          4541,
+          4658,
+          4743,
+          4989
+        ],
+        "lastSpeechInputs": [
+          5444,
+          4281,
+          5606,
+          5662,
+          5787,
+          6367,
+          6289,
+          6253
+        ]
+      },
+      "repetitions": {
+        "algorithm": "same-speaker-char-trigram-dice/v1",
+        "window": 12,
+        "threshold": 0.72,
+        "minChars": 20,
+        "totalSpeeches": 48,
+        "eligibleSpeeches": 44,
+        "repeatedSpeeches": 0,
+        "rate": 0
+      },
+      "kanaLines": 0,
+      "errorKinds": []
+    }
+  ]
+}

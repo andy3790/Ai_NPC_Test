@@ -52,6 +52,8 @@ AI 환경에는 빈도·강도·금지 범위를 지정한 **상황 발생 엔�
 
 자연스러운 반응을 위한 공통 지침은 [대화 프롬프트 버전과 검증](docs/dialogue-prompts.md)에서 관리합니다. 실험 조건의 **대화 반응 지침**으로 이전 버전과 비교할 수 있습니다. 일상 대화는 [거실에서 고르는 영화](examples/natural-dialogue.json) 예제로 시작할 수 있습니다.
 
+갈등 장면으로는 비를 피할 한 칸을 두고 두 친구의 약속이 엇갈리는 [천막 아래 한 칸](examples/market-last-stall.json), 마지막 공연 녹음을 어디까지 들려줄지 결정하는 [마지막 사운드체크](examples/last-soundcheck.json), 구조와 취재 대치를 포함한 [서월 사건극 6선](assets/seowol/drama/README.md)이 있습니다. 실험 중 **새 상황**에 인물이 보거나 들을 것을 쓰고 **운영 메모**에 작성 의도를 남길 수 있습니다. [같은 장면의 Luna 대화 비교](docs/reviews/scene-agency-2026-11-08/report.md)
+
 인물마다 비슷하게 말하는 문제는 [인물별 말투 비교 기록](docs/reviews/character-voice-2026-11-07/report.md)에 별도로 정리했습니다. 기본 지침은 v5이며, v6~v9는 개선 근거가 부족해 실험 선택지로만 남겨 둡니다.
 
 후속 [프로필·발화 방식 비교](docs/reviews/profile-voice-2026-11-07/report.md)는 공통 문단 제거, 고유 예문 보강, 말투 편집과 생활극 집필 틀의 결과를 보존합니다. 원본 인물 설정을 유지하며 효과가 불분명한 후보는 기본값으로 적용하지 않습니다.
