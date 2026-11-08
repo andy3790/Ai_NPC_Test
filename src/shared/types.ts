@@ -71,7 +71,7 @@ export interface Run {
   conversationMemoryVersion?: 'conversation-memory/1' | 'conversation-memory/2' | 'conversation-memory/3' | 'conversation-memory/4';
   sparseVoiceVersion?: 'sparse-voice/1' | 'sparse-voice/2';
   sceneObservationVersion?: 'scene-observation/1';
-  topicClosureVersion?: 'topic-closure/1' | 'topic-closure/2' | 'topic-closure/3' | 'topic-closure/4' | 'topic-closure/5';
+  topicClosureVersion?: 'topic-closure/1' | 'topic-closure/2' | 'topic-closure/3' | 'topic-closure/4' | 'topic-closure/5' | 'topic-closure/6';
   sessionCleanup?: Record<string, { status: 'deleted' | 'missing' | 'pending'; at: string; error?: string }>;
   apiCredential?: ApiCredential;
   worldState?: WorldState;

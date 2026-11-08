@@ -20,6 +20,8 @@ export function RunSettings({ detail }: { detail: RunDetail }) {
       {run.adapter === 'openai' && <><dt>API 키 출처</dt><dd>{run.apiCredential?.source === 'browser' ? '개인 키 · 생성 당시 키에 고정' : '서버 환경 키 (.env)'}<small>키 원문은 기록하지 않습니다.</small></dd></>}
       <dt>앱 / 실행기 버전</dt><dd>{run.appVersion} / {run.cliVersion || '기록 없음'}</dd>
       {run.conversationMemoryVersion && <><dt>대화 기억 버전</dt><dd>{run.conversationMemoryVersion}</dd></>}
+      {run.topicClosureVersion && <><dt>화제·이견 기억 버전</dt><dd>{run.topicClosureVersion}</dd></>}
+      {run.sceneObservationVersion && <><dt>현장 관찰 전달 버전</dt><dd>{run.sceneObservationVersion}</dd></>}
       {run.sparseVoiceVersion && <><dt>간략한 인물의 말투 버전</dt><dd>{run.sparseVoiceVersion}</dd></>}
       <dt>프롬프트 버전</dt><dd>{run.promptVersion ?? (versions.length ? versions.join(', ') : '이전 기록에 버전 정보 없음')}</dd>
       <dt>대화 반응 지침</dt><dd>{variant.dialoguePromptVersion ?? '이전 기록 · 저장된 인물 지침 유지'}</dd>

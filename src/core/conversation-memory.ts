@@ -3,9 +3,9 @@ import type { Run, Utterance } from '../shared/types.js';
 
 export const CONVERSATION_MEMORY_VERSION = 'conversation-memory/2' as const;
 export const DIALOGUE_MEMORY_VERSION = 'conversation-memory/4' as const;
-export const TOPIC_CLOSURE_VERSION = 'topic-closure/5' as const;
+export const TOPIC_CLOSURE_VERSION = 'topic-closure/6' as const;
 export const usesSourceReferences = (version: Run['topicClosureVersion']) =>
-  version==='topic-closure/3' || version==='topic-closure/4' || version===TOPIC_CLOSURE_VERSION;
+  version==='topic-closure/3' || version==='topic-closure/4' || version==='topic-closure/5' || version===TOPIC_CLOSURE_VERSION;
 export const recallsPlans = (version: Run['conversationMemoryVersion']) =>
   version==='conversation-memory/3' || version===DIALOGUE_MEMORY_VERSION;
 
@@ -41,6 +41,7 @@ interface ConversationMemory {
     timeUse?: string;
   };
   quiet: boolean;
+  ordinaryRecall?: boolean;
   omit: Set<number>;
   offered: number[];
 }
@@ -65,6 +66,7 @@ function recurringExchange(visible: Utterance[], actor: string, extended: boolea
 // A person's refusal or request is evidence of that person's position. Only
 // attach the listener's own earlier words or goal if they concern this subject.
 const choiceCue=/지\s*(?:말자|말아|마(?:라|세요|요)?(?:[.!?\s]|$))|양보.{0,7}(?:못|어렵|할 수 없)|동의.{0,7}(?:못|않|어렵|없)|반대(?:해|야|예요|합니다)|먼저.{0,10}(?:약속했|쓰기로|내주기로)|내\s*차례(?:야|다|잖|예요|라고)|못\s*(?:내줘|비켜|넘겨|주겠)/u;
+const resistsChoice=(speech:string)=>choiceCue.test(speech) || /(?:못|안)\s*물러|물러.{0,6}(?:없|않)|양보.{0,6}(?:싫|않)/u.test(speech);
 function pendingChoice(visible: Utterance[], actor: string, since: number, fresh: Set<string>, goal: string) {
   const last=visible.findLast(u=>u.kind==='speech' && u.speech.trim());
   if (!last || last.speakerId===actor || (last.sequence<=since && !fresh.has(last.id))) return;
@@ -156,7 +158,6 @@ export function checkQuietDisclosure(speech: string, disclosures: Disclosure[], 
 export function conversationMemory(history: Utterance[], actor: string, stored: number[], fresh: Set<string>,
     version: Run['conversationMemoryVersion'] = CONVERSATION_MEMORY_VERSION, goal = '', pendingActivity = false,
     policies: Pick<Run,'topicClosureVersion'|'sceneObservationVersion'> = {}): ConversationMemory {
-  const topicClosure=policies.topicClosureVersion;
   const extended = version!=='conversation-memory/1';
   const visible = history.filter(u => u.speakerId === actor || receives(u,actor)).map(u => {
     const seen=visibleUtterance(u,actor);
@@ -176,13 +177,18 @@ export function conversationMemory(history: Utterance[], actor: string, stored: 
   const aside = visible.filter(u => stored.includes(u.sequence));
   const relevant = aside.filter(u => [...terms(subjectText(u),extended)].filter(w => recentTerms.has(w)).length >= 2);
   const repeated = recurringExchange(visible,actor,extended);
+  // Ordinary exchanges should not be rehearsed as disputes. Switch to the
+  // position-preserving recall only on public evidence perceived by this actor.
+  const ordinaryRecall=policies.topicClosureVersion===TOPIC_CLOSURE_VERSION &&
+    !visible.filter(u=>u.kind==='speech' && u.speech.trim()).slice(-18).some(u=>
+      resistsChoice(u.speech) || /(?:약속|내줄|비켜|양보|내가?\s*먼저).{0,12}(?:아니|없|싫)|(?:내|우리)\s*차례|싫어\s*[.!?]|섭섭|서운/u.test(u.speech));
+  const topicClosure=ordinaryRecall ? undefined : policies.topicClosureVersion;
   // Only this actor's own saved decision can retire optional recall. Real
   // deliveries, a new question or a voiced objection can reopen the subject.
-  const resists=(speech:string)=>choiceCue.test(speech) || /(?:못|안)\s*물러|물러.{0,6}(?:없|않)|양보.{0,6}(?:싫|않)/u.test(speech);
   const newest=visible.filter(u=>u.sequence>(last?.sequence ?? 0) || fresh.has(u.id));
-  const openExchange=repeated?.some(u=>resists(u.speech)) ||
-    newest.some(u=>u.kind==='event' || /[?？]/u.test(u.speech) || resists(u.speech));
-  const latestPolicy=topicClosure===TOPIC_CLOSURE_VERSION;
+  const openExchange=repeated?.some(u=>resistsChoice(u.speech)) ||
+    newest.some(u=>u.kind==='event' || /[?？]/u.test(u.speech) || resistsChoice(u.speech));
+  const latestPolicy=topicClosure==='topic-closure/5' || topicClosure===TOPIC_CLOSURE_VERSION;
   const sameSubject=(a:Set<string>,b:Set<string>)=>[...a].filter(term=>b.has(term)).length>=2;
   const matchedWords=latestPolicy && repeated && relevant.length ? repeated.map(u=>terms(subjectText(u),extended)) : [];
   const matchesSubject=(u:Utterance)=>{
@@ -212,7 +218,7 @@ export function conversationMemory(history: Utterance[], actor: string, stored: 
         voices.set(u.speakerId,u);
       }
       for (const u of repeated) if (fresh.has(u.id)) omit.delete(u.sequence);
-    } else if (latestPolicy && !personallySetAside) {
+    } else if (ordinaryRecall || (latestPolicy && !personallySetAside)) {
       // Neutral recurrence alone cannot settle an implicit disagreement. Keep
       // each voice's newest words accessible without replaying every mention.
       for (const u of repeated) voices.set(u.speakerId,u);
@@ -256,9 +262,9 @@ export function conversationMemory(history: Utterance[], actor: string, stored: 
       ? '이 대목은 본인이 이미 내려놓았다. 같은 감상이나 몸짓에 한 번 더 답하지 않고 그대로 있어도 된다. 새 관찰, 남은 이견, 직접 받은 질문에는 그때의 내 생각대로 반응한다.'
       : topicClosure
       ? '같은 소재가 다시 나왔다. 인용은 각자가 실제로 한 말이다. setAside는 본인이 내려놓았던 대목이다. 남의 동의는 그 사람이 밝힌 만큼만 안다. 하고 싶은 말이나 선택이 남았으면 이어 가고, 더 할 말이 없으면 쉬어도 된다.'
-      : '이미 서로 넘긴 대목이다. 덧붙일 새 말이 없으면 그 화제를 여기서 마치고 조용히 있어도 된다. 새 질문·다른 사람의 요청·달라진 현장에는 지금 아는 만큼 답한다. 발언 인용은 그 사람의 말이고 물리적 결과는 관찰로 확인한다.'}),
+      : (ordinaryRecall ? '이 소재로 이미 이야기를 주고받았다.' : '이미 서로 넘긴 대목이다.')+' 덧붙일 새 말이 없으면 그 화제를 여기서 마치고 조용히 있어도 된다. 새 질문·다른 사람의 요청·달라진 현장에는 지금 아는 만큼 답한다. 발언 인용은 그 사람의 말이고 물리적 결과는 관찰로 확인한다.'}),
   };
-  return {context, quiet:false, omit, offered:offers.map(u => u.sequence)};
+  return {context, quiet:false, ...(ordinaryRecall && {ordinaryRecall}), omit, offered:offers.map(u => u.sequence)};
 }
 
 // The actor already has the full text in deliveries or recall. Keep the

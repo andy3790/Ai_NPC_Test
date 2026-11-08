@@ -225,7 +225,7 @@ export class Engine extends EventEmitter {
         memory.context.quiet+=' alreadyTold에 적힌 사람에게는 그 소식이 이미 전해졌다.';
       if (Object.keys(memory.context).length) {
         const available=[...(prompt.messages ?? []),...(prompt.alreadyTold ?? []),...(prompt.alreadyHeard ?? []),...(prompt.earlierObservations ?? [])];
-        prompt.conversationMemory=usesSourceReferences(run.topicClosureVersion)
+        prompt.conversationMemory=!memory.ordinaryRecall && usesSourceReferences(run.topicClosureVersion)
           ? compactDiscussion(memory.context,available.map(source=>source.sequence)) : memory.context;
       }
       metadata = {...metadata,conversationMemoryVersion:run.conversationMemoryVersion, omittedRecall:memory.omit.size,
@@ -240,7 +240,7 @@ export class Engine extends EventEmitter {
         delete prompt.characterPerformance.earlierWords;
       metadata = {...metadata,...turn.metadata};
       if (turn.select) schema = withPortrayal(schema,turn.fixedPhrasing);
-      const familiar=Boolean(memory?.context.setAside?.length || (!run.topicClosureVersion && memory?.context.repeatedExchange));
+      const familiar=Boolean(memory?.context.setAside?.length || ((!run.topicClosureVersion || memory?.ordinaryRecall) && memory?.context.repeatedExchange));
       const followUp=run.sparseVoiceVersion && !prompt.localContext?.ongoingActivity && !prompt.environment &&
         sparseFollowUp(characters[slot],slot,history,familiar);
       if (followUp) {

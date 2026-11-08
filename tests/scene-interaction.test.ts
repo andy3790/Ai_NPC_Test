@@ -55,7 +55,7 @@ test('only a listener who set the topic aside gets shorter recall, and a questio
   const history=Array.from({length:8},(_,i)=>line(i+1,i%2?'나':'가',
     ['레몬 향이 좋네.','레몬 향이 진하네.','레몬 향은 나도 좋았어.','레몬 향이 남네.'][i%4]));
   const memory=(rows:Utterance[],stored:number[])=>conversationMemory(rows,'가',stored,new Set([rows.at(-1)!.id]),
-    'conversation-memory/4','',false,policies);
+    'conversation-memory/4','',false,{...policies,topicClosureVersion:'topic-closure/5'});
   const closed=memory(history,[2]);
   assert.equal(closed.quiet,true);
   assert.ok(closed.context.quiet);
@@ -69,6 +69,13 @@ test('only a listener who set the topic aside gets shorter recall, and a questio
   const later=Array.from({length:24},(_,i)=>line(i+1,i%2?'나':'가','레몬 그림에 물방울이 남았네.'));
   assert.equal(memory(later,[2]).quiet,true);
   assert.equal(memory([...later,line(25,'나','다음 주부터 일하러 지방에 가.')],[2]).quiet,false);
+  const current=(rows:Utterance[])=>conversationMemory(rows,'가',[],new Set([rows.at(-1)!.id]),'conversation-memory/4','',false,policies);
+  const ordinary=current(history);
+  assert.equal(ordinary.ordinaryRecall,true);
+  assert.ok(!ordinary.omit.has(7) && !ordinary.omit.has(8));
+  assert.doesNotMatch(ordinary.context.next!,/이미 서로 넘긴/);
+  const dispute=current([...history,line(9,'나','그건 내 차례야. 레몬 그림을 건드리지 마.')]);
+  assert.ok(!dispute.ordinaryRecall && dispute.context.pendingChoice);
 });
 
 for (const deliveryMode of ['batched_on_turn','per_utterance'] as const) {

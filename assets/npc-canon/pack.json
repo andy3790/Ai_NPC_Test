@@ -30,7 +30,7 @@
       "src/core/director.ts": "c6d9e1deb5fcb0cc41e547dac8188b8868bea4c7c7b3afd5fc7dbd01a123b456",
       "src/core/character-performance.ts": "d1b26cc0500d7c468a8ea062faa23ed81f7d3c332ba059fdf0e005862ed81290",
       "src/shared/character-performance.ts": "02d028a28f1bde5369d81dec789ffe343cf040f0a090724ecb620b3ebfda2176",
-      "src/core/conversation-memory.ts": "7e6f51d80c150567bde5e0f8d6c7cfa553ccf4c2428d351bfa420133dbdda247",
+      "src/core/conversation-memory.ts": "bd017ab094e12b70026526658acaf1a9a50982b8546b1cdb371dd34a95c91eed",
       "src/core/scene-observation.ts": "3b429758c39f24c6d36b06934c4ec14c8a133d1a93f1768220031540456690ba"
     },
     "imageInputSupported": false,
