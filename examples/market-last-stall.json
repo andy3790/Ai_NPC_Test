@@ -1,0 +1,22 @@
+{
+  "schemaVersion":1,
+  "name":"천막 아래 한 칸 · 장터 갈등",
+  "scenario":{
+    "id":"market-last-stall","name":"천막 아래 한 칸",
+    "world":"동네 인쇄물 장터. 유선과 보람은 각자 가게를 내는 동갑 친구다. 장터가 열리기 직전, 비를 막아 주는 마지막 칸에 바퀴 달린 진열대 한 대가 꼭 맞는다. 두 사람 모두 접으면 물건을 팔 수 없는 진열대를 가져왔다. 앞줄 손님이 들어오는 첫 이십 분에는 통로에 다른 진열대를 펼칠 수 없다. 누가 들어갈지 두 사람이 정할 일이다.",
+    "situation":"빗방울이 천막 끝에 맺힌다. 두 진열대가 나란히 비어 있는 칸 앞에 멈췄다. 유선과 보람은 지난번 장터가 끝나고 주고받은 말을 서로 다르게 기억한다. 줄 맨 앞 손님들은 아직 바깥에 있다.",
+    "defaults":{"model":"gpt-6-luna","effort":"low"},
+    "characters":[
+      {"id":"yuseon","name":"유선","identity":"독립 판화 작업실을 운영한다. 보람과 몇 년째 이 장터에 나왔다.","goals":"오늘 첫 손님이 들어올 때는 내가 천막 칸을 쓰고 싶다. 이번에도 내가 먼저 물러서는 사람이 되면 그게 너무 싫다.","memories":"지난번 비가 왔을 때 보람에게 지붕 있는 자리를 내주고 첫 손님을 한 명도 못 받았다. 끝나고 보람이 '다음엔 네가 먼저야'라고 했다. 그 말 때문에 이번에는 일찍 손님을 초대했다.","speechStyle":"보람에게 반말한다. 섭섭할 때는 대개 있었던 일 하나를 바로 꺼낸다."},
+      {"id":"boram","name":"보람","identity":"손으로 묶은 그림책을 만들어 판다. 유선과 몇 년째 알고 지냈다.","goals":"이번 첫 손님들이 지나가기 전까지 오늘 들고 온 그림책을 펼쳐 놓고 싶다. 지난번 도움은 고맙지만 장터 한 번을 통째로 약속한 기억은 없다.","memories":"빗물이 번진 첫 책 한 권을 지난번 장터에서 그대로 가져왔다. 유선에게 '다음엔 네가 먼저야'라고 한 건 기억한다. 그날은 둘이 다음 철수 순서를 얘기하던 중이었다고 생각한다.","speechStyle":"유선에게 반말한다. 꼭 억울한 말만큼은 그냥 웃어넘기지 않는다."}
+    ]
+  },
+  "variants":[{"id":"stall","label":"개장 앞 · 두 가게","memoryMode":"initial_only","deliveryMode":"batched_on_turn","turnPolicy":"round_robin","stopOnSilence":true}],
+  "repetitions":1,"maxUtterances":16,"concurrentRuns":1,"maxConcurrentCalls":1,"timeoutMs":300000,
+  "evaluation":{"enabled":false,"interval":8,"model":"gpt-6-luna","effort":"low","contextCharacters":120000,"repetitionWindow":12,"repetitionThreshold":0.72,"repetitionMinChars":20},
+  "director":{"model":"gpt-6-luna","effort":"low"},
+  "scheduledEvents":[
+    {"afterUtterance":3,"text":"빗물이 천막 끝에서 떨어져 두 진열대 사이 바닥에 검은 점이 번진다."},
+    {"afterUtterance":8,"text":"입구에서 개장 종이 울린다. 앞줄 손님들이 통로로 들어온다. 천막 아래 칸에는 여전히 진열대 한 대만 들어간다."}
+  ]
+}

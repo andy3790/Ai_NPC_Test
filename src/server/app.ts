@@ -132,7 +132,7 @@ export async function createApp(engine: Engine, options: { history?: RunHistoryC
     if (action === 'pause') await engine.pause(id);
     else if (action === 'resume' || action === 'step') await engine.resume(id, action === 'step');
     else if (action === 'stop') await engine.stop(id);
-    else if (action === 'inject') { const input = z.object({ text: z.string(), audience: audienceSchema.optional() }).parse(req.body); await engine.inject(id, input.text, input.audience); }
+    else if (action === 'inject') { const input = z.object({ text: z.string(), observation:z.string().trim().min(1).max(100000).optional(), audience: audienceSchema.optional() }).parse(req.body); await engine.inject(id, input.text, input.audience,input.observation); }
     else if (action === 'evaluate') await engine.evaluate(id);
     else throw new Error('알 수 없는 동작');
     return detail(id);

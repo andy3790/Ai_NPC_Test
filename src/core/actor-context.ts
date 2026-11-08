@@ -85,7 +85,8 @@ export function checkDialogue(speech: string, action: string, history: Utterance
 
 // Provider history also contains obsolete instructions and rejected replies. Only
 // committed, visible records may enter the rolling context of an independent turn.
-export function actorRecall(history: Utterance[], actor: string, fresh: Set<string>) {
+export function actorRecall(history: Utterance[], actor: string, fresh: Set<string>, observations=false):
+    {sequence:number;kind:Utterance['kind'];speaker?:string;speech?:string;action?:string;observation?:string}[] {
   const observed = history.filter(u => !fresh.has(u.id) && (u.speakerId === actor || receives(u, actor)))
     .map(u => visibleUtterance(u, actor));
   const own = observed.filter(u => u.speakerId === actor);
@@ -95,7 +96,8 @@ export function actorRecall(history: Utterance[], actor: string, fresh: Set<stri
     .filter(c => c.score > .12).sort((a,b) => b.score-a.score || b.u.sequence-a.u.sequence).slice(0,3);
   const selected = new Set([...earlier.map(c => c.u), ...own.slice(-3), ...outcomes.slice(-4), ...observed.slice(-12)]);
   return observed.filter(u => selected.has(u)).map(u => ({
-    sequence: u.sequence, speaker: u.speakerName, kind: u.kind,
-    ...(u.speech && { speech: u.speech.slice(0, 500) }), ...(u.action && { action: u.action.slice(0, 350) }),
+    sequence: u.sequence, kind: u.kind,
+    ...(observations && u.kind==='event' ? {observation:u.speech.slice(0,500)} :
+      {speaker:u.speakerName,...(u.speech && {speech:u.speech.slice(0,500)}),...(u.action && {action:u.action.slice(0,350)})}),
   }));
 }

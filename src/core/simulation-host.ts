@@ -12,6 +12,6 @@ export interface SimulationHost {
   speak(session: NpcSession, key: string, input: string, metadata: Record<string, unknown>, history: Utterance[]): Promise<InvocationMetrics>;
   append(u: Utterance, accepted?: InvocationMetrics): void; flush(): Promise<void>; changed(): void;
   completeDelivery(u: Utterance): void;
-  inject(text: string, audience?: Audience): void;
+  inject(text: string, audience?: Audience, observation?: string): void;
   evaluate(final: boolean): Promise<void>;
 }

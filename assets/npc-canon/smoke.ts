@@ -19,7 +19,11 @@ for(const w of worlds) {
     for(const r of runs) {
       const d=engine.detail(r.id);assert.equal(d.run.status,'completed',d.run.error??undefined);
       const speech=d.utterances.filter(u=>u.kind==='speech');assert.equal(speech.length,16);
-      const events=d.utterances.filter(u=>u.kind==='event');assert.equal(events.length,1);assert.equal(events[0].speech,w.events[0].text);
+      const events=d.utterances.filter(u=>u.kind==='event');assert.equal(events.length,1);
+      const scheduled=w.events[0];
+      assert.equal(events[0].speech,scheduled.observation ?? scheduled.text);
+      const authored=store.events(r.id).find(e=>e.method==='narrator/event');
+      assert.equal((authored?.params as {text?:string} | undefined)?.text,scheduled.text);
       assert.equal(d.utterances.slice(0,d.utterances.indexOf(events[0])).filter(u=>u.kind==='speech').length,12);
       assert.equal(d.evaluations.length,2);assert.ok(d.evaluations.every(e=>e.status==='completed'));
       for(const inv of d.invocations.filter(i=>i.kind==='speech')) {

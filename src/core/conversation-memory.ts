@@ -3,6 +3,9 @@ import type { Run, Utterance } from '../shared/types.js';
 
 export const CONVERSATION_MEMORY_VERSION = 'conversation-memory/2' as const;
 export const DIALOGUE_MEMORY_VERSION = 'conversation-memory/4' as const;
+export const TOPIC_CLOSURE_VERSION = 'topic-closure/5' as const;
+export const usesSourceReferences = (version: Run['topicClosureVersion']) =>
+  version==='topic-closure/3' || version==='topic-closure/4' || version===TOPIC_CLOSURE_VERSION;
 export const recallsPlans = (version: Run['conversationMemoryVersion']) =>
   version==='conversation-memory/3' || version===DIALOGUE_MEMORY_VERSION;
 
@@ -20,7 +23,7 @@ function terms(text: string, extended = false) {
   return result;
 }
 const subjectText = (u: Utterance) => u.speech.trim() ? u.speech : u.action;
-const cite = (u: Utterance) => ({sequence:u.sequence, speaker:u.speakerName,
+const cite = (u: Utterance) => ({sequence:u.sequence, ...(u.speakerName && {speaker:u.speakerName}),
   kind:u.kind === 'event' ? '관찰' : u.speech.trim() ? '발언' : '행동', quote:subjectText(u).slice(0,175)});
 type Citation = ReturnType<typeof cite>;
 interface ConversationMemory {
@@ -30,7 +33,8 @@ interface ConversationMemory {
     checkpoint?: string;
     sources?: Citation[];
     setAside?: Citation[];
-    repeatedExchange?: { turns: number; last: Citation };
+    repeatedExchange?: { turns: number; last: Citation; recentVoices?: Citation[] };
+    pendingChoice?: { otherWords: Citation; ownWords?: Citation; ownInterest?: string };
     lastGoalObservation?: { attempt: string; result: Citation };
     resultUse?: string;
     prospective?: Citation;
@@ -56,6 +60,20 @@ function recurringExchange(visible: Utterance[], actor: string, extended: boolea
   }
   if (!matched.length) return;
   return matched;
+}
+
+// A person's refusal or request is evidence of that person's position. Only
+// attach the listener's own earlier words or goal if they concern this subject.
+const choiceCue=/지\s*(?:말자|말아|마(?:라|세요|요)?(?:[.!?\s]|$))|양보.{0,7}(?:못|어렵|할 수 없)|동의.{0,7}(?:못|않|어렵|없)|반대(?:해|야|예요|합니다)|먼저.{0,10}(?:약속했|쓰기로|내주기로)|내\s*차례(?:야|다|잖|예요|라고)|못\s*(?:내줘|비켜|넘겨|주겠)/u;
+function pendingChoice(visible: Utterance[], actor: string, since: number, fresh: Set<string>, goal: string) {
+  const last=visible.findLast(u=>u.kind==='speech' && u.speech.trim());
+  if (!last || last.speakerId===actor || (last.sequence<=since && !fresh.has(last.id))) return;
+  if (!choiceCue.test(last.speech)) return;
+  const subject=terms(last.speech,true);
+  const related=(text:string)=>[...terms(text,true)].some(word=>subject.has(word));
+  const old=visible.slice(-24).findLast(u=>u.speakerId===actor && u.kind==='speech' && related(u.speech));
+  const interest=goal.split(/\r?\n/u).filter(s=>s.trim() && related(s)).at(-1);
+  return {otherWords:cite(last), ...(old && {ownWords:cite(old)}), ...(interest && {ownInterest:interest.slice(0,210)})};
 }
 
 function lastGoalResult(visible: Utterance[], actor: string, goal: string) {
@@ -136,9 +154,14 @@ export function checkQuietDisclosure(speech: string, disclosures: Disclosure[], 
 }
 
 export function conversationMemory(history: Utterance[], actor: string, stored: number[], fresh: Set<string>,
-    version: Run['conversationMemoryVersion'] = CONVERSATION_MEMORY_VERSION, goal = '', pendingActivity = false): ConversationMemory {
+    version: Run['conversationMemoryVersion'] = CONVERSATION_MEMORY_VERSION, goal = '', pendingActivity = false,
+    policies: Pick<Run,'topicClosureVersion'|'sceneObservationVersion'> = {}): ConversationMemory {
+  const topicClosure=policies.topicClosureVersion;
   const extended = version!=='conversation-memory/1';
-  const visible = history.filter(u => u.speakerId === actor || receives(u,actor)).map(u => visibleUtterance(u,actor))
+  const visible = history.filter(u => u.speakerId === actor || receives(u,actor)).map(u => {
+    const seen=visibleUtterance(u,actor);
+    return policies.sceneObservationVersion && seen.kind==='event' ? {...seen,speakerName:''} : seen;
+  })
     .filter(u => subjectText(u).trim());
   const ownChoices = history.filter(u => u.kind === 'speech' && u.speakerId === actor);
   const ownTurns = ownChoices.length;
@@ -153,9 +176,51 @@ export function conversationMemory(history: Utterance[], actor: string, stored: 
   const aside = visible.filter(u => stored.includes(u.sequence));
   const relevant = aside.filter(u => [...terms(subjectText(u),extended)].filter(w => recentTerms.has(w)).length >= 2);
   const repeated = recurringExchange(visible,actor,extended);
+  // Only this actor's own saved decision can retire optional recall. Real
+  // deliveries, a new question or a voiced objection can reopen the subject.
+  const resists=(speech:string)=>choiceCue.test(speech) || /(?:못|안)\s*물러|물러.{0,6}(?:없|않)|양보.{0,6}(?:싫|않)/u.test(speech);
+  const newest=visible.filter(u=>u.sequence>(last?.sequence ?? 0) || fresh.has(u.id));
+  const openExchange=repeated?.some(u=>resists(u.speech)) ||
+    newest.some(u=>u.kind==='event' || /[?？]/u.test(u.speech) || resists(u.speech));
+  const latestPolicy=topicClosure===TOPIC_CLOSURE_VERSION;
+  const sameSubject=(a:Set<string>,b:Set<string>)=>[...a].filter(term=>b.has(term)).length>=2;
+  const matchedWords=latestPolicy && repeated && relevant.length ? repeated.map(u=>terms(subjectText(u),extended)) : [];
+  const matchesSubject=(u:Utterance)=>{
+    const words=terms(subjectText(u),extended);
+    return matchedWords.some(other=>sameSubject(words,other));
+  };
+  const personalSource=latestPolicy && repeated && !openExchange && relevant.findLast(matchesSubject);
+  // A listener can put a subject down even after the original citation drops
+  // out of the 18-line window. A fresh request or another subject still gets
+  // ordinary recall. The original messages always reach the actor.
+  const idleSubject=latestPolicy && personalSource && recallsPlans(version) && !pendingActivity && newest.length>0 &&
+    newest.every(u=>u.kind==='speech' && !/부탁|해\s*줘|주세요|궁금|왜\s|어떻게/u.test(u.speech) && matchesSubject(u));
+  const personallySetAside=topicClosure==='topic-closure/4'
+    ? repeated && relevant.length>0 && !openExchange && repeated.some(u=>stored.includes(u.sequence)) : !!personalSource;
   const omit = new Set<number>();
+  const voices = new Map<string,Utterance>();
   if (repeated) {
-    for (const u of repeated.slice(0,-1)) if (!fresh.has(u.id)) omit.add(u.sequence);
+    if (topicClosure && !personallySetAside && !(latestPolicy && !openExchange)) {
+      // Sharing a noun says nothing about agreeing. Only an identical line from
+      // the same speaker is redundant; keep each side's actual words available.
+      const seen = new Map<string,number>();
+      for (const u of repeated) {
+        const key=JSON.stringify([u.speakerId,u.speech.trim()]);
+        const prior=seen.get(key);
+        if (prior!==undefined) omit.add(prior);
+        seen.set(key,u.sequence);
+        voices.set(u.speakerId,u);
+      }
+      for (const u of repeated) if (fresh.has(u.id)) omit.delete(u.sequence);
+    } else if (latestPolicy && !personallySetAside) {
+      // Neutral recurrence alone cannot settle an implicit disagreement. Keep
+      // each voice's newest words accessible without replaying every mention.
+      for (const u of repeated) voices.set(u.speakerId,u);
+      const latest=new Set([...voices.values()].map(u=>u.sequence));
+      for (const u of repeated) if (!latest.has(u.sequence) && !fresh.has(u.id)) omit.add(u.sequence);
+    } else {
+      for (const u of repeated.slice(0,-1)) if (!fresh.has(u.id)) omit.add(u.sequence);
+    }
   }
   // Never omit deliveries or a world result. Remove quote duplicates from the
   // optional recall channels only; full original records remain in the store.
@@ -172,15 +237,49 @@ export function conversationMemory(history: Utterance[], actor: string, stored: 
   const goalEvidence = version === CONVERSATION_MEMORY_VERSION && ownTurns >= 3 && (checkpoint || [...terms(goal,true)].some(term => recentTerms.has(term)))
     ? lastGoalResult(visible,actor,goal) : undefined;
   const prospect = recallsPlans(version) ? prospectOnReturn(visible,actor,fresh,last?.sequence ?? 0) : undefined;
+  const choice = topicClosure && topicClosure!=='topic-closure/1' ? pendingChoice(visible,actor,last?.sequence ?? 0,fresh,goal) : undefined;
+  if (idleSubject && !prospect && !choice) {
+    return {context:{quiet:'본인이 이미 답하고 접어 둔 화제의 후속 말이다. 새로 할 말이나 일이 떠오르면 자기 선택을 한다. 그대로 듣는 차례는 speech와 action을 모두 비워 둔다.'},
+      quiet:true,omit,offered:[]};
+  }
   const context = {
+    ...(choice && {pendingChoice:choice,choiceUse:usesSourceReferences(topicClosure)
+      ? '이 말을 듣고 무엇을 할지는 내 몫이다. 이미 말한 이유를 다시 변론할 필요는 없다. 짧게 받거나, 말없이 행동하거나, 그대로 있어도 된다.'
+      : '상대가 방금 꺼낸 말이다. 내 입장과 맞는 부분만 받아들여도 된다. 내가 물러서거나 마음을 바꾼다면 지금 내게 어떤 사정이 생겼는지에 따른다.'}),
     ...(prospect && {prospective:prospect,timeUse:'이때 본인이 실제로 한 말은 앞으로의 계획이나 가정이었다. 이후 그 일이 일어났다는 관찰이 있어야 지난 경험으로 이야기할 수 있다.'}),
     ...(goalEvidence && {lastGoalObservation:goalEvidence, resultUse:'자기 목표와 관련해 직접 한 행동과 이미 본 결과다. 바뀐 징후나 남은 일이 있을 때만 그 점을 다룬다.'}),
     ...(relevant.length && {setAside:relevant.slice(-3).map(cite)}),
-    ...(repeated && {repeatedExchange:{turns:repeated.length, last:cite(repeated.at(-1)!)}}),
+    ...(repeated && !personallySetAside && {repeatedExchange:{turns:repeated.length, last:cite(repeated.at(-1)!),
+      ...(topicClosure && {recentVoices:[...voices.values()].sort((a,b)=>a.sequence-b.sequence).slice(-4).map(cite)})}}),
     ...(offers.length && {sources:offers.map(cite), checkpoint:'이미 답을 들었거나 농담·점검을 이쯤에서 놓아도 될 때 그 근거 한 건의 순번을 setAsideSequence로 고른다. 새 질문·미해결·작업 시도만 있으면 null.'}),
-    ...((relevant.length || repeated) && {next:'이미 서로 넘긴 대목이다. 덧붙일 새 말이 없으면 그 화제를 여기서 마치고 조용히 있어도 된다. 새 질문·다른 사람의 요청·달라진 현장에는 지금 아는 만큼 답한다. 발언 인용은 그 사람의 말이고 물리적 결과는 관찰로 확인한다.'}),
+    ...((relevant.length || repeated) && {next:personallySetAside
+      ? '이 대목은 본인이 이미 내려놓았다. 같은 감상이나 몸짓에 한 번 더 답하지 않고 그대로 있어도 된다. 새 관찰, 남은 이견, 직접 받은 질문에는 그때의 내 생각대로 반응한다.'
+      : topicClosure
+      ? '같은 소재가 다시 나왔다. 인용은 각자가 실제로 한 말이다. setAside는 본인이 내려놓았던 대목이다. 남의 동의는 그 사람이 밝힌 만큼만 안다. 하고 싶은 말이나 선택이 남았으면 이어 가고, 더 할 말이 없으면 쉬어도 된다.'
+      : '이미 서로 넘긴 대목이다. 덧붙일 새 말이 없으면 그 화제를 여기서 마치고 조용히 있어도 된다. 새 질문·다른 사람의 요청·달라진 현장에는 지금 아는 만큼 답한다. 발언 인용은 그 사람의 말이고 물리적 결과는 관찰로 확인한다.'}),
   };
   return {context, quiet:false, omit, offered:offers.map(u => u.sequence)};
+}
+
+// The actor already has the full text in deliveries or recall. Keep the
+// semantic link to the source without repeating the quotation as another cue.
+export function compactDiscussion(context: ConversationMemory['context'], available: number[]) {
+  const seen=new Set(available);
+  if (context.prospective) seen.add(context.prospective.sequence);
+  if (context.lastGoalObservation) seen.add(context.lastGoalObservation.result.sequence);
+  const reference=(c:Citation)=>{
+    if (seen.has(c.sequence)) return {sequence:c.sequence,...(c.speaker && {speaker:c.speaker})};
+    seen.add(c.sequence);
+    return c;
+  };
+  const {pendingChoice, repeatedExchange, setAside, sources}=context;
+  return {...context,
+    ...(pendingChoice && {pendingChoice:{...pendingChoice,otherWords:reference(pendingChoice.otherWords),
+      ...(pendingChoice.ownWords && {ownWords:reference(pendingChoice.ownWords)})}}),
+    ...(repeatedExchange && {repeatedExchange:{...repeatedExchange,last:reference(repeatedExchange.last),
+      ...(repeatedExchange.recentVoices && {recentVoices:repeatedExchange.recentVoices.map(reference)})}}),
+    ...(setAside && {setAside:setAside.map(reference)}),
+    ...(sources && {sources:sources.map(reference)})};
 }
 
 export function withMemoryCheckpoint<T extends {properties?:object;required?:string[]}>(schema: T, offered: number[]) {

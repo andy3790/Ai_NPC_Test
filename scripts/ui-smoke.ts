@@ -25,7 +25,10 @@ try {
   await page.getByRole('button', { name: '매 발화마다 전달', exact: false }).first().click();
   await page.getByRole('button', { name: '호출·계측', exact: true }).click();
   await page.getByLabel('호출 종류 필터').selectOption('receive');
-  assert.equal(await page.locator('tr.clickable').count(), 27); // 6 speeches * 2 + 5 environment outcomes * 3
+  // The first five choices deliver speech and its immediate world result in
+  // one call per listener, plus a result-only call to the actor. The sixth
+  // speech goes to the two listeners, with no new world result.
+  assert.equal(await page.locator('tr.clickable').count(), 5 * 3 + 2);
   await page.locator('tr.clickable').first().click(); await page.getByRole('heading', { name: '입력', exact: true }).waitFor();
   await page.getByRole('button', { name: '대화 기록', exact: true }).click();
   await mkdir('.cache/screenshots', { recursive: true });
@@ -61,6 +64,9 @@ try {
     const eventInput = page.getByLabel('새 상황', { exact: true });
     const eventText = '화면 갱신이 지연되거나 실패해도 한 번만 저장되는 상황.';
     await eventInput.fill(eventText);
+    await page.getByText('운영 메모 (선택)',{exact:true}).click();
+    const note=page.getByLabel('운영 메모',{exact:true});
+    await note.fill('운영자만 보는 상황 투입 회귀 검사');
     const detailPath = `/api/runs/${paused.id}`, injectPath = `${detailPath}/inject`;
     const matchesRead = (url: URL) => url.pathname === '/api/runs' || url.pathname === detailPath;
     let releaseReads!: () => void;
@@ -93,11 +99,13 @@ try {
       releaseReads();
       await page.locator('.content > .alert.error').filter({ hasText: refreshError }).waitFor();
       assert.equal(await eventInput.inputValue(), '');
+      assert.equal(await note.inputValue(),'');
       assert.equal(await page.getByRole('button', { name: '재개', exact: true }).isDisabled(), false);
       const stored = await page.request.get(`${base}${detailPath}`); // APIRequestContext bypasses page routes.
       assert.equal(stored.status(), 200);
       const saved = await stored.json() as RunDetail;
       assert.equal(saved.utterances.filter(utterance => utterance.kind === 'event' && utterance.speech === eventText).length, 1);
+      assert.ok(saved.utterances.every(u=>!u.speech.includes('운영자만 보는')));
       assert.equal(injectionRequests, 1);
     } finally {
       releaseReads();

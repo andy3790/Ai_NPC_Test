@@ -15,11 +15,11 @@ export const worlds = [tidemark, glass, orison, emberline, orchard, nocturne];
 export const fields = ['identity','personality','values','goals','relationships','memories','knowledge','unknowns','speechStyle','exampleDialogue','behaviors','taboos'];
 export const fieldLabels = { identity:'정체성·외형', personality:'성격·압박 반응', values:'가치 우선순위', goals:'목표·양보선', relationships:'관계·상대에 대한 태도', memories:'초기 기억·본인만 아는 사실', knowledge:'아는 것·공개할 수 있는 것', unknowns:'모르는 것', speechStyle:'말투·어휘', exampleDialogue:'예시 대사', behaviors:'관찰 가능한 행동 습관', taboos:'금기·불변 기준' };
 export const rules = [
-  '서로 다른 세계관과 묶음은 독립이다. 제공된 세계관·본인 설정·이후 공식 진행자 사건 외의 인물·장소·조직·역사·능력·규칙을 확정 사실로 추가하지 않는다. 현실 상식으로 빈칸을 채워 새 설정을 단정하지 않는다.',
+  '서로 다른 세계관과 묶음은 독립이다. 본인이 아는 배경과 이후 현장에서 확인한 변화에 따라 말한다. 알지 못하는 인물·장소·조직·역사·능력·규칙을 현실 상식으로 채워 확정하지 않는다.',
   '확정 사실, 본인의 직접 기억, 남에게 들은 주장, 추측, 질문, 제안을 구분한다. 타인의 발언이나 출처 없는 쪽지는 발언이 있었다는 사실만 추가하며 내용의 참을 보증하지 않는다. 의문문 속에 새 사실을 전제하지 않는다.',
   '공개 인물 소개는 이름·직무·나이/운영 연수·외형만 공유한다. 다른 인물의 비공개 기억·목표·속마음은 모른다. 본인이 자발적으로 설명하거나 대화로 들으면 그 시점부터 출처를 붙여 활용할 수 있다. 들었다고 과거부터 알았던 것으로 바꾸지 않는다.',
   '자신의 대사와 외부에서 볼 수 있는 자기 행동만 낸다. 타인의 대사·동의·감정·행동, 사건의 성공 여부를 대신 확정하지 않는다. 서술 속 내면 독백·평가 점수·모델 추론·독자 설명은 출력하지 않는다.',
-  '이 실험은 결정 전 숙의 장면이다. 빈 종이 메모, 옷매무새 정리, 기존 소품 가리키기 같은 일상 행동은 허용한다. 수량·권한·계약·시설 상태를 바꾸는 실행 완료는 공식 진행자 사건으로만 정한다. 제안이나 역할극 대사만으로 세계 상태를 바꾸지 않는다.',
+  '아직 결정을 내리기 전이다. 누군가는 자기 메모를 적고, 누군가는 자리를 뜨거나 결정을 보류할 수 있다. 수량·권한·계약·시설 상태가 실제로 바뀌었는지는 현장에서 확인된 결과로 판단한다.',
   '예시 대사는 말투 참고이며 실제로 이미 했던 대화가 아니다. 관계의 평가는 본인의 태도이고 상대의 속마음을 인증하지 않는다. 사적 생각은 생각, 초안은 초안, 미제출 문서는 미제출 상태로 유지한다.',
   '설득에 따라 제안·우선순위·감정은 변할 수 있다. 가치·금기와 확인된 과거를 이유 없이 뒤집는 것과 구별한다. 매번 말버릇이나 소품 동작을 반복할 의무는 없다.',
   '이미지는 외형과 분위기 참고다. 이미지에 우연히 그려진 숫자·장식·반사·원경·인원·사물 수를 새 설정의 근거로 쓰지 않는다. 텍스트 기준과 시각 허용 설명을 우선한다. 현재 실행 엔진에는 이미지 픽셀을 전달하지 않는다.',
@@ -139,5 +139,5 @@ function worldMarkdown(w,characters,entries,image) {
 }
 export const promptSources = ['src/core/dialogue-policies.ts','src/shared/dialogue-policy.ts','src/core/world-policies.ts',
   'src/shared/world-policy.ts','src/shared/world-schema.ts','src/core/director.ts','src/core/character-performance.ts',
-  'src/shared/character-performance.ts','src/core/conversation-memory.ts'];
+  'src/shared/character-performance.ts','src/core/conversation-memory.ts','src/core/scene-observation.ts'];
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) await build();

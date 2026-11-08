@@ -54,7 +54,7 @@ export function RunSettings({ detail }: { detail: RunDetail }) {
       <dt>반복 평가 기준</dt><dd>최근 {spec.evaluation.repetitionWindow ?? 12}발화 · 유사도 {spec.evaluation.repetitionThreshold ?? 0.72} · 최소 {spec.evaluation.repetitionMinChars ?? 20}자</dd>
       <dt>진행자 모델</dt><dd>{spec.director.model} / {spec.director.effort}{variant.turnPolicy !== 'director' && ' · 사용 안 함'}</dd>
     </dl></section>
-    <section><h3>예정된 상황 투입</h3>{spec.scheduledEvents.length ? spec.scheduledEvents.map((event, index) => <p key={index} className="snapshot-text"><strong>{event.afterUtterance}발화 후</strong> · {event.text}</p>) : <p>없음</p>}</section>
+    <section><h3>예정된 상황 투입</h3>{spec.scheduledEvents.length ? spec.scheduledEvents.map((event, index) => <p key={index} className="snapshot-text"><strong>{event.afterUtterance}발화 후</strong> · {event.observation ?? event.text}{event.observation && <small className="snapshot-note">기록 원문 · {event.text}</small>}</p>) : <p>없음</p>}</section>
     <section><h3>환경·행동·목표 규칙</h3>{scenario.environment ? <><p>{scenario.environment.enabled ? '사용' : '꺼짐'} · 목표 달성 시 {scenario.environment.stopOnGoals ? '종료' : '계속'}</p><pre>{JSON.stringify(scenario.environment, null, 2)}</pre></> : <p>미설정</p>}</section>
     {scenario.spatial && <section><h3>장소·연결 통로·시작 위치·통신 채널</h3>
       {scenario.spatial.locations.map(l => <p key={l.id} className="snapshot-text"><strong>{l.name}</strong> · {scenario.spatial!.initialPositions.filter(p => p.locationId === l.id).map(p => scenario.characters.find(c => c.id === p.npcId)?.name).join('·') || '시작 인원 없음'}<br/>{l.initialSituation || l.description}</p>)}

@@ -234,9 +234,12 @@ test('reconciling a sparse speech publishes and delivers the complete stored pro
     const result=await turn(...args);
     if (JSON.parse(args[0].input).task!=='speak') return result;
     const raw=JSON.parse(result.output);
-    const sentence='창가 받침은 모서리에 있는 작은 찻잔도 안정적으로 놓을 수 있으니, 저는 그쪽에 두는 게 마음이 좀 더 놓이겠어요.';
+    const sentence=store.get('invocations',args[0].clientMessageId)?.characterId==='b'
+      ? '창가 받침은 모서리에 있는 작은 찻잔도 안정적으로 놓을 수 있으니, 거기 두는 건 어때요?'
+      : '창가 받침은 모서리에 있는 작은 찻잔도 안정적으로 놓을 수 있으니, 저는 그쪽에 두는 게 마음이 좀 더 놓이겠어요.';
     const units=Array.isArray(raw.speech);
-    result.output=JSON.stringify({...raw,speech:units ? [sentence] : sentence});
+    const sources=JSON.parse(args[0].input).conversationMemory?.sources;
+    result.output=JSON.stringify({...raw,speech:units ? [sentence] : sentence,...(sources?.length && {setAsideSequence:sources[0].sequence})});
     adapter.results.set(result.turnId,result);
     if (units && !recovered) {
       recovered=result.turnId;

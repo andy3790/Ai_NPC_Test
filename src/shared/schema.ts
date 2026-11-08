@@ -100,7 +100,8 @@ export const experimentSchema = z.object({
   director: modelConfig,
   worldEngine: modelConfig.optional(),
   eventGenerator: eventGeneratorSchema.optional(),
-  scheduledEvents: z.array(z.object({ afterUtterance: z.number().int().min(0), text: text.min(1), audience: audienceSchema.optional() })).default([]),
+  scheduledEvents: z.array(z.object({ afterUtterance: z.number().int().min(0), text: text.min(1),
+    observation: text.trim().min(1).optional(), audience: audienceSchema.optional() })).default([]),
 }).superRefine((v, c) => {
   if (new Set(v.variants.map(x => x.id)).size !== v.variants.length)
     c.addIssue({ code: 'custom', message: '실험 조건 ID는 중복될 수 없습니다.' });

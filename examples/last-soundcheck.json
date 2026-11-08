@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "name": "마지막 사운드체크 · 친구 사이의 이견",
+  "scenario": {
+    "id": "last-soundcheck",
+    "name": "마지막 사운드체크",
+    "world": "현대 한국. 같은 동아리에서 오래 합주한 재인과 해수는 동갑 친구다. 작은 공연이 끝난 뒤 관객 몇 명이 객석에 남아 있다. 둘은 열린 부스에서 함께 앉아 있다. 재생기에는 오늘 해산하는 밴드의 첫 합주 녹음이 올라와 있다. 출력을 열면 객석에도 들리고, 열지 않으면 지금처럼 부스에서만 들을 수 있다.",
+    "situation": "녹음 끝에 노래가 멎은 뒤 재인이 혼자 다시 들어가려다 놓친 숨소리와 해수의 웃음이 담겼다. 해수가 객석으로 가는 출력 페이더 옆에 손을 뒀다. 재인은 헤드폰 한쪽을 벗고 그 손을 본다. 둘 사이에서 이 녹음을 사람들 앞에 틀지 이야기를 나눈 적은 없다.",
+    "defaults": {"model":"gpt-6-luna","effort":"low"},
+    "characters": [
+      {"id":"jaein","name":"재인","identity":"노래를 불렀다. 해수와 오래된 친구다.","goals":"오늘 그 숨소리가 객석에 나가는 건 싫다. 해수가 그날 웃었던 이유도 마음에 남아 있다.","memories":"그날 틀린 건 별로 마음에 남지 않았지만 혼자 다시 들어가려던 순간엔 정말 울 것 같았다. 해수에게는 말한 적 없다.","speechStyle":"해수에게 반말한다. 마음이 상하면 하고 있던 말을 중간에서 바꾸기도 한다."},
+      {"id":"haesu","name":"해수","identity":"드럼을 쳤다. 그날의 녹음기를 가져왔고 오늘 부스에서는 출력을 맡았다.","goals":"마지막까지 남아 준 사람들이 우리가 처음 시작하던 소리를 잠깐이라도 듣고 가면 좋겠다. 매끈하게 자른 곡만 남기는 건 싫다.","memories":"녹음 끝에서 웃은 건 한참 긴장하고 있다가 재인이 다시 노래하려는 걸 듣고 반가워서였다. 재인이 그날 어떤 기분이었는지는 모른다.","speechStyle":"재인에게 반말한다. 친한 사이에서 평소에 쓰는 말로 얘기한다."}
+    ]
+  },
+  "variants": [{"id":"booth","label":"부스 · 두 친구","memoryMode":"initial_only","deliveryMode":"batched_on_turn","turnPolicy":"round_robin","stopOnSilence":true}],
+  "repetitions":1,"maxUtterances":16,"concurrentRuns":1,"maxConcurrentCalls":1,"timeoutMs":300000,
+  "evaluation":{"enabled":false,"interval":8,"model":"gpt-6-luna","effort":"low","contextCharacters":120000,"repetitionWindow":12,"repetitionThreshold":0.72,"repetitionMinChars":20},
+  "director":{"model":"gpt-6-luna","effort":"low"},
+  "scheduledEvents":[
+    {"afterUtterance":3,"text":"객석에서 접이식 의자 하나가 접히는 소리가 난다. 아직 두어 사람이 무대 쪽을 보고 있다."},
+    {"afterUtterance":8,"text":"부스 인터폰에서 무대 스태프의 목소리가 들린다. “나 이제 객석 불 좀 올려도 돼?”"}
+  ]
+}

@@ -18,9 +18,9 @@
   },
   "compatibility": {
     "schemaPath": "src/shared/schema.ts",
-    "schemaSha256": "fe3af6ab9d51df7684edda2f1906bbe86d948eb2e422402ac46e02d43365538d",
+    "schemaSha256": "a1b034f182e5c74c566ea6a061759a8ca595772dc687cd9c9268d5f16aa9f6a0",
     "promptPath": "src/core/prompts.ts",
-    "promptSha256": "32cab59910d6c45a93c7e876859358758ec33826a13b823e403b68e42910bba0",
+    "promptSha256": "9aa619ea2492caf90e8c053dd628a0b284f228c30803208634e67c8a27bd23c3",
     "promptDependencies": {
       "src/core/dialogue-policies.ts": "1d3140ac86ac75f3af080bc2d8fd8da46ff074d004593d3bcb620bd65cecf335",
       "src/shared/dialogue-policy.ts": "1593262cd1325b117d689f79b33b1dea57647298a44cf50e4a7a9bde37b3612d",
@@ -30,7 +30,8 @@
       "src/core/director.ts": "c6d9e1deb5fcb0cc41e547dac8188b8868bea4c7c7b3afd5fc7dbd01a123b456",
       "src/core/character-performance.ts": "d1b26cc0500d7c468a8ea062faa23ed81f7d3c332ba059fdf0e005862ed81290",
       "src/shared/character-performance.ts": "02d028a28f1bde5369d81dec789ffe343cf040f0a090724ecb620b3ebfda2176",
-      "src/core/conversation-memory.ts": "8bf81a5dbeefa98f9d5ad80ed5a0eae0252917cd0080d45255538c14e918a451"
+      "src/core/conversation-memory.ts": "7e6f51d80c150567bde5e0f8d6c7cfa553ccf4c2428d351bfa420133dbdda247",
+      "src/core/scene-observation.ts": "3b429758c39f24c6d36b06934c4ec14c8a133d1a93f1768220031540456690ba"
     },
     "imageInputSupported": false,
     "defaultModel": "gpt-6-luna",

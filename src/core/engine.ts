@@ -7,7 +7,8 @@ import type { Adapter } from '../adapters/types.js';
 import { Store } from './store.js';
 import { SessionCleanup } from './session-cleanup.js';
 import { ACTOR_CONTEXT_VERSION, actorRecall, checkDialogue, establishedConversation, LANGUAGE_CHECK_VERSION, languageRepairSchema, priorDisclosures } from './actor-context.js';
-import { CONVERSATION_MEMORY_VERSION, DIALOGUE_MEMORY_VERSION, checkProspectiveClaim, checkQuietDisclosure, conversationMemory, recallsPlans, rememberSource, withMemoryCheckpoint } from './conversation-memory.js';
+import { CONVERSATION_MEMORY_VERSION, DIALOGUE_MEMORY_VERSION, TOPIC_CLOSURE_VERSION, checkProspectiveClaim, checkQuietDisclosure, compactDiscussion, conversationMemory, recallsPlans, rememberSource, usesSourceReferences, withMemoryCheckpoint } from './conversation-memory.js';
+import { authoredObservation, SCENE_OBSERVATION_VERSION } from './scene-observation.js';
 import { WORLD_CONTEXT_VERSION, worldRequestContext } from './world-context.js';
 import { CHARACTER_PERFORMANCE } from '../shared/character-performance.js';
 import { committedPerformance, performTurn, withPortrayal, lacksVoice, parseSpeechOutput, SPARSE_VOICE_VERSION, sparseFollowUp, withSpeechUnits } from './character-performance.js';
@@ -87,6 +88,7 @@ export class Engine extends EventEmitter {
         characterPerformanceVersion: sourceVariant.characterPerformanceVersion ?? CHARACTER_PERFORMANCE,
         ...(environmentMode(spec, sourceVariant) === 'ai' ? { worldPromptVersion: sourceVariant.worldPromptVersion ?? WORLD_PROMPT_VERSION } : {}) };
       const context = {conversationMemoryVersion:environmentMode(spec,variant)==='off' ? DIALOGUE_MEMORY_VERSION : CONVERSATION_MEMORY_VERSION,
+        sceneObservationVersion:SCENE_OBSERVATION_VERSION, topicClosureVersion:TOPIC_CLOSURE_VERSION,
         ...(variant.characterPerformanceVersion===CHARACTER_PERFORMANCE && spec.scenario.characters.some(lacksVoice) && {sparseVoiceVersion:SPARSE_VOICE_VERSION}),
         ...(this.adapter.name === 'openai' && { npcContextVersion: ACTOR_CONTEXT_VERSION,
         ...(isAiEnvironment(spec, variant) && { worldContextVersion: WORLD_CONTEXT_VERSION }) })};
@@ -150,7 +152,7 @@ export class Engine extends EventEmitter {
       const run = this.run(id); if (Object.hasOwn(run.sessions, c.id)) { await this.restoreSession(id, 'sessions', c.id, run.sessions[c.id]); continue; }
       const config = { model: c.model ?? run.variant.model ?? run.spec.scenario.defaults.model, effort: c.effort ?? run.variant.effort ?? run.spec.scenario.defaults.effort };
       const instructions = persona(run.spec, c, { ...run.variant,
-        dialoguePromptVersion: run.variant.dialoguePromptVersion ?? LEGACY_DIALOGUE_PROMPT });
+        dialoguePromptVersion: run.variant.dialoguePromptVersion ?? LEGACY_DIALOGUE_PROMPT },!!run.sceneObservationVersion);
       const threadId = await this.adapter.createSession(config, instructions, join(this.dataDir, 'sessions', id, c.id), run.apiCredential);
       this.store.patch('runs', id, { sessions: { ...this.run(id).sessions, [c.id]: { id: randomUUID(), characterId: c.id, threadId, config, instructions } } });
     }
@@ -202,12 +204,12 @@ export class Engine extends EventEmitter {
     const fresh = new Set<string>((prompt.messages ?? []).map((u: {id:string}) => u.id));
     const memory = run.conversationMemoryVersion
       ? conversationMemory(history,session.characterId,session.setAsideSequences ?? [],fresh,run.conversationMemoryVersion,
-        characters[slot].goals,Boolean(prompt.localContext?.ongoingActivity || prompt.localContext?.transit || prompt.environment)) : undefined;
+        characters[slot].goals,Boolean(prompt.localContext?.ongoingActivity || prompt.localContext?.transit || prompt.environment),run) : undefined;
     const spatial = metadata.outputType === 'spatialSpeech' && run.npcContextVersion
       ? spatialChoiceContract(prompt.localContext, session.characterId) : undefined;
     if (spatial) metadata = { ...metadata, spatialChoiceVersion: SPATIAL_CHOICE_VERSION };
     if (run.npcContextVersion && !memory?.quiet) {
-      prompt.earlierObservations = actorRecall(history, session.characterId, fresh).filter(u => !memory?.omit.has(u.sequence));
+      prompt.earlierObservations = actorRecall(history, session.characterId, fresh,!!run.sceneObservationVersion).filter(u => !memory?.omit.has(u.sequence));
       const established = ['npc-context/3', ACTOR_CONTEXT_VERSION].includes(run.npcContextVersion) ? establishedConversation(history,session.characterId).filter(u => !memory?.omit.has(u.sequence)) : [];
       if (established.length) prompt.alreadyHeard = established;
       prompt.continuity = 'earlierObservations는 이미 오간 말과 확정된 결과다. 현재 일어나는 일은 messages와 현재 위치에서 확인한다. 상대가 이미 들은 자기소개나 결정을 다시 설명할 필요가 없다.';
@@ -221,7 +223,11 @@ export class Engine extends EventEmitter {
     if (memory) {
       if (retainListeners && memory.context.quiet && prompt.alreadyTold)
         memory.context.quiet+=' alreadyTold에 적힌 사람에게는 그 소식이 이미 전해졌다.';
-      if (Object.keys(memory.context).length) prompt.conversationMemory = memory.context;
+      if (Object.keys(memory.context).length) {
+        const available=[...(prompt.messages ?? []),...(prompt.alreadyTold ?? []),...(prompt.alreadyHeard ?? []),...(prompt.earlierObservations ?? [])];
+        prompt.conversationMemory=usesSourceReferences(run.topicClosureVersion)
+          ? compactDiscussion(memory.context,available.map(source=>source.sequence)) : memory.context;
+      }
       metadata = {...metadata,conversationMemoryVersion:run.conversationMemoryVersion, omittedRecall:memory.omit.size,
         ...(memory.offered.length && {memoryOffers:memory.offered})};
     }
@@ -234,7 +240,7 @@ export class Engine extends EventEmitter {
         delete prompt.characterPerformance.earlierWords;
       metadata = {...metadata,...turn.metadata};
       if (turn.select) schema = withPortrayal(schema,turn.fixedPhrasing);
-      const familiar=Boolean(memory?.context.repeatedExchange || memory?.context.setAside?.length);
+      const familiar=Boolean(memory?.context.setAside?.length || (!run.topicClosureVersion && memory?.context.repeatedExchange));
       const followUp=run.sparseVoiceVersion && !prompt.localContext?.ongoingActivity && !prompt.environment &&
         sparseFollowUp(characters[slot],slot,history,familiar);
       if (followUp) {
@@ -284,6 +290,8 @@ export class Engine extends EventEmitter {
       metadata: { ...metadata, adapter: run.adapter, appVersion: run.appVersion, cliVersion: run.cliVersion,
         promptVersion: run.promptVersion ?? null, runtimePromptVersion: PROMPT_VERSION,
         ...((kind === 'speech' || kind === 'receive') && run.npcContextVersion && { npcContextVersion: run.npcContextVersion }),
+        ...((kind==='speech' || kind==='receive') && run.sceneObservationVersion && {sceneObservationVersion:run.sceneObservationVersion}),
+        ...(kind==='speech' && run.topicClosureVersion && {topicClosureVersion:run.topicClosureVersion}),
         ...(kind === 'speech' && run.npcContextVersion && run.npcContextVersion !== 'npc-context/1' && {languageCheckVersion:LANGUAGE_CHECK_VERSION}),
         dialoguePromptVersion: run.variant.dialoguePromptVersion ?? null,
         worldPromptVersion: kind === 'environment' ? worldPromptVersion(session.instructions) : null,
@@ -358,7 +366,8 @@ export class Engine extends EventEmitter {
     }
   }
   private async flush(id: string) {
-    if (this.run(id).variant.deliveryMode !== 'per_utterance') return;
+    const run=this.run(id);
+    if (run.variant.deliveryMode !== 'per_utterance') return;
     const receipts = this.store.list('receipts', id), history = this.store.list('utterances', id);
     const pending = receipts.filter(r => r.status !== 'delivered');
     if (!pending.length) {
@@ -371,9 +380,10 @@ export class Engine extends EventEmitter {
       const results = await Promise.allSettled(barrier.recipients.map(async batches => {
         for (const batch of batches) {
           const { receipts, messages, characterId, operationKey } = batch;
-          const session = this.run(id).sessions[characterId], bundled = messages.length > 1;
+          const session = run.sessions[characterId], bundled = messages.length > 1;
           this.store.transaction(() => { for (const receipt of receipts) this.store.patch('receipts', receipt.id, { status: 'processing' }); });
-          const input = bundled ? receiverBatchPrompt(messages, characterId) : receiverPrompt(messages[0], characterId);
+          const observations=!!run.sceneObservationVersion;
+          const input = bundled ? receiverBatchPrompt(messages, characterId,observations) : receiverPrompt(messages[0], characterId,observations);
           const call = await this.invoke(id, 'receive', session, operationKey, input, {
             sourceUtteranceId: messages[0].id, sourceUtteranceIds: messages.map(u => u.id), receiptIds: receipts.map(r => r.id),
             receivePromptVersion: bundled ? 'npc-receive/2' : 'npc-receive/1', receiveDeliveryVersion: RECEIVE_DELIVERY_VERSION,
@@ -506,7 +516,7 @@ export class Engine extends EventEmitter {
         await this.flush(id);
         let run = this.run(id); let all = this.store.list('utterances', id); let speeches = all.filter(u => u.kind === 'speech');
         for (const [index, event] of run.spec.scheduledEvents.entries()) if (event.afterUtterance <= speeches.length && !this.run(id).appliedEvents.includes(index)) {
-          this.store.transaction(() => { this.appendEvent(id, event.text, event.audience); this.store.patch('runs', id, { appliedEvents: [...this.run(id).appliedEvents, index] }); });
+          this.store.transaction(() => { this.appendEvent(id, event.text, event.audience,event.observation); this.store.patch('runs', id, { appliedEvents: [...this.run(id).appliedEvents, index] }); });
         }
         await this.flush(id);
         const rules = environmentMode(run.spec, run.variant) === 'rules';
@@ -520,7 +530,7 @@ export class Engine extends EventEmitter {
         const speakerId = await this.speaker(id, speeches); const session = this.run(id).sessions[speakerId];
         const receipts = this.pending(id, speakerId); all = this.store.list('utterances', id);
         const messages = all.filter(u => receipts.some(r => r.utteranceId === u.id));
-        const call = await this.speak(id, session, `speech:${speeches.length + 1}`, speakerPrompt(messages, run.variant.memoryMode === 'reinject_on_speech' ? session.instructions : undefined, rules ? progressionPrompt(run.spec, all, speakerId) : undefined), { receiptIds: receipts.map(r => r.id) }, all);
+        const call = await this.speak(id, session, `speech:${speeches.length + 1}`, speakerPrompt(messages, run.variant.memoryMode === 'reinject_on_speech' ? session.instructions : undefined, rules ? progressionPrompt(run.spec, all, speakerId) : undefined, run.sceneObservationVersion ? speakerId : undefined,undefined,!!run.sceneObservationVersion), { receiptIds: receipts.map(r => r.id) }, all);
         const output = speechSchema.parse(parseSpeechOutput(call)); const character = run.spec.scenario.characters.find(c => c.id === speakerId)!;
         let resolved: ReturnType<typeof resolveAction>;
         try { resolved = rules ? resolveAction(run.spec, all, speakerId, output.actionId) : null; }
@@ -669,7 +679,7 @@ export class Engine extends EventEmitter {
     if (!this.workers.has(id) && !this.resuming.has(id)) await this.sessionCleanup.run(id);
     this.changed(id);
   }
-  private appendEvent(id: string, text: string, audience?: Audience) {
+  private appendEvent(id: string, text: string, audience?: Audience, observation?: string) {
     const all = this.store.list('utterances', id);
     const run = this.run(id), scoped = audience ?? { scope: 'all' as const, locationIds: [], npcIds: [] };
     if (scoped.scope === 'locations' && environmentMode(run.spec, run.variant) !== 'ai_spatial') throw new Error('장소별 상황 투입은 AI 분산 공간에서 사용하세요.');
@@ -677,14 +687,16 @@ export class Engine extends EventEmitter {
       locationId: scoped.scope === 'locations' && scoped.locationIds.length === 1 ? scoped.locationIds[0] : null, virtualSeconds: run.worldState?.virtualSeconds ?? 0,
       speechRecipientIds: audienceNpcIds(run.spec, run.worldState, scoped), actionRecipientIds: [], audience: scoped,
     } : undefined;
-    this.append(id, { id: randomUUID(), runId: id, sequence: all.length + 1, speechIndex: null, kind: 'event', speakerId: '__narrator__', speakerName: '상황', speech: text, action: '', createdAt: now(), invocationId: null, deliveryCompletedAt: null, deliveryMs: null, ...(perception ? { perception } : {}) });
-    this.store.event(id, null, 'narrator/event', { text, ...(audience ? { audience } : {}) });
+    const speech=run.sceneObservationVersion ? authoredObservation(text,observation) : observation ?? text;
+    this.append(id, { id: randomUUID(), runId: id, sequence: all.length + 1, speechIndex: null, kind: 'event', speakerId: '__narrator__', speakerName: '상황', speech, action: '', createdAt: now(), invocationId: null, deliveryCompletedAt: null, deliveryMs: null, ...(perception ? { perception } : {}) });
+    this.store.event(id, null, 'narrator/event', { text, ...(observation!==undefined && {observation}), ...(audience ? { audience } : {}) });
   }
-  async inject(id: string, text: string, audience?: Audience) {
+  async inject(id: string, text: string, audience?: Audience, observation?: string) {
     const run = this.run(id); if (run.status !== 'paused' || this.workers.has(id)) throw new Error('상황은 일시정지가 완료된 묶음에 투입하세요.');
     if (run.worldState?.spatial?.cycle || run.worldState?.spatial?.pendingResolution || run.eventGeneratorState?.proposals.some(p => p.status === 'proposed')) throw new Error('미완료 선택·엔진 결과를 먼저 재개하여 확정한 뒤 일시정지하고 상황을 투입하세요. 복구 중인 입력에는 새 사건을 끼워 넣을 수 없습니다.');
     if (!text.trim() || text.length > 100_000) throw new Error('상황 내용은 1~100,000자여야 합니다.');
-    this.store.transaction(() => this.appendEvent(id, text, audience));
+    if (observation!==undefined && (!observation.trim() || observation.length>100_000)) throw new Error('현장 관찰은 1~100,000자여야 합니다.');
+    this.store.transaction(() => this.appendEvent(id, text, audience,observation));
     await this.startWorker(id, async () => { await this.sessions(id); await this.flush(id); });
   }
   review(findingId: string, patch: { review?: 'unreviewed' | 'confirmed' | 'dismissed'; note?: string }) {
@@ -738,7 +750,7 @@ export class Engine extends EventEmitter {
       invoke: (kind, session, key, input, metadata, history) => this.invoke(id, kind, session, key, input, metadata, undefined, history),
       speak: (session, key, input, metadata, history) => this.speak(id, session, key, input, metadata, history),
       append: (u,call) => this.append(id,u,call), flush: () => this.flush(id), changed: () => this.changed(id),
-      completeDelivery: u => this.completeDelivery(id, u), inject: (text, audience) => this.appendEvent(id, text, audience),
+      completeDelivery: u => this.completeDelivery(id, u), inject: (text, audience, observation) => this.appendEvent(id, text, audience,observation),
       evaluate: final => this.evaluatePending(id, final) };
   }
   async cleanupSessions(id?: string) {

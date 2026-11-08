@@ -68,7 +68,7 @@ async function decideCycle(h: SimulationHost) {
     const known = new Set([...all.filter(u => u.speakerId === npcId).map(u => u.id),
       ...h.store.list('receipts', h.id).filter(r => r.characterId === npcId && r.status === 'delivered').map(r => r.utteranceId), ...messages.map(u => u.id)]);
     const call = await h.speak(session, `spatial:choice:${cycle.id}:${npcId}`,
-      speakerPrompt(messages, run.variant.memoryMode === 'reinject_on_speech' ? session.instructions : undefined, undefined, npcId, localContext(run.spec, current, npcId)),
+      speakerPrompt(messages, run.variant.memoryMode === 'reinject_on_speech' ? session.instructions : undefined, undefined, npcId, localContext(run.spec, current, npcId),!!run.sceneObservationVersion),
       { outputType: 'spatialSpeech', spatialChoiceVersion:'spatial-choice/2', receiptIds: pending.map(r => r.id), virtualSeconds: current.virtualSeconds }, all);
     try {
       const output = spatialSpeechSchema.parse(parseSpeechOutput(call));
@@ -204,7 +204,7 @@ export async function runSpatial(h: SimulationHost) {
     if (pendingProposal(h)) { scheduleResolution(h, true); continue; }
     let run = h.run(); let count = history(h).filter(u => u.kind === 'speech').length;
     for (const [i, event] of run.spec.scheduledEvents.entries()) if (event.afterUtterance <= count && !h.run().appliedEvents.includes(i)) {
-      h.store.transaction(() => { h.inject(event.text, event.audience); h.store.patch('runs', h.id, { appliedEvents: [...h.run().appliedEvents, i] }); });
+      h.store.transaction(() => { h.inject(event.text, event.audience,event.observation); h.store.patch('runs', h.id, { appliedEvents: [...h.run().appliedEvents, i] }); });
     }
     await h.flush();
     if (atLimit) {

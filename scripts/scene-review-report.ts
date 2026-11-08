@@ -56,6 +56,7 @@ for (const dir of (await readdir(root,{withFileTypes:true})).filter(d => d.isDir
       positions:r.worldState?.spatial?.positions.map(p => ({npc:p.npcId,place:p.locationId,transit:p.transit?.connectionId ?? null})),
       proposals:r.eventGeneratorState?.proposals.map(p => ({title:p.title,at:p.virtualSeconds,status:p.status})),
       prompt:r.promptVersion,actorContext:r.npcContextVersion ?? 'provider-chain',worldContext:r.worldContextVersion ?? null,
+      ...(r.sceneObservationVersion && {sceneObservation:r.sceneObservationVersion,topicClosure:r.topicClosureVersion}),
       ...(r.conversationMemoryVersion && {conversationMemory:{version:r.conversationMemoryVersion,
         checkpoints:memories.filter(m=>m.checkpoint).length, selections:memories.filter(m=>m.selected).length,
         compacted:memories.filter(m=>m.compacted).length, reintroduced:memories.filter(m=>m.retrieved).length,

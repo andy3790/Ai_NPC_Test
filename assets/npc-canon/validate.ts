@@ -54,7 +54,10 @@ for(const w of worlds) {
         for(const field of fields) {assert.ok(!input.includes(`[${anchor(other,field)}]`));privacyChecks++;}
         const secret=other.memories.split('[본인만 아는 확정 기억]')[1].trim();assert.ok(!input.includes(secret));
       }
-      for(const event of saved.scheduledEvents) assert.ok(!input.includes(event.text),'미래 사건이 초기 persona에 노출');
+      for(const event of saved.scheduledEvents) {
+        assert.ok(event.observation?.trim(),'현장에서 볼 수 있는 사건 본문이 필요합니다.');
+        assert.ok(!input.includes(event.text) && !input.includes(event.observation),'미래 사건이 초기 persona에 노출');
+      }
       assert.ok(!input.includes('requiredFindings'),'평가 정답이 persona에 노출');
     }
   }

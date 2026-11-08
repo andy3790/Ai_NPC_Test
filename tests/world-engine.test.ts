@@ -156,7 +156,7 @@ test('quiet NPC choices advance a delayed result at its due time without inventi
     const calls = d.invocations.filter(c => c.kind === 'environment');
     assert.equal(JSON.parse(calls[0].output).events.length, 0); assert.equal(JSON.parse(calls[1].output).events.length, 1);
     const lastSpeaker = d.invocations.filter(c => c.kind === 'speech').at(-1)!;
-    assert.ok(JSON.parse(lastSpeaker.input).messages.some((u: any) => u.speech === '화면에 확인 응답이 뜬다.'));
+    assert.ok(JSON.parse(lastSpeaker.input).messages.some((u: any) => u.observation === '화면에 확인 응답이 뜬다.'));
   } finally { await engine.close(); store.close(); }
 });
 test('a provider ignoring the quiet-time schema pauses before commit and resumes without replaying the NPC choice', async () => {
@@ -306,7 +306,7 @@ test('world event receiver failure preserves completed engine output and retries
   adapter.delayMs = 1; scripted(adapter); const turn = adapter.turn.bind(adapter); let fail = true;
   adapter.turn = async (...args) => {
     const input = JSON.parse(args[0].input);
-    if (input.task === 'receive' && input.message?.worldEvent && fail) { fail = false; adapter.failNextKind = 'receive'; }
+    if (input.task === 'receive' && input.message?.kind==='event' && input.message.observation && fail) { fail = false; adapter.failNextKind = 'receive'; }
     return turn(...args);
   };
   try {

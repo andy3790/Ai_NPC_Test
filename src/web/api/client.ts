@@ -47,7 +47,7 @@ export const api = {
   deleteRuns: (runIds: string[], token: string) => request<BulkRunDeletionResult>('/runs', { runIds, confirm: true, token }, 'DELETE'),
   configUrl: (id: string) => `/api${runPath(id)}/config.json`,
   controlRun: (id: string, control: RunControl) => request<RunDetail>(`${runPath(id)}/${control}`, {}),
-  inject: (id: string, text: string, audience?: import('../../shared/spatial-schema.js').Audience) => request<RunDetail>(`${runPath(id)}/inject`, { text, audience }),
+  inject: (id: string, text: string, audience?: import('../../shared/spatial-schema.js').Audience, observation?: string) => request<RunDetail>(`${runPath(id)}/inject`, { text, audience, observation }),
   reviewFinding: (id: string, patch: FindingPatch) => request<EvaluationFinding>(`/findings/${encodeURIComponent(id)}`, patch, 'PATCH'),
   exportUrl: (id: string) => `/api${runPath(id)}/export.zip`,
 };
